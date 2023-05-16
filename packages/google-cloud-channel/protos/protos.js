@@ -11697,6 +11697,7 @@
                          * @property {string|null} [reportJob] FetchReportResultsRequest reportJob
                          * @property {number|null} [pageSize] FetchReportResultsRequest pageSize
                          * @property {string|null} [pageToken] FetchReportResultsRequest pageToken
+                         * @property {Array.<string>|null} [partitionKeys] FetchReportResultsRequest partitionKeys
                          */
     
                         /**
@@ -11708,6 +11709,7 @@
                          * @param {google.cloud.channel.v1.IFetchReportResultsRequest=} [properties] Properties to set
                          */
                         function FetchReportResultsRequest(properties) {
+                            this.partitionKeys = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11739,6 +11741,14 @@
                         FetchReportResultsRequest.prototype.pageToken = "";
     
                         /**
+                         * FetchReportResultsRequest partitionKeys.
+                         * @member {Array.<string>} partitionKeys
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @instance
+                         */
+                        FetchReportResultsRequest.prototype.partitionKeys = $util.emptyArray;
+    
+                        /**
                          * Creates a new FetchReportResultsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.FetchReportResultsRequest
@@ -11768,6 +11778,9 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.partitionKeys != null && message.partitionKeys.length)
+                                for (var i = 0; i < message.partitionKeys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.partitionKeys[i]);
                             return writer;
                         };
     
@@ -11814,6 +11827,12 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        if (!(message.partitionKeys && message.partitionKeys.length))
+                                            message.partitionKeys = [];
+                                        message.partitionKeys.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11858,6 +11877,13 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.partitionKeys != null && message.hasOwnProperty("partitionKeys")) {
+                                if (!Array.isArray(message.partitionKeys))
+                                    return "partitionKeys: array expected";
+                                for (var i = 0; i < message.partitionKeys.length; ++i)
+                                    if (!$util.isString(message.partitionKeys[i]))
+                                        return "partitionKeys: string[] expected";
+                            }
                             return null;
                         };
     
@@ -11879,6 +11905,13 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.partitionKeys) {
+                                if (!Array.isArray(object.partitionKeys))
+                                    throw TypeError(".google.cloud.channel.v1.FetchReportResultsRequest.partitionKeys: array expected");
+                                message.partitionKeys = [];
+                                for (var i = 0; i < object.partitionKeys.length; ++i)
+                                    message.partitionKeys[i] = String(object.partitionKeys[i]);
+                            }
                             return message;
                         };
     
@@ -11895,6 +11928,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partitionKeys = [];
                             if (options.defaults) {
                                 object.reportJob = "";
                                 object.pageSize = 0;
@@ -11906,6 +11941,11 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.partitionKeys && message.partitionKeys.length) {
+                                object.partitionKeys = [];
+                                for (var j = 0; j < message.partitionKeys.length; ++j)
+                                    object.partitionKeys[j] = message.partitionKeys[j];
+                            }
                             return object;
                         };
     
@@ -13888,6 +13928,7 @@
                          * @memberof google.cloud.channel.v1
                          * @interface IRow
                          * @property {Array.<google.cloud.channel.v1.IReportValue>|null} [values] Row values
+                         * @property {string|null} [partitionKey] Row partitionKey
                          */
     
                         /**
@@ -13913,6 +13954,14 @@
                          * @instance
                          */
                         Row.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * Row partitionKey.
+                         * @member {string} partitionKey
+                         * @memberof google.cloud.channel.v1.Row
+                         * @instance
+                         */
+                        Row.prototype.partitionKey = "";
     
                         /**
                          * Creates a new Row instance using the specified properties.
@@ -13941,6 +13990,8 @@
                             if (message.values != null && message.values.length)
                                 for (var i = 0; i < message.values.length; ++i)
                                     $root.google.cloud.channel.v1.ReportValue.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.partitionKey != null && Object.hasOwnProperty.call(message, "partitionKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.partitionKey);
                             return writer;
                         };
     
@@ -13979,6 +14030,10 @@
                                         if (!(message.values && message.values.length))
                                             message.values = [];
                                         message.values.push($root.google.cloud.channel.v1.ReportValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.partitionKey = reader.string();
                                         break;
                                     }
                                 default:
@@ -14025,6 +14080,9 @@
                                         return "values." + error;
                                 }
                             }
+                            if (message.partitionKey != null && message.hasOwnProperty("partitionKey"))
+                                if (!$util.isString(message.partitionKey))
+                                    return "partitionKey: string expected";
                             return null;
                         };
     
@@ -14050,6 +14108,8 @@
                                     message.values[i] = $root.google.cloud.channel.v1.ReportValue.fromObject(object.values[i]);
                                 }
                             }
+                            if (object.partitionKey != null)
+                                message.partitionKey = String(object.partitionKey);
                             return message;
                         };
     
@@ -14068,11 +14128,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.values = [];
+                            if (options.defaults)
+                                object.partitionKey = "";
                             if (message.values && message.values.length) {
                                 object.values = [];
                                 for (var j = 0; j < message.values.length; ++j)
                                     object.values[j] = $root.google.cloud.channel.v1.ReportValue.toObject(message.values[j], options);
                             }
+                            if (message.partitionKey != null && message.hasOwnProperty("partitionKey"))
+                                object.partitionKey = message.partitionKey;
                             return object;
                         };
     

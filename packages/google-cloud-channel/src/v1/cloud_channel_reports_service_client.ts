@@ -42,8 +42,7 @@ const version = require('../../../package.json').version;
 /**
  *  CloudChannelReportsService lets Google Cloud resellers and
  *  distributors retrieve and combine a variety of data in Cloud Channel for
- *  multiple products (Google Cloud Platform (GCP), Google Voice, and
- *  Google Workspace.)
+ *  multiple products (Google Cloud, Google Voice, and Google Workspace.)
  * @class
  * @memberof v1
  */
@@ -632,6 +631,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -743,6 +745,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -802,6 +807,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
