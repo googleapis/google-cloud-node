@@ -692,7 +692,8 @@
                           "oneof": [
                             "sampledShapleyAttribution",
                             "integratedGradientsAttribution",
-                            "xraiAttribution"
+                            "xraiAttribution",
+                            "examples"
                           ]
                         }
                       },
@@ -708,6 +709,10 @@
                         "xraiAttribution": {
                           "type": "XraiAttribution",
                           "id": 3
+                        },
+                        "examples": {
+                          "type": "Examples",
+                          "id": 7
                         },
                         "topK": {
                           "type": "int32",
@@ -820,6 +825,99 @@
                         "maxBlurSigma": {
                           "type": "float",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Examples": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "exampleGcsSource"
+                          ]
+                        },
+                        "config": {
+                          "oneof": [
+                            "nearestNeighborSearchConfig",
+                            "presets"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exampleGcsSource": {
+                          "type": "ExampleGcsSource",
+                          "id": 5
+                        },
+                        "nearestNeighborSearchConfig": {
+                          "type": "google.protobuf.Value",
+                          "id": 2
+                        },
+                        "presets": {
+                          "type": "Presets",
+                          "id": 4
+                        },
+                        "neighborCount": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ExampleGcsSource": {
+                          "fields": {
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 1
+                            },
+                            "gcsSource": {
+                              "type": "GcsSource",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "JSONL": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Presets": {
+                      "oneofs": {
+                        "_query": {
+                          "oneof": [
+                            "query"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "query": {
+                          "type": "Query",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "modality": {
+                          "type": "Modality",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Query": {
+                          "values": {
+                            "PRECISE": 0,
+                            "FAST": 1
+                          }
+                        },
+                        "Modality": {
+                          "values": {
+                            "MODALITY_UNSPECIFIED": 0,
+                            "IMAGE": 1,
+                            "TEXT": 2,
+                            "TABULAR": 3
+                          }
                         }
                       }
                     },
