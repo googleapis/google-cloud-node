@@ -694,8 +694,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the connection profile type. Must be in the
-   *   format `projects/* /locations/*`.
+   *   Required. The parent resource of the connection profile type. Must be in
+   *   the format `projects/* /locations/*`.
    * @param {google.cloud.datastream.v1.ConnectionProfile} request.connectionProfile
    *   An ad-hoc connection profile configuration.
    * @param {string} request.connectionProfileName
@@ -1080,7 +1080,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.object
-   *   Required. The name of the stream object resource to start a backfill job for.
+   *   Required. The name of the stream object resource to start a backfill job
+   *   for.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1171,7 +1172,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.object
-   *   Required. The name of the stream object resource to stop the backfill job for.
+   *   Required. The name of the stream object resource to stop the backfill job
+   *   for.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1463,8 +1465,8 @@ export class DatastreamClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the connection profile, but don't create any resources.
-   *   The default is false.
+   *   Optional. Only validate the connection profile, but don't create any
+   *   resources. The default is false.
    * @param {boolean} [request.force]
    *   Optional. Create the connection profile without validating it.
    * @param {object} [options]
@@ -1630,8 +1632,8 @@ export class DatastreamClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the connection profile, but don't update any resources.
-   *   The default is false.
+   *   Optional. Only validate the connection profile, but don't update any
+   *   resources. The default is false.
    * @param {boolean} [request.force]
    *   Optional. Update the connection profile without validating it.
    * @param {object} [options]
@@ -2114,8 +2116,8 @@ export class DatastreamClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the stream with the changes, without actually updating it.
-   *   The default is false.
+   *   Optional. Only validate the stream with the changes, without actually
+   *   updating it. The default is false.
    * @param {boolean} [request.force]
    *   Optional. Update the stream without validating it.
    * @param {object} [options]
@@ -2426,6 +2428,8 @@ export class DatastreamClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, will skip validations.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2583,8 +2587,8 @@ export class DatastreamClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.force]
-   *   Optional. If set to true, any child routes that belong to this PrivateConnection will
-   *   also be deleted.
+   *   Optional. If set to true, any child routes that belong to this
+   *   PrivateConnection will also be deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3680,8 +3684,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name for the location for which static IPs should be returned.
-   *   Must be in the format `projects/* /locations/*`.
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Ips to return, will likely not be specified.
    * @param {string} request.pageToken
@@ -3780,8 +3784,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name for the location for which static IPs should be returned.
-   *   Must be in the format `projects/* /locations/*`.
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Ips to return, will likely not be specified.
    * @param {string} request.pageToken
@@ -3828,8 +3832,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name for the location for which static IPs should be returned.
-   *   Must be in the format `projects/* /locations/*`.
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Ips to return, will likely not be specified.
    * @param {string} request.pageToken
@@ -3876,7 +3880,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
+   *   Required. The parent that owns the collection of private connectivity
+   *   configurations.
    * @param {number} request.pageSize
    *   Maximum number of private connectivity configurations to return.
    *   If unspecified, at most 50 private connectivity configurations that will be
@@ -3990,7 +3995,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
+   *   Required. The parent that owns the collection of private connectivity
+   *   configurations.
    * @param {number} request.pageSize
    *   Maximum number of private connectivity configurations to return.
    *   If unspecified, at most 50 private connectivity configurations that will be
@@ -4048,7 +4054,8 @@ export class DatastreamClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
+   *   Required. The parent that owns the collection of private connectivity
+   *   configurations.
    * @param {number} request.pageSize
    *   Maximum number of private connectivity configurations to return.
    *   If unspecified, at most 50 private connectivity configurations that will be

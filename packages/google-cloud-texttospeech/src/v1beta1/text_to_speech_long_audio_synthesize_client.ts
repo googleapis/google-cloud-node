@@ -346,17 +346,18 @@ export class TextToSpeechLongAudioSynthesizeClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The resource states of the request in the form of
-   *   `projects/* /locations/* /voices/*`.
+   *   `projects/* /locations/*`.
    * @param {google.cloud.texttospeech.v1beta1.SynthesisInput} request.input
    *   Required. The Synthesizer requires either plain text or SSML as input.
+   *   While Long Audio is in preview, SSML is temporarily unsupported.
    * @param {google.cloud.texttospeech.v1beta1.AudioConfig} request.audioConfig
    *   Required. The configuration of the synthesized audio.
    * @param {string} request.outputGcsUri
-   *   Specifies a Cloud Storage URI for the synthesis results. Must be
+   *   Required. Specifies a Cloud Storage URI for the synthesis results. Must be
    *   specified in the format: `gs://bucket_name/object_name`, and the bucket
    *   must already exist.
    * @param {google.cloud.texttospeech.v1beta1.VoiceSelectionParams} request.voice
-   *   The desired voice of the synthesized audio.
+   *   Required. The desired voice of the synthesized audio.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

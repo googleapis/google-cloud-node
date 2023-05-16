@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "3.4.1",
+        "version": "3.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -2958,7 +2958,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -2985,6 +2985,10 @@
                     },
                     {
                         "name": "enable_partial_response",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_debugging_info",
                         "type": "TYPE_BOOL"
                     }
                 ],
