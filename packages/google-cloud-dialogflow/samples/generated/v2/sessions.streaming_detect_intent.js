@@ -92,6 +92,10 @@ function main(session, queryInput) {
    *  over all streaming messages must not exceed 1 minute.
    */
   // const inputAudio = 'Buffer.from('string')'
+  /**
+   *  if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
+   */
+  // const enableDebuggingInfo = true
 
   // Imports the Dialogflow library
   const {SessionsClient} = require('@google-cloud/dialogflow').v2;
