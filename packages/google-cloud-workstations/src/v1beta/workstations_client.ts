@@ -1321,7 +1321,7 @@ export class WorkstationsClient {
    *   If set, validate the request and preview the review, but do not apply it.
    * @param {string} request.etag
    *   If set, the request will be rejected if the latest version of the
-   *   workstation cluster on the server does not have this etag.
+   *   workstation cluster on the server does not have this ETag.
    * @param {boolean} request.force
    *   If set, any workstation configurations and workstations in the
    *   workstation cluster are also deleted. Otherwise, the request only
@@ -1469,7 +1469,7 @@ export class WorkstationsClient {
    * @param {string} request.parent
    *   Required. Parent resource name.
    * @param {string} request.workstationConfigId
-   *   Required. ID to use for the config.
+   *   Required. ID to use for the workstation configuration.
    * @param {google.cloud.workstations.v1beta.WorkstationConfig} request.workstationConfig
    *   Required. Config to create.
    * @param {boolean} request.validateOnly
@@ -1618,13 +1618,15 @@ export class WorkstationsClient {
    * @param {google.cloud.workstations.v1beta.WorkstationConfig} request.workstationConfig
    *   Required. Config to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask specifying which fields in the config should be updated.
+   *   Required. Mask specifying which fields in the workstation configuration
+   *   should be updated.
    * @param {boolean} request.validateOnly
    *   If set, validate the request and preview the review, but do not actually
    *   apply it.
    * @param {boolean} request.allowMissing
-   *   If set, and the config is not found, a new config will be created.
-   *   In this situation, update_mask is ignored.
+   *   If set and the workstation configuration is not found, a new
+   *   workstation configuration will be created. In this situation,
+   *   update_mask is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1766,16 +1768,17 @@ export class WorkstationsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the config to delete.
+   *   Required. Name of the workstation configuration to delete.
    * @param {boolean} request.validateOnly
    *   If set, validate the request and preview the review, but do not actually
    *   apply it.
    * @param {string} request.etag
-   *   If set, the request will be rejected if the latest version of the config on
-   *   the server does not have this etag.
+   *   If set, the request is rejected if the latest version of the
+   *   workstation configuration on the server does not have this ETag.
    * @param {boolean} request.force
-   *   If set, any Workstations in the config will also be deleted. Otherwise,
-   *   the request will work only if the config has no workstations.
+   *   If set, any workstations in the workstation configuration are also deleted.
+   *   Otherwise, the request works only if the workstation configuration has
+   *   no workstations.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2064,13 +2067,15 @@ export class WorkstationsClient {
    * @param {google.cloud.workstations.v1beta.Workstation} request.workstation
    *   Required. Workstation to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask specifying which fields in the config should be updated.
+   *   Required. Mask specifying which fields in the workstation configuration
+   *   should be updated.
    * @param {boolean} request.validateOnly
    *   If set, validate the request and preview the review, but do not actually
    *   apply it.
    * @param {boolean} request.allowMissing
-   *   If set, and the config is not found, a new config will be created.
-   *   In this situation, update_mask is ignored.
+   *   If set and the workstation configuration is not found, a new
+   *   workstation configuration is created. In this situation, update_mask
+   *   is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2214,7 +2219,7 @@ export class WorkstationsClient {
    *   apply it.
    * @param {string} request.etag
    *   If set, the request will be rejected if the latest version of the
-   *   workstation on the server does not have this etag.
+   *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2358,7 +2363,7 @@ export class WorkstationsClient {
    *   apply it.
    * @param {string} request.etag
    *   If set, the request will be rejected if the latest version of the
-   *   workstation on the server does not have this etag.
+   *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2502,7 +2507,7 @@ export class WorkstationsClient {
    *   apply it.
    * @param {string} request.etag
    *   If set, the request will be rejected if the latest version of the
-   *   workstation on the server does not have this etag.
+   *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3215,7 +3220,7 @@ export class WorkstationsClient {
     ) as AsyncIterable<protos.google.cloud.workstations.v1beta.IWorkstationConfig>;
   }
   /**
-   * Returns all Workstations using the specified config.
+   * Returns all Workstations using the specified workstation configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3404,8 +3409,8 @@ export class WorkstationsClient {
     ) as AsyncIterable<protos.google.cloud.workstations.v1beta.IWorkstation>;
   }
   /**
-   * Returns all Workstations using the specified config on which the caller has
-   * the "workstations.workstations.use" permission.
+   * Returns all workstations using the specified workstation configuration
+   * on which the caller has the "workstations.workstations.use" permission.
    *
    * @param {Object} request
    *   The request object that will be sent.
