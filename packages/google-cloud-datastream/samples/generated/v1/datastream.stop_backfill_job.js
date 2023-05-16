@@ -29,7 +29,8 @@ function main(object) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the stream object resource to stop the backfill job for.
+   *  Required. The name of the stream object resource to stop the backfill job
+   *  for.
    */
   // const object = 'abc123'
 

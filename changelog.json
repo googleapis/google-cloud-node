@@ -5,6 +5,99 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "a5389596ba5b0c707582612a6b2aa84385fefc26",
+          "message": "Do not exit with 1 on empty folder",
+          "issues": [
+            "4272"
+          ]
+        }
+      ],
+      "version": "1.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "0b204f0b-d47b-4d59-b14c-bb66d75f445e",
+      "createTime": "2023-05-11T22:03:10.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8b5caebc2569c715a4fee03e6bcc5e5cd2ca5150",
+          "message": "Add processing strategy to batch recognition requests",
+          "issues": [
+            "4268"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "1dfc19b9-45b0-41bd-8dab-c0fe1d078878",
+      "createTime": "2023-05-11T22:03:10.634Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added debug info to StreamingDetectIntent",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added dtmf digits to WebhookRequest",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added FLOW as a new DiffType in TestRunDifference",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "[dialogflow-cx] extended CreateAgent timeout to 180 seconds",
+          "issues": [
+            "4253"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added debug info to StreamingDetectIntent",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added dtmf digits to WebhookRequest",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added FLOW as a new DiffType in TestRunDifference",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "[dialogflow-cx] extended CreateAgent timeout to 180 seconds",
+          "issues": []
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "48831956-cb59-40d8-95f0-6e17d324dccd",
+      "createTime": "2023-05-11T22:03:10.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "405cbe236171808ca3b49faa933c2078bebd09d6",
           "message": "Address typo in package.json",
           "issues": [],
@@ -9405,5 +9498,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-09T22:01:41.602Z"
+  "updateTime": "2023-05-11T22:03:10.640Z"
 }

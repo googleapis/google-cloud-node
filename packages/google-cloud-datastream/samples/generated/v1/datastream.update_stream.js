@@ -55,8 +55,8 @@ function main(stream) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. Only validate the stream with the changes, without actually updating it.
-   *  The default is false.
+   *  Optional. Only validate the stream with the changes, without actually
+   *  updating it. The default is false.
    */
   // const validateOnly = true
   /**

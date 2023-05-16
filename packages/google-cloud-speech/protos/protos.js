@@ -32271,6 +32271,7 @@
                          * @property {google.protobuf.IFieldMask|null} [configMask] BatchRecognizeRequest configMask
                          * @property {Array.<google.cloud.speech.v2.IBatchRecognizeFileMetadata>|null} [files] BatchRecognizeRequest files
                          * @property {google.cloud.speech.v2.IRecognitionOutputConfig|null} [recognitionOutputConfig] BatchRecognizeRequest recognitionOutputConfig
+                         * @property {google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy|null} [processingStrategy] BatchRecognizeRequest processingStrategy
                          */
     
                         /**
@@ -32330,6 +32331,14 @@
                         BatchRecognizeRequest.prototype.recognitionOutputConfig = null;
     
                         /**
+                         * BatchRecognizeRequest processingStrategy.
+                         * @member {google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy} processingStrategy
+                         * @memberof google.cloud.speech.v2.BatchRecognizeRequest
+                         * @instance
+                         */
+                        BatchRecognizeRequest.prototype.processingStrategy = 0;
+    
+                        /**
                          * Creates a new BatchRecognizeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.BatchRecognizeRequest
@@ -32364,6 +32373,8 @@
                                 $root.google.protobuf.FieldMask.encode(message.configMask, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.recognitionOutputConfig != null && Object.hasOwnProperty.call(message, "recognitionOutputConfig"))
                                 $root.google.cloud.speech.v2.RecognitionOutputConfig.encode(message.recognitionOutputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.processingStrategy != null && Object.hasOwnProperty.call(message, "processingStrategy"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.processingStrategy);
                             return writer;
                         };
     
@@ -32418,6 +32429,10 @@
                                     }
                                 case 6: {
                                         message.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.processingStrategy = reader.int32();
                                         break;
                                     }
                                 default:
@@ -32482,6 +32497,14 @@
                                 if (error)
                                     return "recognitionOutputConfig." + error;
                             }
+                            if (message.processingStrategy != null && message.hasOwnProperty("processingStrategy"))
+                                switch (message.processingStrategy) {
+                                default:
+                                    return "processingStrategy: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -32524,6 +32547,22 @@
                                     throw TypeError(".google.cloud.speech.v2.BatchRecognizeRequest.recognitionOutputConfig: object expected");
                                 message.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.fromObject(object.recognitionOutputConfig);
                             }
+                            switch (object.processingStrategy) {
+                            default:
+                                if (typeof object.processingStrategy === "number") {
+                                    message.processingStrategy = object.processingStrategy;
+                                    break;
+                                }
+                                break;
+                            case "PROCESSING_STRATEGY_UNSPECIFIED":
+                            case 0:
+                                message.processingStrategy = 0;
+                                break;
+                            case "DYNAMIC_BATCHING":
+                            case 1:
+                                message.processingStrategy = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -32547,6 +32586,7 @@
                                 object.config = null;
                                 object.configMask = null;
                                 object.recognitionOutputConfig = null;
+                                object.processingStrategy = options.enums === String ? "PROCESSING_STRATEGY_UNSPECIFIED" : 0;
                             }
                             if (message.recognizer != null && message.hasOwnProperty("recognizer"))
                                 object.recognizer = message.recognizer;
@@ -32561,6 +32601,8 @@
                                 object.configMask = $root.google.protobuf.FieldMask.toObject(message.configMask, options);
                             if (message.recognitionOutputConfig != null && message.hasOwnProperty("recognitionOutputConfig"))
                                 object.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.toObject(message.recognitionOutputConfig, options);
+                            if (message.processingStrategy != null && message.hasOwnProperty("processingStrategy"))
+                                object.processingStrategy = options.enums === String ? $root.google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy[message.processingStrategy] === undefined ? message.processingStrategy : $root.google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy[message.processingStrategy] : message.processingStrategy;
                             return object;
                         };
     
@@ -32589,6 +32631,20 @@
                             }
                             return typeUrlPrefix + "/google.cloud.speech.v2.BatchRecognizeRequest";
                         };
+    
+                        /**
+                         * ProcessingStrategy enum.
+                         * @name google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy
+                         * @enum {number}
+                         * @property {number} PROCESSING_STRATEGY_UNSPECIFIED=0 PROCESSING_STRATEGY_UNSPECIFIED value
+                         * @property {number} DYNAMIC_BATCHING=1 DYNAMIC_BATCHING value
+                         */
+                        BatchRecognizeRequest.ProcessingStrategy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROCESSING_STRATEGY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DYNAMIC_BATCHING"] = 1;
+                            return values;
+                        })();
     
                         return BatchRecognizeRequest;
                     })();

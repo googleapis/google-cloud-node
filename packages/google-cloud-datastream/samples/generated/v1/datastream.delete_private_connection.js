@@ -47,8 +47,8 @@ function main(name) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, any child routes that belong to this PrivateConnection will
-   *  also be deleted.
+   *  Optional. If set to true, any child routes that belong to this
+   *  PrivateConnection will also be deleted.
    */
   // const force = true
 
