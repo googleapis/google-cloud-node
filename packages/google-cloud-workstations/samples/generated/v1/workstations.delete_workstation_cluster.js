@@ -38,7 +38,7 @@ function main(name) {
   // const validateOnly = true
   /**
    *  If set, the request will be rejected if the latest version of the
-   *  workstation cluster on the server does not have this etag.
+   *  workstation cluster on the server does not have this ETag.
    */
   // const etag = 'abc123'
   /**

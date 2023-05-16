@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the connection profile type. Must be in the
-   *  format `projects/* /locations/*`.
+   *  Required. The parent resource of the connection profile type. Must be in
+   *  the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

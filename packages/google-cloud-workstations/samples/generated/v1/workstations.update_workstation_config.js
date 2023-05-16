@@ -33,7 +33,8 @@ function main(workstationConfig, updateMask) {
    */
   // const workstationConfig = {}
   /**
-   *  Required. Mask specifying which fields in the config should be updated.
+   *  Required. Mask specifying which fields in the workstation configuration
+   *  should be updated.
    */
   // const updateMask = {}
   /**
@@ -42,8 +43,9 @@ function main(workstationConfig, updateMask) {
    */
   // const validateOnly = true
   /**
-   *  If set, and the config is not found, a new config will be created.
-   *  In this situation, update_mask is ignored.
+   *  If set and the workstation configuration is not found, a new
+   *  workstation configuration will be created. In this situation,
+   *  update_mask is ignored.
    */
   // const allowMissing = true
 
