@@ -243,6 +243,15 @@ export class BatchServiceClient {
           get: '/v1alpha/{name=projects/*}/locations',
         },
         {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1alpha/{name=projects/*/locations/*/operations/*}',
         },
