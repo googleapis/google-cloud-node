@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataplex",
-        "version": "2.3.1",
+        "version": "2.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1516,6 +1516,46 @@
             }
         },
         {
+            "regionTag": "dataplex_v1_generated_DataplexService_RunTask_async",
+            "title": "ContentService runTask Sample",
+            "origin": "API_DEFINITION",
+            "description": " Run an on demand execution of a Task.",
+            "canonical": true,
+            "file": "dataplex_service.run_task.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RunTask",
+                "fullName": "google.cloud.dataplex.v1.DataplexService.RunTask",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataplex.v1.RunTaskResponse",
+                "client": {
+                    "shortName": "DataplexServiceClient",
+                    "fullName": "google.cloud.dataplex.v1.DataplexServiceClient"
+                },
+                "method": {
+                    "shortName": "RunTask",
+                    "fullName": "google.cloud.dataplex.v1.DataplexService.RunTask",
+                    "service": {
+                        "shortName": "DataplexService",
+                        "fullName": "google.cloud.dataplex.v1.DataplexService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dataplex_v1_generated_DataplexService_GetJob_async",
             "title": "ContentService getJob Sample",
             "origin": "API_DEFINITION",
@@ -1894,7 +1934,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -1914,6 +1954,10 @@
                     {
                         "name": "data_scan_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -1942,7 +1986,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -1958,6 +2002,10 @@
                     {
                         "name": "update_mask",
                         "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

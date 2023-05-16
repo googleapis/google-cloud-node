@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.5.0...discoveryengine-v0.6.0) (2023-05-04)
+
+
+### Features
+
+* [discoveryengine] add document purge API ([#4219](https://github.com/googleapis/google-cloud-node/issues/4219)) ([454fa79](https://github.com/googleapis/google-cloud-node/commit/454fa7943ddf664bc54a67e654d7e8a39ea55fed))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.4.1...discoveryengine-v0.5.0) (2023-04-24)
+
+
+### Features
+
+* [discoveryengine] add search, autocomplete and schema services ([#4201](https://github.com/googleapis/google-cloud-node/issues/4201)) ([de00e1d](https://github.com/googleapis/google-cloud-node/commit/de00e1d88877dd674dfd20b78a3de4476d65eb29))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.4.0...discoveryengine-v0.4.1) (2023-04-13)
 
 

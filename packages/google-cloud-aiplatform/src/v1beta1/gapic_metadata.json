@@ -266,6 +266,11 @@
                 "undeployModel"
               ]
             },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
+              ]
+            },
             "ListEndpoints": {
               "methods": [
                 "listEndpoints",
@@ -306,6 +311,11 @@
             "UndeployModel": {
               "methods": [
                 "undeployModel"
+              ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
               ]
             },
             "ListEndpoints": {
@@ -1600,6 +1610,30 @@
                 "searchMigratableResources",
                 "searchMigratableResourcesStream",
                 "searchMigratableResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
               ]
             }
           }

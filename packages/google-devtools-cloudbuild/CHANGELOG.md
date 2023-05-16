@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.2...cloudbuild-v3.6.0) (2023-04-24)
+
+
+### Features
+
+* [cloudbuild] Add PeeredNetworkIpRange to NetworkConfigs message ([#4181](https://github.com/googleapis/google-cloud-node/issues/4181)) ([01fa5eb](https://github.com/googleapis/google-cloud-node/commit/01fa5eb8e96fd8c8c0dd689b5da1ab57c4b66c98))
+
 ## [3.5.2](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.1...cloudbuild-v3.5.2) (2023-04-13)
 
 

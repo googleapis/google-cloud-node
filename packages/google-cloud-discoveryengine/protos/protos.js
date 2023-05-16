@@ -66,6 +66,323 @@
                      */
                     var v1beta = {};
     
+                    v1beta.Interval = (function() {
+    
+                        /**
+                         * Properties of an Interval.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IInterval
+                         * @property {number|null} [minimum] Interval minimum
+                         * @property {number|null} [exclusiveMinimum] Interval exclusiveMinimum
+                         * @property {number|null} [maximum] Interval maximum
+                         * @property {number|null} [exclusiveMaximum] Interval exclusiveMaximum
+                         */
+    
+                        /**
+                         * Constructs a new Interval.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents an Interval.
+                         * @implements IInterval
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IInterval=} [properties] Properties to set
+                         */
+                        function Interval(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Interval minimum.
+                         * @member {number|null|undefined} minimum
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Interval.prototype.minimum = null;
+    
+                        /**
+                         * Interval exclusiveMinimum.
+                         * @member {number|null|undefined} exclusiveMinimum
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Interval.prototype.exclusiveMinimum = null;
+    
+                        /**
+                         * Interval maximum.
+                         * @member {number|null|undefined} maximum
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Interval.prototype.maximum = null;
+    
+                        /**
+                         * Interval exclusiveMaximum.
+                         * @member {number|null|undefined} exclusiveMaximum
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Interval.prototype.exclusiveMaximum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Interval min.
+                         * @member {"minimum"|"exclusiveMinimum"|undefined} min
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Object.defineProperty(Interval.prototype, "min", {
+                            get: $util.oneOfGetter($oneOfFields = ["minimum", "exclusiveMinimum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Interval max.
+                         * @member {"maximum"|"exclusiveMaximum"|undefined} max
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         */
+                        Object.defineProperty(Interval.prototype, "max", {
+                            get: $util.oneOfGetter($oneOfFields = ["maximum", "exclusiveMaximum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Interval instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IInterval=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.Interval} Interval instance
+                         */
+                        Interval.create = function create(properties) {
+                            return new Interval(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Interval message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Interval.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IInterval} message Interval message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Interval.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.minimum != null && Object.hasOwnProperty.call(message, "minimum"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.minimum);
+                            if (message.exclusiveMinimum != null && Object.hasOwnProperty.call(message, "exclusiveMinimum"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.exclusiveMinimum);
+                            if (message.maximum != null && Object.hasOwnProperty.call(message, "maximum"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.maximum);
+                            if (message.exclusiveMaximum != null && Object.hasOwnProperty.call(message, "exclusiveMaximum"))
+                                writer.uint32(/* id 4, wireType 1 =*/33).double(message.exclusiveMaximum);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Interval.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IInterval} message Interval message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Interval message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.Interval} Interval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Interval.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.Interval();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.minimum = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.exclusiveMinimum = reader.double();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maximum = reader.double();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.exclusiveMaximum = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Interval message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.Interval} Interval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Interval.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Interval message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Interval.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.minimum != null && message.hasOwnProperty("minimum")) {
+                                properties.min = 1;
+                                if (typeof message.minimum !== "number")
+                                    return "minimum: number expected";
+                            }
+                            if (message.exclusiveMinimum != null && message.hasOwnProperty("exclusiveMinimum")) {
+                                if (properties.min === 1)
+                                    return "min: multiple values";
+                                properties.min = 1;
+                                if (typeof message.exclusiveMinimum !== "number")
+                                    return "exclusiveMinimum: number expected";
+                            }
+                            if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                properties.max = 1;
+                                if (typeof message.maximum !== "number")
+                                    return "maximum: number expected";
+                            }
+                            if (message.exclusiveMaximum != null && message.hasOwnProperty("exclusiveMaximum")) {
+                                if (properties.max === 1)
+                                    return "max: multiple values";
+                                properties.max = 1;
+                                if (typeof message.exclusiveMaximum !== "number")
+                                    return "exclusiveMaximum: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.Interval} Interval
+                         */
+                        Interval.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.Interval)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.Interval();
+                            if (object.minimum != null)
+                                message.minimum = Number(object.minimum);
+                            if (object.exclusiveMinimum != null)
+                                message.exclusiveMinimum = Number(object.exclusiveMinimum);
+                            if (object.maximum != null)
+                                message.maximum = Number(object.maximum);
+                            if (object.exclusiveMaximum != null)
+                                message.exclusiveMaximum = Number(object.exclusiveMaximum);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.Interval} message Interval
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Interval.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.minimum != null && message.hasOwnProperty("minimum")) {
+                                object.minimum = options.json && !isFinite(message.minimum) ? String(message.minimum) : message.minimum;
+                                if (options.oneofs)
+                                    object.min = "minimum";
+                            }
+                            if (message.exclusiveMinimum != null && message.hasOwnProperty("exclusiveMinimum")) {
+                                object.exclusiveMinimum = options.json && !isFinite(message.exclusiveMinimum) ? String(message.exclusiveMinimum) : message.exclusiveMinimum;
+                                if (options.oneofs)
+                                    object.min = "exclusiveMinimum";
+                            }
+                            if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                object.maximum = options.json && !isFinite(message.maximum) ? String(message.maximum) : message.maximum;
+                                if (options.oneofs)
+                                    object.max = "maximum";
+                            }
+                            if (message.exclusiveMaximum != null && message.hasOwnProperty("exclusiveMaximum")) {
+                                object.exclusiveMaximum = options.json && !isFinite(message.exclusiveMaximum) ? String(message.exclusiveMaximum) : message.exclusiveMaximum;
+                                if (options.oneofs)
+                                    object.max = "exclusiveMaximum";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Interval to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Interval.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Interval
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.Interval
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Interval.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.Interval";
+                        };
+    
+                        return Interval;
+                    })();
+    
                     v1beta.CustomAttribute = (function() {
     
                         /**
@@ -560,6 +877,774 @@
                         return UserInfo;
                     })();
     
+                    v1beta.CompletionService = (function() {
+    
+                        /**
+                         * Constructs a new CompletionService service.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a CompletionService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CompletionService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CompletionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CompletionService;
+    
+                        /**
+                         * Creates new CompletionService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.CompletionService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CompletionService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CompletionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.CompletionService|completeQuery}.
+                         * @memberof google.cloud.discoveryengine.v1beta.CompletionService
+                         * @typedef CompleteQueryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} [response] CompleteQueryResponse
+                         */
+    
+                        /**
+                         * Calls CompleteQuery.
+                         * @function completeQuery
+                         * @memberof google.cloud.discoveryengine.v1beta.CompletionService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest} request CompleteQueryRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.CompletionService.CompleteQueryCallback} callback Node-style callback called with the error, if any, and CompleteQueryResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CompletionService.prototype.completeQuery = function completeQuery(request, callback) {
+                            return this.rpcCall(completeQuery, $root.google.cloud.discoveryengine.v1beta.CompleteQueryRequest, $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse, request, callback);
+                        }, "name", { value: "CompleteQuery" });
+    
+                        /**
+                         * Calls CompleteQuery.
+                         * @function completeQuery
+                         * @memberof google.cloud.discoveryengine.v1beta.CompletionService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest} request CompleteQueryRequest message or plain object
+                         * @returns {Promise<google.cloud.discoveryengine.v1beta.CompleteQueryResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return CompletionService;
+                    })();
+    
+                    v1beta.CompleteQueryRequest = (function() {
+    
+                        /**
+                         * Properties of a CompleteQueryRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ICompleteQueryRequest
+                         * @property {string|null} [dataStore] CompleteQueryRequest dataStore
+                         * @property {string|null} [query] CompleteQueryRequest query
+                         * @property {string|null} [queryModel] CompleteQueryRequest queryModel
+                         * @property {string|null} [userPseudoId] CompleteQueryRequest userPseudoId
+                         */
+    
+                        /**
+                         * Constructs a new CompleteQueryRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a CompleteQueryRequest.
+                         * @implements ICompleteQueryRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest=} [properties] Properties to set
+                         */
+                        function CompleteQueryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CompleteQueryRequest dataStore.
+                         * @member {string} dataStore
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @instance
+                         */
+                        CompleteQueryRequest.prototype.dataStore = "";
+    
+                        /**
+                         * CompleteQueryRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @instance
+                         */
+                        CompleteQueryRequest.prototype.query = "";
+    
+                        /**
+                         * CompleteQueryRequest queryModel.
+                         * @member {string} queryModel
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @instance
+                         */
+                        CompleteQueryRequest.prototype.queryModel = "";
+    
+                        /**
+                         * CompleteQueryRequest userPseudoId.
+                         * @member {string} userPseudoId
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @instance
+                         */
+                        CompleteQueryRequest.prototype.userPseudoId = "";
+    
+                        /**
+                         * Creates a new CompleteQueryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryRequest} CompleteQueryRequest instance
+                         */
+                        CompleteQueryRequest.create = function create(properties) {
+                            return new CompleteQueryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CompleteQueryRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest} message CompleteQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompleteQueryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataStore != null && Object.hasOwnProperty.call(message, "dataStore"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataStore);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                            if (message.queryModel != null && Object.hasOwnProperty.call(message, "queryModel"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.queryModel);
+                            if (message.userPseudoId != null && Object.hasOwnProperty.call(message, "userPseudoId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPseudoId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CompleteQueryRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryRequest} message CompleteQueryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompleteQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CompleteQueryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryRequest} CompleteQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompleteQueryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataStore = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.query = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.queryModel = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.userPseudoId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CompleteQueryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryRequest} CompleteQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompleteQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CompleteQueryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CompleteQueryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataStore != null && message.hasOwnProperty("dataStore"))
+                                if (!$util.isString(message.dataStore))
+                                    return "dataStore: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.queryModel != null && message.hasOwnProperty("queryModel"))
+                                if (!$util.isString(message.queryModel))
+                                    return "queryModel: string expected";
+                            if (message.userPseudoId != null && message.hasOwnProperty("userPseudoId"))
+                                if (!$util.isString(message.userPseudoId))
+                                    return "userPseudoId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CompleteQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryRequest} CompleteQueryRequest
+                         */
+                        CompleteQueryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.CompleteQueryRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryRequest();
+                            if (object.dataStore != null)
+                                message.dataStore = String(object.dataStore);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.queryModel != null)
+                                message.queryModel = String(object.queryModel);
+                            if (object.userPseudoId != null)
+                                message.userPseudoId = String(object.userPseudoId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CompleteQueryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.CompleteQueryRequest} message CompleteQueryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CompleteQueryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataStore = "";
+                                object.query = "";
+                                object.queryModel = "";
+                                object.userPseudoId = "";
+                            }
+                            if (message.dataStore != null && message.hasOwnProperty("dataStore"))
+                                object.dataStore = message.dataStore;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.queryModel != null && message.hasOwnProperty("queryModel"))
+                                object.queryModel = message.queryModel;
+                            if (message.userPseudoId != null && message.hasOwnProperty("userPseudoId"))
+                                object.userPseudoId = message.userPseudoId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CompleteQueryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CompleteQueryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CompleteQueryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CompleteQueryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.CompleteQueryRequest";
+                        };
+    
+                        return CompleteQueryRequest;
+                    })();
+    
+                    v1beta.CompleteQueryResponse = (function() {
+    
+                        /**
+                         * Properties of a CompleteQueryResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ICompleteQueryResponse
+                         * @property {Array.<google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion>|null} [querySuggestions] CompleteQueryResponse querySuggestions
+                         */
+    
+                        /**
+                         * Constructs a new CompleteQueryResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a CompleteQueryResponse.
+                         * @implements ICompleteQueryResponse
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryResponse=} [properties] Properties to set
+                         */
+                        function CompleteQueryResponse(properties) {
+                            this.querySuggestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CompleteQueryResponse querySuggestions.
+                         * @member {Array.<google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion>} querySuggestions
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @instance
+                         */
+                        CompleteQueryResponse.prototype.querySuggestions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CompleteQueryResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryResponse=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} CompleteQueryResponse instance
+                         */
+                        CompleteQueryResponse.create = function create(properties) {
+                            return new CompleteQueryResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CompleteQueryResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryResponse} message CompleteQueryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompleteQueryResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.querySuggestions != null && message.querySuggestions.length)
+                                for (var i = 0; i < message.querySuggestions.length; ++i)
+                                    $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.encode(message.querySuggestions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CompleteQueryResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICompleteQueryResponse} message CompleteQueryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CompleteQueryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CompleteQueryResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} CompleteQueryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompleteQueryResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.querySuggestions && message.querySuggestions.length))
+                                            message.querySuggestions = [];
+                                        message.querySuggestions.push($root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CompleteQueryResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} CompleteQueryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CompleteQueryResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CompleteQueryResponse message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CompleteQueryResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.querySuggestions != null && message.hasOwnProperty("querySuggestions")) {
+                                if (!Array.isArray(message.querySuggestions))
+                                    return "querySuggestions: array expected";
+                                for (var i = 0; i < message.querySuggestions.length; ++i) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.verify(message.querySuggestions[i]);
+                                    if (error)
+                                        return "querySuggestions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CompleteQueryResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} CompleteQueryResponse
+                         */
+                        CompleteQueryResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse();
+                            if (object.querySuggestions) {
+                                if (!Array.isArray(object.querySuggestions))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.CompleteQueryResponse.querySuggestions: array expected");
+                                message.querySuggestions = [];
+                                for (var i = 0; i < object.querySuggestions.length; ++i) {
+                                    if (typeof object.querySuggestions[i] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.CompleteQueryResponse.querySuggestions: object expected");
+                                    message.querySuggestions[i] = $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.fromObject(object.querySuggestions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CompleteQueryResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse} message CompleteQueryResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CompleteQueryResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.querySuggestions = [];
+                            if (message.querySuggestions && message.querySuggestions.length) {
+                                object.querySuggestions = [];
+                                for (var j = 0; j < message.querySuggestions.length; ++j)
+                                    object.querySuggestions[j] = $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.toObject(message.querySuggestions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CompleteQueryResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CompleteQueryResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CompleteQueryResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CompleteQueryResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.CompleteQueryResponse";
+                        };
+    
+                        CompleteQueryResponse.QuerySuggestion = (function() {
+    
+                            /**
+                             * Properties of a QuerySuggestion.
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                             * @interface IQuerySuggestion
+                             * @property {string|null} [suggestion] QuerySuggestion suggestion
+                             */
+    
+                            /**
+                             * Constructs a new QuerySuggestion.
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse
+                             * @classdesc Represents a QuerySuggestion.
+                             * @implements IQuerySuggestion
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion=} [properties] Properties to set
+                             */
+                            function QuerySuggestion(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QuerySuggestion suggestion.
+                             * @member {string} suggestion
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @instance
+                             */
+                            QuerySuggestion.prototype.suggestion = "";
+    
+                            /**
+                             * Creates a new QuerySuggestion instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion} QuerySuggestion instance
+                             */
+                            QuerySuggestion.create = function create(properties) {
+                                return new QuerySuggestion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QuerySuggestion message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion} message QuerySuggestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuerySuggestion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.suggestion != null && Object.hasOwnProperty.call(message, "suggestion"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.suggestion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QuerySuggestion message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.IQuerySuggestion} message QuerySuggestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuerySuggestion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QuerySuggestion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion} QuerySuggestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuerySuggestion.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.suggestion = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QuerySuggestion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion} QuerySuggestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuerySuggestion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QuerySuggestion message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QuerySuggestion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.suggestion != null && message.hasOwnProperty("suggestion"))
+                                    if (!$util.isString(message.suggestion))
+                                        return "suggestion: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QuerySuggestion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion} QuerySuggestion
+                             */
+                            QuerySuggestion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion();
+                                if (object.suggestion != null)
+                                    message.suggestion = String(object.suggestion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QuerySuggestion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion} message QuerySuggestion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QuerySuggestion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.suggestion = "";
+                                if (message.suggestion != null && message.hasOwnProperty("suggestion"))
+                                    object.suggestion = message.suggestion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QuerySuggestion to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QuerySuggestion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QuerySuggestion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QuerySuggestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.CompleteQueryResponse.QuerySuggestion";
+                            };
+    
+                            return QuerySuggestion;
+                        })();
+    
+                        return CompleteQueryResponse;
+                    })();
+    
                     v1beta.Document = (function() {
     
                         /**
@@ -571,7 +1656,9 @@
                          * @property {string|null} [name] Document name
                          * @property {string|null} [id] Document id
                          * @property {string|null} [schemaId] Document schemaId
+                         * @property {google.cloud.discoveryengine.v1beta.Document.IContent|null} [content] Document content
                          * @property {string|null} [parentDocumentId] Document parentDocumentId
+                         * @property {google.protobuf.IStruct|null} [derivedStructData] Document derivedStructData
                          */
     
                         /**
@@ -630,12 +1717,28 @@
                         Document.prototype.schemaId = "";
     
                         /**
+                         * Document content.
+                         * @member {google.cloud.discoveryengine.v1beta.Document.IContent|null|undefined} content
+                         * @memberof google.cloud.discoveryengine.v1beta.Document
+                         * @instance
+                         */
+                        Document.prototype.content = null;
+    
+                        /**
                          * Document parentDocumentId.
                          * @member {string} parentDocumentId
                          * @memberof google.cloud.discoveryengine.v1beta.Document
                          * @instance
                          */
                         Document.prototype.parentDocumentId = "";
+    
+                        /**
+                         * Document derivedStructData.
+                         * @member {google.protobuf.IStruct|null|undefined} derivedStructData
+                         * @memberof google.cloud.discoveryengine.v1beta.Document
+                         * @instance
+                         */
+                        Document.prototype.derivedStructData = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -685,8 +1788,12 @@
                                 $root.google.protobuf.Struct.encode(message.structData, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.jsonData != null && Object.hasOwnProperty.call(message, "jsonData"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.jsonData);
+                            if (message.derivedStructData != null && Object.hasOwnProperty.call(message, "derivedStructData"))
+                                $root.google.protobuf.Struct.encode(message.derivedStructData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.parentDocumentId != null && Object.hasOwnProperty.call(message, "parentDocumentId"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.parentDocumentId);
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                $root.google.cloud.discoveryengine.v1beta.Document.Content.encode(message.content, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -741,8 +1848,16 @@
                                         message.schemaId = reader.string();
                                         break;
                                     }
+                                case 10: {
+                                        message.content = $root.google.cloud.discoveryengine.v1beta.Document.Content.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 7: {
                                         message.parentDocumentId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.derivedStructData = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -805,9 +1920,19 @@
                             if (message.schemaId != null && message.hasOwnProperty("schemaId"))
                                 if (!$util.isString(message.schemaId))
                                     return "schemaId: string expected";
+                            if (message.content != null && message.hasOwnProperty("content")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.Document.Content.verify(message.content);
+                                if (error)
+                                    return "content." + error;
+                            }
                             if (message.parentDocumentId != null && message.hasOwnProperty("parentDocumentId"))
                                 if (!$util.isString(message.parentDocumentId))
                                     return "parentDocumentId: string expected";
+                            if (message.derivedStructData != null && message.hasOwnProperty("derivedStructData")) {
+                                var error = $root.google.protobuf.Struct.verify(message.derivedStructData);
+                                if (error)
+                                    return "derivedStructData." + error;
+                            }
                             return null;
                         };
     
@@ -836,8 +1961,18 @@
                                 message.id = String(object.id);
                             if (object.schemaId != null)
                                 message.schemaId = String(object.schemaId);
+                            if (object.content != null) {
+                                if (typeof object.content !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.Document.content: object expected");
+                                message.content = $root.google.cloud.discoveryengine.v1beta.Document.Content.fromObject(object.content);
+                            }
                             if (object.parentDocumentId != null)
                                 message.parentDocumentId = String(object.parentDocumentId);
+                            if (object.derivedStructData != null) {
+                                if (typeof object.derivedStructData !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.Document.derivedStructData: object expected");
+                                message.derivedStructData = $root.google.protobuf.Struct.fromObject(object.derivedStructData);
+                            }
                             return message;
                         };
     
@@ -858,7 +1993,9 @@
                                 object.name = "";
                                 object.id = "";
                                 object.schemaId = "";
+                                object.derivedStructData = null;
                                 object.parentDocumentId = "";
+                                object.content = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -876,8 +2013,12 @@
                                 if (options.oneofs)
                                     object.data = "jsonData";
                             }
+                            if (message.derivedStructData != null && message.hasOwnProperty("derivedStructData"))
+                                object.derivedStructData = $root.google.protobuf.Struct.toObject(message.derivedStructData, options);
                             if (message.parentDocumentId != null && message.hasOwnProperty("parentDocumentId"))
                                 object.parentDocumentId = message.parentDocumentId;
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = $root.google.cloud.discoveryengine.v1beta.Document.Content.toObject(message.content, options);
                             return object;
                         };
     
@@ -906,6 +2047,283 @@
                             }
                             return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.Document";
                         };
+    
+                        Document.Content = (function() {
+    
+                            /**
+                             * Properties of a Content.
+                             * @memberof google.cloud.discoveryengine.v1beta.Document
+                             * @interface IContent
+                             * @property {Uint8Array|null} [rawBytes] Content rawBytes
+                             * @property {string|null} [uri] Content uri
+                             * @property {string|null} [mimeType] Content mimeType
+                             */
+    
+                            /**
+                             * Constructs a new Content.
+                             * @memberof google.cloud.discoveryengine.v1beta.Document
+                             * @classdesc Represents a Content.
+                             * @implements IContent
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.Document.IContent=} [properties] Properties to set
+                             */
+                            function Content(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Content rawBytes.
+                             * @member {Uint8Array|null|undefined} rawBytes
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @instance
+                             */
+                            Content.prototype.rawBytes = null;
+    
+                            /**
+                             * Content uri.
+                             * @member {string|null|undefined} uri
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @instance
+                             */
+                            Content.prototype.uri = null;
+    
+                            /**
+                             * Content mimeType.
+                             * @member {string} mimeType
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @instance
+                             */
+                            Content.prototype.mimeType = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Content content.
+                             * @member {"rawBytes"|"uri"|undefined} content
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @instance
+                             */
+                            Object.defineProperty(Content.prototype, "content", {
+                                get: $util.oneOfGetter($oneOfFields = ["rawBytes", "uri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Content instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.Document.IContent=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.Document.Content} Content instance
+                             */
+                            Content.create = function create(properties) {
+                                return new Content(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Content message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Document.Content.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.Document.IContent} message Content message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Content.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                                if (message.rawBytes != null && Object.hasOwnProperty.call(message, "rawBytes"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.rawBytes);
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Content message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Document.Content.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.Document.IContent} message Content message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Content.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Content message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.Document.Content} Content
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Content.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.Document.Content();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.rawBytes = reader.bytes();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.mimeType = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Content message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.Document.Content} Content
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Content.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Content message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Content.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.rawBytes != null && message.hasOwnProperty("rawBytes")) {
+                                    properties.content = 1;
+                                    if (!(message.rawBytes && typeof message.rawBytes.length === "number" || $util.isString(message.rawBytes)))
+                                        return "rawBytes: buffer expected";
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    if (properties.content === 1)
+                                        return "content: multiple values";
+                                    properties.content = 1;
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                }
+                                if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                    if (!$util.isString(message.mimeType))
+                                        return "mimeType: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Content message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.Document.Content} Content
+                             */
+                            Content.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.Document.Content)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.Document.Content();
+                                if (object.rawBytes != null)
+                                    if (typeof object.rawBytes === "string")
+                                        $util.base64.decode(object.rawBytes, message.rawBytes = $util.newBuffer($util.base64.length(object.rawBytes)), 0);
+                                    else if (object.rawBytes.length >= 0)
+                                        message.rawBytes = object.rawBytes;
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.mimeType != null)
+                                    message.mimeType = String(object.mimeType);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Content message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.Document.Content} message Content
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Content.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.mimeType = "";
+                                if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                    object.mimeType = message.mimeType;
+                                if (message.rawBytes != null && message.hasOwnProperty("rawBytes")) {
+                                    object.rawBytes = options.bytes === String ? $util.base64.encode(message.rawBytes, 0, message.rawBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.rawBytes) : message.rawBytes;
+                                    if (options.oneofs)
+                                        object.content = "rawBytes";
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    object.uri = message.uri;
+                                    if (options.oneofs)
+                                        object.content = "uri";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Content to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Content.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Content
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.Document.Content
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Content.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.Document.Content";
+                            };
+    
+                            return Content;
+                        })();
     
                         return Document;
                     })();
@@ -1136,6 +2554,39 @@
                          * @memberof google.cloud.discoveryengine.v1beta.DocumentService
                          * @instance
                          * @param {google.cloud.discoveryengine.v1beta.IImportDocumentsRequest} request ImportDocumentsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.DocumentService|purgeDocuments}.
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @typedef PurgeDocumentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls PurgeDocuments.
+                         * @function purgeDocuments
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} request PurgeDocumentsRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocumentsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DocumentService.prototype.purgeDocuments = function purgeDocuments(request, callback) {
+                            return this.rpcCall(purgeDocuments, $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "PurgeDocuments" });
+    
+                        /**
+                         * Calls PurgeDocuments.
+                         * @function purgeDocuments
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} request PurgeDocumentsRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -8526,6 +9977,824 @@
                         return MediaInfo;
                     })();
     
+                    v1beta.PurgeDocumentsRequest = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsRequest
+                         * @property {string|null} [parent] PurgeDocumentsRequest parent
+                         * @property {string|null} [filter] PurgeDocumentsRequest filter
+                         * @property {boolean|null} [force] PurgeDocumentsRequest force
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsRequest.
+                         * @implements IPurgeDocumentsRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.parent = "";
+    
+                        /**
+                         * PurgeDocumentsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.filter = "";
+    
+                        /**
+                         * PurgeDocumentsRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new PurgeDocumentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest instance
+                         */
+                        PurgeDocumentsRequest.create = function create(properties) {
+                            return new PurgeDocumentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} message PurgeDocumentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} message PurgeDocumentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         */
+                        PurgeDocumentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} message PurgeDocumentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.force = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest";
+                        };
+    
+                        return PurgeDocumentsRequest;
+                    })();
+    
+                    v1beta.PurgeDocumentsResponse = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsResponse
+                         * @property {number|Long|null} [purgeCount] PurgeDocumentsResponse purgeCount
+                         * @property {Array.<string>|null} [purgeSample] PurgeDocumentsResponse purgeSample
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsResponse.
+                         * @implements IPurgeDocumentsResponse
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsResponse(properties) {
+                            this.purgeSample = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsResponse purgeCount.
+                         * @member {number|Long} purgeCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         */
+                        PurgeDocumentsResponse.prototype.purgeCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PurgeDocumentsResponse purgeSample.
+                         * @member {Array.<string>} purgeSample
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         */
+                        PurgeDocumentsResponse.prototype.purgeSample = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PurgeDocumentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse instance
+                         */
+                        PurgeDocumentsResponse.create = function create(properties) {
+                            return new PurgeDocumentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse} message PurgeDocumentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.purgeCount != null && Object.hasOwnProperty.call(message, "purgeCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.purgeCount);
+                            if (message.purgeSample != null && message.purgeSample.length)
+                                for (var i = 0; i < message.purgeSample.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.purgeSample[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse} message PurgeDocumentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.purgeCount = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.purgeSample && message.purgeSample.length))
+                                            message.purgeSample = [];
+                                        message.purgeSample.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.purgeCount != null && message.hasOwnProperty("purgeCount"))
+                                if (!$util.isInteger(message.purgeCount) && !(message.purgeCount && $util.isInteger(message.purgeCount.low) && $util.isInteger(message.purgeCount.high)))
+                                    return "purgeCount: integer|Long expected";
+                            if (message.purgeSample != null && message.hasOwnProperty("purgeSample")) {
+                                if (!Array.isArray(message.purgeSample))
+                                    return "purgeSample: array expected";
+                                for (var i = 0; i < message.purgeSample.length; ++i)
+                                    if (!$util.isString(message.purgeSample[i]))
+                                        return "purgeSample: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         */
+                        PurgeDocumentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse();
+                            if (object.purgeCount != null)
+                                if ($util.Long)
+                                    (message.purgeCount = $util.Long.fromValue(object.purgeCount)).unsigned = false;
+                                else if (typeof object.purgeCount === "string")
+                                    message.purgeCount = parseInt(object.purgeCount, 10);
+                                else if (typeof object.purgeCount === "number")
+                                    message.purgeCount = object.purgeCount;
+                                else if (typeof object.purgeCount === "object")
+                                    message.purgeCount = new $util.LongBits(object.purgeCount.low >>> 0, object.purgeCount.high >>> 0).toNumber();
+                            if (object.purgeSample) {
+                                if (!Array.isArray(object.purgeSample))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.purgeSample: array expected");
+                                message.purgeSample = [];
+                                for (var i = 0; i < object.purgeSample.length; ++i)
+                                    message.purgeSample[i] = String(object.purgeSample[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} message PurgeDocumentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.purgeSample = [];
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.purgeCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.purgeCount = options.longs === String ? "0" : 0;
+                            if (message.purgeCount != null && message.hasOwnProperty("purgeCount"))
+                                if (typeof message.purgeCount === "number")
+                                    object.purgeCount = options.longs === String ? String(message.purgeCount) : message.purgeCount;
+                                else
+                                    object.purgeCount = options.longs === String ? $util.Long.prototype.toString.call(message.purgeCount) : options.longs === Number ? new $util.LongBits(message.purgeCount.low >>> 0, message.purgeCount.high >>> 0).toNumber() : message.purgeCount;
+                            if (message.purgeSample && message.purgeSample.length) {
+                                object.purgeSample = [];
+                                for (var j = 0; j < message.purgeSample.length; ++j)
+                                    object.purgeSample[j] = message.purgeSample[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse";
+                        };
+    
+                        return PurgeDocumentsResponse;
+                    })();
+    
+                    v1beta.PurgeDocumentsMetadata = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] PurgeDocumentsMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PurgeDocumentsMetadata updateTime
+                         * @property {number|Long|null} [successCount] PurgeDocumentsMetadata successCount
+                         * @property {number|Long|null} [failureCount] PurgeDocumentsMetadata failureCount
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsMetadata.
+                         * @implements IPurgeDocumentsMetadata
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.createTime = null;
+    
+                        /**
+                         * PurgeDocumentsMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * PurgeDocumentsMetadata successCount.
+                         * @member {number|Long} successCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.successCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PurgeDocumentsMetadata failureCount.
+                         * @member {number|Long} failureCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.failureCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new PurgeDocumentsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata instance
+                         */
+                        PurgeDocumentsMetadata.create = function create(properties) {
+                            return new PurgeDocumentsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata} message PurgeDocumentsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.successCount != null && Object.hasOwnProperty.call(message, "successCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.successCount);
+                            if (message.failureCount != null && Object.hasOwnProperty.call(message, "failureCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.failureCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata} message PurgeDocumentsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.successCount = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.failureCount = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.successCount != null && message.hasOwnProperty("successCount"))
+                                if (!$util.isInteger(message.successCount) && !(message.successCount && $util.isInteger(message.successCount.low) && $util.isInteger(message.successCount.high)))
+                                    return "successCount: integer|Long expected";
+                            if (message.failureCount != null && message.hasOwnProperty("failureCount"))
+                                if (!$util.isInteger(message.failureCount) && !(message.failureCount && $util.isInteger(message.failureCount.low) && $util.isInteger(message.failureCount.high)))
+                                    return "failureCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         */
+                        PurgeDocumentsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.successCount != null)
+                                if ($util.Long)
+                                    (message.successCount = $util.Long.fromValue(object.successCount)).unsigned = false;
+                                else if (typeof object.successCount === "string")
+                                    message.successCount = parseInt(object.successCount, 10);
+                                else if (typeof object.successCount === "number")
+                                    message.successCount = object.successCount;
+                                else if (typeof object.successCount === "object")
+                                    message.successCount = new $util.LongBits(object.successCount.low >>> 0, object.successCount.high >>> 0).toNumber();
+                            if (object.failureCount != null)
+                                if ($util.Long)
+                                    (message.failureCount = $util.Long.fromValue(object.failureCount)).unsigned = false;
+                                else if (typeof object.failureCount === "string")
+                                    message.failureCount = parseInt(object.failureCount, 10);
+                                else if (typeof object.failureCount === "number")
+                                    message.failureCount = object.failureCount;
+                                else if (typeof object.failureCount === "object")
+                                    message.failureCount = new $util.LongBits(object.failureCount.low >>> 0, object.failureCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} message PurgeDocumentsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.successCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.successCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failureCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failureCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.successCount != null && message.hasOwnProperty("successCount"))
+                                if (typeof message.successCount === "number")
+                                    object.successCount = options.longs === String ? String(message.successCount) : message.successCount;
+                                else
+                                    object.successCount = options.longs === String ? $util.Long.prototype.toString.call(message.successCount) : options.longs === Number ? new $util.LongBits(message.successCount.low >>> 0, message.successCount.high >>> 0).toNumber() : message.successCount;
+                            if (message.failureCount != null && message.hasOwnProperty("failureCount"))
+                                if (typeof message.failureCount === "number")
+                                    object.failureCount = options.longs === String ? String(message.failureCount) : message.failureCount;
+                                else
+                                    object.failureCount = options.longs === String ? $util.Long.prototype.toString.call(message.failureCount) : options.longs === Number ? new $util.LongBits(message.failureCount.low >>> 0, message.failureCount.high >>> 0).toNumber() : message.failureCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata";
+                        };
+    
+                        return PurgeDocumentsMetadata;
+                    })();
+    
                     v1beta.RecommendationService = (function() {
     
                         /**
@@ -9627,6 +11896,7489 @@
                         })();
     
                         return RecommendResponse;
+                    })();
+    
+                    v1beta.Schema = (function() {
+    
+                        /**
+                         * Properties of a Schema.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ISchema
+                         * @property {google.protobuf.IStruct|null} [structSchema] Schema structSchema
+                         * @property {string|null} [jsonSchema] Schema jsonSchema
+                         * @property {string|null} [name] Schema name
+                         */
+    
+                        /**
+                         * Constructs a new Schema.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a Schema.
+                         * @implements ISchema
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ISchema=} [properties] Properties to set
+                         */
+                        function Schema(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Schema structSchema.
+                         * @member {google.protobuf.IStruct|null|undefined} structSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.structSchema = null;
+    
+                        /**
+                         * Schema jsonSchema.
+                         * @member {string|null|undefined} jsonSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.jsonSchema = null;
+    
+                        /**
+                         * Schema name.
+                         * @member {string} name
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Schema schema.
+                         * @member {"structSchema"|"jsonSchema"|undefined} schema
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @instance
+                         */
+                        Object.defineProperty(Schema.prototype, "schema", {
+                            get: $util.oneOfGetter($oneOfFields = ["structSchema", "jsonSchema"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Schema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISchema=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.Schema} Schema instance
+                         */
+                        Schema.create = function create(properties) {
+                            return new Schema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Schema message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISchema} message Schema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Schema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.structSchema != null && Object.hasOwnProperty.call(message, "structSchema"))
+                                $root.google.protobuf.Struct.encode(message.structSchema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.jsonSchema != null && Object.hasOwnProperty.call(message, "jsonSchema"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.jsonSchema);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISchema} message Schema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Schema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Schema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.Schema} Schema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Schema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.Schema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.structSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.jsonSchema = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Schema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.Schema} Schema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Schema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Schema message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Schema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema")) {
+                                properties.schema = 1;
+                                {
+                                    var error = $root.google.protobuf.Struct.verify(message.structSchema);
+                                    if (error)
+                                        return "structSchema." + error;
+                                }
+                            }
+                            if (message.jsonSchema != null && message.hasOwnProperty("jsonSchema")) {
+                                if (properties.schema === 1)
+                                    return "schema: multiple values";
+                                properties.schema = 1;
+                                if (!$util.isString(message.jsonSchema))
+                                    return "jsonSchema: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.Schema} Schema
+                         */
+                        Schema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.Schema)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.Schema();
+                            if (object.structSchema != null) {
+                                if (typeof object.structSchema !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.Schema.structSchema: object expected");
+                                message.structSchema = $root.google.protobuf.Struct.fromObject(object.structSchema);
+                            }
+                            if (object.jsonSchema != null)
+                                message.jsonSchema = String(object.jsonSchema);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Schema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.Schema} message Schema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Schema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.structSchema != null && message.hasOwnProperty("structSchema")) {
+                                object.structSchema = $root.google.protobuf.Struct.toObject(message.structSchema, options);
+                                if (options.oneofs)
+                                    object.schema = "structSchema";
+                            }
+                            if (message.jsonSchema != null && message.hasOwnProperty("jsonSchema")) {
+                                object.jsonSchema = message.jsonSchema;
+                                if (options.oneofs)
+                                    object.schema = "jsonSchema";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Schema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Schema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Schema
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.Schema
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Schema.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.Schema";
+                        };
+    
+                        return Schema;
+                    })();
+    
+                    v1beta.SchemaService = (function() {
+    
+                        /**
+                         * Constructs a new SchemaService service.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a SchemaService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SchemaService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SchemaService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SchemaService;
+    
+                        /**
+                         * Creates new SchemaService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SchemaService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SchemaService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SchemaService|getSchema}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @typedef GetSchemaCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.discoveryengine.v1beta.Schema} [response] Schema
+                         */
+    
+                        /**
+                         * Calls GetSchema.
+                         * @function getSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest} request GetSchemaRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SchemaService.GetSchemaCallback} callback Node-style callback called with the error, if any, and Schema
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SchemaService.prototype.getSchema = function getSchema(request, callback) {
+                            return this.rpcCall(getSchema, $root.google.cloud.discoveryengine.v1beta.GetSchemaRequest, $root.google.cloud.discoveryengine.v1beta.Schema, request, callback);
+                        }, "name", { value: "GetSchema" });
+    
+                        /**
+                         * Calls GetSchema.
+                         * @function getSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest} request GetSchemaRequest message or plain object
+                         * @returns {Promise<google.cloud.discoveryengine.v1beta.Schema>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SchemaService|listSchemas}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @typedef ListSchemasCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.discoveryengine.v1beta.ListSchemasResponse} [response] ListSchemasResponse
+                         */
+    
+                        /**
+                         * Calls ListSchemas.
+                         * @function listSchemas
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest} request ListSchemasRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SchemaService.ListSchemasCallback} callback Node-style callback called with the error, if any, and ListSchemasResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SchemaService.prototype.listSchemas = function listSchemas(request, callback) {
+                            return this.rpcCall(listSchemas, $root.google.cloud.discoveryengine.v1beta.ListSchemasRequest, $root.google.cloud.discoveryengine.v1beta.ListSchemasResponse, request, callback);
+                        }, "name", { value: "ListSchemas" });
+    
+                        /**
+                         * Calls ListSchemas.
+                         * @function listSchemas
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest} request ListSchemasRequest message or plain object
+                         * @returns {Promise<google.cloud.discoveryengine.v1beta.ListSchemasResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SchemaService|createSchema}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @typedef CreateSchemaCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSchema.
+                         * @function createSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest} request CreateSchemaRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SchemaService.CreateSchemaCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SchemaService.prototype.createSchema = function createSchema(request, callback) {
+                            return this.rpcCall(createSchema, $root.google.cloud.discoveryengine.v1beta.CreateSchemaRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSchema" });
+    
+                        /**
+                         * Calls CreateSchema.
+                         * @function createSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest} request CreateSchemaRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SchemaService|updateSchema}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @typedef UpdateSchemaCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSchema.
+                         * @function updateSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest} request UpdateSchemaRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SchemaService.UpdateSchemaCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SchemaService.prototype.updateSchema = function updateSchema(request, callback) {
+                            return this.rpcCall(updateSchema, $root.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSchema" });
+    
+                        /**
+                         * Calls UpdateSchema.
+                         * @function updateSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest} request UpdateSchemaRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SchemaService|deleteSchema}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @typedef DeleteSchemaCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSchema.
+                         * @function deleteSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest} request DeleteSchemaRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SchemaService.DeleteSchemaCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SchemaService.prototype.deleteSchema = function deleteSchema(request, callback) {
+                            return this.rpcCall(deleteSchema, $root.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSchema" });
+    
+                        /**
+                         * Calls DeleteSchema.
+                         * @function deleteSchema
+                         * @memberof google.cloud.discoveryengine.v1beta.SchemaService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest} request DeleteSchemaRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return SchemaService;
+                    })();
+    
+                    v1beta.GetSchemaRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IGetSchemaRequest
+                         * @property {string|null} [name] GetSchemaRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a GetSchemaRequest.
+                         * @implements IGetSchemaRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest=} [properties] Properties to set
+                         */
+                        function GetSchemaRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSchemaRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @instance
+                         */
+                        GetSchemaRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSchemaRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.GetSchemaRequest} GetSchemaRequest instance
+                         */
+                        GetSchemaRequest.create = function create(properties) {
+                            return new GetSchemaRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSchemaRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.GetSchemaRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest} message GetSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSchemaRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.GetSchemaRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IGetSchemaRequest} message GetSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSchemaRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSchemaRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.GetSchemaRequest} GetSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSchemaRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.GetSchemaRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSchemaRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.GetSchemaRequest} GetSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSchemaRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSchemaRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSchemaRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.GetSchemaRequest} GetSchemaRequest
+                         */
+                        GetSchemaRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.GetSchemaRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.GetSchemaRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSchemaRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.GetSchemaRequest} message GetSchemaRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSchemaRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSchemaRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSchemaRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSchemaRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.GetSchemaRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSchemaRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.GetSchemaRequest";
+                        };
+    
+                        return GetSchemaRequest;
+                    })();
+    
+                    v1beta.ListSchemasRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSchemasRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IListSchemasRequest
+                         * @property {string|null} [parent] ListSchemasRequest parent
+                         * @property {number|null} [pageSize] ListSchemasRequest pageSize
+                         * @property {string|null} [pageToken] ListSchemasRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSchemasRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a ListSchemasRequest.
+                         * @implements IListSchemasRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest=} [properties] Properties to set
+                         */
+                        function ListSchemasRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSchemasRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @instance
+                         */
+                        ListSchemasRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSchemasRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @instance
+                         */
+                        ListSchemasRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSchemasRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @instance
+                         */
+                        ListSchemasRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSchemasRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasRequest} ListSchemasRequest instance
+                         */
+                        ListSchemasRequest.create = function create(properties) {
+                            return new ListSchemasRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSchemasRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.ListSchemasRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest} message ListSchemasRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSchemasRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSchemasRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.ListSchemasRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasRequest} message ListSchemasRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSchemasRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSchemasRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasRequest} ListSchemasRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSchemasRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.ListSchemasRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSchemasRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasRequest} ListSchemasRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSchemasRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSchemasRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSchemasRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSchemasRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasRequest} ListSchemasRequest
+                         */
+                        ListSchemasRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.ListSchemasRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.ListSchemasRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSchemasRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ListSchemasRequest} message ListSchemasRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSchemasRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSchemasRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSchemasRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSchemasRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSchemasRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.ListSchemasRequest";
+                        };
+    
+                        return ListSchemasRequest;
+                    })();
+    
+                    v1beta.ListSchemasResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSchemasResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IListSchemasResponse
+                         * @property {Array.<google.cloud.discoveryengine.v1beta.ISchema>|null} [schemas] ListSchemasResponse schemas
+                         * @property {string|null} [nextPageToken] ListSchemasResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSchemasResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a ListSchemasResponse.
+                         * @implements IListSchemasResponse
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasResponse=} [properties] Properties to set
+                         */
+                        function ListSchemasResponse(properties) {
+                            this.schemas = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSchemasResponse schemas.
+                         * @member {Array.<google.cloud.discoveryengine.v1beta.ISchema>} schemas
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @instance
+                         */
+                        ListSchemasResponse.prototype.schemas = $util.emptyArray;
+    
+                        /**
+                         * ListSchemasResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @instance
+                         */
+                        ListSchemasResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSchemasResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasResponse=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasResponse} ListSchemasResponse instance
+                         */
+                        ListSchemasResponse.create = function create(properties) {
+                            return new ListSchemasResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSchemasResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.ListSchemasResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasResponse} message ListSchemasResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSchemasResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.schemas != null && message.schemas.length)
+                                for (var i = 0; i < message.schemas.length; ++i)
+                                    $root.google.cloud.discoveryengine.v1beta.Schema.encode(message.schemas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSchemasResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.ListSchemasResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IListSchemasResponse} message ListSchemasResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSchemasResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSchemasResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasResponse} ListSchemasResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSchemasResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.ListSchemasResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.schemas && message.schemas.length))
+                                            message.schemas = [];
+                                        message.schemas.push($root.google.cloud.discoveryengine.v1beta.Schema.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSchemasResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasResponse} ListSchemasResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSchemasResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSchemasResponse message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSchemasResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.schemas != null && message.hasOwnProperty("schemas")) {
+                                if (!Array.isArray(message.schemas))
+                                    return "schemas: array expected";
+                                for (var i = 0; i < message.schemas.length; ++i) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.Schema.verify(message.schemas[i]);
+                                    if (error)
+                                        return "schemas." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSchemasResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.ListSchemasResponse} ListSchemasResponse
+                         */
+                        ListSchemasResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.ListSchemasResponse)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.ListSchemasResponse();
+                            if (object.schemas) {
+                                if (!Array.isArray(object.schemas))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.ListSchemasResponse.schemas: array expected");
+                                message.schemas = [];
+                                for (var i = 0; i < object.schemas.length; ++i) {
+                                    if (typeof object.schemas[i] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.ListSchemasResponse.schemas: object expected");
+                                    message.schemas[i] = $root.google.cloud.discoveryengine.v1beta.Schema.fromObject(object.schemas[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSchemasResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ListSchemasResponse} message ListSchemasResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSchemasResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.schemas = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.schemas && message.schemas.length) {
+                                object.schemas = [];
+                                for (var j = 0; j < message.schemas.length; ++j)
+                                    object.schemas[j] = $root.google.cloud.discoveryengine.v1beta.Schema.toObject(message.schemas[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSchemasResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSchemasResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSchemasResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.ListSchemasResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSchemasResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.ListSchemasResponse";
+                        };
+    
+                        return ListSchemasResponse;
+                    })();
+    
+                    v1beta.CreateSchemaRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ICreateSchemaRequest
+                         * @property {string|null} [parent] CreateSchemaRequest parent
+                         * @property {google.cloud.discoveryengine.v1beta.ISchema|null} [schema] CreateSchemaRequest schema
+                         * @property {string|null} [schemaId] CreateSchemaRequest schemaId
+                         */
+    
+                        /**
+                         * Constructs a new CreateSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a CreateSchemaRequest.
+                         * @implements ICreateSchemaRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest=} [properties] Properties to set
+                         */
+                        function CreateSchemaRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSchemaRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @instance
+                         */
+                        CreateSchemaRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSchemaRequest schema.
+                         * @member {google.cloud.discoveryengine.v1beta.ISchema|null|undefined} schema
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @instance
+                         */
+                        CreateSchemaRequest.prototype.schema = null;
+    
+                        /**
+                         * CreateSchemaRequest schemaId.
+                         * @member {string} schemaId
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @instance
+                         */
+                        CreateSchemaRequest.prototype.schemaId = "";
+    
+                        /**
+                         * Creates a new CreateSchemaRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaRequest} CreateSchemaRequest instance
+                         */
+                        CreateSchemaRequest.create = function create(properties) {
+                            return new CreateSchemaRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSchemaRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CreateSchemaRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest} message CreateSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSchemaRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                $root.google.cloud.discoveryengine.v1beta.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.schemaId != null && Object.hasOwnProperty.call(message, "schemaId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.schemaId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CreateSchemaRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaRequest} message CreateSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSchemaRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSchemaRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaRequest} CreateSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSchemaRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.CreateSchemaRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.schema = $root.google.cloud.discoveryengine.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.schemaId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSchemaRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaRequest} CreateSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSchemaRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSchemaRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSchemaRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.schema != null && message.hasOwnProperty("schema")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.Schema.verify(message.schema);
+                                if (error)
+                                    return "schema." + error;
+                            }
+                            if (message.schemaId != null && message.hasOwnProperty("schemaId"))
+                                if (!$util.isString(message.schemaId))
+                                    return "schemaId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaRequest} CreateSchemaRequest
+                         */
+                        CreateSchemaRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.CreateSchemaRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.CreateSchemaRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.schema != null) {
+                                if (typeof object.schema !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.CreateSchemaRequest.schema: object expected");
+                                message.schema = $root.google.cloud.discoveryengine.v1beta.Schema.fromObject(object.schema);
+                            }
+                            if (object.schemaId != null)
+                                message.schemaId = String(object.schemaId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSchemaRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.CreateSchemaRequest} message CreateSchemaRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSchemaRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.schema = null;
+                                object.schemaId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                object.schema = $root.google.cloud.discoveryengine.v1beta.Schema.toObject(message.schema, options);
+                            if (message.schemaId != null && message.hasOwnProperty("schemaId"))
+                                object.schemaId = message.schemaId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSchemaRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSchemaRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSchemaRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSchemaRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.CreateSchemaRequest";
+                        };
+    
+                        return CreateSchemaRequest;
+                    })();
+    
+                    v1beta.UpdateSchemaRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IUpdateSchemaRequest
+                         * @property {google.cloud.discoveryengine.v1beta.ISchema|null} [schema] UpdateSchemaRequest schema
+                         * @property {boolean|null} [allowMissing] UpdateSchemaRequest allowMissing
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents an UpdateSchemaRequest.
+                         * @implements IUpdateSchemaRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest=} [properties] Properties to set
+                         */
+                        function UpdateSchemaRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSchemaRequest schema.
+                         * @member {google.cloud.discoveryengine.v1beta.ISchema|null|undefined} schema
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @instance
+                         */
+                        UpdateSchemaRequest.prototype.schema = null;
+    
+                        /**
+                         * UpdateSchemaRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @instance
+                         */
+                        UpdateSchemaRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * Creates a new UpdateSchemaRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaRequest} UpdateSchemaRequest instance
+                         */
+                        UpdateSchemaRequest.create = function create(properties) {
+                            return new UpdateSchemaRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSchemaRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.UpdateSchemaRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest} message UpdateSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSchemaRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                                $root.google.cloud.discoveryengine.v1beta.Schema.encode(message.schema, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.UpdateSchemaRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest} message UpdateSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSchemaRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSchemaRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaRequest} UpdateSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSchemaRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.schema = $root.google.cloud.discoveryengine.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSchemaRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaRequest} UpdateSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSchemaRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSchemaRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSchemaRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.schema != null && message.hasOwnProperty("schema")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.Schema.verify(message.schema);
+                                if (error)
+                                    return "schema." + error;
+                            }
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaRequest} UpdateSchemaRequest
+                         */
+                        UpdateSchemaRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest();
+                            if (object.schema != null) {
+                                if (typeof object.schema !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.UpdateSchemaRequest.schema: object expected");
+                                message.schema = $root.google.cloud.discoveryengine.v1beta.Schema.fromObject(object.schema);
+                            }
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSchemaRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.UpdateSchemaRequest} message UpdateSchemaRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSchemaRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.schema = null;
+                                object.allowMissing = false;
+                            }
+                            if (message.schema != null && message.hasOwnProperty("schema"))
+                                object.schema = $root.google.cloud.discoveryengine.v1beta.Schema.toObject(message.schema, options);
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSchemaRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSchemaRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSchemaRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSchemaRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.UpdateSchemaRequest";
+                        };
+    
+                        return UpdateSchemaRequest;
+                    })();
+    
+                    v1beta.DeleteSchemaRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IDeleteSchemaRequest
+                         * @property {string|null} [name] DeleteSchemaRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSchemaRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a DeleteSchemaRequest.
+                         * @implements IDeleteSchemaRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest=} [properties] Properties to set
+                         */
+                        function DeleteSchemaRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSchemaRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @instance
+                         */
+                        DeleteSchemaRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSchemaRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaRequest} DeleteSchemaRequest instance
+                         */
+                        DeleteSchemaRequest.create = function create(properties) {
+                            return new DeleteSchemaRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSchemaRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DeleteSchemaRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest} message DeleteSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSchemaRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DeleteSchemaRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest} message DeleteSchemaRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSchemaRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSchemaRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaRequest} DeleteSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSchemaRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSchemaRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaRequest} DeleteSchemaRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSchemaRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSchemaRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSchemaRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaRequest} DeleteSchemaRequest
+                         */
+                        DeleteSchemaRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSchemaRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.DeleteSchemaRequest} message DeleteSchemaRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSchemaRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSchemaRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSchemaRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSchemaRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSchemaRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.DeleteSchemaRequest";
+                        };
+    
+                        return DeleteSchemaRequest;
+                    })();
+    
+                    v1beta.CreateSchemaMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ICreateSchemaMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CreateSchemaMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CreateSchemaMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new CreateSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a CreateSchemaMetadata.
+                         * @implements ICreateSchemaMetadata
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata=} [properties] Properties to set
+                         */
+                        function CreateSchemaMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSchemaMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @instance
+                         */
+                        CreateSchemaMetadata.prototype.createTime = null;
+    
+                        /**
+                         * CreateSchemaMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @instance
+                         */
+                        CreateSchemaMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new CreateSchemaMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaMetadata} CreateSchemaMetadata instance
+                         */
+                        CreateSchemaMetadata.create = function create(properties) {
+                            return new CreateSchemaMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSchemaMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CreateSchemaMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata} message CreateSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSchemaMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSchemaMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.CreateSchemaMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata} message CreateSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSchemaMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSchemaMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaMetadata} CreateSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSchemaMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSchemaMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaMetadata} CreateSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSchemaMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSchemaMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSchemaMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSchemaMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.CreateSchemaMetadata} CreateSchemaMetadata
+                         */
+                        CreateSchemaMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.CreateSchemaMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.CreateSchemaMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSchemaMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.CreateSchemaMetadata} message CreateSchemaMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSchemaMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSchemaMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSchemaMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSchemaMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSchemaMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.CreateSchemaMetadata";
+                        };
+    
+                        return CreateSchemaMetadata;
+                    })();
+    
+                    v1beta.UpdateSchemaMetadata = (function() {
+    
+                        /**
+                         * Properties of an UpdateSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IUpdateSchemaMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] UpdateSchemaMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] UpdateSchemaMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents an UpdateSchemaMetadata.
+                         * @implements IUpdateSchemaMetadata
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata=} [properties] Properties to set
+                         */
+                        function UpdateSchemaMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSchemaMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @instance
+                         */
+                        UpdateSchemaMetadata.prototype.createTime = null;
+    
+                        /**
+                         * UpdateSchemaMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @instance
+                         */
+                        UpdateSchemaMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new UpdateSchemaMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata} UpdateSchemaMetadata instance
+                         */
+                        UpdateSchemaMetadata.create = function create(properties) {
+                            return new UpdateSchemaMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSchemaMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata} message UpdateSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSchemaMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSchemaMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata} message UpdateSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSchemaMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSchemaMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata} UpdateSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSchemaMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSchemaMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata} UpdateSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSchemaMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSchemaMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSchemaMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSchemaMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata} UpdateSchemaMetadata
+                         */
+                        UpdateSchemaMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSchemaMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata} message UpdateSchemaMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSchemaMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSchemaMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSchemaMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSchemaMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSchemaMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata";
+                        };
+    
+                        return UpdateSchemaMetadata;
+                    })();
+    
+                    v1beta.DeleteSchemaMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IDeleteSchemaMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteSchemaMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeleteSchemaMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSchemaMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a DeleteSchemaMetadata.
+                         * @implements IDeleteSchemaMetadata
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata=} [properties] Properties to set
+                         */
+                        function DeleteSchemaMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSchemaMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @instance
+                         */
+                        DeleteSchemaMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteSchemaMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @instance
+                         */
+                        DeleteSchemaMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new DeleteSchemaMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata} DeleteSchemaMetadata instance
+                         */
+                        DeleteSchemaMetadata.create = function create(properties) {
+                            return new DeleteSchemaMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSchemaMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata} message DeleteSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSchemaMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSchemaMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata} message DeleteSchemaMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSchemaMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSchemaMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata} DeleteSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSchemaMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSchemaMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata} DeleteSchemaMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSchemaMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSchemaMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSchemaMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSchemaMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata} DeleteSchemaMetadata
+                         */
+                        DeleteSchemaMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSchemaMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata} message DeleteSchemaMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSchemaMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSchemaMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSchemaMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSchemaMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSchemaMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata";
+                        };
+    
+                        return DeleteSchemaMetadata;
+                    })();
+    
+                    v1beta.SearchService = (function() {
+    
+                        /**
+                         * Constructs a new SearchService service.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a SearchService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SearchService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SearchService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SearchService;
+    
+                        /**
+                         * Creates new SearchService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SearchService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SearchService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.SearchService|search}.
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchService
+                         * @typedef SearchCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.discoveryengine.v1beta.SearchResponse} [response] SearchResponse
+                         */
+    
+                        /**
+                         * Calls Search.
+                         * @function search
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest} request SearchRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.SearchService.SearchCallback} callback Node-style callback called with the error, if any, and SearchResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SearchService.prototype.search = function search(request, callback) {
+                            return this.rpcCall(search, $root.google.cloud.discoveryengine.v1beta.SearchRequest, $root.google.cloud.discoveryengine.v1beta.SearchResponse, request, callback);
+                        }, "name", { value: "Search" });
+    
+                        /**
+                         * Calls Search.
+                         * @function search
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest} request SearchRequest message or plain object
+                         * @returns {Promise<google.cloud.discoveryengine.v1beta.SearchResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return SearchService;
+                    })();
+    
+                    v1beta.SearchRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ISearchRequest
+                         * @property {string|null} [servingConfig] SearchRequest servingConfig
+                         * @property {string|null} [branch] SearchRequest branch
+                         * @property {string|null} [query] SearchRequest query
+                         * @property {number|null} [pageSize] SearchRequest pageSize
+                         * @property {string|null} [pageToken] SearchRequest pageToken
+                         * @property {number|null} [offset] SearchRequest offset
+                         * @property {string|null} [filter] SearchRequest filter
+                         * @property {string|null} [orderBy] SearchRequest orderBy
+                         * @property {Array.<google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec>|null} [facetSpecs] SearchRequest facetSpecs
+                         * @property {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null} [boostSpec] SearchRequest boostSpec
+                         * @property {Object.<string,google.protobuf.IValue>|null} [params] SearchRequest params
+                         * @property {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec|null} [queryExpansionSpec] SearchRequest queryExpansionSpec
+                         * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec|null} [spellCorrectionSpec] SearchRequest spellCorrectionSpec
+                         * @property {string|null} [userPseudoId] SearchRequest userPseudoId
+                         * @property {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec|null} [contentSearchSpec] SearchRequest contentSearchSpec
+                         */
+    
+                        /**
+                         * Constructs a new SearchRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a SearchRequest.
+                         * @implements ISearchRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest=} [properties] Properties to set
+                         */
+                        function SearchRequest(properties) {
+                            this.facetSpecs = [];
+                            this.params = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchRequest servingConfig.
+                         * @member {string} servingConfig
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.servingConfig = "";
+    
+                        /**
+                         * SearchRequest branch.
+                         * @member {string} branch
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.branch = "";
+    
+                        /**
+                         * SearchRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.query = "";
+    
+                        /**
+                         * SearchRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * SearchRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.pageToken = "";
+    
+                        /**
+                         * SearchRequest offset.
+                         * @member {number} offset
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.offset = 0;
+    
+                        /**
+                         * SearchRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.filter = "";
+    
+                        /**
+                         * SearchRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.orderBy = "";
+    
+                        /**
+                         * SearchRequest facetSpecs.
+                         * @member {Array.<google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec>} facetSpecs
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.facetSpecs = $util.emptyArray;
+    
+                        /**
+                         * SearchRequest boostSpec.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null|undefined} boostSpec
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.boostSpec = null;
+    
+                        /**
+                         * SearchRequest params.
+                         * @member {Object.<string,google.protobuf.IValue>} params
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.params = $util.emptyObject;
+    
+                        /**
+                         * SearchRequest queryExpansionSpec.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec|null|undefined} queryExpansionSpec
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.queryExpansionSpec = null;
+    
+                        /**
+                         * SearchRequest spellCorrectionSpec.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec|null|undefined} spellCorrectionSpec
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.spellCorrectionSpec = null;
+    
+                        /**
+                         * SearchRequest userPseudoId.
+                         * @member {string} userPseudoId
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.userPseudoId = "";
+    
+                        /**
+                         * SearchRequest contentSearchSpec.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec|null|undefined} contentSearchSpec
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.contentSearchSpec = null;
+    
+                        /**
+                         * Creates a new SearchRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchRequest} SearchRequest instance
+                         */
+                        SearchRequest.create = function create(properties) {
+                            return new SearchRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest} message SearchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.servingConfig != null && Object.hasOwnProperty.call(message, "servingConfig"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.servingConfig);
+                            if (message.branch != null && Object.hasOwnProperty.call(message, "branch"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.branch);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.query);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
+                            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.offset);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.orderBy);
+                            if (message.facetSpecs != null && message.facetSpecs.length)
+                                for (var i = 0; i < message.facetSpecs.length; ++i)
+                                    $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.encode(message.facetSpecs[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.boostSpec != null && Object.hasOwnProperty.call(message, "boostSpec"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.encode(message.boostSpec, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.protobuf.Value.encode(message.params[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.queryExpansionSpec != null && Object.hasOwnProperty.call(message, "queryExpansionSpec"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.encode(message.queryExpansionSpec, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.spellCorrectionSpec != null && Object.hasOwnProperty.call(message, "spellCorrectionSpec"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.encode(message.spellCorrectionSpec, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.userPseudoId != null && Object.hasOwnProperty.call(message, "userPseudoId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.userPseudoId);
+                            if (message.contentSearchSpec != null && Object.hasOwnProperty.call(message, "contentSearchSpec"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.encode(message.contentSearchSpec, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchRequest} message SearchRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchRequest} SearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.servingConfig = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.branch = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.query = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.offset = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.facetSpecs && message.facetSpecs.length))
+                                            message.facetSpecs = [];
+                                        message.facetSpecs.push($root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.boostSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        if (message.params === $util.emptyObject)
+                                            message.params = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.params[key] = value;
+                                        break;
+                                    }
+                                case 13: {
+                                        message.queryExpansionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.spellCorrectionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.userPseudoId = reader.string();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.contentSearchSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchRequest} SearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.servingConfig != null && message.hasOwnProperty("servingConfig"))
+                                if (!$util.isString(message.servingConfig))
+                                    return "servingConfig: string expected";
+                            if (message.branch != null && message.hasOwnProperty("branch"))
+                                if (!$util.isString(message.branch))
+                                    return "branch: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (!$util.isInteger(message.offset))
+                                    return "offset: integer expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.facetSpecs != null && message.hasOwnProperty("facetSpecs")) {
+                                if (!Array.isArray(message.facetSpecs))
+                                    return "facetSpecs: array expected";
+                                for (var i = 0; i < message.facetSpecs.length; ++i) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.verify(message.facetSpecs[i]);
+                                    if (error)
+                                        return "facetSpecs." + error;
+                                }
+                            }
+                            if (message.boostSpec != null && message.hasOwnProperty("boostSpec")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.verify(message.boostSpec);
+                                if (error)
+                                    return "boostSpec." + error;
+                            }
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.protobuf.Value.verify(message.params[key[i]]);
+                                    if (error)
+                                        return "params." + error;
+                                }
+                            }
+                            if (message.queryExpansionSpec != null && message.hasOwnProperty("queryExpansionSpec")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.verify(message.queryExpansionSpec);
+                                if (error)
+                                    return "queryExpansionSpec." + error;
+                            }
+                            if (message.spellCorrectionSpec != null && message.hasOwnProperty("spellCorrectionSpec")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.verify(message.spellCorrectionSpec);
+                                if (error)
+                                    return "spellCorrectionSpec." + error;
+                            }
+                            if (message.userPseudoId != null && message.hasOwnProperty("userPseudoId"))
+                                if (!$util.isString(message.userPseudoId))
+                                    return "userPseudoId: string expected";
+                            if (message.contentSearchSpec != null && message.hasOwnProperty("contentSearchSpec")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.verify(message.contentSearchSpec);
+                                if (error)
+                                    return "contentSearchSpec." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchRequest} SearchRequest
+                         */
+                        SearchRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest();
+                            if (object.servingConfig != null)
+                                message.servingConfig = String(object.servingConfig);
+                            if (object.branch != null)
+                                message.branch = String(object.branch);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.offset != null)
+                                message.offset = object.offset | 0;
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.facetSpecs) {
+                                if (!Array.isArray(object.facetSpecs))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.facetSpecs: array expected");
+                                message.facetSpecs = [];
+                                for (var i = 0; i < object.facetSpecs.length; ++i) {
+                                    if (typeof object.facetSpecs[i] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.facetSpecs: object expected");
+                                    message.facetSpecs[i] = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.fromObject(object.facetSpecs[i]);
+                                }
+                            }
+                            if (object.boostSpec != null) {
+                                if (typeof object.boostSpec !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.boostSpec: object expected");
+                                message.boostSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.fromObject(object.boostSpec);
+                            }
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.params[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.params: object expected");
+                                    message.params[keys[i]] = $root.google.protobuf.Value.fromObject(object.params[keys[i]]);
+                                }
+                            }
+                            if (object.queryExpansionSpec != null) {
+                                if (typeof object.queryExpansionSpec !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.queryExpansionSpec: object expected");
+                                message.queryExpansionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.fromObject(object.queryExpansionSpec);
+                            }
+                            if (object.spellCorrectionSpec != null) {
+                                if (typeof object.spellCorrectionSpec !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.spellCorrectionSpec: object expected");
+                                message.spellCorrectionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.fromObject(object.spellCorrectionSpec);
+                            }
+                            if (object.userPseudoId != null)
+                                message.userPseudoId = String(object.userPseudoId);
+                            if (object.contentSearchSpec != null) {
+                                if (typeof object.contentSearchSpec !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.contentSearchSpec: object expected");
+                                message.contentSearchSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.fromObject(object.contentSearchSpec);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.SearchRequest} message SearchRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.facetSpecs = [];
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (options.defaults) {
+                                object.servingConfig = "";
+                                object.branch = "";
+                                object.query = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.offset = 0;
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.boostSpec = null;
+                                object.queryExpansionSpec = null;
+                                object.spellCorrectionSpec = null;
+                                object.userPseudoId = "";
+                                object.contentSearchSpec = null;
+                            }
+                            if (message.servingConfig != null && message.hasOwnProperty("servingConfig"))
+                                object.servingConfig = message.servingConfig;
+                            if (message.branch != null && message.hasOwnProperty("branch"))
+                                object.branch = message.branch;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                object.offset = message.offset;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.facetSpecs && message.facetSpecs.length) {
+                                object.facetSpecs = [];
+                                for (var j = 0; j < message.facetSpecs.length; ++j)
+                                    object.facetSpecs[j] = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.toObject(message.facetSpecs[j], options);
+                            }
+                            if (message.boostSpec != null && message.hasOwnProperty("boostSpec"))
+                                object.boostSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.toObject(message.boostSpec, options);
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = $root.google.protobuf.Value.toObject(message.params[keys2[j]], options);
+                            }
+                            if (message.queryExpansionSpec != null && message.hasOwnProperty("queryExpansionSpec"))
+                                object.queryExpansionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.toObject(message.queryExpansionSpec, options);
+                            if (message.spellCorrectionSpec != null && message.hasOwnProperty("spellCorrectionSpec"))
+                                object.spellCorrectionSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.toObject(message.spellCorrectionSpec, options);
+                            if (message.userPseudoId != null && message.hasOwnProperty("userPseudoId"))
+                                object.userPseudoId = message.userPseudoId;
+                            if (message.contentSearchSpec != null && message.hasOwnProperty("contentSearchSpec"))
+                                object.contentSearchSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.toObject(message.contentSearchSpec, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SearchRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SearchRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest";
+                        };
+    
+                        SearchRequest.FacetSpec = (function() {
+    
+                            /**
+                             * Properties of a FacetSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @interface IFacetSpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey|null} [facetKey] FacetSpec facetKey
+                             * @property {number|null} [limit] FacetSpec limit
+                             * @property {Array.<string>|null} [excludedFilterKeys] FacetSpec excludedFilterKeys
+                             * @property {boolean|null} [enableDynamicPosition] FacetSpec enableDynamicPosition
+                             */
+    
+                            /**
+                             * Constructs a new FacetSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @classdesc Represents a FacetSpec.
+                             * @implements IFacetSpec
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec=} [properties] Properties to set
+                             */
+                            function FacetSpec(properties) {
+                                this.excludedFilterKeys = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FacetSpec facetKey.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey|null|undefined} facetKey
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @instance
+                             */
+                            FacetSpec.prototype.facetKey = null;
+    
+                            /**
+                             * FacetSpec limit.
+                             * @member {number} limit
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @instance
+                             */
+                            FacetSpec.prototype.limit = 0;
+    
+                            /**
+                             * FacetSpec excludedFilterKeys.
+                             * @member {Array.<string>} excludedFilterKeys
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @instance
+                             */
+                            FacetSpec.prototype.excludedFilterKeys = $util.emptyArray;
+    
+                            /**
+                             * FacetSpec enableDynamicPosition.
+                             * @member {boolean} enableDynamicPosition
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @instance
+                             */
+                            FacetSpec.prototype.enableDynamicPosition = false;
+    
+                            /**
+                             * Creates a new FacetSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec} FacetSpec instance
+                             */
+                            FacetSpec.create = function create(properties) {
+                                return new FacetSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FacetSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec} message FacetSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FacetSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.facetKey != null && Object.hasOwnProperty.call(message, "facetKey"))
+                                    $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.encode(message.facetKey, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.limit);
+                                if (message.excludedFilterKeys != null && message.excludedFilterKeys.length)
+                                    for (var i = 0; i < message.excludedFilterKeys.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.excludedFilterKeys[i]);
+                                if (message.enableDynamicPosition != null && Object.hasOwnProperty.call(message, "enableDynamicPosition"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.enableDynamicPosition);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FacetSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IFacetSpec} message FacetSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FacetSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FacetSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec} FacetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FacetSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.facetKey = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.limit = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.excludedFilterKeys && message.excludedFilterKeys.length))
+                                                message.excludedFilterKeys = [];
+                                            message.excludedFilterKeys.push(reader.string());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.enableDynamicPosition = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FacetSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec} FacetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FacetSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FacetSpec message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FacetSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.facetKey != null && message.hasOwnProperty("facetKey")) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.verify(message.facetKey);
+                                    if (error)
+                                        return "facetKey." + error;
+                                }
+                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                    if (!$util.isInteger(message.limit))
+                                        return "limit: integer expected";
+                                if (message.excludedFilterKeys != null && message.hasOwnProperty("excludedFilterKeys")) {
+                                    if (!Array.isArray(message.excludedFilterKeys))
+                                        return "excludedFilterKeys: array expected";
+                                    for (var i = 0; i < message.excludedFilterKeys.length; ++i)
+                                        if (!$util.isString(message.excludedFilterKeys[i]))
+                                            return "excludedFilterKeys: string[] expected";
+                                }
+                                if (message.enableDynamicPosition != null && message.hasOwnProperty("enableDynamicPosition"))
+                                    if (typeof message.enableDynamicPosition !== "boolean")
+                                        return "enableDynamicPosition: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FacetSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec} FacetSpec
+                             */
+                            FacetSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec();
+                                if (object.facetKey != null) {
+                                    if (typeof object.facetKey !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.facetKey: object expected");
+                                    message.facetKey = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.fromObject(object.facetKey);
+                                }
+                                if (object.limit != null)
+                                    message.limit = object.limit | 0;
+                                if (object.excludedFilterKeys) {
+                                    if (!Array.isArray(object.excludedFilterKeys))
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.excludedFilterKeys: array expected");
+                                    message.excludedFilterKeys = [];
+                                    for (var i = 0; i < object.excludedFilterKeys.length; ++i)
+                                        message.excludedFilterKeys[i] = String(object.excludedFilterKeys[i]);
+                                }
+                                if (object.enableDynamicPosition != null)
+                                    message.enableDynamicPosition = Boolean(object.enableDynamicPosition);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FacetSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec} message FacetSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FacetSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.excludedFilterKeys = [];
+                                if (options.defaults) {
+                                    object.facetKey = null;
+                                    object.limit = 0;
+                                    object.enableDynamicPosition = false;
+                                }
+                                if (message.facetKey != null && message.hasOwnProperty("facetKey"))
+                                    object.facetKey = $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.toObject(message.facetKey, options);
+                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                    object.limit = message.limit;
+                                if (message.excludedFilterKeys && message.excludedFilterKeys.length) {
+                                    object.excludedFilterKeys = [];
+                                    for (var j = 0; j < message.excludedFilterKeys.length; ++j)
+                                        object.excludedFilterKeys[j] = message.excludedFilterKeys[j];
+                                }
+                                if (message.enableDynamicPosition != null && message.hasOwnProperty("enableDynamicPosition"))
+                                    object.enableDynamicPosition = message.enableDynamicPosition;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FacetSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FacetSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FacetSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FacetSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec";
+                            };
+    
+                            FacetSpec.FacetKey = (function() {
+    
+                                /**
+                                 * Properties of a FacetKey.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                                 * @interface IFacetKey
+                                 * @property {string|null} [key] FacetKey key
+                                 * @property {Array.<google.cloud.discoveryengine.v1beta.IInterval>|null} [intervals] FacetKey intervals
+                                 * @property {Array.<string>|null} [restrictedValues] FacetKey restrictedValues
+                                 * @property {Array.<string>|null} [prefixes] FacetKey prefixes
+                                 * @property {Array.<string>|null} [contains] FacetKey contains
+                                 * @property {boolean|null} [caseInsensitive] FacetKey caseInsensitive
+                                 * @property {string|null} [orderBy] FacetKey orderBy
+                                 */
+    
+                                /**
+                                 * Constructs a new FacetKey.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec
+                                 * @classdesc Represents a FacetKey.
+                                 * @implements IFacetKey
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey=} [properties] Properties to set
+                                 */
+                                function FacetKey(properties) {
+                                    this.intervals = [];
+                                    this.restrictedValues = [];
+                                    this.prefixes = [];
+                                    this.contains = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FacetKey key.
+                                 * @member {string} key
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.key = "";
+    
+                                /**
+                                 * FacetKey intervals.
+                                 * @member {Array.<google.cloud.discoveryengine.v1beta.IInterval>} intervals
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.intervals = $util.emptyArray;
+    
+                                /**
+                                 * FacetKey restrictedValues.
+                                 * @member {Array.<string>} restrictedValues
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.restrictedValues = $util.emptyArray;
+    
+                                /**
+                                 * FacetKey prefixes.
+                                 * @member {Array.<string>} prefixes
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.prefixes = $util.emptyArray;
+    
+                                /**
+                                 * FacetKey contains.
+                                 * @member {Array.<string>} contains
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.contains = $util.emptyArray;
+    
+                                /**
+                                 * FacetKey caseInsensitive.
+                                 * @member {boolean} caseInsensitive
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.caseInsensitive = false;
+    
+                                /**
+                                 * FacetKey orderBy.
+                                 * @member {string} orderBy
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 */
+                                FacetKey.prototype.orderBy = "";
+    
+                                /**
+                                 * Creates a new FacetKey instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey} FacetKey instance
+                                 */
+                                FacetKey.create = function create(properties) {
+                                    return new FacetKey(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FacetKey message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey} message FacetKey message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FacetKey.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                    if (message.intervals != null && message.intervals.length)
+                                        for (var i = 0; i < message.intervals.length; ++i)
+                                            $root.google.cloud.discoveryengine.v1beta.Interval.encode(message.intervals[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.restrictedValues != null && message.restrictedValues.length)
+                                        for (var i = 0; i < message.restrictedValues.length; ++i)
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.restrictedValues[i]);
+                                    if (message.prefixes != null && message.prefixes.length)
+                                        for (var i = 0; i < message.prefixes.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.prefixes[i]);
+                                    if (message.contains != null && message.contains.length)
+                                        for (var i = 0; i < message.contains.length; ++i)
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.contains[i]);
+                                    if (message.caseInsensitive != null && Object.hasOwnProperty.call(message, "caseInsensitive"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.caseInsensitive);
+                                    if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.orderBy);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FacetKey message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.IFacetKey} message FacetKey message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FacetKey.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FacetKey message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey} FacetKey
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FacetKey.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.key = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.intervals && message.intervals.length))
+                                                    message.intervals = [];
+                                                message.intervals.push($root.google.cloud.discoveryengine.v1beta.Interval.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 3: {
+                                                if (!(message.restrictedValues && message.restrictedValues.length))
+                                                    message.restrictedValues = [];
+                                                message.restrictedValues.push(reader.string());
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.prefixes && message.prefixes.length))
+                                                    message.prefixes = [];
+                                                message.prefixes.push(reader.string());
+                                                break;
+                                            }
+                                        case 5: {
+                                                if (!(message.contains && message.contains.length))
+                                                    message.contains = [];
+                                                message.contains.push(reader.string());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.caseInsensitive = reader.bool();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.orderBy = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FacetKey message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey} FacetKey
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FacetKey.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FacetKey message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FacetKey.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        if (!$util.isString(message.key))
+                                            return "key: string expected";
+                                    if (message.intervals != null && message.hasOwnProperty("intervals")) {
+                                        if (!Array.isArray(message.intervals))
+                                            return "intervals: array expected";
+                                        for (var i = 0; i < message.intervals.length; ++i) {
+                                            var error = $root.google.cloud.discoveryengine.v1beta.Interval.verify(message.intervals[i]);
+                                            if (error)
+                                                return "intervals." + error;
+                                        }
+                                    }
+                                    if (message.restrictedValues != null && message.hasOwnProperty("restrictedValues")) {
+                                        if (!Array.isArray(message.restrictedValues))
+                                            return "restrictedValues: array expected";
+                                        for (var i = 0; i < message.restrictedValues.length; ++i)
+                                            if (!$util.isString(message.restrictedValues[i]))
+                                                return "restrictedValues: string[] expected";
+                                    }
+                                    if (message.prefixes != null && message.hasOwnProperty("prefixes")) {
+                                        if (!Array.isArray(message.prefixes))
+                                            return "prefixes: array expected";
+                                        for (var i = 0; i < message.prefixes.length; ++i)
+                                            if (!$util.isString(message.prefixes[i]))
+                                                return "prefixes: string[] expected";
+                                    }
+                                    if (message.contains != null && message.hasOwnProperty("contains")) {
+                                        if (!Array.isArray(message.contains))
+                                            return "contains: array expected";
+                                        for (var i = 0; i < message.contains.length; ++i)
+                                            if (!$util.isString(message.contains[i]))
+                                                return "contains: string[] expected";
+                                    }
+                                    if (message.caseInsensitive != null && message.hasOwnProperty("caseInsensitive"))
+                                        if (typeof message.caseInsensitive !== "boolean")
+                                            return "caseInsensitive: boolean expected";
+                                    if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                        if (!$util.isString(message.orderBy))
+                                            return "orderBy: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FacetKey message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey} FacetKey
+                                 */
+                                FacetKey.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey();
+                                    if (object.key != null)
+                                        message.key = String(object.key);
+                                    if (object.intervals) {
+                                        if (!Array.isArray(object.intervals))
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.intervals: array expected");
+                                        message.intervals = [];
+                                        for (var i = 0; i < object.intervals.length; ++i) {
+                                            if (typeof object.intervals[i] !== "object")
+                                                throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.intervals: object expected");
+                                            message.intervals[i] = $root.google.cloud.discoveryengine.v1beta.Interval.fromObject(object.intervals[i]);
+                                        }
+                                    }
+                                    if (object.restrictedValues) {
+                                        if (!Array.isArray(object.restrictedValues))
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.restrictedValues: array expected");
+                                        message.restrictedValues = [];
+                                        for (var i = 0; i < object.restrictedValues.length; ++i)
+                                            message.restrictedValues[i] = String(object.restrictedValues[i]);
+                                    }
+                                    if (object.prefixes) {
+                                        if (!Array.isArray(object.prefixes))
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.prefixes: array expected");
+                                        message.prefixes = [];
+                                        for (var i = 0; i < object.prefixes.length; ++i)
+                                            message.prefixes[i] = String(object.prefixes[i]);
+                                    }
+                                    if (object.contains) {
+                                        if (!Array.isArray(object.contains))
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey.contains: array expected");
+                                        message.contains = [];
+                                        for (var i = 0; i < object.contains.length; ++i)
+                                            message.contains[i] = String(object.contains[i]);
+                                    }
+                                    if (object.caseInsensitive != null)
+                                        message.caseInsensitive = Boolean(object.caseInsensitive);
+                                    if (object.orderBy != null)
+                                        message.orderBy = String(object.orderBy);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FacetKey message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey} message FacetKey
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FacetKey.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.intervals = [];
+                                        object.restrictedValues = [];
+                                        object.prefixes = [];
+                                        object.contains = [];
+                                    }
+                                    if (options.defaults) {
+                                        object.key = "";
+                                        object.caseInsensitive = false;
+                                        object.orderBy = "";
+                                    }
+                                    if (message.key != null && message.hasOwnProperty("key"))
+                                        object.key = message.key;
+                                    if (message.intervals && message.intervals.length) {
+                                        object.intervals = [];
+                                        for (var j = 0; j < message.intervals.length; ++j)
+                                            object.intervals[j] = $root.google.cloud.discoveryengine.v1beta.Interval.toObject(message.intervals[j], options);
+                                    }
+                                    if (message.restrictedValues && message.restrictedValues.length) {
+                                        object.restrictedValues = [];
+                                        for (var j = 0; j < message.restrictedValues.length; ++j)
+                                            object.restrictedValues[j] = message.restrictedValues[j];
+                                    }
+                                    if (message.prefixes && message.prefixes.length) {
+                                        object.prefixes = [];
+                                        for (var j = 0; j < message.prefixes.length; ++j)
+                                            object.prefixes[j] = message.prefixes[j];
+                                    }
+                                    if (message.contains && message.contains.length) {
+                                        object.contains = [];
+                                        for (var j = 0; j < message.contains.length; ++j)
+                                            object.contains[j] = message.contains[j];
+                                    }
+                                    if (message.caseInsensitive != null && message.hasOwnProperty("caseInsensitive"))
+                                        object.caseInsensitive = message.caseInsensitive;
+                                    if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                        object.orderBy = message.orderBy;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FacetKey to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FacetKey.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FacetKey
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FacetKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey";
+                                };
+    
+                                return FacetKey;
+                            })();
+    
+                            return FacetSpec;
+                        })();
+    
+                        SearchRequest.BoostSpec = (function() {
+    
+                            /**
+                             * Properties of a BoostSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @interface IBoostSpec
+                             * @property {Array.<google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec>|null} [conditionBoostSpecs] BoostSpec conditionBoostSpecs
+                             */
+    
+                            /**
+                             * Constructs a new BoostSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @classdesc Represents a BoostSpec.
+                             * @implements IBoostSpec
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec=} [properties] Properties to set
+                             */
+                            function BoostSpec(properties) {
+                                this.conditionBoostSpecs = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BoostSpec conditionBoostSpecs.
+                             * @member {Array.<google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec>} conditionBoostSpecs
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @instance
+                             */
+                            BoostSpec.prototype.conditionBoostSpecs = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BoostSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} BoostSpec instance
+                             */
+                            BoostSpec.create = function create(properties) {
+                                return new BoostSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BoostSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec} message BoostSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BoostSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.conditionBoostSpecs != null && message.conditionBoostSpecs.length)
+                                    for (var i = 0; i < message.conditionBoostSpecs.length; ++i)
+                                        $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.encode(message.conditionBoostSpecs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BoostSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec} message BoostSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BoostSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BoostSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} BoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BoostSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.conditionBoostSpecs && message.conditionBoostSpecs.length))
+                                                message.conditionBoostSpecs = [];
+                                            message.conditionBoostSpecs.push($root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BoostSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} BoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BoostSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BoostSpec message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BoostSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.conditionBoostSpecs != null && message.hasOwnProperty("conditionBoostSpecs")) {
+                                    if (!Array.isArray(message.conditionBoostSpecs))
+                                        return "conditionBoostSpecs: array expected";
+                                    for (var i = 0; i < message.conditionBoostSpecs.length; ++i) {
+                                        var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.verify(message.conditionBoostSpecs[i]);
+                                        if (error)
+                                            return "conditionBoostSpecs." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BoostSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} BoostSpec
+                             */
+                            BoostSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec();
+                                if (object.conditionBoostSpecs) {
+                                    if (!Array.isArray(object.conditionBoostSpecs))
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.conditionBoostSpecs: array expected");
+                                    message.conditionBoostSpecs = [];
+                                    for (var i = 0; i < object.conditionBoostSpecs.length; ++i) {
+                                        if (typeof object.conditionBoostSpecs[i] !== "object")
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.conditionBoostSpecs: object expected");
+                                        message.conditionBoostSpecs[i] = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.fromObject(object.conditionBoostSpecs[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BoostSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} message BoostSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BoostSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.conditionBoostSpecs = [];
+                                if (message.conditionBoostSpecs && message.conditionBoostSpecs.length) {
+                                    object.conditionBoostSpecs = [];
+                                    for (var j = 0; j < message.conditionBoostSpecs.length; ++j)
+                                        object.conditionBoostSpecs[j] = $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.toObject(message.conditionBoostSpecs[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BoostSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BoostSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BoostSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BoostSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec";
+                            };
+    
+                            BoostSpec.ConditionBoostSpec = (function() {
+    
+                                /**
+                                 * Properties of a ConditionBoostSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                                 * @interface IConditionBoostSpec
+                                 * @property {string|null} [condition] ConditionBoostSpec condition
+                                 * @property {number|null} [boost] ConditionBoostSpec boost
+                                 */
+    
+                                /**
+                                 * Constructs a new ConditionBoostSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec
+                                 * @classdesc Represents a ConditionBoostSpec.
+                                 * @implements IConditionBoostSpec
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec=} [properties] Properties to set
+                                 */
+                                function ConditionBoostSpec(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ConditionBoostSpec condition.
+                                 * @member {string} condition
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @instance
+                                 */
+                                ConditionBoostSpec.prototype.condition = "";
+    
+                                /**
+                                 * ConditionBoostSpec boost.
+                                 * @member {number} boost
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @instance
+                                 */
+                                ConditionBoostSpec.prototype.boost = 0;
+    
+                                /**
+                                 * Creates a new ConditionBoostSpec instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec} ConditionBoostSpec instance
+                                 */
+                                ConditionBoostSpec.create = function create(properties) {
+                                    return new ConditionBoostSpec(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ConditionBoostSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec} message ConditionBoostSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ConditionBoostSpec.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.condition);
+                                    if (message.boost != null && Object.hasOwnProperty.call(message, "boost"))
+                                        writer.uint32(/* id 2, wireType 5 =*/21).float(message.boost);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ConditionBoostSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.IConditionBoostSpec} message ConditionBoostSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ConditionBoostSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ConditionBoostSpec message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec} ConditionBoostSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ConditionBoostSpec.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.condition = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.boost = reader.float();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ConditionBoostSpec message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec} ConditionBoostSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ConditionBoostSpec.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ConditionBoostSpec message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ConditionBoostSpec.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.condition != null && message.hasOwnProperty("condition"))
+                                        if (!$util.isString(message.condition))
+                                            return "condition: string expected";
+                                    if (message.boost != null && message.hasOwnProperty("boost"))
+                                        if (typeof message.boost !== "number")
+                                            return "boost: number expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ConditionBoostSpec message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec} ConditionBoostSpec
+                                 */
+                                ConditionBoostSpec.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec();
+                                    if (object.condition != null)
+                                        message.condition = String(object.condition);
+                                    if (object.boost != null)
+                                        message.boost = Number(object.boost);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ConditionBoostSpec message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec} message ConditionBoostSpec
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ConditionBoostSpec.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.condition = "";
+                                        object.boost = 0;
+                                    }
+                                    if (message.condition != null && message.hasOwnProperty("condition"))
+                                        object.condition = message.condition;
+                                    if (message.boost != null && message.hasOwnProperty("boost"))
+                                        object.boost = options.json && !isFinite(message.boost) ? String(message.boost) : message.boost;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ConditionBoostSpec to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ConditionBoostSpec.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ConditionBoostSpec
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ConditionBoostSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec.ConditionBoostSpec";
+                                };
+    
+                                return ConditionBoostSpec;
+                            })();
+    
+                            return BoostSpec;
+                        })();
+    
+                        SearchRequest.QueryExpansionSpec = (function() {
+    
+                            /**
+                             * Properties of a QueryExpansionSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @interface IQueryExpansionSpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.Condition|null} [condition] QueryExpansionSpec condition
+                             */
+    
+                            /**
+                             * Constructs a new QueryExpansionSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @classdesc Represents a QueryExpansionSpec.
+                             * @implements IQueryExpansionSpec
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec=} [properties] Properties to set
+                             */
+                            function QueryExpansionSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryExpansionSpec condition.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.Condition} condition
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @instance
+                             */
+                            QueryExpansionSpec.prototype.condition = 0;
+    
+                            /**
+                             * Creates a new QueryExpansionSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} QueryExpansionSpec instance
+                             */
+                            QueryExpansionSpec.create = function create(properties) {
+                                return new QueryExpansionSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryExpansionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec} message QueryExpansionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryExpansionSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.condition);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryExpansionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IQueryExpansionSpec} message QueryExpansionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryExpansionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryExpansionSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} QueryExpansionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryExpansionSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.condition = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryExpansionSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} QueryExpansionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryExpansionSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryExpansionSpec message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryExpansionSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    switch (message.condition) {
+                                    default:
+                                        return "condition: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryExpansionSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} QueryExpansionSpec
+                             */
+                            QueryExpansionSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec();
+                                switch (object.condition) {
+                                default:
+                                    if (typeof object.condition === "number") {
+                                        message.condition = object.condition;
+                                        break;
+                                    }
+                                    break;
+                                case "CONDITION_UNSPECIFIED":
+                                case 0:
+                                    message.condition = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.condition = 1;
+                                    break;
+                                case "AUTO":
+                                case 2:
+                                    message.condition = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryExpansionSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} message QueryExpansionSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryExpansionSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.condition = options.enums === String ? "CONDITION_UNSPECIFIED" : 0;
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    object.condition = options.enums === String ? $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.Condition[message.condition] === undefined ? message.condition : $root.google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.Condition[message.condition] : message.condition;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryExpansionSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryExpansionSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueryExpansionSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueryExpansionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec";
+                            };
+    
+                            /**
+                             * Condition enum.
+                             * @name google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec.Condition
+                             * @enum {number}
+                             * @property {number} CONDITION_UNSPECIFIED=0 CONDITION_UNSPECIFIED value
+                             * @property {number} DISABLED=1 DISABLED value
+                             * @property {number} AUTO=2 AUTO value
+                             */
+                            QueryExpansionSpec.Condition = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONDITION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISABLED"] = 1;
+                                values[valuesById[2] = "AUTO"] = 2;
+                                return values;
+                            })();
+    
+                            return QueryExpansionSpec;
+                        })();
+    
+                        SearchRequest.SpellCorrectionSpec = (function() {
+    
+                            /**
+                             * Properties of a SpellCorrectionSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @interface ISpellCorrectionSpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.Mode|null} [mode] SpellCorrectionSpec mode
+                             */
+    
+                            /**
+                             * Constructs a new SpellCorrectionSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @classdesc Represents a SpellCorrectionSpec.
+                             * @implements ISpellCorrectionSpec
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec=} [properties] Properties to set
+                             */
+                            function SpellCorrectionSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpellCorrectionSpec mode.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.Mode} mode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @instance
+                             */
+                            SpellCorrectionSpec.prototype.mode = 0;
+    
+                            /**
+                             * Creates a new SpellCorrectionSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} SpellCorrectionSpec instance
+                             */
+                            SpellCorrectionSpec.create = function create(properties) {
+                                return new SpellCorrectionSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpellCorrectionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec} message SpellCorrectionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpellCorrectionSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpellCorrectionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ISpellCorrectionSpec} message SpellCorrectionSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpellCorrectionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpellCorrectionSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} SpellCorrectionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpellCorrectionSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpellCorrectionSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} SpellCorrectionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpellCorrectionSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpellCorrectionSpec message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpellCorrectionSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpellCorrectionSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} SpellCorrectionSpec
+                             */
+                            SpellCorrectionSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec();
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "SUGGESTION_ONLY":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "AUTO":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpellCorrectionSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} message SpellCorrectionSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpellCorrectionSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.Mode[message.mode] : message.mode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpellCorrectionSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpellCorrectionSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpellCorrectionSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpellCorrectionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec";
+                            };
+    
+                            /**
+                             * Mode enum.
+                             * @name google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec.Mode
+                             * @enum {number}
+                             * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                             * @property {number} SUGGESTION_ONLY=1 SUGGESTION_ONLY value
+                             * @property {number} AUTO=2 AUTO value
+                             */
+                            SpellCorrectionSpec.Mode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SUGGESTION_ONLY"] = 1;
+                                values[valuesById[2] = "AUTO"] = 2;
+                                return values;
+                            })();
+    
+                            return SpellCorrectionSpec;
+                        })();
+    
+                        SearchRequest.ContentSearchSpec = (function() {
+    
+                            /**
+                             * Properties of a ContentSearchSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @interface IContentSearchSpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec|null} [snippetSpec] ContentSearchSpec snippetSpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec|null} [summarySpec] ContentSearchSpec summarySpec
+                             */
+    
+                            /**
+                             * Constructs a new ContentSearchSpec.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest
+                             * @classdesc Represents a ContentSearchSpec.
+                             * @implements IContentSearchSpec
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec=} [properties] Properties to set
+                             */
+                            function ContentSearchSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ContentSearchSpec snippetSpec.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec|null|undefined} snippetSpec
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @instance
+                             */
+                            ContentSearchSpec.prototype.snippetSpec = null;
+    
+                            /**
+                             * ContentSearchSpec summarySpec.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec|null|undefined} summarySpec
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @instance
+                             */
+                            ContentSearchSpec.prototype.summarySpec = null;
+    
+                            /**
+                             * Creates a new ContentSearchSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} ContentSearchSpec instance
+                             */
+                            ContentSearchSpec.create = function create(properties) {
+                                return new ContentSearchSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ContentSearchSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec} message ContentSearchSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContentSearchSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.snippetSpec != null && Object.hasOwnProperty.call(message, "snippetSpec"))
+                                    $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.encode(message.snippetSpec, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.summarySpec != null && Object.hasOwnProperty.call(message, "summarySpec"))
+                                    $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.encode(message.summarySpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ContentSearchSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.IContentSearchSpec} message ContentSearchSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContentSearchSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ContentSearchSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} ContentSearchSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContentSearchSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.snippetSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ContentSearchSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} ContentSearchSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContentSearchSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ContentSearchSpec message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ContentSearchSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.snippetSpec != null && message.hasOwnProperty("snippetSpec")) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.verify(message.snippetSpec);
+                                    if (error)
+                                        return "snippetSpec." + error;
+                                }
+                                if (message.summarySpec != null && message.hasOwnProperty("summarySpec")) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.verify(message.summarySpec);
+                                    if (error)
+                                        return "summarySpec." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ContentSearchSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} ContentSearchSpec
+                             */
+                            ContentSearchSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec();
+                                if (object.snippetSpec != null) {
+                                    if (typeof object.snippetSpec !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.snippetSpec: object expected");
+                                    message.snippetSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.fromObject(object.snippetSpec);
+                                }
+                                if (object.summarySpec != null) {
+                                    if (typeof object.summarySpec !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.summarySpec: object expected");
+                                    message.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.fromObject(object.summarySpec);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ContentSearchSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} message ContentSearchSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ContentSearchSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.snippetSpec = null;
+                                    object.summarySpec = null;
+                                }
+                                if (message.snippetSpec != null && message.hasOwnProperty("snippetSpec"))
+                                    object.snippetSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.toObject(message.snippetSpec, options);
+                                if (message.summarySpec != null && message.hasOwnProperty("summarySpec"))
+                                    object.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.toObject(message.summarySpec, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ContentSearchSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ContentSearchSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ContentSearchSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ContentSearchSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec";
+                            };
+    
+                            ContentSearchSpec.SnippetSpec = (function() {
+    
+                                /**
+                                 * Properties of a SnippetSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @interface ISnippetSpec
+                                 * @property {number|null} [maxSnippetCount] SnippetSpec maxSnippetCount
+                                 * @property {boolean|null} [referenceOnly] SnippetSpec referenceOnly
+                                 */
+    
+                                /**
+                                 * Constructs a new SnippetSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @classdesc Represents a SnippetSpec.
+                                 * @implements ISnippetSpec
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec=} [properties] Properties to set
+                                 */
+                                function SnippetSpec(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SnippetSpec maxSnippetCount.
+                                 * @member {number} maxSnippetCount
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @instance
+                                 */
+                                SnippetSpec.prototype.maxSnippetCount = 0;
+    
+                                /**
+                                 * SnippetSpec referenceOnly.
+                                 * @member {boolean} referenceOnly
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @instance
+                                 */
+                                SnippetSpec.prototype.referenceOnly = false;
+    
+                                /**
+                                 * Creates a new SnippetSpec instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec} SnippetSpec instance
+                                 */
+                                SnippetSpec.create = function create(properties) {
+                                    return new SnippetSpec(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SnippetSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec} message SnippetSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SnippetSpec.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.maxSnippetCount != null && Object.hasOwnProperty.call(message, "maxSnippetCount"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxSnippetCount);
+                                    if (message.referenceOnly != null && Object.hasOwnProperty.call(message, "referenceOnly"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.referenceOnly);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SnippetSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec} message SnippetSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SnippetSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SnippetSpec message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec} SnippetSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SnippetSpec.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.maxSnippetCount = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.referenceOnly = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SnippetSpec message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec} SnippetSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SnippetSpec.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SnippetSpec message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SnippetSpec.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.maxSnippetCount != null && message.hasOwnProperty("maxSnippetCount"))
+                                        if (!$util.isInteger(message.maxSnippetCount))
+                                            return "maxSnippetCount: integer expected";
+                                    if (message.referenceOnly != null && message.hasOwnProperty("referenceOnly"))
+                                        if (typeof message.referenceOnly !== "boolean")
+                                            return "referenceOnly: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SnippetSpec message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec} SnippetSpec
+                                 */
+                                SnippetSpec.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec();
+                                    if (object.maxSnippetCount != null)
+                                        message.maxSnippetCount = object.maxSnippetCount | 0;
+                                    if (object.referenceOnly != null)
+                                        message.referenceOnly = Boolean(object.referenceOnly);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SnippetSpec message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec} message SnippetSpec
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SnippetSpec.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.maxSnippetCount = 0;
+                                        object.referenceOnly = false;
+                                    }
+                                    if (message.maxSnippetCount != null && message.hasOwnProperty("maxSnippetCount"))
+                                        object.maxSnippetCount = message.maxSnippetCount;
+                                    if (message.referenceOnly != null && message.hasOwnProperty("referenceOnly"))
+                                        object.referenceOnly = message.referenceOnly;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SnippetSpec to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SnippetSpec.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SnippetSpec
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SnippetSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec";
+                                };
+    
+                                return SnippetSpec;
+                            })();
+    
+                            ContentSearchSpec.SummarySpec = (function() {
+    
+                                /**
+                                 * Properties of a SummarySpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @interface ISummarySpec
+                                 * @property {number|null} [summaryResultCount] SummarySpec summaryResultCount
+                                 */
+    
+                                /**
+                                 * Constructs a new SummarySpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @classdesc Represents a SummarySpec.
+                                 * @implements ISummarySpec
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec=} [properties] Properties to set
+                                 */
+                                function SummarySpec(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SummarySpec summaryResultCount.
+                                 * @member {number} summaryResultCount
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @instance
+                                 */
+                                SummarySpec.prototype.summaryResultCount = 0;
+    
+                                /**
+                                 * Creates a new SummarySpec instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec} SummarySpec instance
+                                 */
+                                SummarySpec.create = function create(properties) {
+                                    return new SummarySpec(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SummarySpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec} message SummarySpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SummarySpec.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.summaryResultCount != null && Object.hasOwnProperty.call(message, "summaryResultCount"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.summaryResultCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SummarySpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec} message SummarySpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SummarySpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SummarySpec message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec} SummarySpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SummarySpec.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.summaryResultCount = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SummarySpec message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec} SummarySpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SummarySpec.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SummarySpec message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SummarySpec.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.summaryResultCount != null && message.hasOwnProperty("summaryResultCount"))
+                                        if (!$util.isInteger(message.summaryResultCount))
+                                            return "summaryResultCount: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SummarySpec message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec} SummarySpec
+                                 */
+                                SummarySpec.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec();
+                                    if (object.summaryResultCount != null)
+                                        message.summaryResultCount = object.summaryResultCount | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SummarySpec message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec} message SummarySpec
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SummarySpec.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.summaryResultCount = 0;
+                                    if (message.summaryResultCount != null && message.hasOwnProperty("summaryResultCount"))
+                                        object.summaryResultCount = message.summaryResultCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SummarySpec to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SummarySpec.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SummarySpec
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SummarySpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec";
+                                };
+    
+                                return SummarySpec;
+                            })();
+    
+                            return ContentSearchSpec;
+                        })();
+    
+                        return SearchRequest;
+                    })();
+    
+                    v1beta.SearchResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface ISearchResponse
+                         * @property {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>|null} [results] SearchResponse results
+                         * @property {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.IFacet>|null} [facets] SearchResponse facets
+                         * @property {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult|null} [guidedSearchResult] SearchResponse guidedSearchResult
+                         * @property {number|null} [totalSize] SearchResponse totalSize
+                         * @property {string|null} [attributionToken] SearchResponse attributionToken
+                         * @property {string|null} [nextPageToken] SearchResponse nextPageToken
+                         * @property {string|null} [correctedQuery] SearchResponse correctedQuery
+                         * @property {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary|null} [summary] SearchResponse summary
+                         * @property {Array.<string>|null} [appliedControls] SearchResponse appliedControls
+                         */
+    
+                        /**
+                         * Constructs a new SearchResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a SearchResponse.
+                         * @implements ISearchResponse
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchResponse=} [properties] Properties to set
+                         */
+                        function SearchResponse(properties) {
+                            this.results = [];
+                            this.facets = [];
+                            this.appliedControls = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchResponse results.
+                         * @member {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>} results
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * SearchResponse facets.
+                         * @member {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.IFacet>} facets
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.facets = $util.emptyArray;
+    
+                        /**
+                         * SearchResponse guidedSearchResult.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult|null|undefined} guidedSearchResult
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.guidedSearchResult = null;
+    
+                        /**
+                         * SearchResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * SearchResponse attributionToken.
+                         * @member {string} attributionToken
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.attributionToken = "";
+    
+                        /**
+                         * SearchResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * SearchResponse correctedQuery.
+                         * @member {string} correctedQuery
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.correctedQuery = "";
+    
+                        /**
+                         * SearchResponse summary.
+                         * @member {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary|null|undefined} summary
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.summary = null;
+    
+                        /**
+                         * SearchResponse appliedControls.
+                         * @member {Array.<string>} appliedControls
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.appliedControls = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SearchResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchResponse=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchResponse} SearchResponse instance
+                         */
+                        SearchResponse.create = function create(properties) {
+                            return new SearchResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchResponse} message SearchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.results != null && message.results.length)
+                                for (var i = 0; i < message.results.length; ++i)
+                                    $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.facets != null && message.facets.length)
+                                for (var i = 0; i < message.facets.length; ++i)
+                                    $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.encode(message.facets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            if (message.attributionToken != null && Object.hasOwnProperty.call(message, "attributionToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.attributionToken);
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.nextPageToken);
+                            if (message.correctedQuery != null && Object.hasOwnProperty.call(message, "correctedQuery"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.correctedQuery);
+                            if (message.guidedSearchResult != null && Object.hasOwnProperty.call(message, "guidedSearchResult"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.encode(message.guidedSearchResult, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.summary != null && Object.hasOwnProperty.call(message, "summary"))
+                                $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary.encode(message.summary, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.appliedControls != null && message.appliedControls.length)
+                                for (var i = 0; i < message.appliedControls.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.appliedControls[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.ISearchResponse} message SearchResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchResponse} SearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.results && message.results.length))
+                                            message.results = [];
+                                        message.results.push($root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.facets && message.facets.length))
+                                            message.facets = [];
+                                        message.facets.push($root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.guidedSearchResult = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.attributionToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.correctedQuery = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.summary = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.appliedControls && message.appliedControls.length))
+                                            message.appliedControls = [];
+                                        message.appliedControls.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchResponse} SearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchResponse message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.results != null && message.hasOwnProperty("results")) {
+                                if (!Array.isArray(message.results))
+                                    return "results: array expected";
+                                for (var i = 0; i < message.results.length; ++i) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.verify(message.results[i]);
+                                    if (error)
+                                        return "results." + error;
+                                }
+                            }
+                            if (message.facets != null && message.hasOwnProperty("facets")) {
+                                if (!Array.isArray(message.facets))
+                                    return "facets: array expected";
+                                for (var i = 0; i < message.facets.length; ++i) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.verify(message.facets[i]);
+                                    if (error)
+                                        return "facets." + error;
+                                }
+                            }
+                            if (message.guidedSearchResult != null && message.hasOwnProperty("guidedSearchResult")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.verify(message.guidedSearchResult);
+                                if (error)
+                                    return "guidedSearchResult." + error;
+                            }
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            if (message.attributionToken != null && message.hasOwnProperty("attributionToken"))
+                                if (!$util.isString(message.attributionToken))
+                                    return "attributionToken: string expected";
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.correctedQuery != null && message.hasOwnProperty("correctedQuery"))
+                                if (!$util.isString(message.correctedQuery))
+                                    return "correctedQuery: string expected";
+                            if (message.summary != null && message.hasOwnProperty("summary")) {
+                                var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary.verify(message.summary);
+                                if (error)
+                                    return "summary." + error;
+                            }
+                            if (message.appliedControls != null && message.hasOwnProperty("appliedControls")) {
+                                if (!Array.isArray(message.appliedControls))
+                                    return "appliedControls: array expected";
+                                for (var i = 0; i < message.appliedControls.length; ++i)
+                                    if (!$util.isString(message.appliedControls[i]))
+                                        return "appliedControls: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.SearchResponse} SearchResponse
+                         */
+                        SearchResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse();
+                            if (object.results) {
+                                if (!Array.isArray(object.results))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.results: array expected");
+                                message.results = [];
+                                for (var i = 0; i < object.results.length; ++i) {
+                                    if (typeof object.results[i] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.results: object expected");
+                                    message.results[i] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.fromObject(object.results[i]);
+                                }
+                            }
+                            if (object.facets) {
+                                if (!Array.isArray(object.facets))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.facets: array expected");
+                                message.facets = [];
+                                for (var i = 0; i < object.facets.length; ++i) {
+                                    if (typeof object.facets[i] !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.facets: object expected");
+                                    message.facets[i] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.fromObject(object.facets[i]);
+                                }
+                            }
+                            if (object.guidedSearchResult != null) {
+                                if (typeof object.guidedSearchResult !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.guidedSearchResult: object expected");
+                                message.guidedSearchResult = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.fromObject(object.guidedSearchResult);
+                            }
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            if (object.attributionToken != null)
+                                message.attributionToken = String(object.attributionToken);
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.correctedQuery != null)
+                                message.correctedQuery = String(object.correctedQuery);
+                            if (object.summary != null) {
+                                if (typeof object.summary !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.summary: object expected");
+                                message.summary = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary.fromObject(object.summary);
+                            }
+                            if (object.appliedControls) {
+                                if (!Array.isArray(object.appliedControls))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.appliedControls: array expected");
+                                message.appliedControls = [];
+                                for (var i = 0; i < object.appliedControls.length; ++i)
+                                    message.appliedControls[i] = String(object.appliedControls[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.SearchResponse} message SearchResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.results = [];
+                                object.facets = [];
+                                object.appliedControls = [];
+                            }
+                            if (options.defaults) {
+                                object.totalSize = 0;
+                                object.attributionToken = "";
+                                object.nextPageToken = "";
+                                object.correctedQuery = "";
+                                object.guidedSearchResult = null;
+                                object.summary = null;
+                            }
+                            if (message.results && message.results.length) {
+                                object.results = [];
+                                for (var j = 0; j < message.results.length; ++j)
+                                    object.results[j] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.toObject(message.results[j], options);
+                            }
+                            if (message.facets && message.facets.length) {
+                                object.facets = [];
+                                for (var j = 0; j < message.facets.length; ++j)
+                                    object.facets[j] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.toObject(message.facets[j], options);
+                            }
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            if (message.attributionToken != null && message.hasOwnProperty("attributionToken"))
+                                object.attributionToken = message.attributionToken;
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.correctedQuery != null && message.hasOwnProperty("correctedQuery"))
+                                object.correctedQuery = message.correctedQuery;
+                            if (message.guidedSearchResult != null && message.hasOwnProperty("guidedSearchResult"))
+                                object.guidedSearchResult = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.toObject(message.guidedSearchResult, options);
+                            if (message.summary != null && message.hasOwnProperty("summary"))
+                                object.summary = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary.toObject(message.summary, options);
+                            if (message.appliedControls && message.appliedControls.length) {
+                                object.appliedControls = [];
+                                for (var j = 0; j < message.appliedControls.length; ++j)
+                                    object.appliedControls[j] = message.appliedControls[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SearchResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SearchResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse";
+                        };
+    
+                        SearchResponse.SearchResult = (function() {
+    
+                            /**
+                             * Properties of a SearchResult.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @interface ISearchResult
+                             * @property {string|null} [id] SearchResult id
+                             * @property {google.cloud.discoveryengine.v1beta.IDocument|null} [document] SearchResult document
+                             */
+    
+                            /**
+                             * Constructs a new SearchResult.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @classdesc Represents a SearchResult.
+                             * @implements ISearchResult
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult=} [properties] Properties to set
+                             */
+                            function SearchResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchResult id.
+                             * @member {string} id
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @instance
+                             */
+                            SearchResult.prototype.id = "";
+    
+                            /**
+                             * SearchResult document.
+                             * @member {google.cloud.discoveryengine.v1beta.IDocument|null|undefined} document
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @instance
+                             */
+                            SearchResult.prototype.document = null;
+    
+                            /**
+                             * Creates a new SearchResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult} SearchResult instance
+                             */
+                            SearchResult.create = function create(properties) {
+                                return new SearchResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult} message SearchResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.document != null && Object.hasOwnProperty.call(message, "document"))
+                                    $root.google.cloud.discoveryengine.v1beta.Document.encode(message.document, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult} message SearchResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult} SearchResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.document = $root.google.cloud.discoveryengine.v1beta.Document.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult} SearchResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchResult message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.document != null && message.hasOwnProperty("document")) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.Document.verify(message.document);
+                                    if (error)
+                                        return "document." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult} SearchResult
+                             */
+                            SearchResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.document != null) {
+                                    if (typeof object.document !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult.document: object expected");
+                                    message.document = $root.google.cloud.discoveryengine.v1beta.Document.fromObject(object.document);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult} message SearchResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.document = null;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.document != null && message.hasOwnProperty("document"))
+                                    object.document = $root.google.cloud.discoveryengine.v1beta.Document.toObject(message.document, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult";
+                            };
+    
+                            return SearchResult;
+                        })();
+    
+                        SearchResponse.Facet = (function() {
+    
+                            /**
+                             * Properties of a Facet.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @interface IFacet
+                             * @property {string|null} [key] Facet key
+                             * @property {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue>|null} [values] Facet values
+                             * @property {boolean|null} [dynamicFacet] Facet dynamicFacet
+                             */
+    
+                            /**
+                             * Constructs a new Facet.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @classdesc Represents a Facet.
+                             * @implements IFacet
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IFacet=} [properties] Properties to set
+                             */
+                            function Facet(properties) {
+                                this.values = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Facet key.
+                             * @member {string} key
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @instance
+                             */
+                            Facet.prototype.key = "";
+    
+                            /**
+                             * Facet values.
+                             * @member {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue>} values
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @instance
+                             */
+                            Facet.prototype.values = $util.emptyArray;
+    
+                            /**
+                             * Facet dynamicFacet.
+                             * @member {boolean} dynamicFacet
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @instance
+                             */
+                            Facet.prototype.dynamicFacet = false;
+    
+                            /**
+                             * Creates a new Facet instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IFacet=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet} Facet instance
+                             */
+                            Facet.create = function create(properties) {
+                                return new Facet(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Facet message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Facet.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IFacet} message Facet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Facet.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.values != null && message.values.length)
+                                    for (var i = 0; i < message.values.length; ++i)
+                                        $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.encode(message.values[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.dynamicFacet != null && Object.hasOwnProperty.call(message, "dynamicFacet"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.dynamicFacet);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Facet message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Facet.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IFacet} message Facet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Facet.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Facet message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet} Facet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Facet.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.values && message.values.length))
+                                                message.values = [];
+                                            message.values.push($root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dynamicFacet = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Facet message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet} Facet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Facet.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Facet message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Facet.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.values != null && message.hasOwnProperty("values")) {
+                                    if (!Array.isArray(message.values))
+                                        return "values: array expected";
+                                    for (var i = 0; i < message.values.length; ++i) {
+                                        var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.verify(message.values[i]);
+                                        if (error)
+                                            return "values." + error;
+                                    }
+                                }
+                                if (message.dynamicFacet != null && message.hasOwnProperty("dynamicFacet"))
+                                    if (typeof message.dynamicFacet !== "boolean")
+                                        return "dynamicFacet: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Facet message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet} Facet
+                             */
+                            Facet.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.values) {
+                                    if (!Array.isArray(object.values))
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.Facet.values: array expected");
+                                    message.values = [];
+                                    for (var i = 0; i < object.values.length; ++i) {
+                                        if (typeof object.values[i] !== "object")
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.Facet.values: object expected");
+                                        message.values[i] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.fromObject(object.values[i]);
+                                    }
+                                }
+                                if (object.dynamicFacet != null)
+                                    message.dynamicFacet = Boolean(object.dynamicFacet);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Facet message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet} message Facet
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Facet.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.values = [];
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.dynamicFacet = false;
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.values && message.values.length) {
+                                    object.values = [];
+                                    for (var j = 0; j < message.values.length; ++j)
+                                        object.values[j] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.toObject(message.values[j], options);
+                                }
+                                if (message.dynamicFacet != null && message.hasOwnProperty("dynamicFacet"))
+                                    object.dynamicFacet = message.dynamicFacet;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Facet to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Facet.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Facet
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Facet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.Facet";
+                            };
+    
+                            Facet.FacetValue = (function() {
+    
+                                /**
+                                 * Properties of a FacetValue.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                                 * @interface IFacetValue
+                                 * @property {string|null} [value] FacetValue value
+                                 * @property {google.cloud.discoveryengine.v1beta.IInterval|null} [interval] FacetValue interval
+                                 * @property {number|Long|null} [count] FacetValue count
+                                 */
+    
+                                /**
+                                 * Constructs a new FacetValue.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet
+                                 * @classdesc Represents a FacetValue.
+                                 * @implements IFacetValue
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue=} [properties] Properties to set
+                                 */
+                                function FacetValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FacetValue value.
+                                 * @member {string|null|undefined} value
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @instance
+                                 */
+                                FacetValue.prototype.value = null;
+    
+                                /**
+                                 * FacetValue interval.
+                                 * @member {google.cloud.discoveryengine.v1beta.IInterval|null|undefined} interval
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @instance
+                                 */
+                                FacetValue.prototype.interval = null;
+    
+                                /**
+                                 * FacetValue count.
+                                 * @member {number|Long} count
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @instance
+                                 */
+                                FacetValue.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * FacetValue facetValue.
+                                 * @member {"value"|"interval"|undefined} facetValue
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @instance
+                                 */
+                                Object.defineProperty(FacetValue.prototype, "facetValue", {
+                                    get: $util.oneOfGetter($oneOfFields = ["value", "interval"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new FacetValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue} FacetValue instance
+                                 */
+                                FacetValue.create = function create(properties) {
+                                    return new FacetValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FacetValue message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue} message FacetValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FacetValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                    if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                        $root.google.cloud.discoveryengine.v1beta.Interval.encode(message.interval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.count);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FacetValue message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.IFacetValue} message FacetValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FacetValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FacetValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue} FacetValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FacetValue.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.value = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.interval = $root.google.cloud.discoveryengine.v1beta.Interval.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.count = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FacetValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue} FacetValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FacetValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FacetValue message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FacetValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.value != null && message.hasOwnProperty("value")) {
+                                        properties.facetValue = 1;
+                                        if (!$util.isString(message.value))
+                                            return "value: string expected";
+                                    }
+                                    if (message.interval != null && message.hasOwnProperty("interval")) {
+                                        if (properties.facetValue === 1)
+                                            return "facetValue: multiple values";
+                                        properties.facetValue = 1;
+                                        {
+                                            var error = $root.google.cloud.discoveryengine.v1beta.Interval.verify(message.interval);
+                                            if (error)
+                                                return "interval." + error;
+                                        }
+                                    }
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                            return "count: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FacetValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue} FacetValue
+                                 */
+                                FacetValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue();
+                                    if (object.value != null)
+                                        message.value = String(object.value);
+                                    if (object.interval != null) {
+                                        if (typeof object.interval !== "object")
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue.interval: object expected");
+                                        message.interval = $root.google.cloud.discoveryengine.v1beta.Interval.fromObject(object.interval);
+                                    }
+                                    if (object.count != null)
+                                        if ($util.Long)
+                                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                        else if (typeof object.count === "string")
+                                            message.count = parseInt(object.count, 10);
+                                        else if (typeof object.count === "number")
+                                            message.count = object.count;
+                                        else if (typeof object.count === "object")
+                                            message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FacetValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue} message FacetValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FacetValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.count = options.longs === String ? "0" : 0;
+                                    if (message.value != null && message.hasOwnProperty("value")) {
+                                        object.value = message.value;
+                                        if (options.oneofs)
+                                            object.facetValue = "value";
+                                    }
+                                    if (message.interval != null && message.hasOwnProperty("interval")) {
+                                        object.interval = $root.google.cloud.discoveryengine.v1beta.Interval.toObject(message.interval, options);
+                                        if (options.oneofs)
+                                            object.facetValue = "interval";
+                                    }
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (typeof message.count === "number")
+                                            object.count = options.longs === String ? String(message.count) : message.count;
+                                        else
+                                            object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FacetValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FacetValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FacetValue
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FacetValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.Facet.FacetValue";
+                                };
+    
+                                return FacetValue;
+                            })();
+    
+                            return Facet;
+                        })();
+    
+                        SearchResponse.GuidedSearchResult = (function() {
+    
+                            /**
+                             * Properties of a GuidedSearchResult.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @interface IGuidedSearchResult
+                             * @property {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute>|null} [refinementAttributes] GuidedSearchResult refinementAttributes
+                             */
+    
+                            /**
+                             * Constructs a new GuidedSearchResult.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @classdesc Represents a GuidedSearchResult.
+                             * @implements IGuidedSearchResult
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult=} [properties] Properties to set
+                             */
+                            function GuidedSearchResult(properties) {
+                                this.refinementAttributes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GuidedSearchResult refinementAttributes.
+                             * @member {Array.<google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute>} refinementAttributes
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @instance
+                             */
+                            GuidedSearchResult.prototype.refinementAttributes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new GuidedSearchResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult} GuidedSearchResult instance
+                             */
+                            GuidedSearchResult.create = function create(properties) {
+                                return new GuidedSearchResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GuidedSearchResult message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult} message GuidedSearchResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GuidedSearchResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.refinementAttributes != null && message.refinementAttributes.length)
+                                    for (var i = 0; i < message.refinementAttributes.length; ++i)
+                                        $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.encode(message.refinementAttributes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GuidedSearchResult message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult} message GuidedSearchResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GuidedSearchResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GuidedSearchResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult} GuidedSearchResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GuidedSearchResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.refinementAttributes && message.refinementAttributes.length))
+                                                message.refinementAttributes = [];
+                                            message.refinementAttributes.push($root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GuidedSearchResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult} GuidedSearchResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GuidedSearchResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GuidedSearchResult message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GuidedSearchResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.refinementAttributes != null && message.hasOwnProperty("refinementAttributes")) {
+                                    if (!Array.isArray(message.refinementAttributes))
+                                        return "refinementAttributes: array expected";
+                                    for (var i = 0; i < message.refinementAttributes.length; ++i) {
+                                        var error = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.verify(message.refinementAttributes[i]);
+                                        if (error)
+                                            return "refinementAttributes." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GuidedSearchResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult} GuidedSearchResult
+                             */
+                            GuidedSearchResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult();
+                                if (object.refinementAttributes) {
+                                    if (!Array.isArray(object.refinementAttributes))
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.refinementAttributes: array expected");
+                                    message.refinementAttributes = [];
+                                    for (var i = 0; i < object.refinementAttributes.length; ++i) {
+                                        if (typeof object.refinementAttributes[i] !== "object")
+                                            throw TypeError(".google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.refinementAttributes: object expected");
+                                        message.refinementAttributes[i] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.fromObject(object.refinementAttributes[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GuidedSearchResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult} message GuidedSearchResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GuidedSearchResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.refinementAttributes = [];
+                                if (message.refinementAttributes && message.refinementAttributes.length) {
+                                    object.refinementAttributes = [];
+                                    for (var j = 0; j < message.refinementAttributes.length; ++j)
+                                        object.refinementAttributes[j] = $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.toObject(message.refinementAttributes[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GuidedSearchResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GuidedSearchResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GuidedSearchResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GuidedSearchResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult";
+                            };
+    
+                            GuidedSearchResult.RefinementAttribute = (function() {
+    
+                                /**
+                                 * Properties of a RefinementAttribute.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                                 * @interface IRefinementAttribute
+                                 * @property {string|null} [attributeKey] RefinementAttribute attributeKey
+                                 * @property {string|null} [attributeValue] RefinementAttribute attributeValue
+                                 */
+    
+                                /**
+                                 * Constructs a new RefinementAttribute.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult
+                                 * @classdesc Represents a RefinementAttribute.
+                                 * @implements IRefinementAttribute
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute=} [properties] Properties to set
+                                 */
+                                function RefinementAttribute(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RefinementAttribute attributeKey.
+                                 * @member {string} attributeKey
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @instance
+                                 */
+                                RefinementAttribute.prototype.attributeKey = "";
+    
+                                /**
+                                 * RefinementAttribute attributeValue.
+                                 * @member {string} attributeValue
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @instance
+                                 */
+                                RefinementAttribute.prototype.attributeValue = "";
+    
+                                /**
+                                 * Creates a new RefinementAttribute instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute} RefinementAttribute instance
+                                 */
+                                RefinementAttribute.create = function create(properties) {
+                                    return new RefinementAttribute(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RefinementAttribute message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute} message RefinementAttribute message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RefinementAttribute.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.attributeKey != null && Object.hasOwnProperty.call(message, "attributeKey"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.attributeKey);
+                                    if (message.attributeValue != null && Object.hasOwnProperty.call(message, "attributeValue"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.attributeValue);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RefinementAttribute message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.IRefinementAttribute} message RefinementAttribute message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RefinementAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RefinementAttribute message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute} RefinementAttribute
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RefinementAttribute.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.attributeKey = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.attributeValue = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RefinementAttribute message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute} RefinementAttribute
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RefinementAttribute.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RefinementAttribute message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RefinementAttribute.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.attributeKey != null && message.hasOwnProperty("attributeKey"))
+                                        if (!$util.isString(message.attributeKey))
+                                            return "attributeKey: string expected";
+                                    if (message.attributeValue != null && message.hasOwnProperty("attributeValue"))
+                                        if (!$util.isString(message.attributeValue))
+                                            return "attributeValue: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RefinementAttribute message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute} RefinementAttribute
+                                 */
+                                RefinementAttribute.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute();
+                                    if (object.attributeKey != null)
+                                        message.attributeKey = String(object.attributeKey);
+                                    if (object.attributeValue != null)
+                                        message.attributeValue = String(object.attributeValue);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RefinementAttribute message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute} message RefinementAttribute
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RefinementAttribute.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.attributeKey = "";
+                                        object.attributeValue = "";
+                                    }
+                                    if (message.attributeKey != null && message.hasOwnProperty("attributeKey"))
+                                        object.attributeKey = message.attributeKey;
+                                    if (message.attributeValue != null && message.hasOwnProperty("attributeValue"))
+                                        object.attributeValue = message.attributeValue;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RefinementAttribute to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RefinementAttribute.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RefinementAttribute
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RefinementAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.GuidedSearchResult.RefinementAttribute";
+                                };
+    
+                                return RefinementAttribute;
+                            })();
+    
+                            return GuidedSearchResult;
+                        })();
+    
+                        SearchResponse.Summary = (function() {
+    
+                            /**
+                             * Properties of a Summary.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @interface ISummary
+                             * @property {string|null} [summaryText] Summary summaryText
+                             */
+    
+                            /**
+                             * Constructs a new Summary.
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                             * @classdesc Represents a Summary.
+                             * @implements ISummary
+                             * @constructor
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary=} [properties] Properties to set
+                             */
+                            function Summary(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Summary summaryText.
+                             * @member {string} summaryText
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @instance
+                             */
+                            Summary.prototype.summaryText = "";
+    
+                            /**
+                             * Creates a new Summary instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary=} [properties] Properties to set
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Summary} Summary instance
+                             */
+                            Summary.create = function create(properties) {
+                                return new Summary(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Summary message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Summary.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary} message Summary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Summary.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.summaryText != null && Object.hasOwnProperty.call(message, "summaryText"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.summaryText);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Summary message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchResponse.Summary.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary} message Summary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Summary.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Summary message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Summary} Summary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Summary.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.summaryText = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Summary message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Summary} Summary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Summary.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Summary message.
+                             * @function verify
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Summary.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.summaryText != null && message.hasOwnProperty("summaryText"))
+                                    if (!$util.isString(message.summaryText))
+                                        return "summaryText: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Summary message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.discoveryengine.v1beta.SearchResponse.Summary} Summary
+                             */
+                            Summary.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary)
+                                    return object;
+                                var message = new $root.google.cloud.discoveryengine.v1beta.SearchResponse.Summary();
+                                if (object.summaryText != null)
+                                    message.summaryText = String(object.summaryText);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Summary message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {google.cloud.discoveryengine.v1beta.SearchResponse.Summary} message Summary
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Summary.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.summaryText = "";
+                                if (message.summaryText != null && message.hasOwnProperty("summaryText"))
+                                    object.summaryText = message.summaryText;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Summary to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Summary.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Summary
+                             * @function getTypeUrl
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchResponse.Summary
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Summary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchResponse.Summary";
+                            };
+    
+                            return Summary;
+                        })();
+    
+                        return SearchResponse;
                     })();
     
                     v1beta.UserEventService = (function() {
@@ -11033,32 +20785,6 @@
                 return ResourceReference;
             })();
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -12020,6 +21746,32 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
             })();
     
             api.HttpBody = (function() {

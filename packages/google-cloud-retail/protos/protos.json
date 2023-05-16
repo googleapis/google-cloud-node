@@ -7813,7 +7813,7 @@
                           "requestType": "CreateMerchantCenterAccountLinkRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v2alpha/{merchant_center_account_link.name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                            "(google.api.http).post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
                             "(google.api.http).body": "merchant_center_account_link",
                             "(google.api.method_signature)": "parent,merchant_center_account_link",
                             "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.MerchantCenterAccountLink",
@@ -7822,7 +7822,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2alpha/{merchant_center_account_link.name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                                "post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
                                 "body": "merchant_center_account_link"
                               }
                             },

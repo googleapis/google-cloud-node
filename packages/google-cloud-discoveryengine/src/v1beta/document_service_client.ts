@@ -191,6 +191,10 @@ export class DocumentServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+        ),
       projectLocationDataStoreBranchPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}'
@@ -198,6 +202,10 @@ export class DocumentServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
         ),
     };
 
@@ -286,12 +294,23 @@ export class DocumentServiceClient {
     const importDocumentsMetadata = protoFilesRoot.lookup(
       '.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata'
     ) as gax.protobuf.Type;
+    const purgeDocumentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse'
+    ) as gax.protobuf.Type;
+    const purgeDocumentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDocumentsResponse.decode.bind(importDocumentsResponse),
         importDocumentsMetadata.decode.bind(importDocumentsMetadata)
+      ),
+      purgeDocuments: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeDocumentsResponse.decode.bind(purgeDocumentsResponse),
+        purgeDocumentsMetadata.decode.bind(purgeDocumentsMetadata)
       ),
     };
 
@@ -352,6 +371,7 @@ export class DocumentServiceClient {
       'updateDocument',
       'deleteDocument',
       'importDocuments',
+      'purgeDocuments',
     ];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
@@ -450,10 +470,10 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to access the
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
    *
    *   If the requested {@link google.cloud.discoveryengine.v1beta.Document|Document}
-   *   does not exist, a NOT_FOUND error is returned.
+   *   does not exist, a `NOT_FOUND` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -563,16 +583,16 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to create the
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
    *
    *   This field must be unique among all
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s with the same
    *   {@link google.cloud.discoveryengine.v1beta.CreateDocumentRequest.parent|parent}.
-   *   Otherwise, an ALREADY_EXISTS error is returned.
+   *   Otherwise, an `ALREADY_EXISTS` error is returned.
    *
    *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
    *   standard with a length limit of 63 characters. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -673,12 +693,12 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to update the
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
    *
    *   If the {@link google.cloud.discoveryengine.v1beta.Document|Document} to update
    *   does not exist and
    *   {@link google.cloud.discoveryengine.v1beta.UpdateDocumentRequest.allow_missing|allow_missing}
-   *   is not set, a NOT_FOUND error is returned.
+   *   is not set, a `NOT_FOUND` error is returned.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document} is not found, a
@@ -786,10 +806,10 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to delete the
    *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
    *
    *   If the {@link google.cloud.discoveryengine.v1beta.Document|Document} to delete
-   *   does not exist, a NOT_FOUND error is returned.
+   *   does not exist, a `NOT_FOUND` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1040,6 +1060,168 @@ export class DocumentServiceClient {
     >;
   }
   /**
+   * Permanently deletes all selected
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s in a branch.
+   *
+   * This process is asynchronous. Depending on the number of
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s to be deleted,
+   * this operation can take hours to complete. Before the delete operation
+   * completes, some {@link google.cloud.discoveryengine.v1beta.Document|Document}s
+   * might still be returned by
+   * {@link google.cloud.discoveryengine.v1beta.DocumentService.GetDocument|DocumentService.GetDocument}
+   * or
+   * {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}.
+   *
+   * To get a list of the
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s to be deleted,
+   * set
+   * {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.force|PurgeDocumentsRequest.force}
+   * to false.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+   * @param {string} request.filter
+   *   Required. Filter matching documents to purge. Only currently supported
+   *   value is
+   *   `*` (all items).
+   * @param {boolean} request.force
+   *   Actually performs the purge. If `force` is set to false, return the
+   *   expected purge count without deleting any documents.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/document_service.purge_documents.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async
+   */
+  purgeDocuments(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeDocuments(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeDocuments(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeDocuments(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+            protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeDocuments(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeDocuments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/document_service.purge_documents.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async
+   */
+  async checkPurgeDocumentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeDocuments,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+    >;
+  }
+  /**
    * Gets a list of {@link google.cloud.discoveryengine.v1beta.Document|Document}s.
    *
    * @param {Object} request
@@ -1052,13 +1234,13 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to list {@link |Documents}s under this
    *   branch, regardless of whether or not this branch exists, a
-   *   PERMISSION_DENIED error is returned.
+   *   `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
    *   to return. If unspecified, defaults to 100. The maximum allowed value is
    *   1000. Values above 1000 will be coerced to 1000.
    *
-   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
    *   A page token
    *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
@@ -1069,7 +1251,7 @@ export class DocumentServiceClient {
    *   When paginating, all other parameters provided to
    *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
    *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1170,13 +1352,13 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to list {@link |Documents}s under this
    *   branch, regardless of whether or not this branch exists, a
-   *   PERMISSION_DENIED error is returned.
+   *   `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
    *   to return. If unspecified, defaults to 100. The maximum allowed value is
    *   1000. Values above 1000 will be coerced to 1000.
    *
-   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
    *   A page token
    *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
@@ -1187,7 +1369,7 @@ export class DocumentServiceClient {
    *   When paginating, all other parameters provided to
    *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
    *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1236,13 +1418,13 @@ export class DocumentServiceClient {
    *
    *   If the caller does not have permission to list {@link |Documents}s under this
    *   branch, regardless of whether or not this branch exists, a
-   *   PERMISSION_DENIED error is returned.
+   *   `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
    *   to return. If unspecified, defaults to 100. The maximum allowed value is
    *   1000. Values above 1000 will be coerced to 1000.
    *
-   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
    *   A page token
    *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
@@ -1253,7 +1435,7 @@ export class DocumentServiceClient {
    *   When paginating, all other parameters provided to
    *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
    *   must match the call that provided the page token. Otherwise, an
-   *   INVALID_ARGUMENT error is returned.
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1692,6 +1874,109 @@ export class DocumentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} schema
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSchemaPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).data_store;
+  }
+
+  /**
+   * Parse the schema from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the schema.
+   */
+  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).schema;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreBranch resource name string.
    *
    * @param {string} project
@@ -1877,6 +2162,91 @@ export class DocumentServiceClient {
     return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
       projectLocationDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} schema
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSchemaPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).data_store;
+  }
+
+  /**
+   * Parse the schema from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the schema.
+   */
+  matchSchemaFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).schema;
   }
 
   /**

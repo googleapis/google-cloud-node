@@ -1808,6 +1808,8 @@ export class SpeechClient {
    *   The maximum number of files allowed to be specified is 5.
    * @param {google.cloud.speech.v2.RecognitionOutputConfig} request.recognitionOutputConfig
    *   Configuration options for where to output the transcripts of each file.
+   * @param {google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy} request.processingStrategy
+   *   Processing strategy to use for this request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3136,8 +3138,8 @@ export class SpeechClient {
    *   format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of Recognizers to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 Recognizers will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 Recognizers will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
@@ -3239,8 +3241,8 @@ export class SpeechClient {
    *   format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of Recognizers to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 Recognizers will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 Recognizers will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
@@ -3296,8 +3298,8 @@ export class SpeechClient {
    *   format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of Recognizers to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 Recognizers will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 Recognizers will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
@@ -3351,10 +3353,10 @@ export class SpeechClient {
    *   Required. The project and location of CustomClass resources to list. The
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
-   *   Number of results per requests. A valid page_size ranges from 0 to 20
+   *   Number of results per requests. A valid page_size ranges from 0 to 100
    *   inclusive. If the page_size is zero or unspecified, a page size of 5 will
-   *   be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-   *   that a call might return fewer results than the requested page size.
+   *   be chosen. If the page size exceeds 100, it will be coerced down to 100.
+   *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
@@ -3461,10 +3463,10 @@ export class SpeechClient {
    *   Required. The project and location of CustomClass resources to list. The
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
-   *   Number of results per requests. A valid page_size ranges from 0 to 20
+   *   Number of results per requests. A valid page_size ranges from 0 to 100
    *   inclusive. If the page_size is zero or unspecified, a page size of 5 will
-   *   be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-   *   that a call might return fewer results than the requested page size.
+   *   be chosen. If the page size exceeds 100, it will be coerced down to 100.
+   *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
@@ -3519,10 +3521,10 @@ export class SpeechClient {
    *   Required. The project and location of CustomClass resources to list. The
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
-   *   Number of results per requests. A valid page_size ranges from 0 to 20
+   *   Number of results per requests. A valid page_size ranges from 0 to 100
    *   inclusive. If the page_size is zero or unspecified, a page size of 5 will
-   *   be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-   *   that a call might return fewer results than the requested page size.
+   *   be chosen. If the page size exceeds 100, it will be coerced down to 100.
+   *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
@@ -3577,8 +3579,8 @@ export class SpeechClient {
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of PhraseSets to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 PhraseSets will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 PhraseSets will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
@@ -3680,8 +3682,8 @@ export class SpeechClient {
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of PhraseSets to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 PhraseSets will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 PhraseSets will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
@@ -3737,8 +3739,8 @@ export class SpeechClient {
    *   expected format is `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of PhraseSets to return. The service may return fewer
-   *   than this value. If unspecified, at most 20 PhraseSets will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   than this value. If unspecified, at most 5 PhraseSets will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
    *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.

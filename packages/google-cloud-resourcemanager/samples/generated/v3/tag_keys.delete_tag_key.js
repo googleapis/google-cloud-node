@@ -29,19 +29,19 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of a TagKey to be deleted in the format `tagKeys/123`.
-   *  The TagKey cannot be a parent of any existing TagValues or it will not be
-   *  deleted successfully.
+   *  Required. The resource name of a TagKey to be deleted in the format
+   *  `tagKeys/123`. The TagKey cannot be a parent of any existing TagValues or
+   *  it will not be deleted successfully.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Set as true to perform validations necessary for deletion, but not actually
-   *  perform the action.
+   *  Optional. Set as true to perform validations necessary for deletion, but
+   *  not actually perform the action.
    */
   // const validateOnly = true
   /**
-   *  Optional. The etag known to the client for the expected state of the TagKey. This is
-   *  to be used for optimistic concurrency.
+   *  Optional. The etag known to the client for the expected state of the
+   *  TagKey. This is to be used for optimistic concurrency.
    */
   // const etag = 'abc123'
 

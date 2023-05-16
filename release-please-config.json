@@ -136,7 +136,10 @@
     "packages/google-cloud-advisorynotifications": {},
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-alloydb": {},
-    "packages/google-cloud-workstations": {}
+    "packages/google-cloud-workstations": {},
+    "packages/google-cloud-confidentialcomputing": {},
+    "packages/google-ai-generativelanguage": {},
+    "packages/google-cloud-storageinsights": {}
   },
   "plugins": [
     {

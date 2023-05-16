@@ -12858,6 +12858,9 @@ export namespace google {
 
                     /** Membership authority */
                     authority?: (google.cloud.gkehub.v1.IAuthority|null);
+
+                    /** Membership monitoringConfig */
+                    monitoringConfig?: (google.cloud.gkehub.v1.IMonitoringConfig|null);
                 }
 
                 /** Represents a Membership. */
@@ -12904,6 +12907,9 @@ export namespace google {
 
                     /** Membership authority. */
                     public authority?: (google.cloud.gkehub.v1.IAuthority|null);
+
+                    /** Membership monitoringConfig. */
+                    public monitoringConfig?: (google.cloud.gkehub.v1.IMonitoringConfig|null);
 
                     /** Membership type. */
                     public type?: "endpoint";
@@ -12997,6 +13003,9 @@ export namespace google {
 
                     /** MembershipEndpoint kubernetesResource */
                     kubernetesResource?: (google.cloud.gkehub.v1.IKubernetesResource|null);
+
+                    /** MembershipEndpoint googleManaged */
+                    googleManaged?: (boolean|null);
                 }
 
                 /** Represents a MembershipEndpoint. */
@@ -13016,6 +13025,9 @@ export namespace google {
 
                     /** MembershipEndpoint kubernetesResource. */
                     public kubernetesResource?: (google.cloud.gkehub.v1.IKubernetesResource|null);
+
+                    /** MembershipEndpoint googleManaged. */
+                    public googleManaged: boolean;
 
                     /**
                      * Creates a new MembershipEndpoint instance using the specified properties.
@@ -13427,6 +13439,9 @@ export namespace google {
 
                     /** GkeCluster resourceLink */
                     resourceLink?: (string|null);
+
+                    /** GkeCluster clusterMissing */
+                    clusterMissing?: (boolean|null);
                 }
 
                 /** Represents a GkeCluster. */
@@ -13440,6 +13455,9 @@ export namespace google {
 
                     /** GkeCluster resourceLink. */
                     public resourceLink: string;
+
+                    /** GkeCluster clusterMissing. */
+                    public clusterMissing: boolean;
 
                     /**
                      * Creates a new GkeCluster instance using the specified properties.
@@ -13640,6 +13658,127 @@ export namespace google {
 
                     /**
                      * Gets the default type url for KubernetesMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MonitoringConfig. */
+                interface IMonitoringConfig {
+
+                    /** MonitoringConfig projectId */
+                    projectId?: (string|null);
+
+                    /** MonitoringConfig location */
+                    location?: (string|null);
+
+                    /** MonitoringConfig cluster */
+                    cluster?: (string|null);
+
+                    /** MonitoringConfig kubernetesMetricsPrefix */
+                    kubernetesMetricsPrefix?: (string|null);
+
+                    /** MonitoringConfig clusterHash */
+                    clusterHash?: (string|null);
+                }
+
+                /** Represents a MonitoringConfig. */
+                class MonitoringConfig implements IMonitoringConfig {
+
+                    /**
+                     * Constructs a new MonitoringConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IMonitoringConfig);
+
+                    /** MonitoringConfig projectId. */
+                    public projectId: string;
+
+                    /** MonitoringConfig location. */
+                    public location: string;
+
+                    /** MonitoringConfig cluster. */
+                    public cluster: string;
+
+                    /** MonitoringConfig kubernetesMetricsPrefix. */
+                    public kubernetesMetricsPrefix: string;
+
+                    /** MonitoringConfig clusterHash. */
+                    public clusterHash: string;
+
+                    /**
+                     * Creates a new MonitoringConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MonitoringConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IMonitoringConfig): google.cloud.gkehub.v1.MonitoringConfig;
+
+                    /**
+                     * Encodes the specified MonitoringConfig message. Does not implicitly {@link google.cloud.gkehub.v1.MonitoringConfig.verify|verify} messages.
+                     * @param message MonitoringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MonitoringConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.MonitoringConfig.verify|verify} messages.
+                     * @param message MonitoringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.MonitoringConfig;
+
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.MonitoringConfig;
+
+                    /**
+                     * Verifies a MonitoringConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MonitoringConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.MonitoringConfig;
+
+                    /**
+                     * Creates a plain object from a MonitoringConfig message. Also converts values to other types if specified.
+                     * @param message MonitoringConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.MonitoringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MonitoringConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MonitoringConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14576,6 +14715,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteMembershipRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteMembershipRequest. */
@@ -14592,6 +14734,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteMembershipRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteMembershipRequest instance using the specified properties.
@@ -23787,6 +23932,9 @@ export namespace google {
 
                     /** Membership infrastructureType */
                     infrastructureType?: (google.cloud.gkehub.v1beta1.Membership.InfrastructureType|keyof typeof google.cloud.gkehub.v1beta1.Membership.InfrastructureType|null);
+
+                    /** Membership monitoringConfig */
+                    monitoringConfig?: (google.cloud.gkehub.v1beta1.IMonitoringConfig|null);
                 }
 
                 /** Represents a Membership. */
@@ -23836,6 +23984,9 @@ export namespace google {
 
                     /** Membership infrastructureType. */
                     public infrastructureType: (google.cloud.gkehub.v1beta1.Membership.InfrastructureType|keyof typeof google.cloud.gkehub.v1beta1.Membership.InfrastructureType);
+
+                    /** Membership monitoringConfig. */
+                    public monitoringConfig?: (google.cloud.gkehub.v1beta1.IMonitoringConfig|null);
 
                     /** Membership type. */
                     public type?: "endpoint";
@@ -25160,6 +25311,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MonitoringConfig. */
+                interface IMonitoringConfig {
+
+                    /** MonitoringConfig projectId */
+                    projectId?: (string|null);
+
+                    /** MonitoringConfig location */
+                    location?: (string|null);
+
+                    /** MonitoringConfig cluster */
+                    cluster?: (string|null);
+
+                    /** MonitoringConfig kubernetesMetricsPrefix */
+                    kubernetesMetricsPrefix?: (string|null);
+
+                    /** MonitoringConfig clusterHash */
+                    clusterHash?: (string|null);
+                }
+
+                /** Represents a MonitoringConfig. */
+                class MonitoringConfig implements IMonitoringConfig {
+
+                    /**
+                     * Constructs a new MonitoringConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1beta1.IMonitoringConfig);
+
+                    /** MonitoringConfig projectId. */
+                    public projectId: string;
+
+                    /** MonitoringConfig location. */
+                    public location: string;
+
+                    /** MonitoringConfig cluster. */
+                    public cluster: string;
+
+                    /** MonitoringConfig kubernetesMetricsPrefix. */
+                    public kubernetesMetricsPrefix: string;
+
+                    /** MonitoringConfig clusterHash. */
+                    public clusterHash: string;
+
+                    /**
+                     * Creates a new MonitoringConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MonitoringConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1beta1.IMonitoringConfig): google.cloud.gkehub.v1beta1.MonitoringConfig;
+
+                    /**
+                     * Encodes the specified MonitoringConfig message. Does not implicitly {@link google.cloud.gkehub.v1beta1.MonitoringConfig.verify|verify} messages.
+                     * @param message MonitoringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1beta1.IMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MonitoringConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1beta1.MonitoringConfig.verify|verify} messages.
+                     * @param message MonitoringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1beta1.IMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1beta1.MonitoringConfig;
+
+                    /**
+                     * Decodes a MonitoringConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1beta1.MonitoringConfig;
+
+                    /**
+                     * Verifies a MonitoringConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MonitoringConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1beta1.MonitoringConfig;
+
+                    /**
+                     * Creates a plain object from a MonitoringConfig message. Also converts values to other types if specified.
+                     * @param message MonitoringConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1beta1.MonitoringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MonitoringConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MonitoringConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a MembershipState. */
                 interface IMembershipState {
 
@@ -25732,6 +26004,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteMembershipRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteMembershipRequest. */
@@ -25748,6 +26023,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteMembershipRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteMembershipRequest instance using the specified properties.

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v4.4.1...dataproc-v4.5.0) (2023-04-24)
+
+
+### Features
+
+* [dataproc] update go_package to v2 in google.cloud.dataproc.v1 ([#4184](https://github.com/googleapis/google-cloud-node/issues/4184)) ([c50526d](https://github.com/googleapis/google-cloud-node/commit/c50526dc1b23a0318adc8fde9a4a88af0725b030))
+
 ## [4.4.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v4.4.0...dataproc-v4.4.1) (2023-04-13)
 
 

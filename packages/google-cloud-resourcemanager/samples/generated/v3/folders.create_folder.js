@@ -29,8 +29,8 @@ function main(folder) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The folder being created, only the display name and parent will be
-   *  consulted. All other fields will be ignored.
+   *  Required. The folder being created, only the display name and parent will
+   *  be consulted. All other fields will be ignored.
    */
   // const folder = {}
 

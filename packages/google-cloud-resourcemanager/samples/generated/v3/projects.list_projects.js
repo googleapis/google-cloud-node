@@ -29,15 +29,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource to list projects under.
-   *  For example, setting this field to 'folders/1234' would list all projects
-   *  directly under that folder.
+   *  Required. The name of the parent resource whose projects are being listed.
+   *  Only children of this parent resource are listed; descendants are not
+   *  listed.
+   *  If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *  parent is an organization, use the value `organizations/{org_id}`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. A pagination token returned from a previous call to ListProjects 
-   *  google.cloud.resourcemanager.v3.Projects.ListProjects 
-   *  that indicates from where listing should continue.
+   *  Optional. A pagination token returned from a previous call to
+   *  ListProjects  google.cloud.resourcemanager.v3.Projects.ListProjects  that
+   *  indicates from where listing should continue.
    */
   // const pageToken = 'abc123'
   /**
@@ -47,8 +49,8 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-   *  returned. Normally only `ACTIVE` projects are returned.
+   *  Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+   *  also be returned. Normally only `ACTIVE` projects are returned.
    */
   // const showDeleted = true
 

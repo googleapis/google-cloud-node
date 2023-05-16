@@ -30,17 +30,18 @@ function main() {
    */
   /**
    *  Optional. The maximum number of organizations to return in the response.
-   *  If unspecified, server picks an appropriate default.
+   *  The server can return fewer organizations than requested. If unspecified,
+   *  server picks an appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A pagination token returned from a previous call to `SearchOrganizations`
-   *  that indicates from where listing should continue.
+   *  Optional. A pagination token returned from a previous call to
+   *  `SearchOrganizations` that indicates from where listing should continue.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. An optional query string used to filter the Organizations to return in
-   *  the response. Query rules are case-insensitive.
+   *  Optional. An optional query string used to filter the Organizations to
+   *  return in the response. Query rules are case-insensitive.
    *  ```
    *  | Field            | Description                                |
    *  |------------------|--------------------------------------------|

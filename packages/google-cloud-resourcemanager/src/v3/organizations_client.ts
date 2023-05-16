@@ -188,6 +188,9 @@ export class OrganizationsClient {
       tagBindingPathTemplate: new this._gaxModule.PathTemplate(
         'tagBindings/{tag_binding}'
       ),
+      tagHoldPathTemplate: new this._gaxModule.PathTemplate(
+        'tagValues/{tag_value}/tagHolds/{tag_hold}'
+      ),
       tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
@@ -352,9 +355,9 @@ export class OrganizationsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Organization to fetch. This is the organization's
-   *   relative path in the API, formatted as "organizations/[organizationId]".
-   *   For example, "organizations/1234".
+   *   Required. The resource name of the Organization to fetch. This is the
+   *   organization's relative path in the API, formatted as
+   *   "organizations/[organizationId]". For example, "organizations/1234".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -744,13 +747,15 @@ export class OrganizationsClient {
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of organizations to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   The server can return fewer organizations than requested. If unspecified,
+   *   server picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchOrganizations`
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchOrganizations` that indicates from where listing should continue.
    * @param {string} [request.query]
-   *   Optional. An optional query string used to filter the Organizations to return in
-   *   the response. Query rules are case-insensitive.
+   *   Optional. An optional query string used to filter the Organizations to
+   *   return in the response. Query rules are case-insensitive.
+   *
    *
    *   ```
    *   | Field            | Description                                |
@@ -857,13 +862,15 @@ export class OrganizationsClient {
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of organizations to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   The server can return fewer organizations than requested. If unspecified,
+   *   server picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchOrganizations`
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchOrganizations` that indicates from where listing should continue.
    * @param {string} [request.query]
-   *   Optional. An optional query string used to filter the Organizations to return in
-   *   the response. Query rules are case-insensitive.
+   *   Optional. An optional query string used to filter the Organizations to
+   *   return in the response. Query rules are case-insensitive.
+   *
    *
    *   ```
    *   | Field            | Description                                |
@@ -918,13 +925,15 @@ export class OrganizationsClient {
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of organizations to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   The server can return fewer organizations than requested. If unspecified,
+   *   server picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchOrganizations`
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchOrganizations` that indicates from where listing should continue.
    * @param {string} [request.query]
-   *   Optional. An optional query string used to filter the Organizations to return in
-   *   the response. Query rules are case-insensitive.
+   *   Optional. An optional query string used to filter the Organizations to
+   *   return in the response. Query rules are case-insensitive.
+   *
    *
    *   ```
    *   | Field            | Description                                |
@@ -1067,6 +1076,42 @@ export class OrganizationsClient {
   matchTagBindingFromTagBindingName(tagBindingName: string) {
     return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
       .tag_binding;
+  }
+
+  /**
+   * Return a fully-qualified tagHold resource name string.
+   *
+   * @param {string} tag_value
+   * @param {string} tag_hold
+   * @returns {string} Resource name string.
+   */
+  tagHoldPath(tagValue: string, tagHold: string) {
+    return this.pathTemplates.tagHoldPathTemplate.render({
+      tag_value: tagValue,
+      tag_hold: tagHold,
+    });
+  }
+
+  /**
+   * Parse the tag_value from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_value.
+   */
+  matchTagValueFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_value;
+  }
+
+  /**
+   * Parse the tag_hold from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_hold.
+   */
+  matchTagHoldFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_hold;
   }
 
   /**

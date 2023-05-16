@@ -6097,6 +6097,9 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
+                /** ClusterUpdate desiredFleet */
+                desiredFleet?: (google.container.v1.IFleet|null);
+
                 /** ClusterUpdate desiredStackType */
                 desiredStackType?: (google.container.v1.StackType|keyof typeof google.container.v1.StackType|null);
 
@@ -6232,6 +6235,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredFleet. */
+                public desiredFleet?: (google.container.v1.IFleet|null);
 
                 /** ClusterUpdate desiredStackType. */
                 public desiredStackType: (google.container.v1.StackType|keyof typeof google.container.v1.StackType);
@@ -6630,7 +6636,8 @@ export namespace google {
                     SET_MASTER_AUTH = 13,
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
-                    SET_MAINTENANCE_POLICY = 16
+                    SET_MAINTENANCE_POLICY = 16,
+                    RESIZE_CLUSTER = 18
                 }
             }
 
@@ -15821,11 +15828,11 @@ export namespace google {
             /** Properties of a DatabaseEncryption. */
             interface IDatabaseEncryption {
 
-                /** DatabaseEncryption state */
-                state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
-
                 /** DatabaseEncryption keyName */
                 keyName?: (string|null);
+
+                /** DatabaseEncryption state */
+                state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -15837,11 +15844,11 @@ export namespace google {
                  */
                 constructor(properties?: google.container.v1.IDatabaseEncryption);
 
-                /** DatabaseEncryption state. */
-                public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
-
                 /** DatabaseEncryption keyName. */
                 public keyName: string;
+
+                /** DatabaseEncryption state. */
+                public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
@@ -22371,6 +22378,9 @@ export namespace google {
 
                 /** AddonsConfig gkeBackupAgentConfig */
                 gkeBackupAgentConfig?: (google.container.v1beta1.IGkeBackupAgentConfig|null);
+
+                /** AddonsConfig gcsFuseCsiDriverConfig */
+                gcsFuseCsiDriverConfig?: (google.container.v1beta1.IGcsFuseCsiDriverConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -22417,6 +22427,9 @@ export namespace google {
 
                 /** AddonsConfig gkeBackupAgentConfig. */
                 public gkeBackupAgentConfig?: (google.container.v1beta1.IGkeBackupAgentConfig|null);
+
+                /** AddonsConfig gcsFuseCsiDriverConfig. */
+                public gcsFuseCsiDriverConfig?: (google.container.v1beta1.IGcsFuseCsiDriverConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -23460,6 +23473,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GcpFilestoreCsiDriverConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GcsFuseCsiDriverConfig. */
+            interface IGcsFuseCsiDriverConfig {
+
+                /** GcsFuseCsiDriverConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a GcsFuseCsiDriverConfig. */
+            class GcsFuseCsiDriverConfig implements IGcsFuseCsiDriverConfig {
+
+                /**
+                 * Constructs a new GcsFuseCsiDriverConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IGcsFuseCsiDriverConfig);
+
+                /** GcsFuseCsiDriverConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new GcsFuseCsiDriverConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GcsFuseCsiDriverConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IGcsFuseCsiDriverConfig): google.container.v1beta1.GcsFuseCsiDriverConfig;
+
+                /**
+                 * Encodes the specified GcsFuseCsiDriverConfig message. Does not implicitly {@link google.container.v1beta1.GcsFuseCsiDriverConfig.verify|verify} messages.
+                 * @param message GcsFuseCsiDriverConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IGcsFuseCsiDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GcsFuseCsiDriverConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.GcsFuseCsiDriverConfig.verify|verify} messages.
+                 * @param message GcsFuseCsiDriverConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IGcsFuseCsiDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GcsFuseCsiDriverConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GcsFuseCsiDriverConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.GcsFuseCsiDriverConfig;
+
+                /**
+                 * Decodes a GcsFuseCsiDriverConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GcsFuseCsiDriverConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.GcsFuseCsiDriverConfig;
+
+                /**
+                 * Verifies a GcsFuseCsiDriverConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GcsFuseCsiDriverConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GcsFuseCsiDriverConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.GcsFuseCsiDriverConfig;
+
+                /**
+                 * Creates a plain object from a GcsFuseCsiDriverConfig message. Also converts values to other types if specified.
+                 * @param message GcsFuseCsiDriverConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.GcsFuseCsiDriverConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GcsFuseCsiDriverConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GcsFuseCsiDriverConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -26318,6 +26428,9 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
 
+                /** ClusterUpdate desiredFleet */
+                desiredFleet?: (google.container.v1beta1.IFleet|null);
+
                 /** ClusterUpdate desiredStackType */
                 desiredStackType?: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType|null);
 
@@ -26474,6 +26587,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredFleet. */
+                public desiredFleet?: (google.container.v1beta1.IFleet|null);
 
                 /** ClusterUpdate desiredStackType. */
                 public desiredStackType: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType);
@@ -26875,7 +26991,8 @@ export namespace google {
                     SET_MASTER_AUTH = 13,
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
-                    SET_MAINTENANCE_POLICY = 16
+                    SET_MAINTENANCE_POLICY = 16,
+                    RESIZE_CLUSTER = 18
                 }
             }
 
@@ -36818,11 +36935,11 @@ export namespace google {
             /** Properties of a DatabaseEncryption. */
             interface IDatabaseEncryption {
 
-                /** DatabaseEncryption state */
-                state?: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State|null);
-
                 /** DatabaseEncryption keyName */
                 keyName?: (string|null);
+
+                /** DatabaseEncryption state */
+                state?: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -36834,11 +36951,11 @@ export namespace google {
                  */
                 constructor(properties?: google.container.v1beta1.IDatabaseEncryption);
 
-                /** DatabaseEncryption state. */
-                public state: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State);
-
                 /** DatabaseEncryption keyName. */
                 public keyName: string;
+
+                /** DatabaseEncryption state. */
+                public state: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State);
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.

@@ -29,6 +29,7 @@
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
   * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
   * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
+  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
@@ -240,6 +241,7 @@
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
   * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
   * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
+  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
@@ -352,6 +354,7 @@
   * [Metadata_service.update_execution](#metadata_service.update_execution)
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
   * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
@@ -439,7 +442,6 @@
   * [Vizier_service.stop_trial](#vizier_service.stop_trial)
   * [Vizier_service.suggest_trials](#vizier_service.suggest_trials)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -738,6 +740,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.list_endpoints.js`
+
+
+-----
+
+
+
+
+### Endpoint_service.mutate_deployed_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js`
 
 
 -----
@@ -4332,6 +4351,23 @@ __Usage:__
 
 
 
+### Endpoint_service.mutate_deployed_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js`
+
+
+-----
+
+
+
+
 ### Endpoint_service.undeploy_model
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.undeploy_model.js).
@@ -6236,6 +6272,23 @@ __Usage:__
 
 
 
+### Model_garden_service.get_publisher_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js`
+
+
+-----
+
+
+
+
 ### Model_service.batch_import_evaluated_annotations
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js).
@@ -7708,23 +7761,6 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-aiplatform/samples/test/quickstart.test.js`
 
 
 

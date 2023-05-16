@@ -21,6 +21,7 @@ import {
   OrganizationsClient,
   ProjectsClient,
   TagBindingsClient,
+  TagHoldsClient,
   TagKeysClient,
   TagValuesClient,
 } from '@google-cloud/resource-manager';
@@ -36,6 +37,9 @@ function doStuffWithProjectsClient(client: ProjectsClient) {
   client.close();
 }
 function doStuffWithTagBindingsClient(client: TagBindingsClient) {
+  client.close();
+}
+function doStuffWithTagHoldsClient(client: TagHoldsClient) {
   client.close();
 }
 function doStuffWithTagKeysClient(client: TagKeysClient) {
@@ -58,6 +62,9 @@ function main() {
   // check that the client instance can be created
   const tagBindingsClient = new TagBindingsClient();
   doStuffWithTagBindingsClient(tagBindingsClient);
+  // check that the client instance can be created
+  const tagHoldsClient = new TagHoldsClient();
+  doStuffWithTagHoldsClient(tagHoldsClient);
   // check that the client instance can be created
   const tagKeysClient = new TagKeysClient();
   doStuffWithTagKeysClient(tagKeysClient);

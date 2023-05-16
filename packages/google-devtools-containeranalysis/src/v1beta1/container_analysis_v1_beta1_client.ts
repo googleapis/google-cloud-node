@@ -704,6 +704,10 @@ export class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.generatePackagesSummary(
       request,

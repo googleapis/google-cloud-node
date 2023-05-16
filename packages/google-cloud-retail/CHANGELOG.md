@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/retail-v2.4.0...retail-v2.4.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* [retail] fix the HTTP format for merchant center link service ([#4183](https://github.com/googleapis/google-cloud-node/issues/4183)) ([ad27ba7](https://github.com/googleapis/google-cloud-node/commit/ad27ba7ef7f23e90fdd8870f9b6b24fa25970f5d))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v2.3.1...retail-v2.4.0) (2023-04-13)
 
 

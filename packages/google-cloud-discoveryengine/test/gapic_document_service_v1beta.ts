@@ -977,6 +977,200 @@ describe('v1beta.DocumentServiceClient', () => {
     });
   });
 
+  describe('purgeDocuments', () => {
+    it('invokes purgeDocuments without error', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.purgeDocuments =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.purgeDocuments(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes purgeDocuments without error using callback', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.purgeDocuments =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.purgeDocuments(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+              protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes purgeDocuments with call error', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.purgeDocuments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes purgeDocuments with LRO error', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.purgeDocuments(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkPurgeDocumentsProgress without error', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkPurgeDocumentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkPurgeDocumentsProgress with error', async () => {
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkPurgeDocumentsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listDocuments', () => {
     it('invokes listDocuments without error', async () => {
       const client = new documentserviceModule.v1beta.DocumentServiceClient({
@@ -1886,6 +2080,132 @@ describe('v1beta.DocumentServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionDataStoreSchema', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        schema: 'schemaValue',
+      };
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSchemaPath', () => {
+        const result = client.projectLocationCollectionDataStoreSchemaPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'dataStoreValue',
+          'schemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSchemaName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSchemaName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSchemaName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSchemaName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSchemaFromProjectLocationCollectionDataStoreSchemaName', () => {
+        const result =
+          client.matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'schemaValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationDataStoreBranch', () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranch';
       const expectedParameters = {
@@ -2096,6 +2416,99 @@ describe('v1beta.DocumentServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreBranchDocumentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSchema', () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        schema: 'schemaValue',
+      };
+      const client = new documentserviceModule.v1beta.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSchemaPath', () => {
+        const result = client.projectLocationDataStoreSchemaPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'schemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSchemaName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSchemaName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSchemaName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSchemaName(fakePath);
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSchemaFromProjectLocationDataStoreSchemaName', () => {
+        const result =
+          client.matchSchemaFromProjectLocationDataStoreSchemaName(fakePath);
+        assert.strictEqual(result, 'schemaValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

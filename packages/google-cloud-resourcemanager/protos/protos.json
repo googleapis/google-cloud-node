@@ -1418,6 +1418,24 @@
                               }
                             }
                           ]
+                        },
+                        "ListEffectiveTags": {
+                          "requestType": "ListEffectiveTagsRequest",
+                          "responseType": "ListEffectiveTagsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/effectiveTags",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/effectiveTags"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1441,6 +1459,10 @@
                         "tagValue": {
                           "type": "string",
                           "id": 3
+                        },
+                        "tagValueNamespacedName": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -1519,6 +1541,298 @@
                         }
                       }
                     },
+                    "ListEffectiveTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEffectiveTagsResponse": {
+                      "fields": {
+                        "effectiveTags": {
+                          "rule": "repeated",
+                          "type": "EffectiveTag",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EffectiveTag": {
+                      "fields": {
+                        "tagValue": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/TagValue"
+                          }
+                        },
+                        "namespacedTagValue": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tagKey": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/TagKey"
+                          }
+                        },
+                        "namespacedTagKey": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "tagKeyParentName": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "inherited": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TagHolds": {
+                      "options": {
+                        "(google.api.default_host)": "cloudresourcemanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only"
+                      },
+                      "methods": {
+                        "CreateTagHold": {
+                          "requestType": "CreateTagHoldRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=tagValues/*}/tagHolds",
+                            "(google.api.http).body": "tag_hold",
+                            "(google.api.method_signature)": "parent,tag_hold",
+                            "(google.longrunning.operation_info).response_type": "TagHold",
+                            "(google.longrunning.operation_info).metadata_type": "CreateTagHoldMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=tagValues/*}/tagHolds",
+                                "body": "tag_hold"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tag_hold"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "TagHold",
+                                "metadata_type": "CreateTagHoldMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteTagHold": {
+                          "requestType": "DeleteTagHoldRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v3/{name=tagValues/*/tagHolds/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteTagHoldMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3/{name=tagValues/*/tagHolds/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteTagHoldMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListTagHolds": {
+                          "requestType": "ListTagHoldsRequest",
+                          "responseType": "ListTagHoldsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=tagValues/*}/tagHolds",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=tagValues/*}/tagHolds"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "TagHold": {
+                      "options": {
+                        "(google.api.resource).type": "cloudresourcemanager.googleapis.com/TagHold",
+                        "(google.api.resource).pattern": "tagValues/{tag_value}/tagHolds/{tag_hold}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "holder": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "origin": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "helpLink": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTagHoldRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudresourcemanager.googleapis.com/TagHold"
+                          }
+                        },
+                        "tagHold": {
+                          "type": "TagHold",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTagHoldMetadata": {
+                      "fields": {}
+                    },
+                    "DeleteTagHoldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/TagHold"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTagHoldMetadata": {
+                      "fields": {}
+                    },
+                    "ListTagHoldsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudresourcemanager.googleapis.com/TagHold"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTagHoldsResponse": {
+                      "fields": {
+                        "tagHolds": {
+                          "rule": "repeated",
+                          "type": "TagHold",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "TagKeys": {
                       "options": {
                         "(google.api.default_host)": "cloudresourcemanager.googleapis.com",
@@ -1554,6 +1868,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v3/{name=tagKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetNamespacedTagKey": {
+                          "requestType": "GetNamespacedTagKeyRequest",
+                          "responseType": "TagKey",
+                          "options": {
+                            "(google.api.http).get": "/v3/tagKeys/namespaced",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/tagKeys/namespaced"
                               }
                             },
                             {
@@ -1767,6 +2099,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "purpose": {
+                          "type": "Purpose",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "purposeData": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1810,6 +2157,18 @@
                       }
                     },
                     "GetTagKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/TagKey"
+                          }
+                        }
+                      }
+                    },
+                    "GetNamespacedTagKeyRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1893,6 +2252,12 @@
                     "DeleteTagKeyMetadata": {
                       "fields": {}
                     },
+                    "Purpose": {
+                      "values": {
+                        "PURPOSE_UNSPECIFIED": 0,
+                        "GCE_FIREWALL": 1
+                      }
+                    },
                     "TagValues": {
                       "options": {
                         "(google.api.default_host)": "cloudresourcemanager.googleapis.com",
@@ -1928,6 +2293,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v3/{name=tagValues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetNamespacedTagValue": {
+                          "requestType": "GetNamespacedTagValueRequest",
+                          "responseType": "TagValue",
+                          "options": {
+                            "(google.api.http).get": "/v3/tagValues/namespaced",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/tagValues/namespaced"
                               }
                             },
                             {
@@ -2184,6 +2567,18 @@
                       }
                     },
                     "GetTagValueRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/TagValue"
+                          }
+                        }
+                      }
+                    },
+                    "GetNamespacedTagValueRequest": {
                       "fields": {
                         "name": {
                           "type": "string",

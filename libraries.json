@@ -524,7 +524,7 @@
     "repo": "googleapis/nodejs-datastore",
     "distribution_name": "@google-cloud/datastore",
     "api_id": "datastore.googleapis.com",
-    "codeowner_team": "@googleapis/cloud-native-db-dpes",
+    "codeowner_team": "@googleapis/cloud-native-db-dpes @googleapis/api-datastore-sdk",
     "api_shortname": "datastore",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-datastore",
@@ -2433,6 +2433,24 @@
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
+    "name": "confidentialcomputing",
+    "name_pretty": "Confidential Computing API",
+    "product_documentation": "https://cloud.google.com/confidential-computing",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/confidentialcomputing/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/confidentialcomputing",
+    "api_id": "confidentialcomputing.googleapis.com",
+    "default_version": "v1alpha1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "confidentialcomputing",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-confidentialcomputing",
+    "support_documentation": "https://cloud.google.com/confidential-computing/docs/getting-support"
+  },
+  {
     "default_version": "v1beta1",
     "release_level": "preview",
     "requires_billing": true,
@@ -2539,6 +2557,24 @@
     "api_shortname": "discoveryengine",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-discoveryengine",
     "support_documentation": "https://cloud.google.com/discovery-engine/docs/getting-support"
+  },
+  {
+    "name": "generativelanguage",
+    "name_pretty": "Generative Language API",
+    "product_documentation": "https://developers.generativeai.google/",
+    "client_documentation": "https://developers.generativeai.google/guide/palm_api_overview#node.js",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-ai/generativelanguage",
+    "api_id": "generativelanguage.googleapis.com",
+    "default_version": "v1beta2",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "generativelanguage",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-ai-generativelanguage",
+    "support_documentation": "https://developers.generativeai.google/docs/getting-support"
   },
   {
     "name": "connectgateway",

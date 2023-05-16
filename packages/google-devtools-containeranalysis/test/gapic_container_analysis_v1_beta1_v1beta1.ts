@@ -627,6 +627,12 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse()
       );
@@ -634,6 +640,14 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.generatePackagesSummary(request);
       assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generatePackagesSummary without error using callback', async () => {
@@ -648,6 +662,12 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse()
       );
@@ -670,6 +690,14 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generatePackagesSummary with error', async () => {
@@ -684,6 +712,12 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generatePackagesSummary = stubSimpleCall(
         undefined,
@@ -693,6 +727,14 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         client.generatePackagesSummary(request),
         expectedError
       );
+      const actualRequest = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generatePackagesSummary as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generatePackagesSummary with closed client', async () => {
@@ -707,6 +749,11 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(

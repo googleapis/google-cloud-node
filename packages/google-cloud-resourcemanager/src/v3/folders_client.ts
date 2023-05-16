@@ -193,6 +193,9 @@ export class FoldersClient {
       tagBindingPathTemplate: new this._gaxModule.PathTemplate(
         'tagBindings/{tag_binding}'
       ),
+      tagHoldPathTemplate: new this._gaxModule.PathTemplate(
+        'tagValues/{tag_value}/tagHolds/{tag_hold}'
+      ),
       tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
@@ -856,8 +859,8 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.resourcemanager.v3.Folder} request.folder
-   *   Required. The folder being created, only the display name and parent will be
-   *   consulted. All other fields will be ignored.
+   *   Required. The folder being created, only the display name and parent will
+   *   be consulted. All other fields will be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -989,7 +992,9 @@ export class FoldersClient {
    * Updates a folder, changing its `display_name`.
    * Changes to the folder `display_name` will be rejected if they violate
    * either the `display_name` formatting rules or the naming constraints
-   * described in the {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
+   * described in the
+   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * documentation.
    *
    * The folder's `display_name` must start and end with a letter or digit,
    * may contain letters, digits, spaces, hyphens and underscores and can be
@@ -1005,8 +1010,8 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.resourcemanager.v3.Folder} request.folder
-   *   Required. The new definition of the Folder. It must include the `name` field, which
-   *   cannot be changed.
+   *   Required. The new definition of the Folder. It must include the `name`
+   *   field, which cannot be changed.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Fields to be updated.
    *   Only the `display_name` can be updated.
@@ -1156,9 +1161,9 @@ export class FoldersClient {
    * `FolderOperation` message as an aid to stateless clients.
    * Folder moves will be rejected if they violate either the naming, height,
    * or fanout constraints described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
-   * The caller must have `resourcemanager.folders.move` permission on the
-   * folder's current and proposed new parent.
+   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * documentation. The caller must have `resourcemanager.folders.move`
+   * permission on the folder's current and proposed new parent.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1166,9 +1171,9 @@ export class FoldersClient {
    *   Required. The resource name of the Folder to move.
    *   Must be of the form folders/{folder_id}
    * @param {string} request.destinationParent
-   *   Required. The resource name of the folder or organization which should be the
-   *   folder's new parent.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The resource name of the folder or organization which should be
+   *   the folder's new parent. Must be of the form `folders/{folder_id}` or
+   *   `organizations/{org_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1302,11 +1307,13 @@ export class FoldersClient {
   }
   /**
    * Requests deletion of a folder. The folder is moved into the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED} state
-   * immediately, and is deleted approximately 30 days later. This method may
-   * only be called on an empty folder, where a folder is empty if it doesn't
-   * contain any folders or projects in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state.
-   * If called on a folder in {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   * state immediately, and is deleted approximately 30 days later. This method
+   * may only be called on an empty folder, where a folder is empty if it
+   * doesn't contain any folders or projects in the
+   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. If
+   * called on a folder in
+   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    * state the operation will result in a no-op success.
    * The caller must have `resourcemanager.folders.delete` permission on the
    * identified folder.
@@ -1449,14 +1456,16 @@ export class FoldersClient {
   }
   /**
    * Cancels the deletion request for a folder. This method may be called on a
-   * folder in any state. If the folder is in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE}
-   * state the result will be a no-op success. In order to succeed, the folder's
-   * parent must be in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In addition,
-   * reintroducing the folder into the tree must not violate folder naming,
-   * height, and fanout constraints described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
-   * The caller must have `resourcemanager.folders.undelete` permission on the
-   * identified folder.
+   * folder in any state. If the folder is in the
+   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state the
+   * result will be a no-op success. In order to succeed, the folder's parent
+   * must be in the
+   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In
+   * addition, reintroducing the folder into the tree must not violate folder
+   * naming, height, and fanout constraints described in the
+   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * documentation. The caller must have `resourcemanager.folders.undelete`
+   * permission on the identified folder.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1606,14 +1615,19 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the organization or folder whose folders are
-   *   being listed.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The name of the parent resource whose folders are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
+   *
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
+   *
    *   Access to this method is controlled by checking the
    *   `resourcemanager.folders.list` permission on the `parent`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A pagination token returned from a previous call to `ListFolders`
    *   that indicates where this listing should continue from.
@@ -1710,14 +1724,19 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the organization or folder whose folders are
-   *   being listed.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The name of the parent resource whose folders are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
+   *
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
+   *
    *   Access to this method is controlled by checking the
    *   `resourcemanager.folders.list` permission on the `parent`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A pagination token returned from a previous call to `ListFolders`
    *   that indicates where this listing should continue from.
@@ -1762,14 +1781,19 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the organization or folder whose folders are
-   *   being listed.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The name of the parent resource whose folders are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
+   *
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
+   *
    *   Access to this method is controlled by checking the
    *   `resourcemanager.folders.list` permission on the `parent`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
    *   Optional. A pagination token returned from a previous call to `ListFolders`
    *   that indicates where this listing should continue from.
@@ -1818,11 +1842,12 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchFolders`
-   *   that indicates from where search should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchFolders` that indicates from where search should continue.
    * @param {string} [request.query]
    *   Optional. Search criteria used to select the folders to return.
    *   If no search criteria is specified then all accessible folders will be
@@ -1944,11 +1969,12 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchFolders`
-   *   that indicates from where search should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchFolders` that indicates from where search should continue.
    * @param {string} [request.query]
    *   Optional. Search criteria used to select the folders to return.
    *   If no search criteria is specified then all accessible folders will be
@@ -2018,11 +2044,12 @@ export class FoldersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of folders to return in the response.
-   *   If unspecified, server picks an appropriate default.
+   *   Optional. The maximum number of folders to return in the response. The
+   *   server can return fewer folders than requested. If unspecified, server
+   *   picks an appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `SearchFolders`
-   *   that indicates from where search should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   `SearchFolders` that indicates from where search should continue.
    * @param {string} [request.query]
    *   Optional. Search criteria used to select the folders to return.
    *   If no search criteria is specified then all accessible folders will be
@@ -2085,6 +2112,181 @@ export class FoldersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2181,6 +2383,42 @@ export class FoldersClient {
   matchTagBindingFromTagBindingName(tagBindingName: string) {
     return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
       .tag_binding;
+  }
+
+  /**
+   * Return a fully-qualified tagHold resource name string.
+   *
+   * @param {string} tag_value
+   * @param {string} tag_hold
+   * @returns {string} Resource name string.
+   */
+  tagHoldPath(tagValue: string, tagHold: string) {
+    return this.pathTemplates.tagHoldPathTemplate.render({
+      tag_value: tagValue,
+      tag_hold: tagHold,
+    });
+  }
+
+  /**
+   * Parse the tag_value from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_value.
+   */
+  matchTagValueFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_value;
+  }
+
+  /**
+   * Parse the tag_hold from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_hold.
+   */
+  matchTagHoldFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_hold;
   }
 
   /**

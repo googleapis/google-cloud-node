@@ -24,6 +24,7 @@ function main() {
   const organizationsClient = new resourcemanager.OrganizationsClient();
   const projectsClient = new resourcemanager.ProjectsClient();
   const tagBindingsClient = new resourcemanager.TagBindingsClient();
+  const tagHoldsClient = new resourcemanager.TagHoldsClient();
   const tagKeysClient = new resourcemanager.TagKeysClient();
   const tagValuesClient = new resourcemanager.TagValuesClient();
 }

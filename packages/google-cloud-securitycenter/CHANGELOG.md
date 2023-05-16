@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.3.0...security-center-v7.4.0) (2023-04-24)
+
+
+### Features
+
+* [securitycenter] add cloud_dlp_inspection and cloud_dlp_data_profile fields to finding's list of attributes ([#4198](https://github.com/googleapis/google-cloud-node/issues/4198)) ([3e1c467](https://github.com/googleapis/google-cloud-node/commit/3e1c4678dc20281eeaf30bf8cf64368e9110f307))
+
 ## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.2.1...security-center-v7.3.0) (2023-04-13)
 
 

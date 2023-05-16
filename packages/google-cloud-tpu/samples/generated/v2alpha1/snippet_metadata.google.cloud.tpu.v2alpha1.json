@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-tpu",
-        "version": "2.5.1",
+        "version": "2.6.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -496,46 +496,6 @@
                 "method": {
                     "shortName": "DeleteQueuedResource",
                     "fullName": "google.cloud.tpu.v2alpha1.Tpu.DeleteQueuedResource",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async",
-            "title": "Tpu resetQueuedResource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resets a QueuedResource TPU instance",
-            "canonical": true,
-            "file": "tpu.reset_queued_resource.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResetQueuedResource",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.ResetQueuedResource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "ResetQueuedResource",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.ResetQueuedResource",
                     "service": {
                         "shortName": "Tpu",
                         "fullName": "google.cloud.tpu.v2alpha1.Tpu"

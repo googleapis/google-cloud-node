@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.3.2...orchestration-airflow-v2.4.0) (2023-05-02)
+
+
+### Features
+
+* [orchestration] add airflow_byoid_uri field to Cloud Composer API ([#4210](https://github.com/googleapis/google-cloud-node/issues/4210)) ([dc2e138](https://github.com/googleapis/google-cloud-node/commit/dc2e138872f7fd7dab8c3e626452b15e20459bd4))
+
 ## [2.3.2](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.3.1...orchestration-airflow-v2.3.2) (2023-04-13)
 
 
