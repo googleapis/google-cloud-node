@@ -7610,6 +7610,7 @@
                          * @property {string|null} [privateConnectionId] CreatePrivateConnectionRequest privateConnectionId
                          * @property {google.cloud.datastream.v1.IPrivateConnection|null} [privateConnection] CreatePrivateConnectionRequest privateConnection
                          * @property {string|null} [requestId] CreatePrivateConnectionRequest requestId
+                         * @property {boolean|null} [force] CreatePrivateConnectionRequest force
                          */
     
                         /**
@@ -7660,6 +7661,14 @@
                         CreatePrivateConnectionRequest.prototype.requestId = "";
     
                         /**
+                         * CreatePrivateConnectionRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
@@ -7691,6 +7700,8 @@
                                 $root.google.cloud.datastream.v1.PrivateConnection.encode(message.privateConnection, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.force);
                             return writer;
                         };
     
@@ -7739,6 +7750,10 @@
                                     }
                                 case 4: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7790,6 +7805,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -7816,6 +7834,8 @@
                             }
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -7837,6 +7857,7 @@
                                 object.privateConnectionId = "";
                                 object.privateConnection = null;
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -7846,6 +7867,8 @@
                                 object.privateConnection = $root.google.cloud.datastream.v1.PrivateConnection.toObject(message.privateConnection, options);
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -15437,6 +15460,7 @@
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [includeObjects] OracleSourceConfig includeObjects
                          * @property {google.cloud.datastream.v1.IOracleRdbms|null} [excludeObjects] OracleSourceConfig excludeObjects
                          * @property {number|null} [maxConcurrentCdcTasks] OracleSourceConfig maxConcurrentCdcTasks
+                         * @property {number|null} [maxConcurrentBackfillTasks] OracleSourceConfig maxConcurrentBackfillTasks
                          * @property {google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null} [dropLargeObjects] OracleSourceConfig dropLargeObjects
                          * @property {google.cloud.datastream.v1.OracleSourceConfig.IStreamLargeObjects|null} [streamLargeObjects] OracleSourceConfig streamLargeObjects
                          */
@@ -15479,6 +15503,14 @@
                          * @instance
                          */
                         OracleSourceConfig.prototype.maxConcurrentCdcTasks = 0;
+    
+                        /**
+                         * OracleSourceConfig maxConcurrentBackfillTasks.
+                         * @member {number} maxConcurrentBackfillTasks
+                         * @memberof google.cloud.datastream.v1.OracleSourceConfig
+                         * @instance
+                         */
+                        OracleSourceConfig.prototype.maxConcurrentBackfillTasks = 0;
     
                         /**
                          * OracleSourceConfig dropLargeObjects.
@@ -15540,6 +15572,8 @@
                                 $root.google.cloud.datastream.v1.OracleRdbms.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.maxConcurrentCdcTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentCdcTasks"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentCdcTasks);
+                            if (message.maxConcurrentBackfillTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentBackfillTasks"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.maxConcurrentBackfillTasks);
                             if (message.dropLargeObjects != null && Object.hasOwnProperty.call(message, "dropLargeObjects"))
                                 $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.encode(message.dropLargeObjects, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.streamLargeObjects != null && Object.hasOwnProperty.call(message, "streamLargeObjects"))
@@ -15588,6 +15622,10 @@
                                     }
                                 case 3: {
                                         message.maxConcurrentCdcTasks = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maxConcurrentBackfillTasks = reader.int32();
                                         break;
                                     }
                                 case 100: {
@@ -15647,6 +15685,9 @@
                             if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
                                 if (!$util.isInteger(message.maxConcurrentCdcTasks))
                                     return "maxConcurrentCdcTasks: integer expected";
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                if (!$util.isInteger(message.maxConcurrentBackfillTasks))
+                                    return "maxConcurrentBackfillTasks: integer expected";
                             if (message.dropLargeObjects != null && message.hasOwnProperty("dropLargeObjects")) {
                                 properties.largeObjectsHandling = 1;
                                 {
@@ -15692,6 +15733,8 @@
                             }
                             if (object.maxConcurrentCdcTasks != null)
                                 message.maxConcurrentCdcTasks = object.maxConcurrentCdcTasks | 0;
+                            if (object.maxConcurrentBackfillTasks != null)
+                                message.maxConcurrentBackfillTasks = object.maxConcurrentBackfillTasks | 0;
                             if (object.dropLargeObjects != null) {
                                 if (typeof object.dropLargeObjects !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.OracleSourceConfig.dropLargeObjects: object expected");
@@ -15722,6 +15765,7 @@
                                 object.includeObjects = null;
                                 object.excludeObjects = null;
                                 object.maxConcurrentCdcTasks = 0;
+                                object.maxConcurrentBackfillTasks = 0;
                             }
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
                                 object.includeObjects = $root.google.cloud.datastream.v1.OracleRdbms.toObject(message.includeObjects, options);
@@ -15729,6 +15773,8 @@
                                 object.excludeObjects = $root.google.cloud.datastream.v1.OracleRdbms.toObject(message.excludeObjects, options);
                             if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
                                 object.maxConcurrentCdcTasks = message.maxConcurrentCdcTasks;
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                object.maxConcurrentBackfillTasks = message.maxConcurrentBackfillTasks;
                             if (message.dropLargeObjects != null && message.hasOwnProperty("dropLargeObjects")) {
                                 object.dropLargeObjects = $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects.toObject(message.dropLargeObjects, options);
                                 if (options.oneofs)
@@ -17216,6 +17262,7 @@
                          * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [excludeObjects] PostgresqlSourceConfig excludeObjects
                          * @property {string|null} [replicationSlot] PostgresqlSourceConfig replicationSlot
                          * @property {string|null} [publication] PostgresqlSourceConfig publication
+                         * @property {number|null} [maxConcurrentBackfillTasks] PostgresqlSourceConfig maxConcurrentBackfillTasks
                          */
     
                         /**
@@ -17266,6 +17313,14 @@
                         PostgresqlSourceConfig.prototype.publication = "";
     
                         /**
+                         * PostgresqlSourceConfig maxConcurrentBackfillTasks.
+                         * @member {number} maxConcurrentBackfillTasks
+                         * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
+                         * @instance
+                         */
+                        PostgresqlSourceConfig.prototype.maxConcurrentBackfillTasks = 0;
+    
+                        /**
                          * Creates a new PostgresqlSourceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.PostgresqlSourceConfig
@@ -17297,6 +17352,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.replicationSlot);
                             if (message.publication != null && Object.hasOwnProperty.call(message, "publication"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.publication);
+                            if (message.maxConcurrentBackfillTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentBackfillTasks"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maxConcurrentBackfillTasks);
                             return writer;
                         };
     
@@ -17345,6 +17402,10 @@
                                     }
                                 case 4: {
                                         message.publication = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.maxConcurrentBackfillTasks = reader.int32();
                                         break;
                                     }
                                 default:
@@ -17398,6 +17459,9 @@
                             if (message.publication != null && message.hasOwnProperty("publication"))
                                 if (!$util.isString(message.publication))
                                     return "publication: string expected";
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                if (!$util.isInteger(message.maxConcurrentBackfillTasks))
+                                    return "maxConcurrentBackfillTasks: integer expected";
                             return null;
                         };
     
@@ -17427,6 +17491,8 @@
                                 message.replicationSlot = String(object.replicationSlot);
                             if (object.publication != null)
                                 message.publication = String(object.publication);
+                            if (object.maxConcurrentBackfillTasks != null)
+                                message.maxConcurrentBackfillTasks = object.maxConcurrentBackfillTasks | 0;
                             return message;
                         };
     
@@ -17448,6 +17514,7 @@
                                 object.excludeObjects = null;
                                 object.replicationSlot = "";
                                 object.publication = "";
+                                object.maxConcurrentBackfillTasks = 0;
                             }
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
                                 object.includeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.toObject(message.includeObjects, options);
@@ -17457,6 +17524,8 @@
                                 object.replicationSlot = message.replicationSlot;
                             if (message.publication != null && message.hasOwnProperty("publication"))
                                 object.publication = message.publication;
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                object.maxConcurrentBackfillTasks = message.maxConcurrentBackfillTasks;
                             return object;
                         };
     
@@ -18560,6 +18629,7 @@
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [includeObjects] MysqlSourceConfig includeObjects
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [excludeObjects] MysqlSourceConfig excludeObjects
                          * @property {number|null} [maxConcurrentCdcTasks] MysqlSourceConfig maxConcurrentCdcTasks
+                         * @property {number|null} [maxConcurrentBackfillTasks] MysqlSourceConfig maxConcurrentBackfillTasks
                          */
     
                         /**
@@ -18602,6 +18672,14 @@
                         MysqlSourceConfig.prototype.maxConcurrentCdcTasks = 0;
     
                         /**
+                         * MysqlSourceConfig maxConcurrentBackfillTasks.
+                         * @member {number} maxConcurrentBackfillTasks
+                         * @memberof google.cloud.datastream.v1.MysqlSourceConfig
+                         * @instance
+                         */
+                        MysqlSourceConfig.prototype.maxConcurrentBackfillTasks = 0;
+    
+                        /**
                          * Creates a new MysqlSourceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.MysqlSourceConfig
@@ -18631,6 +18709,8 @@
                                 $root.google.cloud.datastream.v1.MysqlRdbms.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.maxConcurrentCdcTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentCdcTasks"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentCdcTasks);
+                            if (message.maxConcurrentBackfillTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentBackfillTasks"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.maxConcurrentBackfillTasks);
                             return writer;
                         };
     
@@ -18675,6 +18755,10 @@
                                     }
                                 case 3: {
                                         message.maxConcurrentCdcTasks = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maxConcurrentBackfillTasks = reader.int32();
                                         break;
                                     }
                                 default:
@@ -18725,6 +18809,9 @@
                             if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
                                 if (!$util.isInteger(message.maxConcurrentCdcTasks))
                                     return "maxConcurrentCdcTasks: integer expected";
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                if (!$util.isInteger(message.maxConcurrentBackfillTasks))
+                                    return "maxConcurrentBackfillTasks: integer expected";
                             return null;
                         };
     
@@ -18752,6 +18839,8 @@
                             }
                             if (object.maxConcurrentCdcTasks != null)
                                 message.maxConcurrentCdcTasks = object.maxConcurrentCdcTasks | 0;
+                            if (object.maxConcurrentBackfillTasks != null)
+                                message.maxConcurrentBackfillTasks = object.maxConcurrentBackfillTasks | 0;
                             return message;
                         };
     
@@ -18772,6 +18861,7 @@
                                 object.includeObjects = null;
                                 object.excludeObjects = null;
                                 object.maxConcurrentCdcTasks = 0;
+                                object.maxConcurrentBackfillTasks = 0;
                             }
                             if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
                                 object.includeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.includeObjects, options);
@@ -18779,6 +18869,8 @@
                                 object.excludeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.toObject(message.excludeObjects, options);
                             if (message.maxConcurrentCdcTasks != null && message.hasOwnProperty("maxConcurrentCdcTasks"))
                                 object.maxConcurrentCdcTasks = message.maxConcurrentCdcTasks;
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                object.maxConcurrentBackfillTasks = message.maxConcurrentBackfillTasks;
                             return object;
                         };
     
