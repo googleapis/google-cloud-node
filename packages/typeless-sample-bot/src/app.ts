@@ -168,9 +168,11 @@ export async function main(args: string[]): Promise<number> {
     // Wait for the pipeline to complete.
     const count = await waitForAllSamples(written);
 
-    if (!count) {
+    if (!count && !argv.recursive) {
       // Should this be considred a failure?
       loggers.error('No samples were selected.');
+    } else {
+      console.log('No samples were found.');
     }
   } catch (e) {
     loggers.error('Exception during processing:', e);

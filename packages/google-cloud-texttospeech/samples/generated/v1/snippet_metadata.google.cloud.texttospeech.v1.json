@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-texttospeech",
-        "version": "4.2.0",
+        "version": "4.2.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],

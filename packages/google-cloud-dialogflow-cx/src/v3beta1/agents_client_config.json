@@ -34,7 +34,7 @@
           "retry_params_name": "default"
         },
         "CreateAgent": {
-          "timeout_millis": 60000,
+          "timeout_millis": 180000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },

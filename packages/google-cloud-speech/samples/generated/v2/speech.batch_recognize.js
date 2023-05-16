@@ -66,6 +66,10 @@ function main(recognizer) {
    *  Configuration options for where to output the transcripts of each file.
    */
   // const recognitionOutputConfig = {}
+  /**
+   *  Processing strategy to use for this request.
+   */
+  // const processingStrategy = {}
 
   // Imports the Speech library
   const {SpeechClient} = require('@google-cloud/speech').v2;
