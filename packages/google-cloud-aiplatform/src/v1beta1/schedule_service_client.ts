@@ -1577,6 +1577,7 @@ export class ScheduleServiceClient {
       'listSchedules',
       'pauseSchedule',
       'resumeSchedule',
+      'updateSchedule',
     ];
     for (const methodName of scheduleServiceStubMethods) {
       const callPromise = this.scheduleServiceStub.then(
@@ -2051,6 +2052,109 @@ export class ScheduleServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.resumeSchedule(request, options, callback);
+  }
+  /**
+   * Updates an active or paused Schedule.
+   *
+   * When the Schedule is updated, new runs will be scheduled starting from the
+   * updated next execution time after the update time based on the
+   * time_specification in the updated Schedule. All unstarted runs before the
+   * update time will be skipped while already created runs will NOT be paused
+   * or canceled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.Schedule} request.schedule
+   *   Required. The Schedule which replaces the resource on the server.
+   *   The following restrictions will be applied:
+   *     * The scheduled request type cannot be changed.
+   *     * The output_only fields will be ignored if specified.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. See
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.update_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async
+   */
+  updateSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ISchedule,
+          | protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'schedule.name': request.schedule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSchedule(request, options, callback);
   }
 
   /**

@@ -392,6 +392,7 @@
   * [Schedule_service.list_schedules](#schedule_service.list_schedules)
   * [Schedule_service.pause_schedule](#schedule_service.pause_schedule)
   * [Schedule_service.resume_schedule](#schedule_service.resume_schedule)
+  * [Schedule_service.update_schedule](#schedule_service.update_schedule)
   * [Specialist_pool_service.create_specialist_pool](#specialist_pool_service.create_specialist_pool)
   * [Specialist_pool_service.delete_specialist_pool](#specialist_pool_service.delete_specialist_pool)
   * [Specialist_pool_service.get_specialist_pool](#specialist_pool_service.get_specialist_pool)
@@ -6911,6 +6912,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.resume_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.update_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/schedule_service.update_schedule.js`
 
 
 -----
