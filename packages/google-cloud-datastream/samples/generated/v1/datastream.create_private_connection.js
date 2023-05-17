@@ -54,6 +54,10 @@ function main(parent, privateConnectionId, privateConnection) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, will skip validations.
+   */
+  // const force = true
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

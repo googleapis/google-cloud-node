@@ -33,7 +33,7 @@ function main(parent, workstationConfigId, workstationConfig) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID to use for the config.
+   *  Required. ID to use for the workstation configuration.
    */
   // const workstationConfigId = 'abc123'
   /**

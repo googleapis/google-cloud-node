@@ -785,6 +785,140 @@ describe('v1beta1.ScheduleServiceClient', () => {
     });
   });
 
+  describe('updateSchedule', () => {
+    it('invokes updateSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.Schedule()
+      );
+      client.innerApiCalls.updateSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSchedule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.Schedule()
+      );
+      client.innerApiCalls.updateSchedule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSchedule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.ISchedule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSchedule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSchedule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSchedule(request), expectedError);
+    });
+  });
+
   describe('deleteSchedule', () => {
     it('invokes deleteSchedule without error', async () => {
       const client = new scheduleserviceModule.v1beta1.ScheduleServiceClient({

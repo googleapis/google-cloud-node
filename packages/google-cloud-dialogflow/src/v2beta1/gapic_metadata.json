@@ -357,6 +357,11 @@
                 "suggestConversationSummary"
               ]
             },
+            "GenerateStatelessSummary": {
+              "methods": [
+                "generateStatelessSummary"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -399,6 +404,11 @@
             "SuggestConversationSummary": {
               "methods": [
                 "suggestConversationSummary"
+              ]
+            },
+            "GenerateStatelessSummary": {
+              "methods": [
+                "generateStatelessSummary"
               ]
             },
             "ListConversations": {
