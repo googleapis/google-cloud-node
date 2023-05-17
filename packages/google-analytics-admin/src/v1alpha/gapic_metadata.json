@@ -470,6 +470,41 @@
                 "fetchConnectedGa4Property"
               ]
             },
+            "GetAdSenseLink": {
+              "methods": [
+                "getAdSenseLink"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "createAdSenseLink"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "deleteAdSenseLink"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "getEventCreateRule"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "createEventCreateRule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "updateEventCreateRule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "deleteEventCreateRule"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -615,6 +650,20 @@
                 "listBigQueryLinks",
                 "listBigQueryLinksStream",
                 "listBigQueryLinksAsync"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "listAdSenseLinks",
+                "listAdSenseLinksStream",
+                "listAdSenseLinksAsync"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "listEventCreateRules",
+                "listEventCreateRulesStream",
+                "listEventCreateRulesAsync"
               ]
             }
           }
@@ -1082,6 +1131,41 @@
                 "fetchConnectedGa4Property"
               ]
             },
+            "GetAdSenseLink": {
+              "methods": [
+                "getAdSenseLink"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "createAdSenseLink"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "deleteAdSenseLink"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "getEventCreateRule"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "createEventCreateRule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "updateEventCreateRule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "deleteEventCreateRule"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -1227,6 +1311,20 @@
                 "listBigQueryLinks",
                 "listBigQueryLinksStream",
                 "listBigQueryLinksAsync"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "listAdSenseLinks",
+                "listAdSenseLinksStream",
+                "listAdSenseLinksAsync"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "listEventCreateRules",
+                "listEventCreateRulesStream",
+                "listEventCreateRulesAsync"
               ]
             }
           }
