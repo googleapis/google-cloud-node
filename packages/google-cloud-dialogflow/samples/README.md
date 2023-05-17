@@ -52,6 +52,7 @@
   * [Conversation_profiles.update_conversation_profile](#conversation_profiles.update_conversation_profile)
   * [Conversations.complete_conversation](#conversations.complete_conversation)
   * [Conversations.create_conversation](#conversations.create_conversation)
+  * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
   * [Conversations.get_conversation](#conversations.get_conversation)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
@@ -143,6 +144,7 @@
   * [Conversations.batch_create_messages](#conversations.batch_create_messages)
   * [Conversations.complete_conversation](#conversations.complete_conversation)
   * [Conversations.create_conversation](#conversations.create_conversation)
+  * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
   * [Conversations.get_conversation](#conversations.get_conversation)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
@@ -208,7 +210,6 @@
   * [Versions.list_versions](#versions.list_versions)
   * [Versions.update_version](#versions.update_version)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -898,6 +899,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/conversations.create_conversation.js`
+
+
+-----
+
+
+
+
+### Conversations.generate_stateless_summary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_summary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_summary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_summary.js`
 
 
 -----
@@ -2452,6 +2470,23 @@ __Usage:__
 
 
 
+### Conversations.generate_stateless_summary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_summary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_summary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_summary.js`
+
+
+-----
+
+
+
+
 ### Conversations.get_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js).
@@ -3550,23 +3585,6 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-dialogflow/samples/test/quickstart.test.js`
 
 
 
