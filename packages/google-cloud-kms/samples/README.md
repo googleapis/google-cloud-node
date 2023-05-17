@@ -18,6 +18,7 @@
   * [Ekm_service.list_ekm_connections](#ekm_service.list_ekm_connections)
   * [Ekm_service.update_ekm_config](#ekm_service.update_ekm_config)
   * [Ekm_service.update_ekm_connection](#ekm_service.update_ekm_connection)
+  * [Ekm_service.verify_connectivity](#ekm_service.verify_connectivity)
   * [Key_management_service.asymmetric_decrypt](#key_management_service.asymmetric_decrypt)
   * [Key_management_service.asymmetric_sign](#key_management_service.asymmetric_sign)
   * [Key_management_service.create_crypto_key](#key_management_service.create_crypto_key)
@@ -45,7 +46,6 @@
   * [Key_management_service.update_crypto_key_primary_version](#key_management_service.update_crypto_key_primary_version)
   * [Key_management_service.update_crypto_key_version](#key_management_service.update_crypto_key_version)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -157,6 +157,23 @@ __Usage:__
 
 
 `node packages/google-cloud-kms/samples/generated/v1/ekm_service.update_ekm_connection.js`
+
+
+-----
+
+
+
+
+### Ekm_service.verify_connectivity
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/ekm_service.verify_connectivity.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/ekm_service.verify_connectivity.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-kms/samples/generated/v1/ekm_service.verify_connectivity.js`
 
 
 -----
@@ -616,23 +633,6 @@ __Usage:__
 
 
 `node packages/google-cloud-kms/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-kms/samples/test/quickstart.test.js`
 
 
 
