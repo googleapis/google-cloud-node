@@ -138,6 +138,24 @@
                               "(google.api.method_signature)": "ekm_config,update_mask"
                             }
                           ]
+                        },
+                        "VerifyConnectivity": {
+                          "requestType": "VerifyConnectivityRequest",
+                          "responseType": "VerifyConnectivityResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/ekmConnections/*}:verifyConnectivity",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/ekmConnections/*}:verifyConnectivity"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -465,6 +483,21 @@
                           }
                         }
                       }
+                    },
+                    "VerifyConnectivityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConnection"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConnectivityResponse": {
+                      "fields": {}
                     },
                     "KeyRing": {
                       "options": {
