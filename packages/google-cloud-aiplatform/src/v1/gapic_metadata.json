@@ -1118,6 +1118,40 @@
         }
       }
     },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
