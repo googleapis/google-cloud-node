@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+function main(conversionWorkspace) {
+  // [START datamigration_v1_generated_DataMigrationService_SearchBackgroundJobs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,27 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the migration job resource to delete.
+   *  Required. Name of the conversion workspace resource whose jobs are listed,
+   *  in the form of:
+   *  projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
    */
-  // const name = 'abc123'
+  // const conversionWorkspace = 'abc123'
   /**
-   *  A unique ID used to identify the request. If the server receives two
-   *  requests with the same ID, then the second request is ignored.
-   *  It is recommended to always set this value to a UUID.
-   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
-   *  (_), and hyphens (-). The maximum length is 40 characters.
+   *  Optional. Whether or not to return just the most recent job per job type,
    */
-  // const requestId = 'abc123'
+  // const returnMostRecentPerJobType = true
   /**
-   *  The destination CloudSQL connection profile is always deleted with the
-   *  migration job. In case of force delete, the destination CloudSQL replica
-   *  database is also deleted.
+   *  Optional. The maximum number of jobs to return. The service may return
+   *  fewer than this value. If unspecified, at most 100 jobs are
+   *  returned. The maximum value is 100; values above 100 are coerced to
+   *  100.
    */
-  // const force = true
+  // const maxSize = 1234
+  /**
+   *  Optional. If provided, only returns jobs that completed until (not
+   *  including) the given timestamp.
+   */
+  // const completedUntilTime = {}
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -53,20 +57,19 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callDeleteMigrationJob() {
+  async function callSearchBackgroundJobs() {
     // Construct request
     const request = {
-      name,
+      conversionWorkspace,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.deleteMigrationJob(request);
-    const [response] = await operation.promise();
+    const response = await clouddmsClient.searchBackgroundJobs(request);
     console.log(response);
   }
 
-  callDeleteMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+  callSearchBackgroundJobs();
+  // [END datamigration_v1_generated_DataMigrationService_SearchBackgroundJobs_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+function main(parent, privateConnectionId, privateConnection) {
+  // [START datamigration_v1_generated_DataMigrationService_CreatePrivateConnection_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the migration job resource to delete.
+   *  Required. The parent that owns the collection of PrivateConnections.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  A unique ID used to identify the request. If the server receives two
-   *  requests with the same ID, then the second request is ignored.
+   *  Required. The private connection identifier.
+   */
+  // const privateConnectionId = 'abc123'
+  /**
+   *  Required. The private connection resource to create.
+   */
+  // const privateConnection = {}
+  /**
+   *  Optional. A unique ID used to identify the request. If the server receives
+   *  two requests with the same ID, then the second request is ignored.
    *  It is recommended to always set this value to a UUID.
    *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *  (_), and hyphens (-). The maximum length is 40 characters.
    */
   // const requestId = 'abc123'
   /**
-   *  The destination CloudSQL connection profile is always deleted with the
-   *  migration job. In case of force delete, the destination CloudSQL replica
-   *  database is also deleted.
+   *  Optional. If set to true, will skip validations.
    */
-  // const force = true
+  // const skipValidation = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -53,20 +59,22 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callDeleteMigrationJob() {
+  async function callCreatePrivateConnection() {
     // Construct request
     const request = {
-      name,
+      parent,
+      privateConnectionId,
+      privateConnection,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.deleteMigrationJob(request);
+    const [operation] = await clouddmsClient.createPrivateConnection(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+  callCreatePrivateConnection();
+  // [END datamigration_v1_generated_DataMigrationService_CreatePrivateConnection_async]
 }
 
 process.on('unhandledRejection', err => {

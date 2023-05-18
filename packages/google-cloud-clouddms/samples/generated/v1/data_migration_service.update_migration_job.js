@@ -29,8 +29,8 @@ function main(updateMask, migrationJob) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  migration job resource by the update.
+   *  Required. Field mask is used to specify the fields to be overwritten by the
+   *  update in the conversion workspace resource.
    */
   // const updateMask = {}
   /**
@@ -38,10 +38,10 @@ function main(updateMask, migrationJob) {
    */
   // const migrationJob = {}
   /**
-   *  A unique id used to identify the request. If the server receives two
-   *  requests with the same id, then the second request will be ignored.
+   *  A unique ID used to identify the request. If the server receives two
+   *  requests with the same ID, then the second request is ignored.
    *  It is recommended to always set this value to a UUID.
-   *  The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *  (_), and hyphens (-). The maximum length is 40 characters.
    */
   // const requestId = 'abc123'

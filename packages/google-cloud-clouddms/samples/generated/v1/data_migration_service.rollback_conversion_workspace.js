@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+  // [START datamigration_v1_generated_DataMigrationService_RollbackConversionWorkspace_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the migration job resource to delete.
+   *  Required. Name of the conversion workspace resource to roll back to.
    */
   // const name = 'abc123'
-  /**
-   *  A unique ID used to identify the request. If the server receives two
-   *  requests with the same ID, then the second request is ignored.
-   *  It is recommended to always set this value to a UUID.
-   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
-   *  (_), and hyphens (-). The maximum length is 40 characters.
-   */
-  // const requestId = 'abc123'
-  /**
-   *  The destination CloudSQL connection profile is always deleted with the
-   *  migration job. In case of force delete, the destination CloudSQL replica
-   *  database is also deleted.
-   */
-  // const force = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -53,20 +39,20 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callDeleteMigrationJob() {
+  async function callRollbackConversionWorkspace() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.deleteMigrationJob(request);
+    const [operation] = await clouddmsClient.rollbackConversionWorkspace(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+  callRollbackConversionWorkspace();
+  // [END datamigration_v1_generated_DataMigrationService_RollbackConversionWorkspace_async]
 }
 
 process.on('unhandledRejection', err => {

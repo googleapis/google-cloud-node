@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+function main() {
+  // [START datamigration_v1_generated_DataMigrationService_SeedConversionWorkspace_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,24 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the migration job resource to delete.
+   *  Name of the conversion workspace resource to seed with new database
+   *  structure, in the form of:
+   *  projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
    */
   // const name = 'abc123'
   /**
-   *  A unique ID used to identify the request. If the server receives two
-   *  requests with the same ID, then the second request is ignored.
-   *  It is recommended to always set this value to a UUID.
-   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
-   *  (_), and hyphens (-). The maximum length is 40 characters.
+   *  Should the conversion workspace be committed automatically after the
+   *  seed operation.
    */
-  // const requestId = 'abc123'
+  // const autoCommit = true
   /**
-   *  The destination CloudSQL connection profile is always deleted with the
-   *  migration job. In case of force delete, the destination CloudSQL replica
-   *  database is also deleted.
+   *  Fully qualified (Uri) name of the source connection profile.
    */
-  // const force = true
+  // const sourceConnectionProfile = 'abc123'
+  /**
+   *  Fully qualified (Uri) name of the destination connection profile.
+   */
+  // const destinationConnectionProfile = 'abc123'
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -53,20 +54,19 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callDeleteMigrationJob() {
+  async function callSeedConversionWorkspace() {
     // Construct request
     const request = {
-      name,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.deleteMigrationJob(request);
+    const [operation] = await clouddmsClient.seedConversionWorkspace(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
+  callSeedConversionWorkspace();
+  // [END datamigration_v1_generated_DataMigrationService_SeedConversionWorkspace_async]
 }
 
 process.on('unhandledRejection', err => {
