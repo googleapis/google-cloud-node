@@ -11014,6 +11014,166 @@
                         }
                       }
                     },
+                    "MatchService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "FindNeighbors": {
+                          "requestType": "FindNeighborsRequest",
+                          "responseType": "FindNeighborsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{index_endpoint=projects/*/locations/*/indexEndpoints/*}:findNeighbors",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{index_endpoint=projects/*/locations/*/indexEndpoints/*}:findNeighbors",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ReadIndexDatapoints": {
+                          "requestType": "ReadIndexDatapointsRequest",
+                          "responseType": "ReadIndexDatapointsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{index_endpoint=projects/*/locations/*/indexEndpoints/*}:readIndexDatapoints",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{index_endpoint=projects/*/locations/*/indexEndpoints/*}:readIndexDatapoints",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "FindNeighborsRequest": {
+                      "fields": {
+                        "indexEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/IndexEndpoint"
+                          }
+                        },
+                        "deployedIndexId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "queries": {
+                          "rule": "repeated",
+                          "type": "Query",
+                          "id": 3
+                        },
+                        "returnFullDatapoint": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Query": {
+                          "fields": {
+                            "datapoint": {
+                              "type": "IndexDatapoint",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "neighborCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "perCrowdingAttributeNeighborCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "approximateNeighborCount": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "fractionLeafNodesToSearchOverride": {
+                              "type": "double",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FindNeighborsResponse": {
+                      "fields": {
+                        "nearestNeighbors": {
+                          "rule": "repeated",
+                          "type": "NearestNeighbors",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Neighbor": {
+                          "fields": {
+                            "datapoint": {
+                              "type": "IndexDatapoint",
+                              "id": 1
+                            },
+                            "distance": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "NearestNeighbors": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "neighbors": {
+                              "rule": "repeated",
+                              "type": "Neighbor",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ReadIndexDatapointsRequest": {
+                      "fields": {
+                        "indexEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/IndexEndpoint"
+                          }
+                        },
+                        "deployedIndexId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ids": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ReadIndexDatapointsResponse": {
+                      "fields": {
+                        "datapoints": {
+                          "rule": "repeated",
+                          "type": "IndexDatapoint",
+                          "id": 1
+                        }
+                      }
+                    },
                     "MetadataSchema": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/MetadataSchema",
