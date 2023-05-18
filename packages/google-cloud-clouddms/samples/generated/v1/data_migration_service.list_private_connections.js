@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START datamigration_v1_generated_DataMigrationService_ListMigrationJobs_async]
+  // [START datamigration_v1_generated_DataMigrationService_ListPrivateConnections_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,39 +29,34 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent which owns this collection of migrationJobs.
+   *  Required. The parent that owns the collection of private connections.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of migration jobs to return. The service may return
-   *  fewer than this value. If unspecified, at most 50 migration jobs will be
-   *  returned. The maximum value is 1000; values above 1000 are coerced to
-   *  1000.
+   *  Maximum number of private connections to return.
+   *  If unspecified, at most 50 private connections that are returned.
+   *  The maximum value is 1000; values above 1000 are coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  The nextPageToken value received in the previous call to
-   *  migrationJobs.list, used in the subsequent request to retrieve the next
-   *  page of results. On first call this should be left blank. When paginating,
-   *  all other parameters provided to migrationJobs.list must match the call
-   *  that provided the page token.
+   *  Page token received from a previous `ListPrivateConnections` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to
+   *  `ListPrivateConnections` must match the call that provided the page
+   *  token.
    */
   // const pageToken = 'abc123'
   /**
-   *  A filter expression that filters migration jobs listed in the response.
-   *  The expression must specify the field name, a comparison operator, and the
-   *  value that you want to use for filtering. The value must be a string,
-   *  a number, or a boolean. The comparison operator must be
-   *  either =, !=, >, or <. For example, list migration jobs created this year
-   *  by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.**
-   *  You can also filter nested fields. For example, you could specify
-   *  **reverseSshConnectivity.vmIp = "1.2.3.4"** to select all migration
-   *  jobs connecting through the specific SSH tunnel bastion.
+   *  A filter expression that filters private connections listed in the
+   *  response. The expression must specify the field name, a comparison
+   *  operator, and the value that you want to use for filtering. The value must
+   *  be a string, a number, or a boolean. The comparison operator must be either
+   *  =, !=, >, or <. For example, list private connections created this year by
+   *  specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
    */
   // const filter = 'abc123'
   /**
-   *  Sort the results based on the migration job name.
-   *  Valid values are: "name", "name asc", and "name desc".
+   *  Order by fields for the result.
    */
   // const orderBy = 'abc123'
 
@@ -71,21 +66,21 @@ function main(parent) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callListMigrationJobs() {
+  async function callListPrivateConnections() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await clouddmsClient.listMigrationJobsAsync(request);
+    const iterable = await clouddmsClient.listPrivateConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListMigrationJobs();
-  // [END datamigration_v1_generated_DataMigrationService_ListMigrationJobs_async]
+  callListPrivateConnections();
+  // [END datamigration_v1_generated_DataMigrationService_ListPrivateConnections_async]
 }
 
 process.on('unhandledRejection', err => {

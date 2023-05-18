@@ -29,8 +29,8 @@ function main(updateMask, connectionProfile) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  connection profile resource by the update.
+   *  Required. Field mask is used to specify the fields to be overwritten by the
+   *  update in the conversion workspace resource.
    */
   // const updateMask = {}
   /**
@@ -38,13 +38,25 @@ function main(updateMask, connectionProfile) {
    */
   // const connectionProfile = {}
   /**
-   *  A unique id used to identify the request. If the server receives two
-   *  requests with the same id, then the second request will be ignored.
+   *  Optional. A unique ID used to identify the request. If the server receives
+   *  two requests with the same ID, then the second request is ignored.
    *  It is recommended to always set this value to a UUID.
-   *  The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *  (_), and hyphens (-). The maximum length is 40 characters.
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. Only validate the connection profile, but don't update any
+   *  resources. The default is false. Only supported for Oracle connection
+   *  profiles.
+   */
+  // const validateOnly = true
+  /**
+   *  Optional. Update the connection profile without validating it.
+   *  The default is false.
+   *  Only supported for Oracle connection profiles.
+   */
+  // const skipValidation = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;

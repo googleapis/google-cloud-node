@@ -11,10 +11,12 @@
                     "csharp_namespace": "Google.Cloud.CloudDms.V1",
                     "go_package": "cloud.google.com/go/clouddms/apiv1/clouddmspb;clouddmspb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ClouddmsResourcesProto",
+                    "java_outer_classname": "ConversionWorkspaceResourcesProto",
                     "java_package": "com.google.cloud.clouddms.v1",
                     "php_namespace": "Google\\Cloud\\CloudDms\\V1",
-                    "ruby_package": "Google::Cloud::CloudDMS::V1"
+                    "ruby_package": "Google::Cloud::CloudDMS::V1",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Networks",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
                   "nested": {
                     "DataMigrationService": {
@@ -418,6 +420,418 @@
                               }
                             }
                           ]
+                        },
+                        "CreatePrivateConnection": {
+                          "requestType": "CreatePrivateConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/privateConnections",
+                            "(google.api.http).body": "private_connection",
+                            "(google.api.method_signature)": "parent,private_connection,private_connection_id",
+                            "(google.longrunning.operation_info).response_type": "PrivateConnection",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/privateConnections",
+                                "body": "private_connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,private_connection,private_connection_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "PrivateConnection",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetPrivateConnection": {
+                          "requestType": "GetPrivateConnectionRequest",
+                          "responseType": "PrivateConnection",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/privateConnections/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/privateConnections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListPrivateConnections": {
+                          "requestType": "ListPrivateConnectionsRequest",
+                          "responseType": "ListPrivateConnectionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/privateConnections",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/privateConnections"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeletePrivateConnection": {
+                          "requestType": "DeletePrivateConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/privateConnections/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/privateConnections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetConversionWorkspace": {
+                          "requestType": "GetConversionWorkspaceRequest",
+                          "responseType": "ConversionWorkspace",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListConversionWorkspaces": {
+                          "requestType": "ListConversionWorkspacesRequest",
+                          "responseType": "ListConversionWorkspacesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/conversionWorkspaces",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/conversionWorkspaces"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateConversionWorkspace": {
+                          "requestType": "CreateConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/conversionWorkspaces",
+                            "(google.api.http).body": "conversion_workspace",
+                            "(google.api.method_signature)": "parent,conversion_workspace,conversion_workspace_id",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/conversionWorkspaces",
+                                "body": "conversion_workspace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,conversion_workspace,conversion_workspace_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateConversionWorkspace": {
+                          "requestType": "UpdateConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{conversion_workspace.name=projects/*/locations/*/conversionWorkspaces/*}",
+                            "(google.api.http).body": "conversion_workspace",
+                            "(google.api.method_signature)": "conversion_workspace,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{conversion_workspace.name=projects/*/locations/*/conversionWorkspaces/*}",
+                                "body": "conversion_workspace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "conversion_workspace,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConversionWorkspace": {
+                          "requestType": "DeleteConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SeedConversionWorkspace": {
+                          "requestType": "SeedConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:seed",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:seed",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportMappingRules": {
+                          "requestType": "ImportMappingRulesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/conversionWorkspaces/*}/mappingRules:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/conversionWorkspaces/*}/mappingRules:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ConvertConversionWorkspace": {
+                          "requestType": "ConvertConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:convert",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:convert",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CommitConversionWorkspace": {
+                          "requestType": "CommitConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:commit",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:commit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RollbackConversionWorkspace": {
+                          "requestType": "RollbackConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:rollback",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:rollback",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ApplyConversionWorkspace": {
+                          "requestType": "ApplyConversionWorkspaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:apply",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ConversionWorkspace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/conversionWorkspaces/*}:apply",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConversionWorkspace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DescribeDatabaseEntities": {
+                          "requestType": "DescribeDatabaseEntitiesRequest",
+                          "responseType": "DescribeDatabaseEntitiesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:describeDatabaseEntities"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:describeDatabaseEntities"
+                              }
+                            }
+                          ]
+                        },
+                        "SearchBackgroundJobs": {
+                          "requestType": "SearchBackgroundJobsRequest",
+                          "responseType": "SearchBackgroundJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:searchBackgroundJobs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:searchBackgroundJobs"
+                              }
+                            }
+                          ]
+                        },
+                        "DescribeConversionWorkspaceRevisions": {
+                          "requestType": "DescribeConversionWorkspaceRevisionsRequest",
+                          "responseType": "DescribeConversionWorkspaceRevisionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:describeConversionWorkspaceRevisions"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{conversion_workspace=projects/*/locations/*/conversionWorkspaces/*}:describeConversionWorkspaceRevisions"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchStaticIps": {
+                          "requestType": "FetchStaticIpsRequest",
+                          "responseType": "FetchStaticIpsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*}:fetchStaticIps",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*}:fetchStaticIps"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -777,7 +1191,24 @@
                         },
                         "requestId": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipValidation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -799,7 +1230,24 @@
                         },
                         "requestId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipValidation": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -820,6 +1268,123 @@
                         "force": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "CreatePrivateConnectionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamigration.googleapis.com/PrivateConnection"
+                          }
+                        },
+                        "privateConnectionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "privateConnection": {
+                          "type": "PrivateConnection",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipValidation": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListPrivateConnectionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamigration.googleapis.com/PrivateConnection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListPrivateConnectionsResponse": {
+                      "fields": {
+                        "privateConnections": {
+                          "rule": "repeated",
+                          "type": "PrivateConnection",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeletePrivateConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/PrivateConnection"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetPrivateConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/PrivateConnection"
+                          }
                         }
                       }
                     },
@@ -873,6 +1438,437 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "ListConversionWorkspacesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListConversionWorkspacesResponse": {
+                      "fields": {
+                        "conversionWorkspaces": {
+                          "rule": "repeated",
+                          "type": "ConversionWorkspace",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetConversionWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConversionWorkspaceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "conversionWorkspaceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conversionWorkspace": {
+                          "type": "ConversionWorkspace",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UpdateConversionWorkspaceRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conversionWorkspace": {
+                          "type": "ConversionWorkspace",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteConversionWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CommitConversionWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "commitName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RollbackConversionWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        }
+                      }
+                    },
+                    "ApplyConversionWorkspaceRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "connectionProfile"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "connectionProfile": {
+                          "type": "string",
+                          "id": 100
+                        }
+                      }
+                    },
+                    "SeedConversionWorkspaceRequest": {
+                      "oneofs": {
+                        "seedFrom": {
+                          "oneof": [
+                            "sourceConnectionProfile",
+                            "destinationConnectionProfile"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "autoCommit": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "sourceConnectionProfile": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "destinationConnectionProfile": {
+                          "type": "string",
+                          "id": 101
+                        }
+                      }
+                    },
+                    "ConvertConversionWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "autoCommit": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ImportMappingRulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "rulesFormat": {
+                          "type": "ImportRulesFileFormat",
+                          "id": 2
+                        },
+                        "rulesFiles": {
+                          "rule": "repeated",
+                          "type": "RulesFile",
+                          "id": 3
+                        },
+                        "autoCommit": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "RulesFile": {
+                          "fields": {
+                            "rulesSourceFilename": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "rulesContent": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DescribeDatabaseEntitiesRequest": {
+                      "fields": {
+                        "conversionWorkspace": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "tree": {
+                          "type": "DBTreeType",
+                          "id": 6
+                        },
+                        "uncommitted": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "commitId": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DBTreeType": {
+                          "values": {
+                            "DB_TREE_TYPE_UNSPECIFIED": 0,
+                            "SOURCE_TREE": 1,
+                            "DRAFT_TREE": 2,
+                            "DESTINATION_TREE": 3
+                          }
+                        }
+                      }
+                    },
+                    "DescribeDatabaseEntitiesResponse": {
+                      "fields": {
+                        "databaseEntities": {
+                          "rule": "repeated",
+                          "type": "DatabaseEntity",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchBackgroundJobsRequest": {
+                      "fields": {
+                        "conversionWorkspace": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "returnMostRecentPerJobType": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "completedUntilTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchBackgroundJobsResponse": {
+                      "fields": {
+                        "jobs": {
+                          "rule": "repeated",
+                          "type": "BackgroundJobLogEntry",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DescribeConversionWorkspaceRevisionsRequest": {
+                      "fields": {
+                        "conversionWorkspace": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datamigration.googleapis.com/ConversionWorkspace"
+                          }
+                        },
+                        "commitId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DescribeConversionWorkspaceRevisionsResponse": {
+                      "fields": {
+                        "revisions": {
+                          "rule": "repeated",
+                          "type": "ConversionWorkspace",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FetchStaticIpsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FetchStaticIpsResponse": {
+                      "fields": {
+                        "staticIps": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -964,7 +1960,22 @@
                         }
                       }
                     },
+                    "NetworkArchitecture": {
+                      "values": {
+                        "NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                        "NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER": 1,
+                        "NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER": 2
+                      }
+                    },
                     "PostgreSqlConnectionProfile": {
+                      "oneofs": {
+                        "connectivity": {
+                          "oneof": [
+                            "staticIpConnectivity",
+                            "privateServiceConnectConnectivity"
+                          ]
+                        }
+                      },
                       "fields": {
                         "host": {
                           "type": "string",
@@ -1008,6 +2019,88 @@
                         "cloudSqlId": {
                           "type": "string",
                           "id": 7
+                        },
+                        "networkArchitecture": {
+                          "type": "NetworkArchitecture",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "staticIpConnectivity": {
+                          "type": "StaticIpConnectivity",
+                          "id": 100
+                        },
+                        "privateServiceConnectConnectivity": {
+                          "type": "PrivateServiceConnectConnectivity",
+                          "id": 101
+                        }
+                      }
+                    },
+                    "OracleConnectionProfile": {
+                      "oneofs": {
+                        "connectivity": {
+                          "oneof": [
+                            "staticServiceIpConnectivity",
+                            "forwardSshConnectivity",
+                            "privateConnectivity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "passwordSet": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "databaseService": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "staticServiceIpConnectivity": {
+                          "type": "StaticServiceIpConnectivity",
+                          "id": 100
+                        },
+                        "forwardSshConnectivity": {
+                          "type": "ForwardSshTunnelConnectivity",
+                          "id": 101
+                        },
+                        "privateConnectivity": {
+                          "type": "PrivateConnectivity",
+                          "id": 102
                         }
                       }
                     },
@@ -1039,6 +2132,31 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "additionalPublicIp": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AlloyDbConnectionProfile": {
+                      "fields": {
+                        "clusterId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "settings": {
+                          "type": "AlloyDbSettings",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -1083,6 +2201,13 @@
                         "privateNetwork": {
                           "type": "string",
                           "id": 2
+                        },
+                        "allocatedIpRange": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "requireSsl": {
                           "type": "google.protobuf.BoolValue",
@@ -1143,6 +2268,13 @@
                           "type": "string",
                           "id": 11
                         },
+                        "secondaryZone": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "sourceId": {
                           "type": "string",
                           "id": 12
@@ -1164,6 +2296,17 @@
                         "collation": {
                           "type": "string",
                           "id": 15
+                        },
+                        "cmekKeyName": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "availabilityType": {
+                          "type": "SqlAvailabilityType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1191,13 +2334,137 @@
                             "POSTGRES_10": 5,
                             "MYSQL_8_0": 6,
                             "POSTGRES_12": 7,
-                            "POSTGRES_13": 8
+                            "POSTGRES_13": 8,
+                            "POSTGRES_14": 17
+                          }
+                        },
+                        "SqlAvailabilityType": {
+                          "values": {
+                            "SQL_AVAILABILITY_TYPE_UNSPECIFIED": 0,
+                            "ZONAL": 1,
+                            "REGIONAL": 2
+                          }
+                        }
+                      }
+                    },
+                    "AlloyDbSettings": {
+                      "fields": {
+                        "initialUser": {
+                          "type": "UserPassword",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "vpcNetwork": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "primaryInstanceSettings": {
+                          "type": "PrimaryInstanceSettings",
+                          "id": 4
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UserPassword": {
+                          "fields": {
+                            "user": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "password": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "passwordSet": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PrimaryInstanceSettings": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "machineConfig": {
+                              "type": "MachineConfig",
+                              "id": 2
+                            },
+                            "databaseFlags": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 6
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 7
+                            },
+                            "privateIp": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MachineConfig": {
+                              "fields": {
+                                "cpuCount": {
+                                  "type": "int32",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "EncryptionConfig": {
+                          "fields": {
+                            "kmsKeyName": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
                     },
                     "StaticIpConnectivity": {
                       "fields": {}
+                    },
+                    "PrivateServiceConnectConnectivity": {
+                      "fields": {
+                        "serviceAttachment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
                     },
                     "ReverseSshConnectivity": {
                       "fields": {
@@ -1230,6 +2497,64 @@
                         "vpc": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ForwardSshTunnelConnectivity": {
+                      "oneofs": {
+                        "authenticationMethod": {
+                          "oneof": [
+                            "password",
+                            "privateKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "hostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "privateKey": {
+                          "type": "string",
+                          "id": 101,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "StaticServiceIpConnectivity": {
+                      "fields": {}
+                    },
+                    "PrivateConnectivity": {
+                      "fields": {
+                        "privateConnection": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1309,6 +2634,10 @@
                           "type": "string",
                           "id": 9
                         },
+                        "dumpFlags": {
+                          "type": "DumpFlags",
+                          "id": 17
+                        },
                         "source": {
                           "type": "string",
                           "id": 10,
@@ -1363,6 +2692,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "conversionWorkspace": {
+                          "type": "ConversionWorkspaceInfo",
+                          "id": 18
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "cmekKeyName": {
+                          "type": "string",
+                          "id": 21
                         }
                       },
                       "nested": {
@@ -1402,6 +2743,39 @@
                             "ONE_TIME": 1,
                             "CONTINUOUS": 2
                           }
+                        },
+                        "DumpFlag": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DumpFlags": {
+                          "fields": {
+                            "dumpFlags": {
+                              "rule": "repeated",
+                              "type": "DumpFlag",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ConversionWorkspaceInfo": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "commitId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1415,7 +2789,9 @@
                           "oneof": [
                             "mysql",
                             "postgresql",
-                            "cloudsql"
+                            "oracle",
+                            "cloudsql",
+                            "alloydb"
                           ]
                         }
                       },
@@ -1459,9 +2835,17 @@
                           "type": "PostgreSqlConnectionProfile",
                           "id": 101
                         },
+                        "oracle": {
+                          "type": "OracleConnectionProfile",
+                          "id": 104
+                        },
                         "cloudsql": {
                           "type": "CloudSqlConnectionProfile",
                           "id": 102
+                        },
+                        "alloydb": {
+                          "type": "AlloyDbConnectionProfile",
+                          "id": 105
                         },
                         "error": {
                           "type": "google.rpc.Status",
@@ -1536,7 +2920,12 @@
                             "UNSUPPORTED_GTID_MODE": 17,
                             "UNSUPPORTED_TABLE_DEFINITION": 18,
                             "UNSUPPORTED_DEFINER": 19,
-                            "CANT_RESTART_RUNNING_MIGRATION": 21
+                            "CANT_RESTART_RUNNING_MIGRATION": 21,
+                            "TABLES_WITH_LIMITED_SUPPORT": 24,
+                            "UNSUPPORTED_DATABASE_LOCALE": 25,
+                            "UNSUPPORTED_DATABASE_FDW_CONFIG": 26,
+                            "ERROR_RDBMS": 27,
+                            "SOURCE_SIZE_EXCEEDS_THRESHOLD": 28
                           }
                         }
                       }
@@ -1545,14 +2934,769 @@
                       "values": {
                         "DATABASE_ENGINE_UNSPECIFIED": 0,
                         "MYSQL": 1,
-                        "POSTGRESQL": 2
+                        "POSTGRESQL": 2,
+                        "ORACLE": 4
                       }
                     },
                     "DatabaseProvider": {
                       "values": {
                         "DATABASE_PROVIDER_UNSPECIFIED": 0,
                         "CLOUDSQL": 1,
-                        "RDS": 2
+                        "RDS": 2,
+                        "AURORA": 3,
+                        "ALLOYDB": 4
+                      }
+                    },
+                    "PrivateConnection": {
+                      "options": {
+                        "(google.api.resource).type": "datamigration.googleapis.com/PrivateConnection",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateConnections/{private_connection}"
+                      },
+                      "oneofs": {
+                        "connectivity": {
+                          "oneof": [
+                            "vpcPeeringConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vpcPeeringConfig": {
+                          "type": "VpcPeeringConfig",
+                          "id": 100
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "CREATED": 2,
+                            "FAILED": 3,
+                            "DELETING": 4,
+                            "FAILED_TO_DELETE": 5,
+                            "DELETED": 6
+                          }
+                        }
+                      }
+                    },
+                    "VpcPeeringConfig": {
+                      "fields": {
+                        "vpcName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Networks"
+                          }
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DatabaseEngineInfo": {
+                      "fields": {
+                        "engine": {
+                          "type": "DatabaseEngine",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConversionWorkspace": {
+                      "options": {
+                        "(google.api.resource).type": "datamigration.googleapis.com/ConversionWorkspace",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "source": {
+                          "type": "DatabaseEngineInfo",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destination": {
+                          "type": "DatabaseEngineInfo",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "globalSettings": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "hasUncommittedChanges": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestCommitId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestCommitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "BackgroundJobLogEntry": {
+                      "oneofs": {
+                        "jobDetails": {
+                          "oneof": [
+                            "seedJobDetails",
+                            "importRulesJobDetails",
+                            "convertJobDetails",
+                            "applyJobDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "jobType": {
+                          "type": "BackgroundJobType",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "completionState": {
+                          "type": "JobCompletionState",
+                          "id": 5
+                        },
+                        "completionComment": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "requestAutocommit": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "seedJobDetails": {
+                          "type": "SeedJobDetails",
+                          "id": 100
+                        },
+                        "importRulesJobDetails": {
+                          "type": "ImportRulesJobDetails",
+                          "id": 101
+                        },
+                        "convertJobDetails": {
+                          "type": "ConvertJobDetails",
+                          "id": 102
+                        },
+                        "applyJobDetails": {
+                          "type": "ApplyJobDetails",
+                          "id": 103
+                        }
+                      },
+                      "nested": {
+                        "JobCompletionState": {
+                          "values": {
+                            "JOB_COMPLETION_STATE_UNSPECIFIED": 0,
+                            "SUCCEEDED": 1,
+                            "FAILED": 2
+                          }
+                        },
+                        "SeedJobDetails": {
+                          "fields": {
+                            "connectionProfile": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ImportRulesJobDetails": {
+                          "fields": {
+                            "files": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fileFormat": {
+                              "type": "ImportRulesFileFormat",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ConvertJobDetails": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ApplyJobDetails": {
+                          "fields": {
+                            "connectionProfile": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DatabaseEntity": {
+                      "oneofs": {
+                        "entityBody": {
+                          "oneof": [
+                            "schema",
+                            "table",
+                            "view",
+                            "sequence",
+                            "storedProcedure",
+                            "databaseFunction",
+                            "synonym",
+                            "databasePackage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "shortName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parentEntity": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tree": {
+                          "type": "TreeType",
+                          "id": 3
+                        },
+                        "entityType": {
+                          "type": "DatabaseEntityType",
+                          "id": 4
+                        },
+                        "mappings": {
+                          "rule": "repeated",
+                          "type": "EntityMapping",
+                          "id": 5
+                        },
+                        "schema": {
+                          "type": "SchemaEntity",
+                          "id": 102
+                        },
+                        "table": {
+                          "type": "TableEntity",
+                          "id": 103
+                        },
+                        "view": {
+                          "type": "ViewEntity",
+                          "id": 104
+                        },
+                        "sequence": {
+                          "type": "SequenceEntity",
+                          "id": 105
+                        },
+                        "storedProcedure": {
+                          "type": "StoredProcedureEntity",
+                          "id": 106
+                        },
+                        "databaseFunction": {
+                          "type": "FunctionEntity",
+                          "id": 107
+                        },
+                        "synonym": {
+                          "type": "SynonymEntity",
+                          "id": 108
+                        },
+                        "databasePackage": {
+                          "type": "PackageEntity",
+                          "id": 109
+                        }
+                      },
+                      "nested": {
+                        "TreeType": {
+                          "values": {
+                            "TREE_TYPE_UNSPECIFIED": 0,
+                            "SOURCE": 1,
+                            "DRAFT": 2,
+                            "DESTINATION": 3
+                          }
+                        }
+                      }
+                    },
+                    "SchemaEntity": {
+                      "fields": {
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TableEntity": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "ColumnEntity",
+                          "id": 1
+                        },
+                        "constraints": {
+                          "rule": "repeated",
+                          "type": "ConstraintEntity",
+                          "id": 2
+                        },
+                        "indices": {
+                          "rule": "repeated",
+                          "type": "IndexEntity",
+                          "id": 3
+                        },
+                        "triggers": {
+                          "rule": "repeated",
+                          "type": "TriggerEntity",
+                          "id": 4
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5
+                        },
+                        "comment": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ColumnEntity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "charset": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "collation": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "length": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "precision": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "scale": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "fractionalSecondsPrecision": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "array": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "arrayLength": {
+                          "type": "int32",
+                          "id": 10
+                        },
+                        "nullable": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "autoGenerated": {
+                          "type": "bool",
+                          "id": 12
+                        },
+                        "udt": {
+                          "type": "bool",
+                          "id": 13
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 14
+                        },
+                        "setValues": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "comment": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "ordinalPosition": {
+                          "type": "int32",
+                          "id": 17
+                        },
+                        "defaultValue": {
+                          "type": "string",
+                          "id": 18
+                        }
+                      }
+                    },
+                    "ConstraintEntity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tableColumns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4
+                        },
+                        "referenceColumns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "referenceTable": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "IndexEntity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tableColumns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "unique": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TriggerEntity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "triggeringEvents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "triggerType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sqlCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ViewEntity": {
+                      "fields": {
+                        "sqlCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        },
+                        "constraints": {
+                          "rule": "repeated",
+                          "type": "ConstraintEntity",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SequenceEntity": {
+                      "fields": {
+                        "increment": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "startValue": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "maxValue": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "minValue": {
+                          "type": "bytes",
+                          "id": 4
+                        },
+                        "cycle": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "cache": {
+                          "type": "int64",
+                          "id": 6
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "StoredProcedureEntity": {
+                      "fields": {
+                        "sqlCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FunctionEntity": {
+                      "fields": {
+                        "sqlCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SynonymEntity": {
+                      "fields": {
+                        "sourceEntity": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceType": {
+                          "type": "DatabaseEntityType",
+                          "id": 2
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PackageEntity": {
+                      "fields": {
+                        "packageSqlCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "packageBody": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "customFeatures": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "EntityMapping": {
+                      "fields": {
+                        "sourceEntity": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "draftEntity": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceType": {
+                          "type": "DatabaseEntityType",
+                          "id": 4
+                        },
+                        "draftType": {
+                          "type": "DatabaseEntityType",
+                          "id": 5
+                        },
+                        "mappingLog": {
+                          "rule": "repeated",
+                          "type": "EntityMappingLogEntry",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "EntityMappingLogEntry": {
+                      "fields": {
+                        "ruleId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ruleRevisionId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "mappingComment": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DatabaseEntityType": {
+                      "values": {
+                        "DATABASE_ENTITY_TYPE_UNSPECIFIED": 0,
+                        "DATABASE_ENTITY_TYPE_SCHEMA": 1,
+                        "DATABASE_ENTITY_TYPE_TABLE": 2,
+                        "DATABASE_ENTITY_TYPE_COLUMN": 3,
+                        "DATABASE_ENTITY_TYPE_CONSTRAINT": 4,
+                        "DATABASE_ENTITY_TYPE_INDEX": 5,
+                        "DATABASE_ENTITY_TYPE_TRIGGER": 6,
+                        "DATABASE_ENTITY_TYPE_VIEW": 7,
+                        "DATABASE_ENTITY_TYPE_SEQUENCE": 8,
+                        "DATABASE_ENTITY_TYPE_STORED_PROCEDURE": 9,
+                        "DATABASE_ENTITY_TYPE_FUNCTION": 10,
+                        "DATABASE_ENTITY_TYPE_SYNONYM": 11,
+                        "DATABASE_ENTITY_TYPE_DATABASE_PACKAGE": 12,
+                        "DATABASE_ENTITY_TYPE_UDT": 13,
+                        "DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW": 14,
+                        "DATABASE_ENTITY_TYPE_DATABASE": 15
+                      }
+                    },
+                    "BackgroundJobType": {
+                      "values": {
+                        "BACKGROUND_JOB_TYPE_UNSPECIFIED": 0,
+                        "BACKGROUND_JOB_TYPE_SOURCE_SEED": 1,
+                        "BACKGROUND_JOB_TYPE_CONVERT": 2,
+                        "BACKGROUND_JOB_TYPE_APPLY_DESTINATION": 3,
+                        "BACKGROUND_JOB_TYPE_IMPORT_RULES_FILE": 5
+                      }
+                    },
+                    "ImportRulesFileFormat": {
+                      "values": {
+                        "IMPORT_RULES_FILE_FORMAT_UNSPECIFIED": 0,
+                        "IMPORT_RULES_FILE_FORMAT_HARBOUR_BRIDGE_SESSION_FILE": 1,
+                        "IMPORT_RULES_FILE_FORMAT_ORATOPG_CONFIG_FILE": 2
                       }
                     }
                   }
@@ -2807,6 +4951,69 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
                 }
               }
             },

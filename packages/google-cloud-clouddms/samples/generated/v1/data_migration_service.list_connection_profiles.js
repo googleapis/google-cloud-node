@@ -29,13 +29,13 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of connection profiles.
+   *  Required. The parent which owns this collection of connection profiles.
    */
   // const parent = 'abc123'
   /**
    *  The maximum number of connection profiles to return. The service may return
    *  fewer than this value. If unspecified, at most 50 connection profiles will
-   *  be returned. The maximum value is 1000; values above 1000 will be coerced
+   *  be returned. The maximum value is 1000; values above 1000 are coerced
    *  to 1000.
    */
   // const pageSize = 1234
@@ -59,7 +59,7 @@ function main(parent) {
    */
   // const filter = 'abc123'
   /**
-   *  the order by fields for the result.
+   *  A comma-separated list of fields to order results according to.
    */
   // const orderBy = 'abc123'
 
