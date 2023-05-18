@@ -29,13 +29,13 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of migrationJobs.
+   *  Required. The parent which owns this collection of migrationJobs.
    */
   // const parent = 'abc123'
   /**
    *  The maximum number of migration jobs to return. The service may return
    *  fewer than this value. If unspecified, at most 50 migration jobs will be
-   *  returned. The maximum value is 1000; values above 1000 will be coerced to
+   *  returned. The maximum value is 1000; values above 1000 are coerced to
    *  1000.
    */
   // const pageSize = 1234
