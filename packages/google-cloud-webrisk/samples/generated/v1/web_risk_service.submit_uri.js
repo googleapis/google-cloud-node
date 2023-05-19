@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent, submission) {
-  // [START webrisk_v1_generated_WebRiskService_CreateSubmission_async]
+  // [START webrisk_v1_generated_WebRiskService_SubmitUri_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -34,9 +34,17 @@ function main(parent, submission) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The submission that contains the content of the phishing report.
+   *  Required. The submission that contains the URI to be scanned.
    */
   // const submission = {}
+  /**
+   *  Provides additional information about the submission.
+   */
+  // const threatInfo = {}
+  /**
+   *  Provides additional information about how the submission was discovered.
+   */
+  // const threatDiscovery = {}
 
   // Imports the Webrisk library
   const {WebRiskServiceClient} = require('@google-cloud/web-risk').v1;
@@ -44,7 +52,7 @@ function main(parent, submission) {
   // Instantiates a client
   const webriskClient = new WebRiskServiceClient();
 
-  async function callCreateSubmission() {
+  async function callSubmitUri() {
     // Construct request
     const request = {
       parent,
@@ -52,12 +60,13 @@ function main(parent, submission) {
     };
 
     // Run request
-    const response = await webriskClient.createSubmission(request);
+    const [operation] = await webriskClient.submitUri(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateSubmission();
-  // [END webrisk_v1_generated_WebRiskService_CreateSubmission_async]
+  callSubmitUri();
+  // [END webrisk_v1_generated_WebRiskService_SubmitUri_async]
 }
 
 process.on('unhandledRejection', err => {

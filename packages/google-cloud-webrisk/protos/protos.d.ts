@@ -101,6 +101,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createSubmission(request: google.cloud.webrisk.v1.ICreateSubmissionRequest): Promise<google.cloud.webrisk.v1.Submission>;
+
+                    /**
+                     * Calls SubmitUri.
+                     * @param request SubmitUriRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public submitUri(request: google.cloud.webrisk.v1.ISubmitUriRequest, callback: google.cloud.webrisk.v1.WebRiskService.SubmitUriCallback): void;
+
+                    /**
+                     * Calls SubmitUri.
+                     * @param request SubmitUriRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitUri(request: google.cloud.webrisk.v1.ISubmitUriRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace WebRiskService {
@@ -132,6 +146,13 @@ export namespace google {
                      * @param [response] Submission
                      */
                     type CreateSubmissionCallback = (error: (Error|null), response?: google.cloud.webrisk.v1.Submission) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService|submitUri}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SubmitUriCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ComputeThreatListDiffRequest. */
@@ -1755,6 +1776,9 @@ export namespace google {
 
                     /** Submission uri */
                     uri?: (string|null);
+
+                    /** Submission threatTypes */
+                    threatTypes?: (google.cloud.webrisk.v1.ThreatType[]|null);
                 }
 
                 /** Represents a Submission. */
@@ -1768,6 +1792,9 @@ export namespace google {
 
                     /** Submission uri. */
                     public uri: string;
+
+                    /** Submission threatTypes. */
+                    public threatTypes: google.cloud.webrisk.v1.ThreatType[];
 
                     /**
                      * Creates a new Submission instance using the specified properties.
@@ -1845,6 +1872,472 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ThreatInfo. */
+                interface IThreatInfo {
+
+                    /** ThreatInfo abuseType */
+                    abuseType?: (google.cloud.webrisk.v1.ThreatInfo.AbuseType|keyof typeof google.cloud.webrisk.v1.ThreatInfo.AbuseType|null);
+
+                    /** ThreatInfo threatConfidence */
+                    threatConfidence?: (google.cloud.webrisk.v1.ThreatInfo.IConfidence|null);
+
+                    /** ThreatInfo threatJustification */
+                    threatJustification?: (google.cloud.webrisk.v1.ThreatInfo.IThreatJustification|null);
+                }
+
+                /** Represents a ThreatInfo. */
+                class ThreatInfo implements IThreatInfo {
+
+                    /**
+                     * Constructs a new ThreatInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.webrisk.v1.IThreatInfo);
+
+                    /** ThreatInfo abuseType. */
+                    public abuseType: (google.cloud.webrisk.v1.ThreatInfo.AbuseType|keyof typeof google.cloud.webrisk.v1.ThreatInfo.AbuseType);
+
+                    /** ThreatInfo threatConfidence. */
+                    public threatConfidence?: (google.cloud.webrisk.v1.ThreatInfo.IConfidence|null);
+
+                    /** ThreatInfo threatJustification. */
+                    public threatJustification?: (google.cloud.webrisk.v1.ThreatInfo.IThreatJustification|null);
+
+                    /**
+                     * Creates a new ThreatInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ThreatInfo instance
+                     */
+                    public static create(properties?: google.cloud.webrisk.v1.IThreatInfo): google.cloud.webrisk.v1.ThreatInfo;
+
+                    /**
+                     * Encodes the specified ThreatInfo message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.verify|verify} messages.
+                     * @param message ThreatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.webrisk.v1.IThreatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ThreatInfo message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.verify|verify} messages.
+                     * @param message ThreatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.webrisk.v1.IThreatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ThreatInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ThreatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.ThreatInfo;
+
+                    /**
+                     * Decodes a ThreatInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ThreatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.ThreatInfo;
+
+                    /**
+                     * Verifies a ThreatInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ThreatInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ThreatInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.ThreatInfo;
+
+                    /**
+                     * Creates a plain object from a ThreatInfo message. Also converts values to other types if specified.
+                     * @param message ThreatInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.webrisk.v1.ThreatInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ThreatInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ThreatInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ThreatInfo {
+
+                    /** AbuseType enum. */
+                    enum AbuseType {
+                        ABUSE_TYPE_UNSPECIFIED = 0,
+                        MALWARE = 1,
+                        SOCIAL_ENGINEERING = 2,
+                        UNWANTED_SOFTWARE = 3
+                    }
+
+                    /** Properties of a Confidence. */
+                    interface IConfidence {
+
+                        /** Confidence score */
+                        score?: (number|null);
+
+                        /** Confidence level */
+                        level?: (google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|keyof typeof google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|null);
+                    }
+
+                    /** Represents a Confidence. */
+                    class Confidence implements IConfidence {
+
+                        /**
+                         * Constructs a new Confidence.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.webrisk.v1.ThreatInfo.IConfidence);
+
+                        /** Confidence score. */
+                        public score?: (number|null);
+
+                        /** Confidence level. */
+                        public level?: (google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|keyof typeof google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|null);
+
+                        /** Confidence value. */
+                        public value?: ("score"|"level");
+
+                        /**
+                         * Creates a new Confidence instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Confidence instance
+                         */
+                        public static create(properties?: google.cloud.webrisk.v1.ThreatInfo.IConfidence): google.cloud.webrisk.v1.ThreatInfo.Confidence;
+
+                        /**
+                         * Encodes the specified Confidence message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.Confidence.verify|verify} messages.
+                         * @param message Confidence message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.webrisk.v1.ThreatInfo.IConfidence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Confidence message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.Confidence.verify|verify} messages.
+                         * @param message Confidence message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.webrisk.v1.ThreatInfo.IConfidence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Confidence message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Confidence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.ThreatInfo.Confidence;
+
+                        /**
+                         * Decodes a Confidence message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Confidence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.ThreatInfo.Confidence;
+
+                        /**
+                         * Verifies a Confidence message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Confidence message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Confidence
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.ThreatInfo.Confidence;
+
+                        /**
+                         * Creates a plain object from a Confidence message. Also converts values to other types if specified.
+                         * @param message Confidence
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.webrisk.v1.ThreatInfo.Confidence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Confidence to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Confidence
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Confidence {
+
+                        /** ConfidenceLevel enum. */
+                        enum ConfidenceLevel {
+                            CONFIDENCE_LEVEL_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3
+                        }
+                    }
+
+                    /** Properties of a ThreatJustification. */
+                    interface IThreatJustification {
+
+                        /** ThreatJustification labels */
+                        labels?: (google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel[]|null);
+
+                        /** ThreatJustification comments */
+                        comments?: (string[]|null);
+                    }
+
+                    /** Represents a ThreatJustification. */
+                    class ThreatJustification implements IThreatJustification {
+
+                        /**
+                         * Constructs a new ThreatJustification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.webrisk.v1.ThreatInfo.IThreatJustification);
+
+                        /** ThreatJustification labels. */
+                        public labels: google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel[];
+
+                        /** ThreatJustification comments. */
+                        public comments: string[];
+
+                        /**
+                         * Creates a new ThreatJustification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ThreatJustification instance
+                         */
+                        public static create(properties?: google.cloud.webrisk.v1.ThreatInfo.IThreatJustification): google.cloud.webrisk.v1.ThreatInfo.ThreatJustification;
+
+                        /**
+                         * Encodes the specified ThreatJustification message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.verify|verify} messages.
+                         * @param message ThreatJustification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.webrisk.v1.ThreatInfo.IThreatJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ThreatJustification message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.verify|verify} messages.
+                         * @param message ThreatJustification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.webrisk.v1.ThreatInfo.IThreatJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ThreatJustification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ThreatJustification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.ThreatInfo.ThreatJustification;
+
+                        /**
+                         * Decodes a ThreatJustification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ThreatJustification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.ThreatInfo.ThreatJustification;
+
+                        /**
+                         * Verifies a ThreatJustification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ThreatJustification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ThreatJustification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.ThreatInfo.ThreatJustification;
+
+                        /**
+                         * Creates a plain object from a ThreatJustification message. Also converts values to other types if specified.
+                         * @param message ThreatJustification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.webrisk.v1.ThreatInfo.ThreatJustification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ThreatJustification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ThreatJustification
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ThreatJustification {
+
+                        /** JustificationLabel enum. */
+                        enum JustificationLabel {
+                            JUSTIFICATION_LABEL_UNSPECIFIED = 0,
+                            MANUAL_VERIFICATION = 1,
+                            USER_REPORT = 2,
+                            AUTOMATED_REPORT = 3
+                        }
+                    }
+                }
+
+                /** Properties of a ThreatDiscovery. */
+                interface IThreatDiscovery {
+
+                    /** ThreatDiscovery platform */
+                    platform?: (google.cloud.webrisk.v1.ThreatDiscovery.Platform|keyof typeof google.cloud.webrisk.v1.ThreatDiscovery.Platform|null);
+
+                    /** ThreatDiscovery regionCodes */
+                    regionCodes?: (string[]|null);
+                }
+
+                /** Represents a ThreatDiscovery. */
+                class ThreatDiscovery implements IThreatDiscovery {
+
+                    /**
+                     * Constructs a new ThreatDiscovery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.webrisk.v1.IThreatDiscovery);
+
+                    /** ThreatDiscovery platform. */
+                    public platform: (google.cloud.webrisk.v1.ThreatDiscovery.Platform|keyof typeof google.cloud.webrisk.v1.ThreatDiscovery.Platform);
+
+                    /** ThreatDiscovery regionCodes. */
+                    public regionCodes: string[];
+
+                    /**
+                     * Creates a new ThreatDiscovery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ThreatDiscovery instance
+                     */
+                    public static create(properties?: google.cloud.webrisk.v1.IThreatDiscovery): google.cloud.webrisk.v1.ThreatDiscovery;
+
+                    /**
+                     * Encodes the specified ThreatDiscovery message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatDiscovery.verify|verify} messages.
+                     * @param message ThreatDiscovery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.webrisk.v1.IThreatDiscovery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ThreatDiscovery message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatDiscovery.verify|verify} messages.
+                     * @param message ThreatDiscovery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.webrisk.v1.IThreatDiscovery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ThreatDiscovery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ThreatDiscovery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.ThreatDiscovery;
+
+                    /**
+                     * Decodes a ThreatDiscovery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ThreatDiscovery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.ThreatDiscovery;
+
+                    /**
+                     * Verifies a ThreatDiscovery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ThreatDiscovery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ThreatDiscovery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.ThreatDiscovery;
+
+                    /**
+                     * Creates a plain object from a ThreatDiscovery message. Also converts values to other types if specified.
+                     * @param message ThreatDiscovery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.webrisk.v1.ThreatDiscovery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ThreatDiscovery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ThreatDiscovery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ThreatDiscovery {
+
+                    /** Platform enum. */
+                    enum Platform {
+                        PLATFORM_UNSPECIFIED = 0,
+                        ANDROID = 1,
+                        IOS = 2,
+                        MACOS = 3,
+                        WINDOWS = 4
+                    }
                 }
 
                 /** Properties of a CreateSubmissionRequest. */
@@ -1948,6 +2441,243 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubmitUriRequest. */
+                interface ISubmitUriRequest {
+
+                    /** SubmitUriRequest parent */
+                    parent?: (string|null);
+
+                    /** SubmitUriRequest submission */
+                    submission?: (google.cloud.webrisk.v1.ISubmission|null);
+
+                    /** SubmitUriRequest threatInfo */
+                    threatInfo?: (google.cloud.webrisk.v1.IThreatInfo|null);
+
+                    /** SubmitUriRequest threatDiscovery */
+                    threatDiscovery?: (google.cloud.webrisk.v1.IThreatDiscovery|null);
+                }
+
+                /** Represents a SubmitUriRequest. */
+                class SubmitUriRequest implements ISubmitUriRequest {
+
+                    /**
+                     * Constructs a new SubmitUriRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.webrisk.v1.ISubmitUriRequest);
+
+                    /** SubmitUriRequest parent. */
+                    public parent: string;
+
+                    /** SubmitUriRequest submission. */
+                    public submission?: (google.cloud.webrisk.v1.ISubmission|null);
+
+                    /** SubmitUriRequest threatInfo. */
+                    public threatInfo?: (google.cloud.webrisk.v1.IThreatInfo|null);
+
+                    /** SubmitUriRequest threatDiscovery. */
+                    public threatDiscovery?: (google.cloud.webrisk.v1.IThreatDiscovery|null);
+
+                    /**
+                     * Creates a new SubmitUriRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitUriRequest instance
+                     */
+                    public static create(properties?: google.cloud.webrisk.v1.ISubmitUriRequest): google.cloud.webrisk.v1.SubmitUriRequest;
+
+                    /**
+                     * Encodes the specified SubmitUriRequest message. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriRequest.verify|verify} messages.
+                     * @param message SubmitUriRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.webrisk.v1.ISubmitUriRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitUriRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriRequest.verify|verify} messages.
+                     * @param message SubmitUriRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.webrisk.v1.ISubmitUriRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitUriRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitUriRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.SubmitUriRequest;
+
+                    /**
+                     * Decodes a SubmitUriRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitUriRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.SubmitUriRequest;
+
+                    /**
+                     * Verifies a SubmitUriRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitUriRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitUriRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.SubmitUriRequest;
+
+                    /**
+                     * Creates a plain object from a SubmitUriRequest message. Also converts values to other types if specified.
+                     * @param message SubmitUriRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.webrisk.v1.SubmitUriRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitUriRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitUriRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubmitUriMetadata. */
+                interface ISubmitUriMetadata {
+
+                    /** SubmitUriMetadata state */
+                    state?: (google.cloud.webrisk.v1.SubmitUriMetadata.State|keyof typeof google.cloud.webrisk.v1.SubmitUriMetadata.State|null);
+
+                    /** SubmitUriMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SubmitUriMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SubmitUriMetadata. */
+                class SubmitUriMetadata implements ISubmitUriMetadata {
+
+                    /**
+                     * Constructs a new SubmitUriMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.webrisk.v1.ISubmitUriMetadata);
+
+                    /** SubmitUriMetadata state. */
+                    public state: (google.cloud.webrisk.v1.SubmitUriMetadata.State|keyof typeof google.cloud.webrisk.v1.SubmitUriMetadata.State);
+
+                    /** SubmitUriMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SubmitUriMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SubmitUriMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitUriMetadata instance
+                     */
+                    public static create(properties?: google.cloud.webrisk.v1.ISubmitUriMetadata): google.cloud.webrisk.v1.SubmitUriMetadata;
+
+                    /**
+                     * Encodes the specified SubmitUriMetadata message. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriMetadata.verify|verify} messages.
+                     * @param message SubmitUriMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.webrisk.v1.ISubmitUriMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitUriMetadata message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriMetadata.verify|verify} messages.
+                     * @param message SubmitUriMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.webrisk.v1.ISubmitUriMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitUriMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitUriMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.webrisk.v1.SubmitUriMetadata;
+
+                    /**
+                     * Decodes a SubmitUriMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitUriMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.webrisk.v1.SubmitUriMetadata;
+
+                    /**
+                     * Verifies a SubmitUriMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitUriMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitUriMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.webrisk.v1.SubmitUriMetadata;
+
+                    /**
+                     * Creates a plain object from a SubmitUriMetadata message. Also converts values to other types if specified.
+                     * @param message SubmitUriMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.webrisk.v1.SubmitUriMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitUriMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitUriMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubmitUriMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        CANCELLED = 3,
+                        FAILED = 4,
+                        CLOSED = 5
+                    }
                 }
             }
 
@@ -6834,6 +7564,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -7633,6 +8366,303 @@ export namespace google {
             }
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -7730,6 +8760,1091 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

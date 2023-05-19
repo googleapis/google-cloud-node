@@ -36,7 +36,8 @@ function main(threatTypes) {
    */
   // const hashPrefix = 'Buffer.from('string')'
   /**
-   *  Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+   *  Required. The ThreatLists to search in. Multiple ThreatLists may be
+   *  specified.
    */
   // const threatTypes = 1234
 

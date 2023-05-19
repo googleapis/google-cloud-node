@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
 } from 'google-gax';
 
 import * as protos from '../../protos/protos';
@@ -59,6 +61,7 @@ export class WebRiskServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   webRiskServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -182,6 +185,54 @@ export class WebRiskServiceClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*}/operations',
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const submitUriResponse = protoFilesRoot.lookup(
+      '.google.cloud.webrisk.v1.Submission'
+    ) as gax.protobuf.Type;
+    const submitUriMetadata = protoFilesRoot.lookup(
+      '.google.cloud.webrisk.v1.SubmitUriMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      submitUri: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        submitUriResponse.decode.bind(submitUriResponse),
+        submitUriMetadata.decode.bind(submitUriMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.webrisk.v1.WebRiskService',
@@ -236,6 +287,7 @@ export class WebRiskServiceClient {
       'searchUris',
       'searchHashes',
       'createSubmission',
+      'submitUri',
     ];
     for (const methodName of webRiskServiceStubMethods) {
       const callPromise = this.webRiskServiceStub.then(
@@ -252,7 +304,7 @@ export class WebRiskServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -330,9 +382,9 @@ export class WebRiskServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.webrisk.v1.ThreatType} request.threatType
-   *   Required. The threat list to update. Only a single ThreatType should be specified
-   *   per request. If you want to handle multiple ThreatTypes, you must make one
-   *   request per ThreatType.
+   *   Required. The threat list to update. Only a single ThreatType should be
+   *   specified per request. If you want to handle multiple ThreatTypes, you must
+   *   make one request per ThreatType.
    * @param {Buffer} request.versionToken
    *   The current version token of the client for the requested list (the
    *   client version that was received from the last successful diff).
@@ -433,7 +485,8 @@ export class WebRiskServiceClient {
    * @param {string} request.uri
    *   Required. The URI to be checked for matches.
    * @param {number[]} request.threatTypes
-   *   Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+   *   Required. The ThreatLists to search in. Multiple ThreatLists may be
+   *   specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -521,7 +574,8 @@ export class WebRiskServiceClient {
    *   Note that if this parameter is provided by a URI, it must be encoded using
    *   the web safe base64 variant (RFC 4648).
    * @param {number[]} request.threatTypes
-   *   Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+   *   Required. The ThreatLists to search in. Multiple ThreatLists may be
+   *   specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -608,8 +662,8 @@ export class WebRiskServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project that is making the submission. This string is in
-   *   the format "projects/{project_number}".
+   *   Required. The name of the project that is making the submission. This
+   *   string is in the format "projects/{project_number}".
    * @param {google.cloud.webrisk.v1.Submission} request.submission
    *   Required. The submission that contains the content of the phishing report.
    * @param {object} [options]
@@ -697,6 +751,335 @@ export class WebRiskServiceClient {
     return this.innerApiCalls.createSubmission(request, options, callback);
   }
 
+  /**
+   * Submits a URI suspected of containing malicious content to be reviewed.
+   * Returns a google.longrunning.Operation which, once the review is complete,
+   * is updated with its result. You can use the [Pub/Sub API]
+   * (https://cloud.google.com/pubsub) to receive notifications for the returned
+   * Operation. If the result verifies the existence of malicious content, the
+   * site will be added to the [Google's Social Engineering lists]
+   * (https://support.google.com/webmasters/answer/6350487/) in order to
+   * protect users that could get exposed to this threat in the future. Only
+   * allowlisted projects can use this method during Early Access. Please reach
+   * out to Sales or your customer engineer to obtain access.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project that is making the submission. This
+   *   string is in the format "projects/{project_number}".
+   * @param {google.cloud.webrisk.v1.Submission} request.submission
+   *   Required. The submission that contains the URI to be scanned.
+   * @param {google.cloud.webrisk.v1.ThreatInfo} request.threatInfo
+   *   Provides additional information about the submission.
+   * @param {google.cloud.webrisk.v1.ThreatDiscovery} request.threatDiscovery
+   *   Provides additional information about how the submission was discovered.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/web_risk_service.submit_uri.js</caption>
+   * region_tag:webrisk_v1_generated_WebRiskService_SubmitUri_async
+   */
+  submitUri(
+    request?: protos.google.cloud.webrisk.v1.ISubmitUriRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.webrisk.v1.ISubmission,
+        protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  submitUri(
+    request: protos.google.cloud.webrisk.v1.ISubmitUriRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.webrisk.v1.ISubmission,
+        protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitUri(
+    request: protos.google.cloud.webrisk.v1.ISubmitUriRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.webrisk.v1.ISubmission,
+        protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitUri(
+    request?: protos.google.cloud.webrisk.v1.ISubmitUriRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.webrisk.v1.ISubmission,
+            protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.webrisk.v1.ISubmission,
+        protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.webrisk.v1.ISubmission,
+        protos.google.cloud.webrisk.v1.ISubmitUriMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.submitUri(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `submitUri()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/web_risk_service.submit_uri.js</caption>
+   * region_tag:webrisk_v1_generated_WebRiskService_SubmitUri_async
+   */
+  async checkSubmitUriProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.webrisk.v1.Submission,
+      protos.google.cloud.webrisk.v1.SubmitUriMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.submitUri,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.webrisk.v1.Submission,
+      protos.google.cloud.webrisk.v1.SubmitUriMetadata
+    >;
+  }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -735,6 +1118,7 @@ export class WebRiskServiceClient {
       return this.webRiskServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
