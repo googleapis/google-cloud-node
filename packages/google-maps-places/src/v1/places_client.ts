@@ -18,7 +18,12 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -94,14 +99,22 @@ export class PlacesClient {
    *     const client = new PlacesClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PlacesClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -127,7 +140,7 @@ export class PlacesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -141,10 +154,7 @@ export class PlacesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -152,7 +162,7 @@ export class PlacesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -163,8 +173,11 @@ export class PlacesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.maps.places.v1.Places', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.maps.places.v1.Places',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -195,31 +208,35 @@ export class PlacesClient {
     // Put together the "service stub" for
     // google.maps.places.v1.Places.
     this.placesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.maps.places.v1.Places') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.maps.places.v1.Places'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.places.v1.Places,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const placesStubMethods =
-        ['searchText'];
+    const placesStubMethods = ['searchText'];
     for (const methodName of placesStubMethods) {
       const callPromise = this.placesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -273,8 +290,9 @@ export class PlacesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -285,131 +303,144 @@ export class PlacesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Text query based place search.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.textQuery
- *   Required. The text query for textual search.
- * @param {string} request.languageCode
- *   Place details will be displayed with the preferred language if available.
- *   If the language code is unspecified or unrecognized, place details of any
- *   language may be returned, with a preference for English if such details
- *   exist.
- *
- *   Current list of supported languages:
- *   https://developers.google.com/maps/faq#languagesupport.
- * @param {string} request.regionCode
- *   The Unicode country/region code (CLDR) of the location where the
- *   request is coming from. It is used to display the place details, like
- *   region-specific place name, if available.
- *
- *   For more information, see
- *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
- *
- *
- *   Note that 3-digit region codes are not currently supported.
- * @param {google.maps.places.v1.SearchTextRequest.RankPreference} request.rankPreference
- *   How results will be ranked in the response.
- * @param {google.maps.places.v1.SearchTextRequest.Location} request.location
- *   The region to search. Setting location would usually yields
- *   better results. Recommended to set. This location serves as a bias unless
- *   strict_restriction is set to true, which turns the location to a strict
- *   restriction.
- *
- *   Deprecated.  Use LocationRestriction or LocationBias instead.
- * @param {string} request.includedType
- *   The requested place type. Full list of types supported:
- *   https://developers.google.com/places/supported_types. Only support one
- *   included type.
- * @param {boolean} request.openNow
- *   Used to restrict the search to places that are open at a specific time.
- *   open_now marks if a business is currently open.
- * @param {google.maps.places.v1.Int32Range} request.priceRange
- *   [Deprecated!]Used to restrict the search to places that are within a
- *   certain price range. This is on a scale of 0 to 4. Set a minimum of 0 or
- *   set a maximum of 4 has no effect on the search results. Min price is
- *   default to 0 and max price is default to 4. Default value will be used if
- *   either min or max is unset.
- * @param {number} request.minRating
- *   Filter out results whose average user rating is strictly less than this
- *   limit. A valid value must be an float between 0 and 5 (inclusively) at a
- *   0.5 cadence i.e. `[0, 0.5, 1.0, ... , 5.0]` inclusively. This is to keep
- *   parity with LocalRefinement_UserRating. The input rating will round up to
- *   the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
- *   results with a less than 1.0 rating.
- * @param {number} request.maxResultCount
- *   Maximum number of results to return. It must be between 1 and 20,
- *   inclusively. If the number is unset, it falls back to the upper limit. If
- *   the number is set to negative or exceeds the upper limit, an
- *   INVALID_ARGUMENT error is returned.
- * @param {number[]} request.priceLevels
- *   Used to restrict the search to places that are marked as certain price
- *   levels. Users can choose any combinations of price levels. Default to
- *   select all price levels.
- * @param {boolean} request.strictTypeFiltering
- *   Used to set strict type filtering for included_type. If set to true, only
- *   results of the same type will be returned. Default to false.
- * @param {google.maps.places.v1.SearchTextRequest.LocationBias} request.locationBias
- *   The region to search. This location serves as a bias which means results
- *   around given location might be returned. Cannot be set along with
- *   location_restriction.
- * @param {google.maps.places.v1.SearchTextRequest.LocationRestriction} request.locationRestriction
- *   The region to search. This location serves as a restriction which means
- *   results outside given location will not be returned. Cannot be set along
- *   with location_bias.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.maps.places.v1.SearchTextResponse | SearchTextResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/places.search_text.js</caption>
- * region_tag:places_v1_generated_Places_SearchText_async
- */
+  /**
+   * Text query based place search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.textQuery
+   *   Required. The text query for textual search.
+   * @param {string} request.languageCode
+   *   Place details will be displayed with the preferred language if available.
+   *   If the language code is unspecified or unrecognized, place details of any
+   *   language may be returned, with a preference for English if such details
+   *   exist.
+   *
+   *   Current list of supported languages:
+   *   https://developers.google.com/maps/faq#languagesupport.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of the location where the
+   *   request is coming from. It is used to display the place details, like
+   *   region-specific place name, if available.
+   *
+   *   For more information, see
+   *   http://www.unicode.org/reports/tr35/#unicode_region_subtag.
+   *
+   *
+   *   Note that 3-digit region codes are not currently supported.
+   * @param {google.maps.places.v1.SearchTextRequest.RankPreference} request.rankPreference
+   *   How results will be ranked in the response.
+   * @param {google.maps.places.v1.SearchTextRequest.Location} request.location
+   *   The region to search. Setting location would usually yields
+   *   better results. Recommended to set. This location serves as a bias unless
+   *   strict_restriction is set to true, which turns the location to a strict
+   *   restriction.
+   *
+   *   Deprecated.  Use LocationRestriction or LocationBias instead.
+   * @param {string} request.includedType
+   *   The requested place type. Full list of types supported:
+   *   https://developers.google.com/places/supported_types. Only support one
+   *   included type.
+   * @param {boolean} request.openNow
+   *   Used to restrict the search to places that are open at a specific time.
+   *   open_now marks if a business is currently open.
+   * @param {google.maps.places.v1.Int32Range} request.priceRange
+   *   [Deprecated!]Used to restrict the search to places that are within a
+   *   certain price range. This is on a scale of 0 to 4. Set a minimum of 0 or
+   *   set a maximum of 4 has no effect on the search results. Min price is
+   *   default to 0 and max price is default to 4. Default value will be used if
+   *   either min or max is unset.
+   * @param {number} request.minRating
+   *   Filter out results whose average user rating is strictly less than this
+   *   limit. A valid value must be an float between 0 and 5 (inclusively) at a
+   *   0.5 cadence i.e. `[0, 0.5, 1.0, ... , 5.0]` inclusively. This is to keep
+   *   parity with LocalRefinement_UserRating. The input rating will round up to
+   *   the nearest 0.5(ceiling). For instance, a rating of 0.6 will eliminate all
+   *   results with a less than 1.0 rating.
+   * @param {number} request.maxResultCount
+   *   Maximum number of results to return. It must be between 1 and 20,
+   *   inclusively. If the number is unset, it falls back to the upper limit. If
+   *   the number is set to negative or exceeds the upper limit, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {number[]} request.priceLevels
+   *   Used to restrict the search to places that are marked as certain price
+   *   levels. Users can choose any combinations of price levels. Default to
+   *   select all price levels.
+   * @param {boolean} request.strictTypeFiltering
+   *   Used to set strict type filtering for included_type. If set to true, only
+   *   results of the same type will be returned. Default to false.
+   * @param {google.maps.places.v1.SearchTextRequest.LocationBias} request.locationBias
+   *   The region to search. This location serves as a bias which means results
+   *   around given location might be returned. Cannot be set along with
+   *   location_restriction.
+   * @param {google.maps.places.v1.SearchTextRequest.LocationRestriction} request.locationRestriction
+   *   The region to search. This location serves as a restriction which means
+   *   results outside given location will not be returned. Cannot be set along
+   *   with location_bias.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.maps.places.v1.SearchTextResponse | SearchTextResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/places.search_text.js</caption>
+   * region_tag:places_v1_generated_Places_SearchText_async
+   */
   searchText(
-      request?: protos.google.maps.places.v1.ISearchTextRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.places.v1.ISearchTextResponse,
-        protos.google.maps.places.v1.ISearchTextRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.places.v1.ISearchTextRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.maps.places.v1.ISearchTextResponse,
+      protos.google.maps.places.v1.ISearchTextRequest | undefined,
+      {} | undefined
+    ]
+  >;
   searchText(
-      request: protos.google.maps.places.v1.ISearchTextRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.places.v1.ISearchTextResponse,
-          protos.google.maps.places.v1.ISearchTextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.places.v1.ISearchTextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.places.v1.ISearchTextResponse,
+      protos.google.maps.places.v1.ISearchTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   searchText(
-      request: protos.google.maps.places.v1.ISearchTextRequest,
-      callback: Callback<
-          protos.google.maps.places.v1.ISearchTextResponse,
-          protos.google.maps.places.v1.ISearchTextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.places.v1.ISearchTextRequest,
+    callback: Callback<
+      protos.google.maps.places.v1.ISearchTextResponse,
+      protos.google.maps.places.v1.ISearchTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   searchText(
-      request?: protos.google.maps.places.v1.ISearchTextRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.places.v1.ISearchTextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.places.v1.ISearchTextResponse,
-          protos.google.maps.places.v1.ISearchTextRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.places.v1.ISearchTextResponse,
-          protos.google.maps.places.v1.ISearchTextRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.places.v1.ISearchTextResponse,
-        protos.google.maps.places.v1.ISearchTextRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.maps.places.v1.ISearchTextRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.places.v1.ISearchTextResponse,
+      protos.google.maps.places.v1.ISearchTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.maps.places.v1.ISearchTextResponse,
+      protos.google.maps.places.v1.ISearchTextRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -418,7 +449,6 @@ export class PlacesClient {
     this.initialize();
     return this.innerApiCalls.searchText(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
