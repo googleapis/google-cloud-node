@@ -95,7 +95,7 @@ async function callListAttachments() {
   // Run request
   const iterable = await supportClient.listAttachmentsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
