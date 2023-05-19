@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for the location for which static IPs should be returned.
-   *  Must be in the format `projects/* /locations/*`.
+   *  Required. The resource name for the location for which static IPs should be
+   *  returned. Must be in the format `projects/* /locations/*`.
    */
   // const name = 'abc123'
   /**

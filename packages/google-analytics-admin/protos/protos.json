@@ -2504,6 +2504,174 @@
                               }
                             }
                           ]
+                        },
+                        "GetAdSenseLink": {
+                          "requestType": "GetAdSenseLinkRequest",
+                          "responseType": "AdSenseLink",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/adSenseLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/adSenseLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAdSenseLink": {
+                          "requestType": "CreateAdSenseLinkRequest",
+                          "responseType": "AdSenseLink",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                            "(google.api.http).body": "adsense_link",
+                            "(google.api.method_signature)": "parent,adsense_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                                "body": "adsense_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,adsense_link"
+                            }
+                          ]
+                        },
+                        "DeleteAdSenseLink": {
+                          "requestType": "DeleteAdSenseLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/adSenseLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/adSenseLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAdSenseLinks": {
+                          "requestType": "ListAdSenseLinksRequest",
+                          "responseType": "ListAdSenseLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/adSenseLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEventCreateRule": {
+                          "requestType": "GetEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListEventCreateRules": {
+                          "requestType": "ListEventCreateRulesRequest",
+                          "responseType": "ListEventCreateRulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateEventCreateRule": {
+                          "requestType": "CreateEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                            "(google.api.http).body": "event_create_rule",
+                            "(google.api.method_signature)": "parent,event_create_rule"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                                "body": "event_create_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,event_create_rule"
+                            }
+                          ]
+                        },
+                        "UpdateEventCreateRule": {
+                          "requestType": "UpdateEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{event_create_rule.name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.http).body": "event_create_rule",
+                            "(google.api.method_signature)": "event_create_rule,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{event_create_rule.name=properties/*/dataStreams/*/eventCreateRules/*}",
+                                "body": "event_create_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "event_create_rule,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteEventCreateRule": {
+                          "requestType": "DeleteEventCreateRuleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -4763,6 +4931,82 @@
                         }
                       }
                     },
+                    "CreateAdSenseLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        },
+                        "adsenseLink": {
+                          "type": "AdSenseLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetAdSenseLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAdSenseLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        }
+                      }
+                    },
+                    "ListAdSenseLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAdSenseLinksResponse": {
+                      "fields": {
+                        "adsenseLinks": {
+                          "rule": "repeated",
+                          "type": "AdSenseLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "FetchConnectedGa4PropertyRequest": {
                       "fields": {
                         "property": {
@@ -4783,6 +5027,100 @@
                           "options": {
                             "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
                           }
+                        }
+                      }
+                    },
+                    "CreateEventCreateRuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        },
+                        "eventCreateRule": {
+                          "type": "EventCreateRule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEventCreateRuleRequest": {
+                      "fields": {
+                        "eventCreateRule": {
+                          "type": "EventCreateRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEventCreateRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        }
+                      }
+                    },
+                    "GetEventCreateRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        }
+                      }
+                    },
+                    "ListEventCreateRulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEventCreateRulesResponse": {
+                      "fields": {
+                        "eventCreateRules": {
+                          "rule": "repeated",
+                          "type": "EventCreateRule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -5416,6 +5754,113 @@
                         }
                       }
                     },
+                    "ParameterMutation": {
+                      "fields": {
+                        "parameter": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameterValue": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EventCreateRule": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/EventCreateRule",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}/eventCreateRules/{event_create_rule}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationEvent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventConditions": {
+                          "rule": "repeated",
+                          "type": "MatchingCondition",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceCopyParameters": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "parameterMutations": {
+                          "rule": "repeated",
+                          "type": "ParameterMutation",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "MatchingCondition": {
+                      "fields": {
+                        "field": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "comparisonType": {
+                          "type": "ComparisonType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "negated": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ComparisonType": {
+                          "values": {
+                            "COMPARISON_TYPE_UNSPECIFIED": 0,
+                            "EQUALS": 1,
+                            "EQUALS_CASE_INSENSITIVE": 2,
+                            "CONTAINS": 3,
+                            "CONTAINS_CASE_INSENSITIVE": 4,
+                            "STARTS_WITH": 5,
+                            "STARTS_WITH_CASE_INSENSITIVE": 6,
+                            "ENDS_WITH": 7,
+                            "ENDS_WITH_CASE_INSENSITIVE": 8,
+                            "GREATER_THAN": 9,
+                            "GREATER_THAN_OR_EQUAL": 10,
+                            "LESS_THAN": 11,
+                            "LESS_THAN_OR_EQUAL": 12,
+                            "REGULAR_EXPRESSION": 13,
+                            "REGULAR_EXPRESSION_CASE_INSENSITIVE": 14
+                          }
+                        }
+                      }
+                    },
                     "ExpandedDataSetFilter": {
                       "oneofs": {
                         "oneFilter": {
@@ -5665,7 +6110,10 @@
                         "ATTRIBUTION_SETTINGS": 20,
                         "EXPANDED_DATA_SET": 21,
                         "CHANNEL_GROUP": 22,
-                        "ENHANCED_MEASUREMENT_SETTINGS": 24
+                        "ENHANCED_MEASUREMENT_SETTINGS": 24,
+                        "ADSENSE_LINK": 27,
+                        "AUDIENCE": 28,
+                        "EVENT_CREATE_RULE": 29
                       }
                     },
                     "GoogleSignalsState": {
@@ -6321,7 +6769,10 @@
                                 "expandedDataSet",
                                 "channelGroup",
                                 "bigqueryLink",
-                                "enhancedMeasurementSettings"
+                                "enhancedMeasurementSettings",
+                                "adsenseLink",
+                                "audience",
+                                "eventCreateRule"
                               ]
                             }
                           },
@@ -6401,6 +6852,18 @@
                             "enhancedMeasurementSettings": {
                               "type": "EnhancedMeasurementSettings",
                               "id": 24
+                            },
+                            "adsenseLink": {
+                              "type": "AdSenseLink",
+                              "id": 27
+                            },
+                            "audience": {
+                              "type": "Audience",
+                              "id": 28
+                            },
+                            "eventCreateRule": {
+                              "type": "EventCreateRule",
+                              "id": 29
                             }
                           }
                         }
@@ -7068,6 +7531,28 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AdSenseLink": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/AdSenseLink",
+                        "(google.api.resource).pattern": "properties/{property}/adSenseLinks/{adsense_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adClientCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
