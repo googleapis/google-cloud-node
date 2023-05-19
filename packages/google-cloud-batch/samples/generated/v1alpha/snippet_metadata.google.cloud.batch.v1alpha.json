@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-batch",
-        "version": "0.7.0",
+        "version": "0.7.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -162,7 +162,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -177,6 +177,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -254,7 +258,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -269,6 +273,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     },
                     {
