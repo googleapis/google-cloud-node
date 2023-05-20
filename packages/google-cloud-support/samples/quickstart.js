@@ -27,14 +27,27 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of Case object for which attachments should be
-   *  listed.
+   *  Required. The fully qualified name of parent resource to list cases under.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of attachments fetched with each request. If not
-   *  provided, the default is 10. The maximum page size that will be returned is
-   *  100.
+   *  An expression written in filter language. If non-empty, the query returns
+   *  the cases that match the filter. Else, the query doesn't filter the cases.
+   *  Filter expressions use the following fields with the operators equals (`=`)
+   *  and `AND`:
+   *  - `state`: The accepted values are `OPEN` or `CLOSED`.
+   *  - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+   *  can specify multiple values for priority using the `OR` operator. For
+   *  example, `priority=P1 OR priority=P2`.
+   *  - `creator.email`: The email address of the case creator.
+   *  Examples:
+   *  - `state=CLOSED`
+   *  - `state=OPEN AND creator.email="tester@example.com"`
+   *  - `state=OPEN AND (priority=P0 OR priority=P1)`
+   */
+  // const filter = 'abc123'
+  /**
+   *  The maximum number of cases fetched with each request. Defaults to 10.
    */
   // const pageSize = 1234
   /**
@@ -44,25 +57,25 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Support library
-  const {CaseAttachmentServiceClient} = require('@google-cloud/support').v2;
+  const {CaseServiceClient} = require('@google-cloud/support').v2;
 
   // Instantiates a client
-  const supportClient = new CaseAttachmentServiceClient();
+  const supportClient = new CaseServiceClient();
 
-  async function callListAttachments() {
+  async function callListCases() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await supportClient.listAttachmentsAsync(request);
+    const iterable = await supportClient.listCasesAsync(request);
     for await (const response of iterable) {
       console.log(response);
     }
   }
 
-  callListAttachments();
+  callListCases();
   // [END cloudsupport_quickstart]
 }
 
