@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,37 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @googlemaps/places
 ```
 
+
+### Using the client library
+
+```javascript
+
+// Imports the Places library
+const {PlacesClient} = require('@googlemaps/places').v1;
+
+// Instantiates a client
+const placesClient = new PlacesClient();
+
+async function callSearchText() {
+  // Construct request
+  const request = {
+    textQuery,
+  };
+
+  // Run request
+  const response = await placesClient.searchText(request, {
+    otherArgs: {
+      headers: {
+        'X-Goog-FieldMask': 'places.displayName',
+      },
+    },
+  });
+  console.log(response);
+}
+
+callSearchText();
+
+```
 
 
 
