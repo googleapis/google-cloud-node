@@ -1,6 +1,0 @@
-[
-  "../../protos/google/geo/type/viewport.proto",
-  "../../protos/google/maps/places/v1/geometry.proto",
-  "../../protos/google/maps/places/v1/place.proto",
-  "../../protos/google/maps/places/v1/places_service.proto"
-]
