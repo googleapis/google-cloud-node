@@ -139,7 +139,8 @@
     "packages/google-cloud-workstations": {},
     "packages/google-cloud-confidentialcomputing": {},
     "packages/google-ai-generativelanguage": {},
-    "packages/google-cloud-storageinsights": {}
+    "packages/google-cloud-storageinsights": {},
+    "packages/google-maps-places": {}
   },
   "plugins": [
     {
