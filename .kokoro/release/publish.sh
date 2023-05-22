@@ -35,5 +35,5 @@ echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
 SCRIPT=$(realpath $(dirname $0)/publish-single.sh)
 echo $SCRIPT
-npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
+npx @google-cloud/mono-repo-publish@0.0.1-debug custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
 echo "DONE INSTALLING, calling mono-repo-publish"
