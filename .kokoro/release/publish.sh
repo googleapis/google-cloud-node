@@ -33,7 +33,5 @@ python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /
 NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-node-npm-token-1)
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
-SCRIPT=$(realpath $(dirname $0)/publish-single.sh)
-echo $SCRIPT
-npx @google-cloud/mono-repo-publish@0.0.1-debug custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
-echo "DONE INSTALLING, calling mono-repo-publish"
+SCRIPT=$(realpath $(dirname $0)/./publish-single.sh)
+npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
