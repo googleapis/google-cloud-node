@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.7.1...batch-v0.8.0) (2023-05-20)
+
+
+### Features
+
+* [batch] add support for placement policies ([#4182](https://github.com/googleapis/google-cloud-node/issues/4182)) ([9ece2b7](https://github.com/googleapis/google-cloud-node/commit/9ece2b7d96f3b18b32acfd5e24ba38f52f39dab9))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/batch-v0.7.0...batch-v0.7.1) (2023-04-13)
 
 

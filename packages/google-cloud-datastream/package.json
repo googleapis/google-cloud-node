@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/datastream",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "datastream client for Node.js",
   "repository": {
     "type": "git",

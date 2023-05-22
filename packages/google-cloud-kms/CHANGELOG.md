@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.5.1...kms-v3.6.0) (2023-05-20)
+
+
+### Features
+
+* [kms] added VerifyConnectivity RPC ([#4274](https://github.com/googleapis/google-cloud-node/issues/4274)) ([bf56319](https://github.com/googleapis/google-cloud-node/commit/bf5631932cd0f2f52c23caaba235b04222a1a609))
+
 ## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/kms-v3.5.0...kms-v3.5.1) (2023-04-13)
 
 

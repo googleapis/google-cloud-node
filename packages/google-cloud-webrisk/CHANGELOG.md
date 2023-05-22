@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/web-risk-v3.2.2...web-risk-v3.3.0) (2023-05-20)
+
+
+### Features
+
+* [webrisk] add SubmitUri endpoint ([#4286](https://github.com/googleapis/google-cloud-node/issues/4286)) ([40edfc5](https://github.com/googleapis/google-cloud-node/commit/40edfc52a9894cf57b389c2744563bfa490102cb))
+
 ## [3.2.2](https://github.com/googleapis/google-cloud-node/compare/web-risk-v3.2.1...web-risk-v3.2.2) (2023-04-13)
 
 
