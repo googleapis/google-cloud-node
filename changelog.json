@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "84fb1febb2e50ba9aa1c7d863eb31ab0aab52e25",
+          "message": "Add initial files for google.cloud.support.v2",
+          "issues": [
+            "4288"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "4cc13bbb-f300-4a0f-8c9d-93caec5d50d4",
+      "createTime": "2023-05-22T17:28:11.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ac249801878b0c7271722c0bf128eb2c0437bf44",
           "message": "Add initial files for google.maps.places.v1",
           "issues": [
@@ -9685,5 +9702,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-20T02:26:24.513Z"
+  "updateTime": "2023-05-22T17:28:11.924Z"
 }
