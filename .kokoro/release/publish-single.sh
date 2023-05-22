@@ -17,7 +17,7 @@
 # `-o pipefail` sets the exit code to the rightmost comment to exit
 # with a non-zero
 set -eo pipefail
-echo "IN PUBLISH_SINGLE.SH"
+
 pwd
 
 npm install
