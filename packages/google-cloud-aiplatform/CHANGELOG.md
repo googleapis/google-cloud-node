@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.13.0...aiplatform-v2.14.0) (2023-05-20)
+
+
+### Features
+
+* Add updateSchedule method to ScheduleService ([#4280](https://github.com/googleapis/google-cloud-node/issues/4280)) ([d1e67be](https://github.com/googleapis/google-cloud-node/commit/d1e67beadf1910378989cd1bd3c19cbe000973d7))
+
 ## [2.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.12.0...aiplatform-v2.13.0) (2023-05-09)
 
 
