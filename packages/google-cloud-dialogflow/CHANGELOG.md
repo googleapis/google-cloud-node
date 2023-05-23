@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.7.1...dialogflow-v5.8.0) (2023-05-20)
+
+
+### Features
+
+* [dialogflow] add baseline model configuration for conversation summarization ([#4255](https://github.com/googleapis/google-cloud-node/issues/4255)) ([88877b9](https://github.com/googleapis/google-cloud-node/commit/88877b9509815d76f1915aa87e97597ec7e1520d))
+
 ## [5.7.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.7.0...dialogflow-v5.7.1) (2023-04-13)
 
 

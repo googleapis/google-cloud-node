@@ -1,4 +1,5 @@
 [
   "../../protos/google/cloud/clouddms/v1/clouddms.proto",
-  "../../protos/google/cloud/clouddms/v1/clouddms_resources.proto"
+  "../../protos/google/cloud/clouddms/v1/clouddms_resources.proto",
+  "../../protos/google/cloud/clouddms/v1/conversionworkspace_resources.proto"
 ]

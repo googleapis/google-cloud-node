@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.6.0...channel-v2.7.0) (2023-05-20)
+
+
+### Features
+
+* [channel] added partition_keys field to filter results from FetchReportResults ([#4279](https://github.com/googleapis/google-cloud-node/issues/4279)) ([3defaa1](https://github.com/googleapis/google-cloud-node/commit/3defaa1caaa70a9384eddc0281645a9bf6c860cb))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.5.1...channel-v2.6.0) (2023-05-09)
 
 
