@@ -287,6 +287,7 @@ export class EkmServiceClient {
       'updateEkmConnection',
       'getEkmConfig',
       'updateEkmConfig',
+      'verifyConnectivity',
     ];
     for (const methodName of ekmServiceStubMethods) {
       const callPromise = this.ekmServiceStub.then(
@@ -812,6 +813,96 @@ export class EkmServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateEkmConfig(request, options, callback);
+  }
+  /**
+   * Verifies that Cloud KMS can successfully connect to the external key
+   * manager specified by an {@link google.cloud.kms.v1.EkmConnection|EkmConnection}.
+   * If there is an error connecting to the EKM, this method returns a
+   * FAILED_PRECONDITION status containing structured information as described
+   * at https://cloud.google.com/kms/docs/reference/ekm_errors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The {@link google.cloud.kms.v1.EkmConnection.name|name} of the
+   *   {@link google.cloud.kms.v1.EkmConnection|EkmConnection} to verify.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.kms.v1.VerifyConnectivityResponse | VerifyConnectivityResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ekm_service.verify_connectivity.js</caption>
+   * region_tag:cloudkms_v1_generated_EkmService_VerifyConnectivity_async
+   */
+  verifyConnectivity(
+    request?: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  verifyConnectivity(
+    request: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  verifyConnectivity(
+    request: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  verifyConnectivity(
+    request?: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+          | protos.google.cloud.kms.v1.IVerifyConnectivityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.verifyConnectivity(request, options, callback);
   }
 
   /**

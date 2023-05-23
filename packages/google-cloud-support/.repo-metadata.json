@@ -1,0 +1,17 @@
+{
+  "name": "cloudsupport",
+  "name_pretty": "Google Cloud Support API",
+  "product_documentation": "https://cloud.google.com/support/docs/reference/support-api",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudsupport/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/support",
+  "api_id": "cloudsupport.googleapis.com",
+  "default_version": "v2",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "cloudsupport"
+}
+

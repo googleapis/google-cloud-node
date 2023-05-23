@@ -230,6 +230,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.webrisk.v1.WebRiskService|submitUri}.
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @typedef SubmitUriCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SubmitUri.
+                         * @function submitUri
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest} request SubmitUriRequest message or plain object
+                         * @param {google.cloud.webrisk.v1.WebRiskService.SubmitUriCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(WebRiskService.prototype.submitUri = function submitUri(request, callback) {
+                            return this.rpcCall(submitUri, $root.google.cloud.webrisk.v1.SubmitUriRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SubmitUri" });
+    
+                        /**
+                         * Calls SubmitUri.
+                         * @function submitUri
+                         * @memberof google.cloud.webrisk.v1.WebRiskService
+                         * @instance
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest} request SubmitUriRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return WebRiskService;
                     })();
     
@@ -4375,6 +4408,7 @@
                          * @memberof google.cloud.webrisk.v1
                          * @interface ISubmission
                          * @property {string|null} [uri] Submission uri
+                         * @property {Array.<google.cloud.webrisk.v1.ThreatType>|null} [threatTypes] Submission threatTypes
                          */
     
                         /**
@@ -4386,6 +4420,7 @@
                          * @param {google.cloud.webrisk.v1.ISubmission=} [properties] Properties to set
                          */
                         function Submission(properties) {
+                            this.threatTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4399,6 +4434,14 @@
                          * @instance
                          */
                         Submission.prototype.uri = "";
+    
+                        /**
+                         * Submission threatTypes.
+                         * @member {Array.<google.cloud.webrisk.v1.ThreatType>} threatTypes
+                         * @memberof google.cloud.webrisk.v1.Submission
+                         * @instance
+                         */
+                        Submission.prototype.threatTypes = $util.emptyArray;
     
                         /**
                          * Creates a new Submission instance using the specified properties.
@@ -4426,6 +4469,12 @@
                                 writer = $Writer.create();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.threatTypes != null && message.threatTypes.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    writer.int32(message.threatTypes[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -4462,6 +4511,17 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.threatTypes && message.threatTypes.length))
+                                            message.threatTypes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.threatTypes.push(reader.int32());
+                                        } else
+                                            message.threatTypes.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -4502,6 +4562,21 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.threatTypes != null && message.hasOwnProperty("threatTypes")) {
+                                if (!Array.isArray(message.threatTypes))
+                                    return "threatTypes: array expected";
+                                for (var i = 0; i < message.threatTypes.length; ++i)
+                                    switch (message.threatTypes[i]) {
+                                    default:
+                                        return "threatTypes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -4519,6 +4594,39 @@
                             var message = new $root.google.cloud.webrisk.v1.Submission();
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.threatTypes) {
+                                if (!Array.isArray(object.threatTypes))
+                                    throw TypeError(".google.cloud.webrisk.v1.Submission.threatTypes: array expected");
+                                message.threatTypes = [];
+                                for (var i = 0; i < object.threatTypes.length; ++i)
+                                    switch (object.threatTypes[i]) {
+                                    default:
+                                        if (typeof object.threatTypes[i] === "number") {
+                                            message.threatTypes[i] = object.threatTypes[i];
+                                            break;
+                                        }
+                                    case "THREAT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.threatTypes[i] = 0;
+                                        break;
+                                    case "MALWARE":
+                                    case 1:
+                                        message.threatTypes[i] = 1;
+                                        break;
+                                    case "SOCIAL_ENGINEERING":
+                                    case 2:
+                                        message.threatTypes[i] = 2;
+                                        break;
+                                    case "UNWANTED_SOFTWARE":
+                                    case 3:
+                                        message.threatTypes[i] = 3;
+                                        break;
+                                    case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                                    case 4:
+                                        message.threatTypes[i] = 4;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -4535,10 +4643,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.threatTypes = [];
                             if (options.defaults)
                                 object.uri = "";
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.threatTypes && message.threatTypes.length) {
+                                object.threatTypes = [];
+                                for (var j = 0; j < message.threatTypes.length; ++j)
+                                    object.threatTypes[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] === undefined ? message.threatTypes[j] : $root.google.cloud.webrisk.v1.ThreatType[message.threatTypes[j]] : message.threatTypes[j];
+                            }
                             return object;
                         };
     
@@ -4569,6 +4684,1221 @@
                         };
     
                         return Submission;
+                    })();
+    
+                    v1.ThreatInfo = (function() {
+    
+                        /**
+                         * Properties of a ThreatInfo.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IThreatInfo
+                         * @property {google.cloud.webrisk.v1.ThreatInfo.AbuseType|null} [abuseType] ThreatInfo abuseType
+                         * @property {google.cloud.webrisk.v1.ThreatInfo.IConfidence|null} [threatConfidence] ThreatInfo threatConfidence
+                         * @property {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification|null} [threatJustification] ThreatInfo threatJustification
+                         */
+    
+                        /**
+                         * Constructs a new ThreatInfo.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ThreatInfo.
+                         * @implements IThreatInfo
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IThreatInfo=} [properties] Properties to set
+                         */
+                        function ThreatInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ThreatInfo abuseType.
+                         * @member {google.cloud.webrisk.v1.ThreatInfo.AbuseType} abuseType
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @instance
+                         */
+                        ThreatInfo.prototype.abuseType = 0;
+    
+                        /**
+                         * ThreatInfo threatConfidence.
+                         * @member {google.cloud.webrisk.v1.ThreatInfo.IConfidence|null|undefined} threatConfidence
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @instance
+                         */
+                        ThreatInfo.prototype.threatConfidence = null;
+    
+                        /**
+                         * ThreatInfo threatJustification.
+                         * @member {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification|null|undefined} threatJustification
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @instance
+                         */
+                        ThreatInfo.prototype.threatJustification = null;
+    
+                        /**
+                         * Creates a new ThreatInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatInfo=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ThreatInfo} ThreatInfo instance
+                         */
+                        ThreatInfo.create = function create(properties) {
+                            return new ThreatInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatInfo message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatInfo} message ThreatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.abuseType != null && Object.hasOwnProperty.call(message, "abuseType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.abuseType);
+                            if (message.threatConfidence != null && Object.hasOwnProperty.call(message, "threatConfidence"))
+                                $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.encode(message.threatConfidence, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.threatJustification != null && Object.hasOwnProperty.call(message, "threatJustification"))
+                                $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.encode(message.threatJustification, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatInfo message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatInfo} message ThreatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ThreatInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ThreatInfo} ThreatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.abuseType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.threatConfidence = $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.threatJustification = $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ThreatInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ThreatInfo} ThreatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ThreatInfo message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ThreatInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.abuseType != null && message.hasOwnProperty("abuseType"))
+                                switch (message.abuseType) {
+                                default:
+                                    return "abuseType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.threatConfidence != null && message.hasOwnProperty("threatConfidence")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.verify(message.threatConfidence);
+                                if (error)
+                                    return "threatConfidence." + error;
+                            }
+                            if (message.threatJustification != null && message.hasOwnProperty("threatJustification")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.verify(message.threatJustification);
+                                if (error)
+                                    return "threatJustification." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ThreatInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ThreatInfo} ThreatInfo
+                         */
+                        ThreatInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ThreatInfo)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ThreatInfo();
+                            switch (object.abuseType) {
+                            default:
+                                if (typeof object.abuseType === "number") {
+                                    message.abuseType = object.abuseType;
+                                    break;
+                                }
+                                break;
+                            case "ABUSE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.abuseType = 0;
+                                break;
+                            case "MALWARE":
+                            case 1:
+                                message.abuseType = 1;
+                                break;
+                            case "SOCIAL_ENGINEERING":
+                            case 2:
+                                message.abuseType = 2;
+                                break;
+                            case "UNWANTED_SOFTWARE":
+                            case 3:
+                                message.abuseType = 3;
+                                break;
+                            }
+                            if (object.threatConfidence != null) {
+                                if (typeof object.threatConfidence !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatInfo.threatConfidence: object expected");
+                                message.threatConfidence = $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.fromObject(object.threatConfidence);
+                            }
+                            if (object.threatJustification != null) {
+                                if (typeof object.threatJustification !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatInfo.threatJustification: object expected");
+                                message.threatJustification = $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.fromObject(object.threatJustification);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ThreatInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ThreatInfo} message ThreatInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ThreatInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.abuseType = options.enums === String ? "ABUSE_TYPE_UNSPECIFIED" : 0;
+                                object.threatConfidence = null;
+                                object.threatJustification = null;
+                            }
+                            if (message.abuseType != null && message.hasOwnProperty("abuseType"))
+                                object.abuseType = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatInfo.AbuseType[message.abuseType] === undefined ? message.abuseType : $root.google.cloud.webrisk.v1.ThreatInfo.AbuseType[message.abuseType] : message.abuseType;
+                            if (message.threatConfidence != null && message.hasOwnProperty("threatConfidence"))
+                                object.threatConfidence = $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.toObject(message.threatConfidence, options);
+                            if (message.threatJustification != null && message.hasOwnProperty("threatJustification"))
+                                object.threatJustification = $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.toObject(message.threatJustification, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ThreatInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ThreatInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ThreatInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.webrisk.v1.ThreatInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ThreatInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.webrisk.v1.ThreatInfo";
+                        };
+    
+                        /**
+                         * AbuseType enum.
+                         * @name google.cloud.webrisk.v1.ThreatInfo.AbuseType
+                         * @enum {number}
+                         * @property {number} ABUSE_TYPE_UNSPECIFIED=0 ABUSE_TYPE_UNSPECIFIED value
+                         * @property {number} MALWARE=1 MALWARE value
+                         * @property {number} SOCIAL_ENGINEERING=2 SOCIAL_ENGINEERING value
+                         * @property {number} UNWANTED_SOFTWARE=3 UNWANTED_SOFTWARE value
+                         */
+                        ThreatInfo.AbuseType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ABUSE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MALWARE"] = 1;
+                            values[valuesById[2] = "SOCIAL_ENGINEERING"] = 2;
+                            values[valuesById[3] = "UNWANTED_SOFTWARE"] = 3;
+                            return values;
+                        })();
+    
+                        ThreatInfo.Confidence = (function() {
+    
+                            /**
+                             * Properties of a Confidence.
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo
+                             * @interface IConfidence
+                             * @property {number|null} [score] Confidence score
+                             * @property {google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|null} [level] Confidence level
+                             */
+    
+                            /**
+                             * Constructs a new Confidence.
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo
+                             * @classdesc Represents a Confidence.
+                             * @implements IConfidence
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IConfidence=} [properties] Properties to set
+                             */
+                            function Confidence(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Confidence score.
+                             * @member {number|null|undefined} score
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @instance
+                             */
+                            Confidence.prototype.score = null;
+    
+                            /**
+                             * Confidence level.
+                             * @member {google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel|null|undefined} level
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @instance
+                             */
+                            Confidence.prototype.level = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Confidence value.
+                             * @member {"score"|"level"|undefined} value
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @instance
+                             */
+                            Object.defineProperty(Confidence.prototype, "value", {
+                                get: $util.oneOfGetter($oneOfFields = ["score", "level"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Confidence instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IConfidence=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.Confidence} Confidence instance
+                             */
+                            Confidence.create = function create(properties) {
+                                return new Confidence(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Confidence message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.Confidence.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IConfidence} message Confidence message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Confidence.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.score != null && Object.hasOwnProperty.call(message, "score"))
+                                    writer.uint32(/* id 1, wireType 5 =*/13).float(message.score);
+                                if (message.level != null && Object.hasOwnProperty.call(message, "level"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.level);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Confidence message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.Confidence.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IConfidence} message Confidence message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Confidence.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Confidence message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.Confidence} Confidence
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Confidence.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatInfo.Confidence();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.score = reader.float();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.level = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Confidence message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.Confidence} Confidence
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Confidence.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Confidence message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Confidence.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.score != null && message.hasOwnProperty("score")) {
+                                    properties.value = 1;
+                                    if (typeof message.score !== "number")
+                                        return "score: number expected";
+                                }
+                                if (message.level != null && message.hasOwnProperty("level")) {
+                                    if (properties.value === 1)
+                                        return "value: multiple values";
+                                    properties.value = 1;
+                                    switch (message.level) {
+                                    default:
+                                        return "level: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Confidence message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.Confidence} Confidence
+                             */
+                            Confidence.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.ThreatInfo.Confidence)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.ThreatInfo.Confidence();
+                                if (object.score != null)
+                                    message.score = Number(object.score);
+                                switch (object.level) {
+                                default:
+                                    if (typeof object.level === "number") {
+                                        message.level = object.level;
+                                        break;
+                                    }
+                                    break;
+                                case "CONFIDENCE_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.level = 0;
+                                    break;
+                                case "LOW":
+                                case 1:
+                                    message.level = 1;
+                                    break;
+                                case "MEDIUM":
+                                case 2:
+                                    message.level = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.level = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Confidence message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.Confidence} message Confidence
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Confidence.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.score != null && message.hasOwnProperty("score")) {
+                                    object.score = options.json && !isFinite(message.score) ? String(message.score) : message.score;
+                                    if (options.oneofs)
+                                        object.value = "score";
+                                }
+                                if (message.level != null && message.hasOwnProperty("level")) {
+                                    object.level = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel[message.level] === undefined ? message.level : $root.google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel[message.level] : message.level;
+                                    if (options.oneofs)
+                                        object.value = "level";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Confidence to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Confidence.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Confidence
+                             * @function getTypeUrl
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.Confidence
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Confidence.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.webrisk.v1.ThreatInfo.Confidence";
+                            };
+    
+                            /**
+                             * ConfidenceLevel enum.
+                             * @name google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel
+                             * @enum {number}
+                             * @property {number} CONFIDENCE_LEVEL_UNSPECIFIED=0 CONFIDENCE_LEVEL_UNSPECIFIED value
+                             * @property {number} LOW=1 LOW value
+                             * @property {number} MEDIUM=2 MEDIUM value
+                             * @property {number} HIGH=3 HIGH value
+                             */
+                            Confidence.ConfidenceLevel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONFIDENCE_LEVEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOW"] = 1;
+                                values[valuesById[2] = "MEDIUM"] = 2;
+                                values[valuesById[3] = "HIGH"] = 3;
+                                return values;
+                            })();
+    
+                            return Confidence;
+                        })();
+    
+                        ThreatInfo.ThreatJustification = (function() {
+    
+                            /**
+                             * Properties of a ThreatJustification.
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo
+                             * @interface IThreatJustification
+                             * @property {Array.<google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel>|null} [labels] ThreatJustification labels
+                             * @property {Array.<string>|null} [comments] ThreatJustification comments
+                             */
+    
+                            /**
+                             * Constructs a new ThreatJustification.
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo
+                             * @classdesc Represents a ThreatJustification.
+                             * @implements IThreatJustification
+                             * @constructor
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification=} [properties] Properties to set
+                             */
+                            function ThreatJustification(properties) {
+                                this.labels = [];
+                                this.comments = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ThreatJustification labels.
+                             * @member {Array.<google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel>} labels
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @instance
+                             */
+                            ThreatJustification.prototype.labels = $util.emptyArray;
+    
+                            /**
+                             * ThreatJustification comments.
+                             * @member {Array.<string>} comments
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @instance
+                             */
+                            ThreatJustification.prototype.comments = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ThreatJustification instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification=} [properties] Properties to set
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.ThreatJustification} ThreatJustification instance
+                             */
+                            ThreatJustification.create = function create(properties) {
+                                return new ThreatJustification(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatJustification message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification} message ThreatJustification message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatJustification.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.labels != null && message.labels.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.labels.length; ++i)
+                                        writer.int32(message.labels[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.comments != null && message.comments.length)
+                                    for (var i = 0; i < message.comments.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.comments[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ThreatJustification message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.IThreatJustification} message ThreatJustification message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ThreatJustification.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ThreatJustification message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.ThreatJustification} ThreatJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatJustification.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.labels && message.labels.length))
+                                                message.labels = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.labels.push(reader.int32());
+                                            } else
+                                                message.labels.push(reader.int32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.comments && message.comments.length))
+                                                message.comments = [];
+                                            message.comments.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ThreatJustification message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.ThreatJustification} ThreatJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ThreatJustification.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ThreatJustification message.
+                             * @function verify
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ThreatJustification.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!Array.isArray(message.labels))
+                                        return "labels: array expected";
+                                    for (var i = 0; i < message.labels.length; ++i)
+                                        switch (message.labels[i]) {
+                                        default:
+                                            return "labels: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                if (message.comments != null && message.hasOwnProperty("comments")) {
+                                    if (!Array.isArray(message.comments))
+                                        return "comments: array expected";
+                                    for (var i = 0; i < message.comments.length; ++i)
+                                        if (!$util.isString(message.comments[i]))
+                                            return "comments: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ThreatJustification message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.webrisk.v1.ThreatInfo.ThreatJustification} ThreatJustification
+                             */
+                            ThreatJustification.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification)
+                                    return object;
+                                var message = new $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification();
+                                if (object.labels) {
+                                    if (!Array.isArray(object.labels))
+                                        throw TypeError(".google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.labels: array expected");
+                                    message.labels = [];
+                                    for (var i = 0; i < object.labels.length; ++i)
+                                        switch (object.labels[i]) {
+                                        default:
+                                            if (typeof object.labels[i] === "number") {
+                                                message.labels[i] = object.labels[i];
+                                                break;
+                                            }
+                                        case "JUSTIFICATION_LABEL_UNSPECIFIED":
+                                        case 0:
+                                            message.labels[i] = 0;
+                                            break;
+                                        case "MANUAL_VERIFICATION":
+                                        case 1:
+                                            message.labels[i] = 1;
+                                            break;
+                                        case "USER_REPORT":
+                                        case 2:
+                                            message.labels[i] = 2;
+                                            break;
+                                        case "AUTOMATED_REPORT":
+                                        case 3:
+                                            message.labels[i] = 3;
+                                            break;
+                                        }
+                                }
+                                if (object.comments) {
+                                    if (!Array.isArray(object.comments))
+                                        throw TypeError(".google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.comments: array expected");
+                                    message.comments = [];
+                                    for (var i = 0; i < object.comments.length; ++i)
+                                        message.comments[i] = String(object.comments[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ThreatJustification message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {google.cloud.webrisk.v1.ThreatInfo.ThreatJustification} message ThreatJustification
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ThreatJustification.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.labels = [];
+                                    object.comments = [];
+                                }
+                                if (message.labels && message.labels.length) {
+                                    object.labels = [];
+                                    for (var j = 0; j < message.labels.length; ++j)
+                                        object.labels[j] = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel[message.labels[j]] === undefined ? message.labels[j] : $root.google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel[message.labels[j]] : message.labels[j];
+                                }
+                                if (message.comments && message.comments.length) {
+                                    object.comments = [];
+                                    for (var j = 0; j < message.comments.length; ++j)
+                                        object.comments[j] = message.comments[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ThreatJustification to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ThreatJustification.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ThreatJustification
+                             * @function getTypeUrl
+                             * @memberof google.cloud.webrisk.v1.ThreatInfo.ThreatJustification
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ThreatJustification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.webrisk.v1.ThreatInfo.ThreatJustification";
+                            };
+    
+                            /**
+                             * JustificationLabel enum.
+                             * @name google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel
+                             * @enum {number}
+                             * @property {number} JUSTIFICATION_LABEL_UNSPECIFIED=0 JUSTIFICATION_LABEL_UNSPECIFIED value
+                             * @property {number} MANUAL_VERIFICATION=1 MANUAL_VERIFICATION value
+                             * @property {number} USER_REPORT=2 USER_REPORT value
+                             * @property {number} AUTOMATED_REPORT=3 AUTOMATED_REPORT value
+                             */
+                            ThreatJustification.JustificationLabel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "JUSTIFICATION_LABEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MANUAL_VERIFICATION"] = 1;
+                                values[valuesById[2] = "USER_REPORT"] = 2;
+                                values[valuesById[3] = "AUTOMATED_REPORT"] = 3;
+                                return values;
+                            })();
+    
+                            return ThreatJustification;
+                        })();
+    
+                        return ThreatInfo;
+                    })();
+    
+                    v1.ThreatDiscovery = (function() {
+    
+                        /**
+                         * Properties of a ThreatDiscovery.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface IThreatDiscovery
+                         * @property {google.cloud.webrisk.v1.ThreatDiscovery.Platform|null} [platform] ThreatDiscovery platform
+                         * @property {Array.<string>|null} [regionCodes] ThreatDiscovery regionCodes
+                         */
+    
+                        /**
+                         * Constructs a new ThreatDiscovery.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a ThreatDiscovery.
+                         * @implements IThreatDiscovery
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.IThreatDiscovery=} [properties] Properties to set
+                         */
+                        function ThreatDiscovery(properties) {
+                            this.regionCodes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ThreatDiscovery platform.
+                         * @member {google.cloud.webrisk.v1.ThreatDiscovery.Platform} platform
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @instance
+                         */
+                        ThreatDiscovery.prototype.platform = 0;
+    
+                        /**
+                         * ThreatDiscovery regionCodes.
+                         * @member {Array.<string>} regionCodes
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @instance
+                         */
+                        ThreatDiscovery.prototype.regionCodes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ThreatDiscovery instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatDiscovery=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.ThreatDiscovery} ThreatDiscovery instance
+                         */
+                        ThreatDiscovery.create = function create(properties) {
+                            return new ThreatDiscovery(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatDiscovery message. Does not implicitly {@link google.cloud.webrisk.v1.ThreatDiscovery.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatDiscovery} message ThreatDiscovery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatDiscovery.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.platform != null && Object.hasOwnProperty.call(message, "platform"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.platform);
+                            if (message.regionCodes != null && message.regionCodes.length)
+                                for (var i = 0; i < message.regionCodes.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.regionCodes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ThreatDiscovery message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.ThreatDiscovery.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {google.cloud.webrisk.v1.IThreatDiscovery} message ThreatDiscovery message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ThreatDiscovery.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ThreatDiscovery message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.ThreatDiscovery} ThreatDiscovery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatDiscovery.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.ThreatDiscovery();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.platform = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.regionCodes && message.regionCodes.length))
+                                            message.regionCodes = [];
+                                        message.regionCodes.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ThreatDiscovery message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.ThreatDiscovery} ThreatDiscovery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ThreatDiscovery.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ThreatDiscovery message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ThreatDiscovery.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.platform != null && message.hasOwnProperty("platform"))
+                                switch (message.platform) {
+                                default:
+                                    return "platform: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.regionCodes != null && message.hasOwnProperty("regionCodes")) {
+                                if (!Array.isArray(message.regionCodes))
+                                    return "regionCodes: array expected";
+                                for (var i = 0; i < message.regionCodes.length; ++i)
+                                    if (!$util.isString(message.regionCodes[i]))
+                                        return "regionCodes: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ThreatDiscovery message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.ThreatDiscovery} ThreatDiscovery
+                         */
+                        ThreatDiscovery.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.ThreatDiscovery)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.ThreatDiscovery();
+                            switch (object.platform) {
+                            default:
+                                if (typeof object.platform === "number") {
+                                    message.platform = object.platform;
+                                    break;
+                                }
+                                break;
+                            case "PLATFORM_UNSPECIFIED":
+                            case 0:
+                                message.platform = 0;
+                                break;
+                            case "ANDROID":
+                            case 1:
+                                message.platform = 1;
+                                break;
+                            case "IOS":
+                            case 2:
+                                message.platform = 2;
+                                break;
+                            case "MACOS":
+                            case 3:
+                                message.platform = 3;
+                                break;
+                            case "WINDOWS":
+                            case 4:
+                                message.platform = 4;
+                                break;
+                            }
+                            if (object.regionCodes) {
+                                if (!Array.isArray(object.regionCodes))
+                                    throw TypeError(".google.cloud.webrisk.v1.ThreatDiscovery.regionCodes: array expected");
+                                message.regionCodes = [];
+                                for (var i = 0; i < object.regionCodes.length; ++i)
+                                    message.regionCodes[i] = String(object.regionCodes[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ThreatDiscovery message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ThreatDiscovery} message ThreatDiscovery
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ThreatDiscovery.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.regionCodes = [];
+                            if (options.defaults)
+                                object.platform = options.enums === String ? "PLATFORM_UNSPECIFIED" : 0;
+                            if (message.platform != null && message.hasOwnProperty("platform"))
+                                object.platform = options.enums === String ? $root.google.cloud.webrisk.v1.ThreatDiscovery.Platform[message.platform] === undefined ? message.platform : $root.google.cloud.webrisk.v1.ThreatDiscovery.Platform[message.platform] : message.platform;
+                            if (message.regionCodes && message.regionCodes.length) {
+                                object.regionCodes = [];
+                                for (var j = 0; j < message.regionCodes.length; ++j)
+                                    object.regionCodes[j] = message.regionCodes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ThreatDiscovery to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ThreatDiscovery.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ThreatDiscovery
+                         * @function getTypeUrl
+                         * @memberof google.cloud.webrisk.v1.ThreatDiscovery
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ThreatDiscovery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.webrisk.v1.ThreatDiscovery";
+                        };
+    
+                        /**
+                         * Platform enum.
+                         * @name google.cloud.webrisk.v1.ThreatDiscovery.Platform
+                         * @enum {number}
+                         * @property {number} PLATFORM_UNSPECIFIED=0 PLATFORM_UNSPECIFIED value
+                         * @property {number} ANDROID=1 ANDROID value
+                         * @property {number} IOS=2 IOS value
+                         * @property {number} MACOS=3 MACOS value
+                         * @property {number} WINDOWS=4 WINDOWS value
+                         */
+                        ThreatDiscovery.Platform = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PLATFORM_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ANDROID"] = 1;
+                            values[valuesById[2] = "IOS"] = 2;
+                            values[valuesById[3] = "MACOS"] = 3;
+                            values[valuesById[4] = "WINDOWS"] = 4;
+                            return values;
+                        })();
+    
+                        return ThreatDiscovery;
                     })();
     
                     v1.CreateSubmissionRequest = (function() {
@@ -4801,6 +6131,615 @@
                         };
     
                         return CreateSubmissionRequest;
+                    })();
+    
+                    v1.SubmitUriRequest = (function() {
+    
+                        /**
+                         * Properties of a SubmitUriRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISubmitUriRequest
+                         * @property {string|null} [parent] SubmitUriRequest parent
+                         * @property {google.cloud.webrisk.v1.ISubmission|null} [submission] SubmitUriRequest submission
+                         * @property {google.cloud.webrisk.v1.IThreatInfo|null} [threatInfo] SubmitUriRequest threatInfo
+                         * @property {google.cloud.webrisk.v1.IThreatDiscovery|null} [threatDiscovery] SubmitUriRequest threatDiscovery
+                         */
+    
+                        /**
+                         * Constructs a new SubmitUriRequest.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SubmitUriRequest.
+                         * @implements ISubmitUriRequest
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest=} [properties] Properties to set
+                         */
+                        function SubmitUriRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubmitUriRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @instance
+                         */
+                        SubmitUriRequest.prototype.parent = "";
+    
+                        /**
+                         * SubmitUriRequest submission.
+                         * @member {google.cloud.webrisk.v1.ISubmission|null|undefined} submission
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @instance
+                         */
+                        SubmitUriRequest.prototype.submission = null;
+    
+                        /**
+                         * SubmitUriRequest threatInfo.
+                         * @member {google.cloud.webrisk.v1.IThreatInfo|null|undefined} threatInfo
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @instance
+                         */
+                        SubmitUriRequest.prototype.threatInfo = null;
+    
+                        /**
+                         * SubmitUriRequest threatDiscovery.
+                         * @member {google.cloud.webrisk.v1.IThreatDiscovery|null|undefined} threatDiscovery
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @instance
+                         */
+                        SubmitUriRequest.prototype.threatDiscovery = null;
+    
+                        /**
+                         * Creates a new SubmitUriRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SubmitUriRequest} SubmitUriRequest instance
+                         */
+                        SubmitUriRequest.create = function create(properties) {
+                            return new SubmitUriRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubmitUriRequest message. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest} message SubmitUriRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubmitUriRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.submission != null && Object.hasOwnProperty.call(message, "submission"))
+                                $root.google.cloud.webrisk.v1.Submission.encode(message.submission, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.threatInfo != null && Object.hasOwnProperty.call(message, "threatInfo"))
+                                $root.google.cloud.webrisk.v1.ThreatInfo.encode(message.threatInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.threatDiscovery != null && Object.hasOwnProperty.call(message, "threatDiscovery"))
+                                $root.google.cloud.webrisk.v1.ThreatDiscovery.encode(message.threatDiscovery, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubmitUriRequest message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriRequest} message SubmitUriRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubmitUriRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubmitUriRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SubmitUriRequest} SubmitUriRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubmitUriRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SubmitUriRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.submission = $root.google.cloud.webrisk.v1.Submission.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.threatInfo = $root.google.cloud.webrisk.v1.ThreatInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.threatDiscovery = $root.google.cloud.webrisk.v1.ThreatDiscovery.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubmitUriRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SubmitUriRequest} SubmitUriRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubmitUriRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubmitUriRequest message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubmitUriRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.submission != null && message.hasOwnProperty("submission")) {
+                                var error = $root.google.cloud.webrisk.v1.Submission.verify(message.submission);
+                                if (error)
+                                    return "submission." + error;
+                            }
+                            if (message.threatInfo != null && message.hasOwnProperty("threatInfo")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatInfo.verify(message.threatInfo);
+                                if (error)
+                                    return "threatInfo." + error;
+                            }
+                            if (message.threatDiscovery != null && message.hasOwnProperty("threatDiscovery")) {
+                                var error = $root.google.cloud.webrisk.v1.ThreatDiscovery.verify(message.threatDiscovery);
+                                if (error)
+                                    return "threatDiscovery." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubmitUriRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SubmitUriRequest} SubmitUriRequest
+                         */
+                        SubmitUriRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SubmitUriRequest)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SubmitUriRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.submission != null) {
+                                if (typeof object.submission !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SubmitUriRequest.submission: object expected");
+                                message.submission = $root.google.cloud.webrisk.v1.Submission.fromObject(object.submission);
+                            }
+                            if (object.threatInfo != null) {
+                                if (typeof object.threatInfo !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SubmitUriRequest.threatInfo: object expected");
+                                message.threatInfo = $root.google.cloud.webrisk.v1.ThreatInfo.fromObject(object.threatInfo);
+                            }
+                            if (object.threatDiscovery != null) {
+                                if (typeof object.threatDiscovery !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SubmitUriRequest.threatDiscovery: object expected");
+                                message.threatDiscovery = $root.google.cloud.webrisk.v1.ThreatDiscovery.fromObject(object.threatDiscovery);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubmitUriRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SubmitUriRequest} message SubmitUriRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubmitUriRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.submission = null;
+                                object.threatInfo = null;
+                                object.threatDiscovery = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.submission != null && message.hasOwnProperty("submission"))
+                                object.submission = $root.google.cloud.webrisk.v1.Submission.toObject(message.submission, options);
+                            if (message.threatInfo != null && message.hasOwnProperty("threatInfo"))
+                                object.threatInfo = $root.google.cloud.webrisk.v1.ThreatInfo.toObject(message.threatInfo, options);
+                            if (message.threatDiscovery != null && message.hasOwnProperty("threatDiscovery"))
+                                object.threatDiscovery = $root.google.cloud.webrisk.v1.ThreatDiscovery.toObject(message.threatDiscovery, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubmitUriRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubmitUriRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubmitUriRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.webrisk.v1.SubmitUriRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubmitUriRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.webrisk.v1.SubmitUriRequest";
+                        };
+    
+                        return SubmitUriRequest;
+                    })();
+    
+                    v1.SubmitUriMetadata = (function() {
+    
+                        /**
+                         * Properties of a SubmitUriMetadata.
+                         * @memberof google.cloud.webrisk.v1
+                         * @interface ISubmitUriMetadata
+                         * @property {google.cloud.webrisk.v1.SubmitUriMetadata.State|null} [state] SubmitUriMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SubmitUriMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SubmitUriMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new SubmitUriMetadata.
+                         * @memberof google.cloud.webrisk.v1
+                         * @classdesc Represents a SubmitUriMetadata.
+                         * @implements ISubmitUriMetadata
+                         * @constructor
+                         * @param {google.cloud.webrisk.v1.ISubmitUriMetadata=} [properties] Properties to set
+                         */
+                        function SubmitUriMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubmitUriMetadata state.
+                         * @member {google.cloud.webrisk.v1.SubmitUriMetadata.State} state
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @instance
+                         */
+                        SubmitUriMetadata.prototype.state = 0;
+    
+                        /**
+                         * SubmitUriMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @instance
+                         */
+                        SubmitUriMetadata.prototype.createTime = null;
+    
+                        /**
+                         * SubmitUriMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @instance
+                         */
+                        SubmitUriMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new SubmitUriMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.webrisk.v1.SubmitUriMetadata} SubmitUriMetadata instance
+                         */
+                        SubmitUriMetadata.create = function create(properties) {
+                            return new SubmitUriMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubmitUriMetadata message. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriMetadata} message SubmitUriMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubmitUriMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubmitUriMetadata message, length delimited. Does not implicitly {@link google.cloud.webrisk.v1.SubmitUriMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {google.cloud.webrisk.v1.ISubmitUriMetadata} message SubmitUriMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubmitUriMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubmitUriMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.webrisk.v1.SubmitUriMetadata} SubmitUriMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubmitUriMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.webrisk.v1.SubmitUriMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubmitUriMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.webrisk.v1.SubmitUriMetadata} SubmitUriMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubmitUriMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubmitUriMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubmitUriMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubmitUriMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.webrisk.v1.SubmitUriMetadata} SubmitUriMetadata
+                         */
+                        SubmitUriMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.webrisk.v1.SubmitUriMetadata)
+                                return object;
+                            var message = new $root.google.cloud.webrisk.v1.SubmitUriMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "CANCELLED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "CLOSED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SubmitUriMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.webrisk.v1.SubmitUriMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubmitUriMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {google.cloud.webrisk.v1.SubmitUriMetadata} message SubmitUriMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubmitUriMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.webrisk.v1.SubmitUriMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.webrisk.v1.SubmitUriMetadata.State[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubmitUriMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubmitUriMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubmitUriMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.webrisk.v1.SubmitUriMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubmitUriMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.webrisk.v1.SubmitUriMetadata";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.webrisk.v1.SubmitUriMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} CANCELLED=3 CANCELLED value
+                         * @property {number} FAILED=4 FAILED value
+                         * @property {number} CLOSED=5 CLOSED value
+                         */
+                        SubmitUriMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "CANCELLED"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "CLOSED"] = 5;
+                            return values;
+                        })();
+    
+                        return SubmitUriMetadata;
                     })();
     
                     return v1;
@@ -17964,6 +19903,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -18024,6 +19964,14 @@
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -18054,6 +20002,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                        $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -18115,6 +20065,10 @@
                                 if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                     message[".google.api.methodSignature"] = [];
                                 message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -18185,6 +20139,11 @@
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
+                    }
                     return null;
                 };
     
@@ -18244,6 +20203,11 @@
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                    }
                     return message;
                 };
     
@@ -18267,6 +20231,7 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -18278,6 +20243,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                        object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -20132,6 +22099,658 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
+            protobuf.Duration = (function() {
+    
+                /**
+                 * Properties of a Duration.
+                 * @memberof google.protobuf
+                 * @interface IDuration
+                 * @property {number|Long|null} [seconds] Duration seconds
+                 * @property {number|null} [nanos] Duration nanos
+                 */
+    
+                /**
+                 * Constructs a new Duration.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Duration.
+                 * @implements IDuration
+                 * @constructor
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 */
+                function Duration(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Duration seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Duration nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 */
+                Duration.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Duration instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration=} [properties] Properties to set
+                 * @returns {google.protobuf.Duration} Duration instance
+                 */
+                Duration.create = function create(properties) {
+                    return new Duration(properties);
+                };
+    
+                /**
+                 * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.IDuration} message Duration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Duration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Duration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Duration} Duration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Duration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Duration message.
+                 * @function verify
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Duration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Duration} Duration
+                 */
+                Duration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Duration)
+                        return object;
+                    var message = new $root.google.protobuf.Duration();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Duration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {google.protobuf.Duration} message Duration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Duration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Duration to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Duration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Duration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Duration
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Duration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Duration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Duration";
+                };
+    
+                return Duration;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
+                return Empty;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -20374,6 +22993,2429 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.longrunning = (function() {
+    
+            /**
+             * Namespace longrunning.
+             * @memberof google
+             * @namespace
+             */
+            var longrunning = {};
+    
+            longrunning.Operations = (function() {
+    
+                /**
+                 * Constructs a new Operations service.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operations
+                 * @extends $protobuf.rpc.Service
+                 * @constructor
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 */
+                function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+    
+                (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+    
+                /**
+                 * Creates new Operations service using the specified rpc implementation.
+                 * @function create
+                 * @memberof google.longrunning.Operations
+                 * @static
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+                 */
+                Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                    return new this(rpcImpl, requestDelimited, responseDelimited);
+                };
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef ListOperationsCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+                 */
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                }, "name", { value: "ListOperations" });
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef GetOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "GetOperation" });
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef DeleteOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "DeleteOperation" });
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef CancelOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "CancelOperation" });
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef WaitOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "WaitOperation" });
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                return Operations;
+            })();
+    
+            longrunning.Operation = (function() {
+    
+                /**
+                 * Properties of an Operation.
+                 * @memberof google.longrunning
+                 * @interface IOperation
+                 * @property {string|null} [name] Operation name
+                 * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+                 * @property {boolean|null} [done] Operation done
+                 * @property {google.rpc.IStatus|null} [error] Operation error
+                 * @property {google.protobuf.IAny|null} [response] Operation response
+                 */
+    
+                /**
+                 * Constructs a new Operation.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operation.
+                 * @implements IOperation
+                 * @constructor
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 */
+                function Operation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Operation name.
+                 * @member {string} name
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.name = "";
+    
+                /**
+                 * Operation metadata.
+                 * @member {google.protobuf.IAny|null|undefined} metadata
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.metadata = null;
+    
+                /**
+                 * Operation done.
+                 * @member {boolean} done
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.done = false;
+    
+                /**
+                 * Operation error.
+                 * @member {google.rpc.IStatus|null|undefined} error
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.error = null;
+    
+                /**
+                 * Operation response.
+                 * @member {google.protobuf.IAny|null|undefined} response
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.response = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Operation result.
+                 * @member {"error"|"response"|undefined} result
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Object.defineProperty(Operation.prototype, "result", {
+                    get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Operation instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 * @returns {google.longrunning.Operation} Operation instance
+                 */
+                Operation.create = function create(properties) {
+                    return new Operation(properties);
+                };
+    
+                /**
+                 * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                        $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Operation message.
+                 * @function verify
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Operation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        if (typeof message.done !== "boolean")
+                            return "done: boolean expected";
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        properties.result = 1;
+                        {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
+                        }
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        if (properties.result === 1)
+                            return "result: multiple values";
+                        properties.result = 1;
+                        {
+                            var error = $root.google.protobuf.Any.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.Operation} Operation
+                 */
+                Operation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.Operation)
+                        return object;
+                    var message = new $root.google.longrunning.Operation();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                    }
+                    if (object.done != null)
+                        message.done = Boolean(object.done);
+                    if (object.error != null) {
+                        if (typeof object.error !== "object")
+                            throw TypeError(".google.longrunning.Operation.error: object expected");
+                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                    }
+                    if (object.response != null) {
+                        if (typeof object.response !== "object")
+                            throw TypeError(".google.longrunning.Operation.response: object expected");
+                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.Operation} message Operation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Operation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.metadata = null;
+                        object.done = false;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options);
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        object.done = message.done;
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                        if (options.oneofs)
+                            object.result = "error";
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        object.response = $root.google.protobuf.Any.toObject(message.response, options);
+                        if (options.oneofs)
+                            object.result = "response";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Operation to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Operation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
+                return Operation;
+            })();
+    
+            longrunning.GetOperationRequest = (function() {
+    
+                /**
+                 * Properties of a GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IGetOperationRequest
+                 * @property {string|null} [name] GetOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a GetOperationRequest.
+                 * @implements IGetOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 */
+                function GetOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GetOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 */
+                GetOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new GetOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+                 */
+                GetOperationRequest.create = function create(properties) {
+                    return new GetOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GetOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 */
+                GetOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.GetOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.GetOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this GetOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
+                };
+    
+                return GetOperationRequest;
+            })();
+    
+            longrunning.ListOperationsRequest = (function() {
+    
+                /**
+                 * Properties of a ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsRequest
+                 * @property {string|null} [name] ListOperationsRequest name
+                 * @property {string|null} [filter] ListOperationsRequest filter
+                 * @property {number|null} [pageSize] ListOperationsRequest pageSize
+                 * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsRequest.
+                 * @implements IListOperationsRequest
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 */
+                function ListOperationsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.name = "";
+    
+                /**
+                 * ListOperationsRequest filter.
+                 * @member {string} filter
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.filter = "";
+    
+                /**
+                 * ListOperationsRequest pageSize.
+                 * @member {number} pageSize
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageSize = 0;
+    
+                /**
+                 * ListOperationsRequest pageToken.
+                 * @member {string} pageToken
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+                 */
+                ListOperationsRequest.create = function create(properties) {
+                    return new ListOperationsRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (!$util.isString(message.filter))
+                            return "filter: string expected";
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (!$util.isInteger(message.pageSize))
+                            return "pageSize: integer expected";
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (!$util.isString(message.pageToken))
+                            return "pageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 */
+                ListOperationsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.filter != null)
+                        message.filter = String(object.filter);
+                    if (object.pageSize != null)
+                        message.pageSize = object.pageSize | 0;
+                    if (object.pageToken != null)
+                        message.pageToken = String(object.pageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.filter = "";
+                        object.pageSize = 0;
+                        object.pageToken = "";
+                        object.name = "";
+                    }
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        object.filter = message.filter;
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        object.pageSize = message.pageSize;
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        object.pageToken = message.pageToken;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
+                return ListOperationsRequest;
+            })();
+    
+            longrunning.ListOperationsResponse = (function() {
+    
+                /**
+                 * Properties of a ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsResponse
+                 * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+                 * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsResponse.
+                 * @implements IListOperationsResponse
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 */
+                function ListOperationsResponse(properties) {
+                    this.operations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsResponse operations.
+                 * @member {Array.<google.longrunning.IOperation>} operations
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.operations = $util.emptyArray;
+    
+                /**
+                 * ListOperationsResponse nextPageToken.
+                 * @member {string} nextPageToken
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsResponse instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+                 */
+                ListOperationsResponse.create = function create(properties) {
+                    return new ListOperationsResponse(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.operations != null && message.operations.length)
+                        for (var i = 0; i < message.operations.length; ++i)
+                            $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsResponse message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                        if (!Array.isArray(message.operations))
+                            return "operations: array expected";
+                        for (var i = 0; i < message.operations.length; ++i) {
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            if (error)
+                                return "operations." + error;
+                        }
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (!$util.isString(message.nextPageToken))
+                            return "nextPageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 */
+                ListOperationsResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsResponse();
+                    if (object.operations) {
+                        if (!Array.isArray(object.operations))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                        message.operations = [];
+                        for (var i = 0; i < object.operations.length; ++i) {
+                            if (typeof object.operations[i] !== "object")
+                                throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                        }
+                    }
+                    if (object.nextPageToken != null)
+                        message.nextPageToken = String(object.nextPageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.operations = [];
+                    if (options.defaults)
+                        object.nextPageToken = "";
+                    if (message.operations && message.operations.length) {
+                        object.operations = [];
+                        for (var j = 0; j < message.operations.length; ++j)
+                            object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options);
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        object.nextPageToken = message.nextPageToken;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsResponse to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
+                return ListOperationsResponse;
+            })();
+    
+            longrunning.CancelOperationRequest = (function() {
+    
+                /**
+                 * Properties of a CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface ICancelOperationRequest
+                 * @property {string|null} [name] CancelOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a CancelOperationRequest.
+                 * @implements ICancelOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 */
+                function CancelOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CancelOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 */
+                CancelOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new CancelOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+                 */
+                CancelOperationRequest.create = function create(properties) {
+                    return new CancelOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CancelOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CancelOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 */
+                CancelOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.CancelOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CancelOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CancelOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CancelOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
+                };
+    
+                return CancelOperationRequest;
+            })();
+    
+            longrunning.DeleteOperationRequest = (function() {
+    
+                /**
+                 * Properties of a DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IDeleteOperationRequest
+                 * @property {string|null} [name] DeleteOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a DeleteOperationRequest.
+                 * @implements IDeleteOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 */
+                function DeleteOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeleteOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 */
+                DeleteOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new DeleteOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+                 */
+                DeleteOperationRequest.create = function create(properties) {
+                    return new DeleteOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeleteOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeleteOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 */
+                DeleteOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.DeleteOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeleteOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeleteOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
+                };
+    
+                return DeleteOperationRequest;
+            })();
+    
+            longrunning.WaitOperationRequest = (function() {
+    
+                /**
+                 * Properties of a WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IWaitOperationRequest
+                 * @property {string|null} [name] WaitOperationRequest name
+                 * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+                 */
+    
+                /**
+                 * Constructs a new WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a WaitOperationRequest.
+                 * @implements IWaitOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 */
+                function WaitOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WaitOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.name = "";
+    
+                /**
+                 * WaitOperationRequest timeout.
+                 * @member {google.protobuf.IDuration|null|undefined} timeout
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.timeout = null;
+    
+                /**
+                 * Creates a new WaitOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+                 */
+                WaitOperationRequest.create = function create(properties) {
+                    return new WaitOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                        $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WaitOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WaitOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        if (error)
+                            return "timeout." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 */
+                WaitOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.WaitOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.timeout != null) {
+                        if (typeof object.timeout !== "object")
+                            throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WaitOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.timeout = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                        object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WaitOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WaitOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
+                };
+    
+                return WaitOperationRequest;
+            })();
+    
+            longrunning.OperationInfo = (function() {
+    
+                /**
+                 * Properties of an OperationInfo.
+                 * @memberof google.longrunning
+                 * @interface IOperationInfo
+                 * @property {string|null} [responseType] OperationInfo responseType
+                 * @property {string|null} [metadataType] OperationInfo metadataType
+                 */
+    
+                /**
+                 * Constructs a new OperationInfo.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an OperationInfo.
+                 * @implements IOperationInfo
+                 * @constructor
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 */
+                function OperationInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OperationInfo responseType.
+                 * @member {string} responseType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.responseType = "";
+    
+                /**
+                 * OperationInfo metadataType.
+                 * @member {string} metadataType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.metadataType = "";
+    
+                /**
+                 * Creates a new OperationInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 * @returns {google.longrunning.OperationInfo} OperationInfo instance
+                 */
+                OperationInfo.create = function create(properties) {
+                    return new OperationInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OperationInfo message.
+                 * @function verify
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OperationInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        if (!$util.isString(message.responseType))
+                            return "responseType: string expected";
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        if (!$util.isString(message.metadataType))
+                            return "metadataType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 */
+                OperationInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.OperationInfo)
+                        return object;
+                    var message = new $root.google.longrunning.OperationInfo();
+                    if (object.responseType != null)
+                        message.responseType = String(object.responseType);
+                    if (object.metadataType != null)
+                        message.metadataType = String(object.metadataType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.OperationInfo} message OperationInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OperationInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.responseType = "";
+                        object.metadataType = "";
+                    }
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        object.responseType = message.responseType;
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        object.metadataType = message.metadataType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OperationInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OperationInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
+                };
+    
+                return OperationInfo;
+            })();
+    
+            return longrunning;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dialogflow",
-        "version": "5.7.0",
+        "version": "5.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1432,6 +1432,58 @@
                 "method": {
                     "shortName": "SuggestConversationSummary",
                     "fullName": "google.cloud.dialogflow.v2beta1.Conversations.SuggestConversationSummary",
+                    "service": {
+                        "shortName": "Conversations",
+                        "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v2beta1_generated_Conversations_GenerateStatelessSummary_async",
+            "title": "dialogflow generateStatelessSummary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates and returns a summary for a conversation that does not have a resource created for it.",
+            "canonical": true,
+            "file": "conversations.generate_stateless_summary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateStatelessSummary",
+                "fullName": "google.cloud.dialogflow.v2beta1.Conversations.GenerateStatelessSummary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "stateless_conversation",
+                        "type": ".google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryRequest.MinimalConversation"
+                    },
+                    {
+                        "name": "conversation_profile",
+                        "type": ".google.cloud.dialogflow.v2beta1.ConversationProfile"
+                    },
+                    {
+                        "name": "latest_message",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_context_size",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryResponse",
+                "client": {
+                    "shortName": "ConversationsClient",
+                    "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+                },
+                "method": {
+                    "shortName": "GenerateStatelessSummary",
+                    "fullName": "google.cloud.dialogflow.v2beta1.Conversations.GenerateStatelessSummary",
                     "service": {
                         "shortName": "Conversations",
                         "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
@@ -3442,7 +3494,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 132,
+                    "end": 137,
                     "type": "FULL"
                 }
             ],
@@ -3497,6 +3549,10 @@
                     },
                     {
                         "name": "enable_partial_automated_agent_reply",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_debugging_info",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -4058,7 +4114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 124,
+                    "end": 128,
                     "type": "FULL"
                 }
             ],
@@ -4094,6 +4150,10 @@
                     {
                         "name": "input_audio",
                         "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "enable_debugging_info",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse",

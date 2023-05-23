@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.10.0",
+        "version": "2.14.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1184,6 +1184,54 @@
                 "method": {
                     "shortName": "UndeployModel",
                     "fullName": "google.cloud.aiplatform.v1beta1.EndpointService.UndeployModel",
+                    "service": {
+                        "shortName": "EndpointService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.EndpointService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_EndpointService_MutateDeployedModel_async",
+            "title": "DatasetService mutateDeployedModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
+            "canonical": true,
+            "file": "endpoint_service.mutate_deployed_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "MutateDeployedModel",
+                "fullName": "google.cloud.aiplatform.v1beta1.EndpointService.MutateDeployedModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_model",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployedModel"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EndpointServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EndpointServiceClient"
+                },
+                "method": {
+                    "shortName": "MutateDeployedModel",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EndpointService.MutateDeployedModel",
                     "service": {
                         "shortName": "EndpointService",
                         "fullName": "google.cloud.aiplatform.v1beta1.EndpointService"
@@ -6300,6 +6348,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_ModelGardenService_GetPublisherModel_async",
+            "title": "DatasetService getPublisherModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Model Garden publisher model.",
+            "canonical": true,
+            "file": "model_garden_service.get_publisher_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPublisherModel",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.GetPublisherModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.aiplatform.v1beta1.PublisherModelView"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",
+                "client": {
+                    "shortName": "ModelGardenServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPublisherModel",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.GetPublisherModel",
+                    "service": {
+                        "shortName": "ModelGardenService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_ModelService_UploadModel_async",
             "title": "DatasetService uploadModel Sample",
             "origin": "API_DEFINITION",
@@ -6462,7 +6558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -8000,6 +8096,50 @@
                 "method": {
                     "shortName": "ResumeSchedule",
                     "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.ResumeSchedule",
+                    "service": {
+                        "shortName": "ScheduleService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async",
+            "title": "DatasetService updateSchedule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an active or paused Schedule. When the Schedule is updated, new runs will be scheduled starting from the updated next execution time after the update time based on the time_specification in the updated Schedule. All unstarted runs before the update time will be skipped while already created runs will NOT be paused or canceled.",
+            "canonical": true,
+            "file": "schedule_service.update_schedule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSchedule",
+                "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.UpdateSchedule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "schedule",
+                        "type": ".google.cloud.aiplatform.v1beta1.Schedule"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.Schedule",
+                "client": {
+                    "shortName": "ScheduleServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ScheduleServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSchedule",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.UpdateSchedule",
                     "service": {
                         "shortName": "ScheduleService",
                         "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService"

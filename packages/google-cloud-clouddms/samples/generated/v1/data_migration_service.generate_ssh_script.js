@@ -45,7 +45,7 @@ function main(vm) {
    */
   // const vmSelectionConfig = {}
   /**
-   *  The port that will be open on the bastion host
+   *  The port that will be open on the bastion host.
    */
   // const vmPort = 1234
 

@@ -97,6 +97,30 @@
                               "(google.api.method_signature)": "parent,submission"
                             }
                           ]
+                        },
+                        "SubmitUri": {
+                          "requestType": "SubmitUriRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/uris:submit",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Submission",
+                            "(google.longrunning.operation_info).metadata_type": "SubmitUriMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/uris:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Submission",
+                                "metadata_type": "SubmitUriMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -366,6 +390,118 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "threatTypes": {
+                          "rule": "repeated",
+                          "type": "ThreatType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ThreatInfo": {
+                      "fields": {
+                        "abuseType": {
+                          "type": "AbuseType",
+                          "id": 1
+                        },
+                        "threatConfidence": {
+                          "type": "Confidence",
+                          "id": 2
+                        },
+                        "threatJustification": {
+                          "type": "ThreatJustification",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AbuseType": {
+                          "values": {
+                            "ABUSE_TYPE_UNSPECIFIED": 0,
+                            "MALWARE": 1,
+                            "SOCIAL_ENGINEERING": 2,
+                            "UNWANTED_SOFTWARE": 3
+                          }
+                        },
+                        "Confidence": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "score",
+                                "level"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "score": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "level": {
+                              "type": "ConfidenceLevel",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ConfidenceLevel": {
+                              "values": {
+                                "CONFIDENCE_LEVEL_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
+                              }
+                            }
+                          }
+                        },
+                        "ThreatJustification": {
+                          "fields": {
+                            "labels": {
+                              "rule": "repeated",
+                              "type": "JustificationLabel",
+                              "id": 1
+                            },
+                            "comments": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "JustificationLabel": {
+                              "values": {
+                                "JUSTIFICATION_LABEL_UNSPECIFIED": 0,
+                                "MANUAL_VERIFICATION": 1,
+                                "USER_REPORT": 2,
+                                "AUTOMATED_REPORT": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ThreatDiscovery": {
+                      "fields": {
+                        "platform": {
+                          "type": "Platform",
+                          "id": 1
+                        },
+                        "regionCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Platform": {
+                          "values": {
+                            "PLATFORM_UNSPECIFIED": 0,
+                            "ANDROID": 1,
+                            "IOS": 2,
+                            "MACOS": 3,
+                            "WINDOWS": 4
+                          }
                         }
                       }
                     },
@@ -384,6 +520,61 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitUriRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "submission": {
+                          "type": "Submission",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "threatInfo": {
+                          "type": "ThreatInfo",
+                          "id": 3
+                        },
+                        "threatDiscovery": {
+                          "type": "ThreatDiscovery",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SubmitUriMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "CANCELLED": 3,
+                            "FAILED": 4,
+                            "CLOSED": 5
                           }
                         }
                       }
@@ -1868,6 +2059,33 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -1877,6 +2095,251 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

@@ -561,6 +561,13 @@
                           "rule": "repeated",
                           "type": "Parameter",
                           "id": 26
+                        },
+                        "billingAccount": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1256,6 +1263,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "partitionKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1415,6 +1430,10 @@
                           "rule": "repeated",
                           "type": "ReportValue",
                           "id": 1
+                        },
+                        "partitionKey": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

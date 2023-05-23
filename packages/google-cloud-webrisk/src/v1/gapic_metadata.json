@@ -29,6 +29,11 @@
               "methods": [
                 "createSubmission"
               ]
+            },
+            "SubmitUri": {
+              "methods": [
+                "submitUri"
+              ]
             }
           }
         },
@@ -53,6 +58,11 @@
             "CreateSubmission": {
               "methods": [
                 "createSubmission"
+              ]
+            },
+            "SubmitUri": {
+              "methods": [
+                "submitUri"
               ]
             }
           }

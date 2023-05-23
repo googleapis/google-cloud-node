@@ -727,6 +727,11 @@
                          * @property {string|null} [readEndpoint] Instance readEndpoint
                          * @property {number|null} [readEndpointPort] Instance readEndpointPort
                          * @property {google.cloud.redis.v1.Instance.ReadReplicasMode|null} [readReplicasMode] Instance readReplicasMode
+                         * @property {string|null} [customerManagedKey] Instance customerManagedKey
+                         * @property {google.cloud.redis.v1.IPersistenceConfig|null} [persistenceConfig] Instance persistenceConfig
+                         * @property {Array.<google.cloud.redis.v1.Instance.SuspensionReason>|null} [suspensionReasons] Instance suspensionReasons
+                         * @property {string|null} [maintenanceVersion] Instance maintenanceVersion
+                         * @property {Array.<string>|null} [availableMaintenanceVersions] Instance availableMaintenanceVersions
                          */
     
                         /**
@@ -742,6 +747,8 @@
                             this.redisConfigs = {};
                             this.serverCaCerts = [];
                             this.nodes = [];
+                            this.suspensionReasons = [];
+                            this.availableMaintenanceVersions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -989,6 +996,46 @@
                         Instance.prototype.readReplicasMode = 0;
     
                         /**
+                         * Instance customerManagedKey.
+                         * @member {string} customerManagedKey
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.customerManagedKey = "";
+    
+                        /**
+                         * Instance persistenceConfig.
+                         * @member {google.cloud.redis.v1.IPersistenceConfig|null|undefined} persistenceConfig
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.persistenceConfig = null;
+    
+                        /**
+                         * Instance suspensionReasons.
+                         * @member {Array.<google.cloud.redis.v1.Instance.SuspensionReason>} suspensionReasons
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.suspensionReasons = $util.emptyArray;
+    
+                        /**
+                         * Instance maintenanceVersion.
+                         * @member {string} maintenanceVersion
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceVersion = "";
+    
+                        /**
+                         * Instance availableMaintenanceVersions.
+                         * @member {Array.<string>} availableMaintenanceVersions
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.availableMaintenanceVersions = $util.emptyArray;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.redis.v1.Instance
@@ -1076,6 +1123,21 @@
                                 writer.uint32(/* id 34, wireType 0 =*/272).int32(message.readEndpointPort);
                             if (message.readReplicasMode != null && Object.hasOwnProperty.call(message, "readReplicasMode"))
                                 writer.uint32(/* id 35, wireType 0 =*/280).int32(message.readReplicasMode);
+                            if (message.customerManagedKey != null && Object.hasOwnProperty.call(message, "customerManagedKey"))
+                                writer.uint32(/* id 36, wireType 2 =*/290).string(message.customerManagedKey);
+                            if (message.persistenceConfig != null && Object.hasOwnProperty.call(message, "persistenceConfig"))
+                                $root.google.cloud.redis.v1.PersistenceConfig.encode(message.persistenceConfig, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.suspensionReasons != null && message.suspensionReasons.length) {
+                                writer.uint32(/* id 38, wireType 2 =*/306).fork();
+                                for (var i = 0; i < message.suspensionReasons.length; ++i)
+                                    writer.int32(message.suspensionReasons[i]);
+                                writer.ldelim();
+                            }
+                            if (message.maintenanceVersion != null && Object.hasOwnProperty.call(message, "maintenanceVersion"))
+                                writer.uint32(/* id 39, wireType 2 =*/314).string(message.maintenanceVersion);
+                            if (message.availableMaintenanceVersions != null && message.availableMaintenanceVersions.length)
+                                for (var i = 0; i < message.availableMaintenanceVersions.length; ++i)
+                                    writer.uint32(/* id 40, wireType 2 =*/322).string(message.availableMaintenanceVersions[i]);
                             return writer;
                         };
     
@@ -1272,6 +1334,35 @@
                                         message.readReplicasMode = reader.int32();
                                         break;
                                     }
+                                case 36: {
+                                        message.customerManagedKey = reader.string();
+                                        break;
+                                    }
+                                case 37: {
+                                        message.persistenceConfig = $root.google.cloud.redis.v1.PersistenceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 38: {
+                                        if (!(message.suspensionReasons && message.suspensionReasons.length))
+                                            message.suspensionReasons = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.suspensionReasons.push(reader.int32());
+                                        } else
+                                            message.suspensionReasons.push(reader.int32());
+                                        break;
+                                    }
+                                case 39: {
+                                        message.maintenanceVersion = reader.string();
+                                        break;
+                                    }
+                                case 40: {
+                                        if (!(message.availableMaintenanceVersions && message.availableMaintenanceVersions.length))
+                                            message.availableMaintenanceVersions = [];
+                                        message.availableMaintenanceVersions.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1461,6 +1552,36 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.customerManagedKey != null && message.hasOwnProperty("customerManagedKey"))
+                                if (!$util.isString(message.customerManagedKey))
+                                    return "customerManagedKey: string expected";
+                            if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
+                                var error = $root.google.cloud.redis.v1.PersistenceConfig.verify(message.persistenceConfig);
+                                if (error)
+                                    return "persistenceConfig." + error;
+                            }
+                            if (message.suspensionReasons != null && message.hasOwnProperty("suspensionReasons")) {
+                                if (!Array.isArray(message.suspensionReasons))
+                                    return "suspensionReasons: array expected";
+                                for (var i = 0; i < message.suspensionReasons.length; ++i)
+                                    switch (message.suspensionReasons[i]) {
+                                    default:
+                                        return "suspensionReasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.maintenanceVersion != null && message.hasOwnProperty("maintenanceVersion"))
+                                if (!$util.isString(message.maintenanceVersion))
+                                    return "maintenanceVersion: string expected";
+                            if (message.availableMaintenanceVersions != null && message.hasOwnProperty("availableMaintenanceVersions")) {
+                                if (!Array.isArray(message.availableMaintenanceVersions))
+                                    return "availableMaintenanceVersions: array expected";
+                                for (var i = 0; i < message.availableMaintenanceVersions.length; ++i)
+                                    if (!$util.isString(message.availableMaintenanceVersions[i]))
+                                        return "availableMaintenanceVersions: string[] expected";
+                            }
                             return null;
                         };
     
@@ -1685,6 +1806,43 @@
                                 message.readReplicasMode = 2;
                                 break;
                             }
+                            if (object.customerManagedKey != null)
+                                message.customerManagedKey = String(object.customerManagedKey);
+                            if (object.persistenceConfig != null) {
+                                if (typeof object.persistenceConfig !== "object")
+                                    throw TypeError(".google.cloud.redis.v1.Instance.persistenceConfig: object expected");
+                                message.persistenceConfig = $root.google.cloud.redis.v1.PersistenceConfig.fromObject(object.persistenceConfig);
+                            }
+                            if (object.suspensionReasons) {
+                                if (!Array.isArray(object.suspensionReasons))
+                                    throw TypeError(".google.cloud.redis.v1.Instance.suspensionReasons: array expected");
+                                message.suspensionReasons = [];
+                                for (var i = 0; i < object.suspensionReasons.length; ++i)
+                                    switch (object.suspensionReasons[i]) {
+                                    default:
+                                        if (typeof object.suspensionReasons[i] === "number") {
+                                            message.suspensionReasons[i] = object.suspensionReasons[i];
+                                            break;
+                                        }
+                                    case "SUSPENSION_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.suspensionReasons[i] = 0;
+                                        break;
+                                    case "CUSTOMER_MANAGED_KEY_ISSUE":
+                                    case 1:
+                                        message.suspensionReasons[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.maintenanceVersion != null)
+                                message.maintenanceVersion = String(object.maintenanceVersion);
+                            if (object.availableMaintenanceVersions) {
+                                if (!Array.isArray(object.availableMaintenanceVersions))
+                                    throw TypeError(".google.cloud.redis.v1.Instance.availableMaintenanceVersions: array expected");
+                                message.availableMaintenanceVersions = [];
+                                for (var i = 0; i < object.availableMaintenanceVersions.length; ++i)
+                                    message.availableMaintenanceVersions[i] = String(object.availableMaintenanceVersions[i]);
+                            }
                             return message;
                         };
     
@@ -1704,6 +1862,8 @@
                             if (options.arrays || options.defaults) {
                                 object.serverCaCerts = [];
                                 object.nodes = [];
+                                object.suspensionReasons = [];
+                                object.availableMaintenanceVersions = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -1736,6 +1896,9 @@
                                 object.readEndpoint = "";
                                 object.readEndpointPort = 0;
                                 object.readReplicasMode = options.enums === String ? "READ_REPLICAS_MODE_UNSPECIFIED" : 0;
+                                object.customerManagedKey = "";
+                                object.persistenceConfig = null;
+                                object.maintenanceVersion = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1810,6 +1973,22 @@
                                 object.readEndpointPort = message.readEndpointPort;
                             if (message.readReplicasMode != null && message.hasOwnProperty("readReplicasMode"))
                                 object.readReplicasMode = options.enums === String ? $root.google.cloud.redis.v1.Instance.ReadReplicasMode[message.readReplicasMode] === undefined ? message.readReplicasMode : $root.google.cloud.redis.v1.Instance.ReadReplicasMode[message.readReplicasMode] : message.readReplicasMode;
+                            if (message.customerManagedKey != null && message.hasOwnProperty("customerManagedKey"))
+                                object.customerManagedKey = message.customerManagedKey;
+                            if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig"))
+                                object.persistenceConfig = $root.google.cloud.redis.v1.PersistenceConfig.toObject(message.persistenceConfig, options);
+                            if (message.suspensionReasons && message.suspensionReasons.length) {
+                                object.suspensionReasons = [];
+                                for (var j = 0; j < message.suspensionReasons.length; ++j)
+                                    object.suspensionReasons[j] = options.enums === String ? $root.google.cloud.redis.v1.Instance.SuspensionReason[message.suspensionReasons[j]] === undefined ? message.suspensionReasons[j] : $root.google.cloud.redis.v1.Instance.SuspensionReason[message.suspensionReasons[j]] : message.suspensionReasons[j];
+                            }
+                            if (message.maintenanceVersion != null && message.hasOwnProperty("maintenanceVersion"))
+                                object.maintenanceVersion = message.maintenanceVersion;
+                            if (message.availableMaintenanceVersions && message.availableMaintenanceVersions.length) {
+                                object.availableMaintenanceVersions = [];
+                                for (var j = 0; j < message.availableMaintenanceVersions.length; ++j)
+                                    object.availableMaintenanceVersions[j] = message.availableMaintenanceVersions[j];
+                            }
                             return object;
                         };
     
@@ -1931,7 +2110,398 @@
                             return values;
                         })();
     
+                        /**
+                         * SuspensionReason enum.
+                         * @name google.cloud.redis.v1.Instance.SuspensionReason
+                         * @enum {number}
+                         * @property {number} SUSPENSION_REASON_UNSPECIFIED=0 SUSPENSION_REASON_UNSPECIFIED value
+                         * @property {number} CUSTOMER_MANAGED_KEY_ISSUE=1 CUSTOMER_MANAGED_KEY_ISSUE value
+                         */
+                        Instance.SuspensionReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SUSPENSION_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CUSTOMER_MANAGED_KEY_ISSUE"] = 1;
+                            return values;
+                        })();
+    
                         return Instance;
+                    })();
+    
+                    v1.PersistenceConfig = (function() {
+    
+                        /**
+                         * Properties of a PersistenceConfig.
+                         * @memberof google.cloud.redis.v1
+                         * @interface IPersistenceConfig
+                         * @property {google.cloud.redis.v1.PersistenceConfig.PersistenceMode|null} [persistenceMode] PersistenceConfig persistenceMode
+                         * @property {google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod|null} [rdbSnapshotPeriod] PersistenceConfig rdbSnapshotPeriod
+                         * @property {google.protobuf.ITimestamp|null} [rdbNextSnapshotTime] PersistenceConfig rdbNextSnapshotTime
+                         * @property {google.protobuf.ITimestamp|null} [rdbSnapshotStartTime] PersistenceConfig rdbSnapshotStartTime
+                         */
+    
+                        /**
+                         * Constructs a new PersistenceConfig.
+                         * @memberof google.cloud.redis.v1
+                         * @classdesc Represents a PersistenceConfig.
+                         * @implements IPersistenceConfig
+                         * @constructor
+                         * @param {google.cloud.redis.v1.IPersistenceConfig=} [properties] Properties to set
+                         */
+                        function PersistenceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PersistenceConfig persistenceMode.
+                         * @member {google.cloud.redis.v1.PersistenceConfig.PersistenceMode} persistenceMode
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @instance
+                         */
+                        PersistenceConfig.prototype.persistenceMode = 0;
+    
+                        /**
+                         * PersistenceConfig rdbSnapshotPeriod.
+                         * @member {google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod} rdbSnapshotPeriod
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @instance
+                         */
+                        PersistenceConfig.prototype.rdbSnapshotPeriod = 0;
+    
+                        /**
+                         * PersistenceConfig rdbNextSnapshotTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} rdbNextSnapshotTime
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @instance
+                         */
+                        PersistenceConfig.prototype.rdbNextSnapshotTime = null;
+    
+                        /**
+                         * PersistenceConfig rdbSnapshotStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} rdbSnapshotStartTime
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @instance
+                         */
+                        PersistenceConfig.prototype.rdbSnapshotStartTime = null;
+    
+                        /**
+                         * Creates a new PersistenceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {google.cloud.redis.v1.IPersistenceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1.PersistenceConfig} PersistenceConfig instance
+                         */
+                        PersistenceConfig.create = function create(properties) {
+                            return new PersistenceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PersistenceConfig message. Does not implicitly {@link google.cloud.redis.v1.PersistenceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {google.cloud.redis.v1.IPersistenceConfig} message PersistenceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersistenceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.persistenceMode != null && Object.hasOwnProperty.call(message, "persistenceMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.persistenceMode);
+                            if (message.rdbSnapshotPeriod != null && Object.hasOwnProperty.call(message, "rdbSnapshotPeriod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rdbSnapshotPeriod);
+                            if (message.rdbNextSnapshotTime != null && Object.hasOwnProperty.call(message, "rdbNextSnapshotTime"))
+                                $root.google.protobuf.Timestamp.encode(message.rdbNextSnapshotTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.rdbSnapshotStartTime != null && Object.hasOwnProperty.call(message, "rdbSnapshotStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.rdbSnapshotStartTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PersistenceConfig message, length delimited. Does not implicitly {@link google.cloud.redis.v1.PersistenceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {google.cloud.redis.v1.IPersistenceConfig} message PersistenceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersistenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PersistenceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1.PersistenceConfig} PersistenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersistenceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.PersistenceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.persistenceMode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rdbSnapshotPeriod = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.rdbNextSnapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PersistenceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1.PersistenceConfig} PersistenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersistenceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PersistenceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PersistenceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.persistenceMode != null && message.hasOwnProperty("persistenceMode"))
+                                switch (message.persistenceMode) {
+                                default:
+                                    return "persistenceMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                switch (message.rdbSnapshotPeriod) {
+                                default:
+                                    return "rdbSnapshotPeriod: enum value expected";
+                                case 0:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.rdbNextSnapshotTime != null && message.hasOwnProperty("rdbNextSnapshotTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.rdbNextSnapshotTime);
+                                if (error)
+                                    return "rdbNextSnapshotTime." + error;
+                            }
+                            if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.rdbSnapshotStartTime);
+                                if (error)
+                                    return "rdbSnapshotStartTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PersistenceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1.PersistenceConfig} PersistenceConfig
+                         */
+                        PersistenceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1.PersistenceConfig)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1.PersistenceConfig();
+                            switch (object.persistenceMode) {
+                            default:
+                                if (typeof object.persistenceMode === "number") {
+                                    message.persistenceMode = object.persistenceMode;
+                                    break;
+                                }
+                                break;
+                            case "PERSISTENCE_MODE_UNSPECIFIED":
+                            case 0:
+                                message.persistenceMode = 0;
+                                break;
+                            case "DISABLED":
+                            case 1:
+                                message.persistenceMode = 1;
+                                break;
+                            case "RDB":
+                            case 2:
+                                message.persistenceMode = 2;
+                                break;
+                            }
+                            switch (object.rdbSnapshotPeriod) {
+                            default:
+                                if (typeof object.rdbSnapshotPeriod === "number") {
+                                    message.rdbSnapshotPeriod = object.rdbSnapshotPeriod;
+                                    break;
+                                }
+                                break;
+                            case "SNAPSHOT_PERIOD_UNSPECIFIED":
+                            case 0:
+                                message.rdbSnapshotPeriod = 0;
+                                break;
+                            case "ONE_HOUR":
+                            case 3:
+                                message.rdbSnapshotPeriod = 3;
+                                break;
+                            case "SIX_HOURS":
+                            case 4:
+                                message.rdbSnapshotPeriod = 4;
+                                break;
+                            case "TWELVE_HOURS":
+                            case 5:
+                                message.rdbSnapshotPeriod = 5;
+                                break;
+                            case "TWENTY_FOUR_HOURS":
+                            case 6:
+                                message.rdbSnapshotPeriod = 6;
+                                break;
+                            }
+                            if (object.rdbNextSnapshotTime != null) {
+                                if (typeof object.rdbNextSnapshotTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1.PersistenceConfig.rdbNextSnapshotTime: object expected");
+                                message.rdbNextSnapshotTime = $root.google.protobuf.Timestamp.fromObject(object.rdbNextSnapshotTime);
+                            }
+                            if (object.rdbSnapshotStartTime != null) {
+                                if (typeof object.rdbSnapshotStartTime !== "object")
+                                    throw TypeError(".google.cloud.redis.v1.PersistenceConfig.rdbSnapshotStartTime: object expected");
+                                message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.fromObject(object.rdbSnapshotStartTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PersistenceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {google.cloud.redis.v1.PersistenceConfig} message PersistenceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PersistenceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.persistenceMode = options.enums === String ? "PERSISTENCE_MODE_UNSPECIFIED" : 0;
+                                object.rdbSnapshotPeriod = options.enums === String ? "SNAPSHOT_PERIOD_UNSPECIFIED" : 0;
+                                object.rdbNextSnapshotTime = null;
+                                object.rdbSnapshotStartTime = null;
+                            }
+                            if (message.persistenceMode != null && message.hasOwnProperty("persistenceMode"))
+                                object.persistenceMode = options.enums === String ? $root.google.cloud.redis.v1.PersistenceConfig.PersistenceMode[message.persistenceMode] === undefined ? message.persistenceMode : $root.google.cloud.redis.v1.PersistenceConfig.PersistenceMode[message.persistenceMode] : message.persistenceMode;
+                            if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                object.rdbSnapshotPeriod = options.enums === String ? $root.google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod[message.rdbSnapshotPeriod] === undefined ? message.rdbSnapshotPeriod : $root.google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod[message.rdbSnapshotPeriod] : message.rdbSnapshotPeriod;
+                            if (message.rdbNextSnapshotTime != null && message.hasOwnProperty("rdbNextSnapshotTime"))
+                                object.rdbNextSnapshotTime = $root.google.protobuf.Timestamp.toObject(message.rdbNextSnapshotTime, options);
+                            if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime"))
+                                object.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.toObject(message.rdbSnapshotStartTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PersistenceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PersistenceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PersistenceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.redis.v1.PersistenceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PersistenceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.redis.v1.PersistenceConfig";
+                        };
+    
+                        /**
+                         * PersistenceMode enum.
+                         * @name google.cloud.redis.v1.PersistenceConfig.PersistenceMode
+                         * @enum {number}
+                         * @property {number} PERSISTENCE_MODE_UNSPECIFIED=0 PERSISTENCE_MODE_UNSPECIFIED value
+                         * @property {number} DISABLED=1 DISABLED value
+                         * @property {number} RDB=2 RDB value
+                         */
+                        PersistenceConfig.PersistenceMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PERSISTENCE_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DISABLED"] = 1;
+                            values[valuesById[2] = "RDB"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * SnapshotPeriod enum.
+                         * @name google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod
+                         * @enum {number}
+                         * @property {number} SNAPSHOT_PERIOD_UNSPECIFIED=0 SNAPSHOT_PERIOD_UNSPECIFIED value
+                         * @property {number} ONE_HOUR=3 ONE_HOUR value
+                         * @property {number} SIX_HOURS=4 SIX_HOURS value
+                         * @property {number} TWELVE_HOURS=5 TWELVE_HOURS value
+                         * @property {number} TWENTY_FOUR_HOURS=6 TWENTY_FOUR_HOURS value
+                         */
+                        PersistenceConfig.SnapshotPeriod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SNAPSHOT_PERIOD_UNSPECIFIED"] = 0;
+                            values[valuesById[3] = "ONE_HOUR"] = 3;
+                            values[valuesById[4] = "SIX_HOURS"] = 4;
+                            values[valuesById[5] = "TWELVE_HOURS"] = 5;
+                            values[valuesById[6] = "TWENTY_FOUR_HOURS"] = 6;
+                            return values;
+                        })();
+    
+                        return PersistenceConfig;
                     })();
     
                     v1.RescheduleMaintenanceRequest = (function() {

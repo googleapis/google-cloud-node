@@ -55,8 +55,8 @@ function main(connectionProfile) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. Only validate the connection profile, but don't update any resources.
-   *  The default is false.
+   *  Optional. Only validate the connection profile, but don't update any
+   *  resources. The default is false.
    */
   // const validateOnly = true
   /**

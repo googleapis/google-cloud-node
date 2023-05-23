@@ -69,6 +69,7 @@ function main() {
   // const enableUspsCass = true
 
   // Imports the Addressvalidation library
+  // eslint-disable-next-line node/no-missing-require
   const {AddressValidationClient} = require('@googlemaps/addressvalidation').v1;
 
   // Instantiates a client

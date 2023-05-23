@@ -29,8 +29,8 @@ function main(parent, submission) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project that is making the submission. This string is in
-   *  the format "projects/{project_number}".
+   *  Required. The name of the project that is making the submission. This
+   *  string is in the format "projects/{project_number}".
    */
   // const parent = 'abc123'
   /**

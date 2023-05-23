@@ -39,8 +39,10 @@ function main(name) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  ListModelVersionsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token 
-   *  of the previous ModelService.ListModelversions   call.
+   *  next_page_token google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token 
+   *  of the previous
+   *  ListModelVersions google.cloud.aiplatform.v1beta1.ModelService.ListModelVersions 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**

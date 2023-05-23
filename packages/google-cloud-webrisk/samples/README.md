@@ -16,11 +16,11 @@
   * [Web_risk_service.create_submission](#web_risk_service.create_submission)
   * [Web_risk_service.search_hashes](#web_risk_service.search_hashes)
   * [Web_risk_service.search_uris](#web_risk_service.search_uris)
+  * [Web_risk_service.submit_uri](#web_risk_service.submit_uri)
   * [Web_risk_service_v1_beta1.compute_threat_list_diff](#web_risk_service_v1_beta1.compute_threat_list_diff)
   * [Web_risk_service_v1_beta1.search_hashes](#web_risk_service_v1_beta1.search_hashes)
   * [Web_risk_service_v1_beta1.search_uris](#web_risk_service_v1_beta1.search_uris)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -105,6 +105,23 @@ __Usage:__
 
 
 
+### Web_risk_service.submit_uri
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js`
+
+
+-----
+
+
+
+
 ### Web_risk_service_v1_beta1.compute_threat_list_diff
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js).
@@ -166,23 +183,6 @@ __Usage:__
 
 
 `node packages/google-cloud-webrisk/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-webrisk/samples/test/quickstart.test.js`
 
 
 

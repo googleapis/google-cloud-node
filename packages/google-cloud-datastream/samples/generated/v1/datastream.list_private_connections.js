@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent that owns the collection of private connectivity configurations.
+   *  Required. The parent that owns the collection of private connectivity
+   *  configurations.
    */
   // const parent = 'abc123'
   /**

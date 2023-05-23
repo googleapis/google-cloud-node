@@ -266,6 +266,11 @@
                 "undeployModel"
               ]
             },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
+              ]
+            },
             "ListEndpoints": {
               "methods": [
                 "listEndpoints",
@@ -306,6 +311,11 @@
             "UndeployModel": {
               "methods": [
                 "undeployModel"
+              ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
               ]
             },
             "ListEndpoints": {
@@ -1606,6 +1616,30 @@
         }
       }
     },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -2007,6 +2041,11 @@
                 "resumeSchedule"
               ]
             },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
+              ]
+            },
             "DeleteSchedule": {
               "methods": [
                 "deleteSchedule"
@@ -2042,6 +2081,11 @@
             "ResumeSchedule": {
               "methods": [
                 "resumeSchedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
               ]
             },
             "DeleteSchedule": {

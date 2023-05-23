@@ -2243,6 +2243,100 @@
                             }
                           ]
                         },
+                        "GetChannelGroup": {
+                          "requestType": "GetChannelGroupRequest",
+                          "responseType": "ChannelGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/channelGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/channelGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListChannelGroups": {
+                          "requestType": "ListChannelGroupsRequest",
+                          "responseType": "ListChannelGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/channelGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/channelGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateChannelGroup": {
+                          "requestType": "CreateChannelGroupRequest",
+                          "responseType": "ChannelGroup",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/channelGroups",
+                            "(google.api.http).body": "channel_group",
+                            "(google.api.method_signature)": "parent,channel_group"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/channelGroups",
+                                "body": "channel_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,channel_group"
+                            }
+                          ]
+                        },
+                        "UpdateChannelGroup": {
+                          "requestType": "UpdateChannelGroupRequest",
+                          "responseType": "ChannelGroup",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{channel_group.name=properties/*/channelGroups/*}",
+                            "(google.api.http).body": "channel_group",
+                            "(google.api.method_signature)": "channel_group,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{channel_group.name=properties/*/channelGroups/*}",
+                                "body": "channel_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "channel_group,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteChannelGroup": {
+                          "requestType": "DeleteChannelGroupRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/channelGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/channelGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "SetAutomatedGa4ConfigurationOptOut": {
                           "requestType": "SetAutomatedGa4ConfigurationOptOutRequest",
                           "responseType": "SetAutomatedGa4ConfigurationOptOutResponse",
@@ -2394,6 +2488,188 @@
                                 "post": "/v1alpha/properties:listConnectedSiteTags",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "FetchConnectedGa4Property": {
+                          "requestType": "FetchConnectedGa4PropertyRequest",
+                          "responseType": "FetchConnectedGa4PropertyResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/properties:fetchConnectedGa4Property"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/properties:fetchConnectedGa4Property"
+                              }
+                            }
+                          ]
+                        },
+                        "GetAdSenseLink": {
+                          "requestType": "GetAdSenseLinkRequest",
+                          "responseType": "AdSenseLink",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/adSenseLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/adSenseLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAdSenseLink": {
+                          "requestType": "CreateAdSenseLinkRequest",
+                          "responseType": "AdSenseLink",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                            "(google.api.http).body": "adsense_link",
+                            "(google.api.method_signature)": "parent,adsense_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                                "body": "adsense_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,adsense_link"
+                            }
+                          ]
+                        },
+                        "DeleteAdSenseLink": {
+                          "requestType": "DeleteAdSenseLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/adSenseLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/adSenseLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAdSenseLinks": {
+                          "requestType": "ListAdSenseLinksRequest",
+                          "responseType": "ListAdSenseLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/adSenseLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/adSenseLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEventCreateRule": {
+                          "requestType": "GetEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListEventCreateRules": {
+                          "requestType": "ListEventCreateRulesRequest",
+                          "responseType": "ListEventCreateRulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateEventCreateRule": {
+                          "requestType": "CreateEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                            "(google.api.http).body": "event_create_rule",
+                            "(google.api.method_signature)": "parent,event_create_rule"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*/dataStreams/*}/eventCreateRules",
+                                "body": "event_create_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,event_create_rule"
+                            }
+                          ]
+                        },
+                        "UpdateEventCreateRule": {
+                          "requestType": "UpdateEventCreateRuleRequest",
+                          "responseType": "EventCreateRule",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{event_create_rule.name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.http).body": "event_create_rule",
+                            "(google.api.method_signature)": "event_create_rule,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{event_create_rule.name=properties/*/dataStreams/*/eventCreateRules/*}",
+                                "body": "event_create_rule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "event_create_rule,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteEventCreateRule": {
+                          "requestType": "DeleteEventCreateRuleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/dataStreams/*/eventCreateRules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -4402,6 +4678,100 @@
                         }
                       }
                     },
+                    "CreateChannelGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ChannelGroup"
+                          }
+                        },
+                        "channelGroup": {
+                          "type": "ChannelGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateChannelGroupRequest": {
+                      "fields": {
+                        "channelGroup": {
+                          "type": "ChannelGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteChannelGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ChannelGroup"
+                          }
+                        }
+                      }
+                    },
+                    "GetChannelGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ChannelGroup"
+                          }
+                        }
+                      }
+                    },
+                    "ListChannelGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ChannelGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListChannelGroupsResponse": {
+                      "fields": {
+                        "channelGroups": {
+                          "rule": "repeated",
+                          "type": "ChannelGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "SetAutomatedGa4ConfigurationOptOutRequest": {
                       "fields": {
                         "property": {
@@ -4558,6 +4928,199 @@
                           "rule": "repeated",
                           "type": "ConnectedSiteTag",
                           "id": 1
+                        }
+                      }
+                    },
+                    "CreateAdSenseLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        },
+                        "adsenseLink": {
+                          "type": "AdSenseLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetAdSenseLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAdSenseLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        }
+                      }
+                    },
+                    "ListAdSenseLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AdSenseLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAdSenseLinksResponse": {
+                      "fields": {
+                        "adsenseLinks": {
+                          "rule": "repeated",
+                          "type": "AdSenseLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchConnectedGa4PropertyRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        }
+                      }
+                    },
+                    "FetchConnectedGa4PropertyResponse": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        }
+                      }
+                    },
+                    "CreateEventCreateRuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        },
+                        "eventCreateRule": {
+                          "type": "EventCreateRule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEventCreateRuleRequest": {
+                      "fields": {
+                        "eventCreateRule": {
+                          "type": "EventCreateRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEventCreateRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        }
+                      }
+                    },
+                    "GetEventCreateRuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        }
+                      }
+                    },
+                    "ListEventCreateRulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/EventCreateRule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEventCreateRulesResponse": {
+                      "fields": {
+                        "eventCreateRules": {
+                          "rule": "repeated",
+                          "type": "EventCreateRule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -5021,6 +5584,283 @@
                         }
                       }
                     },
+                    "ChannelGroupFilter": {
+                      "oneofs": {
+                        "valueFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 3
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StringFilter": {
+                          "fields": {
+                            "matchType": {
+                              "type": "MatchType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MatchType": {
+                              "values": {
+                                "MATCH_TYPE_UNSPECIFIED": 0,
+                                "EXACT": 1,
+                                "BEGINS_WITH": 2,
+                                "ENDS_WITH": 3,
+                                "CONTAINS": 4,
+                                "FULL_REGEXP": 5,
+                                "PARTIAL_REGEXP": 6
+                              }
+                            }
+                          }
+                        },
+                        "InListFilter": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ChannelGroupFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "filter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "ChannelGroupFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "ChannelGroupFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "ChannelGroupFilterExpression",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "ChannelGroupFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ChannelGroupFilterExpressionList": {
+                      "fields": {
+                        "filterExpressions": {
+                          "rule": "repeated",
+                          "type": "ChannelGroupFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GroupingRule": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "expression": {
+                          "type": "ChannelGroupFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ChannelGroup": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ChannelGroup",
+                        "(google.api.resource).pattern": "properties/{property}/channelGroups/{channel_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "groupingRule": {
+                          "rule": "repeated",
+                          "type": "GroupingRule",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "systemDefined": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ParameterMutation": {
+                      "fields": {
+                        "parameter": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameterValue": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EventCreateRule": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/EventCreateRule",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}/eventCreateRules/{event_create_rule}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationEvent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventConditions": {
+                          "rule": "repeated",
+                          "type": "MatchingCondition",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceCopyParameters": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "parameterMutations": {
+                          "rule": "repeated",
+                          "type": "ParameterMutation",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "MatchingCondition": {
+                      "fields": {
+                        "field": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "comparisonType": {
+                          "type": "ComparisonType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "negated": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ComparisonType": {
+                          "values": {
+                            "COMPARISON_TYPE_UNSPECIFIED": 0,
+                            "EQUALS": 1,
+                            "EQUALS_CASE_INSENSITIVE": 2,
+                            "CONTAINS": 3,
+                            "CONTAINS_CASE_INSENSITIVE": 4,
+                            "STARTS_WITH": 5,
+                            "STARTS_WITH_CASE_INSENSITIVE": 6,
+                            "ENDS_WITH": 7,
+                            "ENDS_WITH_CASE_INSENSITIVE": 8,
+                            "GREATER_THAN": 9,
+                            "GREATER_THAN_OR_EQUAL": 10,
+                            "LESS_THAN": 11,
+                            "LESS_THAN_OR_EQUAL": 12,
+                            "REGULAR_EXPRESSION": 13,
+                            "REGULAR_EXPRESSION_CASE_INSENSITIVE": 14
+                          }
+                        }
+                      }
+                    },
                     "ExpandedDataSetFilter": {
                       "oneofs": {
                         "oneFilter": {
@@ -5270,7 +6110,10 @@
                         "ATTRIBUTION_SETTINGS": 20,
                         "EXPANDED_DATA_SET": 21,
                         "CHANNEL_GROUP": 22,
-                        "ENHANCED_MEASUREMENT_SETTINGS": 24
+                        "ENHANCED_MEASUREMENT_SETTINGS": 24,
+                        "ADSENSE_LINK": 27,
+                        "AUDIENCE": 28,
+                        "EVENT_CREATE_RULE": 29
                       }
                     },
                     "GoogleSignalsState": {
@@ -5924,8 +6767,12 @@
                                 "dataStream",
                                 "attributionSettings",
                                 "expandedDataSet",
+                                "channelGroup",
                                 "bigqueryLink",
-                                "enhancedMeasurementSettings"
+                                "enhancedMeasurementSettings",
+                                "adsenseLink",
+                                "audience",
+                                "eventCreateRule"
                               ]
                             }
                           },
@@ -5994,6 +6841,10 @@
                               "type": "ExpandedDataSet",
                               "id": 21
                             },
+                            "channelGroup": {
+                              "type": "ChannelGroup",
+                              "id": 22
+                            },
                             "bigqueryLink": {
                               "type": "BigQueryLink",
                               "id": 23
@@ -6001,6 +6852,18 @@
                             "enhancedMeasurementSettings": {
                               "type": "EnhancedMeasurementSettings",
                               "id": 24
+                            },
+                            "adsenseLink": {
+                              "type": "AdSenseLink",
+                              "id": 27
+                            },
+                            "audience": {
+                              "type": "Audience",
+                              "id": 28
+                            },
+                            "eventCreateRule": {
+                              "type": "EventCreateRule",
+                              "id": 29
                             }
                           }
                         }
@@ -6316,7 +7179,8 @@
                           "values": {
                             "DIMENSION_SCOPE_UNSPECIFIED": 0,
                             "EVENT": 1,
-                            "USER": 2
+                            "USER": 2,
+                            "ITEM": 3
                           }
                         }
                       }
@@ -6667,6 +7531,28 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AdSenseLink": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/AdSenseLink",
+                        "(google.api.resource).pattern": "properties/{property}/adSenseLinks/{adsense_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adClientCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }

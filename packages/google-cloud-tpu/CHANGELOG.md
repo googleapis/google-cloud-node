@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.6.0...tpu-v2.6.1) (2023-05-04)
+
+
+### Bug Fixes
+
+* [tpu] restrict the visibility of an API ([#4234](https://github.com/googleapis/google-cloud-node/issues/4234)) ([2421e93](https://github.com/googleapis/google-cloud-node/commit/2421e933f19af7edd6d250a5e30f75b832029cd2))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.5.1...tpu-v2.6.0) (2023-04-24)
 
 

@@ -1242,6 +1242,9 @@ export namespace google {
 
                     /** Entitlement parameters */
                     parameters?: (google.cloud.channel.v1.IParameter[]|null);
+
+                    /** Entitlement billingAccount */
+                    billingAccount?: (string|null);
                 }
 
                 /** Represents an Entitlement. */
@@ -1288,6 +1291,9 @@ export namespace google {
 
                     /** Entitlement parameters. */
                     public parameters: google.cloud.channel.v1.IParameter[];
+
+                    /** Entitlement billingAccount. */
+                    public billingAccount: string;
 
                     /**
                      * Creates a new Entitlement instance using the specified properties.
@@ -4344,6 +4350,9 @@ export namespace google {
 
                     /** FetchReportResultsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** FetchReportResultsRequest partitionKeys */
+                    partitionKeys?: (string[]|null);
                 }
 
                 /** Represents a FetchReportResultsRequest. */
@@ -4363,6 +4372,9 @@ export namespace google {
 
                     /** FetchReportResultsRequest pageToken. */
                     public pageToken: string;
+
+                    /** FetchReportResultsRequest partitionKeys. */
+                    public partitionKeys: string[];
 
                     /**
                      * Creates a new FetchReportResultsRequest instance using the specified properties.
@@ -5230,6 +5242,9 @@ export namespace google {
 
                     /** Row values */
                     values?: (google.cloud.channel.v1.IReportValue[]|null);
+
+                    /** Row partitionKey */
+                    partitionKey?: (string|null);
                 }
 
                 /** Represents a Row. */
@@ -5243,6 +5258,9 @@ export namespace google {
 
                     /** Row values. */
                     public values: google.cloud.channel.v1.IReportValue[];
+
+                    /** Row partitionKey. */
+                    public partitionKey: string;
 
                     /**
                      * Creates a new Row instance using the specified properties.

@@ -5,6 +5,730 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "84fb1febb2e50ba9aa1c7d863eb31ab0aab52e25",
+          "message": "Add initial files for google.cloud.support.v2",
+          "issues": [
+            "4288"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "4cc13bbb-f300-4a0f-8c9d-93caec5d50d4",
+      "createTime": "2023-05-22T17:28:11.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ac249801878b0c7271722c0bf128eb2c0437bf44",
+          "message": "Add initial files for google.maps.places.v1",
+          "issues": [
+            "4289"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "43db6c0a-dd86-476a-a6cb-6fb02d165696",
+      "createTime": "2023-05-20T02:26:24.513Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ee6e6996c8d08786076482508470380e4b2b7465",
+          "message": "[workstations] add output field for the control plane IP address",
+          "issues": [
+            "4263"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "5ac05870-a0b1-48f1-8de9-c061bfbef96a",
+      "createTime": "2023-05-20T02:26:24.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "40edfc52a9894cf57b389c2744563bfa490102cb",
+          "message": "[webrisk] add SubmitUri endpoint",
+          "issues": [
+            "4286"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "8ddc6b6b-9ce9-4d58-9f96-ebb89d88ebcd",
+      "createTime": "2023-05-20T02:26:24.507Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bf5631932cd0f2f52c23caaba235b04222a1a609",
+          "message": "[kms] added VerifyConnectivity RPC",
+          "issues": [
+            "4274"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "3ffe8b2e-be7b-403c-b425-e294f876068d",
+      "createTime": "2023-05-20T02:26:24.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88877b9509815d76f1915aa87e97597ec7e1520d",
+          "message": "[dialogflow] add baseline model configuration for conversation summarization",
+          "issues": [
+            "4255"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "103b69e9-d4ea-4243-8626-aa749395f356",
+      "createTime": "2023-05-20T02:26:24.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f2c4a78cb8929ea10713f5fa043cbe30df378287",
+          "message": "[datastream] Max concurrent backfill tasks",
+          "issues": [
+            "4254"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "7bc86fc5-2bcc-4be6-9950-b8c2557ffc45",
+      "createTime": "2023-05-20T02:26:24.496Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65fadd5fedea461b89cf7aeeb0f825a83dd81e02",
+          "message": "[clouddms] add Oracle to PostgreSQL migration APIs",
+          "issues": [
+            "4285"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "acb663f3-4ade-4f90-bc2c-14e566d21f03",
+      "createTime": "2023-05-20T02:26:24.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3defaa1caaa70a9384eddc0281645a9bf6c860cb",
+          "message": "[channel] added partition_keys field to filter results from FetchReportResults",
+          "issues": [
+            "4279"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "b4a4fbab-ab31-4b99-802e-90e7958240da",
+      "createTime": "2023-05-20T02:26:24.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9ece2b7d96f3b18b32acfd5e24ba38f52f39dab9",
+          "message": "[batch] add support for placement policies",
+          "issues": [
+            "4182"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "9e281631-aa27-4cd4-89de-e621966a868e",
+      "createTime": "2023-05-20T02:26:24.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d1e67beadf1910378989cd1bd3c19cbe000973d7",
+          "message": "Add updateSchedule method to ScheduleService",
+          "issues": [
+            "4280"
+          ]
+        }
+      ],
+      "version": "2.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "dfabd532-1745-47d4-b9da-0e9f0c7b1694",
+      "createTime": "2023-05-20T02:26:24.480Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f0e6e1b85fa68c02a350fed5ffcc6db0bb64fdd",
+          "message": "[analytics-admin] add `GetAdSenseLink`, `CreateAdSenseLink`, `DeleteAdSenseLink`, `ListAdSenseLinks` methods to the Admin API v1alpha",
+          "issues": [
+            "4276"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "084303f1-a65c-4120-8b07-45105027b513",
+      "createTime": "2023-05-20T02:26:24.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a5389596ba5b0c707582612a6b2aa84385fefc26",
+          "message": "Do not exit with 1 on empty folder",
+          "issues": [
+            "4272"
+          ]
+        }
+      ],
+      "version": "1.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "0b204f0b-d47b-4d59-b14c-bb66d75f445e",
+      "createTime": "2023-05-11T22:03:10.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8b5caebc2569c715a4fee03e6bcc5e5cd2ca5150",
+          "message": "Add processing strategy to batch recognition requests",
+          "issues": [
+            "4268"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "1dfc19b9-45b0-41bd-8dab-c0fe1d078878",
+      "createTime": "2023-05-11T22:03:10.634Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added debug info to StreamingDetectIntent",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added dtmf digits to WebhookRequest",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added FLOW as a new DiffType in TestRunDifference",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "[dialogflow-cx] extended CreateAgent timeout to 180 seconds",
+          "issues": [
+            "4253"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added debug info to StreamingDetectIntent",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added dtmf digits to WebhookRequest",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "Added FLOW as a new DiffType in TestRunDifference",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7",
+          "message": "[dialogflow-cx] extended CreateAgent timeout to 180 seconds",
+          "issues": []
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "48831956-cb59-40d8-95f0-6e17d324dccd",
+      "createTime": "2023-05-11T22:03:10.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "405cbe236171808ca3b49faa933c2078bebd09d6",
+          "message": "Address typo in package.json",
+          "issues": [],
+          "scope": "build"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "9da03a8c-e1c1-40cf-a217-f9518a09ca2e",
+      "createTime": "2023-05-09T22:01:41.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1427b2bf0cac31a3fbd10f607b2a5d9803f3a18f",
+          "message": "[redis] [Cloud Memorystore for Redis] Add CMEK key field",
+          "issues": [
+            "4251"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "80002c20-6d9e-454a-86a6-942c36563fac",
+      "createTime": "2023-05-09T22:01:41.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ebb81915abb57c6ce48614e8d39cc1fea84bdc",
+          "message": "[servicecontrol] Log Analytics features of the Cloud Logging API",
+          "issues": [
+            "4252"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "b66cfec7-ca60-444f-a93b-5d43783e9a3c",
+      "createTime": "2023-05-09T22:01:41.507Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "871c86f8524d9afc6aec29dbc00f2cd3eaf0445b",
+          "message": "Add initial files for google.cloud.storageinsights.v1",
+          "issues": [
+            "4243"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "4449d818-9444-4838-9772-36f99721fd7d",
+      "createTime": "2023-05-09T16:59:05.869Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0d4c47eb5d884e3cb760941e616e03769a1e8733",
+          "message": "[channel] Add billing account to entitlement definitions for Cloud Channel API",
+          "issues": [
+            "4250"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "7b3985d6-5c3d-496c-98a2-de584dc873bf",
+      "createTime": "2023-05-09T16:59:05.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4af8ae27af952194885939a3e8014089bf7fc01e",
+          "message": "Add example_gcs_source to Examples in aiplatform v1beta1 explanation.proto",
+          "issues": [
+            "4249"
+          ]
+        }
+      ],
+      "version": "2.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "db8c7ed5-0699-4bc7-9448-b9e2ea64f910",
+      "createTime": "2023-05-09T16:59:05.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "76b2df71b44de5f1764749f8393f2a2cee68221e",
+          "message": "[generativelanguage] Add safety settings",
+          "issues": [
+            "4248"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "f09f4780-ec17-4142-9d3d-bfd70bec5b9a",
+      "createTime": "2023-05-06T06:13:26.255Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0fee2bb364c671cb70b62a81567cf3544587eed",
+          "message": "[container] add a new feature for fleet registration via cluster update in v1alpha1, v1beta1, v1",
+          "issues": [
+            "4244"
+          ]
+        }
+      ],
+      "version": "4.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "50149eea-efcb-4a21-bf23-31017f630fcf",
+      "createTime": "2023-05-06T06:13:26.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "869218ffb438d90c3d6cb5e4566d7ad2d201020e",
+          "message": "[container] support fleet registration via cluster update",
+          "issues": [
+            "4235"
+          ]
+        }
+      ],
+      "version": "4.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cf2e1f61-c0e0-4cbf-a2be-bfc9bc26a072",
+      "createTime": "2023-05-04T19:02:19.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2421e933f19af7edd6d250a5e30f75b832029cd2",
+          "message": "[tpu] restrict the visibility of an API",
+          "issues": [
+            "4234"
+          ]
+        }
+      ],
+      "version": "2.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "c92dcbc7-78be-4a55-a464-6dc166121a28",
+      "createTime": "2023-05-04T19:02:19.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d8520421c0d4c306d8a0d2cf8bf94186d6a27a6b",
+          "message": "Fix sample links in README",
+          "issues": [
+            "4236"
+          ],
+          "scope": "docs"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "b92dca26-b078-416d-90f9-e2b524246061",
+      "createTime": "2023-05-04T18:01:19.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cfaa0530fdb35bdbcd52a04b4b9fb30946572449",
+          "message": "[talent] change timeout settings for SearchJobsForAlert",
+          "issues": [
+            "4227"
+          ]
+        }
+      ],
+      "version": "5.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "8c707900-dd74-492e-b6db-81ad442ef6e4",
+      "createTime": "2023-05-04T06:19:34.845Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b1b4e29f09759a8161c4e26473333ec729fa5165",
+          "message": "[run] Adds support for Startup CPU Boost (GA)",
+          "issues": [
+            "4220"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "10a34898-3bee-46d2-b1b0-764b4b469dba",
+      "createTime": "2023-05-04T06:19:34.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "454fa7943ddf664bc54a67e654d7e8a39ea55fed",
+          "message": "[discoveryengine] add document purge API",
+          "issues": [
+            "4219"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "2d5225d6-5b5f-489a-a9eb-7d40d6c1c904",
+      "createTime": "2023-05-04T06:19:34.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "840390b4fdad779617572db6ce54922cb894e667",
+          "message": "[deploy] added support for DeployArtifacts",
+          "issues": [
+            "4222"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "d1ef1774-76ab-485b-995e-c4d8e9364926",
+      "createTime": "2023-05-04T06:19:34.834Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5268d24478595c01fe04215f50ece5558cfcdc46",
+          "message": "[dataplex] added new Dataplex APIs and new features for existing APIs (e.g. DataScans)",
+          "issues": [
+            "4230"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "5791d5d5-e1ec-41e8-8f48-e50d47d56142",
+      "createTime": "2023-05-04T06:19:34.829Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5367d25cdaa4e935e5c1e345622bf4cbd7131e1a",
+          "message": "Add model_garden_service.proto and publisher_model.proto to BUILD.bazel",
+          "issues": [
+            "4225"
+          ]
+        }
+      ],
+      "version": "2.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "745eabb6-4f17-4e93-b9e9-6d171ef21a52",
+      "createTime": "2023-05-04T06:19:34.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8db807ae80a695bb1ad4fa290bc9a50ce29a8365",
+          "message": "Add initial files for google.ai.generativelanguage.v1beta2",
+          "issues": [
+            "4224"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "c5999974-f512-4db6-a7f8-01b5606c6c66",
+      "createTime": "2023-05-02T17:44:53.222Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dc2e138872f7fd7dab8c3e626452b15e20459bd4",
+          "message": "[orchestration] add airflow_byoid_uri field to Cloud Composer API",
+          "issues": [
+            "4210"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "c5609628-1d40-4e8b-a0af-aaed81554d47",
+      "createTime": "2023-05-02T17:44:53.219Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f12c277d7f7566ead6128076c1c9ba81a856256a",
+          "message": "[contactcenterinsights] support for generating summaries during conversation analysis",
+          "issues": [
+            "4215"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "6b2edf35-e6e6-4218-b2b2-18454547ccf3",
+      "createTime": "2023-05-02T17:44:53.216Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add NVIDIA_L4 to AcceleratorType",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add experiment and experiment_run to CustomJobSpec",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add MutateDeployedModel RPC to endpoint_service",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add offline_storage_ttl_days to EntityType",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add online_storage_ttl_days to FeatureStore",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add GENIE to ModelSourceType",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "20eafa1b79ca8f255400d4eb00fb6d398d3a3980",
+          "message": "Add NVIDIA_L4 to AcceleratorType",
+          "issues": [
+            "4216"
+          ]
+        }
+      ],
+      "version": "2.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e27f05ff-d7ca-44ad-8305-915152e7b44b",
+      "createTime": "2023-05-02T17:44:53.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "14d2cc9ccf3b974bce2fc3ab9ff96ec8bdf166bd",
+          "message": "[servicecontrol] add a proto message used for batch mode resource info for ServiceController V2",
+          "issues": [
+            "4213"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "82dd6f93-6e7c-4847-8b4a-c088a38cc699",
+      "createTime": "2023-05-02T17:44:53.210Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5af79e1a4ed1742009bc48e2ee61933b28e45d9e",
+          "message": "[analytics-admin] add `FetchConnectedGa4Property` method to the Admin API v1alpha",
+          "issues": [
+            "4207"
+          ]
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "78487200-6041-4743-8dbf-9a47c9c48a88",
+      "createTime": "2023-05-02T17:44:53.207Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a2e0b9ed07f58228386f8ebcf5c16fa7ac589cc3",
           "message": "Add initial files for google.cloud.confidentialcomputing.v1alpha1",
           "issues": [
@@ -8978,5 +9702,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-04-24T18:38:43.643Z"
+  "updateTime": "2023-05-22T17:28:11.924Z"
 }

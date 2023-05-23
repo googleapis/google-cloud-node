@@ -11102,6 +11102,549 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getChannelGroup', () => {
+    it('invokes getChannelGroup without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.getChannelGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getChannelGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getChannelGroup without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.getChannelGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getChannelGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IChannelGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getChannelGroup with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getChannelGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getChannelGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getChannelGroup with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getChannelGroup(request), expectedError);
+    });
+  });
+
+  describe('createChannelGroup', () => {
+    it('invokes createChannelGroup without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateChannelGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.createChannelGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createChannelGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createChannelGroup without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateChannelGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.createChannelGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createChannelGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IChannelGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createChannelGroup with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateChannelGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createChannelGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createChannelGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createChannelGroup with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateChannelGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createChannelGroup(request), expectedError);
+    });
+  });
+
+  describe('updateChannelGroup', () => {
+    it('invokes updateChannelGroup without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateChannelGroupRequest()
+      );
+      request.channelGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateChannelGroupRequest',
+        ['channelGroup', 'name']
+      );
+      request.channelGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_group.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.updateChannelGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateChannelGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateChannelGroup without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateChannelGroupRequest()
+      );
+      request.channelGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateChannelGroupRequest',
+        ['channelGroup', 'name']
+      );
+      request.channelGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_group.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ChannelGroup()
+      );
+      client.innerApiCalls.updateChannelGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateChannelGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IChannelGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateChannelGroup with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateChannelGroupRequest()
+      );
+      request.channelGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateChannelGroupRequest',
+        ['channelGroup', 'name']
+      );
+      request.channelGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_group.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateChannelGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateChannelGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateChannelGroup with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateChannelGroupRequest()
+      );
+      request.channelGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateChannelGroupRequest',
+        ['channelGroup', 'name']
+      );
+      request.channelGroup.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateChannelGroup(request), expectedError);
+    });
+  });
+
+  describe('deleteChannelGroup', () => {
+    it('invokes deleteChannelGroup without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteChannelGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteChannelGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteChannelGroup without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteChannelGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteChannelGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteChannelGroup with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteChannelGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteChannelGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteChannelGroup with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteChannelGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteChannelGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteChannelGroup(request), expectedError);
+    });
+  });
+
   describe('setAutomatedGa4ConfigurationOptOut', () => {
     it('invokes setAutomatedGa4ConfigurationOptOut without error', async () => {
       const client =
@@ -11991,6 +12534,1064 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.close();
       await assert.rejects(
         client.listConnectedSiteTags(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('fetchConnectedGa4Property', () => {
+    it('invokes fetchConnectedGa4Property without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse()
+      );
+      client.innerApiCalls.fetchConnectedGa4Property =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchConnectedGa4Property(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes fetchConnectedGa4Property without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse()
+      );
+      client.innerApiCalls.fetchConnectedGa4Property =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchConnectedGa4Property(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes fetchConnectedGa4Property with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchConnectedGa4Property = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchConnectedGa4Property(request),
+        expectedError
+      );
+    });
+
+    it('invokes fetchConnectedGa4Property with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.fetchConnectedGa4Property(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getAdSenseLink', () => {
+    it('invokes getAdSenseLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.AdSenseLink()
+      );
+      client.innerApiCalls.getAdSenseLink = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAdSenseLink(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdSenseLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.AdSenseLink()
+      );
+      client.innerApiCalls.getAdSenseLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAdSenseLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IAdSenseLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdSenseLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAdSenseLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAdSenseLink(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAdSenseLink with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAdSenseLink(request), expectedError);
+    });
+  });
+
+  describe('createAdSenseLink', () => {
+    it('invokes createAdSenseLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.AdSenseLink()
+      );
+      client.innerApiCalls.createAdSenseLink = stubSimpleCall(expectedResponse);
+      const [response] = await client.createAdSenseLink(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdSenseLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.AdSenseLink()
+      );
+      client.innerApiCalls.createAdSenseLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAdSenseLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IAdSenseLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdSenseLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAdSenseLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAdSenseLink(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAdSenseLink with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateAdSenseLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAdSenseLink(request), expectedError);
+    });
+  });
+
+  describe('deleteAdSenseLink', () => {
+    it('invokes deleteAdSenseLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdSenseLink = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAdSenseLink(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdSenseLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAdSenseLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAdSenseLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdSenseLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAdSenseLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAdSenseLink(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdSenseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAdSenseLink with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAdSenseLink(request), expectedError);
+    });
+  });
+
+  describe('getEventCreateRule', () => {
+    it('invokes getEventCreateRule without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.getEventCreateRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getEventCreateRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEventCreateRule without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.getEventCreateRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEventCreateRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IEventCreateRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEventCreateRule with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEventCreateRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getEventCreateRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEventCreateRule with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEventCreateRule(request), expectedError);
+    });
+  });
+
+  describe('createEventCreateRule', () => {
+    it('invokes createEventCreateRule without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.createEventCreateRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createEventCreateRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEventCreateRule without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.createEventCreateRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createEventCreateRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IEventCreateRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEventCreateRule with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createEventCreateRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createEventCreateRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEventCreateRule with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateEventCreateRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createEventCreateRule(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateEventCreateRule', () => {
+    it('invokes updateEventCreateRule without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest()
+      );
+      request.eventCreateRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest',
+        ['eventCreateRule', 'name']
+      );
+      request.eventCreateRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `event_create_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.updateEventCreateRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateEventCreateRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEventCreateRule without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest()
+      );
+      request.eventCreateRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest',
+        ['eventCreateRule', 'name']
+      );
+      request.eventCreateRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `event_create_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EventCreateRule()
+      );
+      client.innerApiCalls.updateEventCreateRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateEventCreateRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IEventCreateRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEventCreateRule with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest()
+      );
+      request.eventCreateRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest',
+        ['eventCreateRule', 'name']
+      );
+      request.eventCreateRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `event_create_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEventCreateRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateEventCreateRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEventCreateRule with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest()
+      );
+      request.eventCreateRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest',
+        ['eventCreateRule', 'name']
+      );
+      request.eventCreateRule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateEventCreateRule(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteEventCreateRule', () => {
+    it('invokes deleteEventCreateRule without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteEventCreateRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteEventCreateRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEventCreateRule without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteEventCreateRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteEventCreateRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEventCreateRule with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteEventCreateRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteEventCreateRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEventCreateRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteEventCreateRule with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteEventCreateRule(request),
         expectedError
       );
     });
@@ -18286,6 +19887,344 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listChannelGroups', () => {
+    it('invokes listChannelGroups without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+      ];
+      client.innerApiCalls.listChannelGroups = stubSimpleCall(expectedResponse);
+      const [response] = await client.listChannelGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listChannelGroups without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+      ];
+      client.innerApiCalls.listChannelGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listChannelGroups(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IChannelGroup[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listChannelGroups with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listChannelGroups = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listChannelGroups(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listChannelGroupsStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+      ];
+      client.descriptors.page.listChannelGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listChannelGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ChannelGroup[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.ChannelGroup) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listChannelGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannelGroups, request)
+      );
+      assert(
+        (client.descriptors.page.listChannelGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listChannelGroupsStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listChannelGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ChannelGroup[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.ChannelGroup) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listChannelGroups.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listChannelGroups, request)
+      );
+      assert(
+        (client.descriptors.page.listChannelGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listChannelGroups without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChannelGroup()
+        ),
+      ];
+      client.descriptors.page.listChannelGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IChannelGroup[] =
+        [];
+      const iterable = client.listChannelGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listChannelGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listChannelGroups with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListChannelGroupsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListChannelGroupsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listChannelGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listChannelGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IChannelGroup[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listChannelGroups.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listChannelGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('listBigQueryLinks', () => {
     it('invokes listBigQueryLinks without error', async () => {
       const client =
@@ -18624,6 +20563,681 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listAdSenseLinks', () => {
+    it('invokes listAdSenseLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+      ];
+      client.innerApiCalls.listAdSenseLinks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAdSenseLinks(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdSenseLinks without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+      ];
+      client.innerApiCalls.listAdSenseLinks =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAdSenseLinks(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IAdSenseLink[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdSenseLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAdSenseLinks = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAdSenseLinks(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdSenseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAdSenseLinksStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+      ];
+      client.descriptors.page.listAdSenseLinks.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAdSenseLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.AdSenseLink[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.AdSenseLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdSenseLinks, request)
+      );
+      assert(
+        (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAdSenseLinksStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdSenseLinks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAdSenseLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.AdSenseLink[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.AdSenseLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAdSenseLinks, request)
+      );
+      assert(
+        (client.descriptors.page.listAdSenseLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdSenseLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.AdSenseLink()
+        ),
+      ];
+      client.descriptors.page.listAdSenseLinks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IAdSenseLink[] =
+        [];
+      const iterable = client.listAdSenseLinksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAdSenseLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListAdSenseLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListAdSenseLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAdSenseLinks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAdSenseLinksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IAdSenseLink[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAdSenseLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listEventCreateRules', () => {
+    it('invokes listEventCreateRules without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+      ];
+      client.innerApiCalls.listEventCreateRules =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listEventCreateRules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEventCreateRules without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+      ];
+      client.innerApiCalls.listEventCreateRules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEventCreateRules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IEventCreateRule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEventCreateRules with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEventCreateRules = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listEventCreateRules(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEventCreateRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEventCreateRulesStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+      ];
+      client.descriptors.page.listEventCreateRules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEventCreateRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.EventCreateRule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.EventCreateRule) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEventCreateRules, request)
+      );
+      assert(
+        (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listEventCreateRulesStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEventCreateRules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEventCreateRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.EventCreateRule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.EventCreateRule) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEventCreateRules, request)
+      );
+      assert(
+        (client.descriptors.page.listEventCreateRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEventCreateRules without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.EventCreateRule()
+        ),
+      ];
+      client.descriptors.page.listEventCreateRules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IEventCreateRule[] =
+        [];
+      const iterable = client.listEventCreateRulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEventCreateRules with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListEventCreateRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListEventCreateRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEventCreateRules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEventCreateRulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IEventCreateRule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEventCreateRules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('account', () => {
       const fakePath = '/rendered/path/account';
@@ -18821,6 +21435,59 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
     });
 
+    describe('adSenseLink', () => {
+      const fakePath = '/rendered/path/adSenseLink';
+      const expectedParameters = {
+        property: 'propertyValue',
+        adsense_link: 'adsenseLinkValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.adSenseLinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adSenseLinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adSenseLinkPath', () => {
+        const result = client.adSenseLinkPath(
+          'propertyValue',
+          'adsenseLinkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adSenseLinkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromAdSenseLinkName', () => {
+        const result = client.matchPropertyFromAdSenseLinkName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.adSenseLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAdsenseLinkFromAdSenseLinkName', () => {
+        const result = client.matchAdsenseLinkFromAdSenseLinkName(fakePath);
+        assert.strictEqual(result, 'adsenseLinkValue');
+        assert(
+          (client.pathTemplates.adSenseLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('attributionSettings', () => {
       const fakePath = '/rendered/path/attributionSettings';
       const expectedParameters = {
@@ -18964,6 +21631,59 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'bigqueryLinkValue');
         assert(
           (client.pathTemplates.bigQueryLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('channelGroup', () => {
+      const fakePath = '/rendered/path/channelGroup';
+      const expectedParameters = {
+        property: 'propertyValue',
+        channel_group: 'channelGroupValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.channelGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.channelGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('channelGroupPath', () => {
+        const result = client.channelGroupPath(
+          'propertyValue',
+          'channelGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.channelGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromChannelGroupName', () => {
+        const result = client.matchPropertyFromChannelGroupName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.channelGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelGroupFromChannelGroupName', () => {
+        const result = client.matchChannelGroupFromChannelGroupName(fakePath);
+        assert.strictEqual(result, 'channelGroupValue');
+        assert(
+          (client.pathTemplates.channelGroupPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -19426,6 +22146,72 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             client.pathTemplates.enhancedMeasurementSettingsPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('eventCreateRule', () => {
+      const fakePath = '/rendered/path/eventCreateRule';
+      const expectedParameters = {
+        property: 'propertyValue',
+        data_stream: 'dataStreamValue',
+        event_create_rule: 'eventCreateRuleValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.eventCreateRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.eventCreateRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('eventCreateRulePath', () => {
+        const result = client.eventCreateRulePath(
+          'propertyValue',
+          'dataStreamValue',
+          'eventCreateRuleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.eventCreateRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromEventCreateRuleName', () => {
+        const result = client.matchPropertyFromEventCreateRuleName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.eventCreateRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStreamFromEventCreateRuleName', () => {
+        const result = client.matchDataStreamFromEventCreateRuleName(fakePath);
+        assert.strictEqual(result, 'dataStreamValue');
+        assert(
+          (client.pathTemplates.eventCreateRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEventCreateRuleFromEventCreateRuleName', () => {
+        const result =
+          client.matchEventCreateRuleFromEventCreateRuleName(fakePath);
+        assert.strictEqual(result, 'eventCreateRuleValue');
+        assert(
+          (client.pathTemplates.eventCreateRulePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

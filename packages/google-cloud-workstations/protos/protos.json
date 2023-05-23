@@ -566,6 +566,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "controlPlaneIp": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "privateClusterConfig": {
                           "type": "PrivateClusterConfig",
                           "id": 12
@@ -706,7 +713,10 @@
                         },
                         "encryptionKey": {
                           "type": "CustomerEncryptionKey",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "degraded": {
                           "type": "bool",
@@ -758,6 +768,13 @@
                                 "poolSize": {
                                   "type": "int32",
                                   "id": 5
+                                },
+                                "pooledInstances": {
+                                  "type": "int32",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "disablePublicIpAddresses": {
                                   "type": "bool",
@@ -898,11 +915,17 @@
                           "fields": {
                             "kmsKey": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             },
                             "kmsKeyServiceAccount": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             }
                           }
                         }
@@ -2156,6 +2179,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "controlPlaneIp": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "privateClusterConfig": {
                           "type": "PrivateClusterConfig",
                           "id": 12
@@ -2296,7 +2326,15 @@
                         },
                         "encryptionKey": {
                           "type": "CustomerEncryptionKey",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "readinessChecks": {
+                          "rule": "repeated",
+                          "type": "ReadinessCheck",
+                          "id": 19
                         },
                         "degraded": {
                           "type": "bool",
@@ -2312,6 +2350,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "enableAuditAgent": {
+                          "type": "bool",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -2349,6 +2391,13 @@
                                   "type": "int32",
                                   "id": 5
                                 },
+                                "pooledInstances": {
+                                  "type": "int32",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
                                 "disablePublicIpAddresses": {
                                   "type": "bool",
                                   "id": 6
@@ -2364,6 +2413,11 @@
                                 "bootDiskSizeGb": {
                                   "type": "int32",
                                   "id": 9
+                                },
+                                "accelerators": {
+                                  "rule": "repeated",
+                                  "type": "Accelerator",
+                                  "id": 11
                                 }
                               },
                               "nested": {
@@ -2388,6 +2442,18 @@
                                     "enableConfidentialCompute": {
                                       "type": "bool",
                                       "id": 1
+                                    }
+                                  }
+                                },
+                                "Accelerator": {
+                                  "fields": {
+                                    "type": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 2
                                     }
                                   }
                                 }
@@ -2484,10 +2550,28 @@
                           "fields": {
                             "kmsKey": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             },
                             "kmsKeyServiceAccount": {
                               "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        },
+                        "ReadinessCheck": {
+                          "fields": {
+                            "path": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "port": {
+                              "type": "int32",
                               "id": 2
                             }
                           }
@@ -2571,6 +2655,11 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "env": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
                         }
                       },
                       "nested": {
