@@ -27,6 +27,10 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -61,6 +65,8 @@ export class DataMigrationServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   dataMigrationServiceStub?: Promise<{[name: string]: Function}>;
@@ -158,6 +164,12 @@ export class DataMigrationServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -184,11 +196,17 @@ export class DataMigrationServiceClient {
       connectionProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connectionProfiles/{connection_profile}'
       ),
+      conversionWorkspacePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
       migrationJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/migrationJobs/{migration_job}'
+      ),
+      privateConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateConnections/{private_connection}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -208,6 +226,26 @@ export class DataMigrationServiceClient {
         'pageToken',
         'nextPageToken',
         'connectionProfiles'
+      ),
+      listPrivateConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'privateConnections'
+      ),
+      listConversionWorkspaces: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'conversionWorkspaces'
+      ),
+      describeDatabaseEntities: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'databaseEntities'
+      ),
+      fetchStaticIps: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'staticIps'
       ),
     };
 
@@ -237,6 +275,12 @@ export class DataMigrationServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/migrationJobs/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/conversionWorkspaces/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/privateConnections/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -248,6 +292,14 @@ export class DataMigrationServiceClient {
               post: '/v1/{resource=projects/*/locations/*/migrationJobs/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/conversionWorkspaces/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/privateConnections/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -257,6 +309,14 @@ export class DataMigrationServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/connectionProfiles/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/conversionWorkspaces/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/privateConnections/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -355,6 +415,72 @@ export class DataMigrationServiceClient {
     const deleteConnectionProfileMetadata = protoFilesRoot.lookup(
       '.google.cloud.clouddms.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createPrivateConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.PrivateConnection'
+    ) as gax.protobuf.Type;
+    const createPrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deletePrivateConnectionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deletePrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const createConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const updateConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const seedConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const seedConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const importMappingRulesResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const importMappingRulesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const convertConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const convertConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const commitConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const commitConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const rollbackConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const rollbackConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const applyConversionWorkspaceResponse = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.ConversionWorkspace'
+    ) as gax.protobuf.Type;
+    const applyConversionWorkspaceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.clouddms.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMigrationJob: new this._gaxModule.LongrunningDescriptor(
@@ -429,6 +555,101 @@ export class DataMigrationServiceClient {
           deleteConnectionProfileMetadata
         )
       ),
+      createPrivateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPrivateConnectionResponse.decode.bind(
+          createPrivateConnectionResponse
+        ),
+        createPrivateConnectionMetadata.decode.bind(
+          createPrivateConnectionMetadata
+        )
+      ),
+      deletePrivateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePrivateConnectionResponse.decode.bind(
+          deletePrivateConnectionResponse
+        ),
+        deletePrivateConnectionMetadata.decode.bind(
+          deletePrivateConnectionMetadata
+        )
+      ),
+      createConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createConversionWorkspaceResponse.decode.bind(
+          createConversionWorkspaceResponse
+        ),
+        createConversionWorkspaceMetadata.decode.bind(
+          createConversionWorkspaceMetadata
+        )
+      ),
+      updateConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateConversionWorkspaceResponse.decode.bind(
+          updateConversionWorkspaceResponse
+        ),
+        updateConversionWorkspaceMetadata.decode.bind(
+          updateConversionWorkspaceMetadata
+        )
+      ),
+      deleteConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteConversionWorkspaceResponse.decode.bind(
+          deleteConversionWorkspaceResponse
+        ),
+        deleteConversionWorkspaceMetadata.decode.bind(
+          deleteConversionWorkspaceMetadata
+        )
+      ),
+      seedConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        seedConversionWorkspaceResponse.decode.bind(
+          seedConversionWorkspaceResponse
+        ),
+        seedConversionWorkspaceMetadata.decode.bind(
+          seedConversionWorkspaceMetadata
+        )
+      ),
+      importMappingRules: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importMappingRulesResponse.decode.bind(importMappingRulesResponse),
+        importMappingRulesMetadata.decode.bind(importMappingRulesMetadata)
+      ),
+      convertConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        convertConversionWorkspaceResponse.decode.bind(
+          convertConversionWorkspaceResponse
+        ),
+        convertConversionWorkspaceMetadata.decode.bind(
+          convertConversionWorkspaceMetadata
+        )
+      ),
+      commitConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        commitConversionWorkspaceResponse.decode.bind(
+          commitConversionWorkspaceResponse
+        ),
+        commitConversionWorkspaceMetadata.decode.bind(
+          commitConversionWorkspaceMetadata
+        )
+      ),
+      rollbackConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        rollbackConversionWorkspaceResponse.decode.bind(
+          rollbackConversionWorkspaceResponse
+        ),
+        rollbackConversionWorkspaceMetadata.decode.bind(
+          rollbackConversionWorkspaceMetadata
+        )
+      ),
+      applyConversionWorkspace: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        applyConversionWorkspaceResponse.decode.bind(
+          applyConversionWorkspaceResponse
+        ),
+        applyConversionWorkspaceMetadata.decode.bind(
+          applyConversionWorkspaceMetadata
+        )
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -498,6 +719,25 @@ export class DataMigrationServiceClient {
       'createConnectionProfile',
       'updateConnectionProfile',
       'deleteConnectionProfile',
+      'createPrivateConnection',
+      'getPrivateConnection',
+      'listPrivateConnections',
+      'deletePrivateConnection',
+      'getConversionWorkspace',
+      'listConversionWorkspaces',
+      'createConversionWorkspace',
+      'updateConversionWorkspace',
+      'deleteConversionWorkspace',
+      'seedConversionWorkspace',
+      'importMappingRules',
+      'convertConversionWorkspace',
+      'commitConversionWorkspace',
+      'rollbackConversionWorkspace',
+      'applyConversionWorkspace',
+      'describeDatabaseEntities',
+      'searchBackgroundJobs',
+      'describeConversionWorkspaceRevisions',
+      'fetchStaticIps',
     ];
     for (const methodName of dataMigrationServiceStubMethods) {
       const callPromise = this.dataMigrationServiceStub.then(
@@ -690,7 +930,7 @@ export class DataMigrationServiceClient {
    * @param {google.cloud.clouddms.v1.VmSelectionConfig} request.vmSelectionConfig
    *   The VM selection configuration
    * @param {number} request.vmPort
-   *   The port that will be open on the bastion host
+   *   The port that will be open on the bastion host.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -866,6 +1106,412 @@ export class DataMigrationServiceClient {
     this.initialize();
     return this.innerApiCalls.getConnectionProfile(request, options, callback);
   }
+  /**
+   * Gets details of a single private connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the private connection to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.clouddms.v1.PrivateConnection | PrivateConnection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.get_private_connection.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_GetPrivateConnection_async
+   */
+  getPrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IPrivateConnection,
+      protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getPrivateConnection(
+    request: protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IPrivateConnection,
+      | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPrivateConnection(
+    request: protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IPrivateConnection,
+      | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.IPrivateConnection,
+          | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.IPrivateConnection,
+      | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IPrivateConnection,
+      protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPrivateConnection(request, options, callback);
+  }
+  /**
+   * Gets details of a single conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the conversion workspace resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.clouddms.v1.ConversionWorkspace | ConversionWorkspace}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.get_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_GetConversionWorkspace_async
+   */
+  getConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IConversionWorkspace,
+      (
+        | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IConversionWorkspace,
+      | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IConversionWorkspace,
+      | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.IConversionWorkspace,
+          | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.IConversionWorkspace,
+      | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IConversionWorkspace,
+      (
+        | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Searches/lists the background jobs for a specific
+   * conversion workspace.
+   *
+   * The background jobs are not resources like conversion workspaces or
+   * mapping rules, and they can't be created, updated or deleted.
+   * Instead, they are a way to expose the data plane jobs log.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversionWorkspace
+   *   Required. Name of the conversion workspace resource whose jobs are listed,
+   *   in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {boolean} [request.returnMostRecentPerJobType]
+   *   Optional. Whether or not to return just the most recent job per job type,
+   * @param {number} [request.maxSize]
+   *   Optional. The maximum number of jobs to return. The service may return
+   *   fewer than this value. If unspecified, at most 100 jobs are
+   *   returned. The maximum value is 100; values above 100 are coerced to
+   *   100.
+   * @param {google.protobuf.Timestamp} [request.completedUntilTime]
+   *   Optional. If provided, only returns jobs that completed until (not
+   *   including) the given timestamp.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.clouddms.v1.SearchBackgroundJobsResponse | SearchBackgroundJobsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.search_background_jobs.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_SearchBackgroundJobs_async
+   */
+  searchBackgroundJobs(
+    request?: protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  searchBackgroundJobs(
+    request: protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+      | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchBackgroundJobs(
+    request: protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+      | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchBackgroundJobs(
+    request?: protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+          | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+      | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+      protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversion_workspace: request.conversionWorkspace ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchBackgroundJobs(request, options, callback);
+  }
+  /**
+   * Retrieves a list of committed revisions of a specific conversion
+   * workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversionWorkspace
+   *   Required. Name of the conversion workspace resource whose revisions are
+   *   listed. Must be in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {string} [request.commitId]
+   *   Optional. Optional filter to request a specific commit ID.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse | DescribeConversionWorkspaceRevisionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.describe_conversion_workspace_revisions.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DescribeConversionWorkspaceRevisions_async
+   */
+  describeConversionWorkspaceRevisions(
+    request?: protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+      (
+        | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  describeConversionWorkspaceRevisions(
+    request: protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+      | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  describeConversionWorkspaceRevisions(
+    request: protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+      | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  describeConversionWorkspaceRevisions(
+    request?: protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+          | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+      | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+      (
+        | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversion_workspace: request.conversionWorkspace ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.describeConversionWorkspaceRevisions(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Creates a new migration job in a given project and location.
@@ -873,7 +1519,7 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of migration jobs.
+   *   Required. The parent which owns this collection of migration jobs.
    * @param {string} request.migrationJobId
    *   Required. The ID of the instance to create.
    * @param {google.cloud.clouddms.v1.MigrationJob} request.migrationJob
@@ -881,12 +1527,12 @@ export class DataMigrationServiceClient {
    *   job](https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
    *   object.
    * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1025,17 +1671,17 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   migration job resource by the update.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the conversion workspace resource.
    * @param {google.cloud.clouddms.v1.MigrationJob} request.migrationJob
    *   Required. The migration job parameters to update.
    * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1176,12 +1822,12 @@ export class DataMigrationServiceClient {
    * @param {string} request.name
    *   Required. Name of the migration job resource to delete.
    * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
    * @param {boolean} request.force
    *   The destination CloudSQL connection profile is always deleted with the
@@ -2157,19 +2803,27 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of connection profiles.
+   *   Required. The parent which owns this collection of connection profiles.
    * @param {string} request.connectionProfileId
    *   Required. The connection profile identifier.
    * @param {google.cloud.clouddms.v1.ConnectionProfile} request.connectionProfile
    *   Required. The create request body including the connection profile data
-   * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the connection profile, but don't create any
+   *   resources. The default is false. Only supported for Oracle connection
+   *   profiles.
+   * @param {boolean} [request.skipValidation]
+   *   Optional. Create the connection profile without validating it.
+   *   The default is false.
+   *   Only supported for Oracle connection profiles.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2311,18 +2965,26 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   connection profile resource by the update.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the conversion workspace resource.
    * @param {google.cloud.clouddms.v1.ConnectionProfile} request.connectionProfile
    *   Required. The connection profile parameters to update.
-   * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the connection profile, but don't update any
+   *   resources. The default is false. Only supported for Oracle connection
+   *   profiles.
+   * @param {boolean} [request.skipValidation]
+   *   Optional. Update the connection profile without validating it.
+   *   The default is false.
+   *   Only supported for Oracle connection profiles.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2468,12 +3130,12 @@ export class DataMigrationServiceClient {
    * @param {string} request.name
    *   Required. Name of the connection profile resource to delete.
    * @param {string} request.requestId
-   *   A unique id used to identify the request. If the server receives two
-   *   requests with the same id, then the second request will be ignored.
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
    * @param {boolean} request.force
    *   In case of force delete, the CloudSQL replica database is also deleted
@@ -2614,16 +3276,1663 @@ export class DataMigrationServiceClient {
     >;
   }
   /**
+   * Creates a new private connection in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of PrivateConnections.
+   * @param {string} request.privateConnectionId
+   *   Required. The private connection identifier.
+   * @param {google.cloud.clouddms.v1.PrivateConnection} request.privateConnection
+   *   Required. The private connection resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {boolean} [request.skipValidation]
+   *   Optional. If set to true, will skip validations.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.create_private_connection.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CreatePrivateConnection_async
+   */
+  createPrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.ICreatePrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IPrivateConnection,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createPrivateConnection(
+    request: protos.google.cloud.clouddms.v1.ICreatePrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IPrivateConnection,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPrivateConnection(
+    request: protos.google.cloud.clouddms.v1.ICreatePrivateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IPrivateConnection,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.ICreatePrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IPrivateConnection,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IPrivateConnection,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IPrivateConnection,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createPrivateConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createPrivateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.create_private_connection.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CreatePrivateConnection_async
+   */
+  async checkCreatePrivateConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.PrivateConnection,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPrivateConnection,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.PrivateConnection,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single Database Migration Service private connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the private connection to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.delete_private_connection.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DeletePrivateConnection_async
+   */
+  deletePrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.IDeletePrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deletePrivateConnection(
+    request: protos.google.cloud.clouddms.v1.IDeletePrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePrivateConnection(
+    request: protos.google.cloud.clouddms.v1.IDeletePrivateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePrivateConnection(
+    request?: protos.google.cloud.clouddms.v1.IDeletePrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deletePrivateConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deletePrivateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.delete_private_connection.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DeletePrivateConnection_async
+   */
+  async checkDeletePrivateConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePrivateConnection,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new conversion workspace in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of conversion workspaces.
+   * @param {string} request.conversionWorkspaceId
+   *   Required. The ID of the conversion workspace to create.
+   * @param {google.cloud.clouddms.v1.ConversionWorkspace} request.conversionWorkspace
+   *   Required. Represents a conversion workspace object.
+   * @param {string} request.requestId
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.create_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CreateConversionWorkspace_async
+   */
+  createConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.create_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CreateConversionWorkspace_async
+   */
+  async checkCreateConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the conversion workspace resource.
+   * @param {google.cloud.clouddms.v1.ConversionWorkspace} request.conversionWorkspace
+   *   Required. The conversion workspace parameters to update.
+   * @param {string} request.requestId
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.update_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_UpdateConversionWorkspace_async
+   */
+  updateConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'conversion_workspace.name': request.conversionWorkspace!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.update_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_UpdateConversionWorkspace_async
+   */
+  async checkUpdateConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the conversion workspace resource to delete.
+   * @param {string} request.requestId
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.delete_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DeleteConversionWorkspace_async
+   */
+  deleteConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.delete_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DeleteConversionWorkspace_async
+   */
+  async checkDeleteConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Imports a snapshot of the source database into the
+   * conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the conversion workspace resource to seed with new database
+   *   structure, in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {boolean} request.autoCommit
+   *   Should the conversion workspace be committed automatically after the
+   *   seed operation.
+   * @param {string} request.sourceConnectionProfile
+   *   Fully qualified (Uri) name of the source connection profile.
+   * @param {string} request.destinationConnectionProfile
+   *   Fully qualified (Uri) name of the destination connection profile.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.seed_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_SeedConversionWorkspace_async
+   */
+  seedConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  seedConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  seedConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  seedConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.seedConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `seedConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.seed_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_SeedConversionWorkspace_async
+   */
+  async checkSeedConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.seedConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Imports the mapping rules for a given conversion workspace.
+   * Supports various formats of external rules files.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the conversion workspace resource to import the rules to
+   *   in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {google.cloud.clouddms.v1.ImportRulesFileFormat} request.rulesFormat
+   *   The format of the rules content file.
+   * @param {number[]} request.rulesFiles
+   *   One or more rules files.
+   * @param {boolean} request.autoCommit
+   *   Should the conversion workspace be committed automatically after the
+   *   import operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.import_mapping_rules.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ImportMappingRules_async
+   */
+  importMappingRules(
+    request?: protos.google.cloud.clouddms.v1.IImportMappingRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importMappingRules(
+    request: protos.google.cloud.clouddms.v1.IImportMappingRulesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importMappingRules(
+    request: protos.google.cloud.clouddms.v1.IImportMappingRulesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importMappingRules(
+    request?: protos.google.cloud.clouddms.v1.IImportMappingRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importMappingRules(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importMappingRules()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.import_mapping_rules.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ImportMappingRules_async
+   */
+  async checkImportMappingRulesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importMappingRules,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a draft tree schema for the destination database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the conversion workspace resource to convert in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {boolean} request.autoCommit
+   *   Specifies whether the conversion workspace is to be committed automatically
+   *   after the conversion.
+   * @param {string} request.filter
+   *   Filter the entities to convert. Leaving this field empty will convert all
+   *   of the entities. Supports Google AIP-160 style filtering.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.convert_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ConvertConversionWorkspace_async
+   */
+  convertConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  convertConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  convertConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  convertConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.convertConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `convertConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.convert_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ConvertConversionWorkspace_async
+   */
+  async checkConvertConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.convertConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Marks all the data in the conversion workspace as committed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the conversion workspace resource to commit.
+   * @param {string} [request.commitName]
+   *   Optional. Optional name of the commit.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.commit_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CommitConversionWorkspace_async
+   */
+  commitConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  commitConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  commitConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  commitConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.commitConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `commitConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.commit_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CommitConversionWorkspace_async
+   */
+  async checkCommitConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.commitConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Rolls back a conversion workspace to the last committed snapshot.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the conversion workspace resource to roll back to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.rollback_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_RollbackConversionWorkspace_async
+   */
+  rollbackConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  rollbackConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rollbackConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rollbackConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.rollbackConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `rollbackConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.rollback_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_RollbackConversionWorkspace_async
+   */
+  async checkRollbackConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.rollbackConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Applies draft tree onto a specific destination database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the conversion workspace resource for which to apply
+   *   the draft tree. Must be in the form of:
+   *    projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {string} request.filter
+   *   Filter which entities to apply. Leaving this field empty will apply all of
+   *   the entities. Supports Google AIP 160 based filtering.
+   * @param {string} request.connectionProfile
+   *   Fully qualified (Uri) name of the destination connection profile.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.apply_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ApplyConversionWorkspace_async
+   */
+  applyConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  applyConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  applyConversionWorkspace(
+    request: protos.google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  applyConversionWorkspace(
+    request?: protos.google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.clouddms.v1.IConversionWorkspace,
+        protos.google.cloud.clouddms.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.applyConversionWorkspace(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `applyConversionWorkspace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.apply_conversion_workspace.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ApplyConversionWorkspace_async
+   */
+  async checkApplyConversionWorkspaceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.applyConversionWorkspace,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.clouddms.v1.ConversionWorkspace,
+      protos.google.cloud.clouddms.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists migration jobs in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of migrationJobs.
+   *   Required. The parent which owns this collection of migrationJobs.
    * @param {number} request.pageSize
    *   The maximum number of migration jobs to return. The service may return
    *   fewer than this value. If unspecified, at most 50 migration jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   returned. The maximum value is 1000; values above 1000 are coerced to
    *   1000.
    * @param {string} request.pageToken
    *   The nextPageToken value received in the previous call to
@@ -2737,11 +5046,11 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of migrationJobs.
+   *   Required. The parent which owns this collection of migrationJobs.
    * @param {number} request.pageSize
    *   The maximum number of migration jobs to return. The service may return
    *   fewer than this value. If unspecified, at most 50 migration jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   returned. The maximum value is 1000; values above 1000 are coerced to
    *   1000.
    * @param {string} request.pageToken
    *   The nextPageToken value received in the previous call to
@@ -2803,11 +5112,11 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of migrationJobs.
+   *   Required. The parent which owns this collection of migrationJobs.
    * @param {number} request.pageSize
    *   The maximum number of migration jobs to return. The service may return
    *   fewer than this value. If unspecified, at most 50 migration jobs will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   returned. The maximum value is 1000; values above 1000 are coerced to
    *   1000.
    * @param {string} request.pageToken
    *   The nextPageToken value received in the previous call to
@@ -2863,16 +5172,17 @@ export class DataMigrationServiceClient {
     ) as AsyncIterable<protos.google.cloud.clouddms.v1.IMigrationJob>;
   }
   /**
-   * Retrieve a list of all connection profiles in a given project and location.
+   * Retrieves a list of all connection profiles in a given project and
+   * location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of connection profiles.
+   *   Required. The parent which owns this collection of connection profiles.
    * @param {number} request.pageSize
    *   The maximum number of connection profiles to return. The service may return
    *   fewer than this value. If unspecified, at most 50 connection profiles will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   be returned. The maximum value is 1000; values above 1000 are coerced
    *   to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListConnectionProfiles` call.
@@ -2891,7 +5201,7 @@ export class DataMigrationServiceClient {
    *   = %lt;my_username%gt;** to list all connection profiles configured to
    *   connect with a specific username.
    * @param {string} request.orderBy
-   *   the order by fields for the result.
+   *   A comma-separated list of fields to order results according to.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2989,11 +5299,11 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of connection profiles.
+   *   Required. The parent which owns this collection of connection profiles.
    * @param {number} request.pageSize
    *   The maximum number of connection profiles to return. The service may return
    *   fewer than this value. If unspecified, at most 50 connection profiles will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   be returned. The maximum value is 1000; values above 1000 are coerced
    *   to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListConnectionProfiles` call.
@@ -3012,7 +5322,7 @@ export class DataMigrationServiceClient {
    *   = %lt;my_username%gt;** to list all connection profiles configured to
    *   connect with a specific username.
    * @param {string} request.orderBy
-   *   the order by fields for the result.
+   *   A comma-separated list of fields to order results according to.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3054,11 +5364,11 @@ export class DataMigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of connection profiles.
+   *   Required. The parent which owns this collection of connection profiles.
    * @param {number} request.pageSize
    *   The maximum number of connection profiles to return. The service may return
    *   fewer than this value. If unspecified, at most 50 connection profiles will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   be returned. The maximum value is 1000; values above 1000 are coerced
    *   to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListConnectionProfiles` call.
@@ -3077,7 +5387,7 @@ export class DataMigrationServiceClient {
    *   = %lt;my_username%gt;** to list all connection profiles configured to
    *   connect with a specific username.
    * @param {string} request.orderBy
-   *   the order by fields for the result.
+   *   A comma-separated list of fields to order results according to.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3112,6 +5422,1325 @@ export class DataMigrationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.clouddms.v1.IConnectionProfile>;
   }
+  /**
+   * Retrieves a list of private connections in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of private connections.
+   * @param {number} request.pageSize
+   *   Maximum number of private connections to return.
+   *   If unspecified, at most 50 private connections that are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   Page token received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that filters private connections listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list private connections created this year by
+   *   specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
+   * @param {string} request.orderBy
+   *   Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.clouddms.v1.PrivateConnection | PrivateConnection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnections(
+    request?: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IPrivateConnection[],
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest | null,
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+    ]
+  >;
+  listPrivateConnections(
+    request: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IPrivateConnection
+    >
+  ): void;
+  listPrivateConnections(
+    request: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IPrivateConnection
+    >
+  ): void;
+  listPrivateConnections(
+    request?: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+          | protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IPrivateConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IPrivateConnection
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IPrivateConnection[],
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest | null,
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPrivateConnections(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of private connections.
+   * @param {number} request.pageSize
+   *   Maximum number of private connections to return.
+   *   If unspecified, at most 50 private connections that are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   Page token received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that filters private connections listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list private connections created this year by
+   *   specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
+   * @param {string} request.orderBy
+   *   Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.clouddms.v1.PrivateConnection | PrivateConnection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnectionsStream(
+    request?: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPrivateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnections.createStream(
+      this.innerApiCalls.listPrivateConnections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPrivateConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of private connections.
+   * @param {number} request.pageSize
+   *   Maximum number of private connections to return.
+   *   If unspecified, at most 50 private connections that are returned.
+   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   * @param {string} request.pageToken
+   *   Page token received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that filters private connections listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list private connections created this year by
+   *   specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
+   * @param {string} request.orderBy
+   *   Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.clouddms.v1.PrivateConnection | PrivateConnection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.list_private_connections.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ListPrivateConnections_async
+   */
+  listPrivateConnectionsAsync(
+    request?: protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.clouddms.v1.IPrivateConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPrivateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnections.asyncIterate(
+      this.innerApiCalls['listPrivateConnections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.clouddms.v1.IPrivateConnection>;
+  }
+  /**
+   * Lists conversion workspaces in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of conversion workspaces.
+   * @param {number} request.pageSize
+   *   The maximum number of conversion workspaces to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 sets are returned.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspaces.list, used in the subsequent request to retrieve the
+   *   next page of results. On first call this should be left blank. When
+   *   paginating, all other parameters provided to conversionWorkspaces.list must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that filters conversion workspaces listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list conversion workspaces created this year
+   *   by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can
+   *   also filter nested fields. For example, you could specify
+   *   **source.version = "12.c.1"** to select all conversion workspaces with
+   *   source database version equal to 12.c.1.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.clouddms.v1.ConversionWorkspace | ConversionWorkspace}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversionWorkspacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listConversionWorkspaces(
+    request?: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IConversionWorkspace[],
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest | null,
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+    ]
+  >;
+  listConversionWorkspaces(
+    request: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+      | protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IConversionWorkspace
+    >
+  ): void;
+  listConversionWorkspaces(
+    request: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+      | protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IConversionWorkspace
+    >
+  ): void;
+  listConversionWorkspaces(
+    request?: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+          | protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IConversionWorkspace
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+      | protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IConversionWorkspace
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IConversionWorkspace[],
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest | null,
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listConversionWorkspaces(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of conversion workspaces.
+   * @param {number} request.pageSize
+   *   The maximum number of conversion workspaces to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 sets are returned.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspaces.list, used in the subsequent request to retrieve the
+   *   next page of results. On first call this should be left blank. When
+   *   paginating, all other parameters provided to conversionWorkspaces.list must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that filters conversion workspaces listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list conversion workspaces created this year
+   *   by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can
+   *   also filter nested fields. For example, you could specify
+   *   **source.version = "12.c.1"** to select all conversion workspaces with
+   *   source database version equal to 12.c.1.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.clouddms.v1.ConversionWorkspace | ConversionWorkspace} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConversionWorkspacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listConversionWorkspacesStream(
+    request?: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConversionWorkspaces'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConversionWorkspaces.createStream(
+      this.innerApiCalls.listConversionWorkspaces as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listConversionWorkspaces`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of conversion workspaces.
+   * @param {number} request.pageSize
+   *   The maximum number of conversion workspaces to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 sets are returned.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspaces.list, used in the subsequent request to retrieve the
+   *   next page of results. On first call this should be left blank. When
+   *   paginating, all other parameters provided to conversionWorkspaces.list must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that filters conversion workspaces listed in the
+   *   response. The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value must
+   *   be a string, a number, or a boolean. The comparison operator must be either
+   *   =, !=, >, or <. For example, list conversion workspaces created this year
+   *   by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can
+   *   also filter nested fields. For example, you could specify
+   *   **source.version = "12.c.1"** to select all conversion workspaces with
+   *   source database version equal to 12.c.1.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.clouddms.v1.ConversionWorkspace | ConversionWorkspace}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.list_conversion_workspaces.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ListConversionWorkspaces_async
+   */
+  listConversionWorkspacesAsync(
+    request?: protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.clouddms.v1.IConversionWorkspace> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConversionWorkspaces'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConversionWorkspaces.asyncIterate(
+      this.innerApiCalls['listConversionWorkspaces'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.clouddms.v1.IConversionWorkspace>;
+  }
+  /**
+   * Describes the database entities tree for a specific conversion workspace
+   * and a specific tree type.
+   *
+   * Database entities are not resources like conversion workspaces or mapping
+   * rules, and they can't be created, updated or deleted. Instead, they are
+   * simple data objects describing the structure of the client database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversionWorkspace
+   *   Required. Name of the conversion workspace resource whose database entities
+   *   are described. Must be in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of entities to return. The service may return
+   *   fewer entities than the value specifies.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
+   *   request to retrieve the next page of results. On first call this should be
+   *   left blank. When paginating, all other parameters provided to
+   *   conversionWorkspace.describeDatabaseEntities must match the call that
+   *   provided the page token.
+   * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
+   *   The tree to fetch.
+   * @param {boolean} request.uncommitted
+   *   Whether to retrieve the latest committed version of the entities or the
+   *   latest version. This field is ignored if a specific commit_id is specified.
+   * @param {string} request.commitId
+   *   Request a specific commit ID. If not specified, the entities from the
+   *   latest commit are returned.
+   * @param {string} request.filter
+   *   Filter the returned entities based on AIP-160 standard.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.clouddms.v1.DatabaseEntity | DatabaseEntity}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `describeDatabaseEntitiesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  describeDatabaseEntities(
+    request?: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IDatabaseEntity[],
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest | null,
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+    ]
+  >;
+  describeDatabaseEntities(
+    request: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+      | protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IDatabaseEntity
+    >
+  ): void;
+  describeDatabaseEntities(
+    request: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+      | protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IDatabaseEntity
+    >
+  ): void;
+  describeDatabaseEntities(
+    request?: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+          | protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IDatabaseEntity
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+      | protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IDatabaseEntity
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IDatabaseEntity[],
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest | null,
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversion_workspace: request.conversionWorkspace ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.describeDatabaseEntities(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversionWorkspace
+   *   Required. Name of the conversion workspace resource whose database entities
+   *   are described. Must be in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of entities to return. The service may return
+   *   fewer entities than the value specifies.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
+   *   request to retrieve the next page of results. On first call this should be
+   *   left blank. When paginating, all other parameters provided to
+   *   conversionWorkspace.describeDatabaseEntities must match the call that
+   *   provided the page token.
+   * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
+   *   The tree to fetch.
+   * @param {boolean} request.uncommitted
+   *   Whether to retrieve the latest committed version of the entities or the
+   *   latest version. This field is ignored if a specific commit_id is specified.
+   * @param {string} request.commitId
+   *   Request a specific commit ID. If not specified, the entities from the
+   *   latest commit are returned.
+   * @param {string} request.filter
+   *   Filter the returned entities based on AIP-160 standard.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.clouddms.v1.DatabaseEntity | DatabaseEntity} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `describeDatabaseEntitiesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  describeDatabaseEntitiesStream(
+    request?: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversion_workspace: request.conversionWorkspace ?? '',
+      });
+    const defaultCallSettings = this._defaults['describeDatabaseEntities'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.describeDatabaseEntities.createStream(
+      this.innerApiCalls.describeDatabaseEntities as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `describeDatabaseEntities`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversionWorkspace
+   *   Required. Name of the conversion workspace resource whose database entities
+   *   are described. Must be in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of entities to return. The service may return
+   *   fewer entities than the value specifies.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
+   *   request to retrieve the next page of results. On first call this should be
+   *   left blank. When paginating, all other parameters provided to
+   *   conversionWorkspace.describeDatabaseEntities must match the call that
+   *   provided the page token.
+   * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
+   *   The tree to fetch.
+   * @param {boolean} request.uncommitted
+   *   Whether to retrieve the latest committed version of the entities or the
+   *   latest version. This field is ignored if a specific commit_id is specified.
+   * @param {string} request.commitId
+   *   Request a specific commit ID. If not specified, the entities from the
+   *   latest commit are returned.
+   * @param {string} request.filter
+   *   Filter the returned entities based on AIP-160 standard.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.clouddms.v1.DatabaseEntity | DatabaseEntity}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.describe_database_entities.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DescribeDatabaseEntities_async
+   */
+  describeDatabaseEntitiesAsync(
+    request?: protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.clouddms.v1.IDatabaseEntity> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversion_workspace: request.conversionWorkspace ?? '',
+      });
+    const defaultCallSettings = this._defaults['describeDatabaseEntities'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.describeDatabaseEntities.asyncIterate(
+      this.innerApiCalls['describeDatabaseEntities'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.clouddms.v1.IDatabaseEntity>;
+  }
+  /**
+   * Fetches a set of static IP addresses that need to be allowlisted by the
+   * customer when using the static-IP connectivity method.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of IPs to return.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchStaticIps` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of string.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchStaticIpsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  fetchStaticIps(
+    request?: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest | null,
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+    ]
+  >;
+  fetchStaticIps(
+    request: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+      | protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  fetchStaticIps(
+    request: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+      | protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  fetchStaticIps(
+    request?: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+          | protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+          | null
+          | undefined,
+          string
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+      | protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest | null,
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchStaticIps(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of IPs to return.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchStaticIps` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing string on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchStaticIpsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  fetchStaticIpsStream(
+    request?: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchStaticIps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchStaticIps.createStream(
+      this.innerApiCalls.fetchStaticIps as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `fetchStaticIps`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name for the location for which static IPs should be
+   *   returned. Must be in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of IPs to return.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchStaticIps` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   string. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.fetch_static_ips.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_FetchStaticIps_async
+   */
+  fetchStaticIpsAsync(
+    request?: protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+    options?: CallOptions
+  ): AsyncIterable<string> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchStaticIps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchStaticIps.asyncIterate(
+      this.innerApiCalls['fetchStaticIps'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<string>;
+  }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.Policy> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.Policy> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3175,6 +6804,67 @@ export class DataMigrationServiceClient {
     return this.pathTemplates.connectionProfilePathTemplate.match(
       connectionProfileName
     ).connection_profile;
+  }
+
+  /**
+   * Return a fully-qualified conversionWorkspace resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversion_workspace
+   * @returns {string} Resource name string.
+   */
+  conversionWorkspacePath(
+    project: string,
+    location: string,
+    conversionWorkspace: string
+  ) {
+    return this.pathTemplates.conversionWorkspacePathTemplate.render({
+      project: project,
+      location: location,
+      conversion_workspace: conversionWorkspace,
+    });
+  }
+
+  /**
+   * Parse the project from ConversionWorkspace resource.
+   *
+   * @param {string} conversionWorkspaceName
+   *   A fully-qualified path representing ConversionWorkspace resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConversionWorkspaceName(conversionWorkspaceName: string) {
+    return this.pathTemplates.conversionWorkspacePathTemplate.match(
+      conversionWorkspaceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConversionWorkspace resource.
+   *
+   * @param {string} conversionWorkspaceName
+   *   A fully-qualified path representing ConversionWorkspace resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConversionWorkspaceName(conversionWorkspaceName: string) {
+    return this.pathTemplates.conversionWorkspacePathTemplate.match(
+      conversionWorkspaceName
+    ).location;
+  }
+
+  /**
+   * Parse the conversion_workspace from ConversionWorkspace resource.
+   *
+   * @param {string} conversionWorkspaceName
+   *   A fully-qualified path representing ConversionWorkspace resource.
+   * @returns {string} A string representing the conversion_workspace.
+   */
+  matchConversionWorkspaceFromConversionWorkspaceName(
+    conversionWorkspaceName: string
+  ) {
+    return this.pathTemplates.conversionWorkspacePathTemplate.match(
+      conversionWorkspaceName
+    ).conversion_workspace;
   }
 
   /**
@@ -3266,6 +6956,67 @@ export class DataMigrationServiceClient {
   }
 
   /**
+   * Return a fully-qualified privateConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_connection
+   * @returns {string} Resource name string.
+   */
+  privateConnectionPath(
+    project: string,
+    location: string,
+    privateConnection: string
+  ) {
+    return this.pathTemplates.privateConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      private_connection: privateConnection,
+    });
+  }
+
+  /**
+   * Parse the project from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPrivateConnectionName(privateConnectionName: string) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPrivateConnectionName(privateConnectionName: string) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).location;
+  }
+
+  /**
+   * Parse the private_connection from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the private_connection.
+   */
+  matchPrivateConnectionFromPrivateConnectionName(
+    privateConnectionName: string
+  ) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).private_connection;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -3299,6 +7050,8 @@ export class DataMigrationServiceClient {
       return this.dataMigrationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.iamClient.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

@@ -25,6 +25,26 @@
                 "getConnectionProfile"
               ]
             },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
+              ]
+            },
+            "GetConversionWorkspace": {
+              "methods": [
+                "getConversionWorkspace"
+              ]
+            },
+            "SearchBackgroundJobs": {
+              "methods": [
+                "searchBackgroundJobs"
+              ]
+            },
+            "DescribeConversionWorkspaceRevisions": {
+              "methods": [
+                "describeConversionWorkspaceRevisions"
+              ]
+            },
             "CreateMigrationJob": {
               "methods": [
                 "createMigrationJob"
@@ -85,6 +105,61 @@
                 "deleteConnectionProfile"
               ]
             },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
+              ]
+            },
+            "CreateConversionWorkspace": {
+              "methods": [
+                "createConversionWorkspace"
+              ]
+            },
+            "UpdateConversionWorkspace": {
+              "methods": [
+                "updateConversionWorkspace"
+              ]
+            },
+            "DeleteConversionWorkspace": {
+              "methods": [
+                "deleteConversionWorkspace"
+              ]
+            },
+            "SeedConversionWorkspace": {
+              "methods": [
+                "seedConversionWorkspace"
+              ]
+            },
+            "ImportMappingRules": {
+              "methods": [
+                "importMappingRules"
+              ]
+            },
+            "ConvertConversionWorkspace": {
+              "methods": [
+                "convertConversionWorkspace"
+              ]
+            },
+            "CommitConversionWorkspace": {
+              "methods": [
+                "commitConversionWorkspace"
+              ]
+            },
+            "RollbackConversionWorkspace": {
+              "methods": [
+                "rollbackConversionWorkspace"
+              ]
+            },
+            "ApplyConversionWorkspace": {
+              "methods": [
+                "applyConversionWorkspace"
+              ]
+            },
             "ListMigrationJobs": {
               "methods": [
                 "listMigrationJobs",
@@ -97,6 +172,34 @@
                 "listConnectionProfiles",
                 "listConnectionProfilesStream",
                 "listConnectionProfilesAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListConversionWorkspaces": {
+              "methods": [
+                "listConversionWorkspaces",
+                "listConversionWorkspacesStream",
+                "listConversionWorkspacesAsync"
+              ]
+            },
+            "DescribeDatabaseEntities": {
+              "methods": [
+                "describeDatabaseEntities",
+                "describeDatabaseEntitiesStream",
+                "describeDatabaseEntitiesAsync"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetchStaticIps",
+                "fetchStaticIpsStream",
+                "fetchStaticIpsAsync"
               ]
             }
           }
@@ -119,6 +222,26 @@
                 "getConnectionProfile"
               ]
             },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
+              ]
+            },
+            "GetConversionWorkspace": {
+              "methods": [
+                "getConversionWorkspace"
+              ]
+            },
+            "SearchBackgroundJobs": {
+              "methods": [
+                "searchBackgroundJobs"
+              ]
+            },
+            "DescribeConversionWorkspaceRevisions": {
+              "methods": [
+                "describeConversionWorkspaceRevisions"
+              ]
+            },
             "CreateMigrationJob": {
               "methods": [
                 "createMigrationJob"
@@ -179,6 +302,61 @@
                 "deleteConnectionProfile"
               ]
             },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
+              ]
+            },
+            "CreateConversionWorkspace": {
+              "methods": [
+                "createConversionWorkspace"
+              ]
+            },
+            "UpdateConversionWorkspace": {
+              "methods": [
+                "updateConversionWorkspace"
+              ]
+            },
+            "DeleteConversionWorkspace": {
+              "methods": [
+                "deleteConversionWorkspace"
+              ]
+            },
+            "SeedConversionWorkspace": {
+              "methods": [
+                "seedConversionWorkspace"
+              ]
+            },
+            "ImportMappingRules": {
+              "methods": [
+                "importMappingRules"
+              ]
+            },
+            "ConvertConversionWorkspace": {
+              "methods": [
+                "convertConversionWorkspace"
+              ]
+            },
+            "CommitConversionWorkspace": {
+              "methods": [
+                "commitConversionWorkspace"
+              ]
+            },
+            "RollbackConversionWorkspace": {
+              "methods": [
+                "rollbackConversionWorkspace"
+              ]
+            },
+            "ApplyConversionWorkspace": {
+              "methods": [
+                "applyConversionWorkspace"
+              ]
+            },
             "ListMigrationJobs": {
               "methods": [
                 "listMigrationJobs",
@@ -191,6 +369,34 @@
                 "listConnectionProfiles",
                 "listConnectionProfilesStream",
                 "listConnectionProfilesAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListConversionWorkspaces": {
+              "methods": [
+                "listConversionWorkspaces",
+                "listConversionWorkspacesStream",
+                "listConversionWorkspacesAsync"
+              ]
+            },
+            "DescribeDatabaseEntities": {
+              "methods": [
+                "describeDatabaseEntities",
+                "describeDatabaseEntitiesStream",
+                "describeDatabaseEntitiesAsync"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetchStaticIps",
+                "fetchStaticIpsStream",
+                "fetchStaticIpsAsync"
               ]
             }
           }

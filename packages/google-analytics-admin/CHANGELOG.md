@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.8.0...admin-v4.9.0) (2023-05-20)
+
+
+### Features
+
+* [analytics-admin] add `GetAdSenseLink`, `CreateAdSenseLink`, `DeleteAdSenseLink`, `ListAdSenseLinks` methods to the Admin API v1alpha ([#4276](https://github.com/googleapis/google-cloud-node/issues/4276)) ([2f0e6e1](https://github.com/googleapis/google-cloud-node/commit/2f0e6e1b85fa68c02a350fed5ffcc6db0bb64fdd))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.7.1...admin-v4.8.0) (2023-05-02)
 
 

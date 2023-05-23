@@ -4,6 +4,210 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "84fb1febb2e50ba9aa1c7d863eb31ab0aab52e25",
+          "message": "Add initial files for google.cloud.support.v2",
+          "issues": [
+            "4288"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "4cc13bbb-f300-4a0f-8c9d-93caec5d50d4",
+      "createTime": "2023-05-22T17:28:11.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ac249801878b0c7271722c0bf128eb2c0437bf44",
+          "message": "Add initial files for google.maps.places.v1",
+          "issues": [
+            "4289"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "43db6c0a-dd86-476a-a6cb-6fb02d165696",
+      "createTime": "2023-05-20T02:26:24.513Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ee6e6996c8d08786076482508470380e4b2b7465",
+          "message": "[workstations] add output field for the control plane IP address",
+          "issues": [
+            "4263"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "5ac05870-a0b1-48f1-8de9-c061bfbef96a",
+      "createTime": "2023-05-20T02:26:24.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "40edfc52a9894cf57b389c2744563bfa490102cb",
+          "message": "[webrisk] add SubmitUri endpoint",
+          "issues": [
+            "4286"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "8ddc6b6b-9ce9-4d58-9f96-ebb89d88ebcd",
+      "createTime": "2023-05-20T02:26:24.507Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bf5631932cd0f2f52c23caaba235b04222a1a609",
+          "message": "[kms] added VerifyConnectivity RPC",
+          "issues": [
+            "4274"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "3ffe8b2e-be7b-403c-b425-e294f876068d",
+      "createTime": "2023-05-20T02:26:24.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88877b9509815d76f1915aa87e97597ec7e1520d",
+          "message": "[dialogflow] add baseline model configuration for conversation summarization",
+          "issues": [
+            "4255"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "103b69e9-d4ea-4243-8626-aa749395f356",
+      "createTime": "2023-05-20T02:26:24.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f2c4a78cb8929ea10713f5fa043cbe30df378287",
+          "message": "[datastream] Max concurrent backfill tasks",
+          "issues": [
+            "4254"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "7bc86fc5-2bcc-4be6-9950-b8c2557ffc45",
+      "createTime": "2023-05-20T02:26:24.496Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65fadd5fedea461b89cf7aeeb0f825a83dd81e02",
+          "message": "[clouddms] add Oracle to PostgreSQL migration APIs",
+          "issues": [
+            "4285"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "acb663f3-4ade-4f90-bc2c-14e566d21f03",
+      "createTime": "2023-05-20T02:26:24.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3defaa1caaa70a9384eddc0281645a9bf6c860cb",
+          "message": "[channel] added partition_keys field to filter results from FetchReportResults",
+          "issues": [
+            "4279"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "b4a4fbab-ab31-4b99-802e-90e7958240da",
+      "createTime": "2023-05-20T02:26:24.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9ece2b7d96f3b18b32acfd5e24ba38f52f39dab9",
+          "message": "[batch] add support for placement policies",
+          "issues": [
+            "4182"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "9e281631-aa27-4cd4-89de-e621966a868e",
+      "createTime": "2023-05-20T02:26:24.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d1e67beadf1910378989cd1bd3c19cbe000973d7",
+          "message": "Add updateSchedule method to ScheduleService",
+          "issues": [
+            "4280"
+          ]
+        }
+      ],
+      "version": "2.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "dfabd532-1745-47d4-b9da-0e9f0c7b1694",
+      "createTime": "2023-05-20T02:26:24.480Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f0e6e1b85fa68c02a350fed5ffcc6db0bb64fdd",
+          "message": "[analytics-admin] add `GetAdSenseLink`, `CreateAdSenseLink`, `DeleteAdSenseLink`, `ListAdSenseLinks` methods to the Admin API v1alpha",
+          "issues": [
+            "4276"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "084303f1-a65c-4120-8b07-45105027b513",
+      "createTime": "2023-05-20T02:26:24.411Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "a5389596ba5b0c707582612a6b2aa84385fefc26",
           "message": "Do not exit with 1 on empty folder",
@@ -9498,5 +9702,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-11T22:03:10.640Z"
+  "updateTime": "2023-05-22T17:28:11.924Z"
 }

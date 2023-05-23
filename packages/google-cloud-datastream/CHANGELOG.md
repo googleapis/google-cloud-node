@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v2.2.2...datastream-v2.3.0) (2023-05-20)
+
+
+### Features
+
+* [datastream] Max concurrent backfill tasks ([#4254](https://github.com/googleapis/google-cloud-node/issues/4254)) ([f2c4a78](https://github.com/googleapis/google-cloud-node/commit/f2c4a78cb8929ea10713f5fa043cbe30df378287))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/datastream-v2.2.1...datastream-v2.2.2) (2023-04-13)
 
 

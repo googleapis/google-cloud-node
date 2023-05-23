@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-webrisk",
-        "version": "3.2.0",
+        "version": "3.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -114,7 +114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -184,6 +184,58 @@
                 "method": {
                     "shortName": "CreateSubmission",
                     "fullName": "google.cloud.webrisk.v1.WebRiskService.CreateSubmission",
+                    "service": {
+                        "shortName": "WebRiskService",
+                        "fullName": "google.cloud.webrisk.v1.WebRiskService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "webrisk_v1_generated_WebRiskService_SubmitUri_async",
+            "title": "WebRiskService submitUri Sample",
+            "origin": "API_DEFINITION",
+            "description": " Submits a URI suspected of containing malicious content to be reviewed. Returns a google.longrunning.Operation which, once the review is complete, is updated with its result. You can use the [Pub/Sub API] (https://cloud.google.com/pubsub) to receive notifications for the returned Operation. If the result verifies the existence of malicious content, the site will be added to the [Google's Social Engineering lists] (https://support.google.com/webmasters/answer/6350487/) in order to protect users that could get exposed to this threat in the future. Only allowlisted projects can use this method during Early Access. Please reach out to Sales or your customer engineer to obtain access.",
+            "canonical": true,
+            "file": "web_risk_service.submit_uri.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SubmitUri",
+                "fullName": "google.cloud.webrisk.v1.WebRiskService.SubmitUri",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "submission",
+                        "type": ".google.cloud.webrisk.v1.Submission"
+                    },
+                    {
+                        "name": "threat_info",
+                        "type": ".google.cloud.webrisk.v1.ThreatInfo"
+                    },
+                    {
+                        "name": "threat_discovery",
+                        "type": ".google.cloud.webrisk.v1.ThreatDiscovery"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "WebRiskServiceClient",
+                    "fullName": "google.cloud.webrisk.v1.WebRiskServiceClient"
+                },
+                "method": {
+                    "shortName": "SubmitUri",
+                    "fullName": "google.cloud.webrisk.v1.WebRiskService.SubmitUri",
                     "service": {
                         "shortName": "WebRiskService",
                         "fullName": "google.cloud.webrisk.v1.WebRiskService"
