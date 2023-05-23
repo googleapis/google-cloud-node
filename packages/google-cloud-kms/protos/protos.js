@@ -296,6 +296,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService|verifyConnectivity}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef VerifyConnectivityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.VerifyConnectivityResponse} [response] VerifyConnectivityResponse
+                         */
+    
+                        /**
+                         * Calls VerifyConnectivity.
+                         * @function verifyConnectivity
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} request VerifyConnectivityRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.VerifyConnectivityCallback} callback Node-style callback called with the error, if any, and VerifyConnectivityResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.verifyConnectivity = function verifyConnectivity(request, callback) {
+                            return this.rpcCall(verifyConnectivity, $root.google.cloud.kms.v1.VerifyConnectivityRequest, $root.google.cloud.kms.v1.VerifyConnectivityResponse, request, callback);
+                        }, "name", { value: "VerifyConnectivity" });
+    
+                        /**
+                         * Calls VerifyConnectivity.
+                         * @function verifyConnectivity
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} request VerifyConnectivityRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.VerifyConnectivityResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return EkmService;
                     })();
     
@@ -3332,6 +3365,384 @@
                         };
     
                         return EkmConfig;
+                    })();
+    
+                    v1.VerifyConnectivityRequest = (function() {
+    
+                        /**
+                         * Properties of a VerifyConnectivityRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IVerifyConnectivityRequest
+                         * @property {string|null} [name] VerifyConnectivityRequest name
+                         */
+    
+                        /**
+                         * Constructs a new VerifyConnectivityRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a VerifyConnectivityRequest.
+                         * @implements IVerifyConnectivityRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest=} [properties] Properties to set
+                         */
+                        function VerifyConnectivityRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyConnectivityRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @instance
+                         */
+                        VerifyConnectivityRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new VerifyConnectivityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest instance
+                         */
+                        VerifyConnectivityRequest.create = function create(properties) {
+                            return new VerifyConnectivityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityRequest message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} message VerifyConnectivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} message VerifyConnectivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyConnectivityRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyConnectivityRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyConnectivityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         */
+                        VerifyConnectivityRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.VerifyConnectivityRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.VerifyConnectivityRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyConnectivityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.VerifyConnectivityRequest} message VerifyConnectivityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyConnectivityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyConnectivityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyConnectivityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyConnectivityRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyConnectivityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.VerifyConnectivityRequest";
+                        };
+    
+                        return VerifyConnectivityRequest;
+                    })();
+    
+                    v1.VerifyConnectivityResponse = (function() {
+    
+                        /**
+                         * Properties of a VerifyConnectivityResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IVerifyConnectivityResponse
+                         */
+    
+                        /**
+                         * Constructs a new VerifyConnectivityResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a VerifyConnectivityResponse.
+                         * @implements IVerifyConnectivityResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse=} [properties] Properties to set
+                         */
+                        function VerifyConnectivityResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new VerifyConnectivityResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse instance
+                         */
+                        VerifyConnectivityResponse.create = function create(properties) {
+                            return new VerifyConnectivityResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityResponse message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse} message VerifyConnectivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse} message VerifyConnectivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyConnectivityResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyConnectivityResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyConnectivityResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         */
+                        VerifyConnectivityResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.VerifyConnectivityResponse)
+                                return object;
+                            return new $root.google.cloud.kms.v1.VerifyConnectivityResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyConnectivityResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.VerifyConnectivityResponse} message VerifyConnectivityResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyConnectivityResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this VerifyConnectivityResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyConnectivityResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyConnectivityResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyConnectivityResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.VerifyConnectivityResponse";
+                        };
+    
+                        return VerifyConnectivityResponse;
                     })();
     
                     v1.KeyRing = (function() {

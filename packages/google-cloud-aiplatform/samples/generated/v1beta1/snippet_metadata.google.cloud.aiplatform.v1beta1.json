@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.13.0",
+        "version": "2.14.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -8096,6 +8096,50 @@
                 "method": {
                     "shortName": "ResumeSchedule",
                     "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.ResumeSchedule",
+                    "service": {
+                        "shortName": "ScheduleService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async",
+            "title": "DatasetService updateSchedule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an active or paused Schedule. When the Schedule is updated, new runs will be scheduled starting from the updated next execution time after the update time based on the time_specification in the updated Schedule. All unstarted runs before the update time will be skipped while already created runs will NOT be paused or canceled.",
+            "canonical": true,
+            "file": "schedule_service.update_schedule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSchedule",
+                "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.UpdateSchedule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "schedule",
+                        "type": ".google.cloud.aiplatform.v1beta1.Schedule"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.Schedule",
+                "client": {
+                    "shortName": "ScheduleServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ScheduleServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSchedule",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService.UpdateSchedule",
                     "service": {
                         "shortName": "ScheduleService",
                         "fullName": "google.cloud.aiplatform.v1beta1.ScheduleService"

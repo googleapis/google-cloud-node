@@ -2739,6 +2739,24 @@
     "support_documentation": "https://cloud.google.com/phishing-protection/docs/getting-support"
   },
   {
+    "name": "places",
+    "name_pretty": "Places API (New)",
+    "product_documentation": "https://developers.google.com/maps/documentation/places/web-service/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/places/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@googlemaps/places",
+    "api_id": "places.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "places",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-places",
+    "support_documentation": "https://developers.google.com/maps/documentation/places/web-service/docs/getting-support"
+  },
+  {
     "name": "cloudprivatecatalog",
     "name_pretty": "Private Catalog",
     "product_documentation": "https://cloud.google.com/private-catalog/",
@@ -2791,6 +2809,24 @@
     "api_shortname": "storageinsights",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-storageinsights",
     "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
+  },
+  {
+    "name": "cloudsupport",
+    "name_pretty": "Support API",
+    "product_documentation": "https://cloud.google.com/support/docs/reference/support-api",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudsupport/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/support",
+    "api_id": "cloudsupport.googleapis.com",
+    "default_version": "v2",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "cloudsupport",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-support",
+    "support_documentation": "https://cloud.google.com/support/docs/getting-support"
   },
   {
     "name": "trace",
