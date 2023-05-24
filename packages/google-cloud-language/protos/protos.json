@@ -1028,6 +1028,26 @@
                             }
                           ]
                         },
+                        "ModerateText": {
+                          "requestType": "ModerateTextRequest",
+                          "responseType": "ModerateTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta2/documents:moderateText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/documents:moderateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
+                        },
                         "AnnotateText": {
                           "requestType": "AnnotateTextRequest",
                           "responseType": "AnnotateTextResponse",
@@ -1727,6 +1747,26 @@
                         }
                       }
                     },
+                    "ModerateTextRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ModerateTextResponse": {
+                      "fields": {
+                        "moderationCategories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AnnotateTextRequest": {
                       "fields": {
                         "document": {
@@ -1771,6 +1811,10 @@
                               "type": "bool",
                               "id": 6
                             },
+                            "moderateText": {
+                              "type": "bool",
+                              "id": 11
+                            },
                             "classificationModelOptions": {
                               "type": "ClassificationModelOptions",
                               "id": 10
@@ -1808,6 +1852,11 @@
                           "rule": "repeated",
                           "type": "ClassificationCategory",
                           "id": 6
+                        },
+                        "moderationCategories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 8
                         }
                       }
                     }
