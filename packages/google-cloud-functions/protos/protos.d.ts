@@ -10181,9 +10181,6 @@ export namespace google {
                     /** Function name */
                     name?: (string|null);
 
-                    /** Function environment */
-                    environment?: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment|null);
-
                     /** Function description */
                     description?: (string|null);
 
@@ -10207,6 +10204,15 @@ export namespace google {
 
                     /** Function stateMessages */
                     stateMessages?: (google.cloud.functions.v2beta.IStateMessage[]|null);
+
+                    /** Function environment */
+                    environment?: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment|null);
+
+                    /** Function url */
+                    url?: (string|null);
+
+                    /** Function kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a Function. */
@@ -10220,9 +10226,6 @@ export namespace google {
 
                     /** Function name. */
                     public name: string;
-
-                    /** Function environment. */
-                    public environment: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment);
 
                     /** Function description. */
                     public description: string;
@@ -10247,6 +10250,15 @@ export namespace google {
 
                     /** Function stateMessages. */
                     public stateMessages: google.cloud.functions.v2beta.IStateMessage[];
+
+                    /** Function environment. */
+                    public environment: (google.cloud.functions.v2beta.Environment|keyof typeof google.cloud.functions.v2beta.Environment);
+
+                    /** Function url. */
+                    public url: string;
+
+                    /** Function kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new Function instance using the specified properties.
@@ -10937,6 +10949,9 @@ export namespace google {
                     /** BuildConfig environmentVariables */
                     environmentVariables?: ({ [k: string]: string }|null);
 
+                    /** BuildConfig dockerRegistry */
+                    dockerRegistry?: (google.cloud.functions.v2beta.BuildConfig.DockerRegistry|keyof typeof google.cloud.functions.v2beta.BuildConfig.DockerRegistry|null);
+
                     /** BuildConfig dockerRepository */
                     dockerRepository?: (string|null);
                 }
@@ -10970,6 +10985,9 @@ export namespace google {
 
                     /** BuildConfig environmentVariables. */
                     public environmentVariables: { [k: string]: string };
+
+                    /** BuildConfig dockerRegistry. */
+                    public dockerRegistry: (google.cloud.functions.v2beta.BuildConfig.DockerRegistry|keyof typeof google.cloud.functions.v2beta.BuildConfig.DockerRegistry);
 
                     /** BuildConfig dockerRepository. */
                     public dockerRepository: string;
@@ -11052,6 +11070,16 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace BuildConfig {
+
+                    /** DockerRegistry enum. */
+                    enum DockerRegistry {
+                        DOCKER_REGISTRY_UNSPECIFIED = 0,
+                        CONTAINER_REGISTRY = 1,
+                        ARTIFACT_REGISTRY = 2
+                    }
+                }
+
                 /** Properties of a ServiceConfig. */
                 interface IServiceConfig {
 
@@ -11063,6 +11091,9 @@ export namespace google {
 
                     /** ServiceConfig availableMemory */
                     availableMemory?: (string|null);
+
+                    /** ServiceConfig availableCpu */
+                    availableCpu?: (string|null);
 
                     /** ServiceConfig environmentVariables */
                     environmentVariables?: ({ [k: string]: string }|null);
@@ -11099,6 +11130,12 @@ export namespace google {
 
                     /** ServiceConfig revision */
                     revision?: (string|null);
+
+                    /** ServiceConfig maxInstanceRequestConcurrency */
+                    maxInstanceRequestConcurrency?: (number|null);
+
+                    /** ServiceConfig securityLevel */
+                    securityLevel?: (google.cloud.functions.v2beta.ServiceConfig.SecurityLevel|keyof typeof google.cloud.functions.v2beta.ServiceConfig.SecurityLevel|null);
                 }
 
                 /** Represents a ServiceConfig. */
@@ -11118,6 +11155,9 @@ export namespace google {
 
                     /** ServiceConfig availableMemory. */
                     public availableMemory: string;
+
+                    /** ServiceConfig availableCpu. */
+                    public availableCpu: string;
 
                     /** ServiceConfig environmentVariables. */
                     public environmentVariables: { [k: string]: string };
@@ -11154,6 +11194,12 @@ export namespace google {
 
                     /** ServiceConfig revision. */
                     public revision: string;
+
+                    /** ServiceConfig maxInstanceRequestConcurrency. */
+                    public maxInstanceRequestConcurrency: number;
+
+                    /** ServiceConfig securityLevel. */
+                    public securityLevel: (google.cloud.functions.v2beta.ServiceConfig.SecurityLevel|keyof typeof google.cloud.functions.v2beta.ServiceConfig.SecurityLevel);
 
                     /**
                      * Creates a new ServiceConfig instance using the specified properties.
@@ -11248,6 +11294,13 @@ export namespace google {
                         ALLOW_ALL = 1,
                         ALLOW_INTERNAL_ONLY = 2,
                         ALLOW_INTERNAL_AND_GCLB = 3
+                    }
+
+                    /** SecurityLevel enum. */
+                    enum SecurityLevel {
+                        SECURITY_LEVEL_UNSPECIFIED = 0,
+                        SECURE_ALWAYS = 1,
+                        SECURE_OPTIONAL = 2
                     }
                 }
 
@@ -12486,6 +12539,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent */
                     parent?: (string|null);
+
+                    /** GenerateUploadUrlRequest kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a GenerateUploadUrlRequest. */
@@ -12499,6 +12555,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent. */
                     public parent: string;
+
+                    /** GenerateUploadUrlRequest kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new GenerateUploadUrlRequest instance using the specified properties.
@@ -13349,6 +13408,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata environments */
+                    environments?: (google.cloud.functions.v2beta.Environment[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2beta.ILocationMetadata);
+
+                    /** LocationMetadata environments. */
+                    public environments: google.cloud.functions.v2beta.Environment[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2beta.ILocationMetadata): google.cloud.functions.v2beta.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2beta.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2beta.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2beta.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2beta.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2beta.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2beta.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2beta.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -2840,8 +2840,8 @@
                     "java_outer_classname": "FunctionsProto",
                     "java_package": "com.google.cloud.functions.v2beta",
                     "objc_class_prefix": "GCF",
-                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "FunctionService": {
@@ -3039,10 +3039,6 @@
                           "type": "string",
                           "id": 1
                         },
-                        "environment": {
-                          "type": "Environment",
-                          "id": 10
-                        },
                         "description": {
                           "type": "string",
                           "id": 2
@@ -3084,6 +3080,24 @@
                           "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 10
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       },
@@ -3256,12 +3270,24 @@
                           "type": "string",
                           "id": 6
                         },
+                        "dockerRegistry": {
+                          "type": "DockerRegistry",
+                          "id": 10
+                        },
                         "dockerRepository": {
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DockerRegistry": {
+                          "values": {
+                            "DOCKER_REGISTRY_UNSPECIFIED": 0,
+                            "CONTAINER_REGISTRY": 1,
+                            "ARTIFACT_REGISTRY": 2
                           }
                         }
                       }
@@ -3283,6 +3309,10 @@
                         "availableMemory": {
                           "type": "string",
                           "id": 13
+                        },
+                        "availableCpu": {
+                          "type": "string",
+                          "id": 22
                         },
                         "environmentVariables": {
                           "keyType": "string",
@@ -3343,6 +3373,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "maxInstanceRequestConcurrency": {
+                          "type": "int32",
+                          "id": 20
+                        },
+                        "securityLevel": {
+                          "type": "SecurityLevel",
+                          "id": 21
                         }
                       },
                       "nested": {
@@ -3359,6 +3397,13 @@
                             "ALLOW_ALL": 1,
                             "ALLOW_INTERNAL_ONLY": 2,
                             "ALLOW_INTERNAL_AND_GCLB": 3
+                          }
+                        },
+                        "SecurityLevel": {
+                          "values": {
+                            "SECURITY_LEVEL_UNSPECIFIED": 0,
+                            "SECURE_ALWAYS": 1,
+                            "SECURE_OPTIONAL": 2
                           }
                         }
                       }
@@ -3627,6 +3672,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },
@@ -3763,6 +3815,15 @@
                           "rule": "repeated",
                           "type": "Stage",
                           "id": 9
+                        }
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "environments": {
+                          "rule": "repeated",
+                          "type": "Environment",
+                          "id": 1
                         }
                       }
                     },
