@@ -35,6 +35,11 @@
                 "classifyText"
               ]
             },
+            "ModerateText": {
+              "methods": [
+                "moderateText"
+              ]
+            },
             "AnnotateText": {
               "methods": [
                 "annotateText"
@@ -68,6 +73,11 @@
             "ClassifyText": {
               "methods": [
                 "classifyText"
+              ]
+            },
+            "ModerateText": {
+              "methods": [
+                "moderateText"
               ]
             },
             "AnnotateText": {

@@ -232,6 +232,46 @@
             }
         },
         {
+            "regionTag": "language_v1_generated_LanguageService_ModerateText_async",
+            "title": "LanguageService moderateText Sample",
+            "origin": "API_DEFINITION",
+            "description": " Moderates a document for harmful and sensitive categories.",
+            "canonical": true,
+            "file": "language_service.moderate_text.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ModerateText",
+                "fullName": "google.cloud.language.v1.LanguageService.ModerateText",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "document",
+                        "type": ".google.cloud.language.v1.Document"
+                    }
+                ],
+                "resultType": ".google.cloud.language.v1.ModerateTextResponse",
+                "client": {
+                    "shortName": "LanguageServiceClient",
+                    "fullName": "google.cloud.language.v1.LanguageServiceClient"
+                },
+                "method": {
+                    "shortName": "ModerateText",
+                    "fullName": "google.cloud.language.v1.LanguageService.ModerateText",
+                    "service": {
+                        "shortName": "LanguageService",
+                        "fullName": "google.cloud.language.v1.LanguageService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "language_v1_generated_LanguageService_AnnotateText_async",
             "title": "LanguageService annotateText Sample",
             "origin": "API_DEFINITION",

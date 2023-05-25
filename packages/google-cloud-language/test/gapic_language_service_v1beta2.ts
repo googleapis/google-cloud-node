@@ -586,6 +586,89 @@ describe('v1beta2.LanguageServiceClient', () => {
     });
   });
 
+  describe('moderateText', () => {
+    it('invokes moderateText without error', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextResponse()
+      );
+      client.innerApiCalls.moderateText = stubSimpleCall(expectedResponse);
+      const [response] = await client.moderateText(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes moderateText without error using callback', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextResponse()
+      );
+      client.innerApiCalls.moderateText =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.moderateText(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.language.v1beta2.IModerateTextResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes moderateText with error', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.moderateText = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.moderateText(request), expectedError);
+    });
+
+    it('invokes moderateText with closed client', async () => {
+      const client = new languageserviceModule.v1beta2.LanguageServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.language.v1beta2.ModerateTextRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.moderateText(request), expectedError);
+    });
+  });
+
   describe('annotateText', () => {
     it('invokes annotateText without error', async () => {
       const client = new languageserviceModule.v1beta2.LanguageServiceClient({

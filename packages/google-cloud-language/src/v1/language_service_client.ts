@@ -227,6 +227,7 @@ export class LanguageServiceClient {
       'analyzeEntitySentiment',
       'analyzeSyntax',
       'classifyText',
+      'moderateText',
       'annotateText',
     ];
     for (const methodName of languageServiceStubMethods) {
@@ -764,6 +765,87 @@ export class LanguageServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.classifyText(request, options, callback);
+  }
+  /**
+   * Moderates a document for harmful and sensitive categories.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.language.v1.Document} request.document
+   *   Required. Input document.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.ModerateTextResponse | ModerateTextResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/language_service.moderate_text.js</caption>
+   * region_tag:language_v1_generated_LanguageService_ModerateText_async
+   */
+  moderateText(
+    request?: protos.google.cloud.language.v1.IModerateTextRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IModerateTextResponse,
+      protos.google.cloud.language.v1.IModerateTextRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  moderateText(
+    request: protos.google.cloud.language.v1.IModerateTextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.language.v1.IModerateTextResponse,
+      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moderateText(
+    request: protos.google.cloud.language.v1.IModerateTextRequest,
+    callback: Callback<
+      protos.google.cloud.language.v1.IModerateTextResponse,
+      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moderateText(
+    request?: protos.google.cloud.language.v1.IModerateTextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          | protos.google.cloud.language.v1.IModerateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.language.v1.IModerateTextResponse,
+      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.language.v1.IModerateTextResponse,
+      protos.google.cloud.language.v1.IModerateTextRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.moderateText(request, options, callback);
   }
   /**
    * A convenience method that provides all the features that analyzeSentiment,
