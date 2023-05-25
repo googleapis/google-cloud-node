@@ -3058,9 +3058,6 @@ export namespace google {
                     /** Function name */
                     name?: (string|null);
 
-                    /** Function environment */
-                    environment?: (google.cloud.functions.v2.Environment|keyof typeof google.cloud.functions.v2.Environment|null);
-
                     /** Function description */
                     description?: (string|null);
 
@@ -3085,11 +3082,14 @@ export namespace google {
                     /** Function stateMessages */
                     stateMessages?: (google.cloud.functions.v2.IStateMessage[]|null);
 
-                    /** Function kmsKeyName */
-                    kmsKeyName?: (string|null);
+                    /** Function environment */
+                    environment?: (google.cloud.functions.v2.Environment|keyof typeof google.cloud.functions.v2.Environment|null);
 
                     /** Function url */
                     url?: (string|null);
+
+                    /** Function kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a Function. */
@@ -3103,9 +3103,6 @@ export namespace google {
 
                     /** Function name. */
                     public name: string;
-
-                    /** Function environment. */
-                    public environment: (google.cloud.functions.v2.Environment|keyof typeof google.cloud.functions.v2.Environment);
 
                     /** Function description. */
                     public description: string;
@@ -3131,11 +3128,14 @@ export namespace google {
                     /** Function stateMessages. */
                     public stateMessages: google.cloud.functions.v2.IStateMessage[];
 
-                    /** Function kmsKeyName. */
-                    public kmsKeyName: string;
+                    /** Function environment. */
+                    public environment: (google.cloud.functions.v2.Environment|keyof typeof google.cloud.functions.v2.Environment);
 
                     /** Function url. */
                     public url: string;
+
+                    /** Function kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new Function instance using the specified properties.
@@ -6285,6 +6285,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata environments */
+                    environments?: (google.cloud.functions.v2.Environment[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v2.ILocationMetadata);
+
+                    /** LocationMetadata environments. */
+                    public environments: google.cloud.functions.v2.Environment[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.functions.v2.ILocationMetadata): google.cloud.functions.v2.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v2.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v2.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v2.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v2.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v2.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v2.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

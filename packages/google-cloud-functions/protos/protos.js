@@ -7338,7 +7338,6 @@
                          * @memberof google.cloud.functions.v2
                          * @interface IFunction
                          * @property {string|null} [name] Function name
-                         * @property {google.cloud.functions.v2.Environment|null} [environment] Function environment
                          * @property {string|null} [description] Function description
                          * @property {google.cloud.functions.v2.IBuildConfig|null} [buildConfig] Function buildConfig
                          * @property {google.cloud.functions.v2.IServiceConfig|null} [serviceConfig] Function serviceConfig
@@ -7347,8 +7346,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Function updateTime
                          * @property {Object.<string,string>|null} [labels] Function labels
                          * @property {Array.<google.cloud.functions.v2.IStateMessage>|null} [stateMessages] Function stateMessages
-                         * @property {string|null} [kmsKeyName] Function kmsKeyName
+                         * @property {google.cloud.functions.v2.Environment|null} [environment] Function environment
                          * @property {string|null} [url] Function url
+                         * @property {string|null} [kmsKeyName] Function kmsKeyName
                          */
     
                         /**
@@ -7375,14 +7375,6 @@
                          * @instance
                          */
                         Function.prototype.name = "";
-    
-                        /**
-                         * Function environment.
-                         * @member {google.cloud.functions.v2.Environment} environment
-                         * @memberof google.cloud.functions.v2.Function
-                         * @instance
-                         */
-                        Function.prototype.environment = 0;
     
                         /**
                          * Function description.
@@ -7449,12 +7441,12 @@
                         Function.prototype.stateMessages = $util.emptyArray;
     
                         /**
-                         * Function kmsKeyName.
-                         * @member {string} kmsKeyName
+                         * Function environment.
+                         * @member {google.cloud.functions.v2.Environment} environment
                          * @memberof google.cloud.functions.v2.Function
                          * @instance
                          */
-                        Function.prototype.kmsKeyName = "";
+                        Function.prototype.environment = 0;
     
                         /**
                          * Function url.
@@ -7463,6 +7455,14 @@
                          * @instance
                          */
                         Function.prototype.url = "";
+    
+                        /**
+                         * Function kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2.Function
+                         * @instance
+                         */
+                        Function.prototype.kmsKeyName = "";
     
                         /**
                          * Creates a new Function instance using the specified properties.
@@ -7552,10 +7552,6 @@
                                         message.name = reader.string();
                                         break;
                                     }
-                                case 10: {
-                                        message.environment = reader.int32();
-                                        break;
-                                    }
                                 case 2: {
                                         message.description = reader.string();
                                         break;
@@ -7609,12 +7605,16 @@
                                         message.stateMessages.push($root.google.cloud.functions.v2.StateMessage.decode(reader, reader.uint32()));
                                         break;
                                     }
-                                case 25: {
-                                        message.kmsKeyName = reader.string();
+                                case 10: {
+                                        message.environment = reader.int32();
                                         break;
                                     }
                                 case 14: {
                                         message.url = reader.string();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.kmsKeyName = reader.string();
                                         break;
                                     }
                                 default:
@@ -7655,15 +7655,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.environment != null && message.hasOwnProperty("environment"))
-                                switch (message.environment) {
-                                default:
-                                    return "environment: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -7716,12 +7707,21 @@
                                         return "stateMessages." + error;
                                 }
                             }
-                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
-                                if (!$util.isString(message.kmsKeyName))
-                                    return "kmsKeyName: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.url != null && message.hasOwnProperty("url"))
                                 if (!$util.isString(message.url))
                                     return "url: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -7739,26 +7739,6 @@
                             var message = new $root.google.cloud.functions.v2.Function();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            switch (object.environment) {
-                            default:
-                                if (typeof object.environment === "number") {
-                                    message.environment = object.environment;
-                                    break;
-                                }
-                                break;
-                            case "ENVIRONMENT_UNSPECIFIED":
-                            case 0:
-                                message.environment = 0;
-                                break;
-                            case "GEN_1":
-                            case 1:
-                                message.environment = 1;
-                                break;
-                            case "GEN_2":
-                            case 2:
-                                message.environment = 2;
-                                break;
-                            }
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.buildConfig != null) {
@@ -7830,10 +7810,30 @@
                                     message.stateMessages[i] = $root.google.cloud.functions.v2.StateMessage.fromObject(object.stateMessages[i]);
                                 }
                             }
-                            if (object.kmsKeyName != null)
-                                message.kmsKeyName = String(object.kmsKeyName);
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
                             if (object.url != null)
                                 message.url = String(object.url);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -15758,6 +15758,257 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v2.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.functions.v2
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.functions.v2.Environment>|null} [environments] LocationMetadata environments
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.functions.v2
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.functions.v2.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.environments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata environments.
+                         * @member {Array.<google.cloud.functions.v2.Environment>} environments
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.environments = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.environments != null && message.environments.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    writer.int32(message.environments[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.environments.push(reader.int32());
+                                        } else
+                                            message.environments.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.environments != null && message.hasOwnProperty("environments")) {
+                                if (!Array.isArray(message.environments))
+                                    return "environments: array expected";
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    switch (message.environments[i]) {
+                                    default:
+                                        return "environments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2.LocationMetadata();
+                            if (object.environments) {
+                                if (!Array.isArray(object.environments))
+                                    throw TypeError(".google.cloud.functions.v2.LocationMetadata.environments: array expected");
+                                message.environments = [];
+                                for (var i = 0; i < object.environments.length; ++i)
+                                    switch (object.environments[i]) {
+                                    default:
+                                        if (typeof object.environments[i] === "number") {
+                                            message.environments[i] = object.environments[i];
+                                            break;
+                                        }
+                                    case "ENVIRONMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.environments[i] = 0;
+                                        break;
+                                    case "GEN_1":
+                                    case 1:
+                                        message.environments[i] = 1;
+                                        break;
+                                    case "GEN_2":
+                                    case 2:
+                                        message.environments[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.environments = [];
+                            if (message.environments && message.environments.length) {
+                                object.environments = [];
+                                for (var j = 0; j < message.environments.length; ++j)
+                                    object.environments[j] = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environments[j]] === undefined ? message.environments[j] : $root.google.cloud.functions.v2.Environment[message.environments[j]] : message.environments[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
                     })();
     
                     v2.Stage = (function() {
