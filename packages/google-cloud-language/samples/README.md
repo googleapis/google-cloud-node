@@ -18,6 +18,7 @@
   * [Language_service.analyze_syntax](#language_service.analyze_syntax)
   * [Language_service.annotate_text](#language_service.annotate_text)
   * [Language_service.classify_text](#language_service.classify_text)
+  * [Language_service.moderate_text](#language_service.moderate_text)
   * [Language_service.analyze_entities](#language_service.analyze_entities)
   * [Language_service.analyze_entity_sentiment](#language_service.analyze_entity_sentiment)
   * [Language_service.analyze_sentiment](#language_service.analyze_sentiment)
@@ -137,6 +138,23 @@ __Usage:__
 
 
 `node packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js`
+
+
+-----
+
+
+
+
+### Language_service.moderate_text
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.moderate_text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.moderate_text.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-language/samples/generated/v1/language_service.moderate_text.js`
 
 
 -----
