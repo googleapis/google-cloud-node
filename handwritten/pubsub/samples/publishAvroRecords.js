@@ -80,7 +80,6 @@ async function publishAvroRecords(topicNameOrId) {
       console.log(`Unknown schema encoding: ${schemaEncoding}`);
       break;
   }
-
   if (!dataBuffer) {
     console.log(`Invalid encoding ${schemaEncoding} on the topic.`);
     return;

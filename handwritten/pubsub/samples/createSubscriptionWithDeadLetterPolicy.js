@@ -61,7 +61,6 @@ async function createSubscriptionWithDeadLetterPolicy(
   console.log(
     `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
   );
-
   console.log(
     'To process dead letter messages, remember to add a subscription to your dead letter topic.'
   );
