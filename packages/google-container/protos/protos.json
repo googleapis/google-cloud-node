@@ -1071,6 +1071,10 @@
                     "ephemeralStorageLocalSsdConfig": {
                       "type": "EphemeralStorageLocalSsdConfig",
                       "id": 41
+                    },
+                    "soleTenantConfig": {
+                      "type": "SoleTenantConfig",
+                      "id": 42
                     }
                   }
                 },
@@ -1228,6 +1232,43 @@
                         "NO_RESERVATION": 1,
                         "ANY_RESERVATION": 2,
                         "SPECIFIC_RESERVATION": 3
+                      }
+                    }
+                  }
+                },
+                "SoleTenantConfig": {
+                  "fields": {
+                    "nodeAffinities": {
+                      "rule": "repeated",
+                      "type": "NodeAffinity",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "NodeAffinity": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "operator": {
+                          "type": "Operator",
+                          "id": 2
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Operator": {
+                          "values": {
+                            "OPERATOR_UNSPECIFIED": 0,
+                            "IN": 1,
+                            "NOT_IN": 2
+                          }
+                        }
                       }
                     }
                   }

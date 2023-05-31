@@ -1176,6 +1176,9 @@ export namespace google {
 
                 /** NodeConfig ephemeralStorageLocalSsdConfig */
                 ephemeralStorageLocalSsdConfig?: (google.container.v1.IEphemeralStorageLocalSsdConfig|null);
+
+                /** NodeConfig soleTenantConfig */
+                soleTenantConfig?: (google.container.v1.ISoleTenantConfig|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1285,6 +1288,9 @@ export namespace google {
 
                 /** NodeConfig ephemeralStorageLocalSsdConfig. */
                 public ephemeralStorageLocalSsdConfig?: (google.container.v1.IEphemeralStorageLocalSsdConfig|null);
+
+                /** NodeConfig soleTenantConfig. */
+                public soleTenantConfig?: (google.container.v1.ISoleTenantConfig|null);
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -2135,6 +2141,225 @@ export namespace google {
                     NO_RESERVATION = 1,
                     ANY_RESERVATION = 2,
                     SPECIFIC_RESERVATION = 3
+                }
+            }
+
+            /** Properties of a SoleTenantConfig. */
+            interface ISoleTenantConfig {
+
+                /** SoleTenantConfig nodeAffinities */
+                nodeAffinities?: (google.container.v1.SoleTenantConfig.INodeAffinity[]|null);
+            }
+
+            /** Represents a SoleTenantConfig. */
+            class SoleTenantConfig implements ISoleTenantConfig {
+
+                /**
+                 * Constructs a new SoleTenantConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ISoleTenantConfig);
+
+                /** SoleTenantConfig nodeAffinities. */
+                public nodeAffinities: google.container.v1.SoleTenantConfig.INodeAffinity[];
+
+                /**
+                 * Creates a new SoleTenantConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SoleTenantConfig instance
+                 */
+                public static create(properties?: google.container.v1.ISoleTenantConfig): google.container.v1.SoleTenantConfig;
+
+                /**
+                 * Encodes the specified SoleTenantConfig message. Does not implicitly {@link google.container.v1.SoleTenantConfig.verify|verify} messages.
+                 * @param message SoleTenantConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ISoleTenantConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SoleTenantConfig message, length delimited. Does not implicitly {@link google.container.v1.SoleTenantConfig.verify|verify} messages.
+                 * @param message SoleTenantConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ISoleTenantConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SoleTenantConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SoleTenantConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.SoleTenantConfig;
+
+                /**
+                 * Decodes a SoleTenantConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SoleTenantConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.SoleTenantConfig;
+
+                /**
+                 * Verifies a SoleTenantConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SoleTenantConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SoleTenantConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.SoleTenantConfig;
+
+                /**
+                 * Creates a plain object from a SoleTenantConfig message. Also converts values to other types if specified.
+                 * @param message SoleTenantConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.SoleTenantConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SoleTenantConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SoleTenantConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SoleTenantConfig {
+
+                /** Properties of a NodeAffinity. */
+                interface INodeAffinity {
+
+                    /** NodeAffinity key */
+                    key?: (string|null);
+
+                    /** NodeAffinity operator */
+                    operator?: (google.container.v1.SoleTenantConfig.NodeAffinity.Operator|keyof typeof google.container.v1.SoleTenantConfig.NodeAffinity.Operator|null);
+
+                    /** NodeAffinity values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a NodeAffinity. */
+                class NodeAffinity implements INodeAffinity {
+
+                    /**
+                     * Constructs a new NodeAffinity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.SoleTenantConfig.INodeAffinity);
+
+                    /** NodeAffinity key. */
+                    public key: string;
+
+                    /** NodeAffinity operator. */
+                    public operator: (google.container.v1.SoleTenantConfig.NodeAffinity.Operator|keyof typeof google.container.v1.SoleTenantConfig.NodeAffinity.Operator);
+
+                    /** NodeAffinity values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new NodeAffinity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeAffinity instance
+                     */
+                    public static create(properties?: google.container.v1.SoleTenantConfig.INodeAffinity): google.container.v1.SoleTenantConfig.NodeAffinity;
+
+                    /**
+                     * Encodes the specified NodeAffinity message. Does not implicitly {@link google.container.v1.SoleTenantConfig.NodeAffinity.verify|verify} messages.
+                     * @param message NodeAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.SoleTenantConfig.INodeAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeAffinity message, length delimited. Does not implicitly {@link google.container.v1.SoleTenantConfig.NodeAffinity.verify|verify} messages.
+                     * @param message NodeAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.SoleTenantConfig.INodeAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeAffinity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.SoleTenantConfig.NodeAffinity;
+
+                    /**
+                     * Decodes a NodeAffinity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.SoleTenantConfig.NodeAffinity;
+
+                    /**
+                     * Verifies a NodeAffinity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeAffinity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeAffinity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.SoleTenantConfig.NodeAffinity;
+
+                    /**
+                     * Creates a plain object from a NodeAffinity message. Also converts values to other types if specified.
+                     * @param message NodeAffinity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.SoleTenantConfig.NodeAffinity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeAffinity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeAffinity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NodeAffinity {
+
+                    /** Operator enum. */
+                    enum Operator {
+                        OPERATOR_UNSPECIFIED = 0,
+                        IN = 1,
+                        NOT_IN = 2
+                    }
                 }
             }
 
