@@ -32,6 +32,7 @@ function main() {
   const matchServiceClient = new aiplatform.MatchServiceClient();
   const metadataServiceClient = new aiplatform.MetadataServiceClient();
   const migrationServiceClient = new aiplatform.MigrationServiceClient();
+  const modelGardenServiceClient = new aiplatform.ModelGardenServiceClient();
   const modelServiceClient = new aiplatform.ModelServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();

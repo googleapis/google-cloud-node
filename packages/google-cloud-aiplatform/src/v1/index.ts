@@ -26,6 +26,7 @@ export {JobServiceClient} from './job_service_client';
 export {MatchServiceClient} from './match_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';
+export {ModelGardenServiceClient} from './model_garden_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';

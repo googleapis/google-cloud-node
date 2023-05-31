@@ -1610,6 +1610,13 @@
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/TrainingPipeline"
                           }
                         },
+                        "pipelineJob": {
+                          "type": "string",
+                          "id": 47,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        },
                         "containerSpec": {
                           "type": "ModelContainerSpec",
                           "id": 9,
@@ -1756,6 +1763,17 @@
                             "DEDICATED_RESOURCES": 1,
                             "AUTOMATIC_RESOURCES": 2,
                             "SHARED_RESOURCES": 3
+                          }
+                        }
+                      }
+                    },
+                    "LargeModelReference": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -13474,6 +13492,357 @@
                                 }
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "ModelGardenService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetPublisherModel": {
+                          "requestType": "GetPublisherModelRequest",
+                          "responseType": "PublisherModel",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=publishers/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=publishers/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PublisherModelView": {
+                      "values": {
+                        "PUBLISHER_MODEL_VIEW_UNSPECIFIED": 0,
+                        "PUBLISHER_MODEL_VIEW_BASIC": 1,
+                        "PUBLISHER_MODEL_VIEW_FULL": 2,
+                        "PUBLISHER_MODEL_VERSION_VIEW_BASIC": 3
+                      }
+                    },
+                    "GetPublisherModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PublisherModel"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "view": {
+                          "type": "PublisherModelView",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PublisherModel": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/PublisherModel",
+                        "(google.api.resource).pattern": "publishers/{publisher}/models/{model}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "openSourceCategory": {
+                          "type": "OpenSourceCategory",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "supportedActions": {
+                          "type": "CallToAction",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "frameworks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "launchStage": {
+                          "type": "LaunchStage",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publisherModelTemplate": {
+                          "type": "string",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "predictSchemata": {
+                          "type": "PredictSchemata",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ResourceReference": {
+                          "oneofs": {
+                            "reference": {
+                              "oneof": [
+                                "uri",
+                                "resourceName"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "Documentation": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "content": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "CallToAction": {
+                          "fields": {
+                            "viewRestApi": {
+                              "type": "ViewRestApi",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openNotebook": {
+                              "type": "RegionalResourceReferences",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "createApplication": {
+                              "type": "RegionalResourceReferences",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openFineTuningPipeline": {
+                              "type": "RegionalResourceReferences",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openPromptTuningPipeline": {
+                              "type": "RegionalResourceReferences",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openGenie": {
+                              "type": "RegionalResourceReferences",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deploy": {
+                              "type": "Deploy",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openGenerationAiStudio": {
+                              "type": "RegionalResourceReferences",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "requestAccess": {
+                              "type": "RegionalResourceReferences",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RegionalResourceReferences": {
+                              "fields": {
+                                "references": {
+                                  "keyType": "string",
+                                  "type": "ResourceReference",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "ViewRestApi": {
+                              "fields": {
+                                "documentations": {
+                                  "rule": "repeated",
+                                  "type": "Documentation",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "Deploy": {
+                              "oneofs": {
+                                "predictionResources": {
+                                  "oneof": [
+                                    "dedicatedResources",
+                                    "automaticResources",
+                                    "sharedResources"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "dedicatedResources": {
+                                  "type": "DedicatedResources",
+                                  "id": 5
+                                },
+                                "automaticResources": {
+                                  "type": "AutomaticResources",
+                                  "id": 6
+                                },
+                                "sharedResources": {
+                                  "type": "string",
+                                  "id": 7
+                                },
+                                "modelDisplayName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "largeModelReference": {
+                                  "type": "LargeModelReference",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "containerSpec": {
+                                  "type": "ModelContainerSpec",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "artifactUri": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "OpenSourceCategory": {
+                          "values": {
+                            "OPEN_SOURCE_CATEGORY_UNSPECIFIED": 0,
+                            "PROPRIETARY": 1,
+                            "GOOGLE_OWNED_OSS_WITH_GOOGLE_CHECKPOINT": 2,
+                            "THIRD_PARTY_OWNED_OSS_WITH_GOOGLE_CHECKPOINT": 3,
+                            "GOOGLE_OWNED_OSS": 4,
+                            "THIRD_PARTY_OWNED_OSS": 5
+                          }
+                        },
+                        "LaunchStage": {
+                          "values": {
+                            "LAUNCH_STAGE_UNSPECIFIED": 0,
+                            "EXPERIMENTAL": 1,
+                            "PRIVATE_PREVIEW": 2,
+                            "PUBLIC_PREVIEW": 3,
+                            "GA": 4
                           }
                         }
                       }

@@ -27,6 +27,7 @@ import {
   MatchServiceClient,
   MetadataServiceClient,
   MigrationServiceClient,
+  ModelGardenServiceClient,
   ModelServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
@@ -70,6 +71,9 @@ function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
   client.close();
 }
 function doStuffWithMigrationServiceClient(client: MigrationServiceClient) {
+  client.close();
+}
+function doStuffWithModelGardenServiceClient(client: ModelGardenServiceClient) {
   client.close();
 }
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
@@ -127,6 +131,9 @@ function main() {
   // check that the client instance can be created
   const migrationServiceClient = new MigrationServiceClient();
   doStuffWithMigrationServiceClient(migrationServiceClient);
+  // check that the client instance can be created
+  const modelGardenServiceClient = new ModelGardenServiceClient();
+  doStuffWithModelGardenServiceClient(modelGardenServiceClient);
   // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);
