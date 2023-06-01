@@ -8265,6 +8265,9 @@ export namespace google {
 
                     /** Node shieldedInstanceConfig */
                     shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
+
+                    /** Node multisliceNode */
+                    multisliceNode?: (boolean|null);
                 }
 
                 /** Represents a Node. */
@@ -8344,6 +8347,9 @@ export namespace google {
 
                     /** Node shieldedInstanceConfig. */
                     public shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
+
+                    /** Node multisliceNode. */
+                    public multisliceNode: boolean;
 
                     /**
                      * Creates a new Node instance using the specified properties.
@@ -11297,6 +11303,9 @@ export namespace google {
 
                     /** DeleteQueuedResourceRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteQueuedResourceRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteQueuedResourceRequest. */
@@ -11313,6 +11322,9 @@ export namespace google {
 
                     /** DeleteQueuedResourceRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteQueuedResourceRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteQueuedResourceRequest instance using the specified properties.
