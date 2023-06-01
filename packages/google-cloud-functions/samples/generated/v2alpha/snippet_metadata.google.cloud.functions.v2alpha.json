@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -250,7 +250,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -261,6 +261,10 @@
                 "parameters": [
                     {
                         "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "kms_key_name",
                         "type": "TYPE_STRING"
                     }
                 ],
