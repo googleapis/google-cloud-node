@@ -28,6 +28,7 @@
                         "NVIDIA_TESLA_P4": 4,
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
+                        "NVIDIA_A100_80GB": 9,
                         "NVIDIA_L4": 11,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
@@ -6514,6 +6515,11 @@
                         "timestampOutsideRetentionRowsCount": {
                           "type": "int64",
                           "id": 7
+                        },
+                        "blockingOperationIds": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     },

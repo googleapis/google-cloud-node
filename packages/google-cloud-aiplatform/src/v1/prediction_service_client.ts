@@ -657,8 +657,7 @@ export class PredictionServiceClient {
    * {@link google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
    * is not specified, all DeployedModels must have
    * {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
-   * populated. Only deployed AutoML tabular Models have
-   * explanation_spec.
+   * populated.
    *
    * @param {Object} request
    *   The request object that will be sent.
