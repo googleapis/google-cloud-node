@@ -473,6 +473,8 @@ export namespace google {
                     CLOUD_PUBSUB = 2,
                     DATAPROC_METASTORE = 3,
                     DATAPLEX = 4,
+                    CLOUD_SPANNER = 6,
+                    CLOUD_BIGTABLE = 7,
                     CLOUD_SQL = 8,
                     LOOKER = 9
                 }
@@ -1710,6 +1712,9 @@ export namespace google {
                     /** SearchCatalogResponse results */
                     results?: (google.cloud.datacatalog.v1.ISearchCatalogResult[]|null);
 
+                    /** SearchCatalogResponse totalSize */
+                    totalSize?: (number|null);
+
                     /** SearchCatalogResponse nextPageToken */
                     nextPageToken?: (string|null);
 
@@ -1728,6 +1733,9 @@ export namespace google {
 
                     /** SearchCatalogResponse results. */
                     public results: google.cloud.datacatalog.v1.ISearchCatalogResult[];
+
+                    /** SearchCatalogResponse totalSize. */
+                    public totalSize: number;
 
                     /** SearchCatalogResponse nextPageToken. */
                     public nextPageToken: string;
@@ -2860,6 +2868,12 @@ export namespace google {
 
                     /** LookupEntryRequest fullyQualifiedName */
                     fullyQualifiedName?: (string|null);
+
+                    /** LookupEntryRequest project */
+                    project?: (string|null);
+
+                    /** LookupEntryRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a LookupEntryRequest. */
@@ -2879,6 +2893,12 @@ export namespace google {
 
                     /** LookupEntryRequest fullyQualifiedName. */
                     public fullyQualifiedName?: (string|null);
+
+                    /** LookupEntryRequest project. */
+                    public project: string;
+
+                    /** LookupEntryRequest location. */
+                    public location: string;
 
                     /** LookupEntryRequest targetName. */
                     public targetName?: ("linkedResource"|"sqlResource"|"fullyQualifiedName");
@@ -2991,6 +3011,9 @@ export namespace google {
                     /** Entry lookerSystemSpec */
                     lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
 
+                    /** Entry cloudBigtableSystemSpec */
+                    cloudBigtableSystemSpec?: (google.cloud.datacatalog.v1.ICloudBigtableSystemSpec|null);
+
                     /** Entry gcsFilesetSpec */
                     gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3011,6 +3034,9 @@ export namespace google {
 
                     /** Entry filesetSpec */
                     filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
+                    /** Entry serviceSpec */
+                    serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
 
                     /** Entry displayName */
                     displayName?: (string|null);
@@ -3076,6 +3102,9 @@ export namespace google {
                     /** Entry lookerSystemSpec. */
                     public lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
 
+                    /** Entry cloudBigtableSystemSpec. */
+                    public cloudBigtableSystemSpec?: (google.cloud.datacatalog.v1.ICloudBigtableSystemSpec|null);
+
                     /** Entry gcsFilesetSpec. */
                     public gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3096,6 +3125,9 @@ export namespace google {
 
                     /** Entry filesetSpec. */
                     public filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
+                    /** Entry serviceSpec. */
+                    public serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
 
                     /** Entry displayName. */
                     public displayName: string;
@@ -3131,13 +3163,13 @@ export namespace google {
                     public system?: ("integratedSystem"|"userSpecifiedSystem");
 
                     /** Entry systemSpec. */
-                    public systemSpec?: ("sqlDatabaseSystemSpec"|"lookerSystemSpec");
+                    public systemSpec?: ("sqlDatabaseSystemSpec"|"lookerSystemSpec"|"cloudBigtableSystemSpec");
 
                     /** Entry typeSpec. */
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /** Entry spec. */
-                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec");
+                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec"|"serviceSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -4142,6 +4174,418 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LookerSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudBigtableSystemSpec. */
+                interface ICloudBigtableSystemSpec {
+
+                    /** CloudBigtableSystemSpec instanceDisplayName */
+                    instanceDisplayName?: (string|null);
+                }
+
+                /** Represents a CloudBigtableSystemSpec. */
+                class CloudBigtableSystemSpec implements ICloudBigtableSystemSpec {
+
+                    /**
+                     * Constructs a new CloudBigtableSystemSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec);
+
+                    /** CloudBigtableSystemSpec instanceDisplayName. */
+                    public instanceDisplayName: string;
+
+                    /**
+                     * Creates a new CloudBigtableSystemSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudBigtableSystemSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Encodes the specified CloudBigtableSystemSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableSystemSpec.verify|verify} messages.
+                     * @param message CloudBigtableSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudBigtableSystemSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableSystemSpec.verify|verify} messages.
+                     * @param message CloudBigtableSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudBigtableSystemSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudBigtableSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Decodes a CloudBigtableSystemSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudBigtableSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Verifies a CloudBigtableSystemSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudBigtableSystemSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudBigtableSystemSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Creates a plain object from a CloudBigtableSystemSpec message. Also converts values to other types if specified.
+                     * @param message CloudBigtableSystemSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableSystemSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudBigtableSystemSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudBigtableSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudBigtableInstanceSpec. */
+                interface ICloudBigtableInstanceSpec {
+
+                    /** CloudBigtableInstanceSpec cloudBigtableClusterSpecs */
+                    cloudBigtableClusterSpecs?: (google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec[]|null);
+                }
+
+                /** Represents a CloudBigtableInstanceSpec. */
+                class CloudBigtableInstanceSpec implements ICloudBigtableInstanceSpec {
+
+                    /**
+                     * Constructs a new CloudBigtableInstanceSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec);
+
+                    /** CloudBigtableInstanceSpec cloudBigtableClusterSpecs. */
+                    public cloudBigtableClusterSpecs: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec[];
+
+                    /**
+                     * Creates a new CloudBigtableInstanceSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudBigtableInstanceSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Encodes the specified CloudBigtableInstanceSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.verify|verify} messages.
+                     * @param message CloudBigtableInstanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudBigtableInstanceSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.verify|verify} messages.
+                     * @param message CloudBigtableInstanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudBigtableInstanceSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudBigtableInstanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Decodes a CloudBigtableInstanceSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudBigtableInstanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Verifies a CloudBigtableInstanceSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudBigtableInstanceSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudBigtableInstanceSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Creates a plain object from a CloudBigtableInstanceSpec message. Also converts values to other types if specified.
+                     * @param message CloudBigtableInstanceSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudBigtableInstanceSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudBigtableInstanceSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudBigtableInstanceSpec {
+
+                    /** Properties of a CloudBigtableClusterSpec. */
+                    interface ICloudBigtableClusterSpec {
+
+                        /** CloudBigtableClusterSpec displayName */
+                        displayName?: (string|null);
+
+                        /** CloudBigtableClusterSpec location */
+                        location?: (string|null);
+
+                        /** CloudBigtableClusterSpec type */
+                        type?: (string|null);
+
+                        /** CloudBigtableClusterSpec linkedResource */
+                        linkedResource?: (string|null);
+                    }
+
+                    /** Represents a CloudBigtableClusterSpec. */
+                    class CloudBigtableClusterSpec implements ICloudBigtableClusterSpec {
+
+                        /**
+                         * Constructs a new CloudBigtableClusterSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec);
+
+                        /** CloudBigtableClusterSpec displayName. */
+                        public displayName: string;
+
+                        /** CloudBigtableClusterSpec location. */
+                        public location: string;
+
+                        /** CloudBigtableClusterSpec type. */
+                        public type: string;
+
+                        /** CloudBigtableClusterSpec linkedResource. */
+                        public linkedResource: string;
+
+                        /**
+                         * Creates a new CloudBigtableClusterSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudBigtableClusterSpec instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Encodes the specified CloudBigtableClusterSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec.verify|verify} messages.
+                         * @param message CloudBigtableClusterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudBigtableClusterSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec.verify|verify} messages.
+                         * @param message CloudBigtableClusterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudBigtableClusterSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudBigtableClusterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Decodes a CloudBigtableClusterSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudBigtableClusterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Verifies a CloudBigtableClusterSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudBigtableClusterSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudBigtableClusterSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Creates a plain object from a CloudBigtableClusterSpec message. Also converts values to other types if specified.
+                         * @param message CloudBigtableClusterSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudBigtableClusterSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudBigtableClusterSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ServiceSpec. */
+                interface IServiceSpec {
+
+                    /** ServiceSpec cloudBigtableInstanceSpec */
+                    cloudBigtableInstanceSpec?: (google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec|null);
+                }
+
+                /** Represents a ServiceSpec. */
+                class ServiceSpec implements IServiceSpec {
+
+                    /**
+                     * Constructs a new ServiceSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IServiceSpec);
+
+                    /** ServiceSpec cloudBigtableInstanceSpec. */
+                    public cloudBigtableInstanceSpec?: (google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec|null);
+
+                    /** ServiceSpec systemSpec. */
+                    public systemSpec?: "cloudBigtableInstanceSpec";
+
+                    /**
+                     * Creates a new ServiceSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IServiceSpec): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Encodes the specified ServiceSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.ServiceSpec.verify|verify} messages.
+                     * @param message ServiceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IServiceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ServiceSpec.verify|verify} messages.
+                     * @param message ServiceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IServiceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Decodes a ServiceSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Verifies a ServiceSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Creates a plain object from a ServiceSpec message. Also converts values to other types if specified.
+                     * @param message ServiceSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ServiceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceSpec
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7060,6 +7504,9 @@ export namespace google {
 
                     /** ImportEntriesRequest gcsBucketPath */
                     gcsBucketPath?: (string|null);
+
+                    /** ImportEntriesRequest jobId */
+                    jobId?: (string|null);
                 }
 
                 /** Represents an ImportEntriesRequest. */
@@ -7076,6 +7523,9 @@ export namespace google {
 
                     /** ImportEntriesRequest gcsBucketPath. */
                     public gcsBucketPath?: (string|null);
+
+                    /** ImportEntriesRequest jobId. */
+                    public jobId: string;
 
                     /** ImportEntriesRequest source. */
                     public source?: "gcsBucketPath";
