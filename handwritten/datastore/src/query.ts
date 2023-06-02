@@ -222,24 +222,33 @@ class Query {
     operatorOrValue?: Operator | AllowedFilterValueType<T>,
     value?: AllowedFilterValueType<T>
   ): Query {
-    if (isFilter(propertyOrFilter)) {
-      this.entityFilters.push(propertyOrFilter);
-      return this;
-    } else {
+    if (arguments.length > 1) {
       process.emitWarning(
         'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
       );
-      let operator = operatorOrValue as Operator;
-      if (arguments.length === 2) {
-        value = operatorOrValue as AllowedFilterValueType<T>;
-        operator = '=';
+    }
+    switch (arguments.length) {
+      case 1: {
+        if (isFilter(propertyOrFilter)) {
+          this.entityFilters.push(propertyOrFilter);
+        }
+        break;
       }
-
-      this.filters.push({
-        name: (propertyOrFilter as String).trim(),
-        op: operator.trim() as Operator,
-        val: value,
-      });
+      case 2: {
+        this.filters.push({
+          name: (propertyOrFilter as String).trim(),
+          op: '=',
+          val: operatorOrValue as AllowedFilterValueType<T>,
+        });
+        break;
+      }
+      case 3: {
+        this.filters.push({
+          name: (propertyOrFilter as String).trim(),
+          op: (operatorOrValue as Operator).trim() as Operator,
+          val: value,
+        });
+      }
     }
     return this;
   }
