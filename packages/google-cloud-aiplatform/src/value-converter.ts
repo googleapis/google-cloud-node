@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-// TODO(): Remove this file once https://github.com/protobufjs/protobuf.js/pull/1495 is submitted.
 export interface ValueType {
   [index: string]:
     | null

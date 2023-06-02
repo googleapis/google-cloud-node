@@ -37,12 +37,12 @@ export function addToValue() {
 }
 
 /**
- * Converts a protobuf.Message to a protobuf.Value object.
- * @param message Message to convert
+ * Converts an object or protobuf.Message to a protobuf.Value object.
+ * @param message Object or protobuf.Message to convert
  * @returns a Value-formatted object
  */
 export function toValue(
-  message: protobuf.Message
+  message: protobuf.Message | object
 ): null | object | undefined | protobuf.common.IValue {
   if (message === undefined) {
     return undefined;
