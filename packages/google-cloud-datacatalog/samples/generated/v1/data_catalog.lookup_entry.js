@@ -51,7 +51,9 @@ function main() {
    */
   // const sqlResource = 'abc123'
   /**
-   *  Fully qualified name (FQN) of the resource.
+   *  Fully Qualified Name
+   *  (FQN) (https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+   *  of the resource.
    *  FQNs take two forms:
    *  * For non-regionalized resources:
    *    `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
@@ -61,6 +63,18 @@ function main() {
    *  `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
    */
   // const fullyQualifiedName = 'abc123'
+  /**
+   *  Project where the lookup should be performed. Required to lookup
+   *  entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+   *  using its `fully_qualified_name`. Ignored in other cases.
+   */
+  // const project = 'my-project'
+  /**
+   *  Location where the lookup should be performed. Required to lookup
+   *  entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+   *  using its `fully_qualified_name`. Ignored in other cases.
+   */
+  // const location = 'abc123'
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;
