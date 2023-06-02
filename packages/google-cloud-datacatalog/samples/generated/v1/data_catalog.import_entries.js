@@ -36,6 +36,11 @@ function main(parent) {
    *  Path to a Cloud Storage bucket that contains a dump ready for ingestion.
    */
   // const gcsBucketPath = 'abc123'
+  /**
+   *  Optional. (Optional) Dataplex task job id, if specified will be used as
+   *  part of ImportEntries LRO ID
+   */
+  // const jobId = 'abc123'
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;
