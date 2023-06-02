@@ -37,7 +37,6 @@ function main(context) {
   // const context = {}
   /**
    *  Optional. A FieldMask indicating which fields should be updated.
-   *  Functionality of this field is not yet supported.
    */
   // const updateMask = {}
   /**
