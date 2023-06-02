@@ -15394,6 +15394,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 6:
                                 case 5:
                                     break;
                                 }
@@ -15536,6 +15537,10 @@
                             case "TWO_PER_COMPANY":
                             case 4:
                                 message.diversificationLevel = 4;
+                                break;
+                            case "MAX_THREE_PER_COMPANY":
+                            case 6:
+                                message.diversificationLevel = 6;
                                 break;
                             case "DIVERSIFY_BY_LOOSER_SIMILARITY":
                             case 5:
@@ -15694,6 +15699,7 @@
                          * @property {number} SIMPLE=2 SIMPLE value
                          * @property {number} ONE_PER_COMPANY=3 ONE_PER_COMPANY value
                          * @property {number} TWO_PER_COMPANY=4 TWO_PER_COMPANY value
+                         * @property {number} MAX_THREE_PER_COMPANY=6 MAX_THREE_PER_COMPANY value
                          * @property {number} DIVERSIFY_BY_LOOSER_SIMILARITY=5 DIVERSIFY_BY_LOOSER_SIMILARITY value
                          */
                         SearchJobsRequest.DiversificationLevel = (function() {
@@ -15703,6 +15709,7 @@
                             values[valuesById[2] = "SIMPLE"] = 2;
                             values[valuesById[3] = "ONE_PER_COMPANY"] = 3;
                             values[valuesById[4] = "TWO_PER_COMPANY"] = 4;
+                            values[valuesById[6] = "MAX_THREE_PER_COMPANY"] = 6;
                             values[valuesById[5] = "DIVERSIFY_BY_LOOSER_SIMILARITY"] = 5;
                             return values;
                         })();

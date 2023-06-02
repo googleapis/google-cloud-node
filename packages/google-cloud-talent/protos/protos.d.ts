@@ -5742,6 +5742,7 @@ export namespace google {
                         SIMPLE = 2,
                         ONE_PER_COMPANY = 3,
                         TWO_PER_COMPANY = 4,
+                        MAX_THREE_PER_COMPANY = 6,
                         DIVERSIFY_BY_LOOSER_SIMILARITY = 5
                     }
 
