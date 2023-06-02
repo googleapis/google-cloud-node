@@ -27258,6 +27258,11 @@
                         "timestampOutsideRetentionRowsCount": {
                           "type": "int64",
                           "id": 7
+                        },
+                        "blockingOperationIds": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     },
@@ -33901,6 +33906,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "launchStage": {
+                          "type": "LaunchStage",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "publisherModelTemplate": {
                           "type": "string",
                           "id": 30,
@@ -34009,6 +34021,13 @@
                             "openGenerationAiStudio": {
                               "type": "RegionalResourceReferences",
                               "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "requestAccess": {
+                              "type": "RegionalResourceReferences",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -34123,6 +34142,15 @@
                             "THIRD_PARTY_OWNED_OSS_WITH_GOOGLE_CHECKPOINT": 3,
                             "GOOGLE_OWNED_OSS": 4,
                             "THIRD_PARTY_OWNED_OSS": 5
+                          }
+                        },
+                        "LaunchStage": {
+                          "values": {
+                            "LAUNCH_STAGE_UNSPECIFIED": 0,
+                            "EXPERIMENTAL": 1,
+                            "PRIVATE_PREVIEW": 2,
+                            "PUBLIC_PREVIEW": 3,
+                            "GA": 4
                           }
                         }
                       }
