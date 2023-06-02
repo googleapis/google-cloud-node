@@ -470,7 +470,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -486,6 +486,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
