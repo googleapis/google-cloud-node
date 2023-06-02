@@ -127,6 +127,7 @@ export interface GetFilesOptions {
   endOffset?: string;
   includeTrailingDelimiter?: boolean;
   prefix?: string;
+  matchGlob?: string;
   maxApiCalls?: number;
   maxResults?: number;
   pageToken?: string;
@@ -2528,6 +2529,8 @@ class Bucket extends ServiceObject {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @property {string} [prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @property {string} [matchGlob] A glob pattern used to filter results,
+   *     for example foo*bar
    * @property {number} [maxApiCalls] Maximum number of API calls to make.
    * @property {number} [maxResults] Maximum number of items plus prefixes to
    *     return per call.

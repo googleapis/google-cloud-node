@@ -3057,6 +3057,28 @@ describe('storage', () => {
         });
     });
 
+    it('should only get files matching the supplied matchGlob argument', async () => {
+      let expectedFileNames = ['CloudLogo1', 'CloudLogo2', 'CloudLogo3'];
+      let [files] = await bucket.getFiles({matchGlob: 'CloudLogo*'});
+      assert.strictEqual(files.length, expectedFileNames.length);
+      for (const curFile of files) {
+        assert.strictEqual(expectedFileNames.includes(curFile.name), true);
+      }
+
+      expectedFileNames = [
+        `${DIRECTORY_NAME}/CloudLogo4`,
+        `${DIRECTORY_NAME}/CloudLogo5`,
+        `${DIRECTORY_NAME}/inner/CloudLogo6`,
+      ];
+      [files] = await bucket.getFiles({
+        matchGlob: `${DIRECTORY_NAME}/**/CloudLogo*`,
+      });
+      assert.strictEqual(files.length, expectedFileNames.length);
+      for (const curFile of files) {
+        assert.strictEqual(expectedFileNames.includes(curFile.name), true);
+      }
+    });
+
     it('should paginate the list', async () => {
       const query = {
         maxResults: NEW_FILES.length - 1,
