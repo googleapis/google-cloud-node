@@ -2461,6 +2461,13 @@
                         "shieldedInstanceConfig": {
                           "type": "ShieldedInstanceConfig",
                           "id": 45
+                        },
+                        "multisliceNode": {
+                          "type": "bool",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2972,6 +2979,10 @@
                         "requestId": {
                           "type": "string",
                           "id": 2
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },

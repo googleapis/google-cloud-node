@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async]
+function main(document) {
+  // [START language_v1beta2_generated_LanguageService_ModerateText_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,42 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. Input document.
    */
-  // const name = 'abc123'
-  /**
-   *  Idempotent request UUID.
-   */
-  // const requestId = 'abc123'
-  /**
-   *  If set to true, all running nodes belonging to this queued resource will
-   *  be deleted first and then the queued resource will be deleted.
-   *  Otherwise (i.e. force=false), the queued resource will only be deleted if
-   *  its nodes have already been deleted or the queued resource is in the
-   *  ACCEPTED, FAILED, or SUSPENDED state.
-   */
-  // const force = true
+  // const document = {}
 
-  // Imports the Tpu library
-  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
+  // Imports the Language library
+  const {LanguageServiceClient} = require('@google-cloud/language').v1beta2;
 
   // Instantiates a client
-  const tpuClient = new TpuClient();
+  const languageClient = new LanguageServiceClient();
 
-  async function callDeleteQueuedResource() {
+  async function callModerateText() {
     // Construct request
     const request = {
-      name,
+      document,
     };
 
     // Run request
-    const [operation] = await tpuClient.deleteQueuedResource(request);
-    const [response] = await operation.promise();
+    const response = await languageClient.moderateText(request);
     console.log(response);
   }
 
-  callDeleteQueuedResource();
-  // [END tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async]
+  callModerateText();
+  // [END language_v1beta2_generated_LanguageService_ModerateText_async]
 }
 
 process.on('unhandledRejection', err => {
