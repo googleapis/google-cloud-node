@@ -4038,6 +4038,7 @@
                              * @interface IServiceNetworking
                              * @property {string|null} [service] ServiceNetworking service
                              * @property {string|null} [deployment] ServiceNetworking deployment
+                             * @property {boolean|null} [disablePodOverprovisioning] ServiceNetworking disablePodOverprovisioning
                              */
     
                             /**
@@ -4072,6 +4073,14 @@
                             ServiceNetworking.prototype.deployment = "";
     
                             /**
+                             * ServiceNetworking disablePodOverprovisioning.
+                             * @member {boolean} disablePodOverprovisioning
+                             * @memberof google.cloud.deploy.v1.KubernetesConfig.ServiceNetworking
+                             * @instance
+                             */
+                            ServiceNetworking.prototype.disablePodOverprovisioning = false;
+    
+                            /**
                              * Creates a new ServiceNetworking instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.KubernetesConfig.ServiceNetworking
@@ -4099,6 +4108,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
                                 if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployment);
+                                if (message.disablePodOverprovisioning != null && Object.hasOwnProperty.call(message, "disablePodOverprovisioning"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.disablePodOverprovisioning);
                                 return writer;
                             };
     
@@ -4139,6 +4150,10 @@
                                         }
                                     case 2: {
                                             message.deployment = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.disablePodOverprovisioning = reader.bool();
                                             break;
                                         }
                                     default:
@@ -4182,6 +4197,9 @@
                                 if (message.deployment != null && message.hasOwnProperty("deployment"))
                                     if (!$util.isString(message.deployment))
                                         return "deployment: string expected";
+                                if (message.disablePodOverprovisioning != null && message.hasOwnProperty("disablePodOverprovisioning"))
+                                    if (typeof message.disablePodOverprovisioning !== "boolean")
+                                        return "disablePodOverprovisioning: boolean expected";
                                 return null;
                             };
     
@@ -4201,6 +4219,8 @@
                                     message.service = String(object.service);
                                 if (object.deployment != null)
                                     message.deployment = String(object.deployment);
+                                if (object.disablePodOverprovisioning != null)
+                                    message.disablePodOverprovisioning = Boolean(object.disablePodOverprovisioning);
                                 return message;
                             };
     
@@ -4220,11 +4240,14 @@
                                 if (options.defaults) {
                                     object.service = "";
                                     object.deployment = "";
+                                    object.disablePodOverprovisioning = false;
                                 }
                                 if (message.service != null && message.hasOwnProperty("service"))
                                     object.service = message.service;
                                 if (message.deployment != null && message.hasOwnProperty("deployment"))
                                     object.deployment = message.deployment;
+                                if (message.disablePodOverprovisioning != null && message.hasOwnProperty("disablePodOverprovisioning"))
+                                    object.disablePodOverprovisioning = message.disablePodOverprovisioning;
                                 return object;
                             };
     
