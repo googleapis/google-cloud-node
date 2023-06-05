@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.billing.budgets.v1beta1",
+  "libraryPackage": "@google-cloud/billing-budgets",
+  "services": {
+    "BudgetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BudgetServiceClient",
+          "rpcs": {
+            "CreateBudget": {
+              "methods": [
+                "createBudget"
+              ]
+            },
+            "UpdateBudget": {
+              "methods": [
+                "updateBudget"
+              ]
+            },
+            "GetBudget": {
+              "methods": [
+                "getBudget"
+              ]
+            },
+            "DeleteBudget": {
+              "methods": [
+                "deleteBudget"
+              ]
+            },
+            "ListBudgets": {
+              "methods": [
+                "listBudgets",
+                "listBudgetsStream",
+                "listBudgetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BudgetServiceClient",
+          "rpcs": {
+            "CreateBudget": {
+              "methods": [
+                "createBudget"
+              ]
+            },
+            "UpdateBudget": {
+              "methods": [
+                "updateBudget"
+              ]
+            },
+            "GetBudget": {
+              "methods": [
+                "getBudget"
+              ]
+            },
+            "DeleteBudget": {
+              "methods": [
+                "deleteBudget"
+              ]
+            },
+            "ListBudgets": {
+              "methods": [
+                "listBudgets",
+                "listBudgetsStream",
+                "listBudgetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
