@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.11.0](https://github.com/googleapis/nodejs-storage/compare/v6.10.1...v6.11.0) (2023-06-02)
+
+
+### Features
+
+* Add support for matchGlob list option ([#2206](https://github.com/googleapis/nodejs-storage/issues/2206)) ([79dd839](https://github.com/googleapis/nodejs-storage/commit/79dd8394fbbc0c97aa3acb86ad2248fd58b243b4))
+
 ## [6.10.1](https://github.com/googleapis/nodejs-storage/compare/v6.10.0...v6.10.1) (2023-05-10)
 
 
