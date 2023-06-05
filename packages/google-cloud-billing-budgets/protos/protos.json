@@ -630,6 +630,14 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "resourceAncestors": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "creditTypes": {
                               "rule": "repeated",
                               "type": "string",

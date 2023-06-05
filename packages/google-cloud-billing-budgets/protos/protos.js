@@ -5248,6 +5248,7 @@
                              * @memberof google.cloud.billing.budgets.v1beta1
                              * @interface IFilter
                              * @property {Array.<string>|null} [projects] Filter projects
+                             * @property {Array.<string>|null} [resourceAncestors] Filter resourceAncestors
                              * @property {Array.<string>|null} [creditTypes] Filter creditTypes
                              * @property {google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment|null} [creditTypesTreatment] Filter creditTypesTreatment
                              * @property {Array.<string>|null} [services] Filter services
@@ -5267,6 +5268,7 @@
                              */
                             function Filter(properties) {
                                 this.projects = [];
+                                this.resourceAncestors = [];
                                 this.creditTypes = [];
                                 this.services = [];
                                 this.subaccounts = [];
@@ -5284,6 +5286,14 @@
                              * @instance
                              */
                             Filter.prototype.projects = $util.emptyArray;
+    
+                            /**
+                             * Filter resourceAncestors.
+                             * @member {Array.<string>} resourceAncestors
+                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
+                             * @instance
+                             */
+                            Filter.prototype.resourceAncestors = $util.emptyArray;
     
                             /**
                              * Filter creditTypes.
@@ -5382,6 +5392,9 @@
                                 if (message.projects != null && message.projects.length)
                                     for (var i = 0; i < message.projects.length; ++i)
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.projects[i]);
+                                if (message.resourceAncestors != null && message.resourceAncestors.length)
+                                    for (var i = 0; i < message.resourceAncestors.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceAncestors[i]);
                                 if (message.services != null && message.services.length)
                                     for (var i = 0; i < message.services.length; ++i)
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.services[i]);
@@ -5440,6 +5453,12 @@
                                             if (!(message.projects && message.projects.length))
                                                 message.projects = [];
                                             message.projects.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.resourceAncestors && message.resourceAncestors.length))
+                                                message.resourceAncestors = [];
+                                            message.resourceAncestors.push(reader.string());
                                             break;
                                         }
                                     case 7: {
@@ -5538,6 +5557,13 @@
                                         if (!$util.isString(message.projects[i]))
                                             return "projects: string[] expected";
                                 }
+                                if (message.resourceAncestors != null && message.hasOwnProperty("resourceAncestors")) {
+                                    if (!Array.isArray(message.resourceAncestors))
+                                        return "resourceAncestors: array expected";
+                                    for (var i = 0; i < message.resourceAncestors.length; ++i)
+                                        if (!$util.isString(message.resourceAncestors[i]))
+                                            return "resourceAncestors: string[] expected";
+                                }
                                 if (message.creditTypes != null && message.hasOwnProperty("creditTypes")) {
                                     if (!Array.isArray(message.creditTypes))
                                         return "creditTypes: array expected";
@@ -5622,6 +5648,13 @@
                                     message.projects = [];
                                     for (var i = 0; i < object.projects.length; ++i)
                                         message.projects[i] = String(object.projects[i]);
+                                }
+                                if (object.resourceAncestors) {
+                                    if (!Array.isArray(object.resourceAncestors))
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.resourceAncestors: array expected");
+                                    message.resourceAncestors = [];
+                                    for (var i = 0; i < object.resourceAncestors.length; ++i)
+                                        message.resourceAncestors[i] = String(object.resourceAncestors[i]);
                                 }
                                 if (object.creditTypes) {
                                     if (!Array.isArray(object.creditTypes))
@@ -5725,6 +5758,7 @@
                                 var object = {};
                                 if (options.arrays || options.defaults) {
                                     object.projects = [];
+                                    object.resourceAncestors = [];
                                     object.services = [];
                                     object.subaccounts = [];
                                     object.creditTypes = [];
@@ -5737,6 +5771,11 @@
                                     object.projects = [];
                                     for (var j = 0; j < message.projects.length; ++j)
                                         object.projects[j] = message.projects[j];
+                                }
+                                if (message.resourceAncestors && message.resourceAncestors.length) {
+                                    object.resourceAncestors = [];
+                                    for (var j = 0; j < message.resourceAncestors.length; ++j)
+                                        object.resourceAncestors[j] = message.resourceAncestors[j];
                                 }
                                 if (message.services && message.services.length) {
                                     object.services = [];
