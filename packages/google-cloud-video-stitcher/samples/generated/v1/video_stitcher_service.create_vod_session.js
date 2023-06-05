@@ -29,8 +29,8 @@ function main(parent, vodSession) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location in which the VOD session should be created, in the
-   *  form of `projects/{project_number}/locations/{location}`.
+   *  Required. The project and location in which the VOD session should be
+   *  created, in the form of `projects/{project_number}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**

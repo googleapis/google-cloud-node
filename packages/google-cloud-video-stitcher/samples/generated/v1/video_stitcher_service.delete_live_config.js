@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START videostitcher_v1_generated_VideoStitcherService_ListVodStitchDetails_async]
+function main(name) {
+  // [START videostitcher_v1_generated_VideoStitcherService_DeleteLiveConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The VOD session where the stitch details belong to, in the form
-   *  of `projects/{project}/locations/{location}/vodSessions/{id}`.
+   *  Required. The name of the live config to be deleted, in the form of
+   *  `projects/{project_number}/locations/{location}/liveConfigs/{id}`.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of items to return.
-   */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value returned from a previous List request, if any.
-   */
-  // const pageToken = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Stitcher library
   const {VideoStitcherServiceClient} = require('@google-cloud/video-stitcher').v1;
@@ -48,21 +40,20 @@ function main(parent) {
   // Instantiates a client
   const stitcherClient = new VideoStitcherServiceClient();
 
-  async function callListVodStitchDetails() {
+  async function callDeleteLiveConfig() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = await stitcherClient.listVodStitchDetailsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await stitcherClient.deleteLiveConfig(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListVodStitchDetails();
-  // [END videostitcher_v1_generated_VideoStitcherService_ListVodStitchDetails_async]
+  callDeleteLiveConfig();
+  // [END videostitcher_v1_generated_VideoStitcherService_DeleteLiveConfig_async]
 }
 
 process.on('unhandledRejection', err => {

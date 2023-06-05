@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START videostitcher_v1_generated_VideoStitcherService_ListVodStitchDetails_async]
+  // [START videostitcher_v1_generated_VideoStitcherService_ListLiveConfigs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The VOD session where the stitch details belong to, in the form
-   *  of `projects/{project}/locations/{location}/vodSessions/{id}`.
+   *  Required. The project that contains the list of live configs, in the
+   *  form of `projects/{project_number}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
@@ -41,6 +41,17 @@ function main(parent) {
    *  The next_page_token value returned from a previous List request, if any.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. The filter to apply to list results (see
+   *  Filtering (https://google.aip.dev/160)).
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. Specifies the ordering of results following
+   *  Cloud API
+   *  syntax (https://cloud.google.com/apis/design/design_patterns#sorting_order).
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Stitcher library
   const {VideoStitcherServiceClient} = require('@google-cloud/video-stitcher').v1;
@@ -48,21 +59,21 @@ function main(parent) {
   // Instantiates a client
   const stitcherClient = new VideoStitcherServiceClient();
 
-  async function callListVodStitchDetails() {
+  async function callListLiveConfigs() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await stitcherClient.listVodStitchDetailsAsync(request);
+    const iterable = await stitcherClient.listLiveConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListVodStitchDetails();
-  // [END videostitcher_v1_generated_VideoStitcherService_ListVodStitchDetails_async]
+  callListLiveConfigs();
+  // [END videostitcher_v1_generated_VideoStitcherService_ListLiveConfigs_async]
 }
 
 process.on('unhandledRejection', err => {
