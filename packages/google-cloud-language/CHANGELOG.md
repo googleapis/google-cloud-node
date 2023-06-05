@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/language-v5.2.2...language-v5.3.0) (2023-05-26)
+
+
+### Features
+
+* [language] Added client library support for ModerateText in the Natural Language API (V1) ([#4298](https://github.com/googleapis/google-cloud-node/issues/4298)) ([2c5e862](https://github.com/googleapis/google-cloud-node/commit/2c5e862c151f5e0294b3933808388a5f7e83cf62))
+
 ## [5.2.2](https://github.com/googleapis/google-cloud-node/compare/language-v5.2.1...language-v5.2.2) (2023-04-13)
 
 

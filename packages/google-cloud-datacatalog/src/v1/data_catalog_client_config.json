@@ -7,7 +7,9 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
-        "unavailable": [
+        "resource_exhausted_internal_unavailable": [
+          "RESOURCE_EXHAUSTED",
+          "INTERNAL",
           "UNAVAILABLE"
         ]
       },
@@ -25,172 +27,172 @@
       "methods": {
         "SearchCatalog": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "CreateEntryGroup": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "GetEntryGroup": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UpdateEntryGroup": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "DeleteEntryGroup": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ListEntryGroups": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "CreateEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UpdateEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "DeleteEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "GetEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "LookupEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ListEntries": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ModifyEntryOverview": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ModifyEntryContacts": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "CreateTagTemplate": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "GetTagTemplate": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UpdateTagTemplate": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "DeleteTagTemplate": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "CreateTagTemplateField": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UpdateTagTemplateField": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "RenameTagTemplateField": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "RenameTagTemplateFieldEnumValue": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "DeleteTagTemplateField": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "CreateTag": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UpdateTag": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "DeleteTag": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ListTags": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ReconcileTags": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "StarEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "UnstarEntry": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "SetIamPolicy": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "GetIamPolicy": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "TestIamPermissions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         },
         "ImportEntries": {
           "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "resource_exhausted_internal_unavailable",
           "retry_params_name": "default"
         }
       }

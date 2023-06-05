@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-language",
-        "version": "5.2.2",
+        "version": "5.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -224,6 +224,46 @@
                 "method": {
                     "shortName": "ClassifyText",
                     "fullName": "google.cloud.language.v1beta2.LanguageService.ClassifyText",
+                    "service": {
+                        "shortName": "LanguageService",
+                        "fullName": "google.cloud.language.v1beta2.LanguageService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "language_v1beta2_generated_LanguageService_ModerateText_async",
+            "title": "LanguageService moderateText Sample",
+            "origin": "API_DEFINITION",
+            "description": " Moderates a document for harmful and sensitive categories.",
+            "canonical": true,
+            "file": "language_service.moderate_text.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ModerateText",
+                "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "document",
+                        "type": ".google.cloud.language.v1beta2.Document"
+                    }
+                ],
+                "resultType": ".google.cloud.language.v1beta2.ModerateTextResponse",
+                "client": {
+                    "shortName": "LanguageServiceClient",
+                    "fullName": "google.cloud.language.v1beta2.LanguageServiceClient"
+                },
+                "method": {
+                    "shortName": "ModerateText",
+                    "fullName": "google.cloud.language.v1beta2.LanguageService.ModerateText",
                     "service": {
                         "shortName": "LanguageService",
                         "fullName": "google.cloud.language.v1beta2.LanguageService"

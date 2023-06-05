@@ -117,6 +117,20 @@ export namespace google {
                     public classifyText(request: google.cloud.language.v1.IClassifyTextRequest): Promise<google.cloud.language.v1.ClassifyTextResponse>;
 
                     /**
+                     * Calls ModerateText.
+                     * @param request ModerateTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ModerateTextResponse
+                     */
+                    public moderateText(request: google.cloud.language.v1.IModerateTextRequest, callback: google.cloud.language.v1.LanguageService.ModerateTextCallback): void;
+
+                    /**
+                     * Calls ModerateText.
+                     * @param request ModerateTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public moderateText(request: google.cloud.language.v1.IModerateTextRequest): Promise<google.cloud.language.v1.ModerateTextResponse>;
+
+                    /**
                      * Calls AnnotateText.
                      * @param request AnnotateTextRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AnnotateTextResponse
@@ -167,6 +181,13 @@ export namespace google {
                      * @param [response] ClassifyTextResponse
                      */
                     type ClassifyTextCallback = (error: (Error|null), response?: google.cloud.language.v1.ClassifyTextResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.language.v1.LanguageService|moderateText}.
+                     * @param error Error, if any
+                     * @param [response] ModerateTextResponse
+                     */
+                    type ModerateTextCallback = (error: (Error|null), response?: google.cloud.language.v1.ModerateTextResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.language.v1.LanguageService|annotateText}.
@@ -2937,6 +2958,200 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ModerateTextRequest. */
+                interface IModerateTextRequest {
+
+                    /** ModerateTextRequest document */
+                    document?: (google.cloud.language.v1.IDocument|null);
+                }
+
+                /** Represents a ModerateTextRequest. */
+                class ModerateTextRequest implements IModerateTextRequest {
+
+                    /**
+                     * Constructs a new ModerateTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1.IModerateTextRequest);
+
+                    /** ModerateTextRequest document. */
+                    public document?: (google.cloud.language.v1.IDocument|null);
+
+                    /**
+                     * Creates a new ModerateTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModerateTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.language.v1.IModerateTextRequest): google.cloud.language.v1.ModerateTextRequest;
+
+                    /**
+                     * Encodes the specified ModerateTextRequest message. Does not implicitly {@link google.cloud.language.v1.ModerateTextRequest.verify|verify} messages.
+                     * @param message ModerateTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1.IModerateTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModerateTextRequest message, length delimited. Does not implicitly {@link google.cloud.language.v1.ModerateTextRequest.verify|verify} messages.
+                     * @param message ModerateTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1.IModerateTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModerateTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModerateTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1.ModerateTextRequest;
+
+                    /**
+                     * Decodes a ModerateTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModerateTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1.ModerateTextRequest;
+
+                    /**
+                     * Verifies a ModerateTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModerateTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModerateTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1.ModerateTextRequest;
+
+                    /**
+                     * Creates a plain object from a ModerateTextRequest message. Also converts values to other types if specified.
+                     * @param message ModerateTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1.ModerateTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModerateTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModerateTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModerateTextResponse. */
+                interface IModerateTextResponse {
+
+                    /** ModerateTextResponse moderationCategories */
+                    moderationCategories?: (google.cloud.language.v1.IClassificationCategory[]|null);
+                }
+
+                /** Represents a ModerateTextResponse. */
+                class ModerateTextResponse implements IModerateTextResponse {
+
+                    /**
+                     * Constructs a new ModerateTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1.IModerateTextResponse);
+
+                    /** ModerateTextResponse moderationCategories. */
+                    public moderationCategories: google.cloud.language.v1.IClassificationCategory[];
+
+                    /**
+                     * Creates a new ModerateTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModerateTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.language.v1.IModerateTextResponse): google.cloud.language.v1.ModerateTextResponse;
+
+                    /**
+                     * Encodes the specified ModerateTextResponse message. Does not implicitly {@link google.cloud.language.v1.ModerateTextResponse.verify|verify} messages.
+                     * @param message ModerateTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1.IModerateTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModerateTextResponse message, length delimited. Does not implicitly {@link google.cloud.language.v1.ModerateTextResponse.verify|verify} messages.
+                     * @param message ModerateTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1.IModerateTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModerateTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModerateTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1.ModerateTextResponse;
+
+                    /**
+                     * Decodes a ModerateTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModerateTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1.ModerateTextResponse;
+
+                    /**
+                     * Verifies a ModerateTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModerateTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModerateTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1.ModerateTextResponse;
+
+                    /**
+                     * Creates a plain object from a ModerateTextResponse message. Also converts values to other types if specified.
+                     * @param message ModerateTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1.ModerateTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModerateTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModerateTextResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AnnotateTextRequest. */
                 interface IAnnotateTextRequest {
 
@@ -3066,6 +3281,9 @@ export namespace google {
                         /** Features classifyText */
                         classifyText?: (boolean|null);
 
+                        /** Features moderateText */
+                        moderateText?: (boolean|null);
+
                         /** Features classificationModelOptions */
                         classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
                     }
@@ -3093,6 +3311,9 @@ export namespace google {
 
                         /** Features classifyText. */
                         public classifyText: boolean;
+
+                        /** Features moderateText. */
+                        public moderateText: boolean;
 
                         /** Features classificationModelOptions. */
                         public classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
@@ -3196,6 +3417,9 @@ export namespace google {
 
                     /** AnnotateTextResponse categories */
                     categories?: (google.cloud.language.v1.IClassificationCategory[]|null);
+
+                    /** AnnotateTextResponse moderationCategories */
+                    moderationCategories?: (google.cloud.language.v1.IClassificationCategory[]|null);
                 }
 
                 /** Represents an AnnotateTextResponse. */
@@ -3224,6 +3448,9 @@ export namespace google {
 
                     /** AnnotateTextResponse categories. */
                     public categories: google.cloud.language.v1.IClassificationCategory[];
+
+                    /** AnnotateTextResponse moderationCategories. */
+                    public moderationCategories: google.cloud.language.v1.IClassificationCategory[];
 
                     /**
                      * Creates a new AnnotateTextResponse instance using the specified properties.
@@ -3398,6 +3625,20 @@ export namespace google {
                     public classifyText(request: google.cloud.language.v1beta2.IClassifyTextRequest): Promise<google.cloud.language.v1beta2.ClassifyTextResponse>;
 
                     /**
+                     * Calls ModerateText.
+                     * @param request ModerateTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ModerateTextResponse
+                     */
+                    public moderateText(request: google.cloud.language.v1beta2.IModerateTextRequest, callback: google.cloud.language.v1beta2.LanguageService.ModerateTextCallback): void;
+
+                    /**
+                     * Calls ModerateText.
+                     * @param request ModerateTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public moderateText(request: google.cloud.language.v1beta2.IModerateTextRequest): Promise<google.cloud.language.v1beta2.ModerateTextResponse>;
+
+                    /**
                      * Calls AnnotateText.
                      * @param request AnnotateTextRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AnnotateTextResponse
@@ -3448,6 +3689,13 @@ export namespace google {
                      * @param [response] ClassifyTextResponse
                      */
                     type ClassifyTextCallback = (error: (Error|null), response?: google.cloud.language.v1beta2.ClassifyTextResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.language.v1beta2.LanguageService|moderateText}.
+                     * @param error Error, if any
+                     * @param [response] ModerateTextResponse
+                     */
+                    type ModerateTextCallback = (error: (Error|null), response?: google.cloud.language.v1beta2.ModerateTextResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.language.v1beta2.LanguageService|annotateText}.
@@ -6237,6 +6485,200 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ModerateTextRequest. */
+                interface IModerateTextRequest {
+
+                    /** ModerateTextRequest document */
+                    document?: (google.cloud.language.v1beta2.IDocument|null);
+                }
+
+                /** Represents a ModerateTextRequest. */
+                class ModerateTextRequest implements IModerateTextRequest {
+
+                    /**
+                     * Constructs a new ModerateTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1beta2.IModerateTextRequest);
+
+                    /** ModerateTextRequest document. */
+                    public document?: (google.cloud.language.v1beta2.IDocument|null);
+
+                    /**
+                     * Creates a new ModerateTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModerateTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.language.v1beta2.IModerateTextRequest): google.cloud.language.v1beta2.ModerateTextRequest;
+
+                    /**
+                     * Encodes the specified ModerateTextRequest message. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextRequest.verify|verify} messages.
+                     * @param message ModerateTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1beta2.IModerateTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModerateTextRequest message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextRequest.verify|verify} messages.
+                     * @param message ModerateTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1beta2.IModerateTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModerateTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModerateTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1beta2.ModerateTextRequest;
+
+                    /**
+                     * Decodes a ModerateTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModerateTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1beta2.ModerateTextRequest;
+
+                    /**
+                     * Verifies a ModerateTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModerateTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModerateTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1beta2.ModerateTextRequest;
+
+                    /**
+                     * Creates a plain object from a ModerateTextRequest message. Also converts values to other types if specified.
+                     * @param message ModerateTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1beta2.ModerateTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModerateTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModerateTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModerateTextResponse. */
+                interface IModerateTextResponse {
+
+                    /** ModerateTextResponse moderationCategories */
+                    moderationCategories?: (google.cloud.language.v1beta2.IClassificationCategory[]|null);
+                }
+
+                /** Represents a ModerateTextResponse. */
+                class ModerateTextResponse implements IModerateTextResponse {
+
+                    /**
+                     * Constructs a new ModerateTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1beta2.IModerateTextResponse);
+
+                    /** ModerateTextResponse moderationCategories. */
+                    public moderationCategories: google.cloud.language.v1beta2.IClassificationCategory[];
+
+                    /**
+                     * Creates a new ModerateTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModerateTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.language.v1beta2.IModerateTextResponse): google.cloud.language.v1beta2.ModerateTextResponse;
+
+                    /**
+                     * Encodes the specified ModerateTextResponse message. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextResponse.verify|verify} messages.
+                     * @param message ModerateTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1beta2.IModerateTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModerateTextResponse message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextResponse.verify|verify} messages.
+                     * @param message ModerateTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1beta2.IModerateTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModerateTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModerateTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1beta2.ModerateTextResponse;
+
+                    /**
+                     * Decodes a ModerateTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModerateTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1beta2.ModerateTextResponse;
+
+                    /**
+                     * Verifies a ModerateTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModerateTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModerateTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1beta2.ModerateTextResponse;
+
+                    /**
+                     * Creates a plain object from a ModerateTextResponse message. Also converts values to other types if specified.
+                     * @param message ModerateTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1beta2.ModerateTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModerateTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModerateTextResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AnnotateTextRequest. */
                 interface IAnnotateTextRequest {
 
@@ -6366,6 +6808,9 @@ export namespace google {
                         /** Features classifyText */
                         classifyText?: (boolean|null);
 
+                        /** Features moderateText */
+                        moderateText?: (boolean|null);
+
                         /** Features classificationModelOptions */
                         classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
                     }
@@ -6393,6 +6838,9 @@ export namespace google {
 
                         /** Features classifyText. */
                         public classifyText: boolean;
+
+                        /** Features moderateText. */
+                        public moderateText: boolean;
 
                         /** Features classificationModelOptions. */
                         public classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
@@ -6496,6 +6944,9 @@ export namespace google {
 
                     /** AnnotateTextResponse categories */
                     categories?: (google.cloud.language.v1beta2.IClassificationCategory[]|null);
+
+                    /** AnnotateTextResponse moderationCategories */
+                    moderationCategories?: (google.cloud.language.v1beta2.IClassificationCategory[]|null);
                 }
 
                 /** Represents an AnnotateTextResponse. */
@@ -6524,6 +6975,9 @@ export namespace google {
 
                     /** AnnotateTextResponse categories. */
                     public categories: google.cloud.language.v1beta2.IClassificationCategory[];
+
+                    /** AnnotateTextResponse moderationCategories. */
+                    public moderationCategories: google.cloud.language.v1beta2.IClassificationCategory[];
 
                     /**
                      * Creates a new AnnotateTextResponse instance using the specified properties.
