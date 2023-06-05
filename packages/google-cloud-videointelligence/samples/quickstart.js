@@ -14,7 +14,6 @@
 
 'use strict';
 async function main() {
-  // [START video_quickstart]
   // Imports the Google Cloud Video Intelligence library
   const videoIntelligence = require('@google-cloud/video-intelligence');
 
@@ -58,7 +57,6 @@ async function main() {
       );
     });
   });
-  // [END video_quickstart]
 }
 
 main().catch(console.error);
