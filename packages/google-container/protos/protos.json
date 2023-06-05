@@ -5942,6 +5942,20 @@
                         }
                       ]
                     },
+                    "CheckAutopilotCompatibility": {
+                      "requestType": "CheckAutopilotCompatibilityRequest",
+                      "responseType": "CheckAutopilotCompatibilityResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/clusters/*}:checkAutopilotCompatibility"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{name=projects/*/locations/*/clusters/*}:checkAutopilotCompatibility"
+                          }
+                        }
+                      ]
+                    },
                     "ListLocations": {
                       "requestType": "ListLocationsRequest",
                       "responseType": "ListLocationsResponse",
@@ -7106,6 +7120,10 @@
                       "type": "bool",
                       "id": 14
                     },
+                    "enableK8sBetaApis": {
+                      "type": "K8sBetaAPIConfig",
+                      "id": 143
+                    },
                     "resourceLabels": {
                       "keyType": "string",
                       "type": "string",
@@ -7390,6 +7408,15 @@
                     }
                   }
                 },
+                "K8sBetaAPIConfig": {
+                  "fields": {
+                    "enabledApis": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
                 "WorkloadConfig": {
                   "oneofs": {
                     "_auditMode": {
@@ -7504,6 +7531,11 @@
                     "_desiredProtectConfig": {
                       "oneof": [
                         "desiredProtectConfig"
+                      ]
+                    },
+                    "_desiredEnableFqdnNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableFqdnNetworkPolicy"
                       ]
                     }
                   },
@@ -7714,6 +7746,21 @@
                     "removedAdditionalPodRangesConfig": {
                       "type": "AdditionalPodRangesConfig",
                       "id": 121
+                    },
+                    "enableK8sBetaApis": {
+                      "type": "K8sBetaAPIConfig",
+                      "id": 122
+                    },
+                    "desiredEnableFqdnNetworkPolicy": {
+                      "type": "bool",
+                      "id": 126,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredK8sBetaApis": {
+                      "type": "K8sBetaAPIConfig",
+                      "id": 131
                     }
                   }
                 },
@@ -8715,6 +8762,18 @@
                     }
                   }
                 },
+                "BestEffortProvisioning": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "minProvisionNodes": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
                 "WindowsVersions": {
                   "fields": {
                     "windowsVersions": {
@@ -9040,6 +9099,10 @@
                     "etag": {
                       "type": "string",
                       "id": 110
+                    },
+                    "bestEffortProvisioning": {
+                      "type": "BestEffortProvisioning",
+                      "id": 113
                     }
                   },
                   "nested": {
@@ -10005,6 +10068,13 @@
                   }
                 },
                 "NetworkConfig": {
+                  "oneofs": {
+                    "_enableFqdnNetworkPolicy": {
+                      "oneof": [
+                        "enableFqdnNetworkPolicy"
+                      ]
+                    }
+                  },
                   "fields": {
                     "network": {
                       "type": "string",
@@ -10045,6 +10115,13 @@
                     "gatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 16
+                    },
+                    "enableFqdnNetworkPolicy": {
+                      "type": "bool",
+                      "id": 19,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -10455,6 +10532,66 @@
                       "rule": "repeated",
                       "type": "Jwk",
                       "id": 1
+                    }
+                  }
+                },
+                "CheckAutopilotCompatibilityRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "AutopilotCompatibilityIssue": {
+                  "fields": {
+                    "lastObservation": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "constraintType": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "incompatibilityType": {
+                      "type": "IssueType",
+                      "id": 3
+                    },
+                    "subjects": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4
+                    },
+                    "documentationUrl": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 6
+                    }
+                  },
+                  "nested": {
+                    "IssueType": {
+                      "values": {
+                        "UNSPECIFIED": 0,
+                        "INCOMPATIBILITY": 1,
+                        "ADDITIONAL_CONFIG_REQUIRED": 2,
+                        "PASSED_WITH_OPTIONAL_CONFIG": 3
+                      }
+                    }
+                  }
+                },
+                "CheckAutopilotCompatibilityResponse": {
+                  "fields": {
+                    "issues": {
+                      "rule": "repeated",
+                      "type": "AutopilotCompatibilityIssue",
+                      "id": 1
+                    },
+                    "summary": {
+                      "type": "string",
+                      "id": 2
                     }
                   }
                 },

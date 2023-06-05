@@ -1872,6 +1872,46 @@
             }
         },
         {
+            "regionTag": "container_v1beta1_generated_ClusterManager_CheckAutopilotCompatibility_async",
+            "title": "ClusterManager checkAutopilotCompatibility Sample",
+            "origin": "API_DEFINITION",
+            "description": " Checks the cluster compatibility with Autopilot mode, and returns a list of compatibility issues.",
+            "canonical": true,
+            "file": "cluster_manager.check_autopilot_compatibility.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CheckAutopilotCompatibility",
+                "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.container.v1beta1.CheckAutopilotCompatibilityResponse",
+                "client": {
+                    "shortName": "ClusterManagerClient",
+                    "fullName": "google.container.v1beta1.ClusterManagerClient"
+                },
+                "method": {
+                    "shortName": "CheckAutopilotCompatibility",
+                    "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
+                    "service": {
+                        "shortName": "ClusterManager",
+                        "fullName": "google.container.v1beta1.ClusterManager"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "container_v1beta1_generated_ClusterManager_ListLocations_async",
             "title": "ClusterManager listLocations Sample",
             "origin": "API_DEFINITION",
