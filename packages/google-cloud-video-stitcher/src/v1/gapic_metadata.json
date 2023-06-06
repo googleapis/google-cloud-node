@@ -10,24 +10,9 @@
         "grpc": {
           "libraryClient": "VideoStitcherServiceClient",
           "rpcs": {
-            "CreateCdnKey": {
-              "methods": [
-                "createCdnKey"
-              ]
-            },
             "GetCdnKey": {
               "methods": [
                 "getCdnKey"
-              ]
-            },
-            "DeleteCdnKey": {
-              "methods": [
-                "deleteCdnKey"
-              ]
-            },
-            "UpdateCdnKey": {
-              "methods": [
-                "updateCdnKey"
               ]
             },
             "CreateVodSession": {
@@ -55,14 +40,44 @@
                 "getLiveAdTagDetail"
               ]
             },
-            "CreateSlate": {
-              "methods": [
-                "createSlate"
-              ]
-            },
             "GetSlate": {
               "methods": [
                 "getSlate"
+              ]
+            },
+            "CreateLiveSession": {
+              "methods": [
+                "createLiveSession"
+              ]
+            },
+            "GetLiveSession": {
+              "methods": [
+                "getLiveSession"
+              ]
+            },
+            "GetLiveConfig": {
+              "methods": [
+                "getLiveConfig"
+              ]
+            },
+            "CreateCdnKey": {
+              "methods": [
+                "createCdnKey"
+              ]
+            },
+            "DeleteCdnKey": {
+              "methods": [
+                "deleteCdnKey"
+              ]
+            },
+            "UpdateCdnKey": {
+              "methods": [
+                "updateCdnKey"
+              ]
+            },
+            "CreateSlate": {
+              "methods": [
+                "createSlate"
               ]
             },
             "UpdateSlate": {
@@ -75,14 +90,14 @@
                 "deleteSlate"
               ]
             },
-            "CreateLiveSession": {
+            "CreateLiveConfig": {
               "methods": [
-                "createLiveSession"
+                "createLiveConfig"
               ]
             },
-            "GetLiveSession": {
+            "DeleteLiveConfig": {
               "methods": [
-                "getLiveSession"
+                "deleteLiveConfig"
               ]
             },
             "ListCdnKeys": {
@@ -118,6 +133,13 @@
                 "listSlates",
                 "listSlatesStream",
                 "listSlatesAsync"
+              ]
+            },
+            "ListLiveConfigs": {
+              "methods": [
+                "listLiveConfigs",
+                "listLiveConfigsStream",
+                "listLiveConfigsAsync"
               ]
             }
           }
@@ -125,24 +147,9 @@
         "grpc-fallback": {
           "libraryClient": "VideoStitcherServiceClient",
           "rpcs": {
-            "CreateCdnKey": {
-              "methods": [
-                "createCdnKey"
-              ]
-            },
             "GetCdnKey": {
               "methods": [
                 "getCdnKey"
-              ]
-            },
-            "DeleteCdnKey": {
-              "methods": [
-                "deleteCdnKey"
-              ]
-            },
-            "UpdateCdnKey": {
-              "methods": [
-                "updateCdnKey"
               ]
             },
             "CreateVodSession": {
@@ -170,14 +177,44 @@
                 "getLiveAdTagDetail"
               ]
             },
-            "CreateSlate": {
-              "methods": [
-                "createSlate"
-              ]
-            },
             "GetSlate": {
               "methods": [
                 "getSlate"
+              ]
+            },
+            "CreateLiveSession": {
+              "methods": [
+                "createLiveSession"
+              ]
+            },
+            "GetLiveSession": {
+              "methods": [
+                "getLiveSession"
+              ]
+            },
+            "GetLiveConfig": {
+              "methods": [
+                "getLiveConfig"
+              ]
+            },
+            "CreateCdnKey": {
+              "methods": [
+                "createCdnKey"
+              ]
+            },
+            "DeleteCdnKey": {
+              "methods": [
+                "deleteCdnKey"
+              ]
+            },
+            "UpdateCdnKey": {
+              "methods": [
+                "updateCdnKey"
+              ]
+            },
+            "CreateSlate": {
+              "methods": [
+                "createSlate"
               ]
             },
             "UpdateSlate": {
@@ -190,14 +227,14 @@
                 "deleteSlate"
               ]
             },
-            "CreateLiveSession": {
+            "CreateLiveConfig": {
               "methods": [
-                "createLiveSession"
+                "createLiveConfig"
               ]
             },
-            "GetLiveSession": {
+            "DeleteLiveConfig": {
               "methods": [
-                "getLiveSession"
+                "deleteLiveConfig"
               ]
             },
             "ListCdnKeys": {
@@ -233,6 +270,13 @@
                 "listSlates",
                 "listSlatesStream",
                 "listSlatesAsync"
+              ]
+            },
+            "ListLiveConfigs": {
+              "methods": [
+                "listLiveConfigs",
+                "listLiveConfigsStream",
+                "listLiveConfigsAsync"
               ]
             }
           }
