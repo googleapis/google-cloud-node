@@ -891,6 +891,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1095,6 +1099,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1277,6 +1284,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
@@ -3552,7 +3562,7 @@ export class FeaturestoreServiceClient {
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    * @param {string} request.entityIdField
    *   Source column that holds entity IDs. If not provided, entity IDs are
-   *   extracted from the column named `entity_id`.
+   *   extracted from the column named entity_id.
    * @param {number[]} request.featureSpecs
    *   Required. Specifications defining which Feature values to import from the
    *   entity. The request fails if no feature_specs are provided, and having
