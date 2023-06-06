@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, cdnKey, cdnKeyId) {
-  // [START videostitcher_v1_generated_VideoStitcherService_CreateCdnKey_async]
+function main(parent, liveConfigId, liveConfig) {
+  // [START videostitcher_v1_generated_VideoStitcherService_CreateLiveConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,22 +29,32 @@ function main(parent, cdnKey, cdnKeyId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project in which the CDN key should be created, in the form
-   *  of `projects/{project_number}/locations/{location}`.
+   *  Required. The project in which the live config should be created, in
+   *  the form of `projects/{project_number}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The CDN key resource to create.
+   *  Required. The unique identifier ID to use for the live config.
    */
-  // const cdnKey = {}
+  // const liveConfigId = 'abc123'
   /**
-   *  Required. The ID to use for the CDN key, which will become the final
-   *  component of the CDN key's resource name.
-   *  This value should conform to RFC-1034, which restricts to
-   *  lower-case letters, numbers, and hyphen, with the first character a
-   *  letter, the last a letter or a number, and a 63 character maximum.
+   *  Required. The live config resource to create.
    */
-  // const cdnKeyId = 'abc123'
+  // const liveConfig = {}
+  /**
+   *  A request ID to identify requests. Specify a unique request ID
+   *  so that if you must retry your request, the server will know to ignore
+   *  the request if it has already been completed. The server will guarantee
+   *  that for at least 60 minutes since the first request.
+   *  For example, consider a situation where you make an initial request and the
+   *  request times out. If you make the request again with the same request ID,
+   *  the server can check if original operation with the same request ID was
+   *  received, and if so, will ignore the second request. This prevents clients
+   *  from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported `(00000000-0000-0000-0000-000000000000)`.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Stitcher library
   const {VideoStitcherServiceClient} = require('@google-cloud/video-stitcher').v1;
@@ -52,22 +62,22 @@ function main(parent, cdnKey, cdnKeyId) {
   // Instantiates a client
   const stitcherClient = new VideoStitcherServiceClient();
 
-  async function callCreateCdnKey() {
+  async function callCreateLiveConfig() {
     // Construct request
     const request = {
       parent,
-      cdnKey,
-      cdnKeyId,
+      liveConfigId,
+      liveConfig,
     };
 
     // Run request
-    const [operation] = await stitcherClient.createCdnKey(request);
+    const [operation] = await stitcherClient.createLiveConfig(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateCdnKey();
-  // [END videostitcher_v1_generated_VideoStitcherService_CreateCdnKey_async]
+  callCreateLiveConfig();
+  // [END videostitcher_v1_generated_VideoStitcherService_CreateLiveConfig_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -51,7 +51,8 @@ function main(slate, updateMask) {
     };
 
     // Run request
-    const response = await stitcherClient.updateSlate(request);
+    const [operation] = await stitcherClient.updateSlate(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 

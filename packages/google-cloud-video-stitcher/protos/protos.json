@@ -357,6 +357,129 @@
                             }
                           }
                         },
+                        "AdTracking": {
+                          "values": {
+                            "AD_TRACKING_UNSPECIFIED": 0,
+                            "CLIENT": 1,
+                            "SERVER": 2
+                          }
+                        },
+                        "LiveConfig": {
+                          "options": {
+                            "(google.api.resource).type": "videostitcher.googleapis.com/LiveConfig",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/liveConfigs/{live_config}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sourceUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "adTagUri": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "gamLiveConfig": {
+                              "type": "GamLiveConfig",
+                              "id": 4
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adTracking": {
+                              "type": "AdTracking",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "defaultSlate": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/Slate"
+                              }
+                            },
+                            "stitchingPolicy": {
+                              "type": "StitchingPolicy",
+                              "id": 8
+                            },
+                            "prefetchConfig": {
+                              "type": "PrefetchConfig",
+                              "id": 10
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CREATING": 1,
+                                "READY": 2,
+                                "DELETING": 3
+                              }
+                            },
+                            "StitchingPolicy": {
+                              "values": {
+                                "STITCHING_POLICY_UNSPECIFIED": 0,
+                                "CUT_CURRENT": 1,
+                                "COMPLETE_AD": 2
+                              }
+                            }
+                          }
+                        },
+                        "PrefetchConfig": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "initialAdRequestDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GamLiveConfig": {
+                          "fields": {
+                            "networkCode": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "assetKey": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "customAssetKey": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "VodSession": {
                           "options": {
                             "(google.api.resource).type": "videostitcher.googleapis.com/VodSession",
@@ -403,10 +526,6 @@
                               "type": "string",
                               "id": 7
                             },
-                            "clientAdTracking": {
-                              "type": "bool",
-                              "id": 8
-                            },
                             "manifestOptions": {
                               "type": "ManifestOptions",
                               "id": 9
@@ -416,6 +535,37 @@
                               "id": 10,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "adTracking": {
+                              "type": "AdTracking",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "gamSettings": {
+                              "type": "GamSettings",
+                              "id": 13
+                            }
+                          },
+                          "nested": {
+                            "GamSettings": {
+                              "fields": {
+                                "networkCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "streamId": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }
@@ -500,63 +650,39 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
-                            "sourceUri": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "defaultAdTagId": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "adTagMap": {
-                              "keyType": "string",
-                              "type": "AdTag",
-                              "id": 5
-                            },
                             "adTagMacros": {
                               "keyType": "string",
                               "type": "string",
                               "id": 6
                             },
-                            "clientAdTracking": {
-                              "type": "bool",
-                              "id": 7
-                            },
-                            "defaultSlateId": {
-                              "type": "string",
-                              "id": 8
-                            },
-                            "stitchingPolicy": {
-                              "type": "StitchingPolicy",
-                              "id": 9
-                            },
                             "manifestOptions": {
                               "type": "ManifestOptions",
                               "id": 10
                             },
-                            "streamId": {
+                            "gamSettings": {
+                              "type": "GamSettings",
+                              "id": 15
+                            },
+                            "liveConfig": {
                               "type": "string",
-                              "id": 11,
+                              "id": 16,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveConfig"
                               }
                             }
                           },
                           "nested": {
-                            "StitchingPolicy": {
-                              "values": {
-                                "STITCHING_POLICY_UNSPECIFIED": 0,
-                                "COMPLETE_AD": 1,
-                                "CUT_CURRENT": 3
+                            "GamSettings": {
+                              "fields": {
+                                "streamId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
-                            }
-                          }
-                        },
-                        "AdTag": {
-                          "fields": {
-                            "uri": {
-                              "type": "string",
-                              "id": 1
                             }
                           }
                         },
@@ -610,6 +736,30 @@
                             "uri": {
                               "type": "string",
                               "id": 2
+                            },
+                            "gamSlate": {
+                              "type": "GamSlate",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "GamSlate": {
+                              "fields": {
+                                "networkCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "gamSlateId": {
+                                  "type": "int64",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -678,11 +828,13 @@
                           "methods": {
                             "CreateCdnKey": {
                               "requestType": "CreateCdnKeyRequest",
-                              "responseType": "CdnKey",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/cdnKeys",
                                 "(google.api.http).body": "cdn_key",
-                                "(google.api.method_signature)": "parent,cdn_key,cdn_key_id"
+                                "(google.api.method_signature)": "parent,cdn_key,cdn_key_id",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -693,6 +845,12 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "parent,cdn_key,cdn_key_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
@@ -734,10 +892,12 @@
                             },
                             "DeleteCdnKey": {
                               "requestType": "DeleteCdnKeyRequest",
-                              "responseType": "google.protobuf.Empty",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/cdnKeys/*}",
-                                "(google.api.method_signature)": "name"
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -747,16 +907,24 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
                             "UpdateCdnKey": {
                               "requestType": "UpdateCdnKeyRequest",
-                              "responseType": "CdnKey",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).patch": "/v1/{cdn_key.name=projects/*/locations/*/cdnKeys/*}",
                                 "(google.api.http).body": "cdn_key",
-                                "(google.api.method_signature)": "cdn_key,update_mask"
+                                "(google.api.method_signature)": "cdn_key,update_mask",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -767,6 +935,12 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "cdn_key,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
@@ -918,11 +1092,13 @@
                             },
                             "CreateSlate": {
                               "requestType": "CreateSlateRequest",
-                              "responseType": "Slate",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/slates",
                                 "(google.api.http).body": "slate",
-                                "(google.api.method_signature)": "parent,slate,slate_id"
+                                "(google.api.method_signature)": "parent,slate,slate_id",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.Slate",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -933,6 +1109,12 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "parent,slate,slate_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.Slate",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
@@ -974,11 +1156,13 @@
                             },
                             "UpdateSlate": {
                               "requestType": "UpdateSlateRequest",
-                              "responseType": "Slate",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).patch": "/v1/{slate.name=projects/*/locations/*/slates/*}",
                                 "(google.api.http).body": "slate",
-                                "(google.api.method_signature)": "slate,update_mask"
+                                "(google.api.method_signature)": "slate,update_mask",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.Slate",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -989,15 +1173,23 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "slate,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.Slate",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
                             "DeleteSlate": {
                               "requestType": "DeleteSlateRequest",
-                              "responseType": "google.protobuf.Empty",
+                              "responseType": "google.longrunning.Operation",
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/slates/*}",
-                                "(google.api.method_signature)": "name"
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1007,6 +1199,12 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             },
@@ -1045,6 +1243,96 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateLiveConfig": {
+                              "requestType": "CreateLiveConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/liveConfigs",
+                                "(google.api.http).body": "live_config",
+                                "(google.api.method_signature)": "parent,live_config,live_config_id",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/liveConfigs",
+                                    "body": "live_config"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,live_config,live_config_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "ListLiveConfigs": {
+                              "requestType": "ListLiveConfigsRequest",
+                              "responseType": "ListLiveConfigsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/liveConfigs",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/liveConfigs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetLiveConfig": {
+                              "requestType": "GetLiveConfigRequest",
+                              "responseType": "LiveConfig",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/liveConfigs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/liveConfigs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "DeleteLiveConfig": {
+                              "requestType": "DeleteLiveConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/liveConfigs/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/liveConfigs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
                                 }
                               ]
                             }
@@ -1353,6 +1641,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -1472,6 +1764,132 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveSession"
                               }
+                            }
+                          }
+                        },
+                        "CreateLiveConfigRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "videostitcher.googleapis.com/LiveConfig"
+                              }
+                            },
+                            "liveConfigId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "liveConfig": {
+                              "type": "LiveConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ListLiveConfigsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "videostitcher.googleapis.com/LiveConfig"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListLiveConfigsResponse": {
+                          "fields": {
+                            "liveConfigs": {
+                              "rule": "repeated",
+                              "type": "LiveConfig",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "GetLiveConfigRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveConfig"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteLiveConfigRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveConfig"
+                              }
+                            }
+                          }
+                        },
+                        "OperationMetadata": {
+                          "fields": {
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "target": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "verb": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         }
@@ -2699,6 +3117,18 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
             },
@@ -2708,6 +3138,263 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }
