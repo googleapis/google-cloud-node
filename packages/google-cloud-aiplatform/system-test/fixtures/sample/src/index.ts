@@ -24,8 +24,10 @@ import {
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
+  MatchServiceClient,
   MetadataServiceClient,
   MigrationServiceClient,
+  ModelGardenServiceClient,
   ModelServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
@@ -62,10 +64,16 @@ function doStuffWithIndexServiceClient(client: IndexServiceClient) {
 function doStuffWithJobServiceClient(client: JobServiceClient) {
   client.close();
 }
+function doStuffWithMatchServiceClient(client: MatchServiceClient) {
+  client.close();
+}
 function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
   client.close();
 }
 function doStuffWithMigrationServiceClient(client: MigrationServiceClient) {
+  client.close();
+}
+function doStuffWithModelGardenServiceClient(client: ModelGardenServiceClient) {
   client.close();
 }
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
@@ -115,11 +123,17 @@ function main() {
   const jobServiceClient = new JobServiceClient();
   doStuffWithJobServiceClient(jobServiceClient);
   // check that the client instance can be created
+  const matchServiceClient = new MatchServiceClient();
+  doStuffWithMatchServiceClient(matchServiceClient);
+  // check that the client instance can be created
   const metadataServiceClient = new MetadataServiceClient();
   doStuffWithMetadataServiceClient(metadataServiceClient);
   // check that the client instance can be created
   const migrationServiceClient = new MigrationServiceClient();
   doStuffWithMigrationServiceClient(migrationServiceClient);
+  // check that the client instance can be created
+  const modelGardenServiceClient = new ModelGardenServiceClient();
+  doStuffWithModelGardenServiceClient(modelGardenServiceClient);
   // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);

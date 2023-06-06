@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project to list slates, in the form of `projects/{project_number}`.
+   *  Required. The project to list slates, in the form of
+   *  `projects/{project_number}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**

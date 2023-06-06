@@ -36,6 +36,14 @@ function main(name) {
    *  Idempotent request UUID.
    */
   // const requestId = 'abc123'
+  /**
+   *  If set to true, all running nodes belonging to this queued resource will
+   *  be deleted first and then the queued resource will be deleted.
+   *  Otherwise (i.e. force=false), the queued resource will only be deleted if
+   *  its nodes have already been deleted or the queued resource is in the
+   *  ACCEPTED, FAILED, or SUSPENDED state.
+   */
+  // const force = true
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;

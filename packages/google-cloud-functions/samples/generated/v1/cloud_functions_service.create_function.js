@@ -29,8 +29,8 @@ function main(location, function1) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location in which the function should be created, specified
-   *  in the format `projects/* /locations/*`
+   *  Required. The project and location in which the function should be created,
+   *  specified in the format `projects/* /locations/*`
    */
   // const location = 'abc123'
   /**
