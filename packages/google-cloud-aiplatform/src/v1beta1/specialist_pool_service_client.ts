@@ -879,6 +879,10 @@ export class SpecialistPoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1083,6 +1087,9 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1265,6 +1272,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
