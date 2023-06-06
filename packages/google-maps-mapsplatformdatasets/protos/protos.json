@@ -6,6 +6,361 @@
           "nested": {
             "mapsplatformdatasets": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Maps.MapsPlatformDatasets.V1",
+                    "go_package": "cloud.google.com/go/maps/mapsplatformdatasets/apiv1/mapsplatformdatasetspb;mapsplatformdatasetspb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "MapsPlatformDatasetsServiceProto",
+                    "java_package": "com.google.maps.mapsplatformdatasets.v1",
+                    "objc_class_prefix": "MDV1",
+                    "php_namespace": "Google\\Maps\\MapsPlatformDatasets\\V1",
+                    "cc_enable_arenas": true
+                  },
+                  "nested": {
+                    "LocalFileSource": {
+                      "fields": {
+                        "filename": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileFormat": {
+                          "type": "FileFormat",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "inputUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileFormat": {
+                          "type": "FileFormat",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FileFormat": {
+                      "values": {
+                        "FILE_FORMAT_UNSPECIFIED": 0,
+                        "FILE_FORMAT_GEOJSON": 1,
+                        "FILE_FORMAT_KML": 2,
+                        "FILE_FORMAT_CSV": 3
+                      }
+                    },
+                    "Dataset": {
+                      "options": {
+                        "(google.api.resource).type": "mapsplatformdatasets.googleapis.com/Dataset",
+                        "(google.api.resource).pattern": "projects/{project}/datasets/{dataset}"
+                      },
+                      "oneofs": {
+                        "dataSource": {
+                          "oneof": [
+                            "localFileSource",
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "versionId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "usage": {
+                          "rule": "repeated",
+                          "type": "Usage",
+                          "id": 5
+                        },
+                        "localFileSource": {
+                          "type": "LocalFileSource",
+                          "id": 6
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 7
+                        },
+                        "status": {
+                          "type": "Status",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionDescription": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Status": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STATE_IMPORTING": 1,
+                            "STATE_IMPORT_SUCCEEDED": 2,
+                            "STATE_IMPORT_FAILED": 3,
+                            "STATE_DELETING": 4,
+                            "STATE_DELETION_FAILED": 5,
+                            "STATE_PROCESSING": 6,
+                            "STATE_PROCESSING_FAILED": 7,
+                            "STATE_NEEDS_REVIEW": 8,
+                            "STATE_PUBLISHING": 9,
+                            "STATE_PUBLISHING_FAILED": 10,
+                            "STATE_COMPLETED": 11
+                          }
+                        }
+                      }
+                    },
+                    "Usage": {
+                      "values": {
+                        "USAGE_UNSPECIFIED": 0,
+                        "USAGE_DATA_DRIVEN_STYLING": 1
+                      }
+                    },
+                    "CreateDatasetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDatasetMetadataRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapsplatformdatasets.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "ListDatasetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDatasetsResponse": {
+                      "fields": {
+                        "datasets": {
+                          "rule": "repeated",
+                          "type": "Dataset",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapsplatformdatasets.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "MapsPlatformDatasets": {
+                      "options": {
+                        "(google.api.default_host)": "mapsplatformdatasets.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateDataset": {
+                          "requestType": "CreateDatasetRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/datasets",
+                            "(google.api.http).body": "dataset",
+                            "(google.api.method_signature)": "parent,dataset"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/datasets",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset"
+                            }
+                          ]
+                        },
+                        "UpdateDatasetMetadata": {
+                          "requestType": "UpdateDatasetMetadataRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{dataset.name=projects/*/datasets/*}",
+                            "(google.api.http).body": "dataset",
+                            "(google.api.method_signature)": "dataset,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{dataset.name=projects/*/datasets/*}",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset,update_mask"
+                            }
+                          ]
+                        },
+                        "GetDataset": {
+                          "requestType": "GetDatasetRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/datasets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDatasets": {
+                          "requestType": "ListDatasetsRequest",
+                          "responseType": "ListDatasetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/datasets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/datasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteDataset": {
+                          "requestType": "DeleteDatasetRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/datasets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1alpha": {
                   "options": {
                     "csharp_namespace": "Google.Maps.MapsPlatformDatasets.V1Alpha",
