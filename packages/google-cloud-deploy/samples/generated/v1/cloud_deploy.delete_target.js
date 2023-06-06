@@ -49,7 +49,7 @@ function main(name) {
   // const requestId = 'abc123'
   /**
    *  Optional. If set to true, then deleting an already deleted or non-existing
-   *  DeliveryPipeline will succeed.
+   *  `Target` will succeed.
    */
   // const allowMissing = true
   /**
