@@ -593,6 +593,9 @@ export namespace google {
                         /** Filter projects */
                         projects?: (string[]|null);
 
+                        /** Filter resourceAncestors */
+                        resourceAncestors?: (string[]|null);
+
                         /** Filter creditTypes */
                         creditTypes?: (string[]|null);
 
@@ -626,6 +629,9 @@ export namespace google {
 
                         /** Filter projects. */
                         public projects: string[];
+
+                        /** Filter resourceAncestors. */
+                        public resourceAncestors: string[];
 
                         /** Filter creditTypes. */
                         public creditTypes: string[];
@@ -2160,6 +2166,9 @@ export namespace google {
                         /** Filter projects */
                         projects?: (string[]|null);
 
+                        /** Filter resourceAncestors */
+                        resourceAncestors?: (string[]|null);
+
                         /** Filter creditTypes */
                         creditTypes?: (string[]|null);
 
@@ -2193,6 +2202,9 @@ export namespace google {
 
                         /** Filter projects. */
                         public projects: string[];
+
+                        /** Filter resourceAncestors. */
+                        public resourceAncestors: string[];
 
                         /** Filter creditTypes. */
                         public creditTypes: string[];
