@@ -41,7 +41,7 @@ function main(dataset) {
   // const updateMask = {}
 
   // Imports the Mapsplatformdatasets library
-  const {MapsPlatformDatasetsClient} = require('@google-cloud/mapsplatformdatasets').v1;
+  const {MapsPlatformDatasetsClient} = require('@googlemaps/maps-platform-datasets').v1;
 
   // Instantiates a client
   const mapsplatformdatasetsClient = new MapsPlatformDatasetsClient();
