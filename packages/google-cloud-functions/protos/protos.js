@@ -7338,7 +7338,6 @@
                          * @memberof google.cloud.functions.v2
                          * @interface IFunction
                          * @property {string|null} [name] Function name
-                         * @property {google.cloud.functions.v2.Environment|null} [environment] Function environment
                          * @property {string|null} [description] Function description
                          * @property {google.cloud.functions.v2.IBuildConfig|null} [buildConfig] Function buildConfig
                          * @property {google.cloud.functions.v2.IServiceConfig|null} [serviceConfig] Function serviceConfig
@@ -7347,8 +7346,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Function updateTime
                          * @property {Object.<string,string>|null} [labels] Function labels
                          * @property {Array.<google.cloud.functions.v2.IStateMessage>|null} [stateMessages] Function stateMessages
-                         * @property {string|null} [kmsKeyName] Function kmsKeyName
+                         * @property {google.cloud.functions.v2.Environment|null} [environment] Function environment
                          * @property {string|null} [url] Function url
+                         * @property {string|null} [kmsKeyName] Function kmsKeyName
                          */
     
                         /**
@@ -7375,14 +7375,6 @@
                          * @instance
                          */
                         Function.prototype.name = "";
-    
-                        /**
-                         * Function environment.
-                         * @member {google.cloud.functions.v2.Environment} environment
-                         * @memberof google.cloud.functions.v2.Function
-                         * @instance
-                         */
-                        Function.prototype.environment = 0;
     
                         /**
                          * Function description.
@@ -7449,12 +7441,12 @@
                         Function.prototype.stateMessages = $util.emptyArray;
     
                         /**
-                         * Function kmsKeyName.
-                         * @member {string} kmsKeyName
+                         * Function environment.
+                         * @member {google.cloud.functions.v2.Environment} environment
                          * @memberof google.cloud.functions.v2.Function
                          * @instance
                          */
-                        Function.prototype.kmsKeyName = "";
+                        Function.prototype.environment = 0;
     
                         /**
                          * Function url.
@@ -7463,6 +7455,14 @@
                          * @instance
                          */
                         Function.prototype.url = "";
+    
+                        /**
+                         * Function kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2.Function
+                         * @instance
+                         */
+                        Function.prototype.kmsKeyName = "";
     
                         /**
                          * Creates a new Function instance using the specified properties.
@@ -7552,10 +7552,6 @@
                                         message.name = reader.string();
                                         break;
                                     }
-                                case 10: {
-                                        message.environment = reader.int32();
-                                        break;
-                                    }
                                 case 2: {
                                         message.description = reader.string();
                                         break;
@@ -7609,12 +7605,16 @@
                                         message.stateMessages.push($root.google.cloud.functions.v2.StateMessage.decode(reader, reader.uint32()));
                                         break;
                                     }
-                                case 25: {
-                                        message.kmsKeyName = reader.string();
+                                case 10: {
+                                        message.environment = reader.int32();
                                         break;
                                     }
                                 case 14: {
                                         message.url = reader.string();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.kmsKeyName = reader.string();
                                         break;
                                     }
                                 default:
@@ -7655,15 +7655,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.environment != null && message.hasOwnProperty("environment"))
-                                switch (message.environment) {
-                                default:
-                                    return "environment: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -7716,12 +7707,21 @@
                                         return "stateMessages." + error;
                                 }
                             }
-                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
-                                if (!$util.isString(message.kmsKeyName))
-                                    return "kmsKeyName: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.url != null && message.hasOwnProperty("url"))
                                 if (!$util.isString(message.url))
                                     return "url: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -7739,26 +7739,6 @@
                             var message = new $root.google.cloud.functions.v2.Function();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            switch (object.environment) {
-                            default:
-                                if (typeof object.environment === "number") {
-                                    message.environment = object.environment;
-                                    break;
-                                }
-                                break;
-                            case "ENVIRONMENT_UNSPECIFIED":
-                            case 0:
-                                message.environment = 0;
-                                break;
-                            case "GEN_1":
-                            case 1:
-                                message.environment = 1;
-                                break;
-                            case "GEN_2":
-                            case 2:
-                                message.environment = 2;
-                                break;
-                            }
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.buildConfig != null) {
@@ -7830,10 +7810,30 @@
                                     message.stateMessages[i] = $root.google.cloud.functions.v2.StateMessage.fromObject(object.stateMessages[i]);
                                 }
                             }
-                            if (object.kmsKeyName != null)
-                                message.kmsKeyName = String(object.kmsKeyName);
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
                             if (object.url != null)
                                 message.url = String(object.url);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -15760,6 +15760,257 @@
                         return OperationMetadata;
                     })();
     
+                    v2.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.functions.v2
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.functions.v2.Environment>|null} [environments] LocationMetadata environments
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.functions.v2
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.functions.v2.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.environments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata environments.
+                         * @member {Array.<google.cloud.functions.v2.Environment>} environments
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.environments = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.environments != null && message.environments.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    writer.int32(message.environments[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.environments.push(reader.int32());
+                                        } else
+                                            message.environments.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.environments != null && message.hasOwnProperty("environments")) {
+                                if (!Array.isArray(message.environments))
+                                    return "environments: array expected";
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    switch (message.environments[i]) {
+                                    default:
+                                        return "environments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2.LocationMetadata();
+                            if (object.environments) {
+                                if (!Array.isArray(object.environments))
+                                    throw TypeError(".google.cloud.functions.v2.LocationMetadata.environments: array expected");
+                                message.environments = [];
+                                for (var i = 0; i < object.environments.length; ++i)
+                                    switch (object.environments[i]) {
+                                    default:
+                                        if (typeof object.environments[i] === "number") {
+                                            message.environments[i] = object.environments[i];
+                                            break;
+                                        }
+                                    case "ENVIRONMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.environments[i] = 0;
+                                        break;
+                                    case "GEN_1":
+                                    case 1:
+                                        message.environments[i] = 1;
+                                        break;
+                                    case "GEN_2":
+                                    case 2:
+                                        message.environments[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.environments = [];
+                            if (message.environments && message.environments.length) {
+                                object.environments = [];
+                                for (var j = 0; j < message.environments.length; ++j)
+                                    object.environments[j] = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environments[j]] === undefined ? message.environments[j] : $root.google.cloud.functions.v2.Environment[message.environments[j]] : message.environments[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
+                    })();
+    
                     v2.Stage = (function() {
     
                         /**
@@ -16550,7 +16801,6 @@
                          * @memberof google.cloud.functions.v2alpha
                          * @interface IFunction
                          * @property {string|null} [name] Function name
-                         * @property {google.cloud.functions.v2alpha.Environment|null} [environment] Function environment
                          * @property {string|null} [description] Function description
                          * @property {google.cloud.functions.v2alpha.IBuildConfig|null} [buildConfig] Function buildConfig
                          * @property {google.cloud.functions.v2alpha.IServiceConfig|null} [serviceConfig] Function serviceConfig
@@ -16559,6 +16809,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Function updateTime
                          * @property {Object.<string,string>|null} [labels] Function labels
                          * @property {Array.<google.cloud.functions.v2alpha.IStateMessage>|null} [stateMessages] Function stateMessages
+                         * @property {google.cloud.functions.v2alpha.Environment|null} [environment] Function environment
+                         * @property {string|null} [url] Function url
+                         * @property {string|null} [kmsKeyName] Function kmsKeyName
                          */
     
                         /**
@@ -16585,14 +16838,6 @@
                          * @instance
                          */
                         Function.prototype.name = "";
-    
-                        /**
-                         * Function environment.
-                         * @member {google.cloud.functions.v2alpha.Environment} environment
-                         * @memberof google.cloud.functions.v2alpha.Function
-                         * @instance
-                         */
-                        Function.prototype.environment = 0;
     
                         /**
                          * Function description.
@@ -16659,6 +16904,30 @@
                         Function.prototype.stateMessages = $util.emptyArray;
     
                         /**
+                         * Function environment.
+                         * @member {google.cloud.functions.v2alpha.Environment} environment
+                         * @memberof google.cloud.functions.v2alpha.Function
+                         * @instance
+                         */
+                        Function.prototype.environment = 0;
+    
+                        /**
+                         * Function url.
+                         * @member {string} url
+                         * @memberof google.cloud.functions.v2alpha.Function
+                         * @instance
+                         */
+                        Function.prototype.url = "";
+    
+                        /**
+                         * Function kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2alpha.Function
+                         * @instance
+                         */
+                        Function.prototype.kmsKeyName = "";
+    
+                        /**
                          * Creates a new Function instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.Function
@@ -16704,6 +16973,10 @@
                                     $root.google.cloud.functions.v2alpha.StateMessage.encode(message.stateMessages[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.environment);
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.url);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
                             return writer;
                         };
     
@@ -16740,10 +17013,6 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
-                                        break;
-                                    }
-                                case 10: {
-                                        message.environment = reader.int32();
                                         break;
                                     }
                                 case 2: {
@@ -16799,6 +17068,18 @@
                                         message.stateMessages.push($root.google.cloud.functions.v2alpha.StateMessage.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 10: {
+                                        message.environment = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.kmsKeyName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16837,15 +17118,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.environment != null && message.hasOwnProperty("environment"))
-                                switch (message.environment) {
-                                default:
-                                    return "environment: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -16898,6 +17170,21 @@
                                         return "stateMessages." + error;
                                 }
                             }
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -16915,26 +17202,6 @@
                             var message = new $root.google.cloud.functions.v2alpha.Function();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            switch (object.environment) {
-                            default:
-                                if (typeof object.environment === "number") {
-                                    message.environment = object.environment;
-                                    break;
-                                }
-                                break;
-                            case "ENVIRONMENT_UNSPECIFIED":
-                            case 0:
-                                message.environment = 0;
-                                break;
-                            case "GEN_1":
-                            case 1:
-                                message.environment = 1;
-                                break;
-                            case "GEN_2":
-                            case 2:
-                                message.environment = 2;
-                                break;
-                            }
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.buildConfig != null) {
@@ -17006,6 +17273,30 @@
                                     message.stateMessages[i] = $root.google.cloud.functions.v2alpha.StateMessage.fromObject(object.stateMessages[i]);
                                 }
                             }
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -17035,6 +17326,8 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.updateTime = null;
                                 object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
+                                object.url = "";
+                                object.kmsKeyName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17063,6 +17356,10 @@
                             }
                             if (message.environment != null && message.hasOwnProperty("environment"))
                                 object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
                             return object;
                         };
     
@@ -18563,6 +18860,7 @@
                          * @property {google.cloud.functions.v2alpha.ISourceProvenance|null} [sourceProvenance] BuildConfig sourceProvenance
                          * @property {string|null} [workerPool] BuildConfig workerPool
                          * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
+                         * @property {google.cloud.functions.v2alpha.BuildConfig.DockerRegistry|null} [dockerRegistry] BuildConfig dockerRegistry
                          * @property {string|null} [dockerRepository] BuildConfig dockerRepository
                          */
     
@@ -18639,6 +18937,14 @@
                         BuildConfig.prototype.environmentVariables = $util.emptyObject;
     
                         /**
+                         * BuildConfig dockerRegistry.
+                         * @member {google.cloud.functions.v2alpha.BuildConfig.DockerRegistry} dockerRegistry
+                         * @memberof google.cloud.functions.v2alpha.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.dockerRegistry = 0;
+    
+                        /**
                          * BuildConfig dockerRepository.
                          * @member {string} dockerRepository
                          * @memberof google.cloud.functions.v2alpha.BuildConfig
@@ -18687,6 +18993,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.dockerRepository);
                             if (message.sourceProvenance != null && Object.hasOwnProperty.call(message, "sourceProvenance"))
                                 $root.google.cloud.functions.v2alpha.SourceProvenance.encode(message.sourceProvenance, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.dockerRegistry);
                             return writer;
                         };
     
@@ -18768,6 +19076,10 @@
                                         message.environmentVariables[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.dockerRegistry = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.dockerRepository = reader.string();
                                         break;
@@ -18837,6 +19149,15 @@
                                     if (!$util.isString(message.environmentVariables[key[i]]))
                                         return "environmentVariables: string{k:string} expected";
                             }
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                switch (message.dockerRegistry) {
+                                default:
+                                    return "dockerRegistry: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
@@ -18880,6 +19201,26 @@
                                 for (var keys = Object.keys(object.environmentVariables), i = 0; i < keys.length; ++i)
                                     message.environmentVariables[keys[i]] = String(object.environmentVariables[keys[i]]);
                             }
+                            switch (object.dockerRegistry) {
+                            default:
+                                if (typeof object.dockerRegistry === "number") {
+                                    message.dockerRegistry = object.dockerRegistry;
+                                    break;
+                                }
+                                break;
+                            case "DOCKER_REGISTRY_UNSPECIFIED":
+                            case 0:
+                                message.dockerRegistry = 0;
+                                break;
+                            case "CONTAINER_REGISTRY":
+                            case 1:
+                                message.dockerRegistry = 1;
+                                break;
+                            case "ARTIFACT_REGISTRY":
+                            case 2:
+                                message.dockerRegistry = 2;
+                                break;
+                            }
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
                             return message;
@@ -18908,6 +19249,7 @@
                                 object.workerPool = "";
                                 object.dockerRepository = "";
                                 object.sourceProvenance = null;
+                                object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -18929,6 +19271,8 @@
                                 object.dockerRepository = message.dockerRepository;
                             if (message.sourceProvenance != null && message.hasOwnProperty("sourceProvenance"))
                                 object.sourceProvenance = $root.google.cloud.functions.v2alpha.SourceProvenance.toObject(message.sourceProvenance, options);
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v2alpha.BuildConfig.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v2alpha.BuildConfig.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
                             return object;
                         };
     
@@ -18958,6 +19302,22 @@
                             return typeUrlPrefix + "/google.cloud.functions.v2alpha.BuildConfig";
                         };
     
+                        /**
+                         * DockerRegistry enum.
+                         * @name google.cloud.functions.v2alpha.BuildConfig.DockerRegistry
+                         * @enum {number}
+                         * @property {number} DOCKER_REGISTRY_UNSPECIFIED=0 DOCKER_REGISTRY_UNSPECIFIED value
+                         * @property {number} CONTAINER_REGISTRY=1 CONTAINER_REGISTRY value
+                         * @property {number} ARTIFACT_REGISTRY=2 ARTIFACT_REGISTRY value
+                         */
+                        BuildConfig.DockerRegistry = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DOCKER_REGISTRY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTAINER_REGISTRY"] = 1;
+                            values[valuesById[2] = "ARTIFACT_REGISTRY"] = 2;
+                            return values;
+                        })();
+    
                         return BuildConfig;
                     })();
     
@@ -18970,6 +19330,7 @@
                          * @property {string|null} [service] ServiceConfig service
                          * @property {number|null} [timeoutSeconds] ServiceConfig timeoutSeconds
                          * @property {string|null} [availableMemory] ServiceConfig availableMemory
+                         * @property {string|null} [availableCpu] ServiceConfig availableCpu
                          * @property {Object.<string,string>|null} [environmentVariables] ServiceConfig environmentVariables
                          * @property {number|null} [maxInstanceCount] ServiceConfig maxInstanceCount
                          * @property {number|null} [minInstanceCount] ServiceConfig minInstanceCount
@@ -18982,6 +19343,8 @@
                          * @property {Array.<google.cloud.functions.v2alpha.ISecretEnvVar>|null} [secretEnvironmentVariables] ServiceConfig secretEnvironmentVariables
                          * @property {Array.<google.cloud.functions.v2alpha.ISecretVolume>|null} [secretVolumes] ServiceConfig secretVolumes
                          * @property {string|null} [revision] ServiceConfig revision
+                         * @property {number|null} [maxInstanceRequestConcurrency] ServiceConfig maxInstanceRequestConcurrency
+                         * @property {google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel|null} [securityLevel] ServiceConfig securityLevel
                          */
     
                         /**
@@ -19025,6 +19388,14 @@
                          * @instance
                          */
                         ServiceConfig.prototype.availableMemory = "";
+    
+                        /**
+                         * ServiceConfig availableCpu.
+                         * @member {string} availableCpu
+                         * @memberof google.cloud.functions.v2alpha.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.availableCpu = "";
     
                         /**
                          * ServiceConfig environmentVariables.
@@ -19123,6 +19494,22 @@
                         ServiceConfig.prototype.revision = "";
     
                         /**
+                         * ServiceConfig maxInstanceRequestConcurrency.
+                         * @member {number} maxInstanceRequestConcurrency
+                         * @memberof google.cloud.functions.v2alpha.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.maxInstanceRequestConcurrency = 0;
+    
+                        /**
+                         * ServiceConfig securityLevel.
+                         * @member {google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel} securityLevel
+                         * @memberof google.cloud.functions.v2alpha.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.securityLevel = 0;
+    
+                        /**
                          * Creates a new ServiceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.ServiceConfig
@@ -19179,6 +19566,12 @@
                             if (message.secretVolumes != null && message.secretVolumes.length)
                                 for (var i = 0; i < message.secretVolumes.length; ++i)
                                     $root.google.cloud.functions.v2alpha.SecretVolume.encode(message.secretVolumes[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.maxInstanceRequestConcurrency != null && Object.hasOwnProperty.call(message, "maxInstanceRequestConcurrency"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).int32(message.maxInstanceRequestConcurrency);
+                            if (message.securityLevel != null && Object.hasOwnProperty.call(message, "securityLevel"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.securityLevel);
+                            if (message.availableCpu != null && Object.hasOwnProperty.call(message, "availableCpu"))
+                                writer.uint32(/* id 22, wireType 2 =*/178).string(message.availableCpu);
                             return writer;
                         };
     
@@ -19223,6 +19616,10 @@
                                     }
                                 case 13: {
                                         message.availableMemory = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.availableCpu = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -19296,6 +19693,14 @@
                                         message.revision = reader.string();
                                         break;
                                     }
+                                case 20: {
+                                        message.maxInstanceRequestConcurrency = reader.int32();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.securityLevel = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19340,6 +19745,9 @@
                             if (message.availableMemory != null && message.hasOwnProperty("availableMemory"))
                                 if (!$util.isString(message.availableMemory))
                                     return "availableMemory: string expected";
+                            if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
+                                if (!$util.isString(message.availableCpu))
+                                    return "availableCpu: string expected";
                             if (message.environmentVariables != null && message.hasOwnProperty("environmentVariables")) {
                                 if (!$util.isObject(message.environmentVariables))
                                     return "environmentVariables: object expected";
@@ -19406,6 +19814,18 @@
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 if (!$util.isString(message.revision))
                                     return "revision: string expected";
+                            if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
+                                if (!$util.isInteger(message.maxInstanceRequestConcurrency))
+                                    return "maxInstanceRequestConcurrency: integer expected";
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                switch (message.securityLevel) {
+                                default:
+                                    return "securityLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -19427,6 +19847,8 @@
                                 message.timeoutSeconds = object.timeoutSeconds | 0;
                             if (object.availableMemory != null)
                                 message.availableMemory = String(object.availableMemory);
+                            if (object.availableCpu != null)
+                                message.availableCpu = String(object.availableCpu);
                             if (object.environmentVariables) {
                                 if (typeof object.environmentVariables !== "object")
                                     throw TypeError(".google.cloud.functions.v2alpha.ServiceConfig.environmentVariables: object expected");
@@ -19512,6 +19934,28 @@
                             }
                             if (object.revision != null)
                                 message.revision = String(object.revision);
+                            if (object.maxInstanceRequestConcurrency != null)
+                                message.maxInstanceRequestConcurrency = object.maxInstanceRequestConcurrency | 0;
+                            switch (object.securityLevel) {
+                            default:
+                                if (typeof object.securityLevel === "number") {
+                                    message.securityLevel = object.securityLevel;
+                                    break;
+                                }
+                                break;
+                            case "SECURITY_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.securityLevel = 0;
+                                break;
+                            case "SECURE_ALWAYS":
+                            case 1:
+                                message.securityLevel = 1;
+                                break;
+                            case "SECURE_OPTIONAL":
+                            case 2:
+                                message.securityLevel = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -19547,6 +19991,9 @@
                                 object.availableMemory = "";
                                 object.allTrafficOnLatestRevision = false;
                                 object.revision = "";
+                                object.maxInstanceRequestConcurrency = 0;
+                                object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
+                                object.availableCpu = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -19588,6 +20035,12 @@
                                 for (var j = 0; j < message.secretVolumes.length; ++j)
                                     object.secretVolumes[j] = $root.google.cloud.functions.v2alpha.SecretVolume.toObject(message.secretVolumes[j], options);
                             }
+                            if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
+                                object.maxInstanceRequestConcurrency = message.maxInstanceRequestConcurrency;
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                object.securityLevel = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel[message.securityLevel] : message.securityLevel;
+                            if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
+                                object.availableCpu = message.availableCpu;
                             return object;
                         };
     
@@ -19648,6 +20101,22 @@
                             values[valuesById[1] = "ALLOW_ALL"] = 1;
                             values[valuesById[2] = "ALLOW_INTERNAL_ONLY"] = 2;
                             values[valuesById[3] = "ALLOW_INTERNAL_AND_GCLB"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * SecurityLevel enum.
+                         * @name google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel
+                         * @enum {number}
+                         * @property {number} SECURITY_LEVEL_UNSPECIFIED=0 SECURITY_LEVEL_UNSPECIFIED value
+                         * @property {number} SECURE_ALWAYS=1 SECURE_ALWAYS value
+                         * @property {number} SECURE_OPTIONAL=2 SECURE_OPTIONAL value
+                         */
+                        ServiceConfig.SecurityLevel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SECURITY_LEVEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SECURE_ALWAYS"] = 1;
+                            values[valuesById[2] = "SECURE_OPTIONAL"] = 2;
                             return values;
                         })();
     
@@ -22615,6 +23084,7 @@
                          * @memberof google.cloud.functions.v2alpha
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
+                         * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
                          */
     
                         /**
@@ -22639,6 +23109,14 @@
                          * @instance
                          */
                         GenerateUploadUrlRequest.prototype.parent = "";
+    
+                        /**
+                         * GenerateUploadUrlRequest kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2alpha.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
@@ -22666,6 +23144,8 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
                             return writer;
                         };
     
@@ -22702,6 +23182,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kmsKeyName = reader.string();
                                         break;
                                     }
                                 default:
@@ -22742,6 +23226,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -22759,6 +23246,8 @@
                             var message = new $root.google.cloud.functions.v2alpha.GenerateUploadUrlRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -22775,10 +23264,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.parent = "";
+                                object.kmsKeyName = "";
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
                             return object;
                         };
     
@@ -24730,6 +25223,257 @@
                         return OperationMetadata;
                     })();
     
+                    v2alpha.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.functions.v2alpha.Environment>|null} [environments] LocationMetadata environments
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.functions.v2alpha.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.environments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata environments.
+                         * @member {Array.<google.cloud.functions.v2alpha.Environment>} environments
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.environments = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2alpha.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2alpha.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.environments != null && message.environments.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    writer.int32(message.environments[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2alpha.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2alpha.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.environments.push(reader.int32());
+                                        } else
+                                            message.environments.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2alpha.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.environments != null && message.hasOwnProperty("environments")) {
+                                if (!Array.isArray(message.environments))
+                                    return "environments: array expected";
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    switch (message.environments[i]) {
+                                    default:
+                                        return "environments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2alpha.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2alpha.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2alpha.LocationMetadata();
+                            if (object.environments) {
+                                if (!Array.isArray(object.environments))
+                                    throw TypeError(".google.cloud.functions.v2alpha.LocationMetadata.environments: array expected");
+                                message.environments = [];
+                                for (var i = 0; i < object.environments.length; ++i)
+                                    switch (object.environments[i]) {
+                                    default:
+                                        if (typeof object.environments[i] === "number") {
+                                            message.environments[i] = object.environments[i];
+                                            break;
+                                        }
+                                    case "ENVIRONMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.environments[i] = 0;
+                                        break;
+                                    case "GEN_1":
+                                    case 1:
+                                        message.environments[i] = 1;
+                                        break;
+                                    case "GEN_2":
+                                    case 2:
+                                        message.environments[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.environments = [];
+                            if (message.environments && message.environments.length) {
+                                object.environments = [];
+                                for (var j = 0; j < message.environments.length; ++j)
+                                    object.environments[j] = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environments[j]] === undefined ? message.environments[j] : $root.google.cloud.functions.v2alpha.Environment[message.environments[j]] : message.environments[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2alpha.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2alpha.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
+                    })();
+    
                     v2alpha.Stage = (function() {
     
                         /**
@@ -25520,7 +26264,6 @@
                          * @memberof google.cloud.functions.v2beta
                          * @interface IFunction
                          * @property {string|null} [name] Function name
-                         * @property {google.cloud.functions.v2beta.Environment|null} [environment] Function environment
                          * @property {string|null} [description] Function description
                          * @property {google.cloud.functions.v2beta.IBuildConfig|null} [buildConfig] Function buildConfig
                          * @property {google.cloud.functions.v2beta.IServiceConfig|null} [serviceConfig] Function serviceConfig
@@ -25529,6 +26272,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Function updateTime
                          * @property {Object.<string,string>|null} [labels] Function labels
                          * @property {Array.<google.cloud.functions.v2beta.IStateMessage>|null} [stateMessages] Function stateMessages
+                         * @property {google.cloud.functions.v2beta.Environment|null} [environment] Function environment
+                         * @property {string|null} [url] Function url
+                         * @property {string|null} [kmsKeyName] Function kmsKeyName
                          */
     
                         /**
@@ -25555,14 +26301,6 @@
                          * @instance
                          */
                         Function.prototype.name = "";
-    
-                        /**
-                         * Function environment.
-                         * @member {google.cloud.functions.v2beta.Environment} environment
-                         * @memberof google.cloud.functions.v2beta.Function
-                         * @instance
-                         */
-                        Function.prototype.environment = 0;
     
                         /**
                          * Function description.
@@ -25629,6 +26367,30 @@
                         Function.prototype.stateMessages = $util.emptyArray;
     
                         /**
+                         * Function environment.
+                         * @member {google.cloud.functions.v2beta.Environment} environment
+                         * @memberof google.cloud.functions.v2beta.Function
+                         * @instance
+                         */
+                        Function.prototype.environment = 0;
+    
+                        /**
+                         * Function url.
+                         * @member {string} url
+                         * @memberof google.cloud.functions.v2beta.Function
+                         * @instance
+                         */
+                        Function.prototype.url = "";
+    
+                        /**
+                         * Function kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2beta.Function
+                         * @instance
+                         */
+                        Function.prototype.kmsKeyName = "";
+    
+                        /**
                          * Creates a new Function instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.Function
@@ -25674,6 +26436,10 @@
                                     $root.google.cloud.functions.v2beta.StateMessage.encode(message.stateMessages[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.environment);
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.url);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
                             return writer;
                         };
     
@@ -25710,10 +26476,6 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
-                                        break;
-                                    }
-                                case 10: {
-                                        message.environment = reader.int32();
                                         break;
                                     }
                                 case 2: {
@@ -25769,6 +26531,18 @@
                                         message.stateMessages.push($root.google.cloud.functions.v2beta.StateMessage.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 10: {
+                                        message.environment = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.kmsKeyName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25807,15 +26581,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.environment != null && message.hasOwnProperty("environment"))
-                                switch (message.environment) {
-                                default:
-                                    return "environment: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
@@ -25868,6 +26633,21 @@
                                         return "stateMessages." + error;
                                 }
                             }
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -25885,26 +26665,6 @@
                             var message = new $root.google.cloud.functions.v2beta.Function();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            switch (object.environment) {
-                            default:
-                                if (typeof object.environment === "number") {
-                                    message.environment = object.environment;
-                                    break;
-                                }
-                                break;
-                            case "ENVIRONMENT_UNSPECIFIED":
-                            case 0:
-                                message.environment = 0;
-                                break;
-                            case "GEN_1":
-                            case 1:
-                                message.environment = 1;
-                                break;
-                            case "GEN_2":
-                            case 2:
-                                message.environment = 2;
-                                break;
-                            }
                             if (object.description != null)
                                 message.description = String(object.description);
                             if (object.buildConfig != null) {
@@ -25976,6 +26736,30 @@
                                     message.stateMessages[i] = $root.google.cloud.functions.v2beta.StateMessage.fromObject(object.stateMessages[i]);
                                 }
                             }
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -26005,6 +26789,8 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.updateTime = null;
                                 object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
+                                object.url = "";
+                                object.kmsKeyName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -26033,6 +26819,10 @@
                             }
                             if (message.environment != null && message.hasOwnProperty("environment"))
                                 object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
                             return object;
                         };
     
@@ -27533,6 +28323,7 @@
                          * @property {google.cloud.functions.v2beta.ISourceProvenance|null} [sourceProvenance] BuildConfig sourceProvenance
                          * @property {string|null} [workerPool] BuildConfig workerPool
                          * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
+                         * @property {google.cloud.functions.v2beta.BuildConfig.DockerRegistry|null} [dockerRegistry] BuildConfig dockerRegistry
                          * @property {string|null} [dockerRepository] BuildConfig dockerRepository
                          */
     
@@ -27609,6 +28400,14 @@
                         BuildConfig.prototype.environmentVariables = $util.emptyObject;
     
                         /**
+                         * BuildConfig dockerRegistry.
+                         * @member {google.cloud.functions.v2beta.BuildConfig.DockerRegistry} dockerRegistry
+                         * @memberof google.cloud.functions.v2beta.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.dockerRegistry = 0;
+    
+                        /**
                          * BuildConfig dockerRepository.
                          * @member {string} dockerRepository
                          * @memberof google.cloud.functions.v2beta.BuildConfig
@@ -27657,6 +28456,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.dockerRepository);
                             if (message.sourceProvenance != null && Object.hasOwnProperty.call(message, "sourceProvenance"))
                                 $root.google.cloud.functions.v2beta.SourceProvenance.encode(message.sourceProvenance, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.dockerRegistry);
                             return writer;
                         };
     
@@ -27738,6 +28539,10 @@
                                         message.environmentVariables[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.dockerRegistry = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.dockerRepository = reader.string();
                                         break;
@@ -27807,6 +28612,15 @@
                                     if (!$util.isString(message.environmentVariables[key[i]]))
                                         return "environmentVariables: string{k:string} expected";
                             }
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                switch (message.dockerRegistry) {
+                                default:
+                                    return "dockerRegistry: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
@@ -27850,6 +28664,26 @@
                                 for (var keys = Object.keys(object.environmentVariables), i = 0; i < keys.length; ++i)
                                     message.environmentVariables[keys[i]] = String(object.environmentVariables[keys[i]]);
                             }
+                            switch (object.dockerRegistry) {
+                            default:
+                                if (typeof object.dockerRegistry === "number") {
+                                    message.dockerRegistry = object.dockerRegistry;
+                                    break;
+                                }
+                                break;
+                            case "DOCKER_REGISTRY_UNSPECIFIED":
+                            case 0:
+                                message.dockerRegistry = 0;
+                                break;
+                            case "CONTAINER_REGISTRY":
+                            case 1:
+                                message.dockerRegistry = 1;
+                                break;
+                            case "ARTIFACT_REGISTRY":
+                            case 2:
+                                message.dockerRegistry = 2;
+                                break;
+                            }
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
                             return message;
@@ -27878,6 +28712,7 @@
                                 object.workerPool = "";
                                 object.dockerRepository = "";
                                 object.sourceProvenance = null;
+                                object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -27899,6 +28734,8 @@
                                 object.dockerRepository = message.dockerRepository;
                             if (message.sourceProvenance != null && message.hasOwnProperty("sourceProvenance"))
                                 object.sourceProvenance = $root.google.cloud.functions.v2beta.SourceProvenance.toObject(message.sourceProvenance, options);
+                            if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
+                                object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v2beta.BuildConfig.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v2beta.BuildConfig.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
                             return object;
                         };
     
@@ -27928,6 +28765,22 @@
                             return typeUrlPrefix + "/google.cloud.functions.v2beta.BuildConfig";
                         };
     
+                        /**
+                         * DockerRegistry enum.
+                         * @name google.cloud.functions.v2beta.BuildConfig.DockerRegistry
+                         * @enum {number}
+                         * @property {number} DOCKER_REGISTRY_UNSPECIFIED=0 DOCKER_REGISTRY_UNSPECIFIED value
+                         * @property {number} CONTAINER_REGISTRY=1 CONTAINER_REGISTRY value
+                         * @property {number} ARTIFACT_REGISTRY=2 ARTIFACT_REGISTRY value
+                         */
+                        BuildConfig.DockerRegistry = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DOCKER_REGISTRY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTAINER_REGISTRY"] = 1;
+                            values[valuesById[2] = "ARTIFACT_REGISTRY"] = 2;
+                            return values;
+                        })();
+    
                         return BuildConfig;
                     })();
     
@@ -27940,6 +28793,7 @@
                          * @property {string|null} [service] ServiceConfig service
                          * @property {number|null} [timeoutSeconds] ServiceConfig timeoutSeconds
                          * @property {string|null} [availableMemory] ServiceConfig availableMemory
+                         * @property {string|null} [availableCpu] ServiceConfig availableCpu
                          * @property {Object.<string,string>|null} [environmentVariables] ServiceConfig environmentVariables
                          * @property {number|null} [maxInstanceCount] ServiceConfig maxInstanceCount
                          * @property {number|null} [minInstanceCount] ServiceConfig minInstanceCount
@@ -27952,6 +28806,8 @@
                          * @property {Array.<google.cloud.functions.v2beta.ISecretEnvVar>|null} [secretEnvironmentVariables] ServiceConfig secretEnvironmentVariables
                          * @property {Array.<google.cloud.functions.v2beta.ISecretVolume>|null} [secretVolumes] ServiceConfig secretVolumes
                          * @property {string|null} [revision] ServiceConfig revision
+                         * @property {number|null} [maxInstanceRequestConcurrency] ServiceConfig maxInstanceRequestConcurrency
+                         * @property {google.cloud.functions.v2beta.ServiceConfig.SecurityLevel|null} [securityLevel] ServiceConfig securityLevel
                          */
     
                         /**
@@ -27995,6 +28851,14 @@
                          * @instance
                          */
                         ServiceConfig.prototype.availableMemory = "";
+    
+                        /**
+                         * ServiceConfig availableCpu.
+                         * @member {string} availableCpu
+                         * @memberof google.cloud.functions.v2beta.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.availableCpu = "";
     
                         /**
                          * ServiceConfig environmentVariables.
@@ -28093,6 +28957,22 @@
                         ServiceConfig.prototype.revision = "";
     
                         /**
+                         * ServiceConfig maxInstanceRequestConcurrency.
+                         * @member {number} maxInstanceRequestConcurrency
+                         * @memberof google.cloud.functions.v2beta.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.maxInstanceRequestConcurrency = 0;
+    
+                        /**
+                         * ServiceConfig securityLevel.
+                         * @member {google.cloud.functions.v2beta.ServiceConfig.SecurityLevel} securityLevel
+                         * @memberof google.cloud.functions.v2beta.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.securityLevel = 0;
+    
+                        /**
                          * Creates a new ServiceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.ServiceConfig
@@ -28149,6 +29029,12 @@
                             if (message.secretVolumes != null && message.secretVolumes.length)
                                 for (var i = 0; i < message.secretVolumes.length; ++i)
                                     $root.google.cloud.functions.v2beta.SecretVolume.encode(message.secretVolumes[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.maxInstanceRequestConcurrency != null && Object.hasOwnProperty.call(message, "maxInstanceRequestConcurrency"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).int32(message.maxInstanceRequestConcurrency);
+                            if (message.securityLevel != null && Object.hasOwnProperty.call(message, "securityLevel"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.securityLevel);
+                            if (message.availableCpu != null && Object.hasOwnProperty.call(message, "availableCpu"))
+                                writer.uint32(/* id 22, wireType 2 =*/178).string(message.availableCpu);
                             return writer;
                         };
     
@@ -28193,6 +29079,10 @@
                                     }
                                 case 13: {
                                         message.availableMemory = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.availableCpu = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -28266,6 +29156,14 @@
                                         message.revision = reader.string();
                                         break;
                                     }
+                                case 20: {
+                                        message.maxInstanceRequestConcurrency = reader.int32();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.securityLevel = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28310,6 +29208,9 @@
                             if (message.availableMemory != null && message.hasOwnProperty("availableMemory"))
                                 if (!$util.isString(message.availableMemory))
                                     return "availableMemory: string expected";
+                            if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
+                                if (!$util.isString(message.availableCpu))
+                                    return "availableCpu: string expected";
                             if (message.environmentVariables != null && message.hasOwnProperty("environmentVariables")) {
                                 if (!$util.isObject(message.environmentVariables))
                                     return "environmentVariables: object expected";
@@ -28376,6 +29277,18 @@
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 if (!$util.isString(message.revision))
                                     return "revision: string expected";
+                            if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
+                                if (!$util.isInteger(message.maxInstanceRequestConcurrency))
+                                    return "maxInstanceRequestConcurrency: integer expected";
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                switch (message.securityLevel) {
+                                default:
+                                    return "securityLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -28397,6 +29310,8 @@
                                 message.timeoutSeconds = object.timeoutSeconds | 0;
                             if (object.availableMemory != null)
                                 message.availableMemory = String(object.availableMemory);
+                            if (object.availableCpu != null)
+                                message.availableCpu = String(object.availableCpu);
                             if (object.environmentVariables) {
                                 if (typeof object.environmentVariables !== "object")
                                     throw TypeError(".google.cloud.functions.v2beta.ServiceConfig.environmentVariables: object expected");
@@ -28482,6 +29397,28 @@
                             }
                             if (object.revision != null)
                                 message.revision = String(object.revision);
+                            if (object.maxInstanceRequestConcurrency != null)
+                                message.maxInstanceRequestConcurrency = object.maxInstanceRequestConcurrency | 0;
+                            switch (object.securityLevel) {
+                            default:
+                                if (typeof object.securityLevel === "number") {
+                                    message.securityLevel = object.securityLevel;
+                                    break;
+                                }
+                                break;
+                            case "SECURITY_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.securityLevel = 0;
+                                break;
+                            case "SECURE_ALWAYS":
+                            case 1:
+                                message.securityLevel = 1;
+                                break;
+                            case "SECURE_OPTIONAL":
+                            case 2:
+                                message.securityLevel = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -28517,6 +29454,9 @@
                                 object.availableMemory = "";
                                 object.allTrafficOnLatestRevision = false;
                                 object.revision = "";
+                                object.maxInstanceRequestConcurrency = 0;
+                                object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
+                                object.availableCpu = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -28558,6 +29498,12 @@
                                 for (var j = 0; j < message.secretVolumes.length; ++j)
                                     object.secretVolumes[j] = $root.google.cloud.functions.v2beta.SecretVolume.toObject(message.secretVolumes[j], options);
                             }
+                            if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
+                                object.maxInstanceRequestConcurrency = message.maxInstanceRequestConcurrency;
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                object.securityLevel = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v2beta.ServiceConfig.SecurityLevel[message.securityLevel] : message.securityLevel;
+                            if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
+                                object.availableCpu = message.availableCpu;
                             return object;
                         };
     
@@ -28618,6 +29564,22 @@
                             values[valuesById[1] = "ALLOW_ALL"] = 1;
                             values[valuesById[2] = "ALLOW_INTERNAL_ONLY"] = 2;
                             values[valuesById[3] = "ALLOW_INTERNAL_AND_GCLB"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * SecurityLevel enum.
+                         * @name google.cloud.functions.v2beta.ServiceConfig.SecurityLevel
+                         * @enum {number}
+                         * @property {number} SECURITY_LEVEL_UNSPECIFIED=0 SECURITY_LEVEL_UNSPECIFIED value
+                         * @property {number} SECURE_ALWAYS=1 SECURE_ALWAYS value
+                         * @property {number} SECURE_OPTIONAL=2 SECURE_OPTIONAL value
+                         */
+                        ServiceConfig.SecurityLevel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SECURITY_LEVEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SECURE_ALWAYS"] = 1;
+                            values[valuesById[2] = "SECURE_OPTIONAL"] = 2;
                             return values;
                         })();
     
@@ -31585,6 +32547,7 @@
                          * @memberof google.cloud.functions.v2beta
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
+                         * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
                          */
     
                         /**
@@ -31609,6 +32572,14 @@
                          * @instance
                          */
                         GenerateUploadUrlRequest.prototype.parent = "";
+    
+                        /**
+                         * GenerateUploadUrlRequest kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v2beta.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
@@ -31636,6 +32607,8 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
                             return writer;
                         };
     
@@ -31672,6 +32645,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kmsKeyName = reader.string();
                                         break;
                                     }
                                 default:
@@ -31712,6 +32689,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
                             return null;
                         };
     
@@ -31729,6 +32709,8 @@
                             var message = new $root.google.cloud.functions.v2beta.GenerateUploadUrlRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
                             return message;
                         };
     
@@ -31745,10 +32727,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.parent = "";
+                                object.kmsKeyName = "";
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
                             return object;
                         };
     
@@ -33698,6 +34684,257 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v2beta.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.functions.v2beta
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.functions.v2beta.Environment>|null} [environments] LocationMetadata environments
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.functions.v2beta
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.functions.v2beta.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.environments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata environments.
+                         * @member {Array.<google.cloud.functions.v2beta.Environment>} environments
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.environments = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2beta.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2beta.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.functions.v2beta.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2beta.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.environments != null && message.environments.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    writer.int32(message.environments[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2beta.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2beta.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2beta.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.environments && message.environments.length))
+                                            message.environments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.environments.push(reader.int32());
+                                        } else
+                                            message.environments.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2beta.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.environments != null && message.hasOwnProperty("environments")) {
+                                if (!Array.isArray(message.environments))
+                                    return "environments: array expected";
+                                for (var i = 0; i < message.environments.length; ++i)
+                                    switch (message.environments[i]) {
+                                    default:
+                                        return "environments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2beta.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2beta.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2beta.LocationMetadata();
+                            if (object.environments) {
+                                if (!Array.isArray(object.environments))
+                                    throw TypeError(".google.cloud.functions.v2beta.LocationMetadata.environments: array expected");
+                                message.environments = [];
+                                for (var i = 0; i < object.environments.length; ++i)
+                                    switch (object.environments[i]) {
+                                    default:
+                                        if (typeof object.environments[i] === "number") {
+                                            message.environments[i] = object.environments[i];
+                                            break;
+                                        }
+                                    case "ENVIRONMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.environments[i] = 0;
+                                        break;
+                                    case "GEN_1":
+                                    case 1:
+                                        message.environments[i] = 1;
+                                        break;
+                                    case "GEN_2":
+                                    case 2:
+                                        message.environments[i] = 2;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.functions.v2beta.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.environments = [];
+                            if (message.environments && message.environments.length) {
+                                object.environments = [];
+                                for (var j = 0; j < message.environments.length; ++j)
+                                    object.environments[j] = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environments[j]] === undefined ? message.environments[j] : $root.google.cloud.functions.v2beta.Environment[message.environments[j]] : message.environments[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2beta.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2beta.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
                     })();
     
                     v2beta.Stage = (function() {
@@ -45259,225 +46496,6 @@
                 return GeneratedCodeInfo;
             })();
     
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
-            })();
-    
             protobuf.Any = (function() {
     
                 /**
@@ -45712,6 +46730,466 @@
                 };
     
                 return Any;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             protobuf.Duration = (function() {
@@ -46128,247 +47606,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;

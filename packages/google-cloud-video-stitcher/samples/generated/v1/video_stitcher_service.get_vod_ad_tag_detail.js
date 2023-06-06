@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the ad tag detail for the specified VOD session, in the form of
+   *  Required. The name of the ad tag detail for the specified VOD session, in
+   *  the form of
    *  `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodAdTagDetails/{vod_ad_tag_detail}`.
    */
   // const name = 'abc123'

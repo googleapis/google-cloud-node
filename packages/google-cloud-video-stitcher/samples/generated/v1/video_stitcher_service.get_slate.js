@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the slate to be retrieved, of the slate, in the form of
-   *  `projects/{project_number}/locations/{location}/slates/{id}`.
+   *  Required. The name of the slate to be retrieved, of the slate, in the form
+   *  of `projects/{project_number}/locations/{location}/slates/{id}`.
    */
   // const name = 'abc123'
 

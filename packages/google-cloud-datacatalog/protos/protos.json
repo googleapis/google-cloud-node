@@ -104,6 +104,8 @@
                         "CLOUD_PUBSUB": 2,
                         "DATAPROC_METASTORE": 3,
                         "DATAPLEX": 4,
+                        "CLOUD_SPANNER": 6,
+                        "CLOUD_BIGTABLE": 7,
                         "CLOUD_SQL": 8,
                         "LOOKER": 9
                       }
@@ -974,6 +976,10 @@
                           "type": "SearchCatalogResult",
                           "id": 1
                         },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
                         "nextPageToken": {
                           "type": "string",
                           "id": 3
@@ -1184,6 +1190,14 @@
                         "fullyQualifiedName": {
                           "type": "string",
                           "id": 5
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -1208,7 +1222,8 @@
                         "systemSpec": {
                           "oneof": [
                             "sqlDatabaseSystemSpec",
-                            "lookerSystemSpec"
+                            "lookerSystemSpec",
+                            "cloudBigtableSystemSpec"
                           ]
                         },
                         "typeSpec": {
@@ -1223,7 +1238,8 @@
                             "databaseTableSpec",
                             "dataSourceConnectionSpec",
                             "routineSpec",
-                            "filesetSpec"
+                            "filesetSpec",
+                            "serviceSpec"
                           ]
                         }
                       },
@@ -1271,6 +1287,10 @@
                           "type": "LookerSystemSpec",
                           "id": 40
                         },
+                        "cloudBigtableSystemSpec": {
+                          "type": "CloudBigtableSystemSpec",
+                          "id": 41
+                        },
                         "gcsFilesetSpec": {
                           "type": "GcsFilesetSpec",
                           "id": 6
@@ -1304,6 +1324,10 @@
                         "filesetSpec": {
                           "type": "FilesetSpec",
                           "id": 33
+                        },
+                        "serviceSpec": {
+                          "type": "ServiceSpec",
+                          "id": 42
                         },
                         "displayName": {
                           "type": "string",
@@ -1539,6 +1563,60 @@
                         "parentViewDisplayName": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "CloudBigtableSystemSpec": {
+                      "fields": {
+                        "instanceDisplayName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CloudBigtableInstanceSpec": {
+                      "fields": {
+                        "cloudBigtableClusterSpecs": {
+                          "rule": "repeated",
+                          "type": "CloudBigtableClusterSpec",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "CloudBigtableClusterSpec": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "location": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "linkedResource": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ServiceSpec": {
+                      "oneofs": {
+                        "systemSpec": {
+                          "oneof": [
+                            "cloudBigtableInstanceSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudBigtableInstanceSpec": {
+                          "type": "CloudBigtableInstanceSpec",
+                          "id": 1
                         }
                       }
                     },
@@ -2027,6 +2105,13 @@
                         "gcsBucketPath": {
                           "type": "string",
                           "id": 2
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2937,12 +3022,18 @@
                         "presentTags": {
                           "rule": "repeated",
                           "type": "Tag",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "absentTags": {
                           "rule": "repeated",
                           "type": "Tag",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

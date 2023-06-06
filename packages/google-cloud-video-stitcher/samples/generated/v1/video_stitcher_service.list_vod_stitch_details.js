@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The VOD session where the stitch details belong to, in the form of
-   *  `projects/{project}/locations/{location}/vodSessions/{id}`.
+   *  Required. The VOD session where the stitch details belong to, in the form
+   *  of `projects/{project}/locations/{location}/vodSessions/{id}`.
    */
   // const parent = 'abc123'
   /**
