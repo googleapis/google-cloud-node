@@ -170,6 +170,11 @@
                 "setMaintenancePolicy"
               ]
             },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "checkAutopilotCompatibility"
+              ]
+            },
             "ListUsableSubnetworks": {
               "methods": [
                 "listUsableSubnetworks",
@@ -340,6 +345,11 @@
             "SetMaintenancePolicy": {
               "methods": [
                 "setMaintenancePolicy"
+              ]
+            },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "checkAutopilotCompatibility"
               ]
             },
             "ListUsableSubnetworks": {

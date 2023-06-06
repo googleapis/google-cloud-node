@@ -267,6 +267,7 @@ export class ClusterManagerClient {
       'setNetworkPolicy',
       'setMaintenancePolicy',
       'listUsableSubnetworks',
+      'checkAutopilotCompatibility',
       'listLocations',
     ];
     for (const methodName of clusterManagerStubMethods) {
@@ -3871,6 +3872,109 @@ export class ClusterManagerClient {
       });
     this.initialize();
     return this.innerApiCalls.setMaintenancePolicy(request, options, callback);
+  }
+  /**
+   * Checks the cluster compatibility with Autopilot mode, and returns a list of
+   * compatibility issues.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name (project, location, cluster) of the cluster to retrieve.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.container.v1beta1.CheckAutopilotCompatibilityResponse | CheckAutopilotCompatibilityResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js</caption>
+   * region_tag:container_v1beta1_generated_ClusterManager_CheckAutopilotCompatibility_async
+   */
+  checkAutopilotCompatibility(
+    request?: protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+      (
+        | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  checkAutopilotCompatibility(
+    request: protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+      | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  checkAutopilotCompatibility(
+    request: protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest,
+    callback: Callback<
+      protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+      | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  checkAutopilotCompatibility(
+    request?: protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+          | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+      | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+      (
+        | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.checkAutopilotCompatibility(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Fetches locations that offer Google Kubernetes Engine.
