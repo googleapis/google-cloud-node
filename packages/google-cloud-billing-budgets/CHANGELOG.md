@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/billing-budgets-v4.2.2...billing-budgets-v4.3.0) (2023-06-06)
+
+
+### Features
+
+* [billing-budgets] Add resource_ancestors field to support filtering by folders & organizations ([8ffd911](https://github.com/googleapis/google-cloud-node/commit/8ffd9112f3e433f4410ce6aa2664db6cf50f5175))
+* [billing-budgets] Add resource_ancestors field to support filtering by folders & organizations ([#4321](https://github.com/googleapis/google-cloud-node/issues/4321)) ([8ffd911](https://github.com/googleapis/google-cloud-node/commit/8ffd9112f3e433f4410ce6aa2664db6cf50f5175))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/billing-budgets-v4.2.1...billing-budgets-v4.2.2) (2023-04-13)
 
 

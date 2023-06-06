@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.7.0...contact-center-insights-v2.8.0) (2023-06-06)
+
+
+### Features
+
+* [contactcenterinsights] Add the resource definition of a STT recognizer ([#4310](https://github.com/googleapis/google-cloud-node/issues/4310)) ([02f2346](https://github.com/googleapis/google-cloud-node/commit/02f2346643a61ebed9c25a60e6229a1996be727c))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.6.0...contact-center-insights-v2.7.0) (2023-05-02)
 
 

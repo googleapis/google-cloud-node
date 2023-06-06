@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.11.0...container-v4.12.0) (2023-06-06)
+
+
+### Features
+
+* [container] add a API field to enable FQDN Network Policy on clusters ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* [container] add a API field to enable FQDN Network Policy on clusters ([#4319](https://github.com/googleapis/google-cloud-node/issues/4319)) ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* [container] add SoleTenantConfig API ([12cc0d9](https://github.com/googleapis/google-cloud-node/commit/12cc0d9c6d17614b5e1a9b5eb189258279f4cee2))
+* [container] add SoleTenantConfig API ([#4306](https://github.com/googleapis/google-cloud-node/issues/4306)) ([12cc0d9](https://github.com/googleapis/google-cloud-node/commit/12cc0d9c6d17614b5e1a9b5eb189258279f4cee2))
+* Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+
 ## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.10.0...container-v4.11.0) (2023-05-06)
 
 

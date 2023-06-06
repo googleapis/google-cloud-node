@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.3.1...datacatalog-v3.4.0) (2023-06-06)
+
+
+### Features
+
+* [datacatalog] add support for entries associated with Spanner and ClougBigTable ([#4302](https://github.com/googleapis/google-cloud-node/issues/4302)) ([89c2be8](https://github.com/googleapis/google-cloud-node/commit/89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702))
+* Expand SearchCatalogResponse with totalSize ([89c2be8](https://github.com/googleapis/google-cloud-node/commit/89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702))
+* Extend ImportApiRequest with jobId parameter ([89c2be8](https://github.com/googleapis/google-cloud-node/commit/89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702))
+* Modify documentation for FQN support ([89c2be8](https://github.com/googleapis/google-cloud-node/commit/89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702))
+
 ## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.3.0...datacatalog-v3.3.1) (2023-04-13)
 
 

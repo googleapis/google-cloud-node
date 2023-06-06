@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.6.1...tpu-v2.7.0) (2023-06-06)
+
+
+### Features
+
+* [tpu] Add MultisliceNode ([#4308](https://github.com/googleapis/google-cloud-node/issues/4308)) ([47ab1c3](https://github.com/googleapis/google-cloud-node/commit/47ab1c3ee106fce357950245318129d2be723dd2))
+* Enable Force on DeleteQueuedResource ([47ab1c3](https://github.com/googleapis/google-cloud-node/commit/47ab1c3ee106fce357950245318129d2be723dd2))
+
 ## [2.6.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.6.0...tpu-v2.6.1) (2023-05-04)
 
 

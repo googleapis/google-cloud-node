@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v0.3.2...video-stitcher-v0.4.0) (2023-06-06)
+
+
+### Features
+
+* [video-stitcher] introduce GAM settings for GAM related configs and support ListOperations ([#4130](https://github.com/googleapis/google-cloud-node/issues/4130)) ([b73a87f](https://github.com/googleapis/google-cloud-node/commit/b73a87f4f1c8d84da66ea81b88a3f2cc6704aa6b))
+
 ## [0.3.2](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v0.3.1...video-stitcher-v0.3.2) (2023-04-13)
 
 
