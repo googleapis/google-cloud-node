@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.CloudBuild.V1",
-                    "go_package": "cloud.google.com/go/cloudbuild/apiv1/v2/apiv1pb;apiv1pb",
+                    "go_package": "cloud.google.com/go/cloudbuild/apiv1/v2/cloudbuildpb;cloudbuildpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloudbuild.v1",
                     "objc_class_prefix": "GCB",
