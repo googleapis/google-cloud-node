@@ -19,7 +19,6 @@
   * [Streaming_video_intelligence_service.streaming_annotate_video](#streaming_video_intelligence_service.streaming_annotate_video)
   * [Video_intelligence_service.annotate_video](#video_intelligence_service.annotate_video)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -148,23 +147,6 @@ __Usage:__
 
 
 `node packages/google-cloud-videointelligence/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-videointelligence/samples/test/quickstart.test.js`
 
 
 

@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Video Intelligence: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [Google Cloud Video Intelligence: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-videointelligence)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/video-intelligence.svg)](https://www.npmjs.org/package/@google-cloud/video-intelligence)
@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,71 +54,21 @@ npm install @google-cloud/video-intelligence
 ```
 
 
-### Using the client library
-
-```javascript
-// Imports the Google Cloud Video Intelligence library
-const videoIntelligence = require('@google-cloud/video-intelligence');
-
-// Creates a client
-const client = new videoIntelligence.VideoIntelligenceServiceClient();
-
-// The GCS uri of the video to analyze
-const gcsUri = 'gs://cloud-samples-data/video/cat.mp4';
-
-// Construct request
-const request = {
-  inputUri: gcsUri,
-  features: ['LABEL_DETECTION'],
-};
-
-// Execute request
-const [operation] = await client.annotateVideo(request);
-
-console.log(
-  'Waiting for operation to complete... (this may take a few minutes)'
-);
-
-const [operationResult] = await operation.promise();
-
-// Gets annotations for video
-const annotations = operationResult.annotationResults[0];
-
-// Gets labels for video from its annotations
-const labels = annotations.segmentLabelAnnotations;
-labels.forEach(label => {
-  console.log(`Label ${label.entity.description} occurs at:`);
-  label.segments.forEach(segment => {
-    segment = segment.segment;
-    console.log(
-      `\tStart: ${segment.startTimeOffset.seconds}` +
-        `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
-    );
-    console.log(
-      `\tEnd: ${segment.endTimeOffset.seconds}.` +
-        `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-    );
-  });
-});
-
-```
-
 
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-videointelligence/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js,samples/README.md) |
-| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js,samples/README.md) |
-| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js,samples/README.md) |
-| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js,samples/README.md) |
-| Streaming_video_intelligence_service.streaming_annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js,samples/README.md) |
-| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/quickstart.js,samples/README.md) |
-| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/test/quickstart.test.js,samples/README.md) |
+| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Streaming_video_intelligence_service.streaming_annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Video_intelligence_service.annotate_video | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js,packages/google-cloud-videointelligence/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/quickstart.js,packages/google-cloud-videointelligence/samples/README.md) |
 
 
 
