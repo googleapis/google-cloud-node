@@ -23,6 +23,1259 @@ export namespace google {
         /** Namespace mapsplatformdatasets. */
         namespace mapsplatformdatasets {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of a LocalFileSource. */
+                interface ILocalFileSource {
+
+                    /** LocalFileSource filename */
+                    filename?: (string|null);
+
+                    /** LocalFileSource fileFormat */
+                    fileFormat?: (google.maps.mapsplatformdatasets.v1.FileFormat|keyof typeof google.maps.mapsplatformdatasets.v1.FileFormat|null);
+                }
+
+                /** Represents a LocalFileSource. */
+                class LocalFileSource implements ILocalFileSource {
+
+                    /**
+                     * Constructs a new LocalFileSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.ILocalFileSource);
+
+                    /** LocalFileSource filename. */
+                    public filename: string;
+
+                    /** LocalFileSource fileFormat. */
+                    public fileFormat: (google.maps.mapsplatformdatasets.v1.FileFormat|keyof typeof google.maps.mapsplatformdatasets.v1.FileFormat);
+
+                    /**
+                     * Creates a new LocalFileSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocalFileSource instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.ILocalFileSource): google.maps.mapsplatformdatasets.v1.LocalFileSource;
+
+                    /**
+                     * Encodes the specified LocalFileSource message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.LocalFileSource.verify|verify} messages.
+                     * @param message LocalFileSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.ILocalFileSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocalFileSource message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.LocalFileSource.verify|verify} messages.
+                     * @param message LocalFileSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.ILocalFileSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocalFileSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocalFileSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.LocalFileSource;
+
+                    /**
+                     * Decodes a LocalFileSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocalFileSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.LocalFileSource;
+
+                    /**
+                     * Verifies a LocalFileSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocalFileSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocalFileSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.LocalFileSource;
+
+                    /**
+                     * Creates a plain object from a LocalFileSource message. Also converts values to other types if specified.
+                     * @param message LocalFileSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.LocalFileSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocalFileSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocalFileSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsSource. */
+                interface IGcsSource {
+
+                    /** GcsSource inputUri */
+                    inputUri?: (string|null);
+
+                    /** GcsSource fileFormat */
+                    fileFormat?: (google.maps.mapsplatformdatasets.v1.FileFormat|keyof typeof google.maps.mapsplatformdatasets.v1.FileFormat|null);
+                }
+
+                /** Represents a GcsSource. */
+                class GcsSource implements IGcsSource {
+
+                    /**
+                     * Constructs a new GcsSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IGcsSource);
+
+                    /** GcsSource inputUri. */
+                    public inputUri: string;
+
+                    /** GcsSource fileFormat. */
+                    public fileFormat: (google.maps.mapsplatformdatasets.v1.FileFormat|keyof typeof google.maps.mapsplatformdatasets.v1.FileFormat);
+
+                    /**
+                     * Creates a new GcsSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsSource instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IGcsSource): google.maps.mapsplatformdatasets.v1.GcsSource;
+
+                    /**
+                     * Encodes the specified GcsSource message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GcsSource.verify|verify} messages.
+                     * @param message GcsSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GcsSource.verify|verify} messages.
+                     * @param message GcsSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.GcsSource;
+
+                    /**
+                     * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.GcsSource;
+
+                    /**
+                     * Verifies a GcsSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.GcsSource;
+
+                    /**
+                     * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                     * @param message GcsSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.GcsSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** FileFormat enum. */
+                enum FileFormat {
+                    FILE_FORMAT_UNSPECIFIED = 0,
+                    FILE_FORMAT_GEOJSON = 1,
+                    FILE_FORMAT_KML = 2,
+                    FILE_FORMAT_CSV = 3
+                }
+
+                /** Properties of a Dataset. */
+                interface IDataset {
+
+                    /** Dataset name */
+                    name?: (string|null);
+
+                    /** Dataset displayName */
+                    displayName?: (string|null);
+
+                    /** Dataset description */
+                    description?: (string|null);
+
+                    /** Dataset versionId */
+                    versionId?: (string|null);
+
+                    /** Dataset usage */
+                    usage?: (google.maps.mapsplatformdatasets.v1.Usage[]|null);
+
+                    /** Dataset localFileSource */
+                    localFileSource?: (google.maps.mapsplatformdatasets.v1.ILocalFileSource|null);
+
+                    /** Dataset gcsSource */
+                    gcsSource?: (google.maps.mapsplatformdatasets.v1.IGcsSource|null);
+
+                    /** Dataset status */
+                    status?: (google.maps.mapsplatformdatasets.v1.IStatus|null);
+
+                    /** Dataset createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset versionCreateTime */
+                    versionCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset versionDescription */
+                    versionDescription?: (string|null);
+                }
+
+                /** Represents a Dataset. */
+                class Dataset implements IDataset {
+
+                    /**
+                     * Constructs a new Dataset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IDataset);
+
+                    /** Dataset name. */
+                    public name: string;
+
+                    /** Dataset displayName. */
+                    public displayName: string;
+
+                    /** Dataset description. */
+                    public description: string;
+
+                    /** Dataset versionId. */
+                    public versionId: string;
+
+                    /** Dataset usage. */
+                    public usage: google.maps.mapsplatformdatasets.v1.Usage[];
+
+                    /** Dataset localFileSource. */
+                    public localFileSource?: (google.maps.mapsplatformdatasets.v1.ILocalFileSource|null);
+
+                    /** Dataset gcsSource. */
+                    public gcsSource?: (google.maps.mapsplatformdatasets.v1.IGcsSource|null);
+
+                    /** Dataset status. */
+                    public status?: (google.maps.mapsplatformdatasets.v1.IStatus|null);
+
+                    /** Dataset createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset versionCreateTime. */
+                    public versionCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset versionDescription. */
+                    public versionDescription: string;
+
+                    /** Dataset dataSource. */
+                    public dataSource?: ("localFileSource"|"gcsSource");
+
+                    /**
+                     * Creates a new Dataset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dataset instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IDataset): google.maps.mapsplatformdatasets.v1.Dataset;
+
+                    /**
+                     * Encodes the specified Dataset message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Dataset.verify|verify} messages.
+                     * @param message Dataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Dataset.verify|verify} messages.
+                     * @param message Dataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dataset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.Dataset;
+
+                    /**
+                     * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.Dataset;
+
+                    /**
+                     * Verifies a Dataset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dataset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.Dataset;
+
+                    /**
+                     * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                     * @param message Dataset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.Dataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dataset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Dataset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Status. */
+                interface IStatus {
+
+                    /** Status state */
+                    state?: (google.maps.mapsplatformdatasets.v1.Status.State|keyof typeof google.maps.mapsplatformdatasets.v1.Status.State|null);
+
+                    /** Status errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents a Status. */
+                class Status implements IStatus {
+
+                    /**
+                     * Constructs a new Status.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IStatus);
+
+                    /** Status state. */
+                    public state: (google.maps.mapsplatformdatasets.v1.Status.State|keyof typeof google.maps.mapsplatformdatasets.v1.Status.State);
+
+                    /** Status errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new Status instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Status instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IStatus): google.maps.mapsplatformdatasets.v1.Status;
+
+                    /**
+                     * Encodes the specified Status message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Status.verify|verify} messages.
+                     * @param message Status message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Status message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Status.verify|verify} messages.
+                     * @param message Status message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Status message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Status
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.Status;
+
+                    /**
+                     * Decodes a Status message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Status
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.Status;
+
+                    /**
+                     * Verifies a Status message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Status
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.Status;
+
+                    /**
+                     * Creates a plain object from a Status message. Also converts values to other types if specified.
+                     * @param message Status
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Status to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Status
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Status {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STATE_IMPORTING = 1,
+                        STATE_IMPORT_SUCCEEDED = 2,
+                        STATE_IMPORT_FAILED = 3,
+                        STATE_DELETING = 4,
+                        STATE_DELETION_FAILED = 5,
+                        STATE_PROCESSING = 6,
+                        STATE_PROCESSING_FAILED = 7,
+                        STATE_NEEDS_REVIEW = 8,
+                        STATE_PUBLISHING = 9,
+                        STATE_PUBLISHING_FAILED = 10,
+                        STATE_COMPLETED = 11
+                    }
+                }
+
+                /** Usage enum. */
+                enum Usage {
+                    USAGE_UNSPECIFIED = 0,
+                    USAGE_DATA_DRIVEN_STYLING = 1
+                }
+
+                /** Properties of a CreateDatasetRequest. */
+                interface ICreateDatasetRequest {
+
+                    /** CreateDatasetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDatasetRequest dataset */
+                    dataset?: (google.maps.mapsplatformdatasets.v1.IDataset|null);
+                }
+
+                /** Represents a CreateDatasetRequest. */
+                class CreateDatasetRequest implements ICreateDatasetRequest {
+
+                    /**
+                     * Constructs a new CreateDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest);
+
+                    /** CreateDatasetRequest parent. */
+                    public parent: string;
+
+                    /** CreateDatasetRequest dataset. */
+                    public dataset?: (google.maps.mapsplatformdatasets.v1.IDataset|null);
+
+                    /**
+                     * Creates a new CreateDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatasetRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest): google.maps.mapsplatformdatasets.v1.CreateDatasetRequest;
+
+                    /**
+                     * Encodes the specified CreateDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.CreateDatasetRequest.verify|verify} messages.
+                     * @param message CreateDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.CreateDatasetRequest.verify|verify} messages.
+                     * @param message CreateDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.CreateDatasetRequest;
+
+                    /**
+                     * Decodes a CreateDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.CreateDatasetRequest;
+
+                    /**
+                     * Verifies a CreateDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.CreateDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDatasetRequest message. Also converts values to other types if specified.
+                     * @param message CreateDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.CreateDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDatasetMetadataRequest. */
+                interface IUpdateDatasetMetadataRequest {
+
+                    /** UpdateDatasetMetadataRequest dataset */
+                    dataset?: (google.maps.mapsplatformdatasets.v1.IDataset|null);
+
+                    /** UpdateDatasetMetadataRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDatasetMetadataRequest. */
+                class UpdateDatasetMetadataRequest implements IUpdateDatasetMetadataRequest {
+
+                    /**
+                     * Constructs a new UpdateDatasetMetadataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest);
+
+                    /** UpdateDatasetMetadataRequest dataset. */
+                    public dataset?: (google.maps.mapsplatformdatasets.v1.IDataset|null);
+
+                    /** UpdateDatasetMetadataRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDatasetMetadataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDatasetMetadataRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest): google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest;
+
+                    /**
+                     * Encodes the specified UpdateDatasetMetadataRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.verify|verify} messages.
+                     * @param message UpdateDatasetMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDatasetMetadataRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.verify|verify} messages.
+                     * @param message UpdateDatasetMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDatasetMetadataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDatasetMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest;
+
+                    /**
+                     * Decodes an UpdateDatasetMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDatasetMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest;
+
+                    /**
+                     * Verifies an UpdateDatasetMetadataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDatasetMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDatasetMetadataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDatasetMetadataRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDatasetMetadataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDatasetMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDatasetMetadataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDatasetRequest. */
+                interface IGetDatasetRequest {
+
+                    /** GetDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDatasetRequest. */
+                class GetDatasetRequest implements IGetDatasetRequest {
+
+                    /**
+                     * Constructs a new GetDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest);
+
+                    /** GetDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDatasetRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest): google.maps.mapsplatformdatasets.v1.GetDatasetRequest;
+
+                    /**
+                     * Encodes the specified GetDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GetDatasetRequest.verify|verify} messages.
+                     * @param message GetDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GetDatasetRequest.verify|verify} messages.
+                     * @param message GetDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.GetDatasetRequest;
+
+                    /**
+                     * Decodes a GetDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.GetDatasetRequest;
+
+                    /**
+                     * Verifies a GetDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.GetDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a GetDatasetRequest message. Also converts values to other types if specified.
+                     * @param message GetDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.GetDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatasetsRequest. */
+                interface IListDatasetsRequest {
+
+                    /** ListDatasetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDatasetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDatasetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDatasetsRequest. */
+                class ListDatasetsRequest implements IListDatasetsRequest {
+
+                    /**
+                     * Constructs a new ListDatasetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest);
+
+                    /** ListDatasetsRequest parent. */
+                    public parent: string;
+
+                    /** ListDatasetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDatasetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDatasetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetsRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest): google.maps.mapsplatformdatasets.v1.ListDatasetsRequest;
+
+                    /**
+                     * Encodes the specified ListDatasetsRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsRequest.verify|verify} messages.
+                     * @param message ListDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetsRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsRequest.verify|verify} messages.
+                     * @param message ListDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.ListDatasetsRequest;
+
+                    /**
+                     * Decodes a ListDatasetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.ListDatasetsRequest;
+
+                    /**
+                     * Verifies a ListDatasetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.ListDatasetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDatasetsRequest message. Also converts values to other types if specified.
+                     * @param message ListDatasetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.ListDatasetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatasetsResponse. */
+                interface IListDatasetsResponse {
+
+                    /** ListDatasetsResponse datasets */
+                    datasets?: (google.maps.mapsplatformdatasets.v1.IDataset[]|null);
+
+                    /** ListDatasetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDatasetsResponse. */
+                class ListDatasetsResponse implements IListDatasetsResponse {
+
+                    /**
+                     * Constructs a new ListDatasetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IListDatasetsResponse);
+
+                    /** ListDatasetsResponse datasets. */
+                    public datasets: google.maps.mapsplatformdatasets.v1.IDataset[];
+
+                    /** ListDatasetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDatasetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetsResponse instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IListDatasetsResponse): google.maps.mapsplatformdatasets.v1.ListDatasetsResponse;
+
+                    /**
+                     * Encodes the specified ListDatasetsResponse message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.verify|verify} messages.
+                     * @param message ListDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IListDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetsResponse message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.verify|verify} messages.
+                     * @param message ListDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IListDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.ListDatasetsResponse;
+
+                    /**
+                     * Decodes a ListDatasetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.ListDatasetsResponse;
+
+                    /**
+                     * Verifies a ListDatasetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.ListDatasetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDatasetsResponse message. Also converts values to other types if specified.
+                     * @param message ListDatasetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.ListDatasetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDatasetRequest. */
+                interface IDeleteDatasetRequest {
+
+                    /** DeleteDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDatasetRequest. */
+                class DeleteDatasetRequest implements IDeleteDatasetRequest {
+
+                    /**
+                     * Constructs a new DeleteDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest);
+
+                    /** DeleteDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDatasetRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest): google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest;
+
+                    /**
+                     * Encodes the specified DeleteDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest.verify|verify} messages.
+                     * @param message DeleteDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest.verify|verify} messages.
+                     * @param message DeleteDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest;
+
+                    /**
+                     * Decodes a DeleteDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest;
+
+                    /**
+                     * Verifies a DeleteDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDatasetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a MapsPlatformDatasets */
+                class MapsPlatformDatasets extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new MapsPlatformDatasets service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new MapsPlatformDatasets service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MapsPlatformDatasets;
+
+                    /**
+                     * Calls CreateDataset.
+                     * @param request CreateDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dataset
+                     */
+                    public createDataset(request: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.CreateDatasetCallback): void;
+
+                    /**
+                     * Calls CreateDataset.
+                     * @param request CreateDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataset(request: google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest): Promise<google.maps.mapsplatformdatasets.v1.Dataset>;
+
+                    /**
+                     * Calls UpdateDatasetMetadata.
+                     * @param request UpdateDatasetMetadataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dataset
+                     */
+                    public updateDatasetMetadata(request: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.UpdateDatasetMetadataCallback): void;
+
+                    /**
+                     * Calls UpdateDatasetMetadata.
+                     * @param request UpdateDatasetMetadataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDatasetMetadata(request: google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest): Promise<google.maps.mapsplatformdatasets.v1.Dataset>;
+
+                    /**
+                     * Calls GetDataset.
+                     * @param request GetDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dataset
+                     */
+                    public getDataset(request: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.GetDatasetCallback): void;
+
+                    /**
+                     * Calls GetDataset.
+                     * @param request GetDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataset(request: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest): Promise<google.maps.mapsplatformdatasets.v1.Dataset>;
+
+                    /**
+                     * Calls ListDatasets.
+                     * @param request ListDatasetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDatasetsResponse
+                     */
+                    public listDatasets(request: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.ListDatasetsCallback): void;
+
+                    /**
+                     * Calls ListDatasets.
+                     * @param request ListDatasetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDatasets(request: google.maps.mapsplatformdatasets.v1.IListDatasetsRequest): Promise<google.maps.mapsplatformdatasets.v1.ListDatasetsResponse>;
+
+                    /**
+                     * Calls DeleteDataset.
+                     * @param request DeleteDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataset(request: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.DeleteDatasetCallback): void;
+
+                    /**
+                     * Calls DeleteDataset.
+                     * @param request DeleteDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataset(request: google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace MapsPlatformDatasets {
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|createDataset}.
+                     * @param error Error, if any
+                     * @param [response] Dataset
+                     */
+                    type CreateDatasetCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.Dataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|updateDatasetMetadata}.
+                     * @param error Error, if any
+                     * @param [response] Dataset
+                     */
+                    type UpdateDatasetMetadataCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.Dataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|getDataset}.
+                     * @param error Error, if any
+                     * @param [response] Dataset
+                     */
+                    type GetDatasetCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.Dataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|listDatasets}.
+                     * @param error Error, if any
+                     * @param [response] ListDatasetsResponse
+                     */
+                    type ListDatasetsCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.ListDatasetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|deleteDataset}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDatasetCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+            }
+
             /** Namespace v1alpha. */
             namespace v1alpha {
 

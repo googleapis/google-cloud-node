@@ -5046,7 +5046,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 108,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -5102,7 +5102,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -5330,7 +5330,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 114,
                     "type": "FULL"
                 }
             ],
@@ -5386,7 +5386,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -5794,7 +5794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 108,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -5850,7 +5850,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -6214,7 +6214,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -7787,7 +7787,7 @@
             "regionTag": "aiplatform_v1beta1_generated_PredictionService_Explain_async",
             "title": "DatasetService explain Sample",
             "origin": "API_DEFINITION",
-            "description": " Perform an online explanation. If [deployed_model_id][google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id] is specified, the corresponding DeployModel must have [explanation_spec][google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec] populated. If [deployed_model_id][google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id] is not specified, all DeployedModels must have [explanation_spec][google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec] populated. Only deployed AutoML tabular Models have explanation_spec.",
+            "description": " Perform an online explanation. If [deployed_model_id][google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id] is specified, the corresponding DeployModel must have [explanation_spec][google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec] populated. If [deployed_model_id][google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id] is not specified, all DeployedModels must have [explanation_spec][google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec] populated.",
             "canonical": true,
             "file": "prediction_service.explain.js",
             "language": "JAVASCRIPT",
@@ -9923,7 +9923,7 @@
             "regionTag": "aiplatform_v1beta1_generated_VizierService_SuggestTrials_async",
             "title": "DatasetService suggestTrials Sample",
             "origin": "API_DEFINITION",
-            "description": " Adds one or more Trials to a Study, with parameter values suggested by Vertex AI Vizier. Returns a long-running operation associated with the generation of Trial suggestions. When this long-running operation succeeds, it will contain a [SuggestTrialsResponse][google.cloud.ml.v1.SuggestTrialsResponse].",
+            "description": " Adds one or more Trials to a Study, with parameter values suggested by Vertex AI Vizier. Returns a long-running operation associated with the generation of Trial suggestions. When this long-running operation succeeds, it will contain a [SuggestTrialsResponse][google.cloud.aiplatform.v1beta1.SuggestTrialsResponse].",
             "canonical": true,
             "file": "vizier_service.suggest_trials.js",
             "language": "JAVASCRIPT",

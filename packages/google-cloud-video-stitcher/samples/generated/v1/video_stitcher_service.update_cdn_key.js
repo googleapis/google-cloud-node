@@ -53,7 +53,8 @@ function main(cdnKey, updateMask) {
     };
 
     // Run request
-    const response = await stitcherClient.updateCdnKey(request);
+    const [operation] = await stitcherClient.updateCdnKey(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 

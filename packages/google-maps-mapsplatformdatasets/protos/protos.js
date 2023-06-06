@@ -57,6 +57,3023 @@
                  */
                 var mapsplatformdatasets = {};
     
+                mapsplatformdatasets.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.maps.mapsplatformdatasets
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.LocalFileSource = (function() {
+    
+                        /**
+                         * Properties of a LocalFileSource.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface ILocalFileSource
+                         * @property {string|null} [filename] LocalFileSource filename
+                         * @property {google.maps.mapsplatformdatasets.v1.FileFormat|null} [fileFormat] LocalFileSource fileFormat
+                         */
+    
+                        /**
+                         * Constructs a new LocalFileSource.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a LocalFileSource.
+                         * @implements ILocalFileSource
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.ILocalFileSource=} [properties] Properties to set
+                         */
+                        function LocalFileSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocalFileSource filename.
+                         * @member {string} filename
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @instance
+                         */
+                        LocalFileSource.prototype.filename = "";
+    
+                        /**
+                         * LocalFileSource fileFormat.
+                         * @member {google.maps.mapsplatformdatasets.v1.FileFormat} fileFormat
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @instance
+                         */
+                        LocalFileSource.prototype.fileFormat = 0;
+    
+                        /**
+                         * Creates a new LocalFileSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ILocalFileSource=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.LocalFileSource} LocalFileSource instance
+                         */
+                        LocalFileSource.create = function create(properties) {
+                            return new LocalFileSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocalFileSource message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.LocalFileSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ILocalFileSource} message LocalFileSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocalFileSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
+                            if (message.fileFormat != null && Object.hasOwnProperty.call(message, "fileFormat"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.fileFormat);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocalFileSource message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.LocalFileSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ILocalFileSource} message LocalFileSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocalFileSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocalFileSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.LocalFileSource} LocalFileSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocalFileSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.LocalFileSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.filename = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileFormat = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocalFileSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.LocalFileSource} LocalFileSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocalFileSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocalFileSource message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocalFileSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filename != null && message.hasOwnProperty("filename"))
+                                if (!$util.isString(message.filename))
+                                    return "filename: string expected";
+                            if (message.fileFormat != null && message.hasOwnProperty("fileFormat"))
+                                switch (message.fileFormat) {
+                                default:
+                                    return "fileFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocalFileSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.LocalFileSource} LocalFileSource
+                         */
+                        LocalFileSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.LocalFileSource)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.LocalFileSource();
+                            if (object.filename != null)
+                                message.filename = String(object.filename);
+                            switch (object.fileFormat) {
+                            default:
+                                if (typeof object.fileFormat === "number") {
+                                    message.fileFormat = object.fileFormat;
+                                    break;
+                                }
+                                break;
+                            case "FILE_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.fileFormat = 0;
+                                break;
+                            case "FILE_FORMAT_GEOJSON":
+                            case 1:
+                                message.fileFormat = 1;
+                                break;
+                            case "FILE_FORMAT_KML":
+                            case 2:
+                                message.fileFormat = 2;
+                                break;
+                            case "FILE_FORMAT_CSV":
+                            case 3:
+                                message.fileFormat = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocalFileSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.LocalFileSource} message LocalFileSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocalFileSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.filename = "";
+                                object.fileFormat = options.enums === String ? "FILE_FORMAT_UNSPECIFIED" : 0;
+                            }
+                            if (message.filename != null && message.hasOwnProperty("filename"))
+                                object.filename = message.filename;
+                            if (message.fileFormat != null && message.hasOwnProperty("fileFormat"))
+                                object.fileFormat = options.enums === String ? $root.google.maps.mapsplatformdatasets.v1.FileFormat[message.fileFormat] === undefined ? message.fileFormat : $root.google.maps.mapsplatformdatasets.v1.FileFormat[message.fileFormat] : message.fileFormat;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocalFileSource to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocalFileSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocalFileSource
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.LocalFileSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocalFileSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.LocalFileSource";
+                        };
+    
+                        return LocalFileSource;
+                    })();
+    
+                    v1.GcsSource = (function() {
+    
+                        /**
+                         * Properties of a GcsSource.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IGcsSource
+                         * @property {string|null} [inputUri] GcsSource inputUri
+                         * @property {google.maps.mapsplatformdatasets.v1.FileFormat|null} [fileFormat] GcsSource fileFormat
+                         */
+    
+                        /**
+                         * Constructs a new GcsSource.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a GcsSource.
+                         * @implements IGcsSource
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IGcsSource=} [properties] Properties to set
+                         */
+                        function GcsSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsSource inputUri.
+                         * @member {string} inputUri
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @instance
+                         */
+                        GcsSource.prototype.inputUri = "";
+    
+                        /**
+                         * GcsSource fileFormat.
+                         * @member {google.maps.mapsplatformdatasets.v1.FileFormat} fileFormat
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @instance
+                         */
+                        GcsSource.prototype.fileFormat = 0;
+    
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGcsSource=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.GcsSource} GcsSource instance
+                         */
+                        GcsSource.create = function create(properties) {
+                            return new GcsSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GcsSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGcsSource} message GcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inputUri != null && Object.hasOwnProperty.call(message, "inputUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUri);
+                            if (message.fileFormat != null && Object.hasOwnProperty.call(message, "fileFormat"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.fileFormat);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GcsSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGcsSource} message GcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.GcsSource} GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.GcsSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inputUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileFormat = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.GcsSource} GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsSource message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
+                                if (!$util.isString(message.inputUri))
+                                    return "inputUri: string expected";
+                            if (message.fileFormat != null && message.hasOwnProperty("fileFormat"))
+                                switch (message.fileFormat) {
+                                default:
+                                    return "fileFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.GcsSource} GcsSource
+                         */
+                        GcsSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.GcsSource)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.GcsSource();
+                            if (object.inputUri != null)
+                                message.inputUri = String(object.inputUri);
+                            switch (object.fileFormat) {
+                            default:
+                                if (typeof object.fileFormat === "number") {
+                                    message.fileFormat = object.fileFormat;
+                                    break;
+                                }
+                                break;
+                            case "FILE_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.fileFormat = 0;
+                                break;
+                            case "FILE_FORMAT_GEOJSON":
+                            case 1:
+                                message.fileFormat = 1;
+                                break;
+                            case "FILE_FORMAT_KML":
+                            case 2:
+                                message.fileFormat = 2;
+                                break;
+                            case "FILE_FORMAT_CSV":
+                            case 3:
+                                message.fileFormat = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.GcsSource} message GcsSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.inputUri = "";
+                                object.fileFormat = options.enums === String ? "FILE_FORMAT_UNSPECIFIED" : 0;
+                            }
+                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
+                                object.inputUri = message.inputUri;
+                            if (message.fileFormat != null && message.hasOwnProperty("fileFormat"))
+                                object.fileFormat = options.enums === String ? $root.google.maps.mapsplatformdatasets.v1.FileFormat[message.fileFormat] === undefined ? message.fileFormat : $root.google.maps.mapsplatformdatasets.v1.FileFormat[message.fileFormat] : message.fileFormat;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GcsSource
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.GcsSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GcsSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.GcsSource";
+                        };
+    
+                        return GcsSource;
+                    })();
+    
+                    /**
+                     * FileFormat enum.
+                     * @name google.maps.mapsplatformdatasets.v1.FileFormat
+                     * @enum {number}
+                     * @property {number} FILE_FORMAT_UNSPECIFIED=0 FILE_FORMAT_UNSPECIFIED value
+                     * @property {number} FILE_FORMAT_GEOJSON=1 FILE_FORMAT_GEOJSON value
+                     * @property {number} FILE_FORMAT_KML=2 FILE_FORMAT_KML value
+                     * @property {number} FILE_FORMAT_CSV=3 FILE_FORMAT_CSV value
+                     */
+                    v1.FileFormat = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FILE_FORMAT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FILE_FORMAT_GEOJSON"] = 1;
+                        values[valuesById[2] = "FILE_FORMAT_KML"] = 2;
+                        values[valuesById[3] = "FILE_FORMAT_CSV"] = 3;
+                        return values;
+                    })();
+    
+                    v1.Dataset = (function() {
+    
+                        /**
+                         * Properties of a Dataset.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IDataset
+                         * @property {string|null} [name] Dataset name
+                         * @property {string|null} [displayName] Dataset displayName
+                         * @property {string|null} [description] Dataset description
+                         * @property {string|null} [versionId] Dataset versionId
+                         * @property {Array.<google.maps.mapsplatformdatasets.v1.Usage>|null} [usage] Dataset usage
+                         * @property {google.maps.mapsplatformdatasets.v1.ILocalFileSource|null} [localFileSource] Dataset localFileSource
+                         * @property {google.maps.mapsplatformdatasets.v1.IGcsSource|null} [gcsSource] Dataset gcsSource
+                         * @property {google.maps.mapsplatformdatasets.v1.IStatus|null} [status] Dataset status
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Dataset createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Dataset updateTime
+                         * @property {google.protobuf.ITimestamp|null} [versionCreateTime] Dataset versionCreateTime
+                         * @property {string|null} [versionDescription] Dataset versionDescription
+                         */
+    
+                        /**
+                         * Constructs a new Dataset.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a Dataset.
+                         * @implements IDataset
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IDataset=} [properties] Properties to set
+                         */
+                        function Dataset(properties) {
+                            this.usage = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Dataset name.
+                         * @member {string} name
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.name = "";
+    
+                        /**
+                         * Dataset displayName.
+                         * @member {string} displayName
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.displayName = "";
+    
+                        /**
+                         * Dataset description.
+                         * @member {string} description
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.description = "";
+    
+                        /**
+                         * Dataset versionId.
+                         * @member {string} versionId
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.versionId = "";
+    
+                        /**
+                         * Dataset usage.
+                         * @member {Array.<google.maps.mapsplatformdatasets.v1.Usage>} usage
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.usage = $util.emptyArray;
+    
+                        /**
+                         * Dataset localFileSource.
+                         * @member {google.maps.mapsplatformdatasets.v1.ILocalFileSource|null|undefined} localFileSource
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.localFileSource = null;
+    
+                        /**
+                         * Dataset gcsSource.
+                         * @member {google.maps.mapsplatformdatasets.v1.IGcsSource|null|undefined} gcsSource
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.gcsSource = null;
+    
+                        /**
+                         * Dataset status.
+                         * @member {google.maps.mapsplatformdatasets.v1.IStatus|null|undefined} status
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.status = null;
+    
+                        /**
+                         * Dataset createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.createTime = null;
+    
+                        /**
+                         * Dataset updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.updateTime = null;
+    
+                        /**
+                         * Dataset versionCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} versionCreateTime
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.versionCreateTime = null;
+    
+                        /**
+                         * Dataset versionDescription.
+                         * @member {string} versionDescription
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.versionDescription = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Dataset dataSource.
+                         * @member {"localFileSource"|"gcsSource"|undefined} dataSource
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         */
+                        Object.defineProperty(Dataset.prototype, "dataSource", {
+                            get: $util.oneOfGetter($oneOfFields = ["localFileSource", "gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Dataset instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDataset=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.Dataset} Dataset instance
+                         */
+                        Dataset.create = function create(properties) {
+                            return new Dataset(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Dataset.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.versionId != null && Object.hasOwnProperty.call(message, "versionId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.versionId);
+                            if (message.usage != null && message.usage.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.usage.length; ++i)
+                                    writer.int32(message.usage[i]);
+                                writer.ldelim();
+                            }
+                            if (message.localFileSource != null && Object.hasOwnProperty.call(message, "localFileSource"))
+                                $root.google.maps.mapsplatformdatasets.v1.LocalFileSource.encode(message.localFileSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.maps.mapsplatformdatasets.v1.GcsSource.encode(message.gcsSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.versionCreateTime != null && Object.hasOwnProperty.call(message, "versionCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.versionCreateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.versionDescription != null && Object.hasOwnProperty.call(message, "versionDescription"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.versionDescription);
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                $root.google.maps.mapsplatformdatasets.v1.Status.encode(message.status, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Dataset.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.Dataset();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.versionId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.usage && message.usage.length))
+                                            message.usage = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.usage.push(reader.int32());
+                                        } else
+                                            message.usage.push(reader.int32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.localFileSource = $root.google.maps.mapsplatformdatasets.v1.LocalFileSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.gcsSource = $root.google.maps.mapsplatformdatasets.v1.GcsSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.status = $root.google.maps.mapsplatformdatasets.v1.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.versionCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.versionDescription = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Dataset message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Dataset.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                if (!$util.isString(message.versionId))
+                                    return "versionId: string expected";
+                            if (message.usage != null && message.hasOwnProperty("usage")) {
+                                if (!Array.isArray(message.usage))
+                                    return "usage: array expected";
+                                for (var i = 0; i < message.usage.length; ++i)
+                                    switch (message.usage[i]) {
+                                    default:
+                                        return "usage: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.localFileSource != null && message.hasOwnProperty("localFileSource")) {
+                                properties.dataSource = 1;
+                                {
+                                    var error = $root.google.maps.mapsplatformdatasets.v1.LocalFileSource.verify(message.localFileSource);
+                                    if (error)
+                                        return "localFileSource." + error;
+                                }
+                            }
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                if (properties.dataSource === 1)
+                                    return "dataSource: multiple values";
+                                properties.dataSource = 1;
+                                {
+                                    var error = $root.google.maps.mapsplatformdatasets.v1.GcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.maps.mapsplatformdatasets.v1.Status.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.versionCreateTime != null && message.hasOwnProperty("versionCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.versionCreateTime);
+                                if (error)
+                                    return "versionCreateTime." + error;
+                            }
+                            if (message.versionDescription != null && message.hasOwnProperty("versionDescription"))
+                                if (!$util.isString(message.versionDescription))
+                                    return "versionDescription: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.Dataset} Dataset
+                         */
+                        Dataset.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.Dataset)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.Dataset();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.versionId != null)
+                                message.versionId = String(object.versionId);
+                            if (object.usage) {
+                                if (!Array.isArray(object.usage))
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.usage: array expected");
+                                message.usage = [];
+                                for (var i = 0; i < object.usage.length; ++i)
+                                    switch (object.usage[i]) {
+                                    default:
+                                        if (typeof object.usage[i] === "number") {
+                                            message.usage[i] = object.usage[i];
+                                            break;
+                                        }
+                                    case "USAGE_UNSPECIFIED":
+                                    case 0:
+                                        message.usage[i] = 0;
+                                        break;
+                                    case "USAGE_DATA_DRIVEN_STYLING":
+                                    case 1:
+                                        message.usage[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.localFileSource != null) {
+                                if (typeof object.localFileSource !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.localFileSource: object expected");
+                                message.localFileSource = $root.google.maps.mapsplatformdatasets.v1.LocalFileSource.fromObject(object.localFileSource);
+                            }
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.gcsSource: object expected");
+                                message.gcsSource = $root.google.maps.mapsplatformdatasets.v1.GcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.status: object expected");
+                                message.status = $root.google.maps.mapsplatformdatasets.v1.Status.fromObject(object.status);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.versionCreateTime != null) {
+                                if (typeof object.versionCreateTime !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.Dataset.versionCreateTime: object expected");
+                                message.versionCreateTime = $root.google.protobuf.Timestamp.fromObject(object.versionCreateTime);
+                            }
+                            if (object.versionDescription != null)
+                                message.versionDescription = String(object.versionDescription);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.Dataset} message Dataset
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Dataset.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.usage = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.versionId = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.versionCreateTime = null;
+                                object.versionDescription = "";
+                                object.status = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                object.versionId = message.versionId;
+                            if (message.usage && message.usage.length) {
+                                object.usage = [];
+                                for (var j = 0; j < message.usage.length; ++j)
+                                    object.usage[j] = options.enums === String ? $root.google.maps.mapsplatformdatasets.v1.Usage[message.usage[j]] === undefined ? message.usage[j] : $root.google.maps.mapsplatformdatasets.v1.Usage[message.usage[j]] : message.usage[j];
+                            }
+                            if (message.localFileSource != null && message.hasOwnProperty("localFileSource")) {
+                                object.localFileSource = $root.google.maps.mapsplatformdatasets.v1.LocalFileSource.toObject(message.localFileSource, options);
+                                if (options.oneofs)
+                                    object.dataSource = "localFileSource";
+                            }
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.maps.mapsplatformdatasets.v1.GcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.dataSource = "gcsSource";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.versionCreateTime != null && message.hasOwnProperty("versionCreateTime"))
+                                object.versionCreateTime = $root.google.protobuf.Timestamp.toObject(message.versionCreateTime, options);
+                            if (message.versionDescription != null && message.hasOwnProperty("versionDescription"))
+                                object.versionDescription = message.versionDescription;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.maps.mapsplatformdatasets.v1.Status.toObject(message.status, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Dataset to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Dataset.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Dataset
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.Dataset
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Dataset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.Dataset";
+                        };
+    
+                        return Dataset;
+                    })();
+    
+                    v1.Status = (function() {
+    
+                        /**
+                         * Properties of a Status.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IStatus
+                         * @property {google.maps.mapsplatformdatasets.v1.Status.State|null} [state] Status state
+                         * @property {string|null} [errorMessage] Status errorMessage
+                         */
+    
+                        /**
+                         * Constructs a new Status.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a Status.
+                         * @implements IStatus
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IStatus=} [properties] Properties to set
+                         */
+                        function Status(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Status state.
+                         * @member {google.maps.mapsplatformdatasets.v1.Status.State} state
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @instance
+                         */
+                        Status.prototype.state = 0;
+    
+                        /**
+                         * Status errorMessage.
+                         * @member {string} errorMessage
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @instance
+                         */
+                        Status.prototype.errorMessage = "";
+    
+                        /**
+                         * Creates a new Status instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IStatus=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.Status} Status instance
+                         */
+                        Status.create = function create(properties) {
+                            return new Status(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Status message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Status.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IStatus} message Status message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Status.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Status message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.Status.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IStatus} message Status message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Status.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Status message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.Status} Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Status.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.Status();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.errorMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Status message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.Status} Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Status.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Status message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Status.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                    break;
+                                }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                if (!$util.isString(message.errorMessage))
+                                    return "errorMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.Status} Status
+                         */
+                        Status.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.Status)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.Status();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STATE_IMPORTING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "STATE_IMPORT_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "STATE_IMPORT_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "STATE_DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "STATE_DELETION_FAILED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "STATE_PROCESSING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "STATE_PROCESSING_FAILED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "STATE_NEEDS_REVIEW":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "STATE_PUBLISHING":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "STATE_PUBLISHING_FAILED":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            case "STATE_COMPLETED":
+                            case 11:
+                                message.state = 11;
+                                break;
+                            }
+                            if (object.errorMessage != null)
+                                message.errorMessage = String(object.errorMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Status message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.Status} message Status
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Status.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.errorMessage = "";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.maps.mapsplatformdatasets.v1.Status.State[message.state] === undefined ? message.state : $root.google.maps.mapsplatformdatasets.v1.Status.State[message.state] : message.state;
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                object.errorMessage = message.errorMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Status to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Status.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Status
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.Status
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.Status";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.maps.mapsplatformdatasets.v1.Status.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STATE_IMPORTING=1 STATE_IMPORTING value
+                         * @property {number} STATE_IMPORT_SUCCEEDED=2 STATE_IMPORT_SUCCEEDED value
+                         * @property {number} STATE_IMPORT_FAILED=3 STATE_IMPORT_FAILED value
+                         * @property {number} STATE_DELETING=4 STATE_DELETING value
+                         * @property {number} STATE_DELETION_FAILED=5 STATE_DELETION_FAILED value
+                         * @property {number} STATE_PROCESSING=6 STATE_PROCESSING value
+                         * @property {number} STATE_PROCESSING_FAILED=7 STATE_PROCESSING_FAILED value
+                         * @property {number} STATE_NEEDS_REVIEW=8 STATE_NEEDS_REVIEW value
+                         * @property {number} STATE_PUBLISHING=9 STATE_PUBLISHING value
+                         * @property {number} STATE_PUBLISHING_FAILED=10 STATE_PUBLISHING_FAILED value
+                         * @property {number} STATE_COMPLETED=11 STATE_COMPLETED value
+                         */
+                        Status.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STATE_IMPORTING"] = 1;
+                            values[valuesById[2] = "STATE_IMPORT_SUCCEEDED"] = 2;
+                            values[valuesById[3] = "STATE_IMPORT_FAILED"] = 3;
+                            values[valuesById[4] = "STATE_DELETING"] = 4;
+                            values[valuesById[5] = "STATE_DELETION_FAILED"] = 5;
+                            values[valuesById[6] = "STATE_PROCESSING"] = 6;
+                            values[valuesById[7] = "STATE_PROCESSING_FAILED"] = 7;
+                            values[valuesById[8] = "STATE_NEEDS_REVIEW"] = 8;
+                            values[valuesById[9] = "STATE_PUBLISHING"] = 9;
+                            values[valuesById[10] = "STATE_PUBLISHING_FAILED"] = 10;
+                            values[valuesById[11] = "STATE_COMPLETED"] = 11;
+                            return values;
+                        })();
+    
+                        return Status;
+                    })();
+    
+                    /**
+                     * Usage enum.
+                     * @name google.maps.mapsplatformdatasets.v1.Usage
+                     * @enum {number}
+                     * @property {number} USAGE_UNSPECIFIED=0 USAGE_UNSPECIFIED value
+                     * @property {number} USAGE_DATA_DRIVEN_STYLING=1 USAGE_DATA_DRIVEN_STYLING value
+                     */
+                    v1.Usage = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "USAGE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "USAGE_DATA_DRIVEN_STYLING"] = 1;
+                        return values;
+                    })();
+    
+                    v1.CreateDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface ICreateDatasetRequest
+                         * @property {string|null} [parent] CreateDatasetRequest parent
+                         * @property {google.maps.mapsplatformdatasets.v1.IDataset|null} [dataset] CreateDatasetRequest dataset
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a CreateDatasetRequest.
+                         * @implements ICreateDatasetRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest=} [properties] Properties to set
+                         */
+                        function CreateDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatasetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatasetRequest dataset.
+                         * @member {google.maps.mapsplatformdatasets.v1.IDataset|null|undefined} dataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.dataset = null;
+    
+                        /**
+                         * Creates a new CreateDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.CreateDatasetRequest} CreateDatasetRequest instance
+                         */
+                        CreateDatasetRequest.create = function create(properties) {
+                            return new CreateDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.CreateDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                $root.google.maps.mapsplatformdatasets.v1.Dataset.encode(message.dataset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.CreateDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatasetRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset")) {
+                                var error = $root.google.maps.mapsplatformdatasets.v1.Dataset.verify(message.dataset);
+                                if (error)
+                                    return "dataset." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.CreateDatasetRequest} CreateDatasetRequest
+                         */
+                        CreateDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataset != null) {
+                                if (typeof object.dataset !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.CreateDatasetRequest.dataset: object expected");
+                                message.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.fromObject(object.dataset);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.CreateDatasetRequest} message CreateDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataset = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.toObject(message.dataset, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.CreateDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.CreateDatasetRequest";
+                        };
+    
+                        return CreateDatasetRequest;
+                    })();
+    
+                    v1.UpdateDatasetMetadataRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDatasetMetadataRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IUpdateDatasetMetadataRequest
+                         * @property {google.maps.mapsplatformdatasets.v1.IDataset|null} [dataset] UpdateDatasetMetadataRequest dataset
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDatasetMetadataRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDatasetMetadataRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents an UpdateDatasetMetadataRequest.
+                         * @implements IUpdateDatasetMetadataRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest=} [properties] Properties to set
+                         */
+                        function UpdateDatasetMetadataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDatasetMetadataRequest dataset.
+                         * @member {google.maps.mapsplatformdatasets.v1.IDataset|null|undefined} dataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @instance
+                         */
+                        UpdateDatasetMetadataRequest.prototype.dataset = null;
+    
+                        /**
+                         * UpdateDatasetMetadataRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @instance
+                         */
+                        UpdateDatasetMetadataRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDatasetMetadataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest} UpdateDatasetMetadataRequest instance
+                         */
+                        UpdateDatasetMetadataRequest.create = function create(properties) {
+                            return new UpdateDatasetMetadataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetMetadataRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest} message UpdateDatasetMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetMetadataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                $root.google.maps.mapsplatformdatasets.v1.Dataset.encode(message.dataset, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetMetadataRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest} message UpdateDatasetMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetMetadataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest} UpdateDatasetMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetMetadataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetMetadataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest} UpdateDatasetMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDatasetMetadataRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDatasetMetadataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset")) {
+                                var error = $root.google.maps.mapsplatformdatasets.v1.Dataset.verify(message.dataset);
+                                if (error)
+                                    return "dataset." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDatasetMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest} UpdateDatasetMetadataRequest
+                         */
+                        UpdateDatasetMetadataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest();
+                            if (object.dataset != null) {
+                                if (typeof object.dataset !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.dataset: object expected");
+                                message.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.fromObject(object.dataset);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDatasetMetadataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest} message UpdateDatasetMetadataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDatasetMetadataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = null;
+                                object.updateMask = null;
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = $root.google.maps.mapsplatformdatasets.v1.Dataset.toObject(message.dataset, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDatasetMetadataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDatasetMetadataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDatasetMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDatasetMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest";
+                        };
+    
+                        return UpdateDatasetMetadataRequest;
+                    })();
+    
+                    v1.GetDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IGetDatasetRequest
+                         * @property {string|null} [name] GetDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a GetDatasetRequest.
+                         * @implements IGetDatasetRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest=} [properties] Properties to set
+                         */
+                        function GetDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @instance
+                         */
+                        GetDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.GetDatasetRequest} GetDatasetRequest instance
+                         */
+                        GetDatasetRequest.create = function create(properties) {
+                            return new GetDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GetDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.GetDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.GetDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDatasetRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.GetDatasetRequest} GetDatasetRequest
+                         */
+                        GetDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.GetDatasetRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.GetDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.GetDatasetRequest} message GetDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.GetDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.GetDatasetRequest";
+                        };
+    
+                        return GetDatasetRequest;
+                    })();
+    
+                    v1.ListDatasetsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IListDatasetsRequest
+                         * @property {string|null} [parent] ListDatasetsRequest parent
+                         * @property {number|null} [pageSize] ListDatasetsRequest pageSize
+                         * @property {string|null} [pageToken] ListDatasetsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a ListDatasetsRequest.
+                         * @implements IListDatasetsRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest=} [properties] Properties to set
+                         */
+                        function ListDatasetsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDatasetsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDatasetsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsRequest} ListDatasetsRequest instance
+                         */
+                        ListDatasetsRequest.create = function create(properties) {
+                            return new ListDatasetsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsRequest} ListDatasetsRequest
+                         */
+                        ListDatasetsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ListDatasetsRequest} message ListDatasetsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetsRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.ListDatasetsRequest";
+                        };
+    
+                        return ListDatasetsRequest;
+                    })();
+    
+                    v1.ListDatasetsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsResponse.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IListDatasetsResponse
+                         * @property {Array.<google.maps.mapsplatformdatasets.v1.IDataset>|null} [datasets] ListDatasetsResponse datasets
+                         * @property {string|null} [nextPageToken] ListDatasetsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsResponse.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a ListDatasetsResponse.
+                         * @implements IListDatasetsResponse
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsResponse=} [properties] Properties to set
+                         */
+                        function ListDatasetsResponse(properties) {
+                            this.datasets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsResponse datasets.
+                         * @member {Array.<google.maps.mapsplatformdatasets.v1.IDataset>} datasets
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.datasets = $util.emptyArray;
+    
+                        /**
+                         * ListDatasetsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsResponse=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} ListDatasetsResponse instance
+                         */
+                        ListDatasetsResponse.create = function create(properties) {
+                            return new ListDatasetsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasets != null && message.datasets.length)
+                                for (var i = 0; i < message.datasets.length; ++i)
+                                    $root.google.maps.mapsplatformdatasets.v1.Dataset.encode(message.datasets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.ListDatasetsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.datasets && message.datasets.length))
+                                            message.datasets = [];
+                                        message.datasets.push($root.google.maps.mapsplatformdatasets.v1.Dataset.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsResponse message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasets != null && message.hasOwnProperty("datasets")) {
+                                if (!Array.isArray(message.datasets))
+                                    return "datasets: array expected";
+                                for (var i = 0; i < message.datasets.length; ++i) {
+                                    var error = $root.google.maps.mapsplatformdatasets.v1.Dataset.verify(message.datasets[i]);
+                                    if (error)
+                                        return "datasets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} ListDatasetsResponse
+                         */
+                        ListDatasetsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.ListDatasetsResponse)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.ListDatasetsResponse();
+                            if (object.datasets) {
+                                if (!Array.isArray(object.datasets))
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.datasets: array expected");
+                                message.datasets = [];
+                                for (var i = 0; i < object.datasets.length; ++i) {
+                                    if (typeof object.datasets[i] !== "object")
+                                        throw TypeError(".google.maps.mapsplatformdatasets.v1.ListDatasetsResponse.datasets: object expected");
+                                    message.datasets[i] = $root.google.maps.mapsplatformdatasets.v1.Dataset.fromObject(object.datasets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} message ListDatasetsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.datasets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.datasets && message.datasets.length) {
+                                object.datasets = [];
+                                for (var j = 0; j < message.datasets.length; ++j)
+                                    object.datasets[j] = $root.google.maps.mapsplatformdatasets.v1.Dataset.toObject(message.datasets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetsResponse
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.ListDatasetsResponse";
+                        };
+    
+                        return ListDatasetsResponse;
+                    })();
+    
+                    v1.DeleteDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IDeleteDatasetRequest
+                         * @property {string|null} [name] DeleteDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDatasetRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a DeleteDatasetRequest.
+                         * @implements IDeleteDatasetRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest=} [properties] Properties to set
+                         */
+                        function DeleteDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @instance
+                         */
+                        DeleteDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest} DeleteDatasetRequest instance
+                         */
+                        DeleteDatasetRequest.create = function create(properties) {
+                            return new DeleteDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDatasetRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         */
+                        DeleteDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest} message DeleteDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest";
+                        };
+    
+                        return DeleteDatasetRequest;
+                    })();
+    
+                    v1.MapsPlatformDatasets = (function() {
+    
+                        /**
+                         * Constructs a new MapsPlatformDatasets service.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a MapsPlatformDatasets
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function MapsPlatformDatasets(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (MapsPlatformDatasets.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = MapsPlatformDatasets;
+    
+                        /**
+                         * Creates new MapsPlatformDatasets service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {MapsPlatformDatasets} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        MapsPlatformDatasets.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|createDataset}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef CreateDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.mapsplatformdatasets.v1.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.CreateDatasetCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.createDataset = function createDataset(request, callback) {
+                            return this.rpcCall(createDataset, $root.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest, $root.google.maps.mapsplatformdatasets.v1.Dataset, request, callback);
+                        }, "name", { value: "CreateDataset" });
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @returns {Promise<google.maps.mapsplatformdatasets.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|updateDatasetMetadata}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef UpdateDatasetMetadataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.mapsplatformdatasets.v1.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls UpdateDatasetMetadata.
+                         * @function updateDatasetMetadata
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest} request UpdateDatasetMetadataRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.UpdateDatasetMetadataCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.updateDatasetMetadata = function updateDatasetMetadata(request, callback) {
+                            return this.rpcCall(updateDatasetMetadata, $root.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest, $root.google.maps.mapsplatformdatasets.v1.Dataset, request, callback);
+                        }, "name", { value: "UpdateDatasetMetadata" });
+    
+                        /**
+                         * Calls UpdateDatasetMetadata.
+                         * @function updateDatasetMetadata
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest} request UpdateDatasetMetadataRequest message or plain object
+                         * @returns {Promise<google.maps.mapsplatformdatasets.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|getDataset}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef GetDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.mapsplatformdatasets.v1.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.GetDatasetCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.getDataset = function getDataset(request, callback) {
+                            return this.rpcCall(getDataset, $root.google.maps.mapsplatformdatasets.v1.GetDatasetRequest, $root.google.maps.mapsplatformdatasets.v1.Dataset, request, callback);
+                        }, "name", { value: "GetDataset" });
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @returns {Promise<google.maps.mapsplatformdatasets.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|listDatasets}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef ListDatasetsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.mapsplatformdatasets.v1.ListDatasetsResponse} [response] ListDatasetsResponse
+                         */
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.ListDatasetsCallback} callback Node-style callback called with the error, if any, and ListDatasetsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.listDatasets = function listDatasets(request, callback) {
+                            return this.rpcCall(listDatasets, $root.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest, $root.google.maps.mapsplatformdatasets.v1.ListDatasetsResponse, request, callback);
+                        }, "name", { value: "ListDatasets" });
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @returns {Promise<google.maps.mapsplatformdatasets.v1.ListDatasetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|deleteDataset}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef DeleteDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.DeleteDatasetCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.deleteDataset = function deleteDataset(request, callback) {
+                            return this.rpcCall(deleteDataset, $root.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataset" });
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        return MapsPlatformDatasets;
+                    })();
+    
+                    return v1;
+                })();
+    
                 mapsplatformdatasets.v1alpha = (function() {
     
                     /**

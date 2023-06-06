@@ -504,6 +504,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public listUsableSubnetworks(request: google.container.v1.IListUsableSubnetworksRequest): Promise<google.container.v1.ListUsableSubnetworksResponse>;
+
+                /**
+                 * Calls CheckAutopilotCompatibility.
+                 * @param request CheckAutopilotCompatibilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and CheckAutopilotCompatibilityResponse
+                 */
+                public checkAutopilotCompatibility(request: google.container.v1.ICheckAutopilotCompatibilityRequest, callback: google.container.v1.ClusterManager.CheckAutopilotCompatibilityCallback): void;
+
+                /**
+                 * Calls CheckAutopilotCompatibility.
+                 * @param request CheckAutopilotCompatibilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public checkAutopilotCompatibility(request: google.container.v1.ICheckAutopilotCompatibilityRequest): Promise<google.container.v1.CheckAutopilotCompatibilityResponse>;
             }
 
             namespace ClusterManager {
@@ -738,6 +752,13 @@ export namespace google {
                  * @param [response] ListUsableSubnetworksResponse
                  */
                 type ListUsableSubnetworksCallback = (error: (Error|null), response?: google.container.v1.ListUsableSubnetworksResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.container.v1.ClusterManager|checkAutopilotCompatibility}.
+                 * @param error Error, if any
+                 * @param [response] CheckAutopilotCompatibilityResponse
+                 */
+                type CheckAutopilotCompatibilityCallback = (error: (Error|null), response?: google.container.v1.CheckAutopilotCompatibilityResponse) => void;
             }
 
             /** Properties of a LinuxNodeConfig. */
@@ -5607,6 +5628,9 @@ export namespace google {
 
                 /** Cluster fleet */
                 fleet?: (google.container.v1.IFleet|null);
+
+                /** Cluster enableK8sBetaApis */
+                enableK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
             }
 
             /** Represents a Cluster. */
@@ -5810,6 +5834,9 @@ export namespace google {
                 /** Cluster fleet. */
                 public fleet?: (google.container.v1.IFleet|null);
 
+                /** Cluster enableK8sBetaApis. */
+                public enableK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
 
@@ -5903,6 +5930,103 @@ export namespace google {
                     ERROR = 5,
                     DEGRADED = 6
                 }
+            }
+
+            /** Properties of a K8sBetaAPIConfig. */
+            interface IK8sBetaAPIConfig {
+
+                /** K8sBetaAPIConfig enabledApis */
+                enabledApis?: (string[]|null);
+            }
+
+            /** Represents a K8sBetaAPIConfig. */
+            class K8sBetaAPIConfig implements IK8sBetaAPIConfig {
+
+                /**
+                 * Constructs a new K8sBetaAPIConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IK8sBetaAPIConfig);
+
+                /** K8sBetaAPIConfig enabledApis. */
+                public enabledApis: string[];
+
+                /**
+                 * Creates a new K8sBetaAPIConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns K8sBetaAPIConfig instance
+                 */
+                public static create(properties?: google.container.v1.IK8sBetaAPIConfig): google.container.v1.K8sBetaAPIConfig;
+
+                /**
+                 * Encodes the specified K8sBetaAPIConfig message. Does not implicitly {@link google.container.v1.K8sBetaAPIConfig.verify|verify} messages.
+                 * @param message K8sBetaAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IK8sBetaAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified K8sBetaAPIConfig message, length delimited. Does not implicitly {@link google.container.v1.K8sBetaAPIConfig.verify|verify} messages.
+                 * @param message K8sBetaAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IK8sBetaAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a K8sBetaAPIConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns K8sBetaAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.K8sBetaAPIConfig;
+
+                /**
+                 * Decodes a K8sBetaAPIConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns K8sBetaAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.K8sBetaAPIConfig;
+
+                /**
+                 * Verifies a K8sBetaAPIConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a K8sBetaAPIConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns K8sBetaAPIConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.K8sBetaAPIConfig;
+
+                /**
+                 * Creates a plain object from a K8sBetaAPIConfig message. Also converts values to other types if specified.
+                 * @param message K8sBetaAPIConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.K8sBetaAPIConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this K8sBetaAPIConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for K8sBetaAPIConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a NodePoolAutoConfig. */
@@ -6333,6 +6457,15 @@ export namespace google {
 
                 /** ClusterUpdate removedAdditionalPodRangesConfig */
                 removedAdditionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate enableK8sBetaApis */
+                enableK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredEnableFqdnNetworkPolicy */
+                desiredEnableFqdnNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredK8sBetaApis */
+                desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -6473,8 +6606,20 @@ export namespace google {
                 /** ClusterUpdate removedAdditionalPodRangesConfig. */
                 public removedAdditionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
 
+                /** ClusterUpdate enableK8sBetaApis. */
+                public enableK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredEnableFqdnNetworkPolicy. */
+                public desiredEnableFqdnNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredK8sBetaApis. */
+                public desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
+
+                /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
+                public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -10439,6 +10584,9 @@ export namespace google {
 
                 /** NodePool etag */
                 etag?: (string|null);
+
+                /** NodePool bestEffortProvisioning */
+                bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
             }
 
             /** Represents a NodePool. */
@@ -10506,6 +10654,9 @@ export namespace google {
 
                 /** NodePool etag. */
                 public etag: string;
+
+                /** NodePool bestEffortProvisioning. */
+                public bestEffortProvisioning?: (google.container.v1.IBestEffortProvisioning|null);
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -11165,6 +11316,109 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NodeManagement
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BestEffortProvisioning. */
+            interface IBestEffortProvisioning {
+
+                /** BestEffortProvisioning enabled */
+                enabled?: (boolean|null);
+
+                /** BestEffortProvisioning minProvisionNodes */
+                minProvisionNodes?: (number|null);
+            }
+
+            /** Represents a BestEffortProvisioning. */
+            class BestEffortProvisioning implements IBestEffortProvisioning {
+
+                /**
+                 * Constructs a new BestEffortProvisioning.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IBestEffortProvisioning);
+
+                /** BestEffortProvisioning enabled. */
+                public enabled: boolean;
+
+                /** BestEffortProvisioning minProvisionNodes. */
+                public minProvisionNodes: number;
+
+                /**
+                 * Creates a new BestEffortProvisioning instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BestEffortProvisioning instance
+                 */
+                public static create(properties?: google.container.v1.IBestEffortProvisioning): google.container.v1.BestEffortProvisioning;
+
+                /**
+                 * Encodes the specified BestEffortProvisioning message. Does not implicitly {@link google.container.v1.BestEffortProvisioning.verify|verify} messages.
+                 * @param message BestEffortProvisioning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IBestEffortProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BestEffortProvisioning message, length delimited. Does not implicitly {@link google.container.v1.BestEffortProvisioning.verify|verify} messages.
+                 * @param message BestEffortProvisioning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IBestEffortProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BestEffortProvisioning message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BestEffortProvisioning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.BestEffortProvisioning;
+
+                /**
+                 * Decodes a BestEffortProvisioning message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BestEffortProvisioning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.BestEffortProvisioning;
+
+                /**
+                 * Verifies a BestEffortProvisioning message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BestEffortProvisioning message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BestEffortProvisioning
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.BestEffortProvisioning;
+
+                /**
+                 * Creates a plain object from a BestEffortProvisioning message. Also converts values to other types if specified.
+                 * @param message BestEffortProvisioning
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.BestEffortProvisioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BestEffortProvisioning to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BestEffortProvisioning
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -14244,6 +14498,9 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig */
                 gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableFqdnNetworkPolicy */
+                enableFqdnNetworkPolicy?: (boolean|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -14284,6 +14541,12 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig. */
                 public gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableFqdnNetworkPolicy. */
+                public enableFqdnNetworkPolicy?: (boolean|null);
+
+                /** NetworkConfig _enableFqdnNetworkPolicy. */
+                public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -15131,6 +15394,344 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GetJSONWebKeysResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CheckAutopilotCompatibilityRequest. */
+            interface ICheckAutopilotCompatibilityRequest {
+
+                /** CheckAutopilotCompatibilityRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a CheckAutopilotCompatibilityRequest. */
+            class CheckAutopilotCompatibilityRequest implements ICheckAutopilotCompatibilityRequest {
+
+                /**
+                 * Constructs a new CheckAutopilotCompatibilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ICheckAutopilotCompatibilityRequest);
+
+                /** CheckAutopilotCompatibilityRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new CheckAutopilotCompatibilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CheckAutopilotCompatibilityRequest instance
+                 */
+                public static create(properties?: google.container.v1.ICheckAutopilotCompatibilityRequest): google.container.v1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityRequest message. Does not implicitly {@link google.container.v1.CheckAutopilotCompatibilityRequest.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ICheckAutopilotCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityRequest message, length delimited. Does not implicitly {@link google.container.v1.CheckAutopilotCompatibilityRequest.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ICheckAutopilotCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CheckAutopilotCompatibilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CheckAutopilotCompatibilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Verifies a CheckAutopilotCompatibilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CheckAutopilotCompatibilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CheckAutopilotCompatibilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Creates a plain object from a CheckAutopilotCompatibilityRequest message. Also converts values to other types if specified.
+                 * @param message CheckAutopilotCompatibilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.CheckAutopilotCompatibilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CheckAutopilotCompatibilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CheckAutopilotCompatibilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AutopilotCompatibilityIssue. */
+            interface IAutopilotCompatibilityIssue {
+
+                /** AutopilotCompatibilityIssue lastObservation */
+                lastObservation?: (google.protobuf.ITimestamp|null);
+
+                /** AutopilotCompatibilityIssue constraintType */
+                constraintType?: (string|null);
+
+                /** AutopilotCompatibilityIssue incompatibilityType */
+                incompatibilityType?: (google.container.v1.AutopilotCompatibilityIssue.IssueType|keyof typeof google.container.v1.AutopilotCompatibilityIssue.IssueType|null);
+
+                /** AutopilotCompatibilityIssue subjects */
+                subjects?: (string[]|null);
+
+                /** AutopilotCompatibilityIssue documentationUrl */
+                documentationUrl?: (string|null);
+
+                /** AutopilotCompatibilityIssue description */
+                description?: (string|null);
+            }
+
+            /** Represents an AutopilotCompatibilityIssue. */
+            class AutopilotCompatibilityIssue implements IAutopilotCompatibilityIssue {
+
+                /**
+                 * Constructs a new AutopilotCompatibilityIssue.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IAutopilotCompatibilityIssue);
+
+                /** AutopilotCompatibilityIssue lastObservation. */
+                public lastObservation?: (google.protobuf.ITimestamp|null);
+
+                /** AutopilotCompatibilityIssue constraintType. */
+                public constraintType: string;
+
+                /** AutopilotCompatibilityIssue incompatibilityType. */
+                public incompatibilityType: (google.container.v1.AutopilotCompatibilityIssue.IssueType|keyof typeof google.container.v1.AutopilotCompatibilityIssue.IssueType);
+
+                /** AutopilotCompatibilityIssue subjects. */
+                public subjects: string[];
+
+                /** AutopilotCompatibilityIssue documentationUrl. */
+                public documentationUrl: string;
+
+                /** AutopilotCompatibilityIssue description. */
+                public description: string;
+
+                /**
+                 * Creates a new AutopilotCompatibilityIssue instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AutopilotCompatibilityIssue instance
+                 */
+                public static create(properties?: google.container.v1.IAutopilotCompatibilityIssue): google.container.v1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Encodes the specified AutopilotCompatibilityIssue message. Does not implicitly {@link google.container.v1.AutopilotCompatibilityIssue.verify|verify} messages.
+                 * @param message AutopilotCompatibilityIssue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IAutopilotCompatibilityIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AutopilotCompatibilityIssue message, length delimited. Does not implicitly {@link google.container.v1.AutopilotCompatibilityIssue.verify|verify} messages.
+                 * @param message AutopilotCompatibilityIssue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IAutopilotCompatibilityIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AutopilotCompatibilityIssue message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AutopilotCompatibilityIssue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Decodes an AutopilotCompatibilityIssue message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AutopilotCompatibilityIssue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Verifies an AutopilotCompatibilityIssue message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AutopilotCompatibilityIssue message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AutopilotCompatibilityIssue
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Creates a plain object from an AutopilotCompatibilityIssue message. Also converts values to other types if specified.
+                 * @param message AutopilotCompatibilityIssue
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.AutopilotCompatibilityIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AutopilotCompatibilityIssue to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AutopilotCompatibilityIssue
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AutopilotCompatibilityIssue {
+
+                /** IssueType enum. */
+                enum IssueType {
+                    UNSPECIFIED = 0,
+                    INCOMPATIBILITY = 1,
+                    ADDITIONAL_CONFIG_REQUIRED = 2,
+                    PASSED_WITH_OPTIONAL_CONFIG = 3
+                }
+            }
+
+            /** Properties of a CheckAutopilotCompatibilityResponse. */
+            interface ICheckAutopilotCompatibilityResponse {
+
+                /** CheckAutopilotCompatibilityResponse issues */
+                issues?: (google.container.v1.IAutopilotCompatibilityIssue[]|null);
+
+                /** CheckAutopilotCompatibilityResponse summary */
+                summary?: (string|null);
+            }
+
+            /** Represents a CheckAutopilotCompatibilityResponse. */
+            class CheckAutopilotCompatibilityResponse implements ICheckAutopilotCompatibilityResponse {
+
+                /**
+                 * Constructs a new CheckAutopilotCompatibilityResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ICheckAutopilotCompatibilityResponse);
+
+                /** CheckAutopilotCompatibilityResponse issues. */
+                public issues: google.container.v1.IAutopilotCompatibilityIssue[];
+
+                /** CheckAutopilotCompatibilityResponse summary. */
+                public summary: string;
+
+                /**
+                 * Creates a new CheckAutopilotCompatibilityResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CheckAutopilotCompatibilityResponse instance
+                 */
+                public static create(properties?: google.container.v1.ICheckAutopilotCompatibilityResponse): google.container.v1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityResponse message. Does not implicitly {@link google.container.v1.CheckAutopilotCompatibilityResponse.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ICheckAutopilotCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityResponse message, length delimited. Does not implicitly {@link google.container.v1.CheckAutopilotCompatibilityResponse.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ICheckAutopilotCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CheckAutopilotCompatibilityResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CheckAutopilotCompatibilityResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Verifies a CheckAutopilotCompatibilityResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CheckAutopilotCompatibilityResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CheckAutopilotCompatibilityResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Creates a plain object from a CheckAutopilotCompatibilityResponse message. Also converts values to other types if specified.
+                 * @param message CheckAutopilotCompatibilityResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.CheckAutopilotCompatibilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CheckAutopilotCompatibilityResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CheckAutopilotCompatibilityResponse
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -19868,6 +20469,20 @@ export namespace google {
                 public listUsableSubnetworks(request: google.container.v1beta1.IListUsableSubnetworksRequest): Promise<google.container.v1beta1.ListUsableSubnetworksResponse>;
 
                 /**
+                 * Calls CheckAutopilotCompatibility.
+                 * @param request CheckAutopilotCompatibilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and CheckAutopilotCompatibilityResponse
+                 */
+                public checkAutopilotCompatibility(request: google.container.v1beta1.ICheckAutopilotCompatibilityRequest, callback: google.container.v1beta1.ClusterManager.CheckAutopilotCompatibilityCallback): void;
+
+                /**
+                 * Calls CheckAutopilotCompatibility.
+                 * @param request CheckAutopilotCompatibilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public checkAutopilotCompatibility(request: google.container.v1beta1.ICheckAutopilotCompatibilityRequest): Promise<google.container.v1beta1.CheckAutopilotCompatibilityResponse>;
+
+                /**
                  * Calls ListLocations.
                  * @param request ListLocationsRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and ListLocationsResponse
@@ -20114,6 +20729,13 @@ export namespace google {
                  * @param [response] ListUsableSubnetworksResponse
                  */
                 type ListUsableSubnetworksCallback = (error: (Error|null), response?: google.container.v1beta1.ListUsableSubnetworksResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.container.v1beta1.ClusterManager|checkAutopilotCompatibility}.
+                 * @param error Error, if any
+                 * @param [response] CheckAutopilotCompatibilityResponse
+                 */
+                type CheckAutopilotCompatibilityCallback = (error: (Error|null), response?: google.container.v1beta1.CheckAutopilotCompatibilityResponse) => void;
 
                 /**
                  * Callback as used by {@link google.container.v1beta1.ClusterManager|listLocations}.
@@ -25705,6 +26327,9 @@ export namespace google {
                 /** Cluster enableKubernetesAlpha */
                 enableKubernetesAlpha?: (boolean|null);
 
+                /** Cluster enableK8sBetaApis */
+                enableK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
                 /** Cluster resourceLabels */
                 resourceLabels?: ({ [k: string]: string }|null);
 
@@ -25933,6 +26558,9 @@ export namespace google {
 
                 /** Cluster enableKubernetesAlpha. */
                 public enableKubernetesAlpha: boolean;
+
+                /** Cluster enableK8sBetaApis. */
+                public enableK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
 
                 /** Cluster resourceLabels. */
                 public resourceLabels: { [k: string]: string };
@@ -26207,6 +26835,103 @@ export namespace google {
                     ERROR = 5,
                     DEGRADED = 6
                 }
+            }
+
+            /** Properties of a K8sBetaAPIConfig. */
+            interface IK8sBetaAPIConfig {
+
+                /** K8sBetaAPIConfig enabledApis */
+                enabledApis?: (string[]|null);
+            }
+
+            /** Represents a K8sBetaAPIConfig. */
+            class K8sBetaAPIConfig implements IK8sBetaAPIConfig {
+
+                /**
+                 * Constructs a new K8sBetaAPIConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IK8sBetaAPIConfig);
+
+                /** K8sBetaAPIConfig enabledApis. */
+                public enabledApis: string[];
+
+                /**
+                 * Creates a new K8sBetaAPIConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns K8sBetaAPIConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IK8sBetaAPIConfig): google.container.v1beta1.K8sBetaAPIConfig;
+
+                /**
+                 * Encodes the specified K8sBetaAPIConfig message. Does not implicitly {@link google.container.v1beta1.K8sBetaAPIConfig.verify|verify} messages.
+                 * @param message K8sBetaAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IK8sBetaAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified K8sBetaAPIConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.K8sBetaAPIConfig.verify|verify} messages.
+                 * @param message K8sBetaAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IK8sBetaAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a K8sBetaAPIConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns K8sBetaAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.K8sBetaAPIConfig;
+
+                /**
+                 * Decodes a K8sBetaAPIConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns K8sBetaAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.K8sBetaAPIConfig;
+
+                /**
+                 * Verifies a K8sBetaAPIConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a K8sBetaAPIConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns K8sBetaAPIConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.K8sBetaAPIConfig;
+
+                /**
+                 * Creates a plain object from a K8sBetaAPIConfig message. Also converts values to other types if specified.
+                 * @param message K8sBetaAPIConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.K8sBetaAPIConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this K8sBetaAPIConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for K8sBetaAPIConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a WorkloadConfig. */
@@ -26889,6 +27614,15 @@ export namespace google {
 
                 /** ClusterUpdate removedAdditionalPodRangesConfig */
                 removedAdditionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate enableK8sBetaApis */
+                enableK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredEnableFqdnNetworkPolicy */
+                desiredEnableFqdnNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredK8sBetaApis */
+                desiredK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -27050,11 +27784,23 @@ export namespace google {
                 /** ClusterUpdate removedAdditionalPodRangesConfig. */
                 public removedAdditionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
 
+                /** ClusterUpdate enableK8sBetaApis. */
+                public enableK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredEnableFqdnNetworkPolicy. */
+                public desiredEnableFqdnNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredK8sBetaApis. */
+                public desiredK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
                 /** ClusterUpdate _desiredProtectConfig. */
                 public _desiredProtectConfig?: "desiredProtectConfig";
+
+                /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
+                public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -30373,6 +31119,109 @@ export namespace google {
                 }
             }
 
+            /** Properties of a BestEffortProvisioning. */
+            interface IBestEffortProvisioning {
+
+                /** BestEffortProvisioning enabled */
+                enabled?: (boolean|null);
+
+                /** BestEffortProvisioning minProvisionNodes */
+                minProvisionNodes?: (number|null);
+            }
+
+            /** Represents a BestEffortProvisioning. */
+            class BestEffortProvisioning implements IBestEffortProvisioning {
+
+                /**
+                 * Constructs a new BestEffortProvisioning.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IBestEffortProvisioning);
+
+                /** BestEffortProvisioning enabled. */
+                public enabled: boolean;
+
+                /** BestEffortProvisioning minProvisionNodes. */
+                public minProvisionNodes: number;
+
+                /**
+                 * Creates a new BestEffortProvisioning instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BestEffortProvisioning instance
+                 */
+                public static create(properties?: google.container.v1beta1.IBestEffortProvisioning): google.container.v1beta1.BestEffortProvisioning;
+
+                /**
+                 * Encodes the specified BestEffortProvisioning message. Does not implicitly {@link google.container.v1beta1.BestEffortProvisioning.verify|verify} messages.
+                 * @param message BestEffortProvisioning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IBestEffortProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BestEffortProvisioning message, length delimited. Does not implicitly {@link google.container.v1beta1.BestEffortProvisioning.verify|verify} messages.
+                 * @param message BestEffortProvisioning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IBestEffortProvisioning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BestEffortProvisioning message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BestEffortProvisioning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.BestEffortProvisioning;
+
+                /**
+                 * Decodes a BestEffortProvisioning message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BestEffortProvisioning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.BestEffortProvisioning;
+
+                /**
+                 * Verifies a BestEffortProvisioning message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BestEffortProvisioning message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BestEffortProvisioning
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.BestEffortProvisioning;
+
+                /**
+                 * Creates a plain object from a BestEffortProvisioning message. Also converts values to other types if specified.
+                 * @param message BestEffortProvisioning
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.BestEffortProvisioning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BestEffortProvisioning to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BestEffortProvisioning
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a WindowsVersions. */
             interface IWindowsVersions {
 
@@ -31346,6 +32195,9 @@ export namespace google {
 
                 /** NodePool etag */
                 etag?: (string|null);
+
+                /** NodePool bestEffortProvisioning */
+                bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
             }
 
             /** Represents a NodePool. */
@@ -31413,6 +32265,9 @@ export namespace google {
 
                 /** NodePool etag. */
                 public etag: string;
+
+                /** NodePool bestEffortProvisioning. */
+                public bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -35587,6 +36442,9 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig */
                 gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableFqdnNetworkPolicy */
+                enableFqdnNetworkPolicy?: (boolean|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -35627,6 +36485,12 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig. */
                 public gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableFqdnNetworkPolicy. */
+                public enableFqdnNetworkPolicy?: (boolean|null);
+
+                /** NetworkConfig _enableFqdnNetworkPolicy. */
+                public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -38655,6 +39519,344 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GetJSONWebKeysResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CheckAutopilotCompatibilityRequest. */
+            interface ICheckAutopilotCompatibilityRequest {
+
+                /** CheckAutopilotCompatibilityRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a CheckAutopilotCompatibilityRequest. */
+            class CheckAutopilotCompatibilityRequest implements ICheckAutopilotCompatibilityRequest {
+
+                /**
+                 * Constructs a new CheckAutopilotCompatibilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ICheckAutopilotCompatibilityRequest);
+
+                /** CheckAutopilotCompatibilityRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new CheckAutopilotCompatibilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CheckAutopilotCompatibilityRequest instance
+                 */
+                public static create(properties?: google.container.v1beta1.ICheckAutopilotCompatibilityRequest): google.container.v1beta1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityRequest message. Does not implicitly {@link google.container.v1beta1.CheckAutopilotCompatibilityRequest.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ICheckAutopilotCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityRequest message, length delimited. Does not implicitly {@link google.container.v1beta1.CheckAutopilotCompatibilityRequest.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ICheckAutopilotCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CheckAutopilotCompatibilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CheckAutopilotCompatibilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Verifies a CheckAutopilotCompatibilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CheckAutopilotCompatibilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CheckAutopilotCompatibilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.CheckAutopilotCompatibilityRequest;
+
+                /**
+                 * Creates a plain object from a CheckAutopilotCompatibilityRequest message. Also converts values to other types if specified.
+                 * @param message CheckAutopilotCompatibilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.CheckAutopilotCompatibilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CheckAutopilotCompatibilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CheckAutopilotCompatibilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AutopilotCompatibilityIssue. */
+            interface IAutopilotCompatibilityIssue {
+
+                /** AutopilotCompatibilityIssue lastObservation */
+                lastObservation?: (google.protobuf.ITimestamp|null);
+
+                /** AutopilotCompatibilityIssue constraintType */
+                constraintType?: (string|null);
+
+                /** AutopilotCompatibilityIssue incompatibilityType */
+                incompatibilityType?: (google.container.v1beta1.AutopilotCompatibilityIssue.IssueType|keyof typeof google.container.v1beta1.AutopilotCompatibilityIssue.IssueType|null);
+
+                /** AutopilotCompatibilityIssue subjects */
+                subjects?: (string[]|null);
+
+                /** AutopilotCompatibilityIssue documentationUrl */
+                documentationUrl?: (string|null);
+
+                /** AutopilotCompatibilityIssue description */
+                description?: (string|null);
+            }
+
+            /** Represents an AutopilotCompatibilityIssue. */
+            class AutopilotCompatibilityIssue implements IAutopilotCompatibilityIssue {
+
+                /**
+                 * Constructs a new AutopilotCompatibilityIssue.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAutopilotCompatibilityIssue);
+
+                /** AutopilotCompatibilityIssue lastObservation. */
+                public lastObservation?: (google.protobuf.ITimestamp|null);
+
+                /** AutopilotCompatibilityIssue constraintType. */
+                public constraintType: string;
+
+                /** AutopilotCompatibilityIssue incompatibilityType. */
+                public incompatibilityType: (google.container.v1beta1.AutopilotCompatibilityIssue.IssueType|keyof typeof google.container.v1beta1.AutopilotCompatibilityIssue.IssueType);
+
+                /** AutopilotCompatibilityIssue subjects. */
+                public subjects: string[];
+
+                /** AutopilotCompatibilityIssue documentationUrl. */
+                public documentationUrl: string;
+
+                /** AutopilotCompatibilityIssue description. */
+                public description: string;
+
+                /**
+                 * Creates a new AutopilotCompatibilityIssue instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AutopilotCompatibilityIssue instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAutopilotCompatibilityIssue): google.container.v1beta1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Encodes the specified AutopilotCompatibilityIssue message. Does not implicitly {@link google.container.v1beta1.AutopilotCompatibilityIssue.verify|verify} messages.
+                 * @param message AutopilotCompatibilityIssue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAutopilotCompatibilityIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AutopilotCompatibilityIssue message, length delimited. Does not implicitly {@link google.container.v1beta1.AutopilotCompatibilityIssue.verify|verify} messages.
+                 * @param message AutopilotCompatibilityIssue message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAutopilotCompatibilityIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AutopilotCompatibilityIssue message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AutopilotCompatibilityIssue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Decodes an AutopilotCompatibilityIssue message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AutopilotCompatibilityIssue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Verifies an AutopilotCompatibilityIssue message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AutopilotCompatibilityIssue message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AutopilotCompatibilityIssue
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AutopilotCompatibilityIssue;
+
+                /**
+                 * Creates a plain object from an AutopilotCompatibilityIssue message. Also converts values to other types if specified.
+                 * @param message AutopilotCompatibilityIssue
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AutopilotCompatibilityIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AutopilotCompatibilityIssue to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AutopilotCompatibilityIssue
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AutopilotCompatibilityIssue {
+
+                /** IssueType enum. */
+                enum IssueType {
+                    UNSPECIFIED = 0,
+                    INCOMPATIBILITY = 1,
+                    ADDITIONAL_CONFIG_REQUIRED = 2,
+                    PASSED_WITH_OPTIONAL_CONFIG = 3
+                }
+            }
+
+            /** Properties of a CheckAutopilotCompatibilityResponse. */
+            interface ICheckAutopilotCompatibilityResponse {
+
+                /** CheckAutopilotCompatibilityResponse issues */
+                issues?: (google.container.v1beta1.IAutopilotCompatibilityIssue[]|null);
+
+                /** CheckAutopilotCompatibilityResponse summary */
+                summary?: (string|null);
+            }
+
+            /** Represents a CheckAutopilotCompatibilityResponse. */
+            class CheckAutopilotCompatibilityResponse implements ICheckAutopilotCompatibilityResponse {
+
+                /**
+                 * Constructs a new CheckAutopilotCompatibilityResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ICheckAutopilotCompatibilityResponse);
+
+                /** CheckAutopilotCompatibilityResponse issues. */
+                public issues: google.container.v1beta1.IAutopilotCompatibilityIssue[];
+
+                /** CheckAutopilotCompatibilityResponse summary. */
+                public summary: string;
+
+                /**
+                 * Creates a new CheckAutopilotCompatibilityResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CheckAutopilotCompatibilityResponse instance
+                 */
+                public static create(properties?: google.container.v1beta1.ICheckAutopilotCompatibilityResponse): google.container.v1beta1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityResponse message. Does not implicitly {@link google.container.v1beta1.CheckAutopilotCompatibilityResponse.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ICheckAutopilotCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CheckAutopilotCompatibilityResponse message, length delimited. Does not implicitly {@link google.container.v1beta1.CheckAutopilotCompatibilityResponse.verify|verify} messages.
+                 * @param message CheckAutopilotCompatibilityResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ICheckAutopilotCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CheckAutopilotCompatibilityResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Decodes a CheckAutopilotCompatibilityResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CheckAutopilotCompatibilityResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Verifies a CheckAutopilotCompatibilityResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CheckAutopilotCompatibilityResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CheckAutopilotCompatibilityResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.CheckAutopilotCompatibilityResponse;
+
+                /**
+                 * Creates a plain object from a CheckAutopilotCompatibilityResponse message. Also converts values to other types if specified.
+                 * @param message CheckAutopilotCompatibilityResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.CheckAutopilotCompatibilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CheckAutopilotCompatibilityResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CheckAutopilotCompatibilityResponse
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
