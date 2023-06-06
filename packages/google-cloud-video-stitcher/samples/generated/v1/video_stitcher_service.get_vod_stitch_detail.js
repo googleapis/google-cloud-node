@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the stitch detail in the specified VOD session, in the form of
+   *  Required. The name of the stitch detail in the specified VOD session, in
+   *  the form of
    *  `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodStitchDetails/{id}`.
    */
   // const name = 'abc123'
