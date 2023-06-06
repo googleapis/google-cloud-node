@@ -170,6 +170,11 @@
                 "setMaintenancePolicy"
               ]
             },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "checkAutopilotCompatibility"
+              ]
+            },
             "ListLocations": {
               "methods": [
                 "listLocations"
@@ -345,6 +350,11 @@
             "SetMaintenancePolicy": {
               "methods": [
                 "setMaintenancePolicy"
+              ]
+            },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "checkAutopilotCompatibility"
               ]
             },
             "ListLocations": {

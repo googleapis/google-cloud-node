@@ -181,6 +181,10 @@
         "ListUsableSubnetworks": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CheckAutopilotCompatibility": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
