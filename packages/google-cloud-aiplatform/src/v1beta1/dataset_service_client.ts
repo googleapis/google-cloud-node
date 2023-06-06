@@ -894,6 +894,10 @@ export class DatasetServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1098,6 +1102,9 @@ export class DatasetServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1280,6 +1287,9 @@ export class DatasetServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
