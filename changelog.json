@@ -4,6 +4,246 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "5c99df6328f6bd0cfc83a6a294377b47228c0943",
+          "message": "[mapsplatformdatasets] Add client libraries for v1",
+          "issues": [
+            "4314"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "6a9a8aa9-87d7-4150-83d8-dfc0a44d2ffb",
+      "createTime": "2023-06-06T07:04:16.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d266f1863a1fe9c58032e44cbc03aa51441442c5",
+          "message": "Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d266f1863a1fe9c58032e44cbc03aa51441442c5",
+          "message": "[container] add a API field to enable FQDN Network Policy on clusters",
+          "issues": [
+            "4319"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d266f1863a1fe9c58032e44cbc03aa51441442c5",
+          "message": "Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d266f1863a1fe9c58032e44cbc03aa51441442c5",
+          "message": "[container] add a API field to enable FQDN Network Policy on clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "12cc0d9c6d17614b5e1a9b5eb189258279f4cee2",
+          "message": "[container] add SoleTenantConfig API",
+          "issues": [
+            "4306"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "12cc0d9c6d17614b5e1a9b5eb189258279f4cee2",
+          "message": "[container] add SoleTenantConfig API",
+          "issues": []
+        }
+      ],
+      "version": "4.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "358e24bb-2818-47d7-8062-1f8b27ed4b35",
+      "createTime": "2023-06-06T07:04:16.849Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b73a87f4f1c8d84da66ea81b88a3f2cc6704aa6b",
+          "message": "[video-stitcher] introduce GAM settings for GAM related configs and support ListOperations",
+          "issues": [
+            "4130"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "a8ebce79-7330-4c82-af6a-1d4ba1d312ed",
+      "createTime": "2023-06-06T07:04:16.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "47ab1c3ee106fce357950245318129d2be723dd2",
+          "message": "Enable Force on DeleteQueuedResource",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "47ab1c3ee106fce357950245318129d2be723dd2",
+          "message": "[tpu] Add MultisliceNode",
+          "issues": [
+            "4308"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "ee642693-0b50-4400-b423-5bba395d9f27",
+      "createTime": "2023-06-06T07:04:16.841Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6d8778f06458c3f701c8c0099de71dfb3b0b59d",
+          "message": "[functions] ListFunctions now include metadata which indicates whether a function is a GEN_1 or GEN_2 function",
+          "issues": [
+            "4262"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "38d24d7e-aec8-4325-9204-0d116982caa9",
+      "createTime": "2023-06-06T07:04:16.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10bb49288c297bfd04bf48b26646e3990b454e27",
+          "message": "[deploy] Add support for disabling Pod overprovisioning in the progressive deployment strategy configuration for a Kubernetes Target",
+          "issues": [
+            "4317"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "bd662fb0-4e8b-423c-a808-4c9f01dc63b7",
+      "createTime": "2023-06-06T07:04:16.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702",
+          "message": "Expand SearchCatalogResponse with totalSize",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702",
+          "message": "Modify documentation for FQN support",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702",
+          "message": "Extend ImportApiRequest with jobId parameter",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "89c2be86f483b14ebf0f0ff3d1b2c7741c5f7702",
+          "message": "[datacatalog] add support for entries associated with Spanner and ClougBigTable",
+          "issues": [
+            "4302"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "194abcf3-faaf-46d8-a19b-bbdb973114f3",
+      "createTime": "2023-06-06T07:04:16.832Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02f2346643a61ebed9c25a60e6229a1996be727c",
+          "message": "[contactcenterinsights] Add the resource definition of a STT recognizer",
+          "issues": [
+            "4310"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "964fb9a9-5893-4de2-a624-aaa9e75fd485",
+      "createTime": "2023-06-06T07:04:16.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8ffd9112f3e433f4410ce6aa2664db6cf50f5175",
+          "message": "[billing-budgets] Add resource_ancestors field to support filtering by folders & organizations",
+          "issues": [
+            "4321"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8ffd9112f3e433f4410ce6aa2664db6cf50f5175",
+          "message": "[billing-budgets] Add resource_ancestors field to support filtering by folders & organizations",
+          "issues": []
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "e4c24fb6-c712-4209-8ea2-317b883d40ab",
+      "createTime": "2023-06-06T07:04:16.825Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b2c4f4670643d8e5a727c80fb668d5b8ab0cf2b1",
+          "message": "[ai-platform] update typings for helpers, updated docstrings; removed stale comment",
+          "issues": [
+            "4312"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "99736a9b9ac01b9673280eddc2f57a8722646ecd",
+          "message": "[ai-platform] add blocking_operation_ids to ImportFeatureValuesOperationMetadata",
+          "issues": [
+            "4284"
+          ]
+        }
+      ],
+      "version": "2.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "f9683817-5b83-4cab-b15c-8298982338b8",
+      "createTime": "2023-06-06T07:04:16.819Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "b6ae70ddcc50fc3bfd1abbb347b25e0bfcafccf0",
           "message": "Update dependency recast to ^0.23.0",
@@ -9737,5 +9977,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-26T10:59:12.347Z"
+  "updateTime": "2023-06-06T07:04:16.853Z"
 }

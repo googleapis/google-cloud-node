@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.5.0...deploy-v2.6.0) (2023-06-06)
+
+
+### Features
+
+* [deploy] Add support for disabling Pod overprovisioning in the progressive deployment strategy configuration for a Kubernetes Target ([#4317](https://github.com/googleapis/google-cloud-node/issues/4317)) ([10bb492](https://github.com/googleapis/google-cloud-node/commit/10bb49288c297bfd04bf48b26646e3990b454e27))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.4.1...deploy-v2.5.0) (2023-05-04)
 
 

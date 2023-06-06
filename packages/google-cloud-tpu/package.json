@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/tpu",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "tpu client for Node.js",
   "repository": {
     "type": "git",

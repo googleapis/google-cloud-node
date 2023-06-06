@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.14.0...aiplatform-v2.15.0) (2023-06-06)
+
+
+### Features
+
+* [ai-platform] add blocking_operation_ids to ImportFeatureValuesOperationMetadata ([#4284](https://github.com/googleapis/google-cloud-node/issues/4284)) ([99736a9](https://github.com/googleapis/google-cloud-node/commit/99736a9b9ac01b9673280eddc2f57a8722646ecd))
+
+
+### Bug Fixes
+
+* [ai-platform] update typings for helpers, updated docstrings; removed stale comment ([#4312](https://github.com/googleapis/google-cloud-node/issues/4312)) ([b2c4f46](https://github.com/googleapis/google-cloud-node/commit/b2c4f4670643d8e5a727c80fb668d5b8ab0cf2b1))
+
 ## [2.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.13.0...aiplatform-v2.14.0) (2023-05-20)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/maps-platform-datasets",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Maps Platform Datasets API client for Node.js",
   "repository": {
     "type": "git",
