@@ -29,8 +29,8 @@ function main(parent, cdnKey, cdnKeyId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project in which the CDN key should be created, in the form of
-   *  `projects/{project_number}/locations/{location}`.
+   *  Required. The project in which the CDN key should be created, in the form
+   *  of `projects/{project_number}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
@@ -38,8 +38,8 @@ function main(parent, cdnKey, cdnKeyId) {
    */
   // const cdnKey = {}
   /**
-   *  Required. The ID to use for the CDN key, which will become the final component of
-   *  the CDN key's resource name.
+   *  Required. The ID to use for the CDN key, which will become the final
+   *  component of the CDN key's resource name.
    *  This value should conform to RFC-1034, which restricts to
    *  lower-case letters, numbers, and hyphen, with the first character a
    *  letter, the last a letter or a number, and a 63 character maximum.
@@ -61,7 +61,8 @@ function main(parent, cdnKey, cdnKeyId) {
     };
 
     // Run request
-    const response = await stitcherClient.createCdnKey(request);
+    const [operation] = await stitcherClient.createCdnKey(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 

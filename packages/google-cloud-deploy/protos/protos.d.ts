@@ -1820,6 +1820,9 @@ export namespace google {
 
                         /** ServiceNetworking deployment */
                         deployment?: (string|null);
+
+                        /** ServiceNetworking disablePodOverprovisioning */
+                        disablePodOverprovisioning?: (boolean|null);
                     }
 
                     /** Represents a ServiceNetworking. */
@@ -1836,6 +1839,9 @@ export namespace google {
 
                         /** ServiceNetworking deployment. */
                         public deployment: string;
+
+                        /** ServiceNetworking disablePodOverprovisioning. */
+                        public disablePodOverprovisioning: boolean;
 
                         /**
                          * Creates a new ServiceNetworking instance using the specified properties.

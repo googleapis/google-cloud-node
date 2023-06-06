@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
 
 const MapsPlatformDatasetsV1AlphaClient =
@@ -23,7 +24,7 @@ const MapsPlatformDatasetsV1AlphaClient =
 type MapsPlatformDatasetsV1AlphaClient =
   v1alpha.MapsPlatformDatasetsV1AlphaClient;
 
-export {v1alpha, MapsPlatformDatasetsV1AlphaClient};
-export default {v1alpha, MapsPlatformDatasetsV1AlphaClient};
+export {v1, v1alpha, MapsPlatformDatasetsV1AlphaClient};
+export default {v1, v1alpha, MapsPlatformDatasetsV1AlphaClient};
 import * as protos from '../protos/protos';
 export {protos};

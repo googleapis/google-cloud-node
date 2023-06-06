@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The VOD session which the ad tag details belong to, in the form of
-   *  `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
+   *  Required. The VOD session which the ad tag details belong to, in the form
+   *  of `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
    */
   // const parent = 'abc123'
   /**

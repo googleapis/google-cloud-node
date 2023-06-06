@@ -1118,6 +1118,40 @@
         }
       }
     },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
@@ -1504,6 +1538,30 @@
                 "searchMigratableResources",
                 "searchMigratableResourcesStream",
                 "searchMigratableResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
               ]
             }
           }

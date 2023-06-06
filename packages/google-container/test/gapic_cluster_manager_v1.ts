@@ -6283,6 +6283,143 @@ describe('v1.ClusterManagerClient', () => {
     });
   });
 
+  describe('checkAutopilotCompatibility', () => {
+    it('invokes checkAutopilotCompatibility without error', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CheckAutopilotCompatibilityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
+      );
+      client.innerApiCalls.checkAutopilotCompatibility =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.checkAutopilotCompatibility(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAutopilotCompatibility without error using callback', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CheckAutopilotCompatibilityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
+      );
+      client.innerApiCalls.checkAutopilotCompatibility =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.checkAutopilotCompatibility(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1.ICheckAutopilotCompatibilityResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAutopilotCompatibility with error', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CheckAutopilotCompatibilityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAutopilotCompatibility(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkAutopilotCompatibility as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAutopilotCompatibility with closed client', async () => {
+      const client = new clustermanagerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CheckAutopilotCompatibilityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.checkAutopilotCompatibility(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listUsableSubnetworks', () => {
     it('invokes listUsableSubnetworks without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
