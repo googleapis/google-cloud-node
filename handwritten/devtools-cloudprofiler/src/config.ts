@@ -185,7 +185,7 @@ export const defaultConfig = {
   heapMaxStackDepth: 64,
   ignoreHeapSamplesPath: '@google-cloud/profiler',
   initialBackoffMillis: 60 * 1000, // 1 minute
-  backoffCapMillis: parseDuration('1h'),
+  backoffCapMillis: parseDuration('1h')!,
   backoffMultiplier: 1.3,
   apiEndpoint: 'cloudprofiler.googleapis.com',
 
