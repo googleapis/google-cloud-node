@@ -2551,6 +2551,9 @@ describe('storage', () => {
         before(async () => {
           bucket = storage.bucket(generateName(), {kmsKeyName});
           await bucket.create();
+        });
+
+        beforeEach(async () => {
           await bucket.setMetadata({
             encryption: {
               defaultKmsKeyName: kmsKeyName,
@@ -2558,7 +2561,7 @@ describe('storage', () => {
           });
         });
 
-        after(async () => {
+        afterEach(async () => {
           await bucket.setMetadata({
             encryption: null,
           });
@@ -2590,24 +2593,13 @@ describe('storage', () => {
         it('should insert an object that inherits the kms key name', async () => {
           const file = bucket.file('kms-encrypted-file');
           const [metadata] = await bucket.getMetadata();
-          const defaultKmsKeyName = metadata.encryption.defaultKmsKeyName;
           await file.save(FILE_CONTENTS, {resumable: false});
+          const [fileMetadata] = await file.getMetadata();
 
-          // Strip the project ID, as it could be the placeholder locally,
-          // but the real value upstream.
-          const projectIdRegExp = /^.+\/locations/;
-          const actualKmsKeyName = file.metadata.kmsKeyName.replace(
-            projectIdRegExp,
-            ''
+          assert.strictEqual(
+            fileMetadata.kmsKeyName,
+            `${metadata.encryption.defaultKmsKeyName}/cryptoKeyVersions/1`
           );
-          let expectedKmsKeyName = defaultKmsKeyName.replace(
-            projectIdRegExp,
-            ''
-          );
-
-          // Upstream attaches a version.
-          expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
-          assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
         });
       });
     });
