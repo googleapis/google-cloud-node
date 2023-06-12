@@ -26,18 +26,25 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
-                /** DatabaseVersion enum. */
-                enum DatabaseVersion {
-                    DATABASE_VERSION_UNSPECIFIED = 0,
-                    POSTGRES_13 = 1,
-                    POSTGRES_14 = 2
-                }
-
                 /** InstanceView enum. */
                 enum InstanceView {
                     INSTANCE_VIEW_UNSPECIFIED = 0,
                     INSTANCE_VIEW_BASIC = 1,
                     INSTANCE_VIEW_FULL = 2
+                }
+
+                /** ClusterView enum. */
+                enum ClusterView {
+                    CLUSTER_VIEW_UNSPECIFIED = 0,
+                    CLUSTER_VIEW_BASIC = 1,
+                    CLUSTER_VIEW_CONTINUOUS_BACKUP = 2
+                }
+
+                /** DatabaseVersion enum. */
+                enum DatabaseVersion {
+                    DATABASE_VERSION_UNSPECIFIED = 0,
+                    POSTGRES_13 = 1,
+                    POSTGRES_14 = 2
                 }
 
                 /** Properties of a UserPassword. */
@@ -581,7 +588,9 @@ export namespace google {
                         SSL_MODE_UNSPECIFIED = 0,
                         SSL_MODE_ALLOW = 1,
                         SSL_MODE_REQUIRE = 2,
-                        SSL_MODE_VERIFY_CA = 3
+                        SSL_MODE_VERIFY_CA = 3,
+                        ALLOW_UNENCRYPTED_AND_ENCRYPTED = 4,
+                        ENCRYPTED_ONLY = 5
                     }
 
                     /** CaSource enum. */
@@ -1039,6 +1048,233 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ContinuousBackupConfig. */
+                interface IContinuousBackupConfig {
+
+                    /** ContinuousBackupConfig enabled */
+                    enabled?: (boolean|null);
+
+                    /** ContinuousBackupConfig recoveryWindowDays */
+                    recoveryWindowDays?: (number|null);
+
+                    /** ContinuousBackupConfig encryptionConfig */
+                    encryptionConfig?: (google.cloud.alloydb.v1.IEncryptionConfig|null);
+                }
+
+                /** Represents a ContinuousBackupConfig. */
+                class ContinuousBackupConfig implements IContinuousBackupConfig {
+
+                    /**
+                     * Constructs a new ContinuousBackupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IContinuousBackupConfig);
+
+                    /** ContinuousBackupConfig enabled. */
+                    public enabled?: (boolean|null);
+
+                    /** ContinuousBackupConfig recoveryWindowDays. */
+                    public recoveryWindowDays: number;
+
+                    /** ContinuousBackupConfig encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.alloydb.v1.IEncryptionConfig|null);
+
+                    /** ContinuousBackupConfig _enabled. */
+                    public _enabled?: "enabled";
+
+                    /**
+                     * Creates a new ContinuousBackupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContinuousBackupConfig instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IContinuousBackupConfig): google.cloud.alloydb.v1.ContinuousBackupConfig;
+
+                    /**
+                     * Encodes the specified ContinuousBackupConfig message. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupConfig.verify|verify} messages.
+                     * @param message ContinuousBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IContinuousBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContinuousBackupConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupConfig.verify|verify} messages.
+                     * @param message ContinuousBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IContinuousBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContinuousBackupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContinuousBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ContinuousBackupConfig;
+
+                    /**
+                     * Decodes a ContinuousBackupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContinuousBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ContinuousBackupConfig;
+
+                    /**
+                     * Verifies a ContinuousBackupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContinuousBackupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContinuousBackupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ContinuousBackupConfig;
+
+                    /**
+                     * Creates a plain object from a ContinuousBackupConfig message. Also converts values to other types if specified.
+                     * @param message ContinuousBackupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ContinuousBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContinuousBackupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContinuousBackupConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContinuousBackupInfo. */
+                interface IContinuousBackupInfo {
+
+                    /** ContinuousBackupInfo encryptionInfo */
+                    encryptionInfo?: (google.cloud.alloydb.v1.IEncryptionInfo|null);
+
+                    /** ContinuousBackupInfo enabledTime */
+                    enabledTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ContinuousBackupInfo schedule */
+                    schedule?: (google.type.DayOfWeek[]|null);
+
+                    /** ContinuousBackupInfo earliestRestorableTime */
+                    earliestRestorableTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ContinuousBackupInfo. */
+                class ContinuousBackupInfo implements IContinuousBackupInfo {
+
+                    /**
+                     * Constructs a new ContinuousBackupInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IContinuousBackupInfo);
+
+                    /** ContinuousBackupInfo encryptionInfo. */
+                    public encryptionInfo?: (google.cloud.alloydb.v1.IEncryptionInfo|null);
+
+                    /** ContinuousBackupInfo enabledTime. */
+                    public enabledTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ContinuousBackupInfo schedule. */
+                    public schedule: google.type.DayOfWeek[];
+
+                    /** ContinuousBackupInfo earliestRestorableTime. */
+                    public earliestRestorableTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ContinuousBackupInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContinuousBackupInfo instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IContinuousBackupInfo): google.cloud.alloydb.v1.ContinuousBackupInfo;
+
+                    /**
+                     * Encodes the specified ContinuousBackupInfo message. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupInfo.verify|verify} messages.
+                     * @param message ContinuousBackupInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IContinuousBackupInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContinuousBackupInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupInfo.verify|verify} messages.
+                     * @param message ContinuousBackupInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IContinuousBackupInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContinuousBackupInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContinuousBackupInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ContinuousBackupInfo;
+
+                    /**
+                     * Decodes a ContinuousBackupInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContinuousBackupInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ContinuousBackupInfo;
+
+                    /**
+                     * Verifies a ContinuousBackupInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContinuousBackupInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContinuousBackupInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ContinuousBackupInfo;
+
+                    /**
+                     * Creates a plain object from a ContinuousBackupInfo message. Also converts values to other types if specified.
+                     * @param message ContinuousBackupInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ContinuousBackupInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContinuousBackupInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContinuousBackupInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BackupSource. */
                 interface IBackupSource {
 
@@ -1142,6 +1378,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ContinuousBackupSource. */
+                interface IContinuousBackupSource {
+
+                    /** ContinuousBackupSource cluster */
+                    cluster?: (string|null);
+
+                    /** ContinuousBackupSource pointInTime */
+                    pointInTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ContinuousBackupSource. */
+                class ContinuousBackupSource implements IContinuousBackupSource {
+
+                    /**
+                     * Constructs a new ContinuousBackupSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IContinuousBackupSource);
+
+                    /** ContinuousBackupSource cluster. */
+                    public cluster: string;
+
+                    /** ContinuousBackupSource pointInTime. */
+                    public pointInTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ContinuousBackupSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContinuousBackupSource instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IContinuousBackupSource): google.cloud.alloydb.v1.ContinuousBackupSource;
+
+                    /**
+                     * Encodes the specified ContinuousBackupSource message. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupSource.verify|verify} messages.
+                     * @param message ContinuousBackupSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IContinuousBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContinuousBackupSource message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ContinuousBackupSource.verify|verify} messages.
+                     * @param message ContinuousBackupSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IContinuousBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContinuousBackupSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContinuousBackupSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ContinuousBackupSource;
+
+                    /**
+                     * Decodes a ContinuousBackupSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContinuousBackupSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ContinuousBackupSource;
+
+                    /**
+                     * Verifies a ContinuousBackupSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContinuousBackupSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContinuousBackupSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ContinuousBackupSource;
+
+                    /**
+                     * Creates a plain object from a ContinuousBackupSource message. Also converts values to other types if specified.
+                     * @param message ContinuousBackupSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ContinuousBackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContinuousBackupSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContinuousBackupSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Cluster. */
                 interface ICluster {
 
@@ -1207,6 +1546,12 @@ export namespace google {
 
                     /** Cluster encryptionInfo */
                     encryptionInfo?: (google.cloud.alloydb.v1.IEncryptionInfo|null);
+
+                    /** Cluster continuousBackupConfig */
+                    continuousBackupConfig?: (google.cloud.alloydb.v1.IContinuousBackupConfig|null);
+
+                    /** Cluster continuousBackupInfo */
+                    continuousBackupInfo?: (google.cloud.alloydb.v1.IContinuousBackupInfo|null);
 
                     /** Cluster secondaryConfig */
                     secondaryConfig?: (google.cloud.alloydb.v1.Cluster.ISecondaryConfig|null);
@@ -1286,6 +1631,12 @@ export namespace google {
 
                     /** Cluster encryptionInfo. */
                     public encryptionInfo?: (google.cloud.alloydb.v1.IEncryptionInfo|null);
+
+                    /** Cluster continuousBackupConfig. */
+                    public continuousBackupConfig?: (google.cloud.alloydb.v1.IContinuousBackupConfig|null);
+
+                    /** Cluster continuousBackupInfo. */
+                    public continuousBackupInfo?: (google.cloud.alloydb.v1.IContinuousBackupInfo|null);
 
                     /** Cluster secondaryConfig. */
                     public secondaryConfig?: (google.cloud.alloydb.v1.Cluster.ISecondaryConfig|null);
@@ -2852,6 +3203,131 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a User. */
+                interface IUser {
+
+                    /** User name */
+                    name?: (string|null);
+
+                    /** User password */
+                    password?: (string|null);
+
+                    /** User databaseRoles */
+                    databaseRoles?: (string[]|null);
+
+                    /** User userType */
+                    userType?: (google.cloud.alloydb.v1.User.UserType|keyof typeof google.cloud.alloydb.v1.User.UserType|null);
+                }
+
+                /** Represents a User. */
+                class User implements IUser {
+
+                    /**
+                     * Constructs a new User.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IUser);
+
+                    /** User name. */
+                    public name: string;
+
+                    /** User password. */
+                    public password: string;
+
+                    /** User databaseRoles. */
+                    public databaseRoles: string[];
+
+                    /** User userType. */
+                    public userType: (google.cloud.alloydb.v1.User.UserType|keyof typeof google.cloud.alloydb.v1.User.UserType);
+
+                    /**
+                     * Creates a new User instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns User instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IUser): google.cloud.alloydb.v1.User;
+
+                    /**
+                     * Encodes the specified User message. Does not implicitly {@link google.cloud.alloydb.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.User;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.User;
+
+                    /**
+                     * Verifies a User message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns User
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.User;
+
+                    /**
+                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * @param message User
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this User to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for User
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace User {
+
+                    /** UserType enum. */
+                    enum UserType {
+                        USER_TYPE_UNSPECIFIED = 0,
+                        ALLOYDB_BUILT_IN = 1,
+                        ALLOYDB_IAM_USER = 2
+                    }
+                }
+
                 /** Represents an AlloyDBAdmin */
                 class AlloyDBAdmin extends $protobuf.rpc.Service {
 
@@ -2943,6 +3419,20 @@ export namespace google {
                     public deleteCluster(request: google.cloud.alloydb.v1.IDeleteClusterRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls PromoteCluster.
+                     * @param request PromoteClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public promoteCluster(request: google.cloud.alloydb.v1.IPromoteClusterRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.PromoteClusterCallback): void;
+
+                    /**
+                     * Calls PromoteCluster.
+                     * @param request PromoteClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public promoteCluster(request: google.cloud.alloydb.v1.IPromoteClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls RestoreCluster.
                      * @param request RestoreClusterRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2955,6 +3445,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public restoreCluster(request: google.cloud.alloydb.v1.IRestoreClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateSecondaryCluster.
+                     * @param request CreateSecondaryClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSecondaryCluster(request: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryClusterCallback): void;
+
+                    /**
+                     * Calls CreateSecondaryCluster.
+                     * @param request CreateSecondaryClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSecondaryCluster(request: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ListInstances.
@@ -2997,6 +3501,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createInstance(request: google.cloud.alloydb.v1.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateSecondaryInstance.
+                     * @param request CreateSecondaryInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSecondaryInstance(request: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryInstanceCallback): void;
+
+                    /**
+                     * Calls CreateSecondaryInstance.
+                     * @param request CreateSecondaryInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSecondaryInstance(request: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls BatchCreateInstances.
@@ -3053,6 +3571,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public failoverInstance(request: google.cloud.alloydb.v1.IFailoverInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls InjectFault.
+                     * @param request InjectFaultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public injectFault(request: google.cloud.alloydb.v1.IInjectFaultRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.InjectFaultCallback): void;
+
+                    /**
+                     * Calls InjectFault.
+                     * @param request InjectFaultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public injectFault(request: google.cloud.alloydb.v1.IInjectFaultRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls RestartInstance.
@@ -3151,6 +3683,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listSupportedDatabaseFlags(request: google.cloud.alloydb.v1.IListSupportedDatabaseFlagsRequest): Promise<google.cloud.alloydb.v1.ListSupportedDatabaseFlagsResponse>;
+
+                    /**
+                     * Calls ListUsers.
+                     * @param request ListUsersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUsersResponse
+                     */
+                    public listUsers(request: google.cloud.alloydb.v1.IListUsersRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.ListUsersCallback): void;
+
+                    /**
+                     * Calls ListUsers.
+                     * @param request ListUsersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUsers(request: google.cloud.alloydb.v1.IListUsersRequest): Promise<google.cloud.alloydb.v1.ListUsersResponse>;
+
+                    /**
+                     * Calls GetUser.
+                     * @param request GetUserRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and User
+                     */
+                    public getUser(request: google.cloud.alloydb.v1.IGetUserRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.GetUserCallback): void;
+
+                    /**
+                     * Calls GetUser.
+                     * @param request GetUserRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getUser(request: google.cloud.alloydb.v1.IGetUserRequest): Promise<google.cloud.alloydb.v1.User>;
+
+                    /**
+                     * Calls CreateUser.
+                     * @param request CreateUserRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and User
+                     */
+                    public createUser(request: google.cloud.alloydb.v1.ICreateUserRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.CreateUserCallback): void;
+
+                    /**
+                     * Calls CreateUser.
+                     * @param request CreateUserRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createUser(request: google.cloud.alloydb.v1.ICreateUserRequest): Promise<google.cloud.alloydb.v1.User>;
+
+                    /**
+                     * Calls UpdateUser.
+                     * @param request UpdateUserRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and User
+                     */
+                    public updateUser(request: google.cloud.alloydb.v1.IUpdateUserRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.UpdateUserCallback): void;
+
+                    /**
+                     * Calls UpdateUser.
+                     * @param request UpdateUserRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateUser(request: google.cloud.alloydb.v1.IUpdateUserRequest): Promise<google.cloud.alloydb.v1.User>;
+
+                    /**
+                     * Calls DeleteUser.
+                     * @param request DeleteUserRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteUser(request: google.cloud.alloydb.v1.IDeleteUserRequest, callback: google.cloud.alloydb.v1.AlloyDBAdmin.DeleteUserCallback): void;
+
+                    /**
+                     * Calls DeleteUser.
+                     * @param request DeleteUserRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteUser(request: google.cloud.alloydb.v1.IDeleteUserRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace AlloyDBAdmin {
@@ -3191,11 +3793,25 @@ export namespace google {
                     type DeleteClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|promoteCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PromoteClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|restoreCluster}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type RestoreClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|createSecondaryCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSecondaryClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|listInstances}.
@@ -3217,6 +3833,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|createSecondaryInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSecondaryInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|batchCreateInstances}.
@@ -3245,6 +3868,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type FailoverInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|injectFault}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type InjectFaultCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|restartInstance}.
@@ -3294,6 +3924,41 @@ export namespace google {
                      * @param [response] ListSupportedDatabaseFlagsResponse
                      */
                     type ListSupportedDatabaseFlagsCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.ListSupportedDatabaseFlagsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|listUsers}.
+                     * @param error Error, if any
+                     * @param [response] ListUsersResponse
+                     */
+                    type ListUsersCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.ListUsersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|getUser}.
+                     * @param error Error, if any
+                     * @param [response] User
+                     */
+                    type GetUserCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.User) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|createUser}.
+                     * @param error Error, if any
+                     * @param [response] User
+                     */
+                    type CreateUserCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.User) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|updateUser}.
+                     * @param error Error, if any
+                     * @param [response] User
+                     */
+                    type UpdateUserCallback = (error: (Error|null), response?: google.cloud.alloydb.v1.User) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1.AlloyDBAdmin|deleteUser}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteUserCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a ListClustersRequest. */
@@ -3531,6 +4196,9 @@ export namespace google {
 
                     /** GetClusterRequest name */
                     name?: (string|null);
+
+                    /** GetClusterRequest view */
+                    view?: (google.cloud.alloydb.v1.ClusterView|keyof typeof google.cloud.alloydb.v1.ClusterView|null);
                 }
 
                 /** Represents a GetClusterRequest. */
@@ -3544,6 +4212,9 @@ export namespace google {
 
                     /** GetClusterRequest name. */
                     public name: string;
+
+                    /** GetClusterRequest view. */
+                    public view: (google.cloud.alloydb.v1.ClusterView|keyof typeof google.cloud.alloydb.v1.ClusterView);
 
                     /**
                      * Creates a new GetClusterRequest instance using the specified properties.
@@ -3617,6 +4288,127 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSecondaryClusterRequest. */
+                interface ICreateSecondaryClusterRequest {
+
+                    /** CreateSecondaryClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSecondaryClusterRequest clusterId */
+                    clusterId?: (string|null);
+
+                    /** CreateSecondaryClusterRequest cluster */
+                    cluster?: (google.cloud.alloydb.v1.ICluster|null);
+
+                    /** CreateSecondaryClusterRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateSecondaryClusterRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateSecondaryClusterRequest. */
+                class CreateSecondaryClusterRequest implements ICreateSecondaryClusterRequest {
+
+                    /**
+                     * Constructs a new CreateSecondaryClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest);
+
+                    /** CreateSecondaryClusterRequest parent. */
+                    public parent: string;
+
+                    /** CreateSecondaryClusterRequest clusterId. */
+                    public clusterId: string;
+
+                    /** CreateSecondaryClusterRequest cluster. */
+                    public cluster?: (google.cloud.alloydb.v1.ICluster|null);
+
+                    /** CreateSecondaryClusterRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateSecondaryClusterRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateSecondaryClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSecondaryClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest): google.cloud.alloydb.v1.CreateSecondaryClusterRequest;
+
+                    /**
+                     * Encodes the specified CreateSecondaryClusterRequest message. Does not implicitly {@link google.cloud.alloydb.v1.CreateSecondaryClusterRequest.verify|verify} messages.
+                     * @param message CreateSecondaryClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSecondaryClusterRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.CreateSecondaryClusterRequest.verify|verify} messages.
+                     * @param message CreateSecondaryClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.ICreateSecondaryClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSecondaryClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSecondaryClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.CreateSecondaryClusterRequest;
+
+                    /**
+                     * Decodes a CreateSecondaryClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSecondaryClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.CreateSecondaryClusterRequest;
+
+                    /**
+                     * Verifies a CreateSecondaryClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSecondaryClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSecondaryClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.CreateSecondaryClusterRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSecondaryClusterRequest message. Also converts values to other types if specified.
+                     * @param message CreateSecondaryClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.CreateSecondaryClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSecondaryClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSecondaryClusterRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3986,11 +4778,129 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PromoteClusterRequest. */
+                interface IPromoteClusterRequest {
+
+                    /** PromoteClusterRequest name */
+                    name?: (string|null);
+
+                    /** PromoteClusterRequest requestId */
+                    requestId?: (string|null);
+
+                    /** PromoteClusterRequest etag */
+                    etag?: (string|null);
+
+                    /** PromoteClusterRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a PromoteClusterRequest. */
+                class PromoteClusterRequest implements IPromoteClusterRequest {
+
+                    /**
+                     * Constructs a new PromoteClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IPromoteClusterRequest);
+
+                    /** PromoteClusterRequest name. */
+                    public name: string;
+
+                    /** PromoteClusterRequest requestId. */
+                    public requestId: string;
+
+                    /** PromoteClusterRequest etag. */
+                    public etag: string;
+
+                    /** PromoteClusterRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new PromoteClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PromoteClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IPromoteClusterRequest): google.cloud.alloydb.v1.PromoteClusterRequest;
+
+                    /**
+                     * Encodes the specified PromoteClusterRequest message. Does not implicitly {@link google.cloud.alloydb.v1.PromoteClusterRequest.verify|verify} messages.
+                     * @param message PromoteClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IPromoteClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PromoteClusterRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.PromoteClusterRequest.verify|verify} messages.
+                     * @param message PromoteClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IPromoteClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PromoteClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PromoteClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.PromoteClusterRequest;
+
+                    /**
+                     * Decodes a PromoteClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PromoteClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.PromoteClusterRequest;
+
+                    /**
+                     * Verifies a PromoteClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PromoteClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PromoteClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.PromoteClusterRequest;
+
+                    /**
+                     * Creates a plain object from a PromoteClusterRequest message. Also converts values to other types if specified.
+                     * @param message PromoteClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.PromoteClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PromoteClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PromoteClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RestoreClusterRequest. */
                 interface IRestoreClusterRequest {
 
                     /** RestoreClusterRequest backupSource */
                     backupSource?: (google.cloud.alloydb.v1.IBackupSource|null);
+
+                    /** RestoreClusterRequest continuousBackupSource */
+                    continuousBackupSource?: (google.cloud.alloydb.v1.IContinuousBackupSource|null);
 
                     /** RestoreClusterRequest parent */
                     parent?: (string|null);
@@ -4020,6 +4930,9 @@ export namespace google {
                     /** RestoreClusterRequest backupSource. */
                     public backupSource?: (google.cloud.alloydb.v1.IBackupSource|null);
 
+                    /** RestoreClusterRequest continuousBackupSource. */
+                    public continuousBackupSource?: (google.cloud.alloydb.v1.IContinuousBackupSource|null);
+
                     /** RestoreClusterRequest parent. */
                     public parent: string;
 
@@ -4036,7 +4949,7 @@ export namespace google {
                     public validateOnly: boolean;
 
                     /** RestoreClusterRequest source. */
-                    public source?: "backupSource";
+                    public source?: ("backupSource"|"continuousBackupSource");
 
                     /**
                      * Creates a new RestoreClusterRequest instance using the specified properties.
@@ -4564,6 +5477,127 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSecondaryInstanceRequest. */
+                interface ICreateSecondaryInstanceRequest {
+
+                    /** CreateSecondaryInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSecondaryInstanceRequest instanceId */
+                    instanceId?: (string|null);
+
+                    /** CreateSecondaryInstanceRequest instance */
+                    instance?: (google.cloud.alloydb.v1.IInstance|null);
+
+                    /** CreateSecondaryInstanceRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateSecondaryInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateSecondaryInstanceRequest. */
+                class CreateSecondaryInstanceRequest implements ICreateSecondaryInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateSecondaryInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest);
+
+                    /** CreateSecondaryInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateSecondaryInstanceRequest instanceId. */
+                    public instanceId: string;
+
+                    /** CreateSecondaryInstanceRequest instance. */
+                    public instance?: (google.cloud.alloydb.v1.IInstance|null);
+
+                    /** CreateSecondaryInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateSecondaryInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateSecondaryInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSecondaryInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest): google.cloud.alloydb.v1.CreateSecondaryInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateSecondaryInstanceRequest message. Does not implicitly {@link google.cloud.alloydb.v1.CreateSecondaryInstanceRequest.verify|verify} messages.
+                     * @param message CreateSecondaryInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSecondaryInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.CreateSecondaryInstanceRequest.verify|verify} messages.
+                     * @param message CreateSecondaryInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.ICreateSecondaryInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSecondaryInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSecondaryInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.CreateSecondaryInstanceRequest;
+
+                    /**
+                     * Decodes a CreateSecondaryInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSecondaryInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.CreateSecondaryInstanceRequest;
+
+                    /**
+                     * Verifies a CreateSecondaryInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSecondaryInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSecondaryInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.CreateSecondaryInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSecondaryInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateSecondaryInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.CreateSecondaryInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSecondaryInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSecondaryInstanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5448,6 +6482,130 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InjectFaultRequest. */
+                interface IInjectFaultRequest {
+
+                    /** InjectFaultRequest faultType */
+                    faultType?: (google.cloud.alloydb.v1.InjectFaultRequest.FaultType|keyof typeof google.cloud.alloydb.v1.InjectFaultRequest.FaultType|null);
+
+                    /** InjectFaultRequest name */
+                    name?: (string|null);
+
+                    /** InjectFaultRequest requestId */
+                    requestId?: (string|null);
+
+                    /** InjectFaultRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an InjectFaultRequest. */
+                class InjectFaultRequest implements IInjectFaultRequest {
+
+                    /**
+                     * Constructs a new InjectFaultRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IInjectFaultRequest);
+
+                    /** InjectFaultRequest faultType. */
+                    public faultType: (google.cloud.alloydb.v1.InjectFaultRequest.FaultType|keyof typeof google.cloud.alloydb.v1.InjectFaultRequest.FaultType);
+
+                    /** InjectFaultRequest name. */
+                    public name: string;
+
+                    /** InjectFaultRequest requestId. */
+                    public requestId: string;
+
+                    /** InjectFaultRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new InjectFaultRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InjectFaultRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IInjectFaultRequest): google.cloud.alloydb.v1.InjectFaultRequest;
+
+                    /**
+                     * Encodes the specified InjectFaultRequest message. Does not implicitly {@link google.cloud.alloydb.v1.InjectFaultRequest.verify|verify} messages.
+                     * @param message InjectFaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IInjectFaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InjectFaultRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.InjectFaultRequest.verify|verify} messages.
+                     * @param message InjectFaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IInjectFaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InjectFaultRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InjectFaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.InjectFaultRequest;
+
+                    /**
+                     * Decodes an InjectFaultRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InjectFaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.InjectFaultRequest;
+
+                    /**
+                     * Verifies an InjectFaultRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InjectFaultRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InjectFaultRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.InjectFaultRequest;
+
+                    /**
+                     * Creates a plain object from an InjectFaultRequest message. Also converts values to other types if specified.
+                     * @param message InjectFaultRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.InjectFaultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InjectFaultRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InjectFaultRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InjectFaultRequest {
+
+                    /** FaultType enum. */
+                    enum FaultType {
+                        FAULT_TYPE_UNSPECIFIED = 0,
+                        STOP_VM = 1
+                    }
                 }
 
                 /** Properties of a RestartInstanceRequest. */
@@ -6591,6 +7749,684 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsersRequest. */
+                interface IListUsersRequest {
+
+                    /** ListUsersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUsersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUsersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListUsersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListUsersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListUsersRequest. */
+                class ListUsersRequest implements IListUsersRequest {
+
+                    /**
+                     * Constructs a new ListUsersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IListUsersRequest);
+
+                    /** ListUsersRequest parent. */
+                    public parent: string;
+
+                    /** ListUsersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUsersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListUsersRequest filter. */
+                    public filter: string;
+
+                    /** ListUsersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListUsersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsersRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IListUsersRequest): google.cloud.alloydb.v1.ListUsersRequest;
+
+                    /**
+                     * Encodes the specified ListUsersRequest message. Does not implicitly {@link google.cloud.alloydb.v1.ListUsersRequest.verify|verify} messages.
+                     * @param message ListUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IListUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsersRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ListUsersRequest.verify|verify} messages.
+                     * @param message ListUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IListUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ListUsersRequest;
+
+                    /**
+                     * Decodes a ListUsersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ListUsersRequest;
+
+                    /**
+                     * Verifies a ListUsersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ListUsersRequest;
+
+                    /**
+                     * Creates a plain object from a ListUsersRequest message. Also converts values to other types if specified.
+                     * @param message ListUsersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ListUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsersResponse. */
+                interface IListUsersResponse {
+
+                    /** ListUsersResponse users */
+                    users?: (google.cloud.alloydb.v1.IUser[]|null);
+
+                    /** ListUsersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListUsersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListUsersResponse. */
+                class ListUsersResponse implements IListUsersResponse {
+
+                    /**
+                     * Constructs a new ListUsersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IListUsersResponse);
+
+                    /** ListUsersResponse users. */
+                    public users: google.cloud.alloydb.v1.IUser[];
+
+                    /** ListUsersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListUsersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListUsersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsersResponse instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IListUsersResponse): google.cloud.alloydb.v1.ListUsersResponse;
+
+                    /**
+                     * Encodes the specified ListUsersResponse message. Does not implicitly {@link google.cloud.alloydb.v1.ListUsersResponse.verify|verify} messages.
+                     * @param message ListUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsersResponse message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.ListUsersResponse.verify|verify} messages.
+                     * @param message ListUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.ListUsersResponse;
+
+                    /**
+                     * Decodes a ListUsersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.ListUsersResponse;
+
+                    /**
+                     * Verifies a ListUsersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.ListUsersResponse;
+
+                    /**
+                     * Creates a plain object from a ListUsersResponse message. Also converts values to other types if specified.
+                     * @param message ListUsersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.ListUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetUserRequest. */
+                interface IGetUserRequest {
+
+                    /** GetUserRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetUserRequest. */
+                class GetUserRequest implements IGetUserRequest {
+
+                    /**
+                     * Constructs a new GetUserRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IGetUserRequest);
+
+                    /** GetUserRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetUserRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetUserRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IGetUserRequest): google.cloud.alloydb.v1.GetUserRequest;
+
+                    /**
+                     * Encodes the specified GetUserRequest message. Does not implicitly {@link google.cloud.alloydb.v1.GetUserRequest.verify|verify} messages.
+                     * @param message GetUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IGetUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetUserRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.GetUserRequest.verify|verify} messages.
+                     * @param message GetUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IGetUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetUserRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.GetUserRequest;
+
+                    /**
+                     * Decodes a GetUserRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.GetUserRequest;
+
+                    /**
+                     * Verifies a GetUserRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetUserRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetUserRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.GetUserRequest;
+
+                    /**
+                     * Creates a plain object from a GetUserRequest message. Also converts values to other types if specified.
+                     * @param message GetUserRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.GetUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetUserRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetUserRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateUserRequest. */
+                interface ICreateUserRequest {
+
+                    /** CreateUserRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateUserRequest userId */
+                    userId?: (string|null);
+
+                    /** CreateUserRequest user */
+                    user?: (google.cloud.alloydb.v1.IUser|null);
+
+                    /** CreateUserRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateUserRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateUserRequest. */
+                class CreateUserRequest implements ICreateUserRequest {
+
+                    /**
+                     * Constructs a new CreateUserRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.ICreateUserRequest);
+
+                    /** CreateUserRequest parent. */
+                    public parent: string;
+
+                    /** CreateUserRequest userId. */
+                    public userId: string;
+
+                    /** CreateUserRequest user. */
+                    public user?: (google.cloud.alloydb.v1.IUser|null);
+
+                    /** CreateUserRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateUserRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateUserRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateUserRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.ICreateUserRequest): google.cloud.alloydb.v1.CreateUserRequest;
+
+                    /**
+                     * Encodes the specified CreateUserRequest message. Does not implicitly {@link google.cloud.alloydb.v1.CreateUserRequest.verify|verify} messages.
+                     * @param message CreateUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.ICreateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateUserRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.CreateUserRequest.verify|verify} messages.
+                     * @param message CreateUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.ICreateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateUserRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.CreateUserRequest;
+
+                    /**
+                     * Decodes a CreateUserRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.CreateUserRequest;
+
+                    /**
+                     * Verifies a CreateUserRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateUserRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateUserRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.CreateUserRequest;
+
+                    /**
+                     * Creates a plain object from a CreateUserRequest message. Also converts values to other types if specified.
+                     * @param message CreateUserRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.CreateUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateUserRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateUserRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateUserRequest. */
+                interface IUpdateUserRequest {
+
+                    /** UpdateUserRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateUserRequest user */
+                    user?: (google.cloud.alloydb.v1.IUser|null);
+
+                    /** UpdateUserRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateUserRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateUserRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents an UpdateUserRequest. */
+                class UpdateUserRequest implements IUpdateUserRequest {
+
+                    /**
+                     * Constructs a new UpdateUserRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IUpdateUserRequest);
+
+                    /** UpdateUserRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateUserRequest user. */
+                    public user?: (google.cloud.alloydb.v1.IUser|null);
+
+                    /** UpdateUserRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateUserRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateUserRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new UpdateUserRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateUserRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IUpdateUserRequest): google.cloud.alloydb.v1.UpdateUserRequest;
+
+                    /**
+                     * Encodes the specified UpdateUserRequest message. Does not implicitly {@link google.cloud.alloydb.v1.UpdateUserRequest.verify|verify} messages.
+                     * @param message UpdateUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IUpdateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateUserRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.UpdateUserRequest.verify|verify} messages.
+                     * @param message UpdateUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IUpdateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateUserRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.UpdateUserRequest;
+
+                    /**
+                     * Decodes an UpdateUserRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.UpdateUserRequest;
+
+                    /**
+                     * Verifies an UpdateUserRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateUserRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateUserRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.UpdateUserRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateUserRequest message. Also converts values to other types if specified.
+                     * @param message UpdateUserRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.UpdateUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateUserRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateUserRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteUserRequest. */
+                interface IDeleteUserRequest {
+
+                    /** DeleteUserRequest name */
+                    name?: (string|null);
+
+                    /** DeleteUserRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteUserRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a DeleteUserRequest. */
+                class DeleteUserRequest implements IDeleteUserRequest {
+
+                    /**
+                     * Constructs a new DeleteUserRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1.IDeleteUserRequest);
+
+                    /** DeleteUserRequest name. */
+                    public name: string;
+
+                    /** DeleteUserRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteUserRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new DeleteUserRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteUserRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1.IDeleteUserRequest): google.cloud.alloydb.v1.DeleteUserRequest;
+
+                    /**
+                     * Encodes the specified DeleteUserRequest message. Does not implicitly {@link google.cloud.alloydb.v1.DeleteUserRequest.verify|verify} messages.
+                     * @param message DeleteUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1.IDeleteUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteUserRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.DeleteUserRequest.verify|verify} messages.
+                     * @param message DeleteUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1.IDeleteUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteUserRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.DeleteUserRequest;
+
+                    /**
+                     * Decodes a DeleteUserRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.DeleteUserRequest;
+
+                    /**
+                     * Verifies a DeleteUserRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteUserRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteUserRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.DeleteUserRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteUserRequest message. Also converts values to other types if specified.
+                     * @param message DeleteUserRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1.DeleteUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteUserRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteUserRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -19,6 +19,20 @@
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
                   "nested": {
+                    "InstanceView": {
+                      "values": {
+                        "INSTANCE_VIEW_UNSPECIFIED": 0,
+                        "INSTANCE_VIEW_BASIC": 1,
+                        "INSTANCE_VIEW_FULL": 2
+                      }
+                    },
+                    "ClusterView": {
+                      "values": {
+                        "CLUSTER_VIEW_UNSPECIFIED": 0,
+                        "CLUSTER_VIEW_BASIC": 1,
+                        "CLUSTER_VIEW_CONTINUOUS_BACKUP": 2
+                      }
+                    },
                     "DatabaseVersion": {
                       "valuesOptions": {
                         "POSTGRES_13": {
@@ -29,13 +43,6 @@
                         "DATABASE_VERSION_UNSPECIFIED": 0,
                         "POSTGRES_13": 1,
                         "POSTGRES_14": 2
-                      }
-                    },
-                    "InstanceView": {
-                      "values": {
-                        "INSTANCE_VIEW_UNSPECIFIED": 0,
-                        "INSTANCE_VIEW_BASIC": 1,
-                        "INSTANCE_VIEW_FULL": 2
                       }
                     },
                     "UserPassword": {
@@ -139,11 +146,24 @@
                       },
                       "nested": {
                         "SslMode": {
+                          "valuesOptions": {
+                            "SSL_MODE_ALLOW": {
+                              "deprecated": true
+                            },
+                            "SSL_MODE_REQUIRE": {
+                              "deprecated": true
+                            },
+                            "SSL_MODE_VERIFY_CA": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "SSL_MODE_UNSPECIFIED": 0,
                             "SSL_MODE_ALLOW": 1,
                             "SSL_MODE_REQUIRE": 2,
-                            "SSL_MODE_VERIFY_CA": 3
+                            "SSL_MODE_VERIFY_CA": 3,
+                            "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 4,
+                            "ENCRYPTED_ONLY": 5
                           }
                         },
                         "CaSource": {
@@ -247,6 +267,65 @@
                         }
                       }
                     },
+                    "ContinuousBackupConfig": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "recoveryWindowDays": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ContinuousBackupInfo": {
+                      "fields": {
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enabledTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "schedule": {
+                          "rule": "repeated",
+                          "type": "google.type.DayOfWeek",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "earliestRestorableTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "BackupSource": {
                       "fields": {
                         "backupUid": {
@@ -262,6 +341,24 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "alloydb.googleapis.com/Backup"
+                          }
+                        }
+                      }
+                    },
+                    "ContinuousBackupSource": {
+                      "fields": {
+                        "cluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pointInTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -397,7 +494,10 @@
                         },
                         "sslConfig": {
                           "type": "SslConfig",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "encryptionConfig": {
                           "type": "EncryptionConfig",
@@ -409,6 +509,20 @@
                         "encryptionInfo": {
                           "type": "EncryptionInfo",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "continuousBackupConfig": {
+                          "type": "ContinuousBackupConfig",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "continuousBackupInfo": {
+                          "type": "ContinuousBackupInfo",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -938,6 +1052,53 @@
                         }
                       }
                     },
+                    "User": {
+                      "options": {
+                        "(google.api.resource).type": "alloydb.googleapis.com/User",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/users/{user}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "databaseRoles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userType": {
+                          "type": "UserType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UserType": {
+                          "values": {
+                            "USER_TYPE_UNSPECIFIED": 0,
+                            "ALLOYDB_BUILT_IN": 1,
+                            "ALLOYDB_IAM_USER": 2
+                          }
+                        }
+                      }
+                    },
                     "AlloyDBAdmin": {
                       "options": {
                         "(google.api.default_host)": "alloydb.googleapis.com",
@@ -1062,6 +1223,34 @@
                             }
                           ]
                         },
+                        "PromoteCluster": {
+                          "requestType": "PromoteClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:promote",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/clusters/*}:promote",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "RestoreCluster": {
                           "requestType": "RestoreClusterRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1077,6 +1266,34 @@
                                 "post": "/v1/{parent=projects/*/locations/*}/clusters:restore",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateSecondaryCluster": {
+                          "requestType": "CreateSecondaryClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/clusters:createsecondary",
+                            "(google.api.http).body": "cluster",
+                            "(google.api.method_signature)": "parent,cluster,cluster_id",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/clusters:createsecondary",
+                                "body": "cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,cluster,cluster_id"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1136,6 +1353,34 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*/locations/*/clusters/*}/instances",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance,instance_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateSecondaryInstance": {
+                          "requestType": "CreateSecondaryInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/clusters/*}/instances:createsecondary",
+                            "(google.api.http).body": "instance",
+                            "(google.api.method_signature)": "parent,instance,instance_id",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/clusters/*}/instances:createsecondary",
                                 "body": "instance"
                               }
                             },
@@ -1247,6 +1492,34 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "InjectFault": {
+                          "requestType": "InjectFaultRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*/instances/*}:injectFault",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "fault_type,name",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/clusters/*/instances/*}:injectFault",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "fault_type,name"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1419,6 +1692,100 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "ListUsers": {
+                          "requestType": "ListUsersRequest",
+                          "responseType": "ListUsersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/clusters/*}/users",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/clusters/*}/users"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetUser": {
+                          "requestType": "GetUserRequest",
+                          "responseType": "User",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/users/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/clusters/*/users/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateUser": {
+                          "requestType": "CreateUserRequest",
+                          "responseType": "User",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/clusters/*}/users",
+                            "(google.api.http).body": "user",
+                            "(google.api.method_signature)": "parent,user,user_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/clusters/*}/users",
+                                "body": "user"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user,user_id"
+                            }
+                          ]
+                        },
+                        "UpdateUser": {
+                          "requestType": "UpdateUserRequest",
+                          "responseType": "User",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{user.name=projects/*/locations/*/clusters/*/users/*}",
+                            "(google.api.http).body": "user",
+                            "(google.api.method_signature)": "user,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{user.name=projects/*/locations/*/clusters/*/users/*}",
+                                "body": "user"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteUser": {
+                          "requestType": "DeleteUserRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/users/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/clusters/*/users/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1485,6 +1852,53 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "view": {
+                          "type": "ClusterView",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSecondaryClusterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "clusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cluster": {
+                          "type": "Cluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1608,11 +2022,45 @@
                         }
                       }
                     },
+                    "PromoteClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "RestoreClusterRequest": {
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "backupSource"
+                            "backupSource",
+                            "continuousBackupSource"
                           ]
                         }
                       },
@@ -1620,6 +2068,10 @@
                         "backupSource": {
                           "type": "BackupSource",
                           "id": 4
+                        },
+                        "continuousBackupSource": {
+                          "type": "ContinuousBackupSource",
+                          "id": 8
                         },
                         "parent": {
                           "type": "string",
@@ -1731,6 +2183,46 @@
                       }
                     },
                     "CreateInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/Instance"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSecondaryInstanceRequest": {
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -1958,6 +2450,47 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "InjectFaultRequest": {
+                      "fields": {
+                        "faultType": {
+                          "type": "FaultType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FaultType": {
+                          "values": {
+                            "FAULT_TYPE_UNSPECIFIED": 0,
+                            "STOP_VM": 1
                           }
                         }
                       }
@@ -2254,6 +2787,181 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListUsersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/User"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUsersResponse": {
+                      "fields": {
+                        "users": {
+                          "rule": "repeated",
+                          "type": "User",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetUserRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/User"
+                          }
+                        }
+                      }
+                    },
+                    "CreateUserRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/User"
+                          }
+                        },
+                        "userId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "user": {
+                          "type": "User",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "user": {
+                          "type": "User",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteUserRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/User"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
