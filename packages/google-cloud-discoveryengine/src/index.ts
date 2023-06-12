@@ -19,25 +19,22 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const CompletionServiceClient = v1beta.CompletionServiceClient;
-type CompletionServiceClient = v1beta.CompletionServiceClient;
-const DocumentServiceClient = v1beta.DocumentServiceClient;
-type DocumentServiceClient = v1beta.DocumentServiceClient;
-const RecommendationServiceClient = v1beta.RecommendationServiceClient;
-type RecommendationServiceClient = v1beta.RecommendationServiceClient;
-const SchemaServiceClient = v1beta.SchemaServiceClient;
-type SchemaServiceClient = v1beta.SchemaServiceClient;
-const SearchServiceClient = v1beta.SearchServiceClient;
-type SearchServiceClient = v1beta.SearchServiceClient;
-const UserEventServiceClient = v1beta.UserEventServiceClient;
-type UserEventServiceClient = v1beta.UserEventServiceClient;
+const CompletionServiceClient = v1.CompletionServiceClient;
+type CompletionServiceClient = v1.CompletionServiceClient;
+const DocumentServiceClient = v1.DocumentServiceClient;
+type DocumentServiceClient = v1.DocumentServiceClient;
+const SchemaServiceClient = v1.SchemaServiceClient;
+type SchemaServiceClient = v1.SchemaServiceClient;
+const SearchServiceClient = v1.SearchServiceClient;
+type SearchServiceClient = v1.SearchServiceClient;
+const UserEventServiceClient = v1.UserEventServiceClient;
+type UserEventServiceClient = v1.UserEventServiceClient;
 
 export {
   v1,
   v1beta,
   CompletionServiceClient,
   DocumentServiceClient,
-  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   UserEventServiceClient,
@@ -47,7 +44,6 @@ export default {
   v1beta,
   CompletionServiceClient,
   DocumentServiceClient,
-  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   UserEventServiceClient,
