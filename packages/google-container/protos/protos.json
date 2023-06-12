@@ -7649,6 +7649,10 @@
                     "fleet": {
                       "type": "Fleet",
                       "id": 140
+                    },
+                    "securityPostureConfig": {
+                      "type": "SecurityPostureConfig",
+                      "id": 145
                     }
                   },
                   "nested": {
@@ -7746,6 +7750,52 @@
                         "WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED": 0,
                         "DISABLED": 1,
                         "BASIC": 2
+                      }
+                    }
+                  }
+                },
+                "SecurityPostureConfig": {
+                  "oneofs": {
+                    "_mode": {
+                      "oneof": [
+                        "mode"
+                      ]
+                    },
+                    "_vulnerabilityMode": {
+                      "oneof": [
+                        "vulnerabilityMode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "vulnerabilityMode": {
+                      "type": "VulnerabilityMode",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "BASIC": 2
+                      }
+                    },
+                    "VulnerabilityMode": {
+                      "values": {
+                        "VULNERABILITY_MODE_UNSPECIFIED": 0,
+                        "VULNERABILITY_DISABLED": 1,
+                        "VULNERABILITY_BASIC": 2
                       }
                     }
                   }
@@ -8008,12 +8058,20 @@
                       "type": "K8sBetaAPIConfig",
                       "id": 122
                     },
+                    "desiredSecurityPostureConfig": {
+                      "type": "SecurityPostureConfig",
+                      "id": 124
+                    },
                     "desiredEnableFqdnNetworkPolicy": {
                       "type": "bool",
                       "id": 126,
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "desiredAutopilotWorkloadPolicyConfig": {
+                      "type": "WorkloadPolicyConfig",
+                      "id": 128
                     },
                     "desiredK8sBetaApis": {
                       "type": "K8sBetaAPIConfig",
@@ -10064,6 +10122,11 @@
                       "oneof": [
                         "gpuSharingConfig"
                       ]
+                    },
+                    "_gpuDriverInstallationConfig": {
+                      "oneof": [
+                        "gpuDriverInstallationConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -10089,6 +10152,13 @@
                     "gpuSharingConfig": {
                       "type": "GPUSharingConfig",
                       "id": 5,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "gpuDriverInstallationConfig": {
+                      "type": "GPUDriverInstallationConfig",
+                      "id": 6,
                       "options": {
                         "proto3_optional": true
                       }
@@ -10121,6 +10191,34 @@
                       "values": {
                         "GPU_SHARING_STRATEGY_UNSPECIFIED": 0,
                         "TIME_SHARING": 1
+                      }
+                    }
+                  }
+                },
+                "GPUDriverInstallationConfig": {
+                  "oneofs": {
+                    "_gpuDriverVersion": {
+                      "oneof": [
+                        "gpuDriverVersion"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "gpuDriverVersion": {
+                      "type": "GPUDriverVersion",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "GPUDriverVersion": {
+                      "values": {
+                        "GPU_DRIVER_VERSION_UNSPECIFIED": 0,
+                        "INSTALLATION_DISABLED": 1,
+                        "DEFAULT": 2,
+                        "LATEST": 3
                       }
                     }
                   }
@@ -10910,6 +11008,28 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    },
+                    "workloadPolicyConfig": {
+                      "type": "WorkloadPolicyConfig",
+                      "id": 2
+                    }
+                  }
+                },
+                "WorkloadPolicyConfig": {
+                  "oneofs": {
+                    "_allowNetAdmin": {
+                      "oneof": [
+                        "allowNetAdmin"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "allowNetAdmin": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
