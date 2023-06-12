@@ -21,7 +21,7 @@
 'use strict';
 
 function main(servingConfig) {
-  // [START discoveryengine_v1beta_generated_SearchService_Search_async]
+  // [START discoveryengine_v1_generated_SearchService_Search_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -47,18 +47,18 @@ function main(servingConfig) {
    */
   // const query = 'abc123'
   /**
-   *  Maximum number of Document google.cloud.discoveryengine.v1beta.Document s
-   *  to return. If unspecified, defaults to a reasonable value. The maximum
-   *  allowed value is 100. Values above 100 will be coerced to 100.
+   *  Maximum number of Document google.cloud.discoveryengine.v1.Document s to
+   *  return. If unspecified, defaults to a reasonable value. The maximum allowed
+   *  value is 100. Values above 100 will be coerced to 100.
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const pageSize = 1234
   /**
    *  A page token received from a previous
-   *  SearchService.Search google.cloud.discoveryengine.v1beta.SearchService.Search 
+   *  SearchService.Search google.cloud.discoveryengine.v1.SearchService.Search 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  SearchService.Search google.cloud.discoveryengine.v1beta.SearchService.Search 
+   *  SearchService.Search google.cloud.discoveryengine.v1.SearchService.Search 
    *  must match the call that provided the page token. Otherwise, an
    *   `INVALID_ARGUMENT`  error is returned.
    */
@@ -66,44 +66,19 @@ function main(servingConfig) {
   /**
    *  A 0-indexed integer that specifies the current offset (that is, starting
    *  result location, amongst the
-   *  Document google.cloud.discoveryengine.v1beta.Document s deemed by the API
-   *  as relevant) in search results. This field is only considered if
-   *  page_token google.cloud.discoveryengine.v1beta.SearchRequest.page_token 
-   *  is unset.
+   *  Document google.cloud.discoveryengine.v1.Document s deemed by the API as
+   *  relevant) in search results. This field is only considered if
+   *  page_token google.cloud.discoveryengine.v1.SearchRequest.page_token  is
+   *  unset.
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const offset = 1234
-  /**
-   *  The filter syntax consists of an expression language for constructing a
-   *  predicate from one or more fields of the documents being filtered. Filter
-   *  expression is case-sensitive.
-   *  If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   */
-  // const filter = 'abc123'
-  /**
-   *  The order in which documents are returned. Document can be ordered by
-   *  a field in an Document google.cloud.discoveryengine.v1beta.Document 
-   *  object. Leave it unset if ordered by relevance. OrderBy expression is
-   *  case-sensitive.
-   *  If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   */
-  // const orderBy = 'abc123'
   /**
    *  Information about the end user.
    *  Highly recommended for analytics. The user_agent string in UserInfo will
    *  be used to deduce device_type for analytics.
    */
   // const userInfo = {}
-  /**
-   *  Facet specifications for faceted search. If empty, no facets are returned.
-   *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
-   *  error is returned.
-   */
-  // const facetSpecs = 1234
-  /**
-   *  Boost specification to boost certain documents.
-   */
-  // const boostSpec = {}
   /**
    *  Additional search parameters.
    *  For public website search only, supported values are:
@@ -131,9 +106,9 @@ function main(servingConfig) {
    *  the visitor logs in or out of the website.
    *  This field should NOT have a fixed value such as `unknown_visitor`.
    *  This should be the same identifier as
-   *  UserEvent.user_pseudo_id google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id 
+   *  UserEvent.user_pseudo_id google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id 
    *  and
-   *  CompleteQueryRequest.user_pseudo_id google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id 
+   *  CompleteQueryRequest.user_pseudo_id google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id 
    *  The field must be a UTF-8 encoded string with a length limit of 128
    *  characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    */
@@ -168,7 +143,7 @@ function main(servingConfig) {
   // const userLabels = 1234
 
   // Imports the Discoveryengine library
-  const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1;
 
   // Instantiates a client
   const discoveryengineClient = new SearchServiceClient();
@@ -187,7 +162,7 @@ function main(servingConfig) {
   }
 
   callSearch();
-  // [END discoveryengine_v1beta_generated_SearchService_Search_async]
+  // [END discoveryengine_v1_generated_SearchService_Search_async]
 }
 
 process.on('unhandledRejection', err => {

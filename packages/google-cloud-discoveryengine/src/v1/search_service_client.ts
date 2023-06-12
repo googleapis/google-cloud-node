@@ -31,7 +31,7 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/search_service_client_config.json`.
+ * `src/v1/search_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './search_service_client_config.json';
@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
 /**
  *  Service for search.
  * @class
- * @memberof v1beta
+ * @memberof v1
  */
 export class SearchServiceClient {
   private _terminated = false;
@@ -225,7 +225,7 @@ export class SearchServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.SearchService',
+      'google.cloud.discoveryengine.v1.SearchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -258,15 +258,14 @@ export class SearchServiceClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.SearchService.
+    // google.cloud.discoveryengine.v1.SearchService.
     this.searchServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.SearchService'
+            'google.cloud.discoveryengine.v1.SearchService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1beta
-            .SearchService,
+          (this._protos as any).google.cloud.discoveryengine.v1.SearchService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -376,53 +375,33 @@ export class SearchServiceClient {
    * @param {string} request.query
    *   Raw search query.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to a reasonable value. The maximum
-   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+   *   value is 100. Values above 100 will be coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   must match the call that provided the page token. Otherwise, an
    *    `INVALID_ARGUMENT`  error is returned.
    * @param {number} request.offset
    *   A 0-indexed integer that specifies the current offset (that is, starting
    *   result location, amongst the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
-   *   as relevant) in search results. This field is only considered if
-   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
-   *   is unset.
+   *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+   *   relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+   *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the documents being filtered. Filter
-   *   expression is case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.orderBy
-   *   The order in which documents are returned. Document can be ordered by
-   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
-   *   object. Leave it unset if ordered by relevance. OrderBy expression is
-   *   case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
    *   Highly recommended for analytics. The user_agent string in UserInfo will
    *   be used to deduce device_type for analytics.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
-   *   error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -433,10 +412,10 @@ export class SearchServiceClient {
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
    * @param {string} request.userPseudoId
@@ -448,13 +427,13 @@ export class SearchServiceClient {
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
    *   This should be the same identifier as
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
    *   and
-   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
    * @param {boolean} request.safeSearch
@@ -481,7 +460,7 @@ export class SearchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult}.
+   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -492,59 +471,53 @@ export class SearchServiceClient {
    *   for more details and examples.
    */
   search(
-    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
-      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+      protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1.ISearchResponse
     ]
   >;
   search(
-    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
-      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+      protos.google.cloud.discoveryengine.v1.ISearchRequest,
+      protos.google.cloud.discoveryengine.v1.ISearchResponse | null | undefined,
+      protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult
     >
   ): void;
   search(
-    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
-      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+      protos.google.cloud.discoveryengine.v1.ISearchRequest,
+      protos.google.cloud.discoveryengine.v1.ISearchResponse | null | undefined,
+      protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult
     >
   ): void;
   search(
-    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
-          | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+          protos.google.cloud.discoveryengine.v1.ISearchRequest,
+          | protos.google.cloud.discoveryengine.v1.ISearchResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+          protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
-      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+      protos.google.cloud.discoveryengine.v1.ISearchRequest,
+      protos.google.cloud.discoveryengine.v1.ISearchResponse | null | undefined,
+      protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
-      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+      protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1.ISearchResponse
     ]
   > | void {
     request = request || {};
@@ -584,53 +557,33 @@ export class SearchServiceClient {
    * @param {string} request.query
    *   Raw search query.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to a reasonable value. The maximum
-   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+   *   value is 100. Values above 100 will be coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   must match the call that provided the page token. Otherwise, an
    *    `INVALID_ARGUMENT`  error is returned.
    * @param {number} request.offset
    *   A 0-indexed integer that specifies the current offset (that is, starting
    *   result location, amongst the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
-   *   as relevant) in search results. This field is only considered if
-   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
-   *   is unset.
+   *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+   *   relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+   *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the documents being filtered. Filter
-   *   expression is case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.orderBy
-   *   The order in which documents are returned. Document can be ordered by
-   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
-   *   object. Leave it unset if ordered by relevance. OrderBy expression is
-   *   case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
    *   Highly recommended for analytics. The user_agent string in UserInfo will
    *   be used to deduce device_type for analytics.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
-   *   error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -641,10 +594,10 @@ export class SearchServiceClient {
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
    * @param {string} request.userPseudoId
@@ -656,13 +609,13 @@ export class SearchServiceClient {
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
    *   This should be the same identifier as
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
    *   and
-   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
    * @param {boolean} request.safeSearch
@@ -689,7 +642,7 @@ export class SearchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAsync()`
@@ -699,7 +652,7 @@ export class SearchServiceClient {
    *   for more details and examples.
    */
   searchStream(
-    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -740,53 +693,33 @@ export class SearchServiceClient {
    * @param {string} request.query
    *   Raw search query.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to a reasonable value. The maximum
-   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
+   *   value is 100. Values above 100 will be coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
    *   must match the call that provided the page token. Otherwise, an
    *    `INVALID_ARGUMENT`  error is returned.
    * @param {number} request.offset
    *   A 0-indexed integer that specifies the current offset (that is, starting
    *   result location, amongst the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
-   *   as relevant) in search results. This field is only considered if
-   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
-   *   is unset.
+   *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+   *   relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+   *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the documents being filtered. Filter
-   *   expression is case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {string} request.orderBy
-   *   The order in which documents are returned. Document can be ordered by
-   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
-   *   object. Leave it unset if ordered by relevance. OrderBy expression is
-   *   case-sensitive.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
    *   Highly recommended for analytics. The user_agent string in UserInfo will
    *   be used to deduce device_type for analytics.
-   * @param {number[]} request.facetSpecs
-   *   Facet specifications for faceted search. If empty, no facets are returned.
-   *
-   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
-   *   error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -797,10 +730,10 @@ export class SearchServiceClient {
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
    * @param {string} request.userPseudoId
@@ -812,13 +745,13 @@ export class SearchServiceClient {
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
    *   This should be the same identifier as
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
    *   and
-   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
    *
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
    * @param {boolean} request.safeSearch
@@ -847,18 +780,18 @@ export class SearchServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/search_service.search.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_SearchService_Search_async
+   * @example <caption>include:samples/generated/v1/search_service.search.js</caption>
+   * region_tag:discoveryengine_v1_generated_SearchService_Search_async
    */
   searchAsync(
-    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ISearchRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -874,7 +807,7 @@ export class SearchServiceClient {
       this.innerApiCalls['search'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult>;
   }
   // --------------------
   // -- Path templates --

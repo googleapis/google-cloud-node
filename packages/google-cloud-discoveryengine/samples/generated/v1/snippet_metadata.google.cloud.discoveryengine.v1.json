@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.discoveryengine.v1beta",
-                "version": "v1beta"
+                "id": "google.cloud.discoveryengine.v1",
+                "version": "v1"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async",
+            "regionTag": "discoveryengine_v1_generated_CompletionService_CompleteQuery_async",
             "title": "CompletionService completeQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Completes the specified user input with keyword suggestions.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "CompleteQuery",
-                "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.CompleteQuery",
+                "fullName": "google.cloud.discoveryengine.v1.CompletionService.CompleteQuery",
                 "async": true,
                 "parameters": [
                     {
@@ -48,26 +48,26 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.CompleteQueryResponse",
+                "resultType": ".google.cloud.discoveryengine.v1.CompleteQueryResponse",
                 "client": {
                     "shortName": "CompletionServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.CompletionServiceClient"
                 },
                 "method": {
                     "shortName": "CompleteQuery",
-                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.CompleteQuery",
+                    "fullName": "google.cloud.discoveryengine.v1.CompletionService.CompleteQuery",
                     "service": {
                         "shortName": "CompletionService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.CompletionService"
+                        "fullName": "google.cloud.discoveryengine.v1.CompletionService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_GetDocument_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_GetDocument_async",
             "title": "CompletionService getDocument Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a [Document][google.cloud.discoveryengine.v1beta.Document].",
+            "description": " Gets a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
             "file": "document_service.get_document.js",
             "language": "JAVASCRIPT",
@@ -80,7 +80,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetDocument",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.GetDocument",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.GetDocument",
                 "async": true,
                 "parameters": [
                     {
@@ -88,26 +88,26 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.Document",
+                "resultType": ".google.cloud.discoveryengine.v1.Document",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "GetDocument",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.GetDocument",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.GetDocument",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_ListDocuments_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_ListDocuments_async",
             "title": "CompletionService listDocuments Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a list of [Document][google.cloud.discoveryengine.v1beta.Document]s.",
+            "description": " Gets a list of [Document][google.cloud.discoveryengine.v1.Document]s.",
             "canonical": true,
             "file": "document_service.list_documents.js",
             "language": "JAVASCRIPT",
@@ -120,7 +120,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListDocuments",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.ListDocuments",
                 "async": true,
                 "parameters": [
                     {
@@ -136,26 +136,26 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.ListDocumentsResponse",
+                "resultType": ".google.cloud.discoveryengine.v1.ListDocumentsResponse",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "ListDocuments",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.ListDocuments",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_CreateDocument_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_CreateDocument_async",
             "title": "CompletionService createDocument Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a [Document][google.cloud.discoveryengine.v1beta.Document].",
+            "description": " Creates a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
             "file": "document_service.create_document.js",
             "language": "JAVASCRIPT",
@@ -168,7 +168,7 @@
             ],
             "clientMethod": {
                 "shortName": "CreateDocument",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.CreateDocument",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.CreateDocument",
                 "async": true,
                 "parameters": [
                     {
@@ -177,77 +177,77 @@
                     },
                     {
                         "name": "document",
-                        "type": ".google.cloud.discoveryengine.v1beta.Document"
+                        "type": ".google.cloud.discoveryengine.v1.Document"
                     },
                     {
                         "name": "document_id",
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.Document",
+                "resultType": ".google.cloud.discoveryengine.v1.Document",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "CreateDocument",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.CreateDocument",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.CreateDocument",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_UpdateDocument_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_UpdateDocument_async",
             "title": "CompletionService updateDocument Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a [Document][google.cloud.discoveryengine.v1beta.Document].",
+            "description": " Updates a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
             "file": "document_service.update_document.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "UpdateDocument",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.UpdateDocument",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.UpdateDocument",
                 "async": true,
                 "parameters": [
                     {
                         "name": "document",
-                        "type": ".google.cloud.discoveryengine.v1beta.Document"
+                        "type": ".google.cloud.discoveryengine.v1.Document"
                     },
                     {
                         "name": "allow_missing",
                         "type": "TYPE_BOOL"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.Document",
+                "resultType": ".google.cloud.discoveryengine.v1.Document",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "UpdateDocument",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.UpdateDocument",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.UpdateDocument",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_DeleteDocument_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_DeleteDocument_async",
             "title": "CompletionService deleteDocument Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a [Document][google.cloud.discoveryengine.v1beta.Document].",
+            "description": " Deletes a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
             "file": "document_service.delete_document.js",
             "language": "JAVASCRIPT",
@@ -260,7 +260,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteDocument",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.DeleteDocument",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.DeleteDocument",
                 "async": true,
                 "parameters": [
                     {
@@ -271,49 +271,49 @@
                 "resultType": ".google.protobuf.Empty",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "DeleteDocument",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.DeleteDocument",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.DeleteDocument",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_ImportDocuments_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_ImportDocuments_async",
             "title": "CompletionService importDocuments Sample",
             "origin": "API_DEFINITION",
-            "description": " Bulk import of multiple [Document][google.cloud.discoveryengine.v1beta.Document]s. Request processing may be synchronous. Non-existing items will be created. Note: It is possible for a subset of the [Document][google.cloud.discoveryengine.v1beta.Document]s to be successfully updated.",
+            "description": " Bulk import of multiple [Document][google.cloud.discoveryengine.v1.Document]s. Request processing may be synchronous. Non-existing items will be created. Note: It is possible for a subset of the [Document][google.cloud.discoveryengine.v1.Document]s to be successfully updated.",
             "canonical": true,
             "file": "document_service.import_documents.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 128,
+                    "end": 125,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "ImportDocuments",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.ImportDocuments",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.ImportDocuments",
                 "async": true,
                 "parameters": [
                     {
                         "name": "inline_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.InlineSource"
+                        "type": ".google.cloud.discoveryengine.v1.ImportDocumentsRequest.InlineSource"
                     },
                     {
                         "name": "gcs_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.GcsSource"
+                        "type": ".google.cloud.discoveryengine.v1.GcsSource"
                     },
                     {
                         "name": "bigquery_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.BigQuerySource"
+                        "type": ".google.cloud.discoveryengine.v1.BigQuerySource"
                     },
                     {
                         "name": "parent",
@@ -321,11 +321,11 @@
                     },
                     {
                         "name": "error_config",
-                        "type": ".google.cloud.discoveryengine.v1beta.ImportErrorConfig"
+                        "type": ".google.cloud.discoveryengine.v1.ImportErrorConfig"
                     },
                     {
                         "name": "reconciliation_mode",
-                        "type": ".google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.ReconciliationMode"
+                        "type": ".google.cloud.discoveryengine.v1.ImportDocumentsRequest.ReconciliationMode"
                     },
                     {
                         "name": "auto_generate_ids",
@@ -339,23 +339,23 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "ImportDocuments",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.ImportDocuments",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.ImportDocuments",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async",
+            "regionTag": "discoveryengine_v1_generated_DocumentService_PurgeDocuments_async",
             "title": "CompletionService purgeDocuments Sample",
             "origin": "API_DEFINITION",
-            "description": " Permanently deletes all selected [Document][google.cloud.discoveryengine.v1beta.Document]s in a branch. This process is asynchronous. Depending on the number of [Document][google.cloud.discoveryengine.v1beta.Document]s to be deleted, this operation can take hours to complete. Before the delete operation completes, some [Document][google.cloud.discoveryengine.v1beta.Document]s might still be returned by [DocumentService.GetDocument][google.cloud.discoveryengine.v1beta.DocumentService.GetDocument] or [DocumentService.ListDocuments][google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments]. To get a list of the [Document][google.cloud.discoveryengine.v1beta.Document]s to be deleted, set [PurgeDocumentsRequest.force][google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.force] to false.",
+            "description": " Permanently deletes all selected [Document][google.cloud.discoveryengine.v1.Document]s in a branch. This process is asynchronous. Depending on the number of [Document][google.cloud.discoveryengine.v1.Document]s to be deleted, this operation can take hours to complete. Before the delete operation completes, some [Document][google.cloud.discoveryengine.v1.Document]s might still be returned by [DocumentService.GetDocument][google.cloud.discoveryengine.v1.DocumentService.GetDocument] or [DocumentService.ListDocuments][google.cloud.discoveryengine.v1.DocumentService.ListDocuments]. To get a list of the [Document][google.cloud.discoveryengine.v1.Document]s to be deleted, set [PurgeDocumentsRequest.force][google.cloud.discoveryengine.v1.PurgeDocumentsRequest.force] to false.",
             "canonical": true,
             "file": "document_service.purge_documents.js",
             "language": "JAVASCRIPT",
@@ -368,7 +368,7 @@
             ],
             "clientMethod": {
                 "shortName": "PurgeDocuments",
-                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments",
                 "async": true,
                 "parameters": [
                     {
@@ -387,87 +387,23 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
                 },
                 "method": {
                     "shortName": "PurgeDocuments",
-                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments",
                     "service": {
                         "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_RecommendationService_Recommend_async",
-            "title": "CompletionService recommend Sample",
-            "origin": "API_DEFINITION",
-            "description": " Makes a recommendation, which requires a contextual user event.",
-            "canonical": true,
-            "file": "recommendation_service.recommend.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 149,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Recommend",
-                "fullName": "google.cloud.discoveryengine.v1beta.RecommendationService.Recommend",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "serving_config",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "user_event",
-                        "type": ".google.cloud.discoveryengine.v1beta.UserEvent"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "params",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "user_labels",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.RecommendResponse",
-                "client": {
-                    "shortName": "RecommendationServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.RecommendationServiceClient"
-                },
-                "method": {
-                    "shortName": "Recommend",
-                    "fullName": "google.cloud.discoveryengine.v1beta.RecommendationService.Recommend",
-                    "service": {
-                        "shortName": "RecommendationService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.RecommendationService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "discoveryengine_v1beta_generated_SchemaService_GetSchema_async",
+            "regionTag": "discoveryengine_v1_generated_SchemaService_GetSchema_async",
             "title": "CompletionService getSchema Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a [Schema][google.cloud.discoveryengine.v1beta.Schema].",
+            "description": " Gets a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
             "file": "schema_service.get_schema.js",
             "language": "JAVASCRIPT",
@@ -480,7 +416,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetSchema",
-                "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.GetSchema",
+                "fullName": "google.cloud.discoveryengine.v1.SchemaService.GetSchema",
                 "async": true,
                 "parameters": [
                     {
@@ -488,26 +424,26 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.Schema",
+                "resultType": ".google.cloud.discoveryengine.v1.Schema",
                 "client": {
                     "shortName": "SchemaServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaServiceClient"
                 },
                 "method": {
                     "shortName": "GetSchema",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.GetSchema",
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaService.GetSchema",
                     "service": {
                         "shortName": "SchemaService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SchemaService"
+                        "fullName": "google.cloud.discoveryengine.v1.SchemaService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_SchemaService_ListSchemas_async",
+            "regionTag": "discoveryengine_v1_generated_SchemaService_ListSchemas_async",
             "title": "CompletionService listSchemas Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a list of [Schema][google.cloud.discoveryengine.v1beta.Schema]s.",
+            "description": " Gets a list of [Schema][google.cloud.discoveryengine.v1.Schema]s.",
             "canonical": true,
             "file": "schema_service.list_schemas.js",
             "language": "JAVASCRIPT",
@@ -520,7 +456,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListSchemas",
-                "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas",
+                "fullName": "google.cloud.discoveryengine.v1.SchemaService.ListSchemas",
                 "async": true,
                 "parameters": [
                     {
@@ -536,39 +472,39 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.ListSchemasResponse",
+                "resultType": ".google.cloud.discoveryengine.v1.ListSchemasResponse",
                 "client": {
                     "shortName": "SchemaServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaServiceClient"
                 },
                 "method": {
                     "shortName": "ListSchemas",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas",
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaService.ListSchemas",
                     "service": {
                         "shortName": "SchemaService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SchemaService"
+                        "fullName": "google.cloud.discoveryengine.v1.SchemaService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_SchemaService_CreateSchema_async",
+            "regionTag": "discoveryengine_v1_generated_SchemaService_CreateSchema_async",
             "title": "CompletionService createSchema Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a [Schema][google.cloud.discoveryengine.v1beta.Schema].",
+            "description": " Creates a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
             "file": "schema_service.create_schema.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "CreateSchema",
-                "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.CreateSchema",
+                "fullName": "google.cloud.discoveryengine.v1.SchemaService.CreateSchema",
                 "async": true,
                 "parameters": [
                     {
@@ -577,7 +513,7 @@
                     },
                     {
                         "name": "schema",
-                        "type": ".google.cloud.discoveryengine.v1beta.Schema"
+                        "type": ".google.cloud.discoveryengine.v1.Schema"
                     },
                     {
                         "name": "schema_id",
@@ -587,41 +523,41 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "SchemaServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaServiceClient"
                 },
                 "method": {
                     "shortName": "CreateSchema",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.CreateSchema",
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaService.CreateSchema",
                     "service": {
                         "shortName": "SchemaService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SchemaService"
+                        "fullName": "google.cloud.discoveryengine.v1.SchemaService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_SchemaService_UpdateSchema_async",
+            "regionTag": "discoveryengine_v1_generated_SchemaService_UpdateSchema_async",
             "title": "CompletionService updateSchema Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a [Schema][google.cloud.discoveryengine.v1beta.Schema].",
+            "description": " Updates a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
             "file": "schema_service.update_schema.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "UpdateSchema",
-                "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.UpdateSchema",
+                "fullName": "google.cloud.discoveryengine.v1.SchemaService.UpdateSchema",
                 "async": true,
                 "parameters": [
                     {
                         "name": "schema",
-                        "type": ".google.cloud.discoveryengine.v1beta.Schema"
+                        "type": ".google.cloud.discoveryengine.v1.Schema"
                     },
                     {
                         "name": "allow_missing",
@@ -631,23 +567,23 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "SchemaServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaServiceClient"
                 },
                 "method": {
                     "shortName": "UpdateSchema",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.UpdateSchema",
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaService.UpdateSchema",
                     "service": {
                         "shortName": "SchemaService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SchemaService"
+                        "fullName": "google.cloud.discoveryengine.v1.SchemaService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async",
+            "regionTag": "discoveryengine_v1_generated_SchemaService_DeleteSchema_async",
             "title": "CompletionService deleteSchema Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a [Schema][google.cloud.discoveryengine.v1beta.Schema].",
+            "description": " Deletes a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
             "file": "schema_service.delete_schema.js",
             "language": "JAVASCRIPT",
@@ -660,7 +596,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteSchema",
-                "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.DeleteSchema",
+                "fullName": "google.cloud.discoveryengine.v1.SchemaService.DeleteSchema",
                 "async": true,
                 "parameters": [
                     {
@@ -671,20 +607,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "SchemaServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaServiceClient"
                 },
                 "method": {
                     "shortName": "DeleteSchema",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SchemaService.DeleteSchema",
+                    "fullName": "google.cloud.discoveryengine.v1.SchemaService.DeleteSchema",
                     "service": {
                         "shortName": "SchemaService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SchemaService"
+                        "fullName": "google.cloud.discoveryengine.v1.SchemaService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_SearchService_Search_async",
+            "regionTag": "discoveryengine_v1_generated_SearchService_Search_async",
             "title": "CompletionService search Sample",
             "origin": "API_DEFINITION",
             "description": " Performs a search.",
@@ -694,13 +630,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 189,
+                    "end": 164,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "Search",
-                "fullName": "google.cloud.discoveryengine.v1beta.SearchService.Search",
+                "fullName": "google.cloud.discoveryengine.v1.SearchService.Search",
                 "async": true,
                 "parameters": [
                     {
@@ -728,24 +664,8 @@
                         "type": "TYPE_INT32"
                     },
                     {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
                         "name": "user_info",
-                        "type": ".google.cloud.discoveryengine.v1beta.UserInfo"
-                    },
-                    {
-                        "name": "facet_specs",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "boost_spec",
-                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec"
+                        "type": ".google.cloud.discoveryengine.v1.UserInfo"
                     },
                     {
                         "name": "params",
@@ -753,11 +673,11 @@
                     },
                     {
                         "name": "query_expansion_spec",
-                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec"
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec"
                     },
                     {
                         "name": "spell_correction_spec",
-                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec"
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec"
                     },
                     {
                         "name": "user_pseudo_id",
@@ -765,7 +685,7 @@
                     },
                     {
                         "name": "content_search_spec",
-                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec"
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec"
                     },
                     {
                         "name": "safe_search",
@@ -776,23 +696,23 @@
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",
+                "resultType": ".google.cloud.discoveryengine.v1.SearchResponse",
                 "client": {
                     "shortName": "SearchServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SearchServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.SearchServiceClient"
                 },
                 "method": {
                     "shortName": "Search",
-                    "fullName": "google.cloud.discoveryengine.v1beta.SearchService.Search",
+                    "fullName": "google.cloud.discoveryengine.v1.SearchService.Search",
                     "service": {
                         "shortName": "SearchService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.SearchService"
+                        "fullName": "google.cloud.discoveryengine.v1.SearchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_async",
+            "regionTag": "discoveryengine_v1_generated_UserEventService_WriteUserEvent_async",
             "title": "CompletionService writeUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event.",
@@ -808,7 +728,7 @@
             ],
             "clientMethod": {
                 "shortName": "WriteUserEvent",
-                "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.WriteUserEvent",
+                "fullName": "google.cloud.discoveryengine.v1.UserEventService.WriteUserEvent",
                 "async": true,
                 "parameters": [
                     {
@@ -817,26 +737,26 @@
                     },
                     {
                         "name": "user_event",
-                        "type": ".google.cloud.discoveryengine.v1beta.UserEvent"
+                        "type": ".google.cloud.discoveryengine.v1.UserEvent"
                     }
                 ],
-                "resultType": ".google.cloud.discoveryengine.v1beta.UserEvent",
+                "resultType": ".google.cloud.discoveryengine.v1.UserEvent",
                 "client": {
                     "shortName": "UserEventServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventServiceClient"
                 },
                 "method": {
                     "shortName": "WriteUserEvent",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.WriteUserEvent",
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventService.WriteUserEvent",
                     "service": {
                         "shortName": "UserEventService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.UserEventService"
+                        "fullName": "google.cloud.discoveryengine.v1.UserEventService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async",
+            "regionTag": "discoveryengine_v1_generated_UserEventService_CollectUserEvent_async",
             "title": "CompletionService collectUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
@@ -852,7 +772,7 @@
             ],
             "clientMethod": {
                 "shortName": "CollectUserEvent",
-                "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.CollectUserEvent",
+                "fullName": "google.cloud.discoveryengine.v1.UserEventService.CollectUserEvent",
                 "async": true,
                 "parameters": [
                     {
@@ -875,20 +795,20 @@
                 "resultType": ".google.api.HttpBody",
                 "client": {
                     "shortName": "UserEventServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventServiceClient"
                 },
                 "method": {
                     "shortName": "CollectUserEvent",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.CollectUserEvent",
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventService.CollectUserEvent",
                     "service": {
                         "shortName": "UserEventService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.UserEventService"
+                        "fullName": "google.cloud.discoveryengine.v1.UserEventService"
                     }
                 }
             }
         },
         {
-            "regionTag": "discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async",
+            "regionTag": "discoveryengine_v1_generated_UserEventService_ImportUserEvents_async",
             "title": "CompletionService importUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of User events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully inserted. Operation.metadata is of type ImportMetadata.",
@@ -904,20 +824,20 @@
             ],
             "clientMethod": {
                 "shortName": "ImportUserEvents",
-                "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.ImportUserEvents",
+                "fullName": "google.cloud.discoveryengine.v1.UserEventService.ImportUserEvents",
                 "async": true,
                 "parameters": [
                     {
                         "name": "inline_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource"
+                        "type": ".google.cloud.discoveryengine.v1.ImportUserEventsRequest.InlineSource"
                     },
                     {
                         "name": "gcs_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.GcsSource"
+                        "type": ".google.cloud.discoveryengine.v1.GcsSource"
                     },
                     {
                         "name": "bigquery_source",
-                        "type": ".google.cloud.discoveryengine.v1beta.BigQuerySource"
+                        "type": ".google.cloud.discoveryengine.v1.BigQuerySource"
                     },
                     {
                         "name": "parent",
@@ -925,20 +845,20 @@
                     },
                     {
                         "name": "error_config",
-                        "type": ".google.cloud.discoveryengine.v1beta.ImportErrorConfig"
+                        "type": ".google.cloud.discoveryengine.v1.ImportErrorConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "UserEventServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventServiceClient"
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventServiceClient"
                 },
                 "method": {
                     "shortName": "ImportUserEvents",
-                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.ImportUserEvents",
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventService.ImportUserEvents",
                     "service": {
                         "shortName": "UserEventService",
-                        "fullName": "google.cloud.discoveryengine.v1beta.UserEventService"
+                        "fullName": "google.cloud.discoveryengine.v1.UserEventService"
                     }
                 }
             }
