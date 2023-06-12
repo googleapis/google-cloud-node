@@ -86,7 +86,8 @@ npm install @google-cloud/rapidmigrationassessment
 // const orderBy = 'abc123'
 
 // Imports the Rapidmigrationassessment library
-const {RapidMigrationAssessmentClient} = require('@google-cloud/rapidmigrationassessment').v1;
+const {RapidMigrationAssessmentClient} =
+  require('@google-cloud/rapidmigrationassessment').v1;
 
 // Instantiates a client
 const rapidmigrationassessmentClient = new RapidMigrationAssessmentClient();
@@ -98,9 +99,11 @@ async function callListCollectors() {
   };
 
   // Run request
-  const iterable = await rapidmigrationassessmentClient.listCollectorsAsync(request);
+  const iterable = await rapidmigrationassessmentClient.listCollectorsAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
