@@ -92,6 +92,16 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
+        "GetSubnet": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdateSubnet": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListNodeTypes": {
           "timeout_millis": 120000,
           "retry_codes_name": "unavailable",
@@ -183,6 +193,36 @@
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListVmwareEngineNetworks": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreatePrivateConnection": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetPrivateConnection": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListPrivateConnections": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "UpdatePrivateConnection": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeletePrivateConnection": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListPrivateConnectionPeeringRoutes": {
           "timeout_millis": 120000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"

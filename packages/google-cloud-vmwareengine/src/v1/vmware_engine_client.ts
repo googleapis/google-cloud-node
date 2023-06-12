@@ -211,6 +211,9 @@ export class VmwareEngineClient {
       privateCloudPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/privateClouds/{private_cloud}'
       ),
+      privateConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateConnections/{private_connection}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -260,6 +263,16 @@ export class VmwareEngineClient {
         'pageToken',
         'nextPageToken',
         'vmwareEngineNetworks'
+      ),
+      listPrivateConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'privateConnections'
+      ),
+      listPrivateConnectionPeeringRoutes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'peeringRoutes'
       ),
     };
 
@@ -383,6 +396,12 @@ export class VmwareEngineClient {
     const deleteClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const updateSubnetResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.Subnet'
+    ) as gax.protobuf.Type;
+    const updateSubnetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const resetNsxCredentialsResponse = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.PrivateCloud'
     ) as gax.protobuf.Type;
@@ -437,6 +456,24 @@ export class VmwareEngineClient {
     const deleteVmwareEngineNetworkMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createPrivateConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.PrivateConnection'
+    ) as gax.protobuf.Type;
+    const createPrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updatePrivateConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.PrivateConnection'
+    ) as gax.protobuf.Type;
+    const updatePrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deletePrivateConnectionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deletePrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPrivateCloud: new this._gaxModule.LongrunningDescriptor(
@@ -473,6 +510,11 @@ export class VmwareEngineClient {
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
         deleteClusterMetadata.decode.bind(deleteClusterMetadata)
+      ),
+      updateSubnet: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateSubnetResponse.decode.bind(updateSubnetResponse),
+        updateSubnetMetadata.decode.bind(updateSubnetMetadata)
       ),
       resetNsxCredentials: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -539,6 +581,33 @@ export class VmwareEngineClient {
           deleteVmwareEngineNetworkMetadata
         )
       ),
+      createPrivateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPrivateConnectionResponse.decode.bind(
+          createPrivateConnectionResponse
+        ),
+        createPrivateConnectionMetadata.decode.bind(
+          createPrivateConnectionMetadata
+        )
+      ),
+      updatePrivateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updatePrivateConnectionResponse.decode.bind(
+          updatePrivateConnectionResponse
+        ),
+        updatePrivateConnectionMetadata.decode.bind(
+          updatePrivateConnectionMetadata
+        )
+      ),
+      deletePrivateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePrivateConnectionResponse.decode.bind(
+          deletePrivateConnectionResponse
+        ),
+        deletePrivateConnectionMetadata.decode.bind(
+          deletePrivateConnectionMetadata
+        )
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -603,6 +672,8 @@ export class VmwareEngineClient {
       'updateCluster',
       'deleteCluster',
       'listSubnets',
+      'getSubnet',
+      'updateSubnet',
       'listNodeTypes',
       'getNodeType',
       'showNsxCredentials',
@@ -622,6 +693,12 @@ export class VmwareEngineClient {
       'deleteVmwareEngineNetwork',
       'getVmwareEngineNetwork',
       'listVmwareEngineNetworks',
+      'createPrivateConnection',
+      'getPrivateConnection',
+      'listPrivateConnections',
+      'updatePrivateConnection',
+      'deletePrivateConnection',
+      'listPrivateConnectionPeeringRoutes',
     ];
     for (const methodName of vmwareEngineStubMethods) {
       const callPromise = this.vmwareEngineStub.then(
@@ -891,6 +968,95 @@ export class VmwareEngineClient {
       });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
+  }
+  /**
+   * Gets details of a single subnet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the subnet to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/subnets/my-subnet`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.vmwareengine.v1.Subnet | Subnet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_subnet.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetSubnet_async
+   */
+  getSubnet(
+    request?: protos.google.cloud.vmwareengine.v1.IGetSubnetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ISubnet,
+      protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getSubnet(
+    request: protos.google.cloud.vmwareengine.v1.IGetSubnetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.ISubnet,
+      protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubnet(
+    request: protos.google.cloud.vmwareengine.v1.IGetSubnetRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.ISubnet,
+      protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubnet(
+    request?: protos.google.cloud.vmwareengine.v1.IGetSubnetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ISubnet,
+          | protos.google.cloud.vmwareengine.v1.IGetSubnetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.ISubnet,
+      protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ISubnet,
+      protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSubnet(request, options, callback);
   }
   /**
    * Gets details of a single `NodeType`.
@@ -1498,6 +1664,109 @@ export class VmwareEngineClient {
       options,
       callback
     );
+  }
+  /**
+   * Retrieves a `PrivateConnection` resource by its resource name. The resource
+   * contains details of the private connection, such as connected
+   * network, routing mode and state.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the private connection to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1/privateConnections/my-connection`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.vmwareengine.v1.PrivateConnection | PrivateConnection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetPrivateConnection_async
+   */
+  getPrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getPrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+      | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+      | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+          | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+      | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPrivateConnection(request, options, callback);
   }
 
   /**
@@ -2611,6 +2880,155 @@ export class VmwareEngineClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single subnet. Only fields specified in
+   * `update_mask` are applied.
+   *
+   * *Note*: This API is synchronous and always returns a successful
+   * `google.longrunning.Operation` (LRO). The returned LRO will only have
+   * `done` and `response` fields.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `Subnet` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.vmwareengine.v1.Subnet} request.subnet
+   *   Required. Subnet description.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_subnet.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateSubnet_async
+   */
+  updateSubnet(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateSubnetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSubnet(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateSubnetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSubnet(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateSubnetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSubnet(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateSubnetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ISubnet,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'subnet.name': request.subnet!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSubnet(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateSubnet()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_subnet.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateSubnet_async
+   */
+  async checkUpdateSubnetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.Subnet,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateSubnet,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.Subnet,
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >;
   }
@@ -4122,6 +4540,510 @@ export class VmwareEngineClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteVmwareEngineNetwork,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new private connection that can be used for accessing private
+   * Clouds.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to create the new private
+   *   connection in. Private connection is a regional resource.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/us-central1`
+   * @param {string} request.privateConnectionId
+   *   Required. The user-provided identifier of the new private connection.
+   *   This identifier must be unique among private connection resources
+   *   within the parent and becomes the final token in the name URI. The
+   *   identifier must meet the following requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {google.cloud.vmwareengine.v1.PrivateConnection} request.privateConnection
+   *   Required. The initial description of the new private connection.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreatePrivateConnection_async
+   */
+  createPrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createPrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createPrivateConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createPrivateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreatePrivateConnection_async
+   */
+  async checkCreatePrivateConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.PrivateConnection,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPrivateConnection,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.PrivateConnection,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Modifies a `PrivateConnection` resource. Only `description` and
+   * `routing_mode` fields can be updated. Only fields specified in `updateMask`
+   * are applied.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vmwareengine.v1.PrivateConnection} request.privateConnection
+   *   Required. Private connection description.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `PrivateConnection` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdatePrivateConnection_async
+   */
+  updatePrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updatePrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'private_connection.name': request.privateConnection!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updatePrivateConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updatePrivateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdatePrivateConnection_async
+   */
+  async checkUpdatePrivateConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.PrivateConnection,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePrivateConnection,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.PrivateConnection,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a `PrivateConnection` resource. When a private connection is
+   * deleted for a VMware Engine network, the connected network becomes
+   * inaccessible to that VMware Engine network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the private connection to be deleted.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1/privateConnections/my-connection`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeletePrivateConnection_async
+   */
+  deletePrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deletePrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePrivateConnection(
+    request: protos.google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePrivateConnection(
+    request?: protos.google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deletePrivateConnection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deletePrivateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_private_connection.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeletePrivateConnection_async
+   */
+  async checkDeletePrivateConnectionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePrivateConnection,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -6126,6 +7048,547 @@ export class VmwareEngineClient {
     ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork>;
   }
   /**
+   * Lists `PrivateConnection` resources in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to query for
+   *   private connections. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/us-central1`
+   * @param {number} request.pageSize
+   *   The maximum number of private connections to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of private connections, you can
+   *   exclude the ones named `example-connection` by specifying
+   *   `name != "example-connection"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-connection")
+   *   (createTime > "2022-09-22T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-connection-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-connection-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.vmwareengine.v1.PrivateConnection | PrivateConnection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnections(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection[],
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+    ]
+  >;
+  listPrivateConnections(
+    request: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection
+    >
+  ): void;
+  listPrivateConnections(
+    request: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection
+    >
+  ): void;
+  listPrivateConnections(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPrivateConnection[],
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPrivateConnections(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to query for
+   *   private connections. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/us-central1`
+   * @param {number} request.pageSize
+   *   The maximum number of private connections to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of private connections, you can
+   *   exclude the ones named `example-connection` by specifying
+   *   `name != "example-connection"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-connection")
+   *   (createTime > "2022-09-22T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-connection-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-connection-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.vmwareengine.v1.PrivateConnection | PrivateConnection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnectionsStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPrivateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnections.createStream(
+      this.innerApiCalls.listPrivateConnections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPrivateConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to query for
+   *   private connections. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/us-central1`
+   * @param {number} request.pageSize
+   *   The maximum number of private connections to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnections` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListPrivateConnections` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of private connections, you can
+   *   exclude the ones named `example-connection` by specifying
+   *   `name != "example-connection"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-connection")
+   *   (createTime > "2022-09-22T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-connection-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-connection-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.vmwareengine.v1.PrivateConnection | PrivateConnection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_private_connections.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListPrivateConnections_async
+   */
+  listPrivateConnectionsAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IPrivateConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPrivateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnections.asyncIterate(
+      this.innerApiCalls['listPrivateConnections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IPrivateConnection>;
+  }
+  /**
+   * Lists the private connection routes exchanged over a peering connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private connection to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/us-west1/privateConnections/my-connection`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnectionPeeringRoutes`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListPrivateConnectionPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.vmwareengine.v1.PeeringRoute | PeeringRoute}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionPeeringRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnectionPeeringRoutes(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+    ]
+  >;
+  listPrivateConnectionPeeringRoutes(
+    request: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): void;
+  listPrivateConnectionPeeringRoutes(
+    request: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): void;
+  listPrivateConnectionPeeringRoutes(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPrivateConnectionPeeringRoutes(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private connection to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/us-west1/privateConnections/my-connection`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnectionPeeringRoutes`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListPrivateConnectionPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.vmwareengine.v1.PeeringRoute | PeeringRoute} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPrivateConnectionPeeringRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPrivateConnectionPeeringRoutesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listPrivateConnectionPeeringRoutes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnectionPeeringRoutes.createStream(
+      this.innerApiCalls.listPrivateConnectionPeeringRoutes as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPrivateConnectionPeeringRoutes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private connection to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/us-west1/privateConnections/my-connection`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPrivateConnectionPeeringRoutes`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListPrivateConnectionPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.vmwareengine.v1.PeeringRoute | PeeringRoute}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListPrivateConnectionPeeringRoutes_async
+   */
+  listPrivateConnectionPeeringRoutesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IPeeringRoute> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listPrivateConnectionPeeringRoutes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPrivateConnectionPeeringRoutes.asyncIterate(
+      this.innerApiCalls['listPrivateConnectionPeeringRoutes'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IPeeringRoute>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -6855,6 +8318,67 @@ export class VmwareEngineClient {
   matchPrivateCloudFromPrivateCloudName(privateCloudName: string) {
     return this.pathTemplates.privateCloudPathTemplate.match(privateCloudName)
       .private_cloud;
+  }
+
+  /**
+   * Return a fully-qualified privateConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_connection
+   * @returns {string} Resource name string.
+   */
+  privateConnectionPath(
+    project: string,
+    location: string,
+    privateConnection: string
+  ) {
+    return this.pathTemplates.privateConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      private_connection: privateConnection,
+    });
+  }
+
+  /**
+   * Parse the project from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPrivateConnectionName(privateConnectionName: string) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPrivateConnectionName(privateConnectionName: string) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).location;
+  }
+
+  /**
+   * Parse the private_connection from PrivateConnection resource.
+   *
+   * @param {string} privateConnectionName
+   *   A fully-qualified path representing PrivateConnection resource.
+   * @returns {string} A string representing the private_connection.
+   */
+  matchPrivateConnectionFromPrivateConnectionName(
+    privateConnectionName: string
+  ) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(
+      privateConnectionName
+    ).private_connection;
   }
 
   /**
