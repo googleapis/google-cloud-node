@@ -41,6 +41,9 @@ export namespace google {
                     /** Access userAgentFamily */
                     userAgentFamily?: (string|null);
 
+                    /** Access userAgent */
+                    userAgent?: (string|null);
+
                     /** Access serviceName */
                     serviceName?: (string|null);
 
@@ -80,6 +83,9 @@ export namespace google {
 
                     /** Access userAgentFamily. */
                     public userAgentFamily: string;
+
+                    /** Access userAgent. */
+                    public userAgent: string;
 
                     /** Access serviceName. */
                     public serviceName: string;
@@ -1117,6 +1123,9 @@ export namespace google {
 
                     /** CloudDlpDataProfile dataProfile */
                     dataProfile?: (string|null);
+
+                    /** CloudDlpDataProfile parentType */
+                    parentType?: (google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|keyof typeof google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|null);
                 }
 
                 /** Represents a CloudDlpDataProfile. */
@@ -1130,6 +1139,9 @@ export namespace google {
 
                     /** CloudDlpDataProfile dataProfile. */
                     public dataProfile: string;
+
+                    /** CloudDlpDataProfile parentType. */
+                    public parentType: (google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType|keyof typeof google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType);
 
                     /**
                      * Creates a new CloudDlpDataProfile instance using the specified properties.
@@ -1207,6 +1219,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudDlpDataProfile {
+
+                    /** ParentType enum. */
+                    enum ParentType {
+                        PARENT_TYPE_UNSPECIFIED = 0,
+                        ORGANIZATION = 1,
+                        PROJECT = 2
+                    }
                 }
 
                 /** Properties of a CloudDlpInspection. */
