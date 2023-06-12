@@ -30,13 +30,13 @@ function main(name) {
    */
   /**
    *  Required. Full name of the Restore
-   *  Format: projects/* /locations/* /restorePlans/* /restores/*
+   *  Format: `projects/* /locations/* /restorePlans/* /restores/*`
    */
   // const name = 'abc123'
   /**
    *  If provided, this value must match the current value of the
-   *  target Restore's etag google.cloud.gkebackup.v1.Restore.etag  field or the request is
-   *  rejected.
+   *  target Restore's etag google.cloud.gkebackup.v1.Restore.etag  field or
+   *  the request is rejected.
    */
   // const etag = 'abc123'
   /**

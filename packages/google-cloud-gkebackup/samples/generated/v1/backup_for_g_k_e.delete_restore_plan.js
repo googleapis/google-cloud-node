@@ -30,13 +30,13 @@ function main(name) {
    */
   /**
    *  Required. Fully qualified RestorePlan name.
-   *  Format: projects/* /locations/* /restorePlans/*
+   *  Format: `projects/* /locations/* /restorePlans/*`
    */
   // const name = 'abc123'
   /**
    *  If provided, this value must match the current value of the
-   *  target RestorePlan's etag google.cloud.gkebackup.v1.RestorePlan.etag  field or the request is
-   *  rejected.
+   *  target RestorePlan's etag google.cloud.gkebackup.v1.RestorePlan.etag 
+   *  field or the request is rejected.
    */
   // const etag = 'abc123'
   /**

@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The Backup that contains the VolumeBackups to list.
-   *  Format: projects/* /locations/* /backupPlans/* /backups/*
+   *  Format: `projects/* /locations/* /backupPlans/* /backups/*`
    */
   // const parent = 'abc123'
   /**

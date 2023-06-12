@@ -29,8 +29,8 @@ function main(restore) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A new version of the Restore resource that contains updated fields.
-   *  This may be sparsely populated if an `update_mask` is provided.
+   *  Required. A new version of the Restore resource that contains updated
+   *  fields. This may be sparsely populated if an `update_mask` is provided.
    */
   // const restore = {}
   /**
