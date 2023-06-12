@@ -6023,6 +6023,56 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "webhookType": {
+                                  "type": "WebhookType",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "httpMethod": {
+                                  "type": "HttpMethod",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "requestBody": {
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "parameterMapping": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WebhookType": {
+                                  "values": {
+                                    "WEBHOOK_TYPE_UNSPECIFIED": 0,
+                                    "STANDARD": 1,
+                                    "FLEXIBLE": 2
+                                  }
+                                },
+                                "HttpMethod": {
+                                  "values": {
+                                    "HTTP_METHOD_UNSPECIFIED": 0,
+                                    "POST": 1,
+                                    "GET": 2,
+                                    "HEAD": 3,
+                                    "PUT": 4,
+                                    "DELETE": 5,
+                                    "PATCH": 6,
+                                    "OPTIONS": 7
+                                  }
                                 }
                               }
                             },

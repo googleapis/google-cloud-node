@@ -23348,6 +23348,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts */
                             allowedCaCerts?: (Uint8Array[]|null);
+
+                            /** GenericWebService webhookType */
+                            webhookType?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|null);
+
+                            /** GenericWebService httpMethod */
+                            httpMethod?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|null);
+
+                            /** GenericWebService requestBody */
+                            requestBody?: (string|null);
+
+                            /** GenericWebService parameterMapping */
+                            parameterMapping?: ({ [k: string]: string }|null);
                         }
 
                         /** Represents a GenericWebService. */
@@ -23373,6 +23385,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts. */
                             public allowedCaCerts: Uint8Array[];
+
+                            /** GenericWebService webhookType. */
+                            public webhookType: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType);
+
+                            /** GenericWebService httpMethod. */
+                            public httpMethod: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod);
+
+                            /** GenericWebService requestBody. */
+                            public requestBody: string;
+
+                            /** GenericWebService parameterMapping. */
+                            public parameterMapping: { [k: string]: string };
 
                             /**
                              * Creates a new GenericWebService instance using the specified properties.
@@ -23450,6 +23474,28 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GenericWebService {
+
+                            /** WebhookType enum. */
+                            enum WebhookType {
+                                WEBHOOK_TYPE_UNSPECIFIED = 0,
+                                STANDARD = 1,
+                                FLEXIBLE = 2
+                            }
+
+                            /** HttpMethod enum. */
+                            enum HttpMethod {
+                                HTTP_METHOD_UNSPECIFIED = 0,
+                                POST = 1,
+                                GET = 2,
+                                HEAD = 3,
+                                PUT = 4,
+                                DELETE = 5,
+                                PATCH = 6,
+                                OPTIONS = 7
+                            }
                         }
 
                         /** Properties of a ServiceDirectoryConfig. */
