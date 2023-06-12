@@ -23,26 +23,24 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  GrpcClientOptions,
-  LROperation,
 } from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/user_event_service_client_config.json`.
+ * `src/v1/completion_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './user_event_service_client_config.json';
+import * as gapicConfig from './completion_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for ingesting end user actions on a website to Discovery Engine API.
+ *  Service for Auto-Completion.
  * @class
- * @memberof v1beta
+ * @memberof v1
  */
-export class UserEventServiceClient {
+export class CompletionServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -60,11 +58,10 @@ export class UserEventServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  operationsClient: gax.OperationsClient;
-  userEventServiceStub?: Promise<{[name: string]: Function}>;
+  completionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of UserEventServiceClient.
+   * Construct an instance of CompletionServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -100,7 +97,7 @@ export class UserEventServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new UserEventServiceClient({fallback: 'rest'}, gax);
+   *     const client = new CompletionServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -108,7 +105,7 @@ export class UserEventServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof UserEventServiceClient;
+    const staticMembers = this.constructor as typeof CompletionServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -204,98 +201,9 @@ export class UserEventServiceClient {
         ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-    // This API contains "long-running operations", which return a
-    // an Operation object that allows for tracking of the operation,
-    // rather than holding a request open.
-    const lroOptions: GrpcClientOptions = {
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-    };
-    if (opts.fallback === 'rest') {
-      lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/operations/*}',
-            },
-            {get: '/v1beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v1beta/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
-          additional_bindings: [
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
-            },
-            {get: '/v1beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v1beta/{name=projects/*}/operations'},
-          ],
-        },
-      ];
-    }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
-    const importUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse'
-    ) as gax.protobuf.Type;
-    const importUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata'
-    ) as gax.protobuf.Type;
-
-    this.descriptors.longrunning = {
-      importUserEvents: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        importUserEventsResponse.decode.bind(importUserEventsResponse),
-        importUserEventsMetadata.decode.bind(importUserEventsMetadata)
-      ),
-    };
-
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.UserEventService',
+      'google.cloud.discoveryengine.v1.CompletionService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -323,33 +231,29 @@ export class UserEventServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.userEventServiceStub) {
-      return this.userEventServiceStub;
+    if (this.completionServiceStub) {
+      return this.completionServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.UserEventService.
-    this.userEventServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.CompletionService.
+    this.completionServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.UserEventService'
+            'google.cloud.discoveryengine.v1.CompletionService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1beta
-            .UserEventService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .CompletionService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const userEventServiceStubMethods = [
-      'writeUserEvent',
-      'collectUserEvent',
-      'importUserEvents',
-    ];
-    for (const methodName of userEventServiceStubMethods) {
-      const callPromise = this.userEventServiceStub.then(
+    const completionServiceStubMethods = ['completeQuery'];
+    for (const methodName of completionServiceStubMethods) {
+      const callPromise = this.completionServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -363,7 +267,7 @@ export class UserEventServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -374,7 +278,7 @@ export class UserEventServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.userEventServiceStub;
+    return this.completionServiceStub;
   }
 
   /**
@@ -431,84 +335,112 @@ export class UserEventServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Writes a single user event.
+   * Completes the specified user input with keyword suggestions.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
-   *   Required. User event to write.
+   * @param {string} request.dataStore
+   *   Required. The parent data store resource name for which the completion is
+   *   performed, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store`.
+   * @param {string} request.query
+   *   Required. The typeahead input used to fetch suggestions. Maximum length is
+   *   128 characters.
+   * @param {string} request.queryModel
+   *   Selects data model of query suggestions for serving. Currently supported
+   *   values:
+   *
+   *   * `document` - Using suggestions generated from user-imported documents.
+   *   * `search-history` - Using suggestions generated from the past history of
+   *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+   *   API calls. Do not use it when there is no traffic for Search API.
+   *   * `user-event` - Using suggestions generated from user-imported search
+   *   events.
+   *
+   *   Default values:
+   *
+   *   * `document` is the default model for regular dataStores.
+   *   * `search-history` is the default model for
+   *   {@link google.cloud.discoveryengine.v1.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   dataStores.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link google.cloud.discoveryengine.v1.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.UserEvent | UserEvent}.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1.CompleteQueryResponse | CompleteQueryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.write_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_async
+   * @example <caption>include:samples/generated/v1/completion_service.complete_query.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_CompleteQuery_async
    */
-  writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  completeQuery(
+    request?: protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest | undefined,
       {} | undefined
     ]
   >;
-  writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  completeQuery(
+    request: protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  completeQuery(
+    request: protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  completeQuery(
+    request?: protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-          | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+          protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+      protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -525,453 +457,10 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        data_store: request.dataStore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.writeUserEvent(request, options, callback);
-  }
-  /**
-   * Writes a single user event from the browser. This uses a GET request to
-   * due to browser restriction of POST-ing to a 3rd party domain.
-   *
-   * This method is used only by the Discovery Engine API JavaScript pixel and
-   * Google Tag Manager. Users should not call this method directly.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {string} request.userEvent
-   *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
-   *   characters.
-   * @param {string} request.uri
-   *   The URL including cgi-parameters but excluding the hash fragment with a
-   *   length limit of 5,000 characters. This is often more useful than the
-   *   referer URL, because many browsers only send the domain for 3rd party
-   *   requests.
-   * @param {number} request.ets
-   *   The event timestamp in milliseconds. This prevents browser caching of
-   *   otherwise identical get requests. The name is abbreviated to reduce the
-   *   payload bytes.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.HttpBody | HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.collect_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async
-   */
-  collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.api.IHttpBody,
-          | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.collectUserEvent(request, options, callback);
-  }
-
-  /**
-   * Bulk import of User events. Request processing might be
-   * synchronous. Events that already exist are skipped.
-   * Use this method for backfilling historical user events.
-   *
-   * Operation.response is of type ImportResponse. Note that it is
-   * possible for a subset of the items to be successfully inserted.
-   * Operation.metadata is of type ImportMetadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource} request.inlineSource
-   *   Required. The Inline source for the input content for UserEvents.
-   * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
-   *   Required. Cloud Storage location for the input content.
-   * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
-   *   Required. BigQuery input source.
-   * @param {string} request.parent
-   *   Required. Parent DataStore resource name, of the form
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-   * @param {google.cloud.discoveryengine.v1beta.ImportErrorConfig} request.errorConfig
-   *   The desired location of errors incurred during the Import. Cannot be set
-   *   for inline user event imports.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
-   */
-  importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.importUserEvents(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `importUserEvents()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
-   */
-  async checkImportUserEventsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importUserEvents,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
-    >;
-  }
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   *   for the details.
-   * @param {function(?Error, ?Object)=} callback
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing
-   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * @return {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   * {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * const name = '';
-   * const [response] = await client.getOperation({name});
-   * // doThingsWith(response)
-   * ```
-   */
-  getOperation(
-    request: protos.google.longrunning.GetOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.Operation,
-          protos.google.longrunning.GetOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.Operation,
-      protos.google.longrunning.GetOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<[protos.google.longrunning.Operation]> {
-    return this.operationsClient.getOperation(request, options, callback);
-  }
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
-   *
-   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation collection.
-   * @param {string} request.filter - The standard list filter.
-   * @param {number=} request.pageSize -
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   *   details.
-   * @returns {Object}
-   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * for await (const response of client.listOperationsAsync(request));
-   * // doThingsWith(response)
-   * ```
-   */
-  listOperationsAsync(
-    request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    return this.operationsClient.listOperationsAsync(request, options);
-  }
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * {@link Operations.GetOperation} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
-   * 1, corresponding to `Code.CANCELLED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be cancelled.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.cancelOperation({name: ''});
-   * ```
-   */
-  cancelOperation(
-    request: protos.google.longrunning.CancelOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.CancelOperationRequest,
-          {} | undefined | null
-        >,
-    callback?: Callback<
-      protos.google.longrunning.CancelOperationRequest,
-      protos.google.protobuf.Empty,
-      {} | undefined | null
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.cancelOperation(request, options, callback);
-  }
-
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be deleted.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   * for the details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.deleteOperation({name: ''});
-   * ```
-   */
-  deleteOperation(
-    request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.DeleteOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.Empty,
-      protos.google.longrunning.DeleteOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.deleteOperation(request, options, callback);
+    return this.innerApiCalls.completeQuery(request, options, callback);
   }
 
   // --------------------
@@ -1547,11 +1036,10 @@ export class UserEventServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.userEventServiceStub && !this._terminated) {
-      return this.userEventServiceStub.then(stub => {
+    if (this.completionServiceStub && !this._terminated) {
+      return this.completionServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
       });
     }
     return Promise.resolve();

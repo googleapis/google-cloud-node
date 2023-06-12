@@ -25,24 +25,26 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/user_event_service_client_config.json`.
+ * `src/v1/schema_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './user_event_service_client_config.json';
+import * as gapicConfig from './schema_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for ingesting end user actions on a website to Discovery Engine API.
+ *  Service for managing {@link google.cloud.discoveryengine.v1.Schema|Schema}s.
  * @class
- * @memberof v1beta
+ * @memberof v1
  */
-export class UserEventServiceClient {
+export class SchemaServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -61,10 +63,10 @@ export class UserEventServiceClient {
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  userEventServiceStub?: Promise<{[name: string]: Function}>;
+  schemaServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of UserEventServiceClient.
+   * Construct an instance of SchemaServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -100,7 +102,7 @@ export class UserEventServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new UserEventServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SchemaServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -108,7 +110,7 @@ export class UserEventServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof UserEventServiceClient;
+    const staticMembers = this.constructor as typeof SchemaServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -204,6 +206,17 @@ export class UserEventServiceClient {
         ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listSchemas: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'schemas'
+      ),
+    };
+
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -217,60 +230,62 @@ export class UserEventServiceClient {
       lroOptions.httpRules = [
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
+          get: '/v1/{name=projects/*/operations/*}',
           additional_bindings: [
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
             },
-            {get: '/v1beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v1beta/{name=projects/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
+          get: '/v1/{name=projects/*}/operations',
           additional_bindings: [
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
-            },
-            {get: '/v1beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v1beta/{name=projects/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*}/operations'},
           ],
         },
       ];
@@ -278,24 +293,46 @@ export class UserEventServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const importUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse'
+    const createSchemaResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.Schema'
     ) as gax.protobuf.Type;
-    const importUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata'
+    const createSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.CreateSchemaMetadata'
+    ) as gax.protobuf.Type;
+    const updateSchemaResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.Schema'
+    ) as gax.protobuf.Type;
+    const updateSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.UpdateSchemaMetadata'
+    ) as gax.protobuf.Type;
+    const deleteSchemaResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DeleteSchemaMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      importUserEvents: new this._gaxModule.LongrunningDescriptor(
+      createSchema: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        importUserEventsResponse.decode.bind(importUserEventsResponse),
-        importUserEventsMetadata.decode.bind(importUserEventsMetadata)
+        createSchemaResponse.decode.bind(createSchemaResponse),
+        createSchemaMetadata.decode.bind(createSchemaMetadata)
+      ),
+      updateSchema: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateSchemaResponse.decode.bind(updateSchemaResponse),
+        updateSchemaMetadata.decode.bind(updateSchemaMetadata)
+      ),
+      deleteSchema: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSchemaResponse.decode.bind(deleteSchemaResponse),
+        deleteSchemaMetadata.decode.bind(deleteSchemaMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.UserEventService',
+      'google.cloud.discoveryengine.v1.SchemaService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -323,33 +360,34 @@ export class UserEventServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.userEventServiceStub) {
-      return this.userEventServiceStub;
+    if (this.schemaServiceStub) {
+      return this.schemaServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.UserEventService.
-    this.userEventServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.SchemaService.
+    this.schemaServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.UserEventService'
+            'google.cloud.discoveryengine.v1.SchemaService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1beta
-            .UserEventService,
+          (this._protos as any).google.cloud.discoveryengine.v1.SchemaService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const userEventServiceStubMethods = [
-      'writeUserEvent',
-      'collectUserEvent',
-      'importUserEvents',
+    const schemaServiceStubMethods = [
+      'getSchema',
+      'listSchemas',
+      'createSchema',
+      'updateSchema',
+      'deleteSchema',
     ];
-    for (const methodName of userEventServiceStubMethods) {
-      const callPromise = this.userEventServiceStub.then(
+    for (const methodName of schemaServiceStubMethods) {
+      const callPromise = this.schemaServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -363,7 +401,10 @@ export class UserEventServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -374,7 +415,7 @@ export class UserEventServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.userEventServiceStub;
+    return this.schemaServiceStub;
   }
 
   /**
@@ -431,84 +472,76 @@ export class UserEventServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Writes a single user event.
+   * Gets a {@link google.cloud.discoveryengine.v1.Schema|Schema}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
-   *   Required. User event to write.
+   * @param {string} request.name
+   *   Required. The full resource name of the schema, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.UserEvent | UserEvent}.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1.Schema | Schema}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.write_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_async
+   * @example <caption>include:samples/generated/v1/schema_service.get_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_GetSchema_async
    */
-  writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  getSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.ISchema,
+      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
       {} | undefined
     ]
   >;
-  writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  getSchema(
+    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ISchema,
+      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  getSchema(
+    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ISchema,
+      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+  getSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-          | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+          protos.google.cloud.discoveryengine.v1.ISchema,
+          | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.ISchema,
+      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.ISchema,
+      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -525,149 +558,31 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.writeUserEvent(request, options, callback);
-  }
-  /**
-   * Writes a single user event from the browser. This uses a GET request to
-   * due to browser restriction of POST-ing to a 3rd party domain.
-   *
-   * This method is used only by the Discovery Engine API JavaScript pixel and
-   * Google Tag Manager. Users should not call this method directly.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {string} request.userEvent
-   *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
-   *   characters.
-   * @param {string} request.uri
-   *   The URL including cgi-parameters but excluding the hash fragment with a
-   *   length limit of 5,000 characters. This is often more useful than the
-   *   referer URL, because many browsers only send the domain for 3rd party
-   *   requests.
-   * @param {number} request.ets
-   *   The event timestamp in milliseconds. This prevents browser caching of
-   *   otherwise identical get requests. The name is abbreviated to reduce the
-   *   payload bytes.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.HttpBody | HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.collect_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async
-   */
-  collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.api.IHttpBody,
-          | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.collectUserEvent(request, options, callback);
+    return this.innerApiCalls.getSchema(request, options, callback);
   }
 
   /**
-   * Bulk import of User events. Request processing might be
-   * synchronous. Events that already exist are skipped.
-   * Use this method for backfilling historical user events.
-   *
-   * Operation.response is of type ImportResponse. Note that it is
-   * possible for a subset of the items to be successfully inserted.
-   * Operation.metadata is of type ImportMetadata.
+   * Creates a {@link google.cloud.discoveryengine.v1.Schema|Schema}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource} request.inlineSource
-   *   Required. The Inline source for the input content for UserEvents.
-   * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
-   *   Required. Cloud Storage location for the input content.
-   * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
-   *   Required. BigQuery input source.
    * @param {string} request.parent
-   *   Required. Parent DataStore resource name, of the form
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-   * @param {google.cloud.discoveryengine.v1beta.ImportErrorConfig} request.errorConfig
-   *   The desired location of errors incurred during the Import. Cannot be set
-   *   for inline user event imports.
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
+   *   Required. The {@link google.cloud.discoveryengine.v1.Schema|Schema} to create.
+   * @param {string} request.schemaId
+   *   Required. The ID to use for the
+   *   {@link google.cloud.discoveryengine.v1.Schema|Schema}, which will become the
+   *   final component of the
+   *   {@link google.cloud.discoveryengine.v1.Schema.name|Schema.name}.
+   *
+   *   This field should conform to
+   *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
+   *   limit of 63 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -677,61 +592,61 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
+   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
    */
-  importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+  createSchema(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
-  importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+  createSchema(
+    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+  createSchema(
+    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+  createSchema(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+            protos.google.cloud.discoveryengine.v1.ISchema,
+            protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -739,8 +654,8 @@ export class UserEventServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -762,10 +677,10 @@ export class UserEventServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importUserEvents(request, options, callback);
+    return this.innerApiCalls.createSchema(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `importUserEvents()`.
+   * Check the status of the long running operation returned by `createSchema()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
@@ -773,15 +688,15 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
+   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
    */
-  async checkImportUserEventsProgress(
+  async checkCreateSchemaProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
+      protos.google.cloud.discoveryengine.v1.Schema,
+      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
     >
   > {
     const request =
@@ -791,13 +706,522 @@ export class UserEventServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.importUserEvents,
+      this.descriptors.longrunning.createSchema,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
+      protos.google.cloud.discoveryengine.v1.Schema,
+      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
     >;
+  }
+  /**
+   * Updates a {@link google.cloud.discoveryengine.v1.Schema|Schema}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
+   *   Required. The {@link google.cloud.discoveryengine.v1.Schema|Schema} to update.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.discoveryengine.v1.Schema|Schema} is
+   *   not found, a new {@link google.cloud.discoveryengine.v1.Schema|Schema} will be
+   *   created. In this situation, `update_mask` is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
+   */
+  updateSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSchema(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchema(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ISchema,
+            protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ISchema,
+        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'schema.name': request.schema!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSchema(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateSchema()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
+   */
+  async checkUpdateSchemaProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.Schema,
+      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateSchema,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.Schema,
+      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
+    >;
+  }
+  /**
+   * Deletes a {@link google.cloud.discoveryengine.v1.Schema|Schema}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full resource name of the schema, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   */
+  deleteSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteSchema(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSchema(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSchema(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSchema(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSchema()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   */
+  async checkDeleteSchemaProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSchema,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+    >;
+  }
+  /**
+   * Gets a list of {@link google.cloud.discoveryengine.v1.Schema|Schema}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   * @param {number} request.pageSize
+   *   The maximum number of {@link google.cloud.discoveryengine.v1.Schema|Schema}s to
+   *   return. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1.Schema | Schema}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSchemas(
+    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ISchema[],
+      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+    ]
+  >;
+  listSchemas(
+    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ISchema
+    >
+  ): void;
+  listSchemas(
+    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ISchema
+    >
+  ): void;
+  listSchemas(
+    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+          | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.ISchema
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ISchema
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ISchema[],
+      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSchemas(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   * @param {number} request.pageSize
+   *   The maximum number of {@link google.cloud.discoveryengine.v1.Schema|Schema}s to
+   *   return. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1.Schema | Schema} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSchemasStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSchemas.createStream(
+      this.innerApiCalls.listSchemas as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSchemas`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   * @param {number} request.pageSize
+   *   The maximum number of {@link google.cloud.discoveryengine.v1.Schema|Schema}s to
+   *   return. The service may return fewer than this value.
+   *
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.discoveryengine.v1.Schema | Schema}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schema_service.list_schemas.js</caption>
+   * region_tag:discoveryengine_v1_generated_SchemaService_ListSchemas_async
+   */
+  listSchemasAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSchemas.asyncIterate(
+      this.innerApiCalls['listSchemas'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema>;
   }
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
@@ -1547,8 +1971,8 @@ export class UserEventServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.userEventServiceStub && !this._terminated) {
-      return this.userEventServiceStub.then(stub => {
+    if (this.schemaServiceStub && !this._terminated) {
+      return this.schemaServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

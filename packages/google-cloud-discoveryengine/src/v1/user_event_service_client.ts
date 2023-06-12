@@ -31,7 +31,7 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/user_event_service_client_config.json`.
+ * `src/v1/user_event_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './user_event_service_client_config.json';
@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
 /**
  *  Service for ingesting end user actions on a website to Discovery Engine API.
  * @class
- * @memberof v1beta
+ * @memberof v1
  */
 export class UserEventServiceClient {
   private _terminated = false;
@@ -217,60 +217,62 @@ export class UserEventServiceClient {
       lroOptions.httpRules = [
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
+          get: '/v1/{name=projects/*/operations/*}',
           additional_bindings: [
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
             },
-            {get: '/v1beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v1beta/{name=projects/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
+          get: '/v1/{name=projects/*}/operations',
           additional_bindings: [
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/collections/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
             },
             {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
-            },
-            {
-              get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
-            },
-            {get: '/v1beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v1beta/{name=projects/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*}/operations'},
           ],
         },
       ];
@@ -279,10 +281,10 @@ export class UserEventServiceClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const importUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse'
+      '.google.cloud.discoveryengine.v1.ImportUserEventsResponse'
     ) as gax.protobuf.Type;
     const importUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata'
+      '.google.cloud.discoveryengine.v1.ImportUserEventsMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -295,7 +297,7 @@ export class UserEventServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.UserEventService',
+      'google.cloud.discoveryengine.v1.UserEventService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -328,14 +330,14 @@ export class UserEventServiceClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.UserEventService.
+    // google.cloud.discoveryengine.v1.UserEventService.
     this.userEventServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.UserEventService'
+            'google.cloud.discoveryengine.v1.UserEventService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1beta
+          (this._protos as any).google.cloud.discoveryengine.v1
             .UserEventService,
       this._opts,
       this._providedCustomServicePath
@@ -438,77 +440,71 @@ export class UserEventServiceClient {
    * @param {string} request.parent
    *   Required. The parent DataStore resource name, such as
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
+   * @param {google.cloud.discoveryengine.v1.UserEvent} request.userEvent
    *   Required. User event to write.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.UserEvent | UserEvent}.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1.UserEvent | UserEvent}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.write_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_async
+   * @example <caption>include:samples/generated/v1/user_event_service.write_user_event.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserEventService_WriteUserEvent_async
    */
   writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+    request?: protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.IUserEvent,
+      protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest | undefined,
       {} | undefined
     ]
   >;
   writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+    request: protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.IUserEvent,
+      | protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   writeUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+    request: protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.IUserEvent,
+      | protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   writeUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest,
+    request?: protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-          | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+          protos.google.cloud.discoveryengine.v1.IUserEvent,
+          | protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
+      protos.google.cloud.discoveryengine.v1.IUserEvent,
+      | protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IUserEvent,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1.IUserEvent,
+      protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -561,57 +557,57 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.collect_user_event.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async
+   * @example <caption>include:samples/generated/v1/user_event_service.collect_user_event.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserEventService_CollectUserEvent_async
    */
   collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.api.IHttpBody,
       (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+        | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
+    request: protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+      | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   collectUserEvent(
-    request: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
+    request: protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest,
     callback: Callback<
       protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+      | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   collectUserEvent(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest,
+    request?: protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.api.IHttpBody,
-          | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+          | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.api.IHttpBody,
-      | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+      | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
       | null
       | undefined,
       {} | null | undefined
@@ -620,7 +616,7 @@ export class UserEventServiceClient {
     [
       protos.google.api.IHttpBody,
       (
-        | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
+        | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
         | undefined
       ),
       {} | undefined
@@ -656,16 +652,16 @@ export class UserEventServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource} request.inlineSource
+   * @param {google.cloud.discoveryengine.v1.ImportUserEventsRequest.InlineSource} request.inlineSource
    *   Required. The Inline source for the input content for UserEvents.
-   * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
+   * @param {google.cloud.discoveryengine.v1.GcsSource} request.gcsSource
    *   Required. Cloud Storage location for the input content.
-   * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
+   * @param {google.cloud.discoveryengine.v1.BigQuerySource} request.bigquerySource
    *   Required. BigQuery input source.
    * @param {string} request.parent
    *   Required. Parent DataStore resource name, of the form
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-   * @param {google.cloud.discoveryengine.v1beta.ImportErrorConfig} request.errorConfig
+   * @param {google.cloud.discoveryengine.v1.ImportErrorConfig} request.errorConfig
    *   The desired location of errors incurred during the Import. Cannot be set
    *   for inline user event imports.
    * @param {object} [options]
@@ -677,61 +673,61 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
+   * @example <caption>include:samples/generated/v1/user_event_service.import_user_events.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserEventService_ImportUserEvents_async
    */
   importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+    request?: protos.google.cloud.discoveryengine.v1.IImportUserEventsRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+    request: protos.google.cloud.discoveryengine.v1.IImportUserEventsRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   importUserEvents(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+    request: protos.google.cloud.discoveryengine.v1.IImportUserEventsRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   importUserEvents(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportUserEventsRequest,
+    request?: protos.google.cloud.discoveryengine.v1.IImportUserEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-            protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+            protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+            protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -739,8 +735,8 @@ export class UserEventServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -773,15 +769,15 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
+   * @example <caption>include:samples/generated/v1/user_event_service.import_user_events.js</caption>
+   * region_tag:discoveryengine_v1_generated_UserEventService_ImportUserEvents_async
    */
   async checkImportUserEventsProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
+      protos.google.cloud.discoveryengine.v1.ImportUserEventsResponse,
+      protos.google.cloud.discoveryengine.v1.ImportUserEventsMetadata
     >
   > {
     const request =
@@ -795,8 +791,8 @@ export class UserEventServiceClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata
+      protos.google.cloud.discoveryengine.v1.ImportUserEventsResponse,
+      protos.google.cloud.discoveryengine.v1.ImportUserEventsMetadata
     >;
   }
   /**
