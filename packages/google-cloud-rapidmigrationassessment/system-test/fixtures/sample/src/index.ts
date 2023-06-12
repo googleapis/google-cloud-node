@@ -16,12 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+import {RapidMigrationAssessmentClient} from '@google-cloud/rapidmigrationassessment';
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const rapidmigrationassessment = require('@google-cloud/rapidmigrationassessment');
+// check that the client class type name can be used
+function doStuffWithRapidMigrationAssessmentClient(
+  client: RapidMigrationAssessmentClient
+) {
+  client.close();
+}
 
 function main() {
-  const rapidMigrationAssessmentClient = new rapidmigrationassessment.RapidMigrationAssessmentClient();
+  // check that the client instance can be created
+  const rapidMigrationAssessmentClient = new RapidMigrationAssessmentClient();
+  doStuffWithRapidMigrationAssessmentClient(rapidMigrationAssessmentClient);
 }
 
 main();
