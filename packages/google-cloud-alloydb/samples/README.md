@@ -38,25 +38,31 @@
   * [Alloy_d_b_admin.create_instance](#alloy_d_b_admin.create_instance)
   * [Alloy_d_b_admin.create_secondary_cluster](#alloy_d_b_admin.create_secondary_cluster)
   * [Alloy_d_b_admin.create_secondary_instance](#alloy_d_b_admin.create_secondary_instance)
+  * [Alloy_d_b_admin.create_user](#alloy_d_b_admin.create_user)
   * [Alloy_d_b_admin.delete_backup](#alloy_d_b_admin.delete_backup)
   * [Alloy_d_b_admin.delete_cluster](#alloy_d_b_admin.delete_cluster)
   * [Alloy_d_b_admin.delete_instance](#alloy_d_b_admin.delete_instance)
+  * [Alloy_d_b_admin.delete_user](#alloy_d_b_admin.delete_user)
   * [Alloy_d_b_admin.failover_instance](#alloy_d_b_admin.failover_instance)
   * [Alloy_d_b_admin.generate_client_certificate](#alloy_d_b_admin.generate_client_certificate)
   * [Alloy_d_b_admin.get_backup](#alloy_d_b_admin.get_backup)
   * [Alloy_d_b_admin.get_cluster](#alloy_d_b_admin.get_cluster)
   * [Alloy_d_b_admin.get_connection_info](#alloy_d_b_admin.get_connection_info)
   * [Alloy_d_b_admin.get_instance](#alloy_d_b_admin.get_instance)
+  * [Alloy_d_b_admin.get_user](#alloy_d_b_admin.get_user)
+  * [Alloy_d_b_admin.inject_fault](#alloy_d_b_admin.inject_fault)
   * [Alloy_d_b_admin.list_backups](#alloy_d_b_admin.list_backups)
   * [Alloy_d_b_admin.list_clusters](#alloy_d_b_admin.list_clusters)
   * [Alloy_d_b_admin.list_instances](#alloy_d_b_admin.list_instances)
   * [Alloy_d_b_admin.list_supported_database_flags](#alloy_d_b_admin.list_supported_database_flags)
+  * [Alloy_d_b_admin.list_users](#alloy_d_b_admin.list_users)
   * [Alloy_d_b_admin.promote_cluster](#alloy_d_b_admin.promote_cluster)
   * [Alloy_d_b_admin.restart_instance](#alloy_d_b_admin.restart_instance)
   * [Alloy_d_b_admin.restore_cluster](#alloy_d_b_admin.restore_cluster)
   * [Alloy_d_b_admin.update_backup](#alloy_d_b_admin.update_backup)
   * [Alloy_d_b_admin.update_cluster](#alloy_d_b_admin.update_cluster)
   * [Alloy_d_b_admin.update_instance](#alloy_d_b_admin.update_instance)
+  * [Alloy_d_b_admin.update_user](#alloy_d_b_admin.update_user)
   * [Alloy_d_b_admin.batch_create_instances](#alloy_d_b_admin.batch_create_instances)
   * [Alloy_d_b_admin.create_backup](#alloy_d_b_admin.create_backup)
   * [Alloy_d_b_admin.create_cluster](#alloy_d_b_admin.create_cluster)
@@ -82,7 +88,6 @@
   * [Alloy_d_b_admin.update_backup](#alloy_d_b_admin.update_backup)
   * [Alloy_d_b_admin.update_cluster](#alloy_d_b_admin.update_cluster)
   * [Alloy_d_b_admin.update_instance](#alloy_d_b_admin.update_instance)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -542,6 +547,23 @@ __Usage:__
 
 
 
+### Alloy_d_b_admin.create_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.create_user.js`
+
+
+-----
+
+
+
+
 ### Alloy_d_b_admin.delete_backup
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_backup.js).
@@ -586,6 +608,23 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_instance.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.delete_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.delete_user.js`
 
 
 -----
@@ -695,6 +734,40 @@ __Usage:__
 
 
 
+### Alloy_d_b_admin.get_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.get_user.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.inject_fault
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.inject_fault.js`
+
+
+-----
+
+
+
+
 ### Alloy_d_b_admin.list_backups
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_backups.js).
@@ -756,6 +829,23 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_supported_database_flags.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.list_users
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.list_users.js`
 
 
 -----
@@ -858,6 +948,23 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_instance.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.update_user
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1alpha/alloy_d_b_admin.update_user.js`
 
 
 -----
@@ -1300,23 +1407,6 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-alloydb/samples/test/quickstart.js`
 
 
 
