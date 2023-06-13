@@ -2551,7 +2551,7 @@
     "repo": "googleapis/google-cloud-node",
     "distribution_name": "@google-cloud/discoveryengine",
     "api_id": "discoveryengine.googleapis.com",
-    "default_version": "v1beta",
+    "default_version": "v1",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
     "api_shortname": "discoveryengine",
