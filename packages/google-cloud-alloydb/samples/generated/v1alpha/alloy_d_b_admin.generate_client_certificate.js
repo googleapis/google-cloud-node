@@ -59,6 +59,10 @@ function main(parent) {
    *  default duration.
    */
   // const certDuration = {}
+  /**
+   *  Optional. The public key from the client.
+   */
+  // const publicKey = 'abc123'
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;

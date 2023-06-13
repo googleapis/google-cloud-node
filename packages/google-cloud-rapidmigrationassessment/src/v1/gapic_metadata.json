@@ -1,0 +1,127 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.rapidmigrationassessment.v1",
+  "libraryPackage": "@google-cloud/rapidmigrationassessment",
+  "services": {
+    "RapidMigrationAssessment": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RapidMigrationAssessmentClient",
+          "rpcs": {
+            "GetAnnotation": {
+              "methods": [
+                "getAnnotation"
+              ]
+            },
+            "GetCollector": {
+              "methods": [
+                "getCollector"
+              ]
+            },
+            "CreateCollector": {
+              "methods": [
+                "createCollector"
+              ]
+            },
+            "CreateAnnotation": {
+              "methods": [
+                "createAnnotation"
+              ]
+            },
+            "UpdateCollector": {
+              "methods": [
+                "updateCollector"
+              ]
+            },
+            "DeleteCollector": {
+              "methods": [
+                "deleteCollector"
+              ]
+            },
+            "ResumeCollector": {
+              "methods": [
+                "resumeCollector"
+              ]
+            },
+            "RegisterCollector": {
+              "methods": [
+                "registerCollector"
+              ]
+            },
+            "PauseCollector": {
+              "methods": [
+                "pauseCollector"
+              ]
+            },
+            "ListCollectors": {
+              "methods": [
+                "listCollectors",
+                "listCollectorsStream",
+                "listCollectorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RapidMigrationAssessmentClient",
+          "rpcs": {
+            "GetAnnotation": {
+              "methods": [
+                "getAnnotation"
+              ]
+            },
+            "GetCollector": {
+              "methods": [
+                "getCollector"
+              ]
+            },
+            "CreateCollector": {
+              "methods": [
+                "createCollector"
+              ]
+            },
+            "CreateAnnotation": {
+              "methods": [
+                "createAnnotation"
+              ]
+            },
+            "UpdateCollector": {
+              "methods": [
+                "updateCollector"
+              ]
+            },
+            "DeleteCollector": {
+              "methods": [
+                "deleteCollector"
+              ]
+            },
+            "ResumeCollector": {
+              "methods": [
+                "resumeCollector"
+              ]
+            },
+            "RegisterCollector": {
+              "methods": [
+                "registerCollector"
+              ]
+            },
+            "PauseCollector": {
+              "methods": [
+                "pauseCollector"
+              ]
+            },
+            "ListCollectors": {
+              "methods": [
+                "listCollectors",
+                "listCollectorsStream",
+                "listCollectorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
