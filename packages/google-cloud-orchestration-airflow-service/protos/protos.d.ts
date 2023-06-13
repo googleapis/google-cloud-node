@@ -6042,6 +6042,48 @@ export namespace google {
                             public checkUpgrade(request: google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeRequest): Promise<google.longrunning.Operation>;
 
                             /**
+                             * Calls ExecuteAirflowCommand.
+                             * @param request ExecuteAirflowCommandRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ExecuteAirflowCommandResponse
+                             */
+                            public executeAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.ExecuteAirflowCommandCallback): void;
+
+                            /**
+                             * Calls ExecuteAirflowCommand.
+                             * @param request ExecuteAirflowCommandRequest message or plain object
+                             * @returns Promise
+                             */
+                            public executeAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse>;
+
+                            /**
+                             * Calls StopAirflowCommand.
+                             * @param request StopAirflowCommandRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and StopAirflowCommandResponse
+                             */
+                            public stopAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.StopAirflowCommandCallback): void;
+
+                            /**
+                             * Calls StopAirflowCommand.
+                             * @param request StopAirflowCommandRequest message or plain object
+                             * @returns Promise
+                             */
+                            public stopAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse>;
+
+                            /**
+                             * Calls PollAirflowCommand.
+                             * @param request PollAirflowCommandRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and PollAirflowCommandResponse
+                             */
+                            public pollAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.PollAirflowCommandCallback): void;
+
+                            /**
+                             * Calls PollAirflowCommand.
+                             * @param request PollAirflowCommandRequest message or plain object
+                             * @returns Promise
+                             */
+                            public pollAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse>;
+
+                            /**
                              * Calls SaveSnapshot.
                              * @param request SaveSnapshotRequest message or plain object
                              * @param callback Node-style callback called with the error, if any, and Operation
@@ -6068,6 +6110,34 @@ export namespace google {
                              * @returns Promise
                              */
                             public loadSnapshot(request: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls DatabaseFailover.
+                             * @param request DatabaseFailoverRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public databaseFailover(request: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.DatabaseFailoverCallback): void;
+
+                            /**
+                             * Calls DatabaseFailover.
+                             * @param request DatabaseFailoverRequest message or plain object
+                             * @returns Promise
+                             */
+                            public databaseFailover(request: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls FetchDatabaseProperties.
+                             * @param request FetchDatabasePropertiesRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and FetchDatabasePropertiesResponse
+                             */
+                            public fetchDatabaseProperties(request: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.FetchDatabasePropertiesCallback): void;
+
+                            /**
+                             * Calls FetchDatabaseProperties.
+                             * @param request FetchDatabasePropertiesRequest message or plain object
+                             * @returns Promise
+                             */
+                            public fetchDatabaseProperties(request: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse>;
                         }
 
                         namespace Environments {
@@ -6122,6 +6192,27 @@ export namespace google {
                             type CheckUpgradeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                             /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|executeAirflowCommand}.
+                             * @param error Error, if any
+                             * @param [response] ExecuteAirflowCommandResponse
+                             */
+                            type ExecuteAirflowCommandCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|stopAirflowCommand}.
+                             * @param error Error, if any
+                             * @param [response] StopAirflowCommandResponse
+                             */
+                            type StopAirflowCommandCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|pollAirflowCommand}.
+                             * @param error Error, if any
+                             * @param [response] PollAirflowCommandResponse
+                             */
+                            type PollAirflowCommandCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse) => void;
+
+                            /**
                              * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|saveSnapshot}.
                              * @param error Error, if any
                              * @param [response] Operation
@@ -6134,6 +6225,20 @@ export namespace google {
                              * @param [response] Operation
                              */
                             type LoadSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|databaseFailover}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type DatabaseFailoverCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|fetchDatabaseProperties}.
+                             * @param error Error, if any
+                             * @param [response] FetchDatabasePropertiesResponse
+                             */
+                            type FetchDatabasePropertiesCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse) => void;
                         }
 
                         /** Properties of a CreateEnvironmentRequest. */
@@ -6851,6 +6956,121 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of an ExecuteAirflowCommandRequest. */
+                        interface IExecuteAirflowCommandRequest {
+
+                            /** ExecuteAirflowCommandRequest environment */
+                            environment?: (string|null);
+
+                            /** ExecuteAirflowCommandRequest command */
+                            command?: (string|null);
+
+                            /** ExecuteAirflowCommandRequest subcommand */
+                            subcommand?: (string|null);
+
+                            /** ExecuteAirflowCommandRequest parameters */
+                            parameters?: (string[]|null);
+                        }
+
+                        /** Represents an ExecuteAirflowCommandRequest. */
+                        class ExecuteAirflowCommandRequest implements IExecuteAirflowCommandRequest {
+
+                            /**
+                             * Constructs a new ExecuteAirflowCommandRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest);
+
+                            /** ExecuteAirflowCommandRequest environment. */
+                            public environment: string;
+
+                            /** ExecuteAirflowCommandRequest command. */
+                            public command: string;
+
+                            /** ExecuteAirflowCommandRequest subcommand. */
+                            public subcommand: string;
+
+                            /** ExecuteAirflowCommandRequest parameters. */
+                            public parameters: string[];
+
+                            /**
+                             * Creates a new ExecuteAirflowCommandRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExecuteAirflowCommandRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest;
+
+                            /**
+                             * Encodes the specified ExecuteAirflowCommandRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest.verify|verify} messages.
+                             * @param message ExecuteAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExecuteAirflowCommandRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest.verify|verify} messages.
+                             * @param message ExecuteAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExecuteAirflowCommandRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExecuteAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest;
+
+                            /**
+                             * Decodes an ExecuteAirflowCommandRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExecuteAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest;
+
+                            /**
+                             * Verifies an ExecuteAirflowCommandRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExecuteAirflowCommandRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExecuteAirflowCommandRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest;
+
+                            /**
+                             * Creates a plain object from an ExecuteAirflowCommandRequest message. Also converts values to other types if specified.
+                             * @param message ExecuteAirflowCommandRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExecuteAirflowCommandRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExecuteAirflowCommandRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an ExecuteAirflowCommandResponse. */
                         interface IExecuteAirflowCommandResponse {
 
@@ -6960,6 +7180,351 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ExecuteAirflowCommandResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a StopAirflowCommandRequest. */
+                        interface IStopAirflowCommandRequest {
+
+                            /** StopAirflowCommandRequest environment */
+                            environment?: (string|null);
+
+                            /** StopAirflowCommandRequest executionId */
+                            executionId?: (string|null);
+
+                            /** StopAirflowCommandRequest pod */
+                            pod?: (string|null);
+
+                            /** StopAirflowCommandRequest podNamespace */
+                            podNamespace?: (string|null);
+
+                            /** StopAirflowCommandRequest force */
+                            force?: (boolean|null);
+                        }
+
+                        /** Represents a StopAirflowCommandRequest. */
+                        class StopAirflowCommandRequest implements IStopAirflowCommandRequest {
+
+                            /**
+                             * Constructs a new StopAirflowCommandRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest);
+
+                            /** StopAirflowCommandRequest environment. */
+                            public environment: string;
+
+                            /** StopAirflowCommandRequest executionId. */
+                            public executionId: string;
+
+                            /** StopAirflowCommandRequest pod. */
+                            public pod: string;
+
+                            /** StopAirflowCommandRequest podNamespace. */
+                            public podNamespace: string;
+
+                            /** StopAirflowCommandRequest force. */
+                            public force: boolean;
+
+                            /**
+                             * Creates a new StopAirflowCommandRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StopAirflowCommandRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest;
+
+                            /**
+                             * Encodes the specified StopAirflowCommandRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest.verify|verify} messages.
+                             * @param message StopAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StopAirflowCommandRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest.verify|verify} messages.
+                             * @param message StopAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StopAirflowCommandRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StopAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest;
+
+                            /**
+                             * Decodes a StopAirflowCommandRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StopAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest;
+
+                            /**
+                             * Verifies a StopAirflowCommandRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StopAirflowCommandRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StopAirflowCommandRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest;
+
+                            /**
+                             * Creates a plain object from a StopAirflowCommandRequest message. Also converts values to other types if specified.
+                             * @param message StopAirflowCommandRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StopAirflowCommandRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StopAirflowCommandRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a StopAirflowCommandResponse. */
+                        interface IStopAirflowCommandResponse {
+
+                            /** StopAirflowCommandResponse isDone */
+                            isDone?: (boolean|null);
+
+                            /** StopAirflowCommandResponse output */
+                            output?: (string[]|null);
+                        }
+
+                        /** Represents a StopAirflowCommandResponse. */
+                        class StopAirflowCommandResponse implements IStopAirflowCommandResponse {
+
+                            /**
+                             * Constructs a new StopAirflowCommandResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse);
+
+                            /** StopAirflowCommandResponse isDone. */
+                            public isDone: boolean;
+
+                            /** StopAirflowCommandResponse output. */
+                            public output: string[];
+
+                            /**
+                             * Creates a new StopAirflowCommandResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StopAirflowCommandResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse;
+
+                            /**
+                             * Encodes the specified StopAirflowCommandResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse.verify|verify} messages.
+                             * @param message StopAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StopAirflowCommandResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse.verify|verify} messages.
+                             * @param message StopAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StopAirflowCommandResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StopAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse;
+
+                            /**
+                             * Decodes a StopAirflowCommandResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StopAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse;
+
+                            /**
+                             * Verifies a StopAirflowCommandResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StopAirflowCommandResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StopAirflowCommandResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse;
+
+                            /**
+                             * Creates a plain object from a StopAirflowCommandResponse message. Also converts values to other types if specified.
+                             * @param message StopAirflowCommandResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StopAirflowCommandResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StopAirflowCommandResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PollAirflowCommandRequest. */
+                        interface IPollAirflowCommandRequest {
+
+                            /** PollAirflowCommandRequest environment */
+                            environment?: (string|null);
+
+                            /** PollAirflowCommandRequest executionId */
+                            executionId?: (string|null);
+
+                            /** PollAirflowCommandRequest pod */
+                            pod?: (string|null);
+
+                            /** PollAirflowCommandRequest podNamespace */
+                            podNamespace?: (string|null);
+
+                            /** PollAirflowCommandRequest nextLineNumber */
+                            nextLineNumber?: (number|null);
+                        }
+
+                        /** Represents a PollAirflowCommandRequest. */
+                        class PollAirflowCommandRequest implements IPollAirflowCommandRequest {
+
+                            /**
+                             * Constructs a new PollAirflowCommandRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest);
+
+                            /** PollAirflowCommandRequest environment. */
+                            public environment: string;
+
+                            /** PollAirflowCommandRequest executionId. */
+                            public executionId: string;
+
+                            /** PollAirflowCommandRequest pod. */
+                            public pod: string;
+
+                            /** PollAirflowCommandRequest podNamespace. */
+                            public podNamespace: string;
+
+                            /** PollAirflowCommandRequest nextLineNumber. */
+                            public nextLineNumber: number;
+
+                            /**
+                             * Creates a new PollAirflowCommandRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PollAirflowCommandRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest;
+
+                            /**
+                             * Encodes the specified PollAirflowCommandRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest.verify|verify} messages.
+                             * @param message PollAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PollAirflowCommandRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest.verify|verify} messages.
+                             * @param message PollAirflowCommandRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PollAirflowCommandRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PollAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest;
+
+                            /**
+                             * Decodes a PollAirflowCommandRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PollAirflowCommandRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest;
+
+                            /**
+                             * Verifies a PollAirflowCommandRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PollAirflowCommandRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PollAirflowCommandRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest;
+
+                            /**
+                             * Creates a plain object from a PollAirflowCommandRequest message. Also converts values to other types if specified.
+                             * @param message PollAirflowCommandRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PollAirflowCommandRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PollAirflowCommandRequest
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -7702,6 +8267,400 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a DatabaseFailoverRequest. */
+                        interface IDatabaseFailoverRequest {
+
+                            /** DatabaseFailoverRequest environment */
+                            environment?: (string|null);
+                        }
+
+                        /** Represents a DatabaseFailoverRequest. */
+                        class DatabaseFailoverRequest implements IDatabaseFailoverRequest {
+
+                            /**
+                             * Constructs a new DatabaseFailoverRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest);
+
+                            /** DatabaseFailoverRequest environment. */
+                            public environment: string;
+
+                            /**
+                             * Creates a new DatabaseFailoverRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DatabaseFailoverRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest;
+
+                            /**
+                             * Encodes the specified DatabaseFailoverRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest.verify|verify} messages.
+                             * @param message DatabaseFailoverRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DatabaseFailoverRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest.verify|verify} messages.
+                             * @param message DatabaseFailoverRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DatabaseFailoverRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DatabaseFailoverRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest;
+
+                            /**
+                             * Decodes a DatabaseFailoverRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DatabaseFailoverRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest;
+
+                            /**
+                             * Verifies a DatabaseFailoverRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DatabaseFailoverRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DatabaseFailoverRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest;
+
+                            /**
+                             * Creates a plain object from a DatabaseFailoverRequest message. Also converts values to other types if specified.
+                             * @param message DatabaseFailoverRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DatabaseFailoverRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DatabaseFailoverRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DatabaseFailoverResponse. */
+                        interface IDatabaseFailoverResponse {
+                        }
+
+                        /** Represents a DatabaseFailoverResponse. */
+                        class DatabaseFailoverResponse implements IDatabaseFailoverResponse {
+
+                            /**
+                             * Constructs a new DatabaseFailoverResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse);
+
+                            /**
+                             * Creates a new DatabaseFailoverResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DatabaseFailoverResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse;
+
+                            /**
+                             * Encodes the specified DatabaseFailoverResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse.verify|verify} messages.
+                             * @param message DatabaseFailoverResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DatabaseFailoverResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse.verify|verify} messages.
+                             * @param message DatabaseFailoverResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DatabaseFailoverResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DatabaseFailoverResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse;
+
+                            /**
+                             * Decodes a DatabaseFailoverResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DatabaseFailoverResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse;
+
+                            /**
+                             * Verifies a DatabaseFailoverResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DatabaseFailoverResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DatabaseFailoverResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse;
+
+                            /**
+                             * Creates a plain object from a DatabaseFailoverResponse message. Also converts values to other types if specified.
+                             * @param message DatabaseFailoverResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DatabaseFailoverResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DatabaseFailoverResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a FetchDatabasePropertiesRequest. */
+                        interface IFetchDatabasePropertiesRequest {
+
+                            /** FetchDatabasePropertiesRequest environment */
+                            environment?: (string|null);
+                        }
+
+                        /** Represents a FetchDatabasePropertiesRequest. */
+                        class FetchDatabasePropertiesRequest implements IFetchDatabasePropertiesRequest {
+
+                            /**
+                             * Constructs a new FetchDatabasePropertiesRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest);
+
+                            /** FetchDatabasePropertiesRequest environment. */
+                            public environment: string;
+
+                            /**
+                             * Creates a new FetchDatabasePropertiesRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FetchDatabasePropertiesRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest;
+
+                            /**
+                             * Encodes the specified FetchDatabasePropertiesRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest.verify|verify} messages.
+                             * @param message FetchDatabasePropertiesRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FetchDatabasePropertiesRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest.verify|verify} messages.
+                             * @param message FetchDatabasePropertiesRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FetchDatabasePropertiesRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FetchDatabasePropertiesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest;
+
+                            /**
+                             * Decodes a FetchDatabasePropertiesRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FetchDatabasePropertiesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest;
+
+                            /**
+                             * Verifies a FetchDatabasePropertiesRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FetchDatabasePropertiesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FetchDatabasePropertiesRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest;
+
+                            /**
+                             * Creates a plain object from a FetchDatabasePropertiesRequest message. Also converts values to other types if specified.
+                             * @param message FetchDatabasePropertiesRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FetchDatabasePropertiesRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FetchDatabasePropertiesRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a FetchDatabasePropertiesResponse. */
+                        interface IFetchDatabasePropertiesResponse {
+
+                            /** FetchDatabasePropertiesResponse primaryGceZone */
+                            primaryGceZone?: (string|null);
+
+                            /** FetchDatabasePropertiesResponse secondaryGceZone */
+                            secondaryGceZone?: (string|null);
+
+                            /** FetchDatabasePropertiesResponse isFailoverReplicaAvailable */
+                            isFailoverReplicaAvailable?: (boolean|null);
+                        }
+
+                        /** Represents a FetchDatabasePropertiesResponse. */
+                        class FetchDatabasePropertiesResponse implements IFetchDatabasePropertiesResponse {
+
+                            /**
+                             * Constructs a new FetchDatabasePropertiesResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse);
+
+                            /** FetchDatabasePropertiesResponse primaryGceZone. */
+                            public primaryGceZone: string;
+
+                            /** FetchDatabasePropertiesResponse secondaryGceZone. */
+                            public secondaryGceZone: string;
+
+                            /** FetchDatabasePropertiesResponse isFailoverReplicaAvailable. */
+                            public isFailoverReplicaAvailable: boolean;
+
+                            /**
+                             * Creates a new FetchDatabasePropertiesResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FetchDatabasePropertiesResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse;
+
+                            /**
+                             * Encodes the specified FetchDatabasePropertiesResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse.verify|verify} messages.
+                             * @param message FetchDatabasePropertiesResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FetchDatabasePropertiesResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse.verify|verify} messages.
+                             * @param message FetchDatabasePropertiesResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FetchDatabasePropertiesResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FetchDatabasePropertiesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse;
+
+                            /**
+                             * Decodes a FetchDatabasePropertiesResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FetchDatabasePropertiesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse;
+
+                            /**
+                             * Verifies a FetchDatabasePropertiesResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FetchDatabasePropertiesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FetchDatabasePropertiesResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse;
+
+                            /**
+                             * Creates a plain object from a FetchDatabasePropertiesResponse message. Also converts values to other types if specified.
+                             * @param message FetchDatabasePropertiesResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FetchDatabasePropertiesResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FetchDatabasePropertiesResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an EnvironmentConfig. */
                         interface IEnvironmentConfig {
 
@@ -7755,6 +8714,9 @@ export namespace google {
 
                             /** EnvironmentConfig recoveryConfig */
                             recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
+
+                            /** EnvironmentConfig resilienceMode */
+                            resilienceMode?: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|null);
                         }
 
                         /** Represents an EnvironmentConfig. */
@@ -7816,6 +8778,9 @@ export namespace google {
 
                             /** EnvironmentConfig recoveryConfig. */
                             public recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
+
+                            /** EnvironmentConfig resilienceMode. */
+                            public resilienceMode: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode);
 
                             /**
                              * Creates a new EnvironmentConfig instance using the specified properties.
@@ -7903,6 +8868,12 @@ export namespace google {
                                 ENVIRONMENT_SIZE_SMALL = 1,
                                 ENVIRONMENT_SIZE_MEDIUM = 2,
                                 ENVIRONMENT_SIZE_LARGE = 3
+                            }
+
+                            /** ResilienceMode enum. */
+                            enum ResilienceMode {
+                                RESILIENCE_MODE_UNSPECIFIED = 0,
+                                HIGH_RESILIENCE = 1
                             }
                         }
 
@@ -10903,7 +11874,8 @@ export namespace google {
                                 UPDATE = 3,
                                 CHECK = 4,
                                 SAVE_SNAPSHOT = 5,
-                                LOAD_SNAPSHOT = 6
+                                LOAD_SNAPSHOT = 6,
+                                DATABASE_FAILOVER = 7
                             }
                         }
 
