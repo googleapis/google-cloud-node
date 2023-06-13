@@ -18,59 +18,52 @@
 
 'use strict';
 
-function main(parent) {
+function main() {
   // [START rapidmigrationassessment_quickstart]
-  /**
-   * This snippet has been automatically generated and should be regarded as a code template only.
-   * It will require modifications to work.
-   * It may require correct/in-range values for request initialization.
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  /**
-   *  Required. Parent value for ListCollectorsRequest.
-   */
-  // const parent = 'abc123'
-  /**
-   *  Requested page size. Server may return fewer items than requested.
-   *  If unspecified, server will pick an appropriate default.
-   */
-  // const pageSize = 1234
-  /**
-   *  A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Filtering results.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Hint for how to order the results.
-   */
-  // const orderBy = 'abc123'
 
   // Imports the Rapidmigrationassessment library
   const {RapidMigrationAssessmentClient} =
     require('@google-cloud/rapidmigrationassessment').v1;
 
   // Instantiates a client
-  const rapidmigrationassessmentClient = new RapidMigrationAssessmentClient();
+  const rapidMigrationAssessmentClient = new RapidMigrationAssessmentClient();
 
-  async function callListCollectors() {
-    // Construct request
-    const request = {
-      parent,
-    };
+  async function quickstart() {
+    const project = await rapidMigrationAssessmentClient.getProjectId();
 
-    // Run request
-    const iterable = await rapidmigrationassessmentClient.listCollectorsAsync(
-      request
-    );
-    for await (const response of iterable) {
-      console.log(response);
+    // List supported locations
+    const locationsIterable =
+      await rapidMigrationAssessmentClient.listLocationsAsync({
+        name: `projects/${project}`,
+      });
+
+    const locations = [];
+    for await (const response of locationsIterable) {
+      console.log(`Supported location: ${response.name}`);
+      locations.push(response.name);
+    }
+
+    for (const location of locations) {
+      // Construct request
+      const request = {
+        parent: location,
+      };
+
+      // Run request
+      const iterable = await rapidMigrationAssessmentClient.listCollectorsAsync(
+        request
+      );
+      console.log(`Listing collectors for location ${location}:`);
+      let count = 0;
+      for await (const response of iterable) {
+        console.log(response);
+        ++count;
+      }
+      console.log(`${count} collectors found.`);
     }
   }
 
-  callListCollectors();
+  quickstart();
   // [END rapidmigrationassessment_quickstart]
 }
 
