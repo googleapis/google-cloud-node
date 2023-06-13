@@ -215,6 +215,34 @@ export namespace google {
                     public listSubnets(request: google.cloud.vmwareengine.v1.IListSubnetsRequest): Promise<google.cloud.vmwareengine.v1.ListSubnetsResponse>;
 
                     /**
+                     * Calls GetSubnet.
+                     * @param request GetSubnetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Subnet
+                     */
+                    public getSubnet(request: google.cloud.vmwareengine.v1.IGetSubnetRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.GetSubnetCallback): void;
+
+                    /**
+                     * Calls GetSubnet.
+                     * @param request GetSubnetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSubnet(request: google.cloud.vmwareengine.v1.IGetSubnetRequest): Promise<google.cloud.vmwareengine.v1.Subnet>;
+
+                    /**
+                     * Calls UpdateSubnet.
+                     * @param request UpdateSubnetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSubnet(request: google.cloud.vmwareengine.v1.IUpdateSubnetRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.UpdateSubnetCallback): void;
+
+                    /**
+                     * Calls UpdateSubnet.
+                     * @param request UpdateSubnetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubnet(request: google.cloud.vmwareengine.v1.IUpdateSubnetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListNodeTypes.
                      * @param request ListNodeTypesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListNodeTypesResponse
@@ -479,6 +507,90 @@ export namespace google {
                      * @returns Promise
                      */
                     public listVmwareEngineNetworks(request: google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest): Promise<google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse>;
+
+                    /**
+                     * Calls CreatePrivateConnection.
+                     * @param request CreatePrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPrivateConnection(request: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.CreatePrivateConnectionCallback): void;
+
+                    /**
+                     * Calls CreatePrivateConnection.
+                     * @param request CreatePrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPrivateConnection(request: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetPrivateConnection.
+                     * @param request GetPrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PrivateConnection
+                     */
+                    public getPrivateConnection(request: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.GetPrivateConnectionCallback): void;
+
+                    /**
+                     * Calls GetPrivateConnection.
+                     * @param request GetPrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPrivateConnection(request: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest): Promise<google.cloud.vmwareengine.v1.PrivateConnection>;
+
+                    /**
+                     * Calls ListPrivateConnections.
+                     * @param request ListPrivateConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPrivateConnectionsResponse
+                     */
+                    public listPrivateConnections(request: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnectionsCallback): void;
+
+                    /**
+                     * Calls ListPrivateConnections.
+                     * @param request ListPrivateConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPrivateConnections(request: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest): Promise<google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse>;
+
+                    /**
+                     * Calls UpdatePrivateConnection.
+                     * @param request UpdatePrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updatePrivateConnection(request: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.UpdatePrivateConnectionCallback): void;
+
+                    /**
+                     * Calls UpdatePrivateConnection.
+                     * @param request UpdatePrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePrivateConnection(request: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeletePrivateConnection.
+                     * @param request DeletePrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePrivateConnection(request: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.DeletePrivateConnectionCallback): void;
+
+                    /**
+                     * Calls DeletePrivateConnection.
+                     * @param request DeletePrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePrivateConnection(request: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListPrivateConnectionPeeringRoutes.
+                     * @param request ListPrivateConnectionPeeringRoutesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPrivateConnectionPeeringRoutesResponse
+                     */
+                    public listPrivateConnectionPeeringRoutes(request: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest, callback: google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnectionPeeringRoutesCallback): void;
+
+                    /**
+                     * Calls ListPrivateConnectionPeeringRoutes.
+                     * @param request ListPrivateConnectionPeeringRoutesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPrivateConnectionPeeringRoutes(request: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest): Promise<google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse>;
                 }
 
                 namespace VmwareEngine {
@@ -566,6 +678,20 @@ export namespace google {
                      * @param [response] ListSubnetsResponse
                      */
                     type ListSubnetsCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.ListSubnetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|getSubnet}.
+                     * @param error Error, if any
+                     * @param [response] Subnet
+                     */
+                    type GetSubnetCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.Subnet) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|updateSubnet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSubnetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listNodeTypes}.
@@ -699,6 +825,48 @@ export namespace google {
                      * @param [response] ListVmwareEngineNetworksResponse
                      */
                     type ListVmwareEngineNetworksCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|createPrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePrivateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|getPrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] PrivateConnection
+                     */
+                    type GetPrivateConnectionCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.PrivateConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listPrivateConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListPrivateConnectionsResponse
+                     */
+                    type ListPrivateConnectionsCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|updatePrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdatePrivateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|deletePrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePrivateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listPrivateConnectionPeeringRoutes}.
+                     * @param error Error, if any
+                     * @param [response] ListPrivateConnectionPeeringRoutesResponse
+                     */
+                    type ListPrivateConnectionPeeringRoutesCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse) => void;
                 }
 
                 /** Properties of a ListPrivateCloudsRequest. */
@@ -2262,6 +2430,9 @@ export namespace google {
 
                     /** ListSubnetsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListSubnetsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListSubnetsResponse. */
@@ -2278,6 +2449,9 @@ export namespace google {
 
                     /** ListSubnetsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListSubnetsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListSubnetsResponse instance using the specified properties.
@@ -2351,6 +2525,206 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListSubnetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSubnetRequest. */
+                interface IGetSubnetRequest {
+
+                    /** GetSubnetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSubnetRequest. */
+                class GetSubnetRequest implements IGetSubnetRequest {
+
+                    /**
+                     * Constructs a new GetSubnetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IGetSubnetRequest);
+
+                    /** GetSubnetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSubnetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSubnetRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IGetSubnetRequest): google.cloud.vmwareengine.v1.GetSubnetRequest;
+
+                    /**
+                     * Encodes the specified GetSubnetRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetSubnetRequest.verify|verify} messages.
+                     * @param message GetSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IGetSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetSubnetRequest.verify|verify} messages.
+                     * @param message GetSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IGetSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSubnetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.GetSubnetRequest;
+
+                    /**
+                     * Decodes a GetSubnetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.GetSubnetRequest;
+
+                    /**
+                     * Verifies a GetSubnetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSubnetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.GetSubnetRequest;
+
+                    /**
+                     * Creates a plain object from a GetSubnetRequest message. Also converts values to other types if specified.
+                     * @param message GetSubnetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.GetSubnetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSubnetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSubnetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubnetRequest. */
+                interface IUpdateSubnetRequest {
+
+                    /** UpdateSubnetRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSubnetRequest subnet */
+                    subnet?: (google.cloud.vmwareengine.v1.ISubnet|null);
+                }
+
+                /** Represents an UpdateSubnetRequest. */
+                class UpdateSubnetRequest implements IUpdateSubnetRequest {
+
+                    /**
+                     * Constructs a new UpdateSubnetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IUpdateSubnetRequest);
+
+                    /** UpdateSubnetRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSubnetRequest subnet. */
+                    public subnet?: (google.cloud.vmwareengine.v1.ISubnet|null);
+
+                    /**
+                     * Creates a new UpdateSubnetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubnetRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IUpdateSubnetRequest): google.cloud.vmwareengine.v1.UpdateSubnetRequest;
+
+                    /**
+                     * Encodes the specified UpdateSubnetRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateSubnetRequest.verify|verify} messages.
+                     * @param message UpdateSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IUpdateSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateSubnetRequest.verify|verify} messages.
+                     * @param message UpdateSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IUpdateSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubnetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.UpdateSubnetRequest;
+
+                    /**
+                     * Decodes an UpdateSubnetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.UpdateSubnetRequest;
+
+                    /**
+                     * Verifies an UpdateSubnetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubnetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.UpdateSubnetRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSubnetRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSubnetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.UpdateSubnetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubnetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubnetRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4955,6 +5329,872 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreatePrivateConnectionRequest. */
+                interface ICreatePrivateConnectionRequest {
+
+                    /** CreatePrivateConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePrivateConnectionRequest privateConnectionId */
+                    privateConnectionId?: (string|null);
+
+                    /** CreatePrivateConnectionRequest privateConnection */
+                    privateConnection?: (google.cloud.vmwareengine.v1.IPrivateConnection|null);
+
+                    /** CreatePrivateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreatePrivateConnectionRequest. */
+                class CreatePrivateConnectionRequest implements ICreatePrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new CreatePrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest);
+
+                    /** CreatePrivateConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreatePrivateConnectionRequest privateConnectionId. */
+                    public privateConnectionId: string;
+
+                    /** CreatePrivateConnectionRequest privateConnection. */
+                    public privateConnection?: (google.cloud.vmwareengine.v1.IPrivateConnection|null);
+
+                    /** CreatePrivateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest): google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreatePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message CreatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message CreatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Verifies a CreatePrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreatePrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPrivateConnectionRequest. */
+                interface IGetPrivateConnectionRequest {
+
+                    /** GetPrivateConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPrivateConnectionRequest. */
+                class GetPrivateConnectionRequest implements IGetPrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new GetPrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest);
+
+                    /** GetPrivateConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest): google.cloud.vmwareengine.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetPrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                     * @param message GetPrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                     * @param message GetPrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Verifies a GetPrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetPrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetPrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.GetPrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionsRequest. */
+                interface IListPrivateConnectionsRequest {
+
+                    /** ListPrivateConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPrivateConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPrivateConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPrivateConnectionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPrivateConnectionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListPrivateConnectionsRequest. */
+                class ListPrivateConnectionsRequest implements IListPrivateConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest);
+
+                    /** ListPrivateConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListPrivateConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPrivateConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPrivateConnectionsRequest filter. */
+                    public filter: string;
+
+                    /** ListPrivateConnectionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListPrivateConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest): google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Verifies a ListPrivateConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionsResponse. */
+                interface IListPrivateConnectionsResponse {
+
+                    /** ListPrivateConnectionsResponse privateConnections */
+                    privateConnections?: (google.cloud.vmwareengine.v1.IPrivateConnection[]|null);
+
+                    /** ListPrivateConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListPrivateConnectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListPrivateConnectionsResponse. */
+                class ListPrivateConnectionsResponse implements IListPrivateConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse);
+
+                    /** ListPrivateConnectionsResponse privateConnections. */
+                    public privateConnections: google.cloud.vmwareengine.v1.IPrivateConnection[];
+
+                    /** ListPrivateConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListPrivateConnectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListPrivateConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse): google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Verifies a ListPrivateConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePrivateConnectionRequest. */
+                interface IUpdatePrivateConnectionRequest {
+
+                    /** UpdatePrivateConnectionRequest privateConnection */
+                    privateConnection?: (google.cloud.vmwareengine.v1.IPrivateConnection|null);
+
+                    /** UpdatePrivateConnectionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdatePrivateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdatePrivateConnectionRequest. */
+                class UpdatePrivateConnectionRequest implements IUpdatePrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new UpdatePrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest);
+
+                    /** UpdatePrivateConnectionRequest privateConnection. */
+                    public privateConnection?: (google.cloud.vmwareengine.v1.IPrivateConnection|null);
+
+                    /** UpdatePrivateConnectionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdatePrivateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdatePrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest): google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified UpdatePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message UpdatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message UpdatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest;
+
+                    /**
+                     * Decodes an UpdatePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest;
+
+                    /**
+                     * Verifies an UpdatePrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePrivateConnectionRequest. */
+                interface IDeletePrivateConnectionRequest {
+
+                    /** DeletePrivateConnectionRequest name */
+                    name?: (string|null);
+
+                    /** DeletePrivateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeletePrivateConnectionRequest. */
+                class DeletePrivateConnectionRequest implements IDeletePrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new DeletePrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest);
+
+                    /** DeletePrivateConnectionRequest name. */
+                    public name: string;
+
+                    /** DeletePrivateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeletePrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest): google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified DeletePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                     * @param message DeletePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                     * @param message DeletePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Verifies a DeletePrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message DeletePrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionPeeringRoutesRequest. */
+                interface IListPrivateConnectionPeeringRoutesRequest {
+
+                    /** ListPrivateConnectionPeeringRoutesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPrivateConnectionPeeringRoutesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPrivateConnectionPeeringRoutesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPrivateConnectionPeeringRoutesRequest. */
+                class ListPrivateConnectionPeeringRoutesRequest implements IListPrivateConnectionPeeringRoutesRequest {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionPeeringRoutesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest);
+
+                    /** ListPrivateConnectionPeeringRoutesRequest parent. */
+                    public parent: string;
+
+                    /** ListPrivateConnectionPeeringRoutesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPrivateConnectionPeeringRoutesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPrivateConnectionPeeringRoutesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionPeeringRoutesRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionPeeringRoutesRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionPeeringRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionPeeringRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionPeeringRoutesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionPeeringRoutesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionPeeringRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest;
+
+                    /**
+                     * Decodes a ListPrivateConnectionPeeringRoutesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionPeeringRoutesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest;
+
+                    /**
+                     * Verifies a ListPrivateConnectionPeeringRoutesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionPeeringRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionPeeringRoutesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionPeeringRoutesRequest message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionPeeringRoutesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionPeeringRoutesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionPeeringRoutesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionPeeringRoutesResponse. */
+                interface IListPrivateConnectionPeeringRoutesResponse {
+
+                    /** ListPrivateConnectionPeeringRoutesResponse peeringRoutes */
+                    peeringRoutes?: (google.cloud.vmwareengine.v1.IPeeringRoute[]|null);
+
+                    /** ListPrivateConnectionPeeringRoutesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPrivateConnectionPeeringRoutesResponse. */
+                class ListPrivateConnectionPeeringRoutesResponse implements IListPrivateConnectionPeeringRoutesResponse {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionPeeringRoutesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse);
+
+                    /** ListPrivateConnectionPeeringRoutesResponse peeringRoutes. */
+                    public peeringRoutes: google.cloud.vmwareengine.v1.IPeeringRoute[];
+
+                    /** ListPrivateConnectionPeeringRoutesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPrivateConnectionPeeringRoutesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionPeeringRoutesResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionPeeringRoutesResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionPeeringRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionPeeringRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionPeeringRoutesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionPeeringRoutesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionPeeringRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse;
+
+                    /**
+                     * Decodes a ListPrivateConnectionPeeringRoutesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionPeeringRoutesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse;
+
+                    /**
+                     * Verifies a ListPrivateConnectionPeeringRoutesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionPeeringRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionPeeringRoutesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionPeeringRoutesResponse message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionPeeringRoutesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionPeeringRoutesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionPeeringRoutesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a NetworkConfig. */
                 interface INetworkConfig {
 
@@ -5214,6 +6454,9 @@ export namespace google {
 
                     /** PrivateCloud uid */
                     uid?: (string|null);
+
+                    /** PrivateCloud type */
+                    type?: (google.cloud.vmwareengine.v1.PrivateCloud.Type|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.Type|null);
                 }
 
                 /** Represents a PrivateCloud. */
@@ -5263,6 +6506,9 @@ export namespace google {
 
                     /** PrivateCloud uid. */
                     public uid: string;
+
+                    /** PrivateCloud type. */
+                    public type: (google.cloud.vmwareengine.v1.PrivateCloud.Type|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.Type);
 
                     /**
                      * Creates a new PrivateCloud instance using the specified properties.
@@ -5456,6 +6702,12 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Type enum. */
+                    enum Type {
+                        STANDARD = 0,
+                        TIME_LIMITED = 1
                     }
                 }
 
@@ -5734,7 +6986,9 @@ export namespace google {
                         ACTIVE = 1,
                         CREATING = 2,
                         UPDATING = 3,
-                        DELETING = 4
+                        DELETING = 4,
+                        RECONCILING = 5,
+                        FAILED = 6
                     }
                 }
 
@@ -6487,6 +7741,151 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a PeeringRoute. */
+                interface IPeeringRoute {
+
+                    /** PeeringRoute destRange */
+                    destRange?: (string|null);
+
+                    /** PeeringRoute type */
+                    type?: (google.cloud.vmwareengine.v1.PeeringRoute.Type|keyof typeof google.cloud.vmwareengine.v1.PeeringRoute.Type|null);
+
+                    /** PeeringRoute nextHopRegion */
+                    nextHopRegion?: (string|null);
+
+                    /** PeeringRoute priority */
+                    priority?: (number|Long|string|null);
+
+                    /** PeeringRoute imported */
+                    imported?: (boolean|null);
+
+                    /** PeeringRoute direction */
+                    direction?: (google.cloud.vmwareengine.v1.PeeringRoute.Direction|keyof typeof google.cloud.vmwareengine.v1.PeeringRoute.Direction|null);
+                }
+
+                /** Represents a PeeringRoute. */
+                class PeeringRoute implements IPeeringRoute {
+
+                    /**
+                     * Constructs a new PeeringRoute.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IPeeringRoute);
+
+                    /** PeeringRoute destRange. */
+                    public destRange: string;
+
+                    /** PeeringRoute type. */
+                    public type: (google.cloud.vmwareengine.v1.PeeringRoute.Type|keyof typeof google.cloud.vmwareengine.v1.PeeringRoute.Type);
+
+                    /** PeeringRoute nextHopRegion. */
+                    public nextHopRegion: string;
+
+                    /** PeeringRoute priority. */
+                    public priority: (number|Long|string);
+
+                    /** PeeringRoute imported. */
+                    public imported: boolean;
+
+                    /** PeeringRoute direction. */
+                    public direction: (google.cloud.vmwareengine.v1.PeeringRoute.Direction|keyof typeof google.cloud.vmwareengine.v1.PeeringRoute.Direction);
+
+                    /**
+                     * Creates a new PeeringRoute instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PeeringRoute instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IPeeringRoute): google.cloud.vmwareengine.v1.PeeringRoute;
+
+                    /**
+                     * Encodes the specified PeeringRoute message. Does not implicitly {@link google.cloud.vmwareengine.v1.PeeringRoute.verify|verify} messages.
+                     * @param message PeeringRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IPeeringRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PeeringRoute message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PeeringRoute.verify|verify} messages.
+                     * @param message PeeringRoute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IPeeringRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PeeringRoute message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PeeringRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PeeringRoute;
+
+                    /**
+                     * Decodes a PeeringRoute message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PeeringRoute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PeeringRoute;
+
+                    /**
+                     * Verifies a PeeringRoute message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PeeringRoute message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PeeringRoute
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PeeringRoute;
+
+                    /**
+                     * Creates a plain object from a PeeringRoute message. Also converts values to other types if specified.
+                     * @param message PeeringRoute
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.PeeringRoute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PeeringRoute to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PeeringRoute
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PeeringRoute {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        DYNAMIC_PEERING_ROUTE = 1,
+                        STATIC_PEERING_ROUTE = 2,
+                        SUBNET_PEERING_ROUTE = 3
+                    }
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        INCOMING = 1,
+                        OUTGOING = 2
+                    }
+                }
+
                 /** Properties of a NetworkPolicy. */
                 interface INetworkPolicy {
 
@@ -7029,6 +8428,212 @@ export namespace google {
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
                         LEGACY = 1
+                    }
+                }
+
+                /** Properties of a PrivateConnection. */
+                interface IPrivateConnection {
+
+                    /** PrivateConnection name */
+                    name?: (string|null);
+
+                    /** PrivateConnection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection description */
+                    description?: (string|null);
+
+                    /** PrivateConnection state */
+                    state?: (google.cloud.vmwareengine.v1.PrivateConnection.State|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.State|null);
+
+                    /** PrivateConnection vmwareEngineNetwork */
+                    vmwareEngineNetwork?: (string|null);
+
+                    /** PrivateConnection vmwareEngineNetworkCanonical */
+                    vmwareEngineNetworkCanonical?: (string|null);
+
+                    /** PrivateConnection type */
+                    type?: (google.cloud.vmwareengine.v1.PrivateConnection.Type|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.Type|null);
+
+                    /** PrivateConnection peeringId */
+                    peeringId?: (string|null);
+
+                    /** PrivateConnection routingMode */
+                    routingMode?: (google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode|null);
+
+                    /** PrivateConnection uid */
+                    uid?: (string|null);
+
+                    /** PrivateConnection serviceNetwork */
+                    serviceNetwork?: (string|null);
+
+                    /** PrivateConnection peeringState */
+                    peeringState?: (google.cloud.vmwareengine.v1.PrivateConnection.PeeringState|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.PeeringState|null);
+                }
+
+                /** Represents a PrivateConnection. */
+                class PrivateConnection implements IPrivateConnection {
+
+                    /**
+                     * Constructs a new PrivateConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IPrivateConnection);
+
+                    /** PrivateConnection name. */
+                    public name: string;
+
+                    /** PrivateConnection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection description. */
+                    public description: string;
+
+                    /** PrivateConnection state. */
+                    public state: (google.cloud.vmwareengine.v1.PrivateConnection.State|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.State);
+
+                    /** PrivateConnection vmwareEngineNetwork. */
+                    public vmwareEngineNetwork: string;
+
+                    /** PrivateConnection vmwareEngineNetworkCanonical. */
+                    public vmwareEngineNetworkCanonical: string;
+
+                    /** PrivateConnection type. */
+                    public type: (google.cloud.vmwareengine.v1.PrivateConnection.Type|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.Type);
+
+                    /** PrivateConnection peeringId. */
+                    public peeringId: string;
+
+                    /** PrivateConnection routingMode. */
+                    public routingMode: (google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode);
+
+                    /** PrivateConnection uid. */
+                    public uid: string;
+
+                    /** PrivateConnection serviceNetwork. */
+                    public serviceNetwork: string;
+
+                    /** PrivateConnection peeringState. */
+                    public peeringState: (google.cloud.vmwareengine.v1.PrivateConnection.PeeringState|keyof typeof google.cloud.vmwareengine.v1.PrivateConnection.PeeringState);
+
+                    /**
+                     * Creates a new PrivateConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateConnection instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IPrivateConnection): google.cloud.vmwareengine.v1.PrivateConnection;
+
+                    /**
+                     * Encodes the specified PrivateConnection message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateConnection.verify|verify} messages.
+                     * @param message PrivateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IPrivateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateConnection message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateConnection.verify|verify} messages.
+                     * @param message PrivateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IPrivateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PrivateConnection;
+
+                    /**
+                     * Decodes a PrivateConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PrivateConnection;
+
+                    /**
+                     * Verifies a PrivateConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PrivateConnection;
+
+                    /**
+                     * Creates a plain object from a PrivateConnection message. Also converts values to other types if specified.
+                     * @param message PrivateConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.PrivateConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateConnection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PrivateConnection {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        UNPROVISIONED = 5,
+                        FAILED = 6
+                    }
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        PRIVATE_SERVICE_ACCESS = 1,
+                        NETAPP_CLOUD_VOLUMES = 2,
+                        DELL_POWERSCALE = 3,
+                        THIRD_PARTY_SERVICE = 4
+                    }
+
+                    /** RoutingMode enum. */
+                    enum RoutingMode {
+                        ROUTING_MODE_UNSPECIFIED = 0,
+                        GLOBAL = 1,
+                        REGIONAL = 2
+                    }
+
+                    /** PeeringState enum. */
+                    enum PeeringState {
+                        PEERING_STATE_UNSPECIFIED = 0,
+                        PEERING_ACTIVE = 1,
+                        PEERING_INACTIVE = 2
                     }
                 }
             }

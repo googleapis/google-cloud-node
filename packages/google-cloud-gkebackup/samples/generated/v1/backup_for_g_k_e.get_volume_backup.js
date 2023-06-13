@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Full name of the VolumeBackup resource.
-   *  Format: projects/* /locations/* /backupPlans/* /backups/* /volumeBackups/*
+   *  Format: `projects/* /locations/* /backupPlans/* /backups/* /volumeBackups/*`
    */
   // const name = 'abc123'
 

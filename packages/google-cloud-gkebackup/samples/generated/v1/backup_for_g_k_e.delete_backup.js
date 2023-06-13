@@ -30,13 +30,13 @@ function main(name) {
    */
   /**
    *  Required. Name of the Backup resource.
-   *  Format: projects/* /locations/* /backupPlans/* /backups/*
+   *  Format: `projects/* /locations/* /backupPlans/* /backups/*`
    */
   // const name = 'abc123'
   /**
    *  If provided, this value must match the current value of the
-   *  target Backup's etag google.cloud.gkebackup.v1.Backup.etag  field or the request is
-   *  rejected.
+   *  target Backup's etag google.cloud.gkebackup.v1.Backup.etag  field or the
+   *  request is rejected.
    */
   // const etag = 'abc123'
   /**
