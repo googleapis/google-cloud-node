@@ -141,7 +141,8 @@
     "packages/google-ai-generativelanguage": {},
     "packages/google-cloud-storageinsights": {},
     "packages/google-cloud-support": {},
-    "packages/google-maps-places": {}
+    "packages/google-maps-places": {},
+    "packages/google-cloud-rapidmigrationassessment": {}
   },
   "plugins": [
     {

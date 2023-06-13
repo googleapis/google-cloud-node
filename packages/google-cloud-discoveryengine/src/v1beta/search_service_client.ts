@@ -412,6 +412,10 @@ export class SearchServiceClient {
    *   case-sensitive.
    *
    *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics. The user_agent string in UserInfo will
+   *   be used to deduce device_type for analytics.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -422,16 +426,13 @@ export class SearchServiceClient {
    * @param {number[]} request.params
    *   Additional search parameters.
    *
-   *   For
-   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
-   *   vertical, supported values are:
+   *   For public website search only, supported values are:
    *
    *   * `user_country_code`: string. Default empty. If set to non-empty, results
    *      are restricted or boosted based on the location provided.
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   *   This field is ignored for other verticals.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
@@ -456,6 +457,27 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -598,6 +620,10 @@ export class SearchServiceClient {
    *   case-sensitive.
    *
    *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics. The user_agent string in UserInfo will
+   *   be used to deduce device_type for analytics.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -608,16 +634,13 @@ export class SearchServiceClient {
    * @param {number[]} request.params
    *   Additional search parameters.
    *
-   *   For
-   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
-   *   vertical, supported values are:
+   *   For public website search only, supported values are:
    *
    *   * `user_country_code`: string. Default empty. If set to non-empty, results
    *      are restricted or boosted based on the location provided.
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   *   This field is ignored for other verticals.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
@@ -642,6 +665,27 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -732,6 +776,10 @@ export class SearchServiceClient {
    *   case-sensitive.
    *
    *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics. The user_agent string in UserInfo will
+   *   be used to deduce device_type for analytics.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -742,16 +790,13 @@ export class SearchServiceClient {
    * @param {number[]} request.params
    *   Additional search parameters.
    *
-   *   For
-   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
-   *   vertical, supported values are:
+   *   For public website search only, supported values are:
    *
    *   * `user_country_code`: string. Default empty. If set to non-empty, results
    *      are restricted or boosted based on the location provided.
    *   * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   *   This field is ignored for other verticals.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
    *   query expansion will occur.
@@ -776,6 +821,27 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   The content search spec that configs the desired behavior of content
    *   search.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

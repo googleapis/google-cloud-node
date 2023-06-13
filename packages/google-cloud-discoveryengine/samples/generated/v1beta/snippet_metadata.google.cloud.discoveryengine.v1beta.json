@@ -294,7 +294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 128,
                     "type": "FULL"
                 }
             ],
@@ -326,6 +326,14 @@
                     {
                         "name": "reconciliation_mode",
                         "type": ".google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.ReconciliationMode"
+                    },
+                    {
+                        "name": "auto_generate_ids",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "id_field",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -686,7 +694,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 163,
+                    "end": 189,
                     "type": "FULL"
                 }
             ],
@@ -728,6 +736,10 @@
                         "type": "TYPE_STRING"
                     },
                     {
+                        "name": "user_info",
+                        "type": ".google.cloud.discoveryengine.v1beta.UserInfo"
+                    },
+                    {
                         "name": "facet_specs",
                         "type": "TYPE_MESSAGE[]"
                     },
@@ -754,6 +766,14 @@
                     {
                         "name": "content_search_spec",
                         "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec"
+                    },
+                    {
+                        "name": "safe_search",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",
