@@ -16,15 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const discoveryengine = require('@google-cloud/discoveryengine');
+import {RapidMigrationAssessmentClient} from '@google-cloud/rapidmigrationassessment';
+
+// check that the client class type name can be used
+function doStuffWithRapidMigrationAssessmentClient(
+  client: RapidMigrationAssessmentClient
+) {
+  client.close();
+}
 
 function main() {
-  const completionServiceClient = new discoveryengine.CompletionServiceClient();
-  const documentServiceClient = new discoveryengine.DocumentServiceClient();
-  const schemaServiceClient = new discoveryengine.SchemaServiceClient();
-  const searchServiceClient = new discoveryengine.SearchServiceClient();
-  const userEventServiceClient = new discoveryengine.UserEventServiceClient();
+  // check that the client instance can be created
+  const rapidMigrationAssessmentClient = new RapidMigrationAssessmentClient();
+  doStuffWithRapidMigrationAssessmentClient(rapidMigrationAssessmentClient);
 }
 
 main();

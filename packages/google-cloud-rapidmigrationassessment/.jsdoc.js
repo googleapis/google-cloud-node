@@ -16,15 +16,40 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const discoveryengine = require('@google-cloud/discoveryengine');
+'use strict';
 
-function main() {
-  const completionServiceClient = new discoveryengine.CompletionServiceClient();
-  const documentServiceClient = new discoveryengine.DocumentServiceClient();
-  const schemaServiceClient = new discoveryengine.SchemaServiceClient();
-  const searchServiceClient = new discoveryengine.SearchServiceClient();
-  const userEventServiceClient = new discoveryengine.UserEventServiceClient();
-}
-
-main();
+module.exports = {
+  opts: {
+    readme: './README.md',
+    package: './package.json',
+    template: './node_modules/jsdoc-fresh',
+    recurse: true,
+    verbose: true,
+    destination: './docs/'
+  },
+  plugins: [
+    'plugins/markdown',
+    'jsdoc-region-tag'
+  ],
+  source: {
+    excludePattern: '(^|\\/|\\\\)[._]',
+    include: [
+      'build/src',
+      'protos'
+    ],
+    includePattern: '\\.js$'
+  },
+  templates: {
+    copyright: 'Copyright 2023 Google LLC',
+    includeDate: false,
+    sourceFiles: false,
+    systemName: '@google-cloud/rapidmigrationassessment',
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
+  },
+  markdown: {
+    idInHeadings: true
+  }
+};

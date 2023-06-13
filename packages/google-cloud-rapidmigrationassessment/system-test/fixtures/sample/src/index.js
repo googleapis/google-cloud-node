@@ -17,14 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const discoveryengine = require('@google-cloud/discoveryengine');
+const rapidmigrationassessment = require('@google-cloud/rapidmigrationassessment');
 
 function main() {
-  const completionServiceClient = new discoveryengine.CompletionServiceClient();
-  const documentServiceClient = new discoveryengine.DocumentServiceClient();
-  const schemaServiceClient = new discoveryengine.SchemaServiceClient();
-  const searchServiceClient = new discoveryengine.SearchServiceClient();
-  const userEventServiceClient = new discoveryengine.UserEventServiceClient();
+  const rapidMigrationAssessmentClient =
+    new rapidmigrationassessment.RapidMigrationAssessmentClient();
 }
 
 main();
