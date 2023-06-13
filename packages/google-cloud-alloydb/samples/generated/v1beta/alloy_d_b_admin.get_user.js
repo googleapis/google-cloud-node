@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START alloydb_v1alpha_generated_AlloyDBAdmin_GetCluster_async]
+  // [START alloydb_v1beta_generated_AlloyDBAdmin_GetUser_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,34 +30,29 @@ function main(name) {
    */
   /**
    *  Required. The name of the resource. For the required format, see the
-   *  comment on the Cluster.name field.
+   *  comment on the User.name field.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. The view of the cluster to return. Returns all default fields if
-   *  not set.
-   */
-  // const view = {}
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callGetCluster() {
+  async function callGetUser() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await alloydbClient.getCluster(request);
+    const response = await alloydbClient.getUser(request);
     console.log(response);
   }
 
-  callGetCluster();
-  // [END alloydb_v1alpha_generated_AlloyDBAdmin_GetCluster_async]
+  callGetUser();
+  // [END alloydb_v1beta_generated_AlloyDBAdmin_GetUser_async]
 }
 
 process.on('unhandledRejection', err => {

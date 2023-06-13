@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START alloydb_v1alpha_generated_AlloyDBAdmin_GetCluster_async]
+function main(parent) {
+  // [START alloydb_v1beta_generated_AlloyDBAdmin_ListUsers_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,48 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the resource. For the required format, see the
-   *  comment on the Cluster.name field.
+   *  Required. Parent value for ListUsersRequest
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. The view of the cluster to return. Returns all default fields if
-   *  not set.
+   *  Optional. Requested page size. Server may return fewer items than
+   *  requested. If unspecified, server will pick an appropriate default.
    */
-  // const view = {}
+  // const pageSize = 1234
+  /**
+   *  Optional. A token identifying a page of results the server should return.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Optional. Filtering results
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. Hint for how to order the results
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callGetCluster() {
+  async function callListUsers() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await alloydbClient.getCluster(request);
-    console.log(response);
+    const iterable = await alloydbClient.listUsersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetCluster();
-  // [END alloydb_v1alpha_generated_AlloyDBAdmin_GetCluster_async]
+  callListUsers();
+  // [END alloydb_v1beta_generated_AlloyDBAdmin_ListUsers_async]
 }
 
 process.on('unhandledRejection', err => {

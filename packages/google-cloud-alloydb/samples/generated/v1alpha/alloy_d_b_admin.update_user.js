@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, clusterId, cluster) {
-  // [START alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+function main(user) {
+  // [START alloydb_v1alpha_generated_AlloyDBAdmin_UpdateUser_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,17 @@ function main(parent, clusterId, cluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location of the new cluster. For the required format, see the
-   *  comment on the Cluster.name field.
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
+   *  User resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the mask. If the
+   *  user does not provide a mask then all fields will be overwritten.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. ID of the requesting object.
+   *  Required. The resource being updated
    */
-  // const clusterId = 'abc123'
-  /**
-   *  Required. The resource being created
-   */
-  // const cluster = {}
+  // const user = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
@@ -56,34 +55,34 @@ function main(parent, clusterId, cluster) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set, performs request validation (e.g. permission checks and
-   *  any other type of validation), but do not actually execute the create
-   *  request.
+   *  Optional. If set, the backend validates the request, but doesn't actually
+   *  execute it.
    */
   // const validateOnly = true
+  /**
+   *  Optional. Allow missing fields in the update mask.
+   */
+  // const allowMissing = true
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callCreateCluster() {
+  async function callUpdateUser() {
     // Construct request
     const request = {
-      parent,
-      clusterId,
-      cluster,
+      user,
     };
 
     // Run request
-    const [operation] = await alloydbClient.createCluster(request);
-    const [response] = await operation.promise();
+    const response = await alloydbClient.updateUser(request);
     console.log(response);
   }
 
-  callCreateCluster();
-  // [END alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+  callUpdateUser();
+  // [END alloydb_v1alpha_generated_AlloyDBAdmin_UpdateUser_async]
 }
 
 process.on('unhandledRejection', err => {

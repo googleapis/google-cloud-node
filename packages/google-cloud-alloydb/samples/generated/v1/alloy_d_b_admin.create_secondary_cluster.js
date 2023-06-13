@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent, clusterId, cluster) {
-  // [START alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+  // [START alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,16 @@ function main(parent, clusterId, cluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location of the new cluster. For the required format, see the
-   *  comment on the Cluster.name field.
+   *  Required. The location of the new cluster. For the required
+   *  format, see the comment on the Cluster.name field.
    */
   // const parent = 'abc123'
   /**
-   *  Required. ID of the requesting object.
+   *  Required. ID of the requesting object (the secondary cluster).
    */
   // const clusterId = 'abc123'
   /**
-   *  Required. The resource being created
+   *  Required. Configuration of the requesting object (the secondary cluster).
    */
   // const cluster = {}
   /**
@@ -63,12 +63,12 @@ function main(parent, clusterId, cluster) {
   // const validateOnly = true
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callCreateCluster() {
+  async function callCreateSecondaryCluster() {
     // Construct request
     const request = {
       parent,
@@ -77,13 +77,13 @@ function main(parent, clusterId, cluster) {
     };
 
     // Run request
-    const [operation] = await alloydbClient.createCluster(request);
+    const [operation] = await alloydbClient.createSecondaryCluster(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateCluster();
-  // [END alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+  callCreateSecondaryCluster();
+  // [END alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_async]
 }
 
 process.on('unhandledRejection', err => {

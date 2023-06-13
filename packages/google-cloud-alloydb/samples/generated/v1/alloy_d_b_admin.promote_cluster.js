@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, clusterId, cluster) {
-  // [START alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+function main(name) {
+  // [START alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,15 @@ function main(parent, clusterId, cluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location of the new cluster. For the required format, see the
-   *  comment on the Cluster.name field.
+   *  Required. The name of the resource. For the required format, see the
+   *  comment on the Cluster.name field
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. ID of the requesting object.
-   */
-  // const clusterId = 'abc123'
-  /**
-   *  Required. The resource being created
-   */
-  // const cluster = {}
+  // const name = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
    *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
+   *  guarantee that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and
    *  the request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
@@ -56,34 +48,37 @@ function main(parent, clusterId, cluster) {
    */
   // const requestId = 'abc123'
   /**
+   *  Optional. The current etag of the Cluster.
+   *  If an etag is provided and does not match the current etag of the Cluster,
+   *  deletion will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
+  /**
    *  Optional. If set, performs request validation (e.g. permission checks and
-   *  any other type of validation), but do not actually execute the create
-   *  request.
+   *  any other type of validation), but do not actually execute the delete.
    */
   // const validateOnly = true
 
   // Imports the Alloydb library
-  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;
+  const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1;
 
   // Instantiates a client
   const alloydbClient = new AlloyDBAdminClient();
 
-  async function callCreateCluster() {
+  async function callPromoteCluster() {
     // Construct request
     const request = {
-      parent,
-      clusterId,
-      cluster,
+      name,
     };
 
     // Run request
-    const [operation] = await alloydbClient.createCluster(request);
+    const [operation] = await alloydbClient.promoteCluster(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateCluster();
-  // [END alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_async]
+  callPromoteCluster();
+  // [END alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_async]
 }
 
 process.on('unhandledRejection', err => {

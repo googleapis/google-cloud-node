@@ -33,6 +33,11 @@ function main(parent, clusterId, cluster) {
    */
   // const backupSource = {}
   /**
+   *  ContinuousBackup source. Continuous backup needs to be enabled in the
+   *  source cluster for this operation to succeed.
+   */
+  // const continuousBackupSource = {}
+  /**
    *  Required. The name of the parent resource. For the required format, see the
    *  comment on the Cluster.name field.
    */

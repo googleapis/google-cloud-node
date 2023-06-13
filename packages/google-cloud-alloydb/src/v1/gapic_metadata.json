@@ -25,6 +25,26 @@
                 "getBackup"
               ]
             },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -40,14 +60,29 @@
                 "deleteCluster"
               ]
             },
+            "PromoteCluster": {
+              "methods": [
+                "promoteCluster"
+              ]
+            },
             "RestoreCluster": {
               "methods": [
                 "restoreCluster"
               ]
             },
+            "CreateSecondaryCluster": {
+              "methods": [
+                "createSecondaryCluster"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
+              ]
+            },
+            "CreateSecondaryInstance": {
+              "methods": [
+                "createSecondaryInstance"
               ]
             },
             "BatchCreateInstances": {
@@ -68,6 +103,11 @@
             "FailoverInstance": {
               "methods": [
                 "failoverInstance"
+              ]
+            },
+            "InjectFault": {
+              "methods": [
+                "injectFault"
               ]
             },
             "RestartInstance": {
@@ -116,6 +156,13 @@
                 "listSupportedDatabaseFlags",
                 "listSupportedDatabaseFlagsStream",
                 "listSupportedDatabaseFlagsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
               ]
             }
           }
@@ -138,6 +185,26 @@
                 "getBackup"
               ]
             },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -153,14 +220,29 @@
                 "deleteCluster"
               ]
             },
+            "PromoteCluster": {
+              "methods": [
+                "promoteCluster"
+              ]
+            },
             "RestoreCluster": {
               "methods": [
                 "restoreCluster"
               ]
             },
+            "CreateSecondaryCluster": {
+              "methods": [
+                "createSecondaryCluster"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
+              ]
+            },
+            "CreateSecondaryInstance": {
+              "methods": [
+                "createSecondaryInstance"
               ]
             },
             "BatchCreateInstances": {
@@ -181,6 +263,11 @@
             "FailoverInstance": {
               "methods": [
                 "failoverInstance"
+              ]
+            },
+            "InjectFault": {
+              "methods": [
+                "injectFault"
               ]
             },
             "RestartInstance": {
@@ -229,6 +316,13 @@
                 "listSupportedDatabaseFlags",
                 "listSupportedDatabaseFlagsStream",
                 "listSupportedDatabaseFlagsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
               ]
             }
           }
