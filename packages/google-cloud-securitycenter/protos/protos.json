@@ -37,6 +37,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "userAgent": {
+                          "type": "string",
+                          "id": 12
+                        },
                         "serviceName": {
                           "type": "string",
                           "id": 5
@@ -269,6 +273,19 @@
                           "id": 1,
                           "options": {
                             "(google.api.resource_reference).type": "dlp.googleapis.com/TableDataProfile"
+                          }
+                        },
+                        "parentType": {
+                          "type": "ParentType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ParentType": {
+                          "values": {
+                            "PARENT_TYPE_UNSPECIFIED": 0,
+                            "ORGANIZATION": 1,
+                            "PROJECT": 2
                           }
                         }
                       }

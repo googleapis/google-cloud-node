@@ -226,6 +226,9 @@ export class UserEventServiceClient {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
             },
             {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+            },
+            {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/operations/*}',
             },
             {
@@ -247,6 +250,9 @@ export class UserEventServiceClient {
           additional_bindings: [
             {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
             },
             {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
