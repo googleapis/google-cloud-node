@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Fully qualified BackupPlan name.
-   *  Format: projects/* /locations/* /backupPlans/*
+   *  Format: `projects/* /locations/* /backupPlans/*`
    */
   // const name = 'abc123'
 

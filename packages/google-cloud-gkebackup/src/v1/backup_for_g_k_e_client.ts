@@ -27,6 +27,10 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -62,6 +66,8 @@ export class BackupForGKEClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   backupForGKEStub?: Promise<{[name: string]: Function}>;
@@ -159,6 +165,12 @@ export class BackupForGKEClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -660,7 +672,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Fully qualified BackupPlan name.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -746,7 +758,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full name of the Backup resource.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -830,7 +842,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full name of the VolumeBackup resource.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/* /volumeBackups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/* /volumeBackups/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -922,7 +934,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Fully qualified RestorePlan name.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1014,7 +1026,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the restore resource.
-   *   Format: projects/* /locations/* /restorePlans/* /restores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1100,7 +1112,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full name of the VolumeRestore resource.
-   *   Format: projects/* /locations/* /restorePlans/* /restores/* /volumeRestores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/* /volumeRestores/*`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1193,7 +1205,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location within which to create the BackupPlan.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {google.cloud.gkebackup.v1.BackupPlan} request.backupPlan
    *   Required. The BackupPlan resource object to create.
    * @param {string} request.backupPlanId
@@ -1342,8 +1354,8 @@ export class BackupForGKEClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkebackup.v1.BackupPlan} request.backupPlan
-   *   Required. A new version of the BackupPlan resource that contains updated fields.
-   *   This may be sparsely populated if an `update_mask` is provided.
+   *   Required. A new version of the BackupPlan resource that contains updated
+   *   fields. This may be sparsely populated if an `update_mask` is provided.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   This is used to specify the fields to be overwritten in the
    *   BackupPlan targeted for update. The values for each of these
@@ -1492,11 +1504,11 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Fully qualified BackupPlan name.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target BackupPlan's {@link google.cloud.gkebackup.v1.BackupPlan.etag|etag} field or the request is
-   *   rejected.
+   *   target BackupPlan's {@link google.cloud.gkebackup.v1.BackupPlan.etag|etag} field
+   *   or the request is rejected.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1635,7 +1647,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BackupPlan within which to create the Backup.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {google.cloud.gkebackup.v1.Backup} request.backup
    *   The Backup resource to create.
    * @param {string} request.backupId
@@ -1784,8 +1796,8 @@ export class BackupForGKEClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkebackup.v1.Backup} request.backup
-   *   Required. A new version of the Backup resource that contains updated fields.
-   *   This may be sparsely populated if an `update_mask` is provided.
+   *   Required. A new version of the Backup resource that contains updated
+   *   fields. This may be sparsely populated if an `update_mask` is provided.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   This is used to specify the fields to be overwritten in the
    *   Backup targeted for update. The values for each of these
@@ -1933,11 +1945,11 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the Backup resource.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target Backup's {@link google.cloud.gkebackup.v1.Backup.etag|etag} field or the request is
-   *   rejected.
+   *   target Backup's {@link google.cloud.gkebackup.v1.Backup.etag|etag} field or the
+   *   request is rejected.
    * @param {boolean} request.force
    *   If set to true, any VolumeBackups below this Backup will also be deleted.
    *   Otherwise, the request will only succeed if the Backup has no
@@ -2080,7 +2092,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location within which to create the RestorePlan.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {google.cloud.gkebackup.v1.RestorePlan} request.restorePlan
    *   Required. The RestorePlan resource object to create.
    * @param {string} request.restorePlanId
@@ -2229,8 +2241,8 @@ export class BackupForGKEClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkebackup.v1.RestorePlan} request.restorePlan
-   *   Required. A new version of the RestorePlan resource that contains updated fields.
-   *   This may be sparsely populated if an `update_mask` is provided.
+   *   Required. A new version of the RestorePlan resource that contains updated
+   *   fields. This may be sparsely populated if an `update_mask` is provided.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   This is used to specify the fields to be overwritten in the
    *   RestorePlan targeted for update. The values for each of these
@@ -2378,11 +2390,11 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Fully qualified RestorePlan name.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target RestorePlan's {@link google.cloud.gkebackup.v1.RestorePlan.etag|etag} field or the request is
-   *   rejected.
+   *   target RestorePlan's {@link google.cloud.gkebackup.v1.RestorePlan.etag|etag}
+   *   field or the request is rejected.
    * @param {boolean} request.force
    *   If set to true, any Restores below this RestorePlan will also be deleted.
    *   Otherwise, the request will only succeed if the RestorePlan has no
@@ -2525,7 +2537,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The RestorePlan within which to create the Restore.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {google.cloud.gkebackup.v1.Restore} request.restore
    *   Required. The restore resource to create.
    * @param {string} request.restoreId
@@ -2674,8 +2686,8 @@ export class BackupForGKEClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkebackup.v1.Restore} request.restore
-   *   Required. A new version of the Restore resource that contains updated fields.
-   *   This may be sparsely populated if an `update_mask` is provided.
+   *   Required. A new version of the Restore resource that contains updated
+   *   fields. This may be sparsely populated if an `update_mask` is provided.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   This is used to specify the fields to be overwritten in the
    *   Restore targeted for update. The values for each of these
@@ -2823,11 +2835,11 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full name of the Restore
-   *   Format: projects/* /locations/* /restorePlans/* /restores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target Restore's {@link google.cloud.gkebackup.v1.Restore.etag|etag} field or the request is
-   *   rejected.
+   *   target Restore's {@link google.cloud.gkebackup.v1.Restore.etag|etag} field or
+   *   the request is rejected.
    * @param {boolean} request.force
    *   If set to true, any VolumeRestores below this restore will also be deleted.
    *   Otherwise, the request will only succeed if the restore has no
@@ -2970,7 +2982,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3083,7 +3095,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3144,7 +3156,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3204,7 +3216,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3311,7 +3323,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3372,7 +3384,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
-   *   Format: projects/* /locations/* /backupPlans/*
+   *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3432,7 +3444,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3545,7 +3557,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3606,7 +3618,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
-   *   Format: projects/* /locations/* /backupPlans/* /backups/*
+   *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3666,7 +3678,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3779,7 +3791,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3840,7 +3852,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
-   *   Format: projects/* /locations/*
+   *   Format: `projects/* /locations/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -3900,7 +3912,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4007,7 +4019,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4068,7 +4080,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
-   *   Format: projects/* /locations/* /restorePlans/*
+   *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4128,7 +4140,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
-   *   Format: projects/* /locations/* /restorePlans/* /restores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4241,7 +4253,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
-   *   Format: projects/* /locations/* /restorePlans/* /restores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4302,7 +4314,7 @@ export class BackupForGKEClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
-   *   Format: projects/* /locations/* /restorePlans/* /restores/*
+   *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {number} request.pageSize
    *   The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
@@ -4355,6 +4367,401 @@ export class BackupForGKEClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkebackup.v1.IVolumeRestore>;
   }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.Policy> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.Policy> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4817,6 +5224,8 @@ export class BackupForGKEClient {
       return this.backupForGKEStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.iamClient.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

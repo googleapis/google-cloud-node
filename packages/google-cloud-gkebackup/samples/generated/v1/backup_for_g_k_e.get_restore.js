@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the restore resource.
-   *  Format: projects/* /locations/* /restorePlans/* /restores/*
+   *  Format: `projects/* /locations/* /restorePlans/* /restores/*`
    */
   // const name = 'abc123'
 

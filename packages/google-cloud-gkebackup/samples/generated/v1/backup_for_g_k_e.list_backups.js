@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The BackupPlan that contains the Backups to list.
-   *  Format: projects/* /locations/* /backupPlans/*
+   *  Format: `projects/* /locations/* /backupPlans/*`
    */
   // const parent = 'abc123'
   /**
