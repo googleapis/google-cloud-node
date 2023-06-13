@@ -13,11 +13,16 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Environments.create_environment](#environments.create_environment)
+  * [Environments.database_failover](#environments.database_failover)
   * [Environments.delete_environment](#environments.delete_environment)
+  * [Environments.execute_airflow_command](#environments.execute_airflow_command)
+  * [Environments.fetch_database_properties](#environments.fetch_database_properties)
   * [Environments.get_environment](#environments.get_environment)
   * [Environments.list_environments](#environments.list_environments)
   * [Environments.load_snapshot](#environments.load_snapshot)
+  * [Environments.poll_airflow_command](#environments.poll_airflow_command)
   * [Environments.save_snapshot](#environments.save_snapshot)
+  * [Environments.stop_airflow_command](#environments.stop_airflow_command)
   * [Environments.update_environment](#environments.update_environment)
   * [Image_versions.list_image_versions](#image_versions.list_image_versions)
   * [Environments.check_upgrade](#environments.check_upgrade)
@@ -30,7 +35,6 @@
   * [Environments.save_snapshot](#environments.save_snapshot)
   * [Environments.update_environment](#environments.update_environment)
   * [Image_versions.list_image_versions](#image_versions.list_image_versions)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -65,6 +69,23 @@ __Usage:__
 
 
 
+### Environments.database_failover
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.database_failover.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.database_failover.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.database_failover.js`
+
+
+-----
+
+
+
+
 ### Environments.delete_environment
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.delete_environment.js).
@@ -75,6 +96,40 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.delete_environment.js`
+
+
+-----
+
+
+
+
+### Environments.execute_airflow_command
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.execute_airflow_command.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.execute_airflow_command.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.execute_airflow_command.js`
+
+
+-----
+
+
+
+
+### Environments.fetch_database_properties
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.fetch_database_properties.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.fetch_database_properties.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.fetch_database_properties.js`
 
 
 -----
@@ -133,6 +188,23 @@ __Usage:__
 
 
 
+### Environments.poll_airflow_command
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.poll_airflow_command.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.poll_airflow_command.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.poll_airflow_command.js`
+
+
+-----
+
+
+
+
 ### Environments.save_snapshot
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.save_snapshot.js).
@@ -143,6 +215,23 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.save_snapshot.js`
+
+
+-----
+
+
+
+
+### Environments.stop_airflow_command
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.stop_airflow_command.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.stop_airflow_command.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.stop_airflow_command.js`
 
 
 -----
@@ -364,23 +453,6 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js`
 
 
 

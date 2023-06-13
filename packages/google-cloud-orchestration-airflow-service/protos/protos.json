@@ -142,6 +142,54 @@
                                     }
                                   ]
                                 },
+                                "ExecuteAirflowCommand": {
+                                  "requestType": "ExecuteAirflowCommandRequest",
+                                  "responseType": "ExecuteAirflowCommandResponse",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:executeAirflowCommand",
+                                    "(google.api.http).body": "*"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:executeAirflowCommand",
+                                        "body": "*"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "StopAirflowCommand": {
+                                  "requestType": "StopAirflowCommandRequest",
+                                  "responseType": "StopAirflowCommandResponse",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:stopAirflowCommand",
+                                    "(google.api.http).body": "*"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:stopAirflowCommand",
+                                        "body": "*"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "PollAirflowCommand": {
+                                  "requestType": "PollAirflowCommandRequest",
+                                  "responseType": "PollAirflowCommandResponse",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:pollAirflowCommand",
+                                    "(google.api.http).body": "*"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:pollAirflowCommand",
+                                        "body": "*"
+                                      }
+                                    }
+                                  ]
+                                },
                                 "SaveSnapshot": {
                                   "requestType": "SaveSnapshotRequest",
                                   "responseType": "google.longrunning.Operation",
@@ -186,6 +234,44 @@
                                       "(google.longrunning.operation_info)": {
                                         "response_type": "google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse",
                                         "metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "DatabaseFailover": {
+                                  "requestType": "DatabaseFailoverRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:databaseFailover",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:databaseFailover",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "FetchDatabaseProperties": {
+                                  "requestType": "FetchDatabasePropertiesRequest",
+                                  "responseType": "FetchDatabasePropertiesResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{environment=projects/*/locations/*/environments/*}:fetchDatabaseProperties"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{environment=projects/*/locations/*/environments/*}:fetchDatabaseProperties"
                                       }
                                     }
                                   ]
@@ -265,6 +351,151 @@
                                 }
                               }
                             },
+                            "ExecuteAirflowCommandRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "command": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "subcommand": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "parameters": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "ExecuteAirflowCommandResponse": {
+                              "fields": {
+                                "executionId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "pod": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "podNamespace": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "error": {
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "StopAirflowCommandRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "executionId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "pod": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "podNamespace": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "force": {
+                                  "type": "bool",
+                                  "id": 5
+                                }
+                              }
+                            },
+                            "StopAirflowCommandResponse": {
+                              "fields": {
+                                "isDone": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "output": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "PollAirflowCommandRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "executionId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "pod": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "podNamespace": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "nextLineNumber": {
+                                  "type": "int32",
+                                  "id": 5
+                                }
+                              }
+                            },
+                            "PollAirflowCommandResponse": {
+                              "fields": {
+                                "output": {
+                                  "rule": "repeated",
+                                  "type": "Line",
+                                  "id": 1
+                                },
+                                "outputEnd": {
+                                  "type": "bool",
+                                  "id": 2
+                                },
+                                "exitInfo": {
+                                  "type": "ExitInfo",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Line": {
+                                  "fields": {
+                                    "lineNumber": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "content": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ExitInfo": {
+                                  "fields": {
+                                    "exitCode": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "error": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "SaveSnapshotRequest": {
                               "fields": {
                                 "environment": {
@@ -315,6 +546,45 @@
                             },
                             "LoadSnapshotResponse": {
                               "fields": {}
+                            },
+                            "DatabaseFailoverRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "DatabaseFailoverResponse": {
+                              "fields": {}
+                            },
+                            "FetchDatabasePropertiesRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                }
+                              }
+                            },
+                            "FetchDatabasePropertiesResponse": {
+                              "fields": {
+                                "primaryGceZone": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "secondaryGceZone": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "isFailoverReplicaAvailable": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
                             },
                             "EnvironmentConfig": {
                               "fields": {
@@ -415,6 +685,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "resilienceMode": {
+                                  "type": "ResilienceMode",
+                                  "id": 19,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -424,6 +701,12 @@
                                     "ENVIRONMENT_SIZE_SMALL": 1,
                                     "ENVIRONMENT_SIZE_MEDIUM": 2,
                                     "ENVIRONMENT_SIZE_LARGE": 3
+                                  }
+                                },
+                                "ResilienceMode": {
+                                  "values": {
+                                    "RESILIENCE_MODE_UNSPECIFIED": 0,
+                                    "HIGH_RESILIENCE": 1
                                   }
                                 }
                               }
@@ -1104,7 +1387,8 @@
                                     "UPDATE": 3,
                                     "CHECK": 4,
                                     "SAVE_SNAPSHOT": 5,
-                                    "LOAD_SNAPSHOT": 6
+                                    "LOAD_SNAPSHOT": 6,
+                                    "DATABASE_FAILOVER": 7
                                   }
                                 }
                               }

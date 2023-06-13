@@ -255,6 +255,12 @@ export class EnvironmentsClient {
     const loadSnapshotMetadata = protoFilesRoot.lookup(
       '.google.cloud.orchestration.airflow.service.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const databaseFailoverResponse = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse'
+    ) as gax.protobuf.Type;
+    const databaseFailoverMetadata = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEnvironment: new this._gaxModule.LongrunningDescriptor(
@@ -281,6 +287,11 @@ export class EnvironmentsClient {
         this.operationsClient,
         loadSnapshotResponse.decode.bind(loadSnapshotResponse),
         loadSnapshotMetadata.decode.bind(loadSnapshotMetadata)
+      ),
+      databaseFailover: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        databaseFailoverResponse.decode.bind(databaseFailoverResponse),
+        databaseFailoverMetadata.decode.bind(databaseFailoverMetadata)
       ),
     };
 
@@ -340,8 +351,13 @@ export class EnvironmentsClient {
       'listEnvironments',
       'updateEnvironment',
       'deleteEnvironment',
+      'executeAirflowCommand',
+      'stopAirflowCommand',
+      'pollAirflowCommand',
       'saveSnapshot',
       'loadSnapshot',
+      'databaseFailover',
+      'fetchDatabaseProperties',
     ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
@@ -525,6 +541,428 @@ export class EnvironmentsClient {
       });
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
+  }
+  /**
+   * Executes Airflow CLI command.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   The resource name of the environment in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}".
+   * @param {string} request.command
+   *   Airflow command.
+   * @param {string} request.subcommand
+   *   Airflow subcommand.
+   * @param {string[]} request.parameters
+   *   Parameters for the Airflow command/subcommand as an array of arguments.
+   *   It may contain positional arguments like `["my-dag-id"]`, key-value
+   *   parameters like `["--foo=bar"]` or `["--foo","bar"]`,
+   *   or other flags like `["-f"]`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandResponse | ExecuteAirflowCommandResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.execute_airflow_command.js</caption>
+   * region_tag:composer_v1_generated_Environments_ExecuteAirflowCommand_async
+   */
+  executeAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  executeAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  executeAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  executeAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.executeAirflowCommand(request, options, callback);
+  }
+  /**
+   * Stops Airflow CLI command execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   The resource name of the environment in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}".
+   * @param {string} request.executionId
+   *   The unique ID of the command execution.
+   * @param {string} request.pod
+   *   The name of the pod where the command is executed.
+   * @param {string} request.podNamespace
+   *   The namespace of the pod where the command is executed.
+   * @param {boolean} request.force
+   *   If true, the execution is terminated forcefully (SIGKILL). If false, the
+   *   execution is stopped gracefully, giving it time for cleanup.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.orchestration.airflow.service.v1.StopAirflowCommandResponse | StopAirflowCommandResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.stop_airflow_command.js</caption>
+   * region_tag:composer_v1_generated_Environments_StopAirflowCommand_async
+   */
+  stopAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  stopAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.stopAirflowCommand(request, options, callback);
+  }
+  /**
+   * Polls Airflow CLI command execution and fetches logs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   The resource name of the environment in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {string} request.executionId
+   *   The unique ID of the command execution.
+   * @param {string} request.pod
+   *   The name of the pod where the command is executed.
+   * @param {string} request.podNamespace
+   *   The namespace of the pod where the command is executed.
+   * @param {number} request.nextLineNumber
+   *   Line number from which new logs should be fetched.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse | PollAirflowCommandResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.poll_airflow_command.js</caption>
+   * region_tag:composer_v1_generated_Environments_PollAirflowCommand_async
+   */
+  pollAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  pollAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pollAirflowCommand(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pollAirflowCommand(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pollAirflowCommand(request, options, callback);
+  }
+  /**
+   * Fetches database properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Required. The resource name of the environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesResponse | FetchDatabasePropertiesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.fetch_database_properties.js</caption>
+   * region_tag:composer_v1_generated_Environments_FetchDatabaseProperties_async
+   */
+  fetchDatabaseProperties(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  fetchDatabaseProperties(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchDatabaseProperties(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchDatabaseProperties(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+      | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchDatabaseProperties(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1372,6 +1810,145 @@ export class EnvironmentsClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse,
+      protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Triggers database failover (only for highly resilient environments).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Target environment:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.database_failover.js</caption>
+   * region_tag:composer_v1_generated_Environments_DatabaseFailover_async
+   */
+  databaseFailover(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  databaseFailover(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  databaseFailover(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  databaseFailover(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.databaseFailover(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `databaseFailover()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.database_failover.js</caption>
+   * region_tag:composer_v1_generated_Environments_DatabaseFailover_async
+   */
+  async checkDatabaseFailoverProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse,
+      protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.databaseFailover,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse,
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >;
   }
