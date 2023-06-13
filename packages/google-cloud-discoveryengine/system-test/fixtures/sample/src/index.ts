@@ -19,7 +19,6 @@
 import {
   CompletionServiceClient,
   DocumentServiceClient,
-  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   UserEventServiceClient,
@@ -30,11 +29,6 @@ function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
   client.close();
 }
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
-  client.close();
-}
-function doStuffWithRecommendationServiceClient(
-  client: RecommendationServiceClient
-) {
   client.close();
 }
 function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
@@ -54,9 +48,6 @@ function main() {
   // check that the client instance can be created
   const documentServiceClient = new DocumentServiceClient();
   doStuffWithDocumentServiceClient(documentServiceClient);
-  // check that the client instance can be created
-  const recommendationServiceClient = new RecommendationServiceClient();
-  doStuffWithRecommendationServiceClient(recommendationServiceClient);
   // check that the client instance can be created
   const schemaServiceClient = new SchemaServiceClient();
   doStuffWithSchemaServiceClient(schemaServiceClient);
