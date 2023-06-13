@@ -35,6 +35,26 @@
                 "getConnectionInfo"
               ]
             },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -95,6 +115,11 @@
                 "failoverInstance"
               ]
             },
+            "InjectFault": {
+              "methods": [
+                "injectFault"
+              ]
+            },
             "RestartInstance": {
               "methods": [
                 "restartInstance"
@@ -141,6 +166,13 @@
                 "listSupportedDatabaseFlags",
                 "listSupportedDatabaseFlagsStream",
                 "listSupportedDatabaseFlagsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
               ]
             }
           }
@@ -173,6 +205,26 @@
                 "getConnectionInfo"
               ]
             },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -233,6 +285,11 @@
                 "failoverInstance"
               ]
             },
+            "InjectFault": {
+              "methods": [
+                "injectFault"
+              ]
+            },
             "RestartInstance": {
               "methods": [
                 "restartInstance"
@@ -279,6 +336,13 @@
                 "listSupportedDatabaseFlags",
                 "listSupportedDatabaseFlagsStream",
                 "listSupportedDatabaseFlagsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
               ]
             }
           }

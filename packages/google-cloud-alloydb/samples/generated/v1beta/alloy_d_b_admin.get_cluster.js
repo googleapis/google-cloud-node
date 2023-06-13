@@ -33,6 +33,11 @@ function main(name) {
    *  comment on the Cluster.name field.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The view of the cluster to return. Returns all default fields if
+   *  not set.
+   */
+  // const view = {}
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1beta;

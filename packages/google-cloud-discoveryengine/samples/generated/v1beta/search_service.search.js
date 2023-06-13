@@ -89,6 +89,12 @@ function main(servingConfig) {
    */
   // const orderBy = 'abc123'
   /**
+   *  Information about the end user.
+   *  Highly recommended for analytics. The user_agent string in UserInfo will
+   *  be used to deduce device_type for analytics.
+   */
+  // const userInfo = {}
+  /**
    *  Facet specifications for faceted search. If empty, no facets are returned.
    *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
    *  error is returned.
@@ -100,15 +106,12 @@ function main(servingConfig) {
   // const boostSpec = {}
   /**
    *  Additional search parameters.
-   *  For
-   *  IndustryVertical.SITE_SEARCH google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH 
-   *  vertical, supported values are:
+   *  For public website search only, supported values are:
    *  * `user_country_code`: string. Default empty. If set to non-empty, results
    *     are restricted or boosted based on the location provided.
    *  * `search_type`: double. Default empty. Enables non-webpage searching
    *    depending on the value. The only valid non-default value is 1,
    *    which enables image searching.
-   *  This field is ignored for other verticals.
    */
   // const params = 1234
   /**
@@ -140,6 +143,29 @@ function main(servingConfig) {
    *  search.
    */
   // const contentSearchSpec = {}
+  /**
+   *  Whether to turn on safe search. This is only supported for
+   *  ContentConfig.PUBLIC_WEBSITE .
+   */
+  // const safeSearch = true
+  /**
+   *  The user labels applied to a resource must meet the following requirements:
+   *  * Each resource can have multiple labels, up to a maximum of 64.
+   *  * Each label must be a key-value pair.
+   *  * Keys have a minimum length of 1 character and a maximum length of 63
+   *    characters and cannot be empty. Values can be empty and have a maximum
+   *    length of 63 characters.
+   *  * Keys and values can contain only lowercase letters, numeric characters,
+   *    underscores, and dashes. All characters must use UTF-8 encoding, and
+   *    international characters are allowed.
+   *  * The key portion of a label must be unique. However, you can use the same
+   *    key with multiple resources.
+   *  * Keys must start with a lowercase letter or international character.
+   *  See Google Cloud
+   *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *  for more details.
+   */
+  // const userLabels = 1234
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

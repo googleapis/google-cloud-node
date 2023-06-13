@@ -29,7 +29,7 @@ function main(parent, clusterId, cluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource. For the required format, see the
+   *  Required. The location of the new cluster. For the required format, see the
    *  comment on the Cluster.name field.
    */
   // const parent = 'abc123'
