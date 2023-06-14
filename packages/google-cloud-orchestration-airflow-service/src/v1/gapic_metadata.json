@@ -15,6 +15,26 @@
                 "getEnvironment"
               ]
             },
+            "ExecuteAirflowCommand": {
+              "methods": [
+                "executeAirflowCommand"
+              ]
+            },
+            "StopAirflowCommand": {
+              "methods": [
+                "stopAirflowCommand"
+              ]
+            },
+            "PollAirflowCommand": {
+              "methods": [
+                "pollAirflowCommand"
+              ]
+            },
+            "FetchDatabaseProperties": {
+              "methods": [
+                "fetchDatabaseProperties"
+              ]
+            },
             "CreateEnvironment": {
               "methods": [
                 "createEnvironment"
@@ -38,6 +58,11 @@
             "LoadSnapshot": {
               "methods": [
                 "loadSnapshot"
+              ]
+            },
+            "DatabaseFailover": {
+              "methods": [
+                "databaseFailover"
               ]
             },
             "ListEnvironments": {
@@ -57,6 +82,26 @@
                 "getEnvironment"
               ]
             },
+            "ExecuteAirflowCommand": {
+              "methods": [
+                "executeAirflowCommand"
+              ]
+            },
+            "StopAirflowCommand": {
+              "methods": [
+                "stopAirflowCommand"
+              ]
+            },
+            "PollAirflowCommand": {
+              "methods": [
+                "pollAirflowCommand"
+              ]
+            },
+            "FetchDatabaseProperties": {
+              "methods": [
+                "fetchDatabaseProperties"
+              ]
+            },
             "CreateEnvironment": {
               "methods": [
                 "createEnvironment"
@@ -80,6 +125,11 @@
             "LoadSnapshot": {
               "methods": [
                 "loadSnapshot"
+              ]
+            },
+            "DatabaseFailover": {
+              "methods": [
+                "databaseFailover"
               ]
             },
             "ListEnvironments": {

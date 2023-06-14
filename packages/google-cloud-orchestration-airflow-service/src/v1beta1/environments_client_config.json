@@ -48,11 +48,31 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ExecuteAirflowCommand": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopAirflowCommand": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PollAirflowCommand": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SaveSnapshot": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "LoadSnapshot": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DatabaseFailover": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchDatabaseProperties": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

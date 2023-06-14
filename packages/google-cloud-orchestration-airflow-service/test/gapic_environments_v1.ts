@@ -387,6 +387,542 @@ describe('v1.EnvironmentsClient', () => {
     });
   });
 
+  describe('executeAirflowCommand', () => {
+    it('invokes executeAirflowCommand without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandResponse()
+      );
+      client.innerApiCalls.executeAirflowCommand =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.executeAirflowCommand(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeAirflowCommand without error using callback', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandResponse()
+      );
+      client.innerApiCalls.executeAirflowCommand =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.executeAirflowCommand(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeAirflowCommand with error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.executeAirflowCommand = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.executeAirflowCommand(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes executeAirflowCommand with closed client', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.executeAirflowCommand(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('stopAirflowCommand', () => {
+    it('invokes stopAirflowCommand without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandResponse()
+      );
+      client.innerApiCalls.stopAirflowCommand =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.stopAirflowCommand(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopAirflowCommand without error using callback', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandResponse()
+      );
+      client.innerApiCalls.stopAirflowCommand =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.stopAirflowCommand(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopAirflowCommand with error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.stopAirflowCommand = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.stopAirflowCommand(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopAirflowCommand with closed client', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.stopAirflowCommand(request), expectedError);
+    });
+  });
+
+  describe('pollAirflowCommand', () => {
+    it('invokes pollAirflowCommand without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse()
+      );
+      client.innerApiCalls.pollAirflowCommand =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.pollAirflowCommand(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pollAirflowCommand without error using callback', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse()
+      );
+      client.innerApiCalls.pollAirflowCommand =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.pollAirflowCommand(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pollAirflowCommand with error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.pollAirflowCommand = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.pollAirflowCommand(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pollAirflowCommand as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pollAirflowCommand with closed client', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.pollAirflowCommand(request), expectedError);
+    });
+  });
+
+  describe('fetchDatabaseProperties', () => {
+    it('invokes fetchDatabaseProperties without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesResponse()
+      );
+      client.innerApiCalls.fetchDatabaseProperties =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchDatabaseProperties(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatabaseProperties without error using callback', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesResponse()
+      );
+      client.innerApiCalls.fetchDatabaseProperties =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchDatabaseProperties(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatabaseProperties with error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchDatabaseProperties = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchDatabaseProperties(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatabaseProperties as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatabaseProperties with closed client', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.fetchDatabaseProperties(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createEnvironment', () => {
     it('invokes createEnvironment without error', async () => {
       const client = new environmentsModule.v1.EnvironmentsClient({
@@ -1345,6 +1881,200 @@ describe('v1.EnvironmentsClient', () => {
         expectedError
       );
       await assert.rejects(client.checkLoadSnapshotProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('databaseFailover', () => {
+    it('invokes databaseFailover without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.databaseFailover =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.databaseFailover(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes databaseFailover without error using callback', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.databaseFailover =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.databaseFailover(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+              protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes databaseFailover with call error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.databaseFailover = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.databaseFailover(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes databaseFailover with LRO error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest',
+        ['environment']
+      );
+      request.environment = defaultValue1;
+      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.databaseFailover = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.databaseFailover(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.databaseFailover as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDatabaseFailoverProgress without error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDatabaseFailoverProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDatabaseFailoverProgress with error', async () => {
+      const client = new environmentsModule.v1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDatabaseFailoverProgress(''),
+        expectedError
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
