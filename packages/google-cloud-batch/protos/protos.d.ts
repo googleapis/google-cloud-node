@@ -3157,6 +3157,9 @@ export namespace google {
                     /** TaskGroup parallelism */
                     parallelism?: (number|Long|string|null);
 
+                    /** TaskGroup schedulingPolicy */
+                    schedulingPolicy?: (google.cloud.batch.v1.TaskGroup.SchedulingPolicy|keyof typeof google.cloud.batch.v1.TaskGroup.SchedulingPolicy|null);
+
                     /** TaskGroup taskEnvironments */
                     taskEnvironments?: (google.cloud.batch.v1.IEnvironment[]|null);
 
@@ -3190,6 +3193,9 @@ export namespace google {
 
                     /** TaskGroup parallelism. */
                     public parallelism: (number|Long|string);
+
+                    /** TaskGroup schedulingPolicy. */
+                    public schedulingPolicy: (google.cloud.batch.v1.TaskGroup.SchedulingPolicy|keyof typeof google.cloud.batch.v1.TaskGroup.SchedulingPolicy);
 
                     /** TaskGroup taskEnvironments. */
                     public taskEnvironments: google.cloud.batch.v1.IEnvironment[];
@@ -3279,6 +3285,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TaskGroup {
+
+                    /** SchedulingPolicy enum. */
+                    enum SchedulingPolicy {
+                        SCHEDULING_POLICY_UNSPECIFIED = 0,
+                        AS_SOON_AS_POSSIBLE = 1,
+                        IN_ORDER = 2
+                    }
                 }
 
                 /** Properties of a ServiceAccount. */
