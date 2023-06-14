@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.4.0...security-center-v7.5.0) (2023-06-14)
+
+
+### Features
+
+* [securitycenter] Add user agent and DLP parent type fields to finding's list of attributes ([#4332](https://github.com/googleapis/google-cloud-node/issues/4332)) ([0552bb9](https://github.com/googleapis/google-cloud-node/commit/0552bb983dae0d565a68fd9ab315c40492f13e46))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.3.0...security-center-v7.4.0) (2023-04-24)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.4.0...orchestration-airflow-v2.5.0) (2023-06-14)
+
+
+### Features
+
+* [orchestration] added RPCs StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties ([33373fd](https://github.com/googleapis/google-cloud-node/commit/33373fd503fd476ed5d5a6ced1e48d86dc0459e1))
+* [orchestration] added RPCs StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties ([#4341](https://github.com/googleapis/google-cloud-node/issues/4341)) ([33373fd](https://github.com/googleapis/google-cloud-node/commit/33373fd503fd476ed5d5a6ced1e48d86dc0459e1))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.3.2...orchestration-airflow-v2.4.0) (2023-05-02)
 
 

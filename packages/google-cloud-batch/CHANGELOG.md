@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.8.0...batch-v0.9.0) (2023-06-14)
+
+
+### Features
+
+* [batch] implement minCpuPlatform ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+* Update TaskGroup doc ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+* **v1:** [batch] Add support for scheduling_policy ([#4340](https://github.com/googleapis/google-cloud-node/issues/4340)) ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.7.1...batch-v0.8.0) (2023-05-20)
 
 

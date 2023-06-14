@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.12.0...container-v4.13.0) (2023-06-14)
+
+
+### Features
+
+* [container] add API for GPU driver installation config ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* [container] add API for GPU driver installation config ([#4330](https://github.com/googleapis/google-cloud-node/issues/4330)) ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+
 ## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.11.0...container-v4.12.0) (2023-06-06)
 
 

@@ -5,6 +5,326 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e1211f0b2bc1557cca5ba63949ef1fb8cdacedf6",
+          "message": "Add initial files for google.cloud.rapidmigrationassessment.v1",
+          "issues": [
+            "4335"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "c783f4fa-6bee-412a-b171-ddde106190e8",
+      "createTime": "2023-06-14T23:55:54.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added support for continuous backups",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added support for cross-region replication (secondary clusters/instances and promotion)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added users API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added fault injection API",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Deprecated SSL modes SSL_MODE_ALLOW, SSL_MODE_REQUIRE, SSL_MODE_VERIFY_CA",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "[alloydb] Added new SSL modes ALLOW_UNENCRYPTED_AND_ENCRYPTED, ENCRYPTED_ONLY",
+          "issues": [
+            "4336"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added new SSL modes ALLOW_UNENCRYPTED_AND_ENCRYPTED, ENCRYPTED_ONLY",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added users API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added fault injection API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added instance update policy",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added cluster network config",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Deprecated SSL modes SSL_MODE_ALLOW, SSL_MODE_REQUIRE, SSL_MODE_VERIFY_CA",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "[alloydb] Added ClusterView supporting more granular view of continuous backups",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added new SSL modes ALLOW_UNENCRYPTED_AND_ENCRYPTED, ENCRYPTED_ONLY",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added users API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added fault injection API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added instance update policy",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Added cluster network config",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "Deprecated SSL modes SSL_MODE_ALLOW, SSL_MODE_REQUIRE, SSL_MODE_VERIFY_CA",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "342a28c3e06848325744e9d80a046ca1ed4dbc5f",
+          "message": "[alloydb] Added ClusterView supporting more granular view of continuous backups",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "d30b2c5e-0fb5-4bb2-a817-3879ca86bffd",
+      "createTime": "2023-06-14T23:55:54.093Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f5b153353788f4df4fee6d19a6cd013fe6bb29f5",
+          "message": "Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f5b153353788f4df4fee6d19a6cd013fe6bb29f5",
+          "message": "[container] add API for GPU driver installation config",
+          "issues": [
+            "4330"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f5b153353788f4df4fee6d19a6cd013fe6bb29f5",
+          "message": "Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f5b153353788f4df4fee6d19a6cd013fe6bb29f5",
+          "message": "[container] add API for GPU driver installation config",
+          "issues": []
+        }
+      ],
+      "version": "4.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "dfd03816-9f6c-41a8-824c-57e00500f8db",
+      "createTime": "2023-06-14T23:55:54.089Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f12063c60a4c8ea05e6269babe2eaa6775974c6f",
+          "message": "[vmwareengine] Adding private connection CRUD, updating management subnets and time-limited PC features",
+          "issues": [
+            "4328"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "6852a2f3-04e8-4c4e-8495-fa41f1d2de38",
+      "createTime": "2023-06-14T23:55:54.084Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0552bb983dae0d565a68fd9ab315c40492f13e46",
+          "message": "[securitycenter] Add user agent and DLP parent type fields to finding's list of attributes",
+          "issues": [
+            "4332"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "3a1c2da7-5077-4944-a6ac-ece0dfd23e96",
+      "createTime": "2023-06-14T23:55:54.081Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "33373fd503fd476ed5d5a6ced1e48d86dc0459e1",
+          "message": "[orchestration] added RPCs StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties",
+          "issues": [
+            "4341"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "33373fd503fd476ed5d5a6ced1e48d86dc0459e1",
+          "message": "[orchestration] added RPCs StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties",
+          "issues": []
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "67accf6e-9534-4c0d-9da3-1c428e767ba1",
+      "createTime": "2023-06-14T23:55:54.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1415f5f0cdbd284fb11427fe1053048e278e7546",
+          "message": "Use v1 as the default version",
+          "issues": [
+            "4333"
+          ],
+          "breakingChangeNote": "use v1 as the default version ([#4333](https://github.com/googleapis/google-cloud-node/issues/4333))"
+        },
+        {
+          "type": "fix",
+          "sha": "0b9c928a45e5de78dd13894dc537b351f90a9d56",
+          "message": "[discoveryengine] remove the summarization feature from v1 version",
+          "issues": [
+            "4273"
+          ],
+          "breakingChangeNote": "[discoveryengine] remove the summarization feature from v1 version ([#4273](https://github.com/googleapis/google-cloud-node/issues/4273))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "42a546c9-32bf-4ba2-a467-a4c43ed44ece",
+      "createTime": "2023-06-14T23:55:54.075Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "64af37afa0abccf87378b4813a26fbaba3ae8bb8",
+          "message": "[dialogflow-cx] add support for flexible webhook",
+          "issues": [
+            "4334"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "64af37afa0abccf87378b4813a26fbaba3ae8bb8",
+          "message": "[dialogflow-cx] add support for flexible webhook",
+          "issues": []
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "b5e1cd3f-0558-4e70-b404-36bc8c6d6a55",
+      "createTime": "2023-06-14T23:55:54.071Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d4d75c629a19649256072d29766e2e692c771ee9",
+          "message": "[batch] Add support for scheduling_policy",
+          "issues": [
+            "4340"
+          ],
+          "scope": "v1"
+        },
+        {
+          "type": "feat",
+          "sha": "d4d75c629a19649256072d29766e2e692c771ee9",
+          "message": "Update TaskGroup doc",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d4d75c629a19649256072d29766e2e692c771ee9",
+          "message": "[batch] implement minCpuPlatform",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "d6936598-bdc4-4429-adeb-9480e50732e2",
+      "createTime": "2023-06-14T23:55:54.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5c99df6328f6bd0cfc83a6a294377b47228c0943",
           "message": "[mapsplatformdatasets] Add client libraries for v1",
           "issues": [
@@ -9977,5 +10297,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-06-06T07:04:16.853Z"
+  "updateTime": "2023-06-14T23:55:54.096Z"
 }
