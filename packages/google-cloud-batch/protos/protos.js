@@ -8077,6 +8077,7 @@
                          * @property {google.cloud.batch.v1.ITaskSpec|null} [taskSpec] TaskGroup taskSpec
                          * @property {number|Long|null} [taskCount] TaskGroup taskCount
                          * @property {number|Long|null} [parallelism] TaskGroup parallelism
+                         * @property {google.cloud.batch.v1.TaskGroup.SchedulingPolicy|null} [schedulingPolicy] TaskGroup schedulingPolicy
                          * @property {Array.<google.cloud.batch.v1.IEnvironment>|null} [taskEnvironments] TaskGroup taskEnvironments
                          * @property {number|Long|null} [taskCountPerNode] TaskGroup taskCountPerNode
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
@@ -8130,6 +8131,14 @@
                          * @instance
                          */
                         TaskGroup.prototype.parallelism = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TaskGroup schedulingPolicy.
+                         * @member {google.cloud.batch.v1.TaskGroup.SchedulingPolicy} schedulingPolicy
+                         * @memberof google.cloud.batch.v1.TaskGroup
+                         * @instance
+                         */
+                        TaskGroup.prototype.schedulingPolicy = 0;
     
                         /**
                          * TaskGroup taskEnvironments.
@@ -8195,6 +8204,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.taskCount);
                             if (message.parallelism != null && Object.hasOwnProperty.call(message, "parallelism"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.parallelism);
+                            if (message.schedulingPolicy != null && Object.hasOwnProperty.call(message, "schedulingPolicy"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.schedulingPolicy);
                             if (message.taskEnvironments != null && message.taskEnvironments.length)
                                 for (var i = 0; i < message.taskEnvironments.length; ++i)
                                     $root.google.cloud.batch.v1.Environment.encode(message.taskEnvironments[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
@@ -8252,6 +8263,10 @@
                                     }
                                 case 5: {
                                         message.parallelism = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.schedulingPolicy = reader.int32();
                                         break;
                                     }
                                 case 9: {
@@ -8321,6 +8336,15 @@
                             if (message.parallelism != null && message.hasOwnProperty("parallelism"))
                                 if (!$util.isInteger(message.parallelism) && !(message.parallelism && $util.isInteger(message.parallelism.low) && $util.isInteger(message.parallelism.high)))
                                     return "parallelism: integer|Long expected";
+                            if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                switch (message.schedulingPolicy) {
+                                default:
+                                    return "schedulingPolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.taskEnvironments != null && message.hasOwnProperty("taskEnvironments")) {
                                 if (!Array.isArray(message.taskEnvironments))
                                     return "taskEnvironments: array expected";
@@ -8379,6 +8403,26 @@
                                     message.parallelism = object.parallelism;
                                 else if (typeof object.parallelism === "object")
                                     message.parallelism = new $util.LongBits(object.parallelism.low >>> 0, object.parallelism.high >>> 0).toNumber();
+                            switch (object.schedulingPolicy) {
+                            default:
+                                if (typeof object.schedulingPolicy === "number") {
+                                    message.schedulingPolicy = object.schedulingPolicy;
+                                    break;
+                                }
+                                break;
+                            case "SCHEDULING_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.schedulingPolicy = 0;
+                                break;
+                            case "AS_SOON_AS_POSSIBLE":
+                            case 1:
+                                message.schedulingPolicy = 1;
+                                break;
+                            case "IN_ORDER":
+                            case 2:
+                                message.schedulingPolicy = 2;
+                                break;
+                            }
                             if (object.taskEnvironments) {
                                 if (!Array.isArray(object.taskEnvironments))
                                     throw TypeError(".google.cloud.batch.v1.TaskGroup.taskEnvironments: array expected");
@@ -8433,6 +8477,7 @@
                                     object.parallelism = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.parallelism = options.longs === String ? "0" : 0;
+                                object.schedulingPolicy = options.enums === String ? "SCHEDULING_POLICY_UNSPECIFIED" : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.taskCountPerNode = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -8455,6 +8500,8 @@
                                     object.parallelism = options.longs === String ? String(message.parallelism) : message.parallelism;
                                 else
                                     object.parallelism = options.longs === String ? $util.Long.prototype.toString.call(message.parallelism) : options.longs === Number ? new $util.LongBits(message.parallelism.low >>> 0, message.parallelism.high >>> 0).toNumber() : message.parallelism;
+                            if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1.TaskGroup.SchedulingPolicy[message.schedulingPolicy] === undefined ? message.schedulingPolicy : $root.google.cloud.batch.v1.TaskGroup.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
                             if (message.taskEnvironments && message.taskEnvironments.length) {
                                 object.taskEnvironments = [];
                                 for (var j = 0; j < message.taskEnvironments.length; ++j)
@@ -8497,6 +8544,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.batch.v1.TaskGroup";
                         };
+    
+                        /**
+                         * SchedulingPolicy enum.
+                         * @name google.cloud.batch.v1.TaskGroup.SchedulingPolicy
+                         * @enum {number}
+                         * @property {number} SCHEDULING_POLICY_UNSPECIFIED=0 SCHEDULING_POLICY_UNSPECIFIED value
+                         * @property {number} AS_SOON_AS_POSSIBLE=1 AS_SOON_AS_POSSIBLE value
+                         * @property {number} IN_ORDER=2 IN_ORDER value
+                         */
+                        TaskGroup.SchedulingPolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEDULING_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AS_SOON_AS_POSSIBLE"] = 1;
+                            values[valuesById[2] = "IN_ORDER"] = 2;
+                            return values;
+                        })();
     
                         return TaskGroup;
                     })();
