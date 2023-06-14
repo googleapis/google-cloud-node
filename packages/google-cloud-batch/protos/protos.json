@@ -796,6 +796,10 @@
                           "type": "int64",
                           "id": 5
                         },
+                        "schedulingPolicy": {
+                          "type": "SchedulingPolicy",
+                          "id": 6
+                        },
                         "taskEnvironments": {
                           "rule": "repeated",
                           "type": "Environment",
@@ -812,6 +816,15 @@
                         "permissiveSsh": {
                           "type": "bool",
                           "id": 12
+                        }
+                      },
+                      "nested": {
+                        "SchedulingPolicy": {
+                          "values": {
+                            "SCHEDULING_POLICY_UNSPECIFIED": 0,
+                            "AS_SOON_AS_POSSIBLE": 1,
+                            "IN_ORDER": 2
+                          }
                         }
                       }
                     },
