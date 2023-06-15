@@ -7280,6 +7280,34 @@ export namespace google {
                     public deleteChannelPartnerRepricingConfig(request: google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls ListSkuGroups.
+                     * @param request ListSkuGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSkuGroupsResponse
+                     */
+                    public listSkuGroups(request: google.cloud.channel.v1.IListSkuGroupsRequest, callback: google.cloud.channel.v1.CloudChannelService.ListSkuGroupsCallback): void;
+
+                    /**
+                     * Calls ListSkuGroups.
+                     * @param request ListSkuGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSkuGroups(request: google.cloud.channel.v1.IListSkuGroupsRequest): Promise<google.cloud.channel.v1.ListSkuGroupsResponse>;
+
+                    /**
+                     * Calls ListSkuGroupBillableSkus.
+                     * @param request ListSkuGroupBillableSkusRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSkuGroupBillableSkusResponse
+                     */
+                    public listSkuGroupBillableSkus(request: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest, callback: google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkusCallback): void;
+
+                    /**
+                     * Calls ListSkuGroupBillableSkus.
+                     * @param request ListSkuGroupBillableSkusRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSkuGroupBillableSkus(request: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest): Promise<google.cloud.channel.v1.ListSkuGroupBillableSkusResponse>;
+
+                    /**
                      * Calls LookupOffer.
                      * @param request LookupOfferRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Offer
@@ -7673,6 +7701,20 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteChannelPartnerRepricingConfigCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listSkuGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListSkuGroupsResponse
+                     */
+                    type ListSkuGroupsCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListSkuGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listSkuGroupBillableSkus}.
+                     * @param error Error, if any
+                     * @param [response] ListSkuGroupBillableSkusResponse
+                     */
+                    type ListSkuGroupBillableSkusCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListSkuGroupBillableSkusResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|lookupOffer}.
@@ -11564,6 +11606,648 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteChannelPartnerRepricingConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSkuGroupsRequest. */
+                interface IListSkuGroupsRequest {
+
+                    /** ListSkuGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSkuGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSkuGroupsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSkuGroupsRequest. */
+                class ListSkuGroupsRequest implements IListSkuGroupsRequest {
+
+                    /**
+                     * Constructs a new ListSkuGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSkuGroupsRequest);
+
+                    /** ListSkuGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListSkuGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSkuGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSkuGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSkuGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSkuGroupsRequest): google.cloud.channel.v1.ListSkuGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListSkuGroupsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsRequest.verify|verify} messages.
+                     * @param message ListSkuGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSkuGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSkuGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsRequest.verify|verify} messages.
+                     * @param message ListSkuGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSkuGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSkuGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSkuGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSkuGroupsRequest;
+
+                    /**
+                     * Decodes a ListSkuGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSkuGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSkuGroupsRequest;
+
+                    /**
+                     * Verifies a ListSkuGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSkuGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSkuGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSkuGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSkuGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListSkuGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSkuGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSkuGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSkuGroupsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSkuGroupBillableSkusRequest. */
+                interface IListSkuGroupBillableSkusRequest {
+
+                    /** ListSkuGroupBillableSkusRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSkuGroupBillableSkusRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSkuGroupBillableSkusRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSkuGroupBillableSkusRequest. */
+                class ListSkuGroupBillableSkusRequest implements IListSkuGroupBillableSkusRequest {
+
+                    /**
+                     * Constructs a new ListSkuGroupBillableSkusRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest);
+
+                    /** ListSkuGroupBillableSkusRequest parent. */
+                    public parent: string;
+
+                    /** ListSkuGroupBillableSkusRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSkuGroupBillableSkusRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSkuGroupBillableSkusRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSkuGroupBillableSkusRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest): google.cloud.channel.v1.ListSkuGroupBillableSkusRequest;
+
+                    /**
+                     * Encodes the specified ListSkuGroupBillableSkusRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusRequest.verify|verify} messages.
+                     * @param message ListSkuGroupBillableSkusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSkuGroupBillableSkusRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusRequest.verify|verify} messages.
+                     * @param message ListSkuGroupBillableSkusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSkuGroupBillableSkusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSkuGroupBillableSkusRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSkuGroupBillableSkusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSkuGroupBillableSkusRequest;
+
+                    /**
+                     * Decodes a ListSkuGroupBillableSkusRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSkuGroupBillableSkusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSkuGroupBillableSkusRequest;
+
+                    /**
+                     * Verifies a ListSkuGroupBillableSkusRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSkuGroupBillableSkusRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSkuGroupBillableSkusRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSkuGroupBillableSkusRequest;
+
+                    /**
+                     * Creates a plain object from a ListSkuGroupBillableSkusRequest message. Also converts values to other types if specified.
+                     * @param message ListSkuGroupBillableSkusRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSkuGroupBillableSkusRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSkuGroupBillableSkusRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSkuGroupBillableSkusRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSkuGroupsResponse. */
+                interface IListSkuGroupsResponse {
+
+                    /** ListSkuGroupsResponse skuGroups */
+                    skuGroups?: (google.cloud.channel.v1.ISkuGroup[]|null);
+
+                    /** ListSkuGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSkuGroupsResponse. */
+                class ListSkuGroupsResponse implements IListSkuGroupsResponse {
+
+                    /**
+                     * Constructs a new ListSkuGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSkuGroupsResponse);
+
+                    /** ListSkuGroupsResponse skuGroups. */
+                    public skuGroups: google.cloud.channel.v1.ISkuGroup[];
+
+                    /** ListSkuGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSkuGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSkuGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSkuGroupsResponse): google.cloud.channel.v1.ListSkuGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListSkuGroupsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsResponse.verify|verify} messages.
+                     * @param message ListSkuGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSkuGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSkuGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsResponse.verify|verify} messages.
+                     * @param message ListSkuGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSkuGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSkuGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSkuGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSkuGroupsResponse;
+
+                    /**
+                     * Decodes a ListSkuGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSkuGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSkuGroupsResponse;
+
+                    /**
+                     * Verifies a ListSkuGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSkuGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSkuGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSkuGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSkuGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListSkuGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSkuGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSkuGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSkuGroupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSkuGroupBillableSkusResponse. */
+                interface IListSkuGroupBillableSkusResponse {
+
+                    /** ListSkuGroupBillableSkusResponse billableSkus */
+                    billableSkus?: (google.cloud.channel.v1.IBillableSku[]|null);
+
+                    /** ListSkuGroupBillableSkusResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSkuGroupBillableSkusResponse. */
+                class ListSkuGroupBillableSkusResponse implements IListSkuGroupBillableSkusResponse {
+
+                    /**
+                     * Constructs a new ListSkuGroupBillableSkusResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSkuGroupBillableSkusResponse);
+
+                    /** ListSkuGroupBillableSkusResponse billableSkus. */
+                    public billableSkus: google.cloud.channel.v1.IBillableSku[];
+
+                    /** ListSkuGroupBillableSkusResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSkuGroupBillableSkusResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSkuGroupBillableSkusResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSkuGroupBillableSkusResponse): google.cloud.channel.v1.ListSkuGroupBillableSkusResponse;
+
+                    /**
+                     * Encodes the specified ListSkuGroupBillableSkusResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.verify|verify} messages.
+                     * @param message ListSkuGroupBillableSkusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSkuGroupBillableSkusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSkuGroupBillableSkusResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.verify|verify} messages.
+                     * @param message ListSkuGroupBillableSkusResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSkuGroupBillableSkusResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSkuGroupBillableSkusResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSkuGroupBillableSkusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSkuGroupBillableSkusResponse;
+
+                    /**
+                     * Decodes a ListSkuGroupBillableSkusResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSkuGroupBillableSkusResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSkuGroupBillableSkusResponse;
+
+                    /**
+                     * Verifies a ListSkuGroupBillableSkusResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSkuGroupBillableSkusResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSkuGroupBillableSkusResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSkuGroupBillableSkusResponse;
+
+                    /**
+                     * Creates a plain object from a ListSkuGroupBillableSkusResponse message. Also converts values to other types if specified.
+                     * @param message ListSkuGroupBillableSkusResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSkuGroupBillableSkusResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSkuGroupBillableSkusResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSkuGroupBillableSkusResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SkuGroup. */
+                interface ISkuGroup {
+
+                    /** SkuGroup name */
+                    name?: (string|null);
+
+                    /** SkuGroup displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a SkuGroup. */
+                class SkuGroup implements ISkuGroup {
+
+                    /**
+                     * Constructs a new SkuGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.ISkuGroup);
+
+                    /** SkuGroup name. */
+                    public name: string;
+
+                    /** SkuGroup displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new SkuGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SkuGroup instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.ISkuGroup): google.cloud.channel.v1.SkuGroup;
+
+                    /**
+                     * Encodes the specified SkuGroup message. Does not implicitly {@link google.cloud.channel.v1.SkuGroup.verify|verify} messages.
+                     * @param message SkuGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.ISkuGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SkuGroup message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SkuGroup.verify|verify} messages.
+                     * @param message SkuGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.ISkuGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SkuGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SkuGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.SkuGroup;
+
+                    /**
+                     * Decodes a SkuGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SkuGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.SkuGroup;
+
+                    /**
+                     * Verifies a SkuGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SkuGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SkuGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.SkuGroup;
+
+                    /**
+                     * Creates a plain object from a SkuGroup message. Also converts values to other types if specified.
+                     * @param message SkuGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.SkuGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SkuGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SkuGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BillableSku. */
+                interface IBillableSku {
+
+                    /** BillableSku sku */
+                    sku?: (string|null);
+
+                    /** BillableSku skuDisplayName */
+                    skuDisplayName?: (string|null);
+
+                    /** BillableSku service */
+                    service?: (string|null);
+
+                    /** BillableSku serviceDisplayName */
+                    serviceDisplayName?: (string|null);
+                }
+
+                /** Represents a BillableSku. */
+                class BillableSku implements IBillableSku {
+
+                    /**
+                     * Constructs a new BillableSku.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IBillableSku);
+
+                    /** BillableSku sku. */
+                    public sku: string;
+
+                    /** BillableSku skuDisplayName. */
+                    public skuDisplayName: string;
+
+                    /** BillableSku service. */
+                    public service: string;
+
+                    /** BillableSku serviceDisplayName. */
+                    public serviceDisplayName: string;
+
+                    /**
+                     * Creates a new BillableSku instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BillableSku instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IBillableSku): google.cloud.channel.v1.BillableSku;
+
+                    /**
+                     * Encodes the specified BillableSku message. Does not implicitly {@link google.cloud.channel.v1.BillableSku.verify|verify} messages.
+                     * @param message BillableSku message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IBillableSku, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BillableSku message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillableSku.verify|verify} messages.
+                     * @param message BillableSku message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IBillableSku, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BillableSku message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BillableSku
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.BillableSku;
+
+                    /**
+                     * Decodes a BillableSku message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BillableSku
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.BillableSku;
+
+                    /**
+                     * Verifies a BillableSku message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BillableSku message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BillableSku
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.BillableSku;
+
+                    /**
+                     * Creates a plain object from a BillableSku message. Also converts values to other types if specified.
+                     * @param message BillableSku
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.BillableSku, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BillableSku to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BillableSku
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
