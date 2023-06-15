@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.6.0...discoveryengine-v0.7.0) (2023-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* use v1 as the default version ([#4333](https://github.com/googleapis/google-cloud-node/issues/4333))
+* [discoveryengine] remove the summarization feature from v1 version ([#4273](https://github.com/googleapis/google-cloud-node/issues/4273))
+
+### Features
+
+* Use v1 as the default version ([#4333](https://github.com/googleapis/google-cloud-node/issues/4333)) ([1415f5f](https://github.com/googleapis/google-cloud-node/commit/1415f5f0cdbd284fb11427fe1053048e278e7546))
+
+
+### Bug Fixes
+
+* [discoveryengine] remove the summarization feature from v1 version ([#4273](https://github.com/googleapis/google-cloud-node/issues/4273)) ([0b9c928](https://github.com/googleapis/google-cloud-node/commit/0b9c928a45e5de78dd13894dc537b351f90a9d56))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.5.0...discoveryengine-v0.6.0) (2023-05-04)
 
 

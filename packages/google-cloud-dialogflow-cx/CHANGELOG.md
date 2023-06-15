@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.5.0...dialogflow-cx-v3.6.0) (2023-06-14)
+
+
+### Features
+
+* [dialogflow-cx] add support for flexible webhook ([64af37a](https://github.com/googleapis/google-cloud-node/commit/64af37afa0abccf87378b4813a26fbaba3ae8bb8))
+* [dialogflow-cx] add support for flexible webhook ([#4334](https://github.com/googleapis/google-cloud-node/issues/4334)) ([64af37a](https://github.com/googleapis/google-cloud-node/commit/64af37afa0abccf87378b4813a26fbaba3ae8bb8))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.4.2...dialogflow-cx-v3.5.0) (2023-05-11)
 
 
