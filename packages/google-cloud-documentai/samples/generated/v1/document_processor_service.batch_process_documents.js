@@ -38,16 +38,20 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  The input documents for batch process.
+   *  The input documents for the
+   *  BatchProcessDocuments google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments 
+   *  method.
    */
   // const inputDocuments = {}
   /**
-   *  The overall output config for batch process.
+   *  The output configuration for the
+   *  BatchProcessDocuments google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments 
+   *  method.
    */
   // const documentOutputConfig = {}
   /**
-   *  Whether Human Review feature should be skipped for this request. Default to
-   *  false.
+   *  Whether human review should be skipped for this request. Default to
+   *  `false`.
    */
   // const skipHumanReview = true
 

@@ -433,6 +433,10 @@
                                   "options": {
                                     "deprecated": true
                                   }
+                                },
+                                "styleInfo": {
+                                  "type": "StyleInfo",
+                                  "id": 5
                                 }
                               },
                               "nested": {
@@ -451,6 +455,70 @@
                                         "WIDE_SPACE": 2,
                                         "HYPHEN": 3
                                       }
+                                    }
+                                  }
+                                },
+                                "StyleInfo": {
+                                  "fields": {
+                                    "fontSize": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "pixelFontSize": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "letterSpacing": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "fontType": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "bold": {
+                                      "type": "bool",
+                                      "id": 5
+                                    },
+                                    "italic": {
+                                      "type": "bool",
+                                      "id": 6
+                                    },
+                                    "underlined": {
+                                      "type": "bool",
+                                      "id": 7
+                                    },
+                                    "strikeout": {
+                                      "type": "bool",
+                                      "id": 8
+                                    },
+                                    "subscript": {
+                                      "type": "bool",
+                                      "id": 9
+                                    },
+                                    "superscript": {
+                                      "type": "bool",
+                                      "id": 10
+                                    },
+                                    "smallcaps": {
+                                      "type": "bool",
+                                      "id": 11
+                                    },
+                                    "fontWeight": {
+                                      "type": "int32",
+                                      "id": 12
+                                    },
+                                    "handwritten": {
+                                      "type": "bool",
+                                      "id": 13
+                                    },
+                                    "textColor": {
+                                      "type": "google.type.Color",
+                                      "id": 14
+                                    },
+                                    "backgroundColor": {
+                                      "type": "google.type.Color",
+                                      "id": 15
                                     }
                                   }
                                 }
@@ -509,7 +577,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               },
                               "nested": {
@@ -2858,7 +2929,8 @@
                             "UNDEPLOYING": 4,
                             "CREATING": 5,
                             "DELETING": 6,
-                            "FAILED": 7
+                            "FAILED": 7,
+                            "IMPORTING": 8
                           }
                         }
                       }

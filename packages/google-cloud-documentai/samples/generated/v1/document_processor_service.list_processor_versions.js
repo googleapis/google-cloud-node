@@ -36,8 +36,8 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  The maximum number of processor versions to return.
-   *  If unspecified, at most 10 processor versions will be returned.
-   *  The maximum value is 20; values above 20 will be coerced to 20.
+   *  If unspecified, at most `10` processor versions will be returned.
+   *  The maximum value is `20`. Values above `20` will be coerced to `20`.
    */
   // const pageSize = 1234
   /**

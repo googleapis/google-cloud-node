@@ -42,7 +42,7 @@ import * as gapicConfig from './document_processor_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service to call Cloud DocumentAI to process documents according to the
+ *  Service to call Document AI to process documents according to the
  *  processor's definition. Processors are built using state-of-the-art Google
  *  AI such as natural language, computer vision, and translation to extract
  *  structured information from unstructured or semi-structured documents.
@@ -624,12 +624,13 @@ export class DocumentProcessorServiceClient {
    *   or
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
+   *   Whether human review should be skipped for this request. Default to
+   *   `false`.
    * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Specifies which fields to include in ProcessResponse's document.
-   *   Only supports top level document and pages field so it must be in the form
-   *   of `{document_field_name}` or `pages.{page_field_name}`.
+   *   Specifies which fields to include in the
+   *   {@link google.cloud.documentai.v1.ProcessResponse.document|ProcessResponse.document}
+   *   output. Only supports top-level document and pages field, so it must be in
+   *   the form of `{document_field_name}` or `pages.{page_field_name}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -707,15 +708,15 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.processDocument(request, options, callback);
   }
   /**
-   * Fetches processor types. Note that we do not use ListProcessorTypes here
-   * because it is not paginated.
+   * Fetches processor types. Note that we don't use
+   * {@link google.cloud.documentai.v1.DocumentProcessorService.ListProcessorTypes|ListProcessorTypes}
+   * here, because it isn't paginated.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project of processor type to list.
-   *   The available processor types may depend on the allow-listing on projects.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The location of processor types to list.
+   *   Format: `projects/{project}/locations/{location}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1068,8 +1069,9 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.getProcessorVersion(request, options, callback);
   }
   /**
-   * Creates a processor from the type processor that the user chose.
-   * The processor will be at "ENABLED" state by default after its creation.
+   * Creates a processor from the
+   * {@link google.cloud.documentai.v1.ProcessorType|ProcessorType} provided. The
+   * processor will be at `ENABLED` state by default after its creation.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1077,9 +1079,11 @@ export class DocumentProcessorServiceClient {
    *   Required. The parent (project and location) under which to create the
    *   processor. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.documentai.v1.Processor} request.processor
-   *   Required. The processor to be created, requires [processor_type] and
-   *   [display_name] to be set. Also, the processor is under CMEK if CMEK fields
-   *   are set.
+   *   Required. The processor to be created, requires
+   *   {@link google.cloud.documentai.v1.Processor.type|Processor.type} and
+   *   {@link |Processor.display_name]} to be set. Also, the
+   *   {@link google.cloud.documentai.v1.Processor.kms_key_name|Processor.kms_key_name}
+   *   field must be set if the processor is under CMEK.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1272,12 +1276,16 @@ export class DocumentProcessorServiceClient {
    *   or
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {google.cloud.documentai.v1.BatchDocumentsInputConfig} request.inputDocuments
-   *   The input documents for batch process.
+   *   The input documents for the
+   *   {@link google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments|BatchProcessDocuments}
+   *   method.
    * @param {google.cloud.documentai.v1.DocumentOutputConfig} request.documentOutputConfig
-   *   The overall output config for batch process.
+   *   The output configuration for the
+   *   {@link google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments|BatchProcessDocuments}
+   *   method.
    * @param {boolean} request.skipHumanReview
-   *   Whether Human Review feature should be skipped for this request. Default to
-   *   false.
+   *   Whether human review should be skipped for this request. Default to
+   *   `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1412,7 +1420,7 @@ export class DocumentProcessorServiceClient {
   /**
    * Trains a new processor version.
    * Operation metadata is returned as
-   * cloud_documentai_core.TrainProcessorVersionMetadata.
+   * {@link google.cloud.documentai.v1.TrainProcessorVersionMetadata|TrainProcessorVersionMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1425,7 +1433,8 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1.DocumentSchema} [request.documentSchema]
    *   Optional. The schema the processor version will be trained with.
    * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData} [request.inputData]
-   *   Optional. The input data used to train the `ProcessorVersion`.
+   *   Optional. The input data used to train the
+   *   {@link google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion}.
    * @param {string} [request.baseProcessorVersion]
    *   Optional. The processor version to use as a base for training. This
    *   processor version must be a child of `parent`. Format:
@@ -2565,8 +2574,9 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1.Document} request.inlineDocument
    *   An inline document proto.
    * @param {string} request.humanReviewConfig
-   *   Required. The resource name of the HumanReviewConfig that the document will
-   *   be reviewed with.
+   *   Required. The resource name of the
+   *   {@link google.cloud.documentai.v1.HumanReviewConfig|HumanReviewConfig} that the
+   *   document will be reviewed with.
    * @param {boolean} request.enableSchemaValidation
    *   Whether the validation should be performed on the ad-hoc review request.
    * @param {google.cloud.documentai.v1.ReviewDocumentRequest.Priority} request.priority
@@ -2859,13 +2869,12 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location of processor type to list.
-   *   The available processor types may depend on the allow-listing on projects.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The location of processor types to list.
+   *   Format: `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of processor types to return.
-   *   If unspecified, at most 100 processor types will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
+   *   If unspecified, at most `100` processor types will be returned.
+   *   The maximum value is `500`. Values above `500` will be coerced to `500`.
    * @param {string} request.pageToken
    *   Used to retrieve the next page of results, empty if at the end of the list.
    * @param {object} [options]
@@ -2961,13 +2970,12 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location of processor type to list.
-   *   The available processor types may depend on the allow-listing on projects.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The location of processor types to list.
+   *   Format: `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of processor types to return.
-   *   If unspecified, at most 100 processor types will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
+   *   If unspecified, at most `100` processor types will be returned.
+   *   The maximum value is `500`. Values above `500` will be coerced to `500`.
    * @param {string} request.pageToken
    *   Used to retrieve the next page of results, empty if at the end of the list.
    * @param {object} [options]
@@ -3011,13 +3019,12 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location of processor type to list.
-   *   The available processor types may depend on the allow-listing on projects.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The location of processor types to list.
+   *   Format: `projects/{project}/locations/{location}`.
    * @param {number} request.pageSize
    *   The maximum number of processor types to return.
-   *   If unspecified, at most 100 processor types will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
+   *   If unspecified, at most `100` processor types will be returned.
+   *   The maximum value is `500`. Values above `500` will be coerced to `500`.
    * @param {string} request.pageToken
    *   Used to retrieve the next page of results, empty if at the end of the list.
    * @param {object} [options]
@@ -3064,8 +3071,8 @@ export class DocumentProcessorServiceClient {
    *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
-   *   If unspecified, at most 50 processors will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `50` processors will be returned.
+   *   The maximum value is `100`. Values above `100` will be coerced to `100`.
    * @param {string} request.pageToken
    *   We will return the processors sorted by creation time. The page token
    *   will point to the next processor.
@@ -3166,8 +3173,8 @@ export class DocumentProcessorServiceClient {
    *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
-   *   If unspecified, at most 50 processors will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `50` processors will be returned.
+   *   The maximum value is `100`. Values above `100` will be coerced to `100`.
    * @param {string} request.pageToken
    *   We will return the processors sorted by creation time. The page token
    *   will point to the next processor.
@@ -3216,8 +3223,8 @@ export class DocumentProcessorServiceClient {
    *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
-   *   If unspecified, at most 50 processors will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `50` processors will be returned.
+   *   The maximum value is `100`. Values above `100` will be coerced to `100`.
    * @param {string} request.pageToken
    *   We will return the processors sorted by creation time. The page token
    *   will point to the next processor.
@@ -3266,8 +3273,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
-   *   If unspecified, at most 10 processor versions will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   If unspecified, at most `10` processor versions will be returned.
+   *   The maximum value is `20`. Values above `20` will be coerced to `20`.
    * @param {string} request.pageToken
    *   We will return the processor versions sorted by creation time. The page
    *   token will point to the next processor version.
@@ -3369,8 +3376,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
-   *   If unspecified, at most 10 processor versions will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   If unspecified, at most `10` processor versions will be returned.
+   *   The maximum value is `20`. Values above `20` will be coerced to `20`.
    * @param {string} request.pageToken
    *   We will return the processor versions sorted by creation time. The page
    *   token will point to the next processor version.
@@ -3420,8 +3427,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
-   *   If unspecified, at most 10 processor versions will be returned.
-   *   The maximum value is 20; values above 20 will be coerced to 20.
+   *   If unspecified, at most `10` processor versions will be returned.
+   *   The maximum value is `20`. Values above `20` will be coerced to `20`.
    * @param {string} request.pageToken
    *   We will return the processor versions sorted by creation time. The page
    *   token will point to the next processor version.
@@ -3471,8 +3478,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.
-   *   If unspecified, at most 5 evaluations will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `5` evaluations are returned.
+   *   The maximum value is `100`. Values above `100` are coerced to `100`.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListEvaluations` call.
    *   Provide this to retrieve the subsequent page.
@@ -3575,8 +3582,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.
-   *   If unspecified, at most 5 evaluations will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `5` evaluations are returned.
+   *   The maximum value is `100`. Values above `100` are coerced to `100`.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListEvaluations` call.
    *   Provide this to retrieve the subsequent page.
@@ -3627,8 +3634,8 @@ export class DocumentProcessorServiceClient {
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.
-   *   If unspecified, at most 5 evaluations will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, at most `5` evaluations are returned.
+   *   The maximum value is `100`. Values above `100` are coerced to `100`.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListEvaluations` call.
    *   Provide this to retrieve the subsequent page.

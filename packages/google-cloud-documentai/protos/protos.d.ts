@@ -1659,6 +1659,9 @@ export namespace google {
 
                             /** Token provenance */
                             provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
+
+                            /** Token styleInfo */
+                            styleInfo?: (google.cloud.documentai.v1.Document.Page.Token.IStyleInfo|null);
                         }
 
                         /** Represents a Token. */
@@ -1681,6 +1684,9 @@ export namespace google {
 
                             /** Token provenance. */
                             public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
+
+                            /** Token styleInfo. */
+                            public styleInfo?: (google.cloud.documentai.v1.Document.Page.Token.IStyleInfo|null);
 
                             /**
                              * Creates a new Token instance using the specified properties.
@@ -1868,6 +1874,187 @@ export namespace google {
                                     WIDE_SPACE = 2,
                                     HYPHEN = 3
                                 }
+                            }
+
+                            /** Properties of a StyleInfo. */
+                            interface IStyleInfo {
+
+                                /** StyleInfo fontSize */
+                                fontSize?: (number|null);
+
+                                /** StyleInfo pixelFontSize */
+                                pixelFontSize?: (number|null);
+
+                                /** StyleInfo letterSpacing */
+                                letterSpacing?: (number|null);
+
+                                /** StyleInfo fontType */
+                                fontType?: (string|null);
+
+                                /** StyleInfo bold */
+                                bold?: (boolean|null);
+
+                                /** StyleInfo italic */
+                                italic?: (boolean|null);
+
+                                /** StyleInfo underlined */
+                                underlined?: (boolean|null);
+
+                                /** StyleInfo strikeout */
+                                strikeout?: (boolean|null);
+
+                                /** StyleInfo subscript */
+                                subscript?: (boolean|null);
+
+                                /** StyleInfo superscript */
+                                superscript?: (boolean|null);
+
+                                /** StyleInfo smallcaps */
+                                smallcaps?: (boolean|null);
+
+                                /** StyleInfo fontWeight */
+                                fontWeight?: (number|null);
+
+                                /** StyleInfo handwritten */
+                                handwritten?: (boolean|null);
+
+                                /** StyleInfo textColor */
+                                textColor?: (google.type.IColor|null);
+
+                                /** StyleInfo backgroundColor */
+                                backgroundColor?: (google.type.IColor|null);
+                            }
+
+                            /** Represents a StyleInfo. */
+                            class StyleInfo implements IStyleInfo {
+
+                                /**
+                                 * Constructs a new StyleInfo.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1.Document.Page.Token.IStyleInfo);
+
+                                /** StyleInfo fontSize. */
+                                public fontSize: number;
+
+                                /** StyleInfo pixelFontSize. */
+                                public pixelFontSize: number;
+
+                                /** StyleInfo letterSpacing. */
+                                public letterSpacing: number;
+
+                                /** StyleInfo fontType. */
+                                public fontType: string;
+
+                                /** StyleInfo bold. */
+                                public bold: boolean;
+
+                                /** StyleInfo italic. */
+                                public italic: boolean;
+
+                                /** StyleInfo underlined. */
+                                public underlined: boolean;
+
+                                /** StyleInfo strikeout. */
+                                public strikeout: boolean;
+
+                                /** StyleInfo subscript. */
+                                public subscript: boolean;
+
+                                /** StyleInfo superscript. */
+                                public superscript: boolean;
+
+                                /** StyleInfo smallcaps. */
+                                public smallcaps: boolean;
+
+                                /** StyleInfo fontWeight. */
+                                public fontWeight: number;
+
+                                /** StyleInfo handwritten. */
+                                public handwritten: boolean;
+
+                                /** StyleInfo textColor. */
+                                public textColor?: (google.type.IColor|null);
+
+                                /** StyleInfo backgroundColor. */
+                                public backgroundColor?: (google.type.IColor|null);
+
+                                /**
+                                 * Creates a new StyleInfo instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns StyleInfo instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1.Document.Page.Token.IStyleInfo): google.cloud.documentai.v1.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Encodes the specified StyleInfo message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.Token.StyleInfo.verify|verify} messages.
+                                 * @param message StyleInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1.Document.Page.Token.IStyleInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified StyleInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.Token.StyleInfo.verify|verify} messages.
+                                 * @param message StyleInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1.Document.Page.Token.IStyleInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a StyleInfo message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns StyleInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Decodes a StyleInfo message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns StyleInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Verifies a StyleInfo message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a StyleInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns StyleInfo
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Creates a plain object from a StyleInfo message. Also converts values to other types if specified.
+                                 * @param message StyleInfo
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1.Document.Page.Token.StyleInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this StyleInfo to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for StyleInfo
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
                         }
 
@@ -13144,7 +13331,8 @@ export namespace google {
                         UNDEPLOYING = 4,
                         CREATING = 5,
                         DELETING = 6,
-                        FAILED = 7
+                        FAILED = 7,
+                        IMPORTING = 8
                     }
                 }
 
