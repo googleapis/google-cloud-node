@@ -1864,6 +1864,102 @@
             }
         },
         {
+            "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroups_async",
+            "title": "CloudChannelReportsService listSkuGroups Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the Rebilling supported SKU groups the account is authorized to sell. Reference: https://cloud.google.com/skus/sku-groups Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different, or the account doesn't exist. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the [SkuGroup][google.cloud.channel.v1.SkuGroup] resources. The data for each resource is displayed in the alphabetical order of SKU group display name. The data for each resource is displayed in the ascending order of [SkuGroup.display_name][google.cloud.channel.v1.SkuGroup.display_name] If unsuccessful, returns an error.",
+            "canonical": true,
+            "file": "cloud_channel_service.list_sku_groups.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSkuGroups",
+                "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkuGroups",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.channel.v1.ListSkuGroupsResponse",
+                "client": {
+                    "shortName": "CloudChannelServiceClient",
+                    "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSkuGroups",
+                    "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkuGroups",
+                    "service": {
+                        "shortName": "CloudChannelService",
+                        "fullName": "google.cloud.channel.v1.CloudChannelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroupBillableSkus_async",
+            "title": "CloudChannelReportsService listSkuGroupBillableSkus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the Billable SKUs in a given SKU group. Possible error codes: PERMISSION_DENIED: If the account making the request and the account being queried for are different, or the account doesn't exist. INVALID_ARGUMENT: Missing or invalid required parameters in the request. INTERNAL: Any non-user error related to technical issue in the backend. In this case, contact cloud channel support. Return Value: If successful, the [BillableSku][google.cloud.channel.v1.BillableSku] resources. The data for each resource is displayed in the ascending order of: * [BillableSku.service_display_name][google.cloud.channel.v1.BillableSku.service_display_name] * [BillableSku.sku_display_name][google.cloud.channel.v1.BillableSku.sku_display_name] If unsuccessful, returns an error.",
+            "canonical": true,
+            "file": "cloud_channel_service.list_sku_group_billable_skus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSkuGroupBillableSkus",
+                "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.channel.v1.ListSkuGroupBillableSkusResponse",
+                "client": {
+                    "shortName": "CloudChannelServiceClient",
+                    "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSkuGroupBillableSkus",
+                    "fullName": "google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus",
+                    "service": {
+                        "shortName": "CloudChannelService",
+                        "fullName": "google.cloud.channel.v1.CloudChannelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_LookupOffer_async",
             "title": "CloudChannelReportsService lookupOffer Sample",
             "origin": "API_DEFINITION",

@@ -2793,6 +2793,24 @@
     "support_documentation": "https://cloud.google.com/certificate-manager/docs/getting-support"
   },
   {
+    "name": "rapidmigrationassessment",
+    "name_pretty": "Rapid Migration Assessment API",
+    "product_documentation": "https://cloud.google.com/migration-center/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/rapidmigrationassessment/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/rapidmigrationassessment",
+    "api_id": "rapidmigrationassessment.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "rapidmigrationassessment",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-rapidmigrationassessment",
+    "support_documentation": "https://cloud.google.com/migration-center/docs/getting-support"
+  },
+  {
     "name": "storageinsights",
     "name_pretty": "Storage Insights API",
     "product_documentation": "https://cloud.google.com/storage/docs/insights/storage-insights",
