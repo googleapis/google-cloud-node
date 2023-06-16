@@ -2066,5 +2066,57 @@ describe('v1.CloudChannelReportsServiceClient', () => {
         );
       });
     });
+
+    describe('skuGroup', () => {
+      const fakePath = '/rendered/path/skuGroup';
+      const expectedParameters = {
+        account: 'accountValue',
+        sku_group: 'skuGroupValue',
+      };
+      const client =
+        new cloudchannelreportsserviceModule.v1.CloudChannelReportsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.skuGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.skuGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('skuGroupPath', () => {
+        const result = client.skuGroupPath('accountValue', 'skuGroupValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.skuGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromSkuGroupName', () => {
+        const result = client.matchAccountFromSkuGroupName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.skuGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSkuGroupFromSkuGroupName', () => {
+        const result = client.matchSkuGroupFromSkuGroupName(fakePath);
+        assert.strictEqual(result, 'skuGroupValue');
+        assert(
+          (client.pathTemplates.skuGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });

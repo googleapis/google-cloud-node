@@ -18874,6 +18874,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listSkuGroups}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListSkuGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListSkuGroupsResponse} [response] ListSkuGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListSkuGroups.
+                         * @function listSkuGroups
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest} request ListSkuGroupsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListSkuGroupsCallback} callback Node-style callback called with the error, if any, and ListSkuGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listSkuGroups = function listSkuGroups(request, callback) {
+                            return this.rpcCall(listSkuGroups, $root.google.cloud.channel.v1.ListSkuGroupsRequest, $root.google.cloud.channel.v1.ListSkuGroupsResponse, request, callback);
+                        }, "name", { value: "ListSkuGroups" });
+    
+                        /**
+                         * Calls ListSkuGroups.
+                         * @function listSkuGroups
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest} request ListSkuGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListSkuGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listSkuGroupBillableSkus}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListSkuGroupBillableSkusCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} [response] ListSkuGroupBillableSkusResponse
+                         */
+    
+                        /**
+                         * Calls ListSkuGroupBillableSkus.
+                         * @function listSkuGroupBillableSkus
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest} request ListSkuGroupBillableSkusRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkusCallback} callback Node-style callback called with the error, if any, and ListSkuGroupBillableSkusResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listSkuGroupBillableSkus = function listSkuGroupBillableSkus(request, callback) {
+                            return this.rpcCall(listSkuGroupBillableSkus, $root.google.cloud.channel.v1.ListSkuGroupBillableSkusRequest, $root.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse, request, callback);
+                        }, "name", { value: "ListSkuGroupBillableSkus" });
+    
+                        /**
+                         * Calls ListSkuGroupBillableSkus.
+                         * @function listSkuGroupBillableSkus
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest} request ListSkuGroupBillableSkusRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListSkuGroupBillableSkusResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|lookupOffer}.
                          * @memberof google.cloud.channel.v1.CloudChannelService
                          * @typedef LookupOfferCallback
@@ -28135,6 +28201,1502 @@
                         };
     
                         return DeleteChannelPartnerRepricingConfigRequest;
+                    })();
+    
+                    v1.ListSkuGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSkuGroupsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSkuGroupsRequest
+                         * @property {string|null} [parent] ListSkuGroupsRequest parent
+                         * @property {number|null} [pageSize] ListSkuGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListSkuGroupsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSkuGroupsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSkuGroupsRequest.
+                         * @implements IListSkuGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListSkuGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSkuGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @instance
+                         */
+                        ListSkuGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSkuGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @instance
+                         */
+                        ListSkuGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSkuGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @instance
+                         */
+                        ListSkuGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSkuGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsRequest} ListSkuGroupsRequest instance
+                         */
+                        ListSkuGroupsRequest.create = function create(properties) {
+                            return new ListSkuGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest} message ListSkuGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsRequest} message ListSkuGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsRequest} ListSkuGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSkuGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsRequest} ListSkuGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSkuGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSkuGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSkuGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsRequest} ListSkuGroupsRequest
+                         */
+                        ListSkuGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSkuGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSkuGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSkuGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSkuGroupsRequest} message ListSkuGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSkuGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSkuGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSkuGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSkuGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSkuGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListSkuGroupsRequest";
+                        };
+    
+                        return ListSkuGroupsRequest;
+                    })();
+    
+                    v1.ListSkuGroupBillableSkusRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSkuGroupBillableSkusRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSkuGroupBillableSkusRequest
+                         * @property {string|null} [parent] ListSkuGroupBillableSkusRequest parent
+                         * @property {number|null} [pageSize] ListSkuGroupBillableSkusRequest pageSize
+                         * @property {string|null} [pageToken] ListSkuGroupBillableSkusRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSkuGroupBillableSkusRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSkuGroupBillableSkusRequest.
+                         * @implements IListSkuGroupBillableSkusRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest=} [properties] Properties to set
+                         */
+                        function ListSkuGroupBillableSkusRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSkuGroupBillableSkusRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @instance
+                         */
+                        ListSkuGroupBillableSkusRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSkuGroupBillableSkusRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @instance
+                         */
+                        ListSkuGroupBillableSkusRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSkuGroupBillableSkusRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @instance
+                         */
+                        ListSkuGroupBillableSkusRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSkuGroupBillableSkusRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusRequest} ListSkuGroupBillableSkusRequest instance
+                         */
+                        ListSkuGroupBillableSkusRequest.create = function create(properties) {
+                            return new ListSkuGroupBillableSkusRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupBillableSkusRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest} message ListSkuGroupBillableSkusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupBillableSkusRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupBillableSkusRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusRequest} message ListSkuGroupBillableSkusRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupBillableSkusRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupBillableSkusRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusRequest} ListSkuGroupBillableSkusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupBillableSkusRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSkuGroupBillableSkusRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupBillableSkusRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusRequest} ListSkuGroupBillableSkusRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupBillableSkusRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSkuGroupBillableSkusRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSkuGroupBillableSkusRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSkuGroupBillableSkusRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusRequest} ListSkuGroupBillableSkusRequest
+                         */
+                        ListSkuGroupBillableSkusRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSkuGroupBillableSkusRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSkuGroupBillableSkusRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSkuGroupBillableSkusRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSkuGroupBillableSkusRequest} message ListSkuGroupBillableSkusRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSkuGroupBillableSkusRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSkuGroupBillableSkusRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSkuGroupBillableSkusRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSkuGroupBillableSkusRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSkuGroupBillableSkusRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListSkuGroupBillableSkusRequest";
+                        };
+    
+                        return ListSkuGroupBillableSkusRequest;
+                    })();
+    
+                    v1.ListSkuGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSkuGroupsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSkuGroupsResponse
+                         * @property {Array.<google.cloud.channel.v1.ISkuGroup>|null} [skuGroups] ListSkuGroupsResponse skuGroups
+                         * @property {string|null} [nextPageToken] ListSkuGroupsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSkuGroupsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSkuGroupsResponse.
+                         * @implements IListSkuGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSkuGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListSkuGroupsResponse(properties) {
+                            this.skuGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSkuGroupsResponse skuGroups.
+                         * @member {Array.<google.cloud.channel.v1.ISkuGroup>} skuGroups
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @instance
+                         */
+                        ListSkuGroupsResponse.prototype.skuGroups = $util.emptyArray;
+    
+                        /**
+                         * ListSkuGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @instance
+                         */
+                        ListSkuGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSkuGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsResponse} ListSkuGroupsResponse instance
+                         */
+                        ListSkuGroupsResponse.create = function create(properties) {
+                            return new ListSkuGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsResponse} message ListSkuGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skuGroups != null && message.skuGroups.length)
+                                for (var i = 0; i < message.skuGroups.length; ++i)
+                                    $root.google.cloud.channel.v1.SkuGroup.encode(message.skuGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupsResponse} message ListSkuGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsResponse} ListSkuGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSkuGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.skuGroups && message.skuGroups.length))
+                                            message.skuGroups = [];
+                                        message.skuGroups.push($root.google.cloud.channel.v1.SkuGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsResponse} ListSkuGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSkuGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSkuGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.skuGroups != null && message.hasOwnProperty("skuGroups")) {
+                                if (!Array.isArray(message.skuGroups))
+                                    return "skuGroups: array expected";
+                                for (var i = 0; i < message.skuGroups.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.SkuGroup.verify(message.skuGroups[i]);
+                                    if (error)
+                                        return "skuGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSkuGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSkuGroupsResponse} ListSkuGroupsResponse
+                         */
+                        ListSkuGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSkuGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSkuGroupsResponse();
+                            if (object.skuGroups) {
+                                if (!Array.isArray(object.skuGroups))
+                                    throw TypeError(".google.cloud.channel.v1.ListSkuGroupsResponse.skuGroups: array expected");
+                                message.skuGroups = [];
+                                for (var i = 0; i < object.skuGroups.length; ++i) {
+                                    if (typeof object.skuGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListSkuGroupsResponse.skuGroups: object expected");
+                                    message.skuGroups[i] = $root.google.cloud.channel.v1.SkuGroup.fromObject(object.skuGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSkuGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSkuGroupsResponse} message ListSkuGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSkuGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.skuGroups = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.skuGroups && message.skuGroups.length) {
+                                object.skuGroups = [];
+                                for (var j = 0; j < message.skuGroups.length; ++j)
+                                    object.skuGroups[j] = $root.google.cloud.channel.v1.SkuGroup.toObject(message.skuGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSkuGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSkuGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSkuGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListSkuGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSkuGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListSkuGroupsResponse";
+                        };
+    
+                        return ListSkuGroupsResponse;
+                    })();
+    
+                    v1.ListSkuGroupBillableSkusResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSkuGroupBillableSkusResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSkuGroupBillableSkusResponse
+                         * @property {Array.<google.cloud.channel.v1.IBillableSku>|null} [billableSkus] ListSkuGroupBillableSkusResponse billableSkus
+                         * @property {string|null} [nextPageToken] ListSkuGroupBillableSkusResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSkuGroupBillableSkusResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSkuGroupBillableSkusResponse.
+                         * @implements IListSkuGroupBillableSkusResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusResponse=} [properties] Properties to set
+                         */
+                        function ListSkuGroupBillableSkusResponse(properties) {
+                            this.billableSkus = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSkuGroupBillableSkusResponse billableSkus.
+                         * @member {Array.<google.cloud.channel.v1.IBillableSku>} billableSkus
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @instance
+                         */
+                        ListSkuGroupBillableSkusResponse.prototype.billableSkus = $util.emptyArray;
+    
+                        /**
+                         * ListSkuGroupBillableSkusResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @instance
+                         */
+                        ListSkuGroupBillableSkusResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSkuGroupBillableSkusResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} ListSkuGroupBillableSkusResponse instance
+                         */
+                        ListSkuGroupBillableSkusResponse.create = function create(properties) {
+                            return new ListSkuGroupBillableSkusResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupBillableSkusResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusResponse} message ListSkuGroupBillableSkusResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupBillableSkusResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.billableSkus != null && message.billableSkus.length)
+                                for (var i = 0; i < message.billableSkus.length; ++i)
+                                    $root.google.cloud.channel.v1.BillableSku.encode(message.billableSkus[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSkuGroupBillableSkusResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSkuGroupBillableSkusResponse} message ListSkuGroupBillableSkusResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSkuGroupBillableSkusResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupBillableSkusResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} ListSkuGroupBillableSkusResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupBillableSkusResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.billableSkus && message.billableSkus.length))
+                                            message.billableSkus = [];
+                                        message.billableSkus.push($root.google.cloud.channel.v1.BillableSku.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSkuGroupBillableSkusResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} ListSkuGroupBillableSkusResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSkuGroupBillableSkusResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSkuGroupBillableSkusResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSkuGroupBillableSkusResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.billableSkus != null && message.hasOwnProperty("billableSkus")) {
+                                if (!Array.isArray(message.billableSkus))
+                                    return "billableSkus: array expected";
+                                for (var i = 0; i < message.billableSkus.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.BillableSku.verify(message.billableSkus[i]);
+                                    if (error)
+                                        return "billableSkus." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSkuGroupBillableSkusResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} ListSkuGroupBillableSkusResponse
+                         */
+                        ListSkuGroupBillableSkusResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSkuGroupBillableSkusResponse();
+                            if (object.billableSkus) {
+                                if (!Array.isArray(object.billableSkus))
+                                    throw TypeError(".google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.billableSkus: array expected");
+                                message.billableSkus = [];
+                                for (var i = 0; i < object.billableSkus.length; ++i) {
+                                    if (typeof object.billableSkus[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListSkuGroupBillableSkusResponse.billableSkus: object expected");
+                                    message.billableSkus[i] = $root.google.cloud.channel.v1.BillableSku.fromObject(object.billableSkus[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSkuGroupBillableSkusResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSkuGroupBillableSkusResponse} message ListSkuGroupBillableSkusResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSkuGroupBillableSkusResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.billableSkus = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.billableSkus && message.billableSkus.length) {
+                                object.billableSkus = [];
+                                for (var j = 0; j < message.billableSkus.length; ++j)
+                                    object.billableSkus[j] = $root.google.cloud.channel.v1.BillableSku.toObject(message.billableSkus[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSkuGroupBillableSkusResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSkuGroupBillableSkusResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSkuGroupBillableSkusResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListSkuGroupBillableSkusResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSkuGroupBillableSkusResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListSkuGroupBillableSkusResponse";
+                        };
+    
+                        return ListSkuGroupBillableSkusResponse;
+                    })();
+    
+                    v1.SkuGroup = (function() {
+    
+                        /**
+                         * Properties of a SkuGroup.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ISkuGroup
+                         * @property {string|null} [name] SkuGroup name
+                         * @property {string|null} [displayName] SkuGroup displayName
+                         */
+    
+                        /**
+                         * Constructs a new SkuGroup.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a SkuGroup.
+                         * @implements ISkuGroup
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ISkuGroup=} [properties] Properties to set
+                         */
+                        function SkuGroup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SkuGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @instance
+                         */
+                        SkuGroup.prototype.name = "";
+    
+                        /**
+                         * SkuGroup displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @instance
+                         */
+                        SkuGroup.prototype.displayName = "";
+    
+                        /**
+                         * Creates a new SkuGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroup=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.SkuGroup} SkuGroup instance
+                         */
+                        SkuGroup.create = function create(properties) {
+                            return new SkuGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SkuGroup message. Does not implicitly {@link google.cloud.channel.v1.SkuGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroup} message SkuGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SkuGroup message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SkuGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroup} message SkuGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SkuGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.SkuGroup} SkuGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.SkuGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SkuGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.SkuGroup} SkuGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SkuGroup message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SkuGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SkuGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.SkuGroup} SkuGroup
+                         */
+                        SkuGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.SkuGroup)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.SkuGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SkuGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.SkuGroup} message SkuGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SkuGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SkuGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SkuGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SkuGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.SkuGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SkuGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.SkuGroup";
+                        };
+    
+                        return SkuGroup;
+                    })();
+    
+                    v1.BillableSku = (function() {
+    
+                        /**
+                         * Properties of a BillableSku.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IBillableSku
+                         * @property {string|null} [sku] BillableSku sku
+                         * @property {string|null} [skuDisplayName] BillableSku skuDisplayName
+                         * @property {string|null} [service] BillableSku service
+                         * @property {string|null} [serviceDisplayName] BillableSku serviceDisplayName
+                         */
+    
+                        /**
+                         * Constructs a new BillableSku.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a BillableSku.
+                         * @implements IBillableSku
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IBillableSku=} [properties] Properties to set
+                         */
+                        function BillableSku(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BillableSku sku.
+                         * @member {string} sku
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @instance
+                         */
+                        BillableSku.prototype.sku = "";
+    
+                        /**
+                         * BillableSku skuDisplayName.
+                         * @member {string} skuDisplayName
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @instance
+                         */
+                        BillableSku.prototype.skuDisplayName = "";
+    
+                        /**
+                         * BillableSku service.
+                         * @member {string} service
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @instance
+                         */
+                        BillableSku.prototype.service = "";
+    
+                        /**
+                         * BillableSku serviceDisplayName.
+                         * @member {string} serviceDisplayName
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @instance
+                         */
+                        BillableSku.prototype.serviceDisplayName = "";
+    
+                        /**
+                         * Creates a new BillableSku instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillableSku=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.BillableSku} BillableSku instance
+                         */
+                        BillableSku.create = function create(properties) {
+                            return new BillableSku(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BillableSku message. Does not implicitly {@link google.cloud.channel.v1.BillableSku.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillableSku} message BillableSku message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillableSku.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sku != null && Object.hasOwnProperty.call(message, "sku"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sku);
+                            if (message.skuDisplayName != null && Object.hasOwnProperty.call(message, "skuDisplayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.skuDisplayName);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.service);
+                            if (message.serviceDisplayName != null && Object.hasOwnProperty.call(message, "serviceDisplayName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceDisplayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BillableSku message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillableSku.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillableSku} message BillableSku message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillableSku.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BillableSku message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.BillableSku} BillableSku
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillableSku.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.BillableSku();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sku = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.skuDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.serviceDisplayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BillableSku message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.BillableSku} BillableSku
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillableSku.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BillableSku message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BillableSku.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sku != null && message.hasOwnProperty("sku"))
+                                if (!$util.isString(message.sku))
+                                    return "sku: string expected";
+                            if (message.skuDisplayName != null && message.hasOwnProperty("skuDisplayName"))
+                                if (!$util.isString(message.skuDisplayName))
+                                    return "skuDisplayName: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.serviceDisplayName != null && message.hasOwnProperty("serviceDisplayName"))
+                                if (!$util.isString(message.serviceDisplayName))
+                                    return "serviceDisplayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BillableSku message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.BillableSku} BillableSku
+                         */
+                        BillableSku.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.BillableSku)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.BillableSku();
+                            if (object.sku != null)
+                                message.sku = String(object.sku);
+                            if (object.skuDisplayName != null)
+                                message.skuDisplayName = String(object.skuDisplayName);
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.serviceDisplayName != null)
+                                message.serviceDisplayName = String(object.serviceDisplayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BillableSku message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {google.cloud.channel.v1.BillableSku} message BillableSku
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BillableSku.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sku = "";
+                                object.skuDisplayName = "";
+                                object.service = "";
+                                object.serviceDisplayName = "";
+                            }
+                            if (message.sku != null && message.hasOwnProperty("sku"))
+                                object.sku = message.sku;
+                            if (message.skuDisplayName != null && message.hasOwnProperty("skuDisplayName"))
+                                object.skuDisplayName = message.skuDisplayName;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.serviceDisplayName != null && message.hasOwnProperty("serviceDisplayName"))
+                                object.serviceDisplayName = message.serviceDisplayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BillableSku to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BillableSku.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BillableSku
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.BillableSku
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BillableSku.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.BillableSku";
+                        };
+    
+                        return BillableSku;
                     })();
     
                     v1.CreateEntitlementRequest = (function() {
