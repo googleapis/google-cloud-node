@@ -2452,6 +2452,42 @@
                             }
                           ]
                         },
+                        "ListSkuGroups": {
+                          "requestType": "ListSkuGroupsRequest",
+                          "responseType": "ListSkuGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*}/skuGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*}/skuGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListSkuGroupBillableSkus": {
+                          "requestType": "ListSkuGroupBillableSkusRequest",
+                          "responseType": "ListSkuGroupBillableSkusResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*/skuGroups/*}/billableSkus",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*/skuGroups/*}/billableSkus"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "LookupOffer": {
                           "requestType": "LookupOfferRequest",
                           "responseType": "Offer",
@@ -3320,6 +3356,119 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ChannelPartnerRepricingConfig"
                           }
+                        }
+                      }
+                    },
+                    "ListSkuGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSkuGroupBillableSkusRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/SkuGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSkuGroupsResponse": {
+                      "fields": {
+                        "skuGroups": {
+                          "rule": "repeated",
+                          "type": "SkuGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListSkuGroupBillableSkusResponse": {
+                      "fields": {
+                        "billableSkus": {
+                          "rule": "repeated",
+                          "type": "BillableSku",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SkuGroup": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/SkuGroup",
+                        "(google.api.resource).pattern": "accounts/{account}/skuGroups/{sku_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BillableSku": {
+                      "fields": {
+                        "sku": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "skuDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "serviceDisplayName": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
