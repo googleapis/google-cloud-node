@@ -1,0 +1,313 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.documentai.v1beta3",
+  "libraryPackage": "@google-cloud/documentai",
+  "services": {
+    "DocumentProcessorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DocumentProcessorServiceClient",
+          "rpcs": {
+            "ProcessDocument": {
+              "methods": [
+                "processDocument"
+              ]
+            },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "GetProcessorType": {
+              "methods": [
+                "getProcessorType"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "BatchProcessDocuments": {
+              "methods": [
+                "batchProcessDocuments"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "trainProcessorVersion"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
+            "ReviewDocument": {
+              "methods": [
+                "reviewDocument"
+              ]
+            },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluateProcessorVersion"
+              ]
+            },
+            "ImportProcessorVersion": {
+              "methods": [
+                "importProcessorVersion"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DocumentProcessorServiceClient",
+          "rpcs": {
+            "ProcessDocument": {
+              "methods": [
+                "processDocument"
+              ]
+            },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "GetProcessorType": {
+              "methods": [
+                "getProcessorType"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "GetProcessorVersion": {
+              "methods": [
+                "getProcessorVersion"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "BatchProcessDocuments": {
+              "methods": [
+                "batchProcessDocuments"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "trainProcessorVersion"
+              ]
+            },
+            "DeleteProcessorVersion": {
+              "methods": [
+                "deleteProcessorVersion"
+              ]
+            },
+            "DeployProcessorVersion": {
+              "methods": [
+                "deployProcessorVersion"
+              ]
+            },
+            "UndeployProcessorVersion": {
+              "methods": [
+                "undeployProcessorVersion"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
+            "SetDefaultProcessorVersion": {
+              "methods": [
+                "setDefaultProcessorVersion"
+              ]
+            },
+            "ReviewDocument": {
+              "methods": [
+                "reviewDocument"
+              ]
+            },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluateProcessorVersion"
+              ]
+            },
+            "ImportProcessorVersion": {
+              "methods": [
+                "importProcessorVersion"
+              ]
+            },
+            "ListProcessorTypes": {
+              "methods": [
+                "listProcessorTypes",
+                "listProcessorTypesStream",
+                "listProcessorTypesAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            },
+            "ListProcessorVersions": {
+              "methods": [
+                "listProcessorVersions",
+                "listProcessorVersionsStream",
+                "listProcessorVersionsAsync"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DocumentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDatasetSchema": {
+              "methods": [
+                "getDatasetSchema"
+              ]
+            },
+            "UpdateDatasetSchema": {
+              "methods": [
+                "updateDatasetSchema"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDatasetSchema": {
+              "methods": [
+                "getDatasetSchema"
+              ]
+            },
+            "UpdateDatasetSchema": {
+              "methods": [
+                "updateDatasetSchema"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
