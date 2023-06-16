@@ -37,8 +37,8 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  The standard list page size.
-   *  If unspecified, at most 5 evaluations will be returned.
-   *  The maximum value is 100; values above 100 will be coerced to 100.
+   *  If unspecified, at most `5` evaluations are returned.
+   *  The maximum value is `100`. Values above `100` are coerced to `100`.
    */
   // const pageSize = 1234
   /**

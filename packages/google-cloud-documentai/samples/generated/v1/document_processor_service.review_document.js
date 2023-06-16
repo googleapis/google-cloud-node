@@ -33,8 +33,9 @@ function main(humanReviewConfig) {
    */
   // const inlineDocument = {}
   /**
-   *  Required. The resource name of the HumanReviewConfig that the document will
-   *  be reviewed with.
+   *  Required. The resource name of the
+   *  HumanReviewConfig google.cloud.documentai.v1.HumanReviewConfig  that the
+   *  document will be reviewed with.
    */
   // const humanReviewConfig = 'abc123'
   /**
