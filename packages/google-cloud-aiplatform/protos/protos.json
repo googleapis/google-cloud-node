@@ -33640,6 +33640,10 @@
                         "metadata": {
                           "type": "google.protobuf.Value",
                           "id": 11
+                        },
+                        "biasConfigs": {
+                          "type": "BiasConfig",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -33651,6 +33655,19 @@
                             },
                             "explanationSpec": {
                               "type": "ExplanationSpec",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "BiasConfig": {
+                          "fields": {
+                            "biasSlices": {
+                              "type": "ModelEvaluationSlice.Slice.SliceSpec",
+                              "id": 1
+                            },
+                            "labels": {
+                              "rule": "repeated",
+                              "type": "string",
                               "id": 2
                             }
                           }
