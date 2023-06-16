@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "7.3.0",
+        "version": "7.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -86,7 +86,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -143,14 +143,14 @@
             "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_FetchProcessorTypes_async",
             "title": "DocumentProcessorService fetchProcessorTypes Sample",
             "origin": "API_DEFINITION",
-            "description": " Fetches processor types. Note that we do not use ListProcessorTypes here because it is not paginated.",
+            "description": " Fetches processor types. Note that we don't use [ListProcessorTypes][google.cloud.documentai.v1beta3.DocumentProcessorService.ListProcessorTypes] here, because it isn't paginated.",
             "canonical": true,
             "file": "document_processor_service.fetch_processor_types.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 55,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -190,7 +190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -359,14 +359,14 @@
             "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_TrainProcessorVersion_async",
             "title": "DocumentProcessorService trainProcessorVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " Trains a new processor version. Operation metadata is returned as cloud_documentai_core.TrainProcessorVersionMetadata.",
+            "description": " Trains a new processor version. Operation metadata is returned as [TrainProcessorVersionMetadata][google.cloud.documentai.v1beta3.TrainProcessorVersionMetadata].",
             "canonical": true,
             "file": "document_processor_service.train_processor_version.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -375,6 +375,10 @@
                 "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.TrainProcessorVersion",
                 "async": true,
                 "parameters": [
+                    {
+                        "name": "custom_document_extraction_options",
+                        "type": ".google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
@@ -623,14 +627,14 @@
             "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_CreateProcessor_async",
             "title": "DocumentProcessorService createProcessor Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a processor from the type processor that the user chose. The processor will be at \"ENABLED\" state by default after its creation.",
+            "description": " Creates a processor from the [ProcessorType][google.cloud.documentai.v1beta3.ProcessorType] provided. The processor will be at `ENABLED` state by default after its creation.",
             "canonical": true,
             "file": "document_processor_service.create_processor.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -838,7 +842,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1030,7 +1034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -1059,6 +1063,138 @@
                     "service": {
                         "shortName": "DocumentProcessorService",
                         "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_UpdateDataset_async",
+            "title": "DocumentProcessorService updateDataset Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates metadata associated with a dataset.",
+            "canonical": true,
+            "file": "document_service.update_dataset.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDataset",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.UpdateDataset",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset",
+                        "type": ".google.cloud.documentai.v1beta3.Dataset"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDataset",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.UpdateDataset",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_GetDatasetSchema_async",
+            "title": "DocumentProcessorService getDatasetSchema Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the `DatasetSchema` of a `Dataset`.",
+            "canonical": true,
+            "file": "document_service.get_dataset_schema.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDatasetSchema",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.GetDatasetSchema",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "visible_fields_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.documentai.v1beta3.DatasetSchema",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "GetDatasetSchema",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.GetDatasetSchema",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_UpdateDatasetSchema_async",
+            "title": "DocumentProcessorService updateDatasetSchema Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a `DatasetSchema`.",
+            "canonical": true,
+            "file": "document_service.update_dataset_schema.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDatasetSchema",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.UpdateDatasetSchema",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset_schema",
+                        "type": ".google.cloud.documentai.v1beta3.DatasetSchema"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.documentai.v1beta3.DatasetSchema",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDatasetSchema",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.UpdateDatasetSchema",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
                     }
                 }
             }

@@ -5838,6 +5838,140 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('dataset', () => {
+      const fakePath = '/rendered/path/dataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        processor: 'processorValue',
+      };
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.datasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetPath', () => {
+        const result = client.datasetPath(
+          'projectValue',
+          'locationValue',
+          'processorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetName', () => {
+        const result = client.matchProjectFromDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetName', () => {
+        const result = client.matchLocationFromDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchProcessorFromDatasetName', () => {
+        const result = client.matchProcessorFromDatasetName(fakePath);
+        assert.strictEqual(result, 'processorValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('datasetSchema', () => {
+      const fakePath = '/rendered/path/datasetSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        processor: 'processorValue',
+      };
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.datasetSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetSchemaPath', () => {
+        const result = client.datasetSchemaPath(
+          'projectValue',
+          'locationValue',
+          'processorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetSchemaName', () => {
+        const result = client.matchProjectFromDatasetSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetSchemaName', () => {
+        const result = client.matchLocationFromDatasetSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchProcessorFromDatasetSchemaName', () => {
+        const result = client.matchProcessorFromDatasetSchemaName(fakePath);
+        assert.strictEqual(result, 'processorValue');
+        assert(
+          (client.pathTemplates.datasetSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('evaluation', () => {
       const fakePath = '/rendered/path/evaluation';
       const expectedParameters = {

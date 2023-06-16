@@ -29,15 +29,14 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location of processor type to list.
-   *  The available processor types may depend on the allow-listing on projects.
-   *  Format: `projects/{project}/locations/{location}`
+   *  Required. The location of processor types to list.
+   *  Format: `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
    *  The maximum number of processor types to return.
-   *  If unspecified, at most 100 processor types will be returned.
-   *  The maximum value is 500; values above 500 will be coerced to 500.
+   *  If unspecified, at most `100` processor types will be returned.
+   *  The maximum value is `500`. Values above `500` will be coerced to `500`.
    */
   // const pageSize = 1234
   /**

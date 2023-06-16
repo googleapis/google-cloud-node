@@ -29,6 +29,10 @@ function main(parent, processorVersion) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Options to control Custom Document Extraction (CDE) Processor.
+   */
+  // const customDocumentExtractionOptions = {}
+  /**
    *  Required. The parent (project, location and processor) to create the new
    *  version for. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}`.
@@ -43,7 +47,8 @@ function main(parent, processorVersion) {
    */
   // const documentSchema = {}
   /**
-   *  Optional. The input data used to train the `ProcessorVersion`.
+   *  Optional. The input data used to train the
+   *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion.
    */
   // const inputData = {}
   /**
