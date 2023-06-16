@@ -44,7 +44,7 @@ function main(name, account) {
   // const updateMask = {}
 
   // Imports the Billing library
-  const {CloudBillingClient} = require('@google-cloud/billing').v1;
+  const {CloudBillingClient} = require('billing').v1;
 
   // Instantiates a client
   const billingClient = new CloudBillingClient();

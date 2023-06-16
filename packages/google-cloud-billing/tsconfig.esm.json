@@ -4,13 +4,13 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
+    "module": "es2020",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "sourceMap": false,
-    "module": "CommonJS",
     "lib": [
-      "es2018",
-      "dom"
+      "es2020",
+      "DOM"
     ]
   },
   "include": [

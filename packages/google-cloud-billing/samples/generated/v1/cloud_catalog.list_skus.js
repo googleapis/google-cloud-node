@@ -69,7 +69,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Billing library
-  const {CloudCatalogClient} = require('@google-cloud/billing').v1;
+  const {CloudCatalogClient} = require('billing').v1;
 
   // Instantiates a client
   const billingClient = new CloudCatalogClient();
