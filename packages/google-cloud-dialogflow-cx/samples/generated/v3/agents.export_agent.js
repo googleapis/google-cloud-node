@@ -56,6 +56,10 @@ function main(name) {
    *  ID>/environments/<Environment ID>`.
    */
   // const environment = 'abc123'
+  /**
+   *  Optional. Whether to include BigQuery Export setting.
+   */
+  // const includeBigqueryExportSettings = true
 
   // Imports the Cx library
   const {AgentsClient} = require('@google-cloud/dialogflow-cx').v3;
