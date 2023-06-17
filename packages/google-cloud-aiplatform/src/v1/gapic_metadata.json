@@ -1618,6 +1618,11 @@
                 "uploadModel"
               ]
             },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "updateExplanationDataset"
+              ]
+            },
             "DeleteModel": {
               "methods": [
                 "deleteModel"
@@ -1714,6 +1719,11 @@
             "UploadModel": {
               "methods": [
                 "uploadModel"
+              ]
+            },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "updateExplanationDataset"
               ]
             },
             "DeleteModel": {
