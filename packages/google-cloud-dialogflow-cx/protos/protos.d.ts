@@ -31813,6 +31813,9 @@ export namespace google {
 
                         /** ExportAgentRequest environment */
                         environment?: (string|null);
+
+                        /** ExportAgentRequest includeBigqueryExportSettings */
+                        includeBigqueryExportSettings?: (boolean|null);
                     }
 
                     /** Represents an ExportAgentRequest. */
@@ -31835,6 +31838,9 @@ export namespace google {
 
                         /** ExportAgentRequest environment. */
                         public environment: string;
+
+                        /** ExportAgentRequest includeBigqueryExportSettings. */
+                        public includeBigqueryExportSettings: boolean;
 
                         /**
                          * Creates a new ExportAgentRequest instance using the specified properties.
@@ -50039,6 +50045,9 @@ export namespace google {
 
                         /** QueryParameters channel */
                         channel?: (string|null);
+
+                        /** QueryParameters sessionTtl */
+                        sessionTtl?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -50082,6 +50091,9 @@ export namespace google {
 
                         /** QueryParameters channel. */
                         public channel: string;
+
+                        /** QueryParameters sessionTtl. */
+                        public sessionTtl?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
