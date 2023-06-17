@@ -1371,6 +1371,12 @@ export class ModelServiceClient {
     const uploadModelMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.UploadModelOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateExplanationDatasetResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateExplanationDatasetResponse'
+    ) as gax.protobuf.Type;
+    const updateExplanationDatasetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateExplanationDatasetOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteModelResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1401,6 +1407,15 @@ export class ModelServiceClient {
         this.operationsClient,
         uploadModelResponse.decode.bind(uploadModelResponse),
         uploadModelMetadata.decode.bind(uploadModelMetadata)
+      ),
+      updateExplanationDataset: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateExplanationDatasetResponse.decode.bind(
+          updateExplanationDatasetResponse
+        ),
+        updateExplanationDatasetMetadata.decode.bind(
+          updateExplanationDatasetMetadata
+        )
       ),
       deleteModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -1479,6 +1494,7 @@ export class ModelServiceClient {
       'listModels',
       'listModelVersions',
       'updateModel',
+      'updateExplanationDataset',
       'deleteModel',
       'deleteModelVersion',
       'mergeVersionAliases',
@@ -2547,6 +2563,151 @@ export class ModelServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.UploadModelResponse,
       protos.google.cloud.aiplatform.v1.UploadModelOperationMetadata
+    >;
+  }
+  /**
+   * Incrementally update the dataset used for an examples model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The resource name of the Model to update.
+   *   Format: `projects/{project}/locations/{location}/models/{model}`
+   * @param {google.cloud.aiplatform.v1.Examples} request.examples
+   *   The example config containing the location of the dataset.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.update_explanation_dataset.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async
+   */
+  updateExplanationDataset(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateExplanationDataset(
+    request: protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExplanationDataset(
+    request: protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExplanationDataset(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+            protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model: request.model ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateExplanationDataset(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateExplanationDataset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.update_explanation_dataset.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async
+   */
+  async checkUpdateExplanationDatasetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetResponse,
+      protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateExplanationDataset,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetResponse,
+      protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetOperationMetadata
     >;
   }
   /**

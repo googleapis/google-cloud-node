@@ -13961,6 +13961,34 @@
                             }
                           ]
                         },
+                        "UpdateExplanationDataset": {
+                          "requestType": "UpdateExplanationDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{model=projects/*/locations/*/models/*}:updateExplanationDataset",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "model",
+                            "(google.longrunning.operation_info).response_type": "UpdateExplanationDatasetResponse",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateExplanationDatasetOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{model=projects/*/locations/*/models/*}:updateExplanationDataset",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpdateExplanationDatasetResponse",
+                                "metadata_type": "UpdateExplanationDatasetOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteModel": {
                           "requestType": "DeleteModelRequest",
                           "responseType": "google.longrunning.Operation",
@@ -14409,6 +14437,30 @@
                         }
                       }
                     },
+                    "UpdateExplanationDatasetRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "examples": {
+                          "type": "Examples",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateExplanationDatasetOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "DeleteModelRequest": {
                       "fields": {
                         "name": {
@@ -14489,6 +14541,9 @@
                           }
                         }
                       }
+                    },
+                    "UpdateExplanationDatasetResponse": {
+                      "fields": {}
                     },
                     "ExportModelOperationMetadata": {
                       "fields": {
