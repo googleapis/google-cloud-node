@@ -40,6 +40,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateExplanationDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
