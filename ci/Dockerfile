@@ -46,4 +46,4 @@ COPY --from=build /root/.local/share/pnpm /root/.local/share/pnpm
 RUN apk add --no-cache git bash python3
 
 ENV PNPM_HOME=/root/.local/share/pnpm
-ENV PATH=$PNPM_HOME:$PATH
+ENV PATH=$PNPM_HOME:$PATH:/bin/flakybot:usr/local/gcloud/google-cloud-sdk/bin
