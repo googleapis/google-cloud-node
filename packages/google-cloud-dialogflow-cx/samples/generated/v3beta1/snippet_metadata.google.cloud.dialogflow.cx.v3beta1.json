@@ -238,7 +238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -262,6 +262,10 @@
                     {
                         "name": "environment",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_bigquery_export_settings",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
