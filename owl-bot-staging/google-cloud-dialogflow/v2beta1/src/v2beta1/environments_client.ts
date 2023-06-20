@@ -426,8 +426,8 @@ export class EnvironmentsClient {
  * @param {string} request.name
  *   Required. The name of the environment.
  *   Supported formats:
- *   - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
- *   - `projects/<Project Number / ID>/locations/<Location
+ *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+ *   - `projects/<Project ID>/locations/<Location
  *     ID>/agent/environments/<Environment ID>`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -501,8 +501,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The agent to create an environment for.
  *   Supported formats:
- *   - `projects/<Project Number / ID>/agent`
- *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+ *   - `projects/<Project ID>/agent`
+ *   - `projects/<Project ID>/locations/<Location ID>/agent`
  * @param {google.cloud.dialogflow.v2beta1.Environment} request.environment
  *   Required. The environment to create.
  * @param {string} request.environmentId
@@ -668,8 +668,8 @@ export class EnvironmentsClient {
  * @param {string} request.name
  *   Required. The name of the environment to delete.
  *   / Format:
- *   - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
- *   - `projects/<Project Number / ID>/locations/<Location
+ *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+ *   - `projects/<Project ID>/locations/<Location
  *   ID>/agent/environments/<Environment ID>`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -744,8 +744,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The agent to list all environments from.
  *   Format:
- *   - `projects/<Project Number / ID>/agent`
- *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+ *   - `projects/<Project ID>/agent`
+ *   - `projects/<Project ID>/locations/<Location ID>/agent`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By
  *   default 100 and at most 1000.
@@ -828,8 +828,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The agent to list all environments from.
  *   Format:
- *   - `projects/<Project Number / ID>/agent`
- *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+ *   - `projects/<Project ID>/agent`
+ *   - `projects/<Project ID>/locations/<Location ID>/agent`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By
  *   default 100 and at most 1000.
@@ -879,8 +879,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The agent to list all environments from.
  *   Format:
- *   - `projects/<Project Number / ID>/agent`
- *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+ *   - `projects/<Project ID>/agent`
+ *   - `projects/<Project ID>/locations/<Location ID>/agent`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By
  *   default 100 and at most 1000.
@@ -929,8 +929,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The name of the environment to retrieve history for.
  *   Supported formats:
- *   - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
- *   - `projects/<Project Number / ID>/locations/<Location
+ *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+ *   - `projects/<Project ID>/locations/<Location
  *     ID>/agent/environments/<Environment ID>`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By
@@ -1014,8 +1014,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The name of the environment to retrieve history for.
  *   Supported formats:
- *   - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
- *   - `projects/<Project Number / ID>/locations/<Location
+ *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+ *   - `projects/<Project ID>/locations/<Location
  *     ID>/agent/environments/<Environment ID>`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By
@@ -1066,8 +1066,8 @@ export class EnvironmentsClient {
  * @param {string} request.parent
  *   Required. The name of the environment to retrieve history for.
  *   Supported formats:
- *   - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
- *   - `projects/<Project Number / ID>/locations/<Location
+ *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+ *   - `projects/<Project ID>/locations/<Location
  *     ID>/agent/environments/<Environment ID>`
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of items to return in a single page. By

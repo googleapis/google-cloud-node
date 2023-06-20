@@ -47,6 +47,10 @@ function main(participant) {
    */
   // const eventInput = {}
   /**
+   *  An input representing the selection of a suggestion.
+   */
+  // const suggestionInput = {}
+  /**
    *  Speech synthesis configuration.
    *  The speech synthesis settings for a virtual agent that may be configured
    *  for the associated conversation profile are not used when calling

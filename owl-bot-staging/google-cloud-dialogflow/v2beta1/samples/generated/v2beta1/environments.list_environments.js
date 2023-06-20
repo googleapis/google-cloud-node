@@ -31,8 +31,8 @@ function main(parent) {
   /**
    *  Required. The agent to list all environments from.
    *  Format:
-   *  - `projects/<Project Number / ID>/agent`
-   *  - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+   *  - `projects/<Project ID>/agent`
+   *  - `projects/<Project ID>/locations/<Location ID>/agent`
    */
   // const parent = 'abc123'
   /**

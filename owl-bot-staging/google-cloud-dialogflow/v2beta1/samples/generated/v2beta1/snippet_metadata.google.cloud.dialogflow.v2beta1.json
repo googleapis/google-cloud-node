@@ -3414,7 +3414,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 127,
+          "end": 131,
           "type": "FULL"
         }
       ],
@@ -3438,6 +3438,10 @@
           {
             "name": "event_input",
             "type": ".google.cloud.dialogflow.v2beta1.EventInput"
+          },
+          {
+            "name": "suggestion_input",
+            "type": ".google.cloud.dialogflow.v2beta1.SuggestionInput"
           },
           {
             "name": "reply_audio_config",
