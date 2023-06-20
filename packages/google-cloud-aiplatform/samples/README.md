@@ -158,6 +158,7 @@
   * [Model_service.list_model_versions](#model_service.list_model_versions)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
+  * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
@@ -2937,6 +2938,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/model_service.merge_version_aliases.js`
+
+
+-----
+
+
+
+
+### Model_service.update_explanation_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/model_service.update_explanation_dataset.js`
 
 
 -----
