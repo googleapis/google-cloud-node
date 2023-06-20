@@ -180,6 +180,9 @@ export class CloudCatalogClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      projectBillingInfoPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/billingInfo'
+      ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'services/{service}'
       ),
@@ -759,6 +762,31 @@ export class CloudCatalogClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified projectBillingInfo resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectBillingInfoPath(project: string) {
+    return this.pathTemplates.projectBillingInfoPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectBillingInfo resource.
+   *
+   * @param {string} projectBillingInfoName
+   *   A fully-qualified path representing ProjectBillingInfo resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectBillingInfoName(projectBillingInfoName: string) {
+    return this.pathTemplates.projectBillingInfoPathTemplate.match(
+      projectBillingInfoName
+    ).project;
+  }
 
   /**
    * Return a fully-qualified service resource name string.
