@@ -32858,6 +32858,7 @@
                              * @interface IContentSearchSpec
                              * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISnippetSpec|null} [snippetSpec] ContentSearchSpec snippetSpec
                              * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec|null} [summarySpec] ContentSearchSpec summarySpec
+                             * @property {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec|null} [extractiveContentSpec] ContentSearchSpec extractiveContentSpec
                              */
     
                             /**
@@ -32892,6 +32893,14 @@
                             ContentSearchSpec.prototype.summarySpec = null;
     
                             /**
+                             * ContentSearchSpec extractiveContentSpec.
+                             * @member {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec|null|undefined} extractiveContentSpec
+                             * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                             * @instance
+                             */
+                            ContentSearchSpec.prototype.extractiveContentSpec = null;
+    
+                            /**
                              * Creates a new ContentSearchSpec instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
@@ -32919,6 +32928,8 @@
                                     $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.encode(message.snippetSpec, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.summarySpec != null && Object.hasOwnProperty.call(message, "summarySpec"))
                                     $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.encode(message.summarySpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.extractiveContentSpec != null && Object.hasOwnProperty.call(message, "extractiveContentSpec"))
+                                    $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.encode(message.extractiveContentSpec, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -32959,6 +32970,10 @@
                                         }
                                     case 2: {
                                             message.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.extractiveContentSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -33006,6 +33021,11 @@
                                     if (error)
                                         return "summarySpec." + error;
                                 }
+                                if (message.extractiveContentSpec != null && message.hasOwnProperty("extractiveContentSpec")) {
+                                    var error = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.verify(message.extractiveContentSpec);
+                                    if (error)
+                                        return "extractiveContentSpec." + error;
+                                }
                                 return null;
                             };
     
@@ -33031,6 +33051,11 @@
                                         throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.summarySpec: object expected");
                                     message.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.fromObject(object.summarySpec);
                                 }
+                                if (object.extractiveContentSpec != null) {
+                                    if (typeof object.extractiveContentSpec !== "object")
+                                        throw TypeError(".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.extractiveContentSpec: object expected");
+                                    message.extractiveContentSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.fromObject(object.extractiveContentSpec);
+                                }
                                 return message;
                             };
     
@@ -33050,11 +33075,14 @@
                                 if (options.defaults) {
                                     object.snippetSpec = null;
                                     object.summarySpec = null;
+                                    object.extractiveContentSpec = null;
                                 }
                                 if (message.snippetSpec != null && message.hasOwnProperty("snippetSpec"))
                                     object.snippetSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SnippetSpec.toObject(message.snippetSpec, options);
                                 if (message.summarySpec != null && message.hasOwnProperty("summarySpec"))
                                     object.summarySpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec.toObject(message.summarySpec, options);
+                                if (message.extractiveContentSpec != null && message.hasOwnProperty("extractiveContentSpec"))
+                                    object.extractiveContentSpec = $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.toObject(message.extractiveContentSpec, options);
                                 return object;
                             };
     
@@ -33514,6 +33542,233 @@
                                 return SummarySpec;
                             })();
     
+                            ContentSearchSpec.ExtractiveContentSpec = (function() {
+    
+                                /**
+                                 * Properties of an ExtractiveContentSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @interface IExtractiveContentSpec
+                                 * @property {number|null} [maxExtractiveAnswerCount] ExtractiveContentSpec maxExtractiveAnswerCount
+                                 * @property {number|null} [maxExtractiveSegmentCount] ExtractiveContentSpec maxExtractiveSegmentCount
+                                 */
+    
+                                /**
+                                 * Constructs a new ExtractiveContentSpec.
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec
+                                 * @classdesc Represents an ExtractiveContentSpec.
+                                 * @implements IExtractiveContentSpec
+                                 * @constructor
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec=} [properties] Properties to set
+                                 */
+                                function ExtractiveContentSpec(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ExtractiveContentSpec maxExtractiveAnswerCount.
+                                 * @member {number} maxExtractiveAnswerCount
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @instance
+                                 */
+                                ExtractiveContentSpec.prototype.maxExtractiveAnswerCount = 0;
+    
+                                /**
+                                 * ExtractiveContentSpec maxExtractiveSegmentCount.
+                                 * @member {number} maxExtractiveSegmentCount
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @instance
+                                 */
+                                ExtractiveContentSpec.prototype.maxExtractiveSegmentCount = 0;
+    
+                                /**
+                                 * Creates a new ExtractiveContentSpec instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec=} [properties] Properties to set
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec} ExtractiveContentSpec instance
+                                 */
+                                ExtractiveContentSpec.create = function create(properties) {
+                                    return new ExtractiveContentSpec(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ExtractiveContentSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec} message ExtractiveContentSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExtractiveContentSpec.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.maxExtractiveAnswerCount != null && Object.hasOwnProperty.call(message, "maxExtractiveAnswerCount"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxExtractiveAnswerCount);
+                                    if (message.maxExtractiveSegmentCount != null && Object.hasOwnProperty.call(message, "maxExtractiveSegmentCount"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxExtractiveSegmentCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ExtractiveContentSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec} message ExtractiveContentSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExtractiveContentSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ExtractiveContentSpec message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec} ExtractiveContentSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExtractiveContentSpec.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.maxExtractiveAnswerCount = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.maxExtractiveSegmentCount = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ExtractiveContentSpec message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec} ExtractiveContentSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExtractiveContentSpec.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ExtractiveContentSpec message.
+                                 * @function verify
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ExtractiveContentSpec.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.maxExtractiveAnswerCount != null && message.hasOwnProperty("maxExtractiveAnswerCount"))
+                                        if (!$util.isInteger(message.maxExtractiveAnswerCount))
+                                            return "maxExtractiveAnswerCount: integer expected";
+                                    if (message.maxExtractiveSegmentCount != null && message.hasOwnProperty("maxExtractiveSegmentCount"))
+                                        if (!$util.isInteger(message.maxExtractiveSegmentCount))
+                                            return "maxExtractiveSegmentCount: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ExtractiveContentSpec message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec} ExtractiveContentSpec
+                                 */
+                                ExtractiveContentSpec.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec)
+                                        return object;
+                                    var message = new $root.google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec();
+                                    if (object.maxExtractiveAnswerCount != null)
+                                        message.maxExtractiveAnswerCount = object.maxExtractiveAnswerCount | 0;
+                                    if (object.maxExtractiveSegmentCount != null)
+                                        message.maxExtractiveSegmentCount = object.maxExtractiveSegmentCount | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ExtractiveContentSpec message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec} message ExtractiveContentSpec
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ExtractiveContentSpec.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.maxExtractiveAnswerCount = 0;
+                                        object.maxExtractiveSegmentCount = 0;
+                                    }
+                                    if (message.maxExtractiveAnswerCount != null && message.hasOwnProperty("maxExtractiveAnswerCount"))
+                                        object.maxExtractiveAnswerCount = message.maxExtractiveAnswerCount;
+                                    if (message.maxExtractiveSegmentCount != null && message.hasOwnProperty("maxExtractiveSegmentCount"))
+                                        object.maxExtractiveSegmentCount = message.maxExtractiveSegmentCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ExtractiveContentSpec to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ExtractiveContentSpec.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ExtractiveContentSpec
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ExtractiveContentSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec";
+                                };
+    
+                                return ExtractiveContentSpec;
+                            })();
+    
                             return ContentSearchSpec;
                         })();
     
@@ -33531,6 +33786,7 @@
                          * @property {google.cloud.discoveryengine.v1beta.SearchResponse.IGuidedSearchResult|null} [guidedSearchResult] SearchResponse guidedSearchResult
                          * @property {number|null} [totalSize] SearchResponse totalSize
                          * @property {string|null} [attributionToken] SearchResponse attributionToken
+                         * @property {string|null} [redirectUri] SearchResponse redirectUri
                          * @property {string|null} [nextPageToken] SearchResponse nextPageToken
                          * @property {string|null} [correctedQuery] SearchResponse correctedQuery
                          * @property {google.cloud.discoveryengine.v1beta.SearchResponse.ISummary|null} [summary] SearchResponse summary
@@ -33594,6 +33850,14 @@
                          * @instance
                          */
                         SearchResponse.prototype.attributionToken = "";
+    
+                        /**
+                         * SearchResponse redirectUri.
+                         * @member {string} redirectUri
+                         * @memberof google.cloud.discoveryengine.v1beta.SearchResponse
+                         * @instance
+                         */
+                        SearchResponse.prototype.redirectUri = "";
     
                         /**
                          * SearchResponse nextPageToken.
@@ -33672,6 +33936,8 @@
                             if (message.appliedControls != null && message.appliedControls.length)
                                 for (var i = 0; i < message.appliedControls.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.appliedControls[i]);
+                            if (message.redirectUri != null && Object.hasOwnProperty.call(message, "redirectUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.redirectUri);
                             return writer;
                         };
     
@@ -33728,6 +33994,10 @@
                                     }
                                 case 4: {
                                         message.attributionToken = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.redirectUri = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -33812,6 +34082,9 @@
                             if (message.attributionToken != null && message.hasOwnProperty("attributionToken"))
                                 if (!$util.isString(message.attributionToken))
                                     return "attributionToken: string expected";
+                            if (message.redirectUri != null && message.hasOwnProperty("redirectUri"))
+                                if (!$util.isString(message.redirectUri))
+                                    return "redirectUri: string expected";
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
@@ -33874,6 +34147,8 @@
                                 message.totalSize = object.totalSize | 0;
                             if (object.attributionToken != null)
                                 message.attributionToken = String(object.attributionToken);
+                            if (object.redirectUri != null)
+                                message.redirectUri = String(object.redirectUri);
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
                             if (object.correctedQuery != null)
@@ -33918,6 +34193,7 @@
                                 object.correctedQuery = "";
                                 object.guidedSearchResult = null;
                                 object.summary = null;
+                                object.redirectUri = "";
                             }
                             if (message.results && message.results.length) {
                                 object.results = [];
@@ -33946,6 +34222,8 @@
                                 for (var j = 0; j < message.appliedControls.length; ++j)
                                     object.appliedControls[j] = message.appliedControls[j];
                             }
+                            if (message.redirectUri != null && message.hasOwnProperty("redirectUri"))
+                                object.redirectUri = message.redirectUri;
                             return object;
                         };
     
