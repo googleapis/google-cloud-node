@@ -461,6 +461,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
+                            },
+                            "includeBigqueryExportSettings": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -4998,6 +5005,13 @@
                             "channel": {
                               "type": "string",
                               "id": 15
+                            },
+                            "sessionTtl": {
+                              "type": "google.protobuf.Duration",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -8182,6 +8196,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
+                              }
+                            },
+                            "includeBigqueryExportSettings": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           },
@@ -12720,6 +12741,13 @@
                             "channel": {
                               "type": "string",
                               "id": 15
+                            },
+                            "sessionTtl": {
+                              "type": "google.protobuf.Duration",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

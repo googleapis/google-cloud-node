@@ -657,11 +657,11 @@ export class UserEventServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource} request.inlineSource
-   *   Required. The Inline source for the input content for UserEvents.
+   *   The Inline source for the input content for UserEvents.
    * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
-   *   Required. Cloud Storage location for the input content.
+   *   Cloud Storage location for the input content.
    * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
-   *   Required. BigQuery input source.
+   *   BigQuery input source.
    * @param {string} request.parent
    *   Required. Parent DataStore resource name, of the form
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`

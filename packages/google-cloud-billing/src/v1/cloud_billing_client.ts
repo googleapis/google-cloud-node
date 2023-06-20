@@ -182,6 +182,9 @@ export class CloudBillingClient {
       billingAccountPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}'
       ),
+      projectBillingInfoPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/billingInfo'
+      ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'services/{service}'
       ),
@@ -1607,6 +1610,31 @@ export class CloudBillingClient {
     return this.pathTemplates.billingAccountPathTemplate.match(
       billingAccountName
     ).billing_account;
+  }
+
+  /**
+   * Return a fully-qualified projectBillingInfo resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectBillingInfoPath(project: string) {
+    return this.pathTemplates.projectBillingInfoPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectBillingInfo resource.
+   *
+   * @param {string} projectBillingInfoName
+   *   A fully-qualified path representing ProjectBillingInfo resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectBillingInfoName(projectBillingInfoName: string) {
+    return this.pathTemplates.projectBillingInfoPathTemplate.match(
+      projectBillingInfoName
+    ).project;
   }
 
   /**
