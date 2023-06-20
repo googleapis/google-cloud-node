@@ -2386,24 +2386,15 @@
                       "fields": {
                         "inlineSource": {
                           "type": "InlineSource",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 2
                         },
                         "gcsSource": {
                           "type": "GcsSource",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 3
                         },
                         "bigquerySource": {
                           "type": "BigQuerySource",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 4
                         },
                         "parent": {
                           "type": "string",
@@ -3623,6 +3614,10 @@
                             "summarySpec": {
                               "type": "SummarySpec",
                               "id": 2
+                            },
+                            "extractiveContentSpec": {
+                              "type": "ExtractiveContentSpec",
+                              "id": 3
                             }
                           },
                           "nested": {
@@ -3643,6 +3638,18 @@
                                 "summaryResultCount": {
                                   "type": "int32",
                                   "id": 1
+                                }
+                              }
+                            },
+                            "ExtractiveContentSpec": {
+                              "fields": {
+                                "maxExtractiveAnswerCount": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "maxExtractiveSegmentCount": {
+                                  "type": "int32",
+                                  "id": 2
                                 }
                               }
                             }
@@ -3673,6 +3680,10 @@
                         "attributionToken": {
                           "type": "string",
                           "id": 4
+                        },
+                        "redirectUri": {
+                          "type": "string",
+                          "id": 12
                         },
                         "nextPageToken": {
                           "type": "string",
