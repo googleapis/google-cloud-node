@@ -810,6 +810,8 @@ export class ParticipantsClient {
    *   The natural language speech audio to be processed.
    * @param {google.cloud.dialogflow.v2beta1.EventInput} request.eventInput
    *   An input event to send to Dialogflow.
+   * @param {google.cloud.dialogflow.v2beta1.SuggestionInput} request.suggestionInput
+   *   An input representing the selection of a suggestion.
    * @param {google.cloud.dialogflow.v2beta1.OutputAudioConfig} request.replyAudioConfig
    *   Speech synthesis configuration.
    *   The speech synthesis settings for a virtual agent that may be configured

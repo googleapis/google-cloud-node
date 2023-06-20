@@ -811,7 +811,7 @@ export class ConversationsClient {
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>`.
    * @param {number[]} request.requests
-   *   Required. A maximum of 1000 Messages can be created in a batch.
+   *   Required. A maximum of 300 messages can be created in a batch.
    *   {@link |CreateMessageRequest.message.send_time} is required. All created
    *   messages will have identical
    *   {@link google.cloud.dialogflow.v2beta1.Message.create_time|Message.create_time}.
@@ -928,7 +928,7 @@ export class ConversationsClient {
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 500 and at most 1000.
    * @param {google.cloud.dialogflow.v2beta1.AssistQueryParameters} request.assistQueryParams
-   *   Parameters for a human assist query.
+   *   Parameters for a human assist query. Only used for POC/demo purpose.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
