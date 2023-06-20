@@ -28277,6 +28277,9 @@ export namespace google {
 
                     /** AttributionSettings reportingAttributionModel */
                     reportingAttributionModel?: (google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|null);
+
+                    /** AttributionSettings adsWebConversionDataExportScope */
+                    adsWebConversionDataExportScope?: (google.analytics.admin.v1alpha.AttributionSettings.AdsWebConversionDataExportScope|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.AdsWebConversionDataExportScope|null);
                 }
 
                 /** Represents an AttributionSettings. */
@@ -28299,6 +28302,9 @@ export namespace google {
 
                     /** AttributionSettings reportingAttributionModel. */
                     public reportingAttributionModel: (google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel);
+
+                    /** AttributionSettings adsWebConversionDataExportScope. */
+                    public adsWebConversionDataExportScope: (google.analytics.admin.v1alpha.AttributionSettings.AdsWebConversionDataExportScope|keyof typeof google.analytics.admin.v1alpha.AttributionSettings.AdsWebConversionDataExportScope);
 
                     /**
                      * Creates a new AttributionSettings instance using the specified properties.
@@ -28405,6 +28411,14 @@ export namespace google {
                         CROSS_CHANNEL_POSITION_BASED = 5,
                         CROSS_CHANNEL_TIME_DECAY = 6,
                         ADS_PREFERRED_LAST_CLICK = 7
+                    }
+
+                    /** AdsWebConversionDataExportScope enum. */
+                    enum AdsWebConversionDataExportScope {
+                        ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED = 0,
+                        NOT_SELECTED_YET = 1,
+                        CROSS_CHANNEL = 2,
+                        ADS_PREFERRED = 3
                     }
                 }
 
