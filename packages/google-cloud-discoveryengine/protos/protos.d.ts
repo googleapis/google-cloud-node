@@ -13407,6 +13407,9 @@ export namespace google {
 
                         /** ContentSearchSpec summarySpec */
                         summarySpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+
+                        /** ContentSearchSpec extractiveContentSpec */
+                        extractiveContentSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec|null);
                     }
 
                     /** Represents a ContentSearchSpec. */
@@ -13423,6 +13426,9 @@ export namespace google {
 
                         /** ContentSearchSpec summarySpec. */
                         public summarySpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+
+                        /** ContentSearchSpec extractiveContentSpec. */
+                        public extractiveContentSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec|null);
 
                         /**
                          * Creates a new ContentSearchSpec instance using the specified properties.
@@ -13703,6 +13709,109 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** Properties of an ExtractiveContentSpec. */
+                        interface IExtractiveContentSpec {
+
+                            /** ExtractiveContentSpec maxExtractiveAnswerCount */
+                            maxExtractiveAnswerCount?: (number|null);
+
+                            /** ExtractiveContentSpec maxExtractiveSegmentCount */
+                            maxExtractiveSegmentCount?: (number|null);
+                        }
+
+                        /** Represents an ExtractiveContentSpec. */
+                        class ExtractiveContentSpec implements IExtractiveContentSpec {
+
+                            /**
+                             * Constructs a new ExtractiveContentSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec);
+
+                            /** ExtractiveContentSpec maxExtractiveAnswerCount. */
+                            public maxExtractiveAnswerCount: number;
+
+                            /** ExtractiveContentSpec maxExtractiveSegmentCount. */
+                            public maxExtractiveSegmentCount: number;
+
+                            /**
+                             * Creates a new ExtractiveContentSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExtractiveContentSpec instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec): google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec;
+
+                            /**
+                             * Encodes the specified ExtractiveContentSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.verify|verify} messages.
+                             * @param message ExtractiveContentSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExtractiveContentSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec.verify|verify} messages.
+                             * @param message ExtractiveContentSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.IExtractiveContentSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExtractiveContentSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExtractiveContentSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec;
+
+                            /**
+                             * Decodes an ExtractiveContentSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExtractiveContentSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec;
+
+                            /**
+                             * Verifies an ExtractiveContentSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExtractiveContentSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExtractiveContentSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec;
+
+                            /**
+                             * Creates a plain object from an ExtractiveContentSpec message. Also converts values to other types if specified.
+                             * @param message ExtractiveContentSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.ExtractiveContentSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExtractiveContentSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExtractiveContentSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
                 }
 
@@ -13723,6 +13832,9 @@ export namespace google {
 
                     /** SearchResponse attributionToken */
                     attributionToken?: (string|null);
+
+                    /** SearchResponse redirectUri */
+                    redirectUri?: (string|null);
 
                     /** SearchResponse nextPageToken */
                     nextPageToken?: (string|null);
@@ -13760,6 +13872,9 @@ export namespace google {
 
                     /** SearchResponse attributionToken. */
                     public attributionToken: string;
+
+                    /** SearchResponse redirectUri. */
+                    public redirectUri: string;
 
                     /** SearchResponse nextPageToken. */
                     public nextPageToken: string;

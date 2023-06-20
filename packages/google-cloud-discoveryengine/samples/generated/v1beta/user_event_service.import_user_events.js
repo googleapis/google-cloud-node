@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(inlineSource, gcsSource, bigquerySource, parent) {
+function main(parent) {
   // [START discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,15 +29,15 @@ function main(inlineSource, gcsSource, bigquerySource, parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Inline source for the input content for UserEvents.
+   *  The Inline source for the input content for UserEvents.
    */
   // const inlineSource = {}
   /**
-   *  Required. Cloud Storage location for the input content.
+   *  Cloud Storage location for the input content.
    */
   // const gcsSource = {}
   /**
-   *  Required. BigQuery input source.
+   *  BigQuery input source.
    */
   // const bigquerySource = {}
   /**
@@ -60,9 +60,6 @@ function main(inlineSource, gcsSource, bigquerySource, parent) {
   async function callImportUserEvents() {
     // Construct request
     const request = {
-      inlineSource,
-      gcsSource,
-      bigquerySource,
       parent,
     };
 

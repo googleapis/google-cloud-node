@@ -955,7 +955,7 @@ export class DocumentServiceClient {
    *   {@link google.cloud.discoveryengine.v1beta.GcsSource.data_schema|GcsSource.data_schema}
    *   or
    *   {@link google.cloud.discoveryengine.v1beta.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
    * @param {string} request.idField
    *   The field in the Cloud Storage and BigQuery sources that indicates the
    *   unique IDs of the documents.
