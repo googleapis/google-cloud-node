@@ -729,6 +729,50 @@ describe('v1.CloudCatalogClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('projectBillingInfo', () => {
+      const fakePath = '/rendered/path/projectBillingInfo';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new cloudcatalogModule.v1.CloudCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectBillingInfoPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectBillingInfoPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectBillingInfoPath', () => {
+        const result = client.projectBillingInfoPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectBillingInfoPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectBillingInfoName', () => {
+        const result = client.matchProjectFromProjectBillingInfoName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectBillingInfoPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('service', () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
