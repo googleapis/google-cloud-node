@@ -1737,6 +1737,7 @@
                          * @property {string|null} [targetId] Stage targetId
                          * @property {Array.<string>|null} [profiles] Stage profiles
                          * @property {google.cloud.deploy.v1.IStrategy|null} [strategy] Stage strategy
+                         * @property {Array.<google.cloud.deploy.v1.IDeployParameters>|null} [deployParameters] Stage deployParameters
                          */
     
                         /**
@@ -1749,6 +1750,7 @@
                          */
                         function Stage(properties) {
                             this.profiles = [];
+                            this.deployParameters = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1778,6 +1780,14 @@
                          * @instance
                          */
                         Stage.prototype.strategy = null;
+    
+                        /**
+                         * Stage deployParameters.
+                         * @member {Array.<google.cloud.deploy.v1.IDeployParameters>} deployParameters
+                         * @memberof google.cloud.deploy.v1.Stage
+                         * @instance
+                         */
+                        Stage.prototype.deployParameters = $util.emptyArray;
     
                         /**
                          * Creates a new Stage instance using the specified properties.
@@ -1810,6 +1820,9 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.profiles[i]);
                             if (message.strategy != null && Object.hasOwnProperty.call(message, "strategy"))
                                 $root.google.cloud.deploy.v1.Strategy.encode(message.strategy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.deployParameters != null && message.deployParameters.length)
+                                for (var i = 0; i < message.deployParameters.length; ++i)
+                                    $root.google.cloud.deploy.v1.DeployParameters.encode(message.deployParameters[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -1856,6 +1869,12 @@
                                     }
                                 case 5: {
                                         message.strategy = $root.google.cloud.deploy.v1.Strategy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.deployParameters && message.deployParameters.length))
+                                            message.deployParameters = [];
+                                        message.deployParameters.push($root.google.cloud.deploy.v1.DeployParameters.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -1908,6 +1927,15 @@
                                 if (error)
                                     return "strategy." + error;
                             }
+                            if (message.deployParameters != null && message.hasOwnProperty("deployParameters")) {
+                                if (!Array.isArray(message.deployParameters))
+                                    return "deployParameters: array expected";
+                                for (var i = 0; i < message.deployParameters.length; ++i) {
+                                    var error = $root.google.cloud.deploy.v1.DeployParameters.verify(message.deployParameters[i]);
+                                    if (error)
+                                        return "deployParameters." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1937,6 +1965,16 @@
                                     throw TypeError(".google.cloud.deploy.v1.Stage.strategy: object expected");
                                 message.strategy = $root.google.cloud.deploy.v1.Strategy.fromObject(object.strategy);
                             }
+                            if (object.deployParameters) {
+                                if (!Array.isArray(object.deployParameters))
+                                    throw TypeError(".google.cloud.deploy.v1.Stage.deployParameters: array expected");
+                                message.deployParameters = [];
+                                for (var i = 0; i < object.deployParameters.length; ++i) {
+                                    if (typeof object.deployParameters[i] !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.Stage.deployParameters: object expected");
+                                    message.deployParameters[i] = $root.google.cloud.deploy.v1.DeployParameters.fromObject(object.deployParameters[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -1953,8 +1991,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.profiles = [];
+                                object.deployParameters = [];
+                            }
                             if (options.defaults) {
                                 object.targetId = "";
                                 object.strategy = null;
@@ -1968,6 +2008,11 @@
                             }
                             if (message.strategy != null && message.hasOwnProperty("strategy"))
                                 object.strategy = $root.google.cloud.deploy.v1.Strategy.toObject(message.strategy, options);
+                            if (message.deployParameters && message.deployParameters.length) {
+                                object.deployParameters = [];
+                                for (var j = 0; j < message.deployParameters.length; ++j)
+                                    object.deployParameters[j] = $root.google.cloud.deploy.v1.DeployParameters.toObject(message.deployParameters[j], options);
+                            }
                             return object;
                         };
     
@@ -1998,6 +2043,302 @@
                         };
     
                         return Stage;
+                    })();
+    
+                    v1.DeployParameters = (function() {
+    
+                        /**
+                         * Properties of a DeployParameters.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IDeployParameters
+                         * @property {Object.<string,string>|null} [values] DeployParameters values
+                         * @property {Object.<string,string>|null} [matchTargetLabels] DeployParameters matchTargetLabels
+                         */
+    
+                        /**
+                         * Constructs a new DeployParameters.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a DeployParameters.
+                         * @implements IDeployParameters
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IDeployParameters=} [properties] Properties to set
+                         */
+                        function DeployParameters(properties) {
+                            this.values = {};
+                            this.matchTargetLabels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeployParameters values.
+                         * @member {Object.<string,string>} values
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @instance
+                         */
+                        DeployParameters.prototype.values = $util.emptyObject;
+    
+                        /**
+                         * DeployParameters matchTargetLabels.
+                         * @member {Object.<string,string>} matchTargetLabels
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @instance
+                         */
+                        DeployParameters.prototype.matchTargetLabels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new DeployParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployParameters=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.DeployParameters} DeployParameters instance
+                         */
+                        DeployParameters.create = function create(properties) {
+                            return new DeployParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeployParameters message. Does not implicitly {@link google.cloud.deploy.v1.DeployParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployParameters} message DeployParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && Object.hasOwnProperty.call(message, "values"))
+                                for (var keys = Object.keys(message.values), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.values[keys[i]]).ldelim();
+                            if (message.matchTargetLabels != null && Object.hasOwnProperty.call(message, "matchTargetLabels"))
+                                for (var keys = Object.keys(message.matchTargetLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.matchTargetLabels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeployParameters message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployParameters} message DeployParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeployParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.DeployParameters} DeployParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.DeployParameters(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.values === $util.emptyObject)
+                                            message.values = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.values[key] = value;
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.matchTargetLabels === $util.emptyObject)
+                                            message.matchTargetLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.matchTargetLabels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeployParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.DeployParameters} DeployParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeployParameters message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeployParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!$util.isObject(message.values))
+                                    return "values: object expected";
+                                var key = Object.keys(message.values);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.values[key[i]]))
+                                        return "values: string{k:string} expected";
+                            }
+                            if (message.matchTargetLabels != null && message.hasOwnProperty("matchTargetLabels")) {
+                                if (!$util.isObject(message.matchTargetLabels))
+                                    return "matchTargetLabels: object expected";
+                                var key = Object.keys(message.matchTargetLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.matchTargetLabels[key[i]]))
+                                        return "matchTargetLabels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeployParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.DeployParameters} DeployParameters
+                         */
+                        DeployParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.DeployParameters)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.DeployParameters();
+                            if (object.values) {
+                                if (typeof object.values !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeployParameters.values: object expected");
+                                message.values = {};
+                                for (var keys = Object.keys(object.values), i = 0; i < keys.length; ++i)
+                                    message.values[keys[i]] = String(object.values[keys[i]]);
+                            }
+                            if (object.matchTargetLabels) {
+                                if (typeof object.matchTargetLabels !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeployParameters.matchTargetLabels: object expected");
+                                message.matchTargetLabels = {};
+                                for (var keys = Object.keys(object.matchTargetLabels), i = 0; i < keys.length; ++i)
+                                    message.matchTargetLabels[keys[i]] = String(object.matchTargetLabels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeployParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {google.cloud.deploy.v1.DeployParameters} message DeployParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeployParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.values = {};
+                                object.matchTargetLabels = {};
+                            }
+                            var keys2;
+                            if (message.values && (keys2 = Object.keys(message.values)).length) {
+                                object.values = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.values[keys2[j]] = message.values[keys2[j]];
+                            }
+                            if (message.matchTargetLabels && (keys2 = Object.keys(message.matchTargetLabels)).length) {
+                                object.matchTargetLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.matchTargetLabels[keys2[j]] = message.matchTargetLabels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeployParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeployParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeployParameters
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.DeployParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeployParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.DeployParameters";
+                        };
+    
+                        return DeployParameters;
                     })();
     
                     v1.Strategy = (function() {
@@ -7478,6 +7819,7 @@
                          * @property {google.cloud.deploy.v1.IMultiTarget|null} [multiTarget] Target multiTarget
                          * @property {string|null} [etag] Target etag
                          * @property {Array.<google.cloud.deploy.v1.IExecutionConfig>|null} [executionConfigs] Target executionConfigs
+                         * @property {Object.<string,string>|null} [deployParameters] Target deployParameters
                          */
     
                         /**
@@ -7492,6 +7834,7 @@
                             this.annotations = {};
                             this.labels = {};
                             this.executionConfigs = [];
+                            this.deployParameters = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7618,6 +7961,14 @@
                          */
                         Target.prototype.executionConfigs = $util.emptyArray;
     
+                        /**
+                         * Target deployParameters.
+                         * @member {Object.<string,string>} deployParameters
+                         * @memberof google.cloud.deploy.v1.Target
+                         * @instance
+                         */
+                        Target.prototype.deployParameters = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7689,6 +8040,9 @@
                                 $root.google.cloud.deploy.v1.CloudRunLocation.encode(message.run, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.multiTarget != null && Object.hasOwnProperty.call(message, "multiTarget"))
                                 $root.google.cloud.deploy.v1.MultiTarget.encode(message.multiTarget, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.deployParameters != null && Object.hasOwnProperty.call(message, "deployParameters"))
+                                for (var keys = Object.keys(message.deployParameters), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.deployParameters[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -7823,6 +8177,29 @@
                                         message.executionConfigs.push($root.google.cloud.deploy.v1.ExecutionConfig.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 20: {
+                                        if (message.deployParameters === $util.emptyObject)
+                                            message.deployParameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.deployParameters[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7950,6 +8327,14 @@
                                         return "executionConfigs." + error;
                                 }
                             }
+                            if (message.deployParameters != null && message.hasOwnProperty("deployParameters")) {
+                                if (!$util.isObject(message.deployParameters))
+                                    return "deployParameters: object expected";
+                                var key = Object.keys(message.deployParameters);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.deployParameters[key[i]]))
+                                        return "deployParameters: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -8031,6 +8416,13 @@
                                     message.executionConfigs[i] = $root.google.cloud.deploy.v1.ExecutionConfig.fromObject(object.executionConfigs[i]);
                                 }
                             }
+                            if (object.deployParameters) {
+                                if (typeof object.deployParameters !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Target.deployParameters: object expected");
+                                message.deployParameters = {};
+                                for (var keys = Object.keys(object.deployParameters), i = 0; i < keys.length; ++i)
+                                    message.deployParameters[keys[i]] = String(object.deployParameters[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -8052,6 +8444,7 @@
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
                                 object.labels = {};
+                                object.deployParameters = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -8114,6 +8507,11 @@
                                 object.multiTarget = $root.google.cloud.deploy.v1.MultiTarget.toObject(message.multiTarget, options);
                                 if (options.oneofs)
                                     object.deploymentTarget = "multiTarget";
+                            }
+                            if (message.deployParameters && (keys2 = Object.keys(message.deployParameters)).length) {
+                                object.deployParameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.deployParameters[keys2[j]] = message.deployParameters[keys2[j]];
                             }
                             return object;
                         };
@@ -11648,6 +12046,7 @@
                          * @property {Object.<string,google.cloud.deploy.v1.ITargetArtifact>|null} [targetArtifacts] Release targetArtifacts
                          * @property {Object.<string,google.cloud.deploy.v1.Release.ITargetRender>|null} [targetRenders] Release targetRenders
                          * @property {google.cloud.deploy.v1.Release.IReleaseCondition|null} [condition] Release condition
+                         * @property {Object.<string,string>|null} [deployParameters] Release deployParameters
                          */
     
                         /**
@@ -11665,6 +12064,7 @@
                             this.targetSnapshots = [];
                             this.targetArtifacts = {};
                             this.targetRenders = {};
+                            this.deployParameters = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11832,6 +12232,14 @@
                         Release.prototype.condition = null;
     
                         /**
+                         * Release deployParameters.
+                         * @member {Object.<string,string>} deployParameters
+                         * @memberof google.cloud.deploy.v1.Release
+                         * @instance
+                         */
+                        Release.prototype.deployParameters = $util.emptyObject;
+    
+                        /**
                          * Creates a new Release instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.Release
@@ -11905,6 +12313,9 @@
                                 writer.uint32(/* id 23, wireType 0 =*/184).bool(message.abandoned);
                             if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                                 $root.google.cloud.deploy.v1.Release.ReleaseCondition.encode(message.condition, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.deployParameters != null && Object.hasOwnProperty.call(message, "deployParameters"))
+                                for (var keys = Object.keys(message.deployParameters), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 25, wireType 2 =*/202).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.deployParameters[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -12099,6 +12510,29 @@
                                         message.condition = $root.google.cloud.deploy.v1.Release.ReleaseCondition.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 25: {
+                                        if (message.deployParameters === $util.emptyObject)
+                                            message.deployParameters = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.deployParameters[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12247,6 +12681,14 @@
                                 if (error)
                                     return "condition." + error;
                             }
+                            if (message.deployParameters != null && message.hasOwnProperty("deployParameters")) {
+                                if (!$util.isObject(message.deployParameters))
+                                    return "deployParameters: object expected";
+                                var key = Object.keys(message.deployParameters);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.deployParameters[key[i]]))
+                                        return "deployParameters: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -12381,6 +12823,13 @@
                                     throw TypeError(".google.cloud.deploy.v1.Release.condition: object expected");
                                 message.condition = $root.google.cloud.deploy.v1.Release.ReleaseCondition.fromObject(object.condition);
                             }
+                            if (object.deployParameters) {
+                                if (typeof object.deployParameters !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Release.deployParameters: object expected");
+                                message.deployParameters = {};
+                                for (var keys = Object.keys(object.deployParameters), i = 0; i < keys.length; ++i)
+                                    message.deployParameters[keys[i]] = String(object.deployParameters[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -12406,6 +12855,7 @@
                                 object.labels = {};
                                 object.targetArtifacts = {};
                                 object.targetRenders = {};
+                                object.deployParameters = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -12482,6 +12932,11 @@
                                 object.abandoned = message.abandoned;
                             if (message.condition != null && message.hasOwnProperty("condition"))
                                 object.condition = $root.google.cloud.deploy.v1.Release.ReleaseCondition.toObject(message.condition, options);
+                            if (message.deployParameters && (keys2 = Object.keys(message.deployParameters)).length) {
+                                object.deployParameters = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.deployParameters[keys2[j]] = message.deployParameters[keys2[j]];
+                            }
                             return object;
                         };
     
