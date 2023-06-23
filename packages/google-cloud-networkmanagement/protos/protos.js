@@ -587,6 +587,7 @@
                          * @property {string|null} [ipAddress] Endpoint ipAddress
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
+                         * @property {string|null} [forwardingRule] Endpoint forwardingRule
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [network] Endpoint network
@@ -632,6 +633,14 @@
                          * @instance
                          */
                         Endpoint.prototype.instance = "";
+    
+                        /**
+                         * Endpoint forwardingRule.
+                         * @member {string} forwardingRule
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRule = "";
     
                         /**
                          * Endpoint gkeMasterCluster.
@@ -713,6 +722,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.gkeMasterCluster);
                             if (message.cloudSqlInstance != null && Object.hasOwnProperty.call(message, "cloudSqlInstance"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudSqlInstance);
+                            if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
                             return writer;
                         };
     
@@ -757,6 +768,10 @@
                                     }
                                 case 3: {
                                         message.instance = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.forwardingRule = reader.string();
                                         break;
                                     }
                                 case 7: {
@@ -823,6 +838,9 @@
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 if (!$util.isString(message.instance))
                                     return "instance: string expected";
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                if (!$util.isString(message.forwardingRule))
+                                    return "forwardingRule: string expected";
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
@@ -865,6 +883,8 @@
                                 message.port = object.port | 0;
                             if (object.instance != null)
                                 message.instance = String(object.instance);
+                            if (object.forwardingRule != null)
+                                message.forwardingRule = String(object.forwardingRule);
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
@@ -918,6 +938,7 @@
                                 object.projectId = "";
                                 object.gkeMasterCluster = "";
                                 object.cloudSqlInstance = "";
+                                object.forwardingRule = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -935,6 +956,8 @@
                                 object.gkeMasterCluster = message.gkeMasterCluster;
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance"))
                                 object.cloudSqlInstance = message.cloudSqlInstance;
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                object.forwardingRule = message.forwardingRule;
                             return object;
                         };
     
@@ -11317,6 +11340,7 @@
                          * @property {string|null} [ipAddress] Endpoint ipAddress
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
+                         * @property {string|null} [forwardingRule] Endpoint forwardingRule
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
@@ -11363,6 +11387,14 @@
                          * @instance
                          */
                         Endpoint.prototype.instance = "";
+    
+                        /**
+                         * Endpoint forwardingRule.
+                         * @member {string} forwardingRule
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRule = "";
     
                         /**
                          * Endpoint gkeMasterCluster.
@@ -11454,6 +11486,8 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudSqlInstance);
                             if (message.cloudFunction != null && Object.hasOwnProperty.call(message, "cloudFunction"))
                                 $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.encode(message.cloudFunction, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
                             return writer;
                         };
     
@@ -11498,6 +11532,10 @@
                                     }
                                 case 3: {
                                         message.instance = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.forwardingRule = reader.string();
                                         break;
                                     }
                                 case 7: {
@@ -11568,6 +11606,9 @@
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 if (!$util.isString(message.instance))
                                     return "instance: string expected";
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                if (!$util.isString(message.forwardingRule))
+                                    return "forwardingRule: string expected";
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
@@ -11615,6 +11656,8 @@
                                 message.port = object.port | 0;
                             if (object.instance != null)
                                 message.instance = String(object.instance);
+                            if (object.forwardingRule != null)
+                                message.forwardingRule = String(object.forwardingRule);
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
@@ -11674,6 +11717,7 @@
                                 object.gkeMasterCluster = "";
                                 object.cloudSqlInstance = "";
                                 object.cloudFunction = null;
+                                object.forwardingRule = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -11693,6 +11737,8 @@
                                 object.cloudSqlInstance = message.cloudSqlInstance;
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction"))
                                 object.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.toObject(message.cloudFunction, options);
+                            if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
+                                object.forwardingRule = message.forwardingRule;
                             return object;
                         };
     

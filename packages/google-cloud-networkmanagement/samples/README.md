@@ -25,7 +25,6 @@
   * [Reachability_service.rerun_connectivity_test](#reachability_service.rerun_connectivity_test)
   * [Reachability_service.update_connectivity_test](#reachability_service.update_connectivity_test)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -256,23 +255,6 @@ __Usage:__
 
 
 `node packages/google-cloud-networkmanagement/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkmanagement/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-networkmanagement/samples/test/quickstart.js`
 
 
 
