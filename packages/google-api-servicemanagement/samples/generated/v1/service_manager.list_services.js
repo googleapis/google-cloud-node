@@ -34,7 +34,7 @@ function main() {
   // const producerProjectId = 'abc123'
   /**
    *  The max number of items to include in the response list. Page size is 50
-   *  if not specified. Maximum value is 100.
+   *  if not specified. Maximum value is 500.
    */
   // const pageSize = 1234
   /**

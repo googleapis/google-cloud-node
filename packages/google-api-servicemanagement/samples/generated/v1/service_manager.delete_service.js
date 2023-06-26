@@ -30,8 +30,8 @@ function main(serviceName) {
    */
   /**
    *  Required. The name of the service.  See the
-   *  overview (https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-   *  example: `example.googleapis.com`.
+   *  overview (https://cloud.google.com/service-management/overview) for naming
+   *  requirements.  For example: `example.googleapis.com`.
    */
   // const serviceName = 'abc123'
 
