@@ -47,5 +47,5 @@ steps:
     env:
     - 'BUILD_TYPE=${_BUILD_TYPE}'
     - 'TEST_TYPE=${_TEST_TYPE}'
-    - 'BUILD=$BUILD_ID'
+    - 'BUILD_ID=$BUILD_ID'
     - 'PROJECT_ID=$PROJECT_ID'
