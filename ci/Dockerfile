@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ARG NODE_VERSION=14
-ARG FLAKYBOT_VERSION=1.2.0
+ARG FLAKYBOT_VERSION=1.1.0
 
 FROM node:${NODE_VERSION}-alpine as build
 
