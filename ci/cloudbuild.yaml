@@ -19,6 +19,8 @@ substitutions:
   _BUILD_TYPE: "presubmit"
   _TEST_TYPE: "system"
   _NODE_VERSION: "14"
+  _REPO_OWNER: "googleapis"
+  _REPO_NAME: "google-cloud-node"
 
 logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT_SHA}/${TRIGGER_NAME}'
 timeout: 32400s
@@ -49,3 +51,6 @@ steps:
     - 'TEST_TYPE=${_TEST_TYPE}'
     - 'BUILD_ID=$BUILD_ID'
     - 'PROJECT_ID=$PROJECT_ID'
+    - 'REPO_OWNER=${_REPO_OWNER}'
+    - 'REPO_NAME=${_REPO_NAME}'
+    - 'COMMIT_SHA=$COMMIT_SHA'
