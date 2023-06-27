@@ -5519,6 +5519,7 @@
                      * @property {google.storagetransfer.v1.IAwsAccessKey|null} [awsAccessKey] AwsS3Data awsAccessKey
                      * @property {string|null} [path] AwsS3Data path
                      * @property {string|null} [roleArn] AwsS3Data roleArn
+                     * @property {string|null} [credentialsSecret] AwsS3Data credentialsSecret
                      */
     
                     /**
@@ -5569,6 +5570,14 @@
                     AwsS3Data.prototype.roleArn = "";
     
                     /**
+                     * AwsS3Data credentialsSecret.
+                     * @member {string} credentialsSecret
+                     * @memberof google.storagetransfer.v1.AwsS3Data
+                     * @instance
+                     */
+                    AwsS3Data.prototype.credentialsSecret = "";
+    
+                    /**
                      * Creates a new AwsS3Data instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.AwsS3Data
@@ -5600,6 +5609,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
                         if (message.roleArn != null && Object.hasOwnProperty.call(message, "roleArn"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.roleArn);
+                        if (message.credentialsSecret != null && Object.hasOwnProperty.call(message, "credentialsSecret"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.credentialsSecret);
                         return writer;
                     };
     
@@ -5648,6 +5659,10 @@
                                 }
                             case 4: {
                                     message.roleArn = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.credentialsSecret = reader.string();
                                     break;
                                 }
                             default:
@@ -5699,6 +5714,9 @@
                         if (message.roleArn != null && message.hasOwnProperty("roleArn"))
                             if (!$util.isString(message.roleArn))
                                 return "roleArn: string expected";
+                        if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
+                            if (!$util.isString(message.credentialsSecret))
+                                return "credentialsSecret: string expected";
                         return null;
                     };
     
@@ -5725,6 +5743,8 @@
                             message.path = String(object.path);
                         if (object.roleArn != null)
                             message.roleArn = String(object.roleArn);
+                        if (object.credentialsSecret != null)
+                            message.credentialsSecret = String(object.credentialsSecret);
                         return message;
                     };
     
@@ -5746,6 +5766,7 @@
                             object.awsAccessKey = null;
                             object.path = "";
                             object.roleArn = "";
+                            object.credentialsSecret = "";
                         }
                         if (message.bucketName != null && message.hasOwnProperty("bucketName"))
                             object.bucketName = message.bucketName;
@@ -5755,6 +5776,8 @@
                             object.path = message.path;
                         if (message.roleArn != null && message.hasOwnProperty("roleArn"))
                             object.roleArn = message.roleArn;
+                        if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
+                            object.credentialsSecret = message.credentialsSecret;
                         return object;
                     };
     
@@ -5797,6 +5820,7 @@
                      * @property {google.storagetransfer.v1.IAzureCredentials|null} [azureCredentials] AzureBlobStorageData azureCredentials
                      * @property {string|null} [container] AzureBlobStorageData container
                      * @property {string|null} [path] AzureBlobStorageData path
+                     * @property {string|null} [credentialsSecret] AzureBlobStorageData credentialsSecret
                      */
     
                     /**
@@ -5847,6 +5871,14 @@
                     AzureBlobStorageData.prototype.path = "";
     
                     /**
+                     * AzureBlobStorageData credentialsSecret.
+                     * @member {string} credentialsSecret
+                     * @memberof google.storagetransfer.v1.AzureBlobStorageData
+                     * @instance
+                     */
+                    AzureBlobStorageData.prototype.credentialsSecret = "";
+    
+                    /**
                      * Creates a new AzureBlobStorageData instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.AzureBlobStorageData
@@ -5878,6 +5910,8 @@
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.container);
                         if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.path);
+                        if (message.credentialsSecret != null && Object.hasOwnProperty.call(message, "credentialsSecret"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.credentialsSecret);
                         return writer;
                     };
     
@@ -5926,6 +5960,10 @@
                                 }
                             case 5: {
                                     message.path = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.credentialsSecret = reader.string();
                                     break;
                                 }
                             default:
@@ -5977,6 +6015,9 @@
                         if (message.path != null && message.hasOwnProperty("path"))
                             if (!$util.isString(message.path))
                                 return "path: string expected";
+                        if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
+                            if (!$util.isString(message.credentialsSecret))
+                                return "credentialsSecret: string expected";
                         return null;
                     };
     
@@ -6003,6 +6044,8 @@
                             message.container = String(object.container);
                         if (object.path != null)
                             message.path = String(object.path);
+                        if (object.credentialsSecret != null)
+                            message.credentialsSecret = String(object.credentialsSecret);
                         return message;
                     };
     
@@ -6024,6 +6067,7 @@
                             object.azureCredentials = null;
                             object.container = "";
                             object.path = "";
+                            object.credentialsSecret = "";
                         }
                         if (message.storageAccount != null && message.hasOwnProperty("storageAccount"))
                             object.storageAccount = message.storageAccount;
@@ -6033,6 +6077,8 @@
                             object.container = message.container;
                         if (message.path != null && message.hasOwnProperty("path"))
                             object.path = message.path;
+                        if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
+                            object.credentialsSecret = message.credentialsSecret;
                         return object;
                     };
     
@@ -10072,6 +10118,266 @@
                     return Schedule;
                 })();
     
+                v1.EventStream = (function() {
+    
+                    /**
+                     * Properties of an EventStream.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IEventStream
+                     * @property {string|null} [name] EventStream name
+                     * @property {google.protobuf.ITimestamp|null} [eventStreamStartTime] EventStream eventStreamStartTime
+                     * @property {google.protobuf.ITimestamp|null} [eventStreamExpirationTime] EventStream eventStreamExpirationTime
+                     */
+    
+                    /**
+                     * Constructs a new EventStream.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents an EventStream.
+                     * @implements IEventStream
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IEventStream=} [properties] Properties to set
+                     */
+                    function EventStream(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EventStream name.
+                     * @member {string} name
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @instance
+                     */
+                    EventStream.prototype.name = "";
+    
+                    /**
+                     * EventStream eventStreamStartTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} eventStreamStartTime
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @instance
+                     */
+                    EventStream.prototype.eventStreamStartTime = null;
+    
+                    /**
+                     * EventStream eventStreamExpirationTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} eventStreamExpirationTime
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @instance
+                     */
+                    EventStream.prototype.eventStreamExpirationTime = null;
+    
+                    /**
+                     * Creates a new EventStream instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {google.storagetransfer.v1.IEventStream=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.EventStream} EventStream instance
+                     */
+                    EventStream.create = function create(properties) {
+                        return new EventStream(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EventStream message. Does not implicitly {@link google.storagetransfer.v1.EventStream.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {google.storagetransfer.v1.IEventStream} message EventStream message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EventStream.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.eventStreamStartTime != null && Object.hasOwnProperty.call(message, "eventStreamStartTime"))
+                            $root.google.protobuf.Timestamp.encode(message.eventStreamStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.eventStreamExpirationTime != null && Object.hasOwnProperty.call(message, "eventStreamExpirationTime"))
+                            $root.google.protobuf.Timestamp.encode(message.eventStreamExpirationTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EventStream message, length delimited. Does not implicitly {@link google.storagetransfer.v1.EventStream.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {google.storagetransfer.v1.IEventStream} message EventStream message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EventStream.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EventStream message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.EventStream} EventStream
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EventStream.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.EventStream();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.eventStreamStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.eventStreamExpirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EventStream message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.EventStream} EventStream
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EventStream.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EventStream message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EventStream.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.eventStreamStartTime != null && message.hasOwnProperty("eventStreamStartTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.eventStreamStartTime);
+                            if (error)
+                                return "eventStreamStartTime." + error;
+                        }
+                        if (message.eventStreamExpirationTime != null && message.hasOwnProperty("eventStreamExpirationTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.eventStreamExpirationTime);
+                            if (error)
+                                return "eventStreamExpirationTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EventStream message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.EventStream} EventStream
+                     */
+                    EventStream.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.EventStream)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.EventStream();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.eventStreamStartTime != null) {
+                            if (typeof object.eventStreamStartTime !== "object")
+                                throw TypeError(".google.storagetransfer.v1.EventStream.eventStreamStartTime: object expected");
+                            message.eventStreamStartTime = $root.google.protobuf.Timestamp.fromObject(object.eventStreamStartTime);
+                        }
+                        if (object.eventStreamExpirationTime != null) {
+                            if (typeof object.eventStreamExpirationTime !== "object")
+                                throw TypeError(".google.storagetransfer.v1.EventStream.eventStreamExpirationTime: object expected");
+                            message.eventStreamExpirationTime = $root.google.protobuf.Timestamp.fromObject(object.eventStreamExpirationTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EventStream message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {google.storagetransfer.v1.EventStream} message EventStream
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EventStream.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.eventStreamStartTime = null;
+                            object.eventStreamExpirationTime = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.eventStreamStartTime != null && message.hasOwnProperty("eventStreamStartTime"))
+                            object.eventStreamStartTime = $root.google.protobuf.Timestamp.toObject(message.eventStreamStartTime, options);
+                        if (message.eventStreamExpirationTime != null && message.hasOwnProperty("eventStreamExpirationTime"))
+                            object.eventStreamExpirationTime = $root.google.protobuf.Timestamp.toObject(message.eventStreamExpirationTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EventStream to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EventStream.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EventStream
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.EventStream
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EventStream.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.EventStream";
+                    };
+    
+                    return EventStream;
+                })();
+    
                 v1.TransferJob = (function() {
     
                     /**
@@ -10085,6 +10391,7 @@
                      * @property {google.storagetransfer.v1.INotificationConfig|null} [notificationConfig] TransferJob notificationConfig
                      * @property {google.storagetransfer.v1.ILoggingConfig|null} [loggingConfig] TransferJob loggingConfig
                      * @property {google.storagetransfer.v1.ISchedule|null} [schedule] TransferJob schedule
+                     * @property {google.storagetransfer.v1.IEventStream|null} [eventStream] TransferJob eventStream
                      * @property {google.storagetransfer.v1.TransferJob.Status|null} [status] TransferJob status
                      * @property {google.protobuf.ITimestamp|null} [creationTime] TransferJob creationTime
                      * @property {google.protobuf.ITimestamp|null} [lastModificationTime] TransferJob lastModificationTime
@@ -10162,6 +10469,14 @@
                      * @instance
                      */
                     TransferJob.prototype.schedule = null;
+    
+                    /**
+                     * TransferJob eventStream.
+                     * @member {google.storagetransfer.v1.IEventStream|null|undefined} eventStream
+                     * @memberof google.storagetransfer.v1.TransferJob
+                     * @instance
+                     */
+                    TransferJob.prototype.eventStream = null;
     
                     /**
                      * TransferJob status.
@@ -10251,6 +10566,8 @@
                             writer.uint32(/* id 12, wireType 2 =*/98).string(message.latestOperationName);
                         if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
                             $root.google.storagetransfer.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                        if (message.eventStream != null && Object.hasOwnProperty.call(message, "eventStream"))
+                            $root.google.storagetransfer.v1.EventStream.encode(message.eventStream, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                         return writer;
                     };
     
@@ -10311,6 +10628,10 @@
                                 }
                             case 5: {
                                     message.schedule = $root.google.storagetransfer.v1.Schedule.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 15: {
+                                    message.eventStream = $root.google.storagetransfer.v1.EventStream.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 6: {
@@ -10397,6 +10718,11 @@
                             if (error)
                                 return "schedule." + error;
                         }
+                        if (message.eventStream != null && message.hasOwnProperty("eventStream")) {
+                            var error = $root.google.storagetransfer.v1.EventStream.verify(message.eventStream);
+                            if (error)
+                                return "eventStream." + error;
+                        }
                         if (message.status != null && message.hasOwnProperty("status"))
                             switch (message.status) {
                             default:
@@ -10465,6 +10791,11 @@
                             if (typeof object.schedule !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferJob.schedule: object expected");
                             message.schedule = $root.google.storagetransfer.v1.Schedule.fromObject(object.schedule);
+                        }
+                        if (object.eventStream != null) {
+                            if (typeof object.eventStream !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferJob.eventStream: object expected");
+                            message.eventStream = $root.google.storagetransfer.v1.EventStream.fromObject(object.eventStream);
                         }
                         switch (object.status) {
                         default:
@@ -10536,6 +10867,7 @@
                             object.notificationConfig = null;
                             object.latestOperationName = "";
                             object.loggingConfig = null;
+                            object.eventStream = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -10561,6 +10893,8 @@
                             object.latestOperationName = message.latestOperationName;
                         if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
                             object.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.toObject(message.loggingConfig, options);
+                        if (message.eventStream != null && message.hasOwnProperty("eventStream"))
+                            object.eventStream = $root.google.storagetransfer.v1.EventStream.toObject(message.eventStream, options);
                         return object;
                     };
     
@@ -12950,6 +13284,7 @@
                      * @property {string|null} [projectId] TransferOperation projectId
                      * @property {google.storagetransfer.v1.ITransferSpec|null} [transferSpec] TransferOperation transferSpec
                      * @property {google.storagetransfer.v1.INotificationConfig|null} [notificationConfig] TransferOperation notificationConfig
+                     * @property {google.storagetransfer.v1.ILoggingConfig|null} [loggingConfig] TransferOperation loggingConfig
                      * @property {google.protobuf.ITimestamp|null} [startTime] TransferOperation startTime
                      * @property {google.protobuf.ITimestamp|null} [endTime] TransferOperation endTime
                      * @property {google.storagetransfer.v1.TransferOperation.Status|null} [status] TransferOperation status
@@ -13005,6 +13340,14 @@
                      * @instance
                      */
                     TransferOperation.prototype.notificationConfig = null;
+    
+                    /**
+                     * TransferOperation loggingConfig.
+                     * @member {google.storagetransfer.v1.ILoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.storagetransfer.v1.TransferOperation
+                     * @instance
+                     */
+                    TransferOperation.prototype.loggingConfig = null;
     
                     /**
                      * TransferOperation startTime.
@@ -13099,6 +13442,8 @@
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.transferJobName);
                         if (message.notificationConfig != null && Object.hasOwnProperty.call(message, "notificationConfig"))
                             $root.google.storagetransfer.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.storagetransfer.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         return writer;
                     };
     
@@ -13147,6 +13492,10 @@
                                 }
                             case 10: {
                                     message.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 12: {
+                                    message.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 4: {
@@ -13226,6 +13575,11 @@
                             if (error)
                                 return "notificationConfig." + error;
                         }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.storagetransfer.v1.LoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
                         if (message.startTime != null && message.hasOwnProperty("startTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.startTime);
                             if (error)
@@ -13247,6 +13601,7 @@
                             case 4:
                             case 5:
                             case 6:
+                            case 7:
                                 break;
                             }
                         if (message.counters != null && message.hasOwnProperty("counters")) {
@@ -13295,6 +13650,11 @@
                                 throw TypeError(".google.storagetransfer.v1.TransferOperation.notificationConfig: object expected");
                             message.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.fromObject(object.notificationConfig);
                         }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferOperation.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.fromObject(object.loggingConfig);
+                        }
                         if (object.startTime != null) {
                             if (typeof object.startTime !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferOperation.startTime: object expected");
@@ -13339,6 +13699,10 @@
                         case "QUEUED":
                         case 6:
                             message.status = 6;
+                            break;
+                        case "SUSPENDING":
+                        case 7:
+                            message.status = 7;
                             break;
                         }
                         if (object.counters != null) {
@@ -13386,6 +13750,7 @@
                             object.counters = null;
                             object.transferJobName = "";
                             object.notificationConfig = null;
+                            object.loggingConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -13410,6 +13775,8 @@
                             object.transferJobName = message.transferJobName;
                         if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
                             object.notificationConfig = $root.google.storagetransfer.v1.NotificationConfig.toObject(message.notificationConfig, options);
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.storagetransfer.v1.LoggingConfig.toObject(message.loggingConfig, options);
                         return object;
                     };
     
@@ -13450,6 +13817,7 @@
                      * @property {number} FAILED=4 FAILED value
                      * @property {number} ABORTED=5 ABORTED value
                      * @property {number} QUEUED=6 QUEUED value
+                     * @property {number} SUSPENDING=7 SUSPENDING value
                      */
                     TransferOperation.Status = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -13460,6 +13828,7 @@
                         values[valuesById[4] = "FAILED"] = 4;
                         values[valuesById[5] = "ABORTED"] = 5;
                         values[valuesById[6] = "QUEUED"] = 6;
+                        values[valuesById[7] = "SUSPENDING"] = 7;
                         return values;
                     })();
     

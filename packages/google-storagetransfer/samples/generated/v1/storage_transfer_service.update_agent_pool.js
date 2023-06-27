@@ -29,8 +29,8 @@ function main(agentPool) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The agent pool to update. `agent_pool` is expected to specify following
-   *  fields:
+   *  Required. The agent pool to update. `agent_pool` is expected to specify
+   *  following fields:
    *  *  name google.storagetransfer.v1.AgentPool.name 
    *  *  display_name google.storagetransfer.v1.AgentPool.display_name 
    *  *  bandwidth_limit google.storagetransfer.v1.AgentPool.bandwidth_limit 
