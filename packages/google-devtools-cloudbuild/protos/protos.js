@@ -13448,6 +13448,7 @@
                          * @property {Array.<string>|null} [includedFiles] BuildTrigger includedFiles
                          * @property {string|null} [filter] BuildTrigger filter
                          * @property {string|null} [serviceAccount] BuildTrigger serviceAccount
+                         * @property {google.devtools.cloudbuild.v1.IRepositoryEventConfig|null} [repositoryEventConfig] BuildTrigger repositoryEventConfig
                          */
     
                         /**
@@ -13621,6 +13622,14 @@
                          */
                         BuildTrigger.prototype.serviceAccount = "";
     
+                        /**
+                         * BuildTrigger repositoryEventConfig.
+                         * @member {google.devtools.cloudbuild.v1.IRepositoryEventConfig|null|undefined} repositoryEventConfig
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.repositoryEventConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -13701,6 +13710,8 @@
                                 writer.uint32(/* id 33, wireType 2 =*/266).string(message.serviceAccount);
                             if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
                                 writer.uint32(/* id 34, wireType 2 =*/274).string(message.resourceName);
+                            if (message.repositoryEventConfig != null && Object.hasOwnProperty.call(message, "repositoryEventConfig"))
+                                $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.encode(message.repositoryEventConfig, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
                             return writer;
                         };
     
@@ -13836,6 +13847,10 @@
                                         message.serviceAccount = reader.string();
                                         break;
                                     }
+                                case 39: {
+                                        message.repositoryEventConfig = $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13969,6 +13984,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.repositoryEventConfig != null && message.hasOwnProperty("repositoryEventConfig")) {
+                                var error = $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.verify(message.repositoryEventConfig);
+                                if (error)
+                                    return "repositoryEventConfig." + error;
+                            }
                             return null;
                         };
     
@@ -14060,6 +14080,11 @@
                                 message.filter = String(object.filter);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.repositoryEventConfig != null) {
+                                if (typeof object.repositoryEventConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.repositoryEventConfig: object expected");
+                                message.repositoryEventConfig = $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.fromObject(object.repositoryEventConfig);
+                            }
                             return message;
                         };
     
@@ -14096,6 +14121,7 @@
                                 object.webhookConfig = null;
                                 object.serviceAccount = "";
                                 object.resourceName = "";
+                                object.repositoryEventConfig = null;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -14157,6 +14183,8 @@
                                 object.serviceAccount = message.serviceAccount;
                             if (message.resourceName != null && message.hasOwnProperty("resourceName"))
                                 object.resourceName = message.resourceName;
+                            if (message.repositoryEventConfig != null && message.hasOwnProperty("repositoryEventConfig"))
+                                object.repositoryEventConfig = $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.toObject(message.repositoryEventConfig, options);
                             return object;
                         };
     
@@ -14187,6 +14215,363 @@
                         };
     
                         return BuildTrigger;
+                    })();
+    
+                    v1.RepositoryEventConfig = (function() {
+    
+                        /**
+                         * Properties of a RepositoryEventConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IRepositoryEventConfig
+                         * @property {string|null} [repository] RepositoryEventConfig repository
+                         * @property {google.devtools.cloudbuild.v1.RepositoryEventConfig.RepositoryType|null} [repositoryType] RepositoryEventConfig repositoryType
+                         * @property {google.devtools.cloudbuild.v1.IPullRequestFilter|null} [pullRequest] RepositoryEventConfig pullRequest
+                         * @property {google.devtools.cloudbuild.v1.IPushFilter|null} [push] RepositoryEventConfig push
+                         */
+    
+                        /**
+                         * Constructs a new RepositoryEventConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a RepositoryEventConfig.
+                         * @implements IRepositoryEventConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IRepositoryEventConfig=} [properties] Properties to set
+                         */
+                        function RepositoryEventConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepositoryEventConfig repository.
+                         * @member {string} repository
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         */
+                        RepositoryEventConfig.prototype.repository = "";
+    
+                        /**
+                         * RepositoryEventConfig repositoryType.
+                         * @member {google.devtools.cloudbuild.v1.RepositoryEventConfig.RepositoryType} repositoryType
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         */
+                        RepositoryEventConfig.prototype.repositoryType = 0;
+    
+                        /**
+                         * RepositoryEventConfig pullRequest.
+                         * @member {google.devtools.cloudbuild.v1.IPullRequestFilter|null|undefined} pullRequest
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         */
+                        RepositoryEventConfig.prototype.pullRequest = null;
+    
+                        /**
+                         * RepositoryEventConfig push.
+                         * @member {google.devtools.cloudbuild.v1.IPushFilter|null|undefined} push
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         */
+                        RepositoryEventConfig.prototype.push = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepositoryEventConfig filter.
+                         * @member {"pullRequest"|"push"|undefined} filter
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RepositoryEventConfig.prototype, "filter", {
+                            get: $util.oneOfGetter($oneOfFields = ["pullRequest", "push"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepositoryEventConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IRepositoryEventConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.RepositoryEventConfig} RepositoryEventConfig instance
+                         */
+                        RepositoryEventConfig.create = function create(properties) {
+                            return new RepositoryEventConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepositoryEventConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.RepositoryEventConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IRepositoryEventConfig} message RepositoryEventConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepositoryEventConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                            if (message.repositoryType != null && Object.hasOwnProperty.call(message, "repositoryType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.repositoryType);
+                            if (message.pullRequest != null && Object.hasOwnProperty.call(message, "pullRequest"))
+                                $root.google.devtools.cloudbuild.v1.PullRequestFilter.encode(message.pullRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.push != null && Object.hasOwnProperty.call(message, "push"))
+                                $root.google.devtools.cloudbuild.v1.PushFilter.encode(message.push, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepositoryEventConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.RepositoryEventConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IRepositoryEventConfig} message RepositoryEventConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepositoryEventConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepositoryEventConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.RepositoryEventConfig} RepositoryEventConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepositoryEventConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepositoryEventConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.repository = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.repositoryType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pullRequest = $root.google.devtools.cloudbuild.v1.PullRequestFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.push = $root.google.devtools.cloudbuild.v1.PushFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepositoryEventConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.RepositoryEventConfig} RepositoryEventConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepositoryEventConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepositoryEventConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepositoryEventConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                if (!$util.isString(message.repository))
+                                    return "repository: string expected";
+                            if (message.repositoryType != null && message.hasOwnProperty("repositoryType"))
+                                switch (message.repositoryType) {
+                                default:
+                                    return "repositoryType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.pullRequest != null && message.hasOwnProperty("pullRequest")) {
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.PullRequestFilter.verify(message.pullRequest);
+                                    if (error)
+                                        return "pullRequest." + error;
+                                }
+                            }
+                            if (message.push != null && message.hasOwnProperty("push")) {
+                                if (properties.filter === 1)
+                                    return "filter: multiple values";
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.PushFilter.verify(message.push);
+                                    if (error)
+                                        return "push." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepositoryEventConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.RepositoryEventConfig} RepositoryEventConfig
+                         */
+                        RepositoryEventConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.RepositoryEventConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.RepositoryEventConfig();
+                            if (object.repository != null)
+                                message.repository = String(object.repository);
+                            switch (object.repositoryType) {
+                            default:
+                                if (typeof object.repositoryType === "number") {
+                                    message.repositoryType = object.repositoryType;
+                                    break;
+                                }
+                                break;
+                            case "REPOSITORY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.repositoryType = 0;
+                                break;
+                            case "GITHUB":
+                            case 1:
+                                message.repositoryType = 1;
+                                break;
+                            case "GITHUB_ENTERPRISE":
+                            case 2:
+                                message.repositoryType = 2;
+                                break;
+                            case "GITLAB_ENTERPRISE":
+                            case 3:
+                                message.repositoryType = 3;
+                                break;
+                            }
+                            if (object.pullRequest != null) {
+                                if (typeof object.pullRequest !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.RepositoryEventConfig.pullRequest: object expected");
+                                message.pullRequest = $root.google.devtools.cloudbuild.v1.PullRequestFilter.fromObject(object.pullRequest);
+                            }
+                            if (object.push != null) {
+                                if (typeof object.push !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.RepositoryEventConfig.push: object expected");
+                                message.push = $root.google.devtools.cloudbuild.v1.PushFilter.fromObject(object.push);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepositoryEventConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.RepositoryEventConfig} message RepositoryEventConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepositoryEventConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.repository = "";
+                                object.repositoryType = options.enums === String ? "REPOSITORY_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                object.repository = message.repository;
+                            if (message.repositoryType != null && message.hasOwnProperty("repositoryType"))
+                                object.repositoryType = options.enums === String ? $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.RepositoryType[message.repositoryType] === undefined ? message.repositoryType : $root.google.devtools.cloudbuild.v1.RepositoryEventConfig.RepositoryType[message.repositoryType] : message.repositoryType;
+                            if (message.pullRequest != null && message.hasOwnProperty("pullRequest")) {
+                                object.pullRequest = $root.google.devtools.cloudbuild.v1.PullRequestFilter.toObject(message.pullRequest, options);
+                                if (options.oneofs)
+                                    object.filter = "pullRequest";
+                            }
+                            if (message.push != null && message.hasOwnProperty("push")) {
+                                object.push = $root.google.devtools.cloudbuild.v1.PushFilter.toObject(message.push, options);
+                                if (options.oneofs)
+                                    object.filter = "push";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepositoryEventConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepositoryEventConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepositoryEventConfig
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.RepositoryEventConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepositoryEventConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.RepositoryEventConfig";
+                        };
+    
+                        /**
+                         * RepositoryType enum.
+                         * @name google.devtools.cloudbuild.v1.RepositoryEventConfig.RepositoryType
+                         * @enum {number}
+                         * @property {number} REPOSITORY_TYPE_UNSPECIFIED=0 REPOSITORY_TYPE_UNSPECIFIED value
+                         * @property {number} GITHUB=1 GITHUB value
+                         * @property {number} GITHUB_ENTERPRISE=2 GITHUB_ENTERPRISE value
+                         * @property {number} GITLAB_ENTERPRISE=3 GITLAB_ENTERPRISE value
+                         */
+                        RepositoryEventConfig.RepositoryType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REPOSITORY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GITHUB"] = 1;
+                            values[valuesById[2] = "GITHUB_ENTERPRISE"] = 2;
+                            values[valuesById[3] = "GITLAB_ENTERPRISE"] = 3;
+                            return values;
+                        })();
+    
+                        return RepositoryEventConfig;
                     })();
     
                     v1.GitHubEventsConfig = (function() {

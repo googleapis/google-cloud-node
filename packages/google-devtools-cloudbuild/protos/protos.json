@@ -15,8 +15,8 @@
                     "objc_class_prefix": "GCB",
                     "php_namespace": "Google\\Cloud\\Build\\V1",
                     "ruby_package": "Google::Cloud::Build::V1",
-                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "(google.api.resource_definition).type": "cloudbuild.googleapis.com/Repository",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}"
                   },
                   "nested": {
                     "CloudBuild": {
@@ -1715,6 +1715,54 @@
                           "id": 33,
                           "options": {
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
+                        },
+                        "repositoryEventConfig": {
+                          "type": "RepositoryEventConfig",
+                          "id": 39
+                        }
+                      }
+                    },
+                    "RepositoryEventConfig": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "pullRequest",
+                            "push"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "repositoryType": {
+                          "type": "RepositoryType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pullRequest": {
+                          "type": "PullRequestFilter",
+                          "id": 3
+                        },
+                        "push": {
+                          "type": "PushFilter",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "RepositoryType": {
+                          "values": {
+                            "REPOSITORY_TYPE_UNSPECIFIED": 0,
+                            "GITHUB": 1,
+                            "GITHUB_ENTERPRISE": 2,
+                            "GITLAB_ENTERPRISE": 3
                           }
                         }
                       }

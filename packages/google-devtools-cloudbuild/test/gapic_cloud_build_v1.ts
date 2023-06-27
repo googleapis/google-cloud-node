@@ -4470,6 +4470,82 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('repository', () => {
+      const fakePath = '/rendered/path/repository';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connection: 'connectionValue',
+        repository: 'repositoryValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.repositoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.repositoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('repositoryPath', () => {
+        const result = client.repositoryPath(
+          'projectValue',
+          'locationValue',
+          'connectionValue',
+          'repositoryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRepositoryName', () => {
+        const result = client.matchProjectFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRepositoryName', () => {
+        const result = client.matchLocationFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectionFromRepositoryName', () => {
+        const result = client.matchConnectionFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'connectionValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromRepositoryName', () => {
+        const result = client.matchRepositoryFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('secretVersion', () => {
       const fakePath = '/rendered/path/secretVersion';
       const expectedParameters = {
