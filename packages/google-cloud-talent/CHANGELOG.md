@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.1.4](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.3...talent-v5.1.4) (2023-06-28)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#4351](https://github.com/googleapis/google-cloud-node/issues/4351)) ([4fb5285](https://github.com/googleapis/google-cloud-node/commit/4fb528559c204cee33329c4e55021aa1fd0e4974))
+
 ## [5.1.3](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.2...talent-v5.1.3) (2023-05-04)
 
 

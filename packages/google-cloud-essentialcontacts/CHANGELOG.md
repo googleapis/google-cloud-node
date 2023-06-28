@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/google-cloud-node/compare/essential-contacts-v2.1.2...essential-contacts-v2.1.3) (2023-06-28)
+
+
+### Bug Fixes
+
+* [essentialcontacts] mark fields in Contacts message as REQUIRED ([#4368](https://github.com/googleapis/google-cloud-node/issues/4368)) ([aa7da8c](https://github.com/googleapis/google-cloud-node/commit/aa7da8ca580b7ee92aede81711033e97fc23e396))
+
 ## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/essential-contacts-v2.1.1...essential-contacts-v2.1.2) (2023-04-13)
 
 

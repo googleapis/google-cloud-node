@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.15.0...aiplatform-v2.16.0) (2023-06-28)
+
+
+### Features
+
+* Add bias_configs to ModelEvaluation ([#4349](https://github.com/googleapis/google-cloud-node/issues/4349)) ([4c047d4](https://github.com/googleapis/google-cloud-node/commit/4c047d4a9cdbc08dfb70e3843a54ca73ad1f4e79))
+* Add UpdateExplanationDataset to aiplatform ([#4359](https://github.com/googleapis/google-cloud-node/issues/4359)) ([c0a3d8a](https://github.com/googleapis/google-cloud-node/commit/c0a3d8a1df6b319e555955dfef8a56ceef54a6e2))
+
 ## [2.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.14.0...aiplatform-v2.15.0) (2023-06-06)
 
 

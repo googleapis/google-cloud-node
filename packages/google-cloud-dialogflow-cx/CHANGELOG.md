@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.6.0...dialogflow-cx-v3.7.0) (2023-06-28)
+
+
+### Features
+
+* [dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* [dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest ([#4357](https://github.com/googleapis/google-cloud-node/issues/4357)) ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* Added session_ttl to SessionProto ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* Added session_ttl to SessionProto ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.5.0...dialogflow-cx-v3.6.0) (2023-06-14)
 
 
