@@ -627,6 +627,13 @@
                     "roleArn": {
                       "type": "string",
                       "id": 4
+                    },
+                    "credentialsSecret": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -656,6 +663,13 @@
                     "path": {
                       "type": "string",
                       "id": 5
+                    },
+                    "credentialsSecret": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1074,6 +1088,25 @@
                     }
                   }
                 },
+                "EventStream": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "eventStreamStartTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "eventStreamExpirationTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    }
+                  }
+                },
                 "TransferJob": {
                   "fields": {
                     "name": {
@@ -1103,6 +1136,10 @@
                     "schedule": {
                       "type": "Schedule",
                       "id": 5
+                    },
+                    "eventStream": {
+                      "type": "EventStream",
+                      "id": 15
                     },
                     "status": {
                       "type": "Status",
@@ -1365,6 +1402,10 @@
                       "type": "NotificationConfig",
                       "id": 10
                     },
+                    "loggingConfig": {
+                      "type": "LoggingConfig",
+                      "id": 12
+                    },
                     "startTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 4
@@ -1400,7 +1441,8 @@
                         "SUCCESS": 3,
                         "FAILED": 4,
                         "ABORTED": 5,
-                        "QUEUED": 6
+                        "QUEUED": 6,
+                        "SUSPENDING": 7
                       }
                     }
                   }
