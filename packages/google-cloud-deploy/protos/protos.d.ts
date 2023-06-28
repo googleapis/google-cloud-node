@@ -864,6 +864,9 @@ export namespace google {
 
                     /** Stage strategy */
                     strategy?: (google.cloud.deploy.v1.IStrategy|null);
+
+                    /** Stage deployParameters */
+                    deployParameters?: (google.cloud.deploy.v1.IDeployParameters[]|null);
                 }
 
                 /** Represents a Stage. */
@@ -883,6 +886,9 @@ export namespace google {
 
                     /** Stage strategy. */
                     public strategy?: (google.cloud.deploy.v1.IStrategy|null);
+
+                    /** Stage deployParameters. */
+                    public deployParameters: google.cloud.deploy.v1.IDeployParameters[];
 
                     /**
                      * Creates a new Stage instance using the specified properties.
@@ -956,6 +962,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Stage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeployParameters. */
+                interface IDeployParameters {
+
+                    /** DeployParameters values */
+                    values?: ({ [k: string]: string }|null);
+
+                    /** DeployParameters matchTargetLabels */
+                    matchTargetLabels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a DeployParameters. */
+                class DeployParameters implements IDeployParameters {
+
+                    /**
+                     * Constructs a new DeployParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployParameters);
+
+                    /** DeployParameters values. */
+                    public values: { [k: string]: string };
+
+                    /** DeployParameters matchTargetLabels. */
+                    public matchTargetLabels: { [k: string]: string };
+
+                    /**
+                     * Creates a new DeployParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployParameters instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployParameters): google.cloud.deploy.v1.DeployParameters;
+
+                    /**
+                     * Encodes the specified DeployParameters message. Does not implicitly {@link google.cloud.deploy.v1.DeployParameters.verify|verify} messages.
+                     * @param message DeployParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployParameters message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployParameters.verify|verify} messages.
+                     * @param message DeployParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployParameters;
+
+                    /**
+                     * Decodes a DeployParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployParameters;
+
+                    /**
+                     * Verifies a DeployParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployParameters;
+
+                    /**
+                     * Creates a plain object from a DeployParameters message. Also converts values to other types if specified.
+                     * @param message DeployParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployParameters
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3292,6 +3401,9 @@ export namespace google {
 
                     /** Target executionConfigs */
                     executionConfigs?: (google.cloud.deploy.v1.IExecutionConfig[]|null);
+
+                    /** Target deployParameters */
+                    deployParameters?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Target. */
@@ -3347,6 +3459,9 @@ export namespace google {
 
                     /** Target executionConfigs. */
                     public executionConfigs: google.cloud.deploy.v1.IExecutionConfig[];
+
+                    /** Target deployParameters. */
+                    public deployParameters: { [k: string]: string };
 
                     /** Target deploymentTarget. */
                     public deploymentTarget?: ("gke"|"anthosCluster"|"run"|"multiTarget");
@@ -4934,6 +5049,9 @@ export namespace google {
 
                     /** Release condition */
                     condition?: (google.cloud.deploy.v1.Release.IReleaseCondition|null);
+
+                    /** Release deployParameters */
+                    deployParameters?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Release. */
@@ -5004,6 +5122,9 @@ export namespace google {
 
                     /** Release condition. */
                     public condition?: (google.cloud.deploy.v1.Release.IReleaseCondition|null);
+
+                    /** Release deployParameters. */
+                    public deployParameters: { [k: string]: string };
 
                     /**
                      * Creates a new Release instance using the specified properties.
