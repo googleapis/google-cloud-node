@@ -806,6 +806,9 @@
                         }
                       }
                     },
+                    "EnableServiceResponse": {
+                      "fields": {}
+                    },
                     "GenerateConfigReportRequest": {
                       "fields": {
                         "newConfig": {
