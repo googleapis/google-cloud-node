@@ -380,6 +380,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateReason": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -446,6 +460,17 @@
                               "type": "EncryptionKey",
                               "id": 6
                             }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CLUSTER_PENDING": 1,
+                            "PROVISIONING": 2,
+                            "READY": 3,
+                            "FAILED": 4,
+                            "DEACTIVATED": 5,
+                            "DELETING": 6
                           }
                         }
                       }
@@ -1764,7 +1789,9 @@
                           "oneof": [
                             "allNamespaces",
                             "selectedNamespaces",
-                            "selectedApplications"
+                            "selectedApplications",
+                            "noNamespaces",
+                            "excludedNamespaces"
                           ]
                         }
                       },
@@ -1797,10 +1824,23 @@
                           "type": "NamespacedNames",
                           "id": 7
                         },
+                        "noNamespaces": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "excludedNamespaces": {
+                          "type": "Namespaces",
+                          "id": 10
+                        },
                         "substitutionRules": {
                           "rule": "repeated",
                           "type": "SubstitutionRule",
                           "id": 8
+                        },
+                        "transformationRules": {
+                          "rule": "repeated",
+                          "type": "TransformationRule",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -1844,6 +1884,19 @@
                               "rule": "repeated",
                               "type": "GroupKind",
                               "id": 1
+                            },
+                            "excludedGroupKinds": {
+                              "rule": "repeated",
+                              "type": "GroupKind",
+                              "id": 2
+                            },
+                            "allGroupKinds": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "noGroupKinds": {
+                              "type": "bool",
+                              "id": 4
                             }
                           }
                         },
@@ -1873,6 +1926,80 @@
                             "newValue": {
                               "type": "string",
                               "id": 5
+                            }
+                          }
+                        },
+                        "TransformationRuleAction": {
+                          "fields": {
+                            "op": {
+                              "type": "Op",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fromPath": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Op": {
+                              "values": {
+                                "OP_UNSPECIFIED": 0,
+                                "REMOVE": 1,
+                                "MOVE": 2,
+                                "COPY": 3,
+                                "ADD": 4,
+                                "TEST": 5,
+                                "REPLACE": 6
+                              }
+                            }
+                          }
+                        },
+                        "ResourceFilter": {
+                          "fields": {
+                            "namespaces": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "groupKinds": {
+                              "rule": "repeated",
+                              "type": "GroupKind",
+                              "id": 2
+                            },
+                            "jsonPath": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "TransformationRule": {
+                          "fields": {
+                            "fieldActions": {
+                              "rule": "repeated",
+                              "type": "TransformationRuleAction",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "resourceFilter": {
+                              "type": "ResourceFilter",
+                              "id": 2
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
@@ -1949,6 +2076,31 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateReason": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CLUSTER_PENDING": 1,
+                            "READY": 2,
+                            "FAILED": 3,
+                            "DELETING": 4
                           }
                         }
                       }

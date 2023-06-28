@@ -854,6 +854,12 @@ export namespace google {
 
                     /** BackupPlan protectedPodCount */
                     protectedPodCount?: (number|null);
+
+                    /** BackupPlan state */
+                    state?: (google.cloud.gkebackup.v1.BackupPlan.State|keyof typeof google.cloud.gkebackup.v1.BackupPlan.State|null);
+
+                    /** BackupPlan stateReason */
+                    stateReason?: (string|null);
                 }
 
                 /** Represents a BackupPlan. */
@@ -903,6 +909,12 @@ export namespace google {
 
                     /** BackupPlan protectedPodCount. */
                     public protectedPodCount: number;
+
+                    /** BackupPlan state. */
+                    public state: (google.cloud.gkebackup.v1.BackupPlan.State|keyof typeof google.cloud.gkebackup.v1.BackupPlan.State);
+
+                    /** BackupPlan stateReason. */
+                    public stateReason: string;
 
                     /**
                      * Creates a new BackupPlan instance using the specified properties.
@@ -1324,6 +1336,17 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CLUSTER_PENDING = 1,
+                        PROVISIONING = 2,
+                        READY = 3,
+                        FAILED = 4,
+                        DEACTIVATED = 5,
+                        DELETING = 6
                     }
                 }
 
@@ -5440,8 +5463,17 @@ export namespace google {
                     /** RestoreConfig selectedApplications */
                     selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
 
+                    /** RestoreConfig noNamespaces */
+                    noNamespaces?: (boolean|null);
+
+                    /** RestoreConfig excludedNamespaces */
+                    excludedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
                     /** RestoreConfig substitutionRules */
                     substitutionRules?: (google.cloud.gkebackup.v1.RestoreConfig.ISubstitutionRule[]|null);
+
+                    /** RestoreConfig transformationRules */
+                    transformationRules?: (google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule[]|null);
                 }
 
                 /** Represents a RestoreConfig. */
@@ -5474,11 +5506,20 @@ export namespace google {
                     /** RestoreConfig selectedApplications. */
                     public selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
 
+                    /** RestoreConfig noNamespaces. */
+                    public noNamespaces?: (boolean|null);
+
+                    /** RestoreConfig excludedNamespaces. */
+                    public excludedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
                     /** RestoreConfig substitutionRules. */
                     public substitutionRules: google.cloud.gkebackup.v1.RestoreConfig.ISubstitutionRule[];
 
+                    /** RestoreConfig transformationRules. */
+                    public transformationRules: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule[];
+
                     /** RestoreConfig namespacedResourceRestoreScope. */
-                    public namespacedResourceRestoreScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
+                    public namespacedResourceRestoreScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications"|"noNamespaces"|"excludedNamespaces");
 
                     /**
                      * Creates a new RestoreConfig instance using the specified properties.
@@ -5690,6 +5731,15 @@ export namespace google {
 
                         /** ClusterResourceRestoreScope selectedGroupKinds */
                         selectedGroupKinds?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[]|null);
+
+                        /** ClusterResourceRestoreScope excludedGroupKinds */
+                        excludedGroupKinds?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[]|null);
+
+                        /** ClusterResourceRestoreScope allGroupKinds */
+                        allGroupKinds?: (boolean|null);
+
+                        /** ClusterResourceRestoreScope noGroupKinds */
+                        noGroupKinds?: (boolean|null);
                     }
 
                     /** Represents a ClusterResourceRestoreScope. */
@@ -5703,6 +5753,15 @@ export namespace google {
 
                         /** ClusterResourceRestoreScope selectedGroupKinds. */
                         public selectedGroupKinds: google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[];
+
+                        /** ClusterResourceRestoreScope excludedGroupKinds. */
+                        public excludedGroupKinds: google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[];
+
+                        /** ClusterResourceRestoreScope allGroupKinds. */
+                        public allGroupKinds: boolean;
+
+                        /** ClusterResourceRestoreScope noGroupKinds. */
+                        public noGroupKinds: boolean;
 
                         /**
                          * Creates a new ClusterResourceRestoreScope instance using the specified properties.
@@ -5902,6 +5961,353 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a TransformationRuleAction. */
+                    interface ITransformationRuleAction {
+
+                        /** TransformationRuleAction op */
+                        op?: (google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op|null);
+
+                        /** TransformationRuleAction fromPath */
+                        fromPath?: (string|null);
+
+                        /** TransformationRuleAction path */
+                        path?: (string|null);
+
+                        /** TransformationRuleAction value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a TransformationRuleAction. */
+                    class TransformationRuleAction implements ITransformationRuleAction {
+
+                        /**
+                         * Constructs a new TransformationRuleAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction);
+
+                        /** TransformationRuleAction op. */
+                        public op: (google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op);
+
+                        /** TransformationRuleAction fromPath. */
+                        public fromPath: string;
+
+                        /** TransformationRuleAction path. */
+                        public path: string;
+
+                        /** TransformationRuleAction value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new TransformationRuleAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TransformationRuleAction instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction): google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction;
+
+                        /**
+                         * Encodes the specified TransformationRuleAction message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.verify|verify} messages.
+                         * @param message TransformationRuleAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TransformationRuleAction message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.verify|verify} messages.
+                         * @param message TransformationRuleAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TransformationRuleAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TransformationRuleAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction;
+
+                        /**
+                         * Decodes a TransformationRuleAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TransformationRuleAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction;
+
+                        /**
+                         * Verifies a TransformationRuleAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TransformationRuleAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TransformationRuleAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction;
+
+                        /**
+                         * Creates a plain object from a TransformationRuleAction message. Also converts values to other types if specified.
+                         * @param message TransformationRuleAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TransformationRuleAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TransformationRuleAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TransformationRuleAction {
+
+                        /** Op enum. */
+                        enum Op {
+                            OP_UNSPECIFIED = 0,
+                            REMOVE = 1,
+                            MOVE = 2,
+                            COPY = 3,
+                            ADD = 4,
+                            TEST = 5,
+                            REPLACE = 6
+                        }
+                    }
+
+                    /** Properties of a ResourceFilter. */
+                    interface IResourceFilter {
+
+                        /** ResourceFilter namespaces */
+                        namespaces?: (string[]|null);
+
+                        /** ResourceFilter groupKinds */
+                        groupKinds?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[]|null);
+
+                        /** ResourceFilter jsonPath */
+                        jsonPath?: (string|null);
+                    }
+
+                    /** Represents a ResourceFilter. */
+                    class ResourceFilter implements IResourceFilter {
+
+                        /**
+                         * Constructs a new ResourceFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter);
+
+                        /** ResourceFilter namespaces. */
+                        public namespaces: string[];
+
+                        /** ResourceFilter groupKinds. */
+                        public groupKinds: google.cloud.gkebackup.v1.RestoreConfig.IGroupKind[];
+
+                        /** ResourceFilter jsonPath. */
+                        public jsonPath: string;
+
+                        /**
+                         * Creates a new ResourceFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceFilter instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter): google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter;
+
+                        /**
+                         * Encodes the specified ResourceFilter message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.verify|verify} messages.
+                         * @param message ResourceFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceFilter message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.verify|verify} messages.
+                         * @param message ResourceFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter;
+
+                        /**
+                         * Decodes a ResourceFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter;
+
+                        /**
+                         * Verifies a ResourceFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter;
+
+                        /**
+                         * Creates a plain object from a ResourceFilter message. Also converts values to other types if specified.
+                         * @param message ResourceFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TransformationRule. */
+                    interface ITransformationRule {
+
+                        /** TransformationRule fieldActions */
+                        fieldActions?: (google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction[]|null);
+
+                        /** TransformationRule resourceFilter */
+                        resourceFilter?: (google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter|null);
+
+                        /** TransformationRule description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a TransformationRule. */
+                    class TransformationRule implements ITransformationRule {
+
+                        /**
+                         * Constructs a new TransformationRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule);
+
+                        /** TransformationRule fieldActions. */
+                        public fieldActions: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction[];
+
+                        /** TransformationRule resourceFilter. */
+                        public resourceFilter?: (google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter|null);
+
+                        /** TransformationRule description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new TransformationRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TransformationRule instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule): google.cloud.gkebackup.v1.RestoreConfig.TransformationRule;
+
+                        /**
+                         * Encodes the specified TransformationRule message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.verify|verify} messages.
+                         * @param message TransformationRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TransformationRule message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.verify|verify} messages.
+                         * @param message TransformationRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TransformationRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TransformationRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.TransformationRule;
+
+                        /**
+                         * Decodes a TransformationRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TransformationRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.TransformationRule;
+
+                        /**
+                         * Verifies a TransformationRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TransformationRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TransformationRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.TransformationRule;
+
+                        /**
+                         * Creates a plain object from a TransformationRule message. Also converts values to other types if specified.
+                         * @param message TransformationRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.TransformationRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TransformationRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TransformationRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RestorePlan. */
@@ -5936,6 +6342,12 @@ export namespace google {
 
                     /** RestorePlan etag */
                     etag?: (string|null);
+
+                    /** RestorePlan state */
+                    state?: (google.cloud.gkebackup.v1.RestorePlan.State|keyof typeof google.cloud.gkebackup.v1.RestorePlan.State|null);
+
+                    /** RestorePlan stateReason */
+                    stateReason?: (string|null);
                 }
 
                 /** Represents a RestorePlan. */
@@ -5976,6 +6388,12 @@ export namespace google {
 
                     /** RestorePlan etag. */
                     public etag: string;
+
+                    /** RestorePlan state. */
+                    public state: (google.cloud.gkebackup.v1.RestorePlan.State|keyof typeof google.cloud.gkebackup.v1.RestorePlan.State);
+
+                    /** RestorePlan stateReason. */
+                    public stateReason: string;
 
                     /**
                      * Creates a new RestorePlan instance using the specified properties.
@@ -6053,6 +6471,18 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestorePlan {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CLUSTER_PENDING = 1,
+                        READY = 2,
+                        FAILED = 3,
+                        DELETING = 4
+                    }
                 }
 
                 /** Properties of a VolumeBackup. */
