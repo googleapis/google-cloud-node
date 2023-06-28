@@ -33,7 +33,6 @@
   * [Translation_service.translate_document](#translation_service.translate_document)
   * [Translation_service.translate_text](#translation_service.translate_text)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -400,23 +399,6 @@ __Usage:__
 
 
 `node packages/google-cloud-translate/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-translate/samples/test/quickstart.test.js`
 
 
 
