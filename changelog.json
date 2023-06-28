@@ -5,6 +5,489 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "f6f3726caf528c591f55772c23b8836a2657c2c8",
+          "message": "[storagetransfer] add event driven transfer configuration",
+          "issues": [
+            "4376"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "1f44ef3e-9639-4fbf-87e1-e1e411f73fc5",
+      "createTime": "2023-06-28T19:08:57.103Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "1c26d779-6f70-45bf-97c2-eb3b1ef43dd7",
+      "createTime": "2023-06-28T19:08:57.100Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5ce24848470ada481a42e7739fdef41928266623",
+          "message": "[cloudbuild] add repositoryevent to buildtrigger",
+          "issues": [
+            "4378"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "6bcf079b-909a-4405-8a57-88835ac1d806",
+      "createTime": "2023-06-28T19:08:57.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "23adc029-c0b1-449a-ac0e-bd6b407dec78",
+      "createTime": "2023-06-28T19:08:57.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "50983ac6-f134-4498-b890-2386f0a33a77",
+      "createTime": "2023-06-28T19:08:57.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "b37213da-a350-4893-8d69-9847df5175d2",
+      "createTime": "2023-06-28T19:08:57.084Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "235e35dc-6f8e-47dc-8706-212003be678c",
+      "createTime": "2023-06-28T19:08:57.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "beb6888d-121e-45f8-8e50-373a312f88b7",
+      "createTime": "2023-06-28T19:08:57.077Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "3ef0dba7-b1a9-4928-8929-838ceedf9413",
+      "createTime": "2023-06-28T19:08:57.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "644e6762afb8653592fe3e4ab988a8e3c6f549a4",
+          "message": "[securitycenter] Mark the Asset APIs as deprecated in client libraries",
+          "issues": [
+            "4370"
+          ]
+        }
+      ],
+      "version": "7.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "6e8d76d4-8055-4a3a-9591-73d28b997d2b",
+      "createTime": "2023-06-28T19:08:57.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "eca06233d65148c564133150c1fa13522988a9af",
+          "message": "[networkmanagement] add forwarding_rule field to Connectivity Test Endpoint proto",
+          "issues": [
+            "4371"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "88de3a3d-2801-4c7a-8dd4-31a2a9e21cf8",
+      "createTime": "2023-06-28T19:08:57.066Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "2e0d7e1b-b0e5-4083-b9dc-c87701f8c1be",
+      "createTime": "2023-06-28T19:08:57.062Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "7e73e5f0-f3c0-49a7-9c03-2a5d87a60ce6",
+      "createTime": "2023-06-28T19:08:57.058Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b2dca930afe3368815935bbc45915fa89ee5cfc3",
+          "message": "[gkebackup] added new restore scope options",
+          "issues": [
+            "4377"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "45139f18-6043-49a2-ae39-0e71df83d499",
+      "createTime": "2023-06-28T19:08:57.055Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "aa7da8ca580b7ee92aede81711033e97fc23e396",
+          "message": "[essentialcontacts] mark fields in Contacts message as REQUIRED",
+          "issues": [
+            "4368"
+          ]
+        }
+      ],
+      "version": "2.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "0dd7c88a-88ac-4eab-b7be-6be7a8c1b38a",
+      "createTime": "2023-06-28T19:08:57.052Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "Add IMPORTING enum to State in processor.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "[documentai] add StyleInfo to document.proto",
+          "issues": [
+            "4352"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "Add REPLACE enum to OperationType in document.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "Add PropertyMetadata and EntityTypeMetadata to document_schema.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "Add IMPORTING enum to State in processor.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "512ef37b330c16029bd0a2721efe07ce9a31f90b",
+          "message": "[documentai] add StyleInfo to document.proto",
+          "issues": []
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "2b5ab396-44de-461d-a609-e49f63897892",
+      "createTime": "2023-06-28T19:08:57.048Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5958cfa56bd5280301f446a8863d6461ea86493e",
+          "message": "[discoveryengine] support extractive content in search",
+          "issues": [
+            "4355"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "23694015-a7ac-4473-8b0f-3554a9154ba9",
+      "createTime": "2023-06-28T19:08:57.042Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7778345f3d7089e3bdc1294beb4005cfa8793012",
+          "message": "Added session_ttl to SessionProto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7778345f3d7089e3bdc1294beb4005cfa8793012",
+          "message": "[dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest",
+          "issues": [
+            "4357"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "7778345f3d7089e3bdc1294beb4005cfa8793012",
+          "message": "Added session_ttl to SessionProto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7778345f3d7089e3bdc1294beb4005cfa8793012",
+          "message": "[dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest",
+          "issues": []
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "99fd5f77-0fdc-4091-8a55-6e6346029be9",
+      "createTime": "2023-06-28T19:08:57.038Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2339f4d2c62fda48c745f4dde3f071fa4346fc9b",
+          "message": "[dialogflow] added dialogflow_assist_answer",
+          "issues": [
+            "4364"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "5bc374aa-c84a-4e40-aa32-edcf445434da",
+      "createTime": "2023-06-28T19:08:57.035Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dd8b0ec2df1c39330e1a104de55e809d9a31a1a9",
+          "message": "[deploy] Add deploy parameters for cloud deploy",
+          "issues": [
+            "4367"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "919b0dcc-092f-48ae-8da0-105e1a309553",
+      "createTime": "2023-06-28T19:08:57.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "926d727f25951f9199e3f02d419a41dbb8e1c824",
+          "message": "[channel] Add support for ListSkuGroups and ListSkuGroupBillableSkus APIs in Cloud Channel APIs",
+          "issues": [
+            "4348"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "c0715d6a-81b8-48c2-afec-378dc4acd58a",
+      "createTime": "2023-06-28T19:08:57.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a77e51fe3fc235676189525f6a582844a830cc99",
+          "message": "[billing] added resource_reference for name in GetProjectBillingInfoRequest message",
+          "issues": [
+            "4356"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "c45bf071-ac2c-4326-a7a7-0ba564abd257",
+      "createTime": "2023-06-28T19:08:57.021Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4fb528559c204cee33329c4e55021aa1fd0e4974",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4351"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.6.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "0204a8ca-fe02-48f4-8e11-1e6ed2b8583b",
+      "createTime": "2023-06-28T19:08:57.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0a3d8a1df6b319e555955dfef8a56ceef54a6e2",
+          "message": "Add UpdateExplanationDataset to aiplatform",
+          "issues": [
+            "4359"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4c047d4a9cdbc08dfb70e3843a54ca73ad1f4e79",
+          "message": "Add bias_configs to ModelEvaluation",
+          "issues": [
+            "4349"
+          ]
+        }
+      ],
+      "version": "2.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "021b815c-227f-465c-95c2-8c0d3285e366",
+      "createTime": "2023-06-28T19:08:57.014Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e1211f0b2bc1557cca5ba63949ef1fb8cdacedf6",
           "message": "Add initial files for google.cloud.rapidmigrationassessment.v1",
           "issues": [
@@ -10297,5 +10780,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-06-14T23:55:54.096Z"
+  "updateTime": "2023-06-28T19:08:57.103Z"
 }

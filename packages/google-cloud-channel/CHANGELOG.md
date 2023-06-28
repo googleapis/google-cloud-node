@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.7.0...channel-v2.8.0) (2023-06-28)
+
+
+### Features
+
+* [channel] Add support for ListSkuGroups and ListSkuGroupBillableSkus APIs in Cloud Channel APIs ([#4348](https://github.com/googleapis/google-cloud-node/issues/4348)) ([926d727](https://github.com/googleapis/google-cloud-node/commit/926d727f25951f9199e3f02d419a41dbb8e1c824))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.6.0...channel-v2.7.0) (2023-05-20)
 
 

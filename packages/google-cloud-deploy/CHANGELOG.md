@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.6.0...deploy-v2.7.0) (2023-06-28)
+
+
+### Features
+
+* [deploy] Add deploy parameters for cloud deploy ([#4367](https://github.com/googleapis/google-cloud-node/issues/4367)) ([dd8b0ec](https://github.com/googleapis/google-cloud-node/commit/dd8b0ec2df1c39330e1a104de55e809d9a31a1a9))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.5.0...deploy-v2.6.0) (2023-06-06)
 
 

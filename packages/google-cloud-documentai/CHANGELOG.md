@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.3.1...documentai-v7.4.0) (2023-06-28)
+
+
+### Features
+
+* [documentai] add StyleInfo to document.proto ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+* [documentai] add StyleInfo to document.proto ([#4352](https://github.com/googleapis/google-cloud-node/issues/4352)) ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+* Add IMPORTING enum to State in processor.proto ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+* Add IMPORTING enum to State in processor.proto ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+* Add PropertyMetadata and EntityTypeMetadata to document_schema.proto ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+* Add REPLACE enum to OperationType in document.proto ([512ef37](https://github.com/googleapis/google-cloud-node/commit/512ef37b330c16029bd0a2721efe07ce9a31f90b))
+
 ## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.3.0...documentai-v7.3.1) (2023-04-13)
 
 

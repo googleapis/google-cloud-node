@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.5.0...security-center-v7.6.0) (2023-06-28)
+
+
+### Features
+
+* [securitycenter] Mark the Asset APIs as deprecated in client libraries ([#4370](https://github.com/googleapis/google-cloud-node/issues/4370)) ([644e676](https://github.com/googleapis/google-cloud-node/commit/644e6762afb8653592fe3e4ab988a8e3c6f549a4))
+
 ## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.4.0...security-center-v7.5.0) (2023-06-14)
 
 

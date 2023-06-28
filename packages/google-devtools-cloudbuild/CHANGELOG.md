@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.6.0...cloudbuild-v3.7.0) (2023-06-28)
+
+
+### Features
+
+* [cloudbuild] add repositoryevent to buildtrigger ([#4378](https://github.com/googleapis/google-cloud-node/issues/4378)) ([5ce2484](https://github.com/googleapis/google-cloud-node/commit/5ce24848470ada481a42e7739fdef41928266623))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.2...cloudbuild-v3.6.0) (2023-04-24)
 
 

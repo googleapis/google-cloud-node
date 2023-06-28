@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.7.0...discoveryengine-v0.8.0) (2023-06-28)
+
+
+### Features
+
+* [discoveryengine] support extractive content in search ([#4355](https://github.com/googleapis/google-cloud-node/issues/4355)) ([5958cfa](https://github.com/googleapis/google-cloud-node/commit/5958cfa56bd5280301f446a8863d6461ea86493e))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.6.0...discoveryengine-v0.7.0) (2023-06-14)
 
 
