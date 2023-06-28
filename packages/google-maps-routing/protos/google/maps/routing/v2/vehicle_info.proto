@@ -28,10 +28,10 @@ option objc_class_prefix = "GMRV2";
 option php_namespace = "Google\\Maps\\Routing\\V2";
 option ruby_package = "Google::Maps::Routing::V2";
 
-// Encapsulates the vehicle information, such as the license plate last
-// character.
+// Contains the vehicle information, such as the vehicle emission type.
 message VehicleInfo {
   // Describes the vehicle's emission type.
-  // Applies only to the `DRIVE` travel mode.
+  // Applies only to the `DRIVE`
+  // [RouteTravelMode][google.maps.routing.v2.RouteTravelMode].
   VehicleEmissionType emission_type = 2;
 }

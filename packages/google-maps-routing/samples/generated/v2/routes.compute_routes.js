@@ -64,10 +64,20 @@ function main(origin, destination) {
   // const polylineEncoding = {}
   /**
    *  Optional. The departure time. If you don't set this value, then this value
-   *  defaults to the time that you made the request. If you set this value to a
-   *  time that has already occurred, then the request fails.
+   *  defaults to the time that you made the request.
+   *  NOTE: You can only specify a `departure_time` in the past when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`.
    */
   // const departureTime = {}
+  /**
+   *  Optional. The arrival time.
+   *  NOTE: Can only be set when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`. You can specify either departure_time or arrival_time, but not
+   *  both.
+   */
+  // const arrivalTime = {}
   /**
    *  Optional. Specifies whether to calculate alternate routes in addition to
    *  the route. No alternative routes are returned for requests that have
@@ -95,14 +105,27 @@ function main(origin, destination) {
    */
   // const regionCode = 'abc123'
   /**
-   *  Optional. Specifies the units of measure for the display fields. This
-   *  includes the `instruction` field in
+   *  Optional. Specifies the units of measure for the display fields. These
+   *  fields include the `instruction` field in
    *  NavigationInstruction google.maps.routing.v2.NavigationInstruction. The
    *  units of measure used for the route, leg, step distance, and duration are
    *  not affected by this value. If you don't provide this value, then the
-   *  display units are inferred from the location of the request.
+   *  display units are inferred from the location of the first origin.
    */
   // const units = {}
+  /**
+   *  Optional. If set to true, the service attempts to minimize the overall cost
+   *  of the route by re-ordering the specified intermediate waypoints. The
+   *  request fails if any of the intermediate waypoints is a `via` waypoint. Use
+   *  `ComputeRoutesResponse.Routes.optimized_intermediate_waypoint_index` to
+   *  find the new ordering.
+   *  If `ComputeRoutesResponseroutes.optimized_intermediate_waypoint_index` is
+   *  not requested in the `X-Goog-FieldMask` header, the request fails.
+   *  If `optimize_waypoint_order` is set to false,
+   *  `ComputeRoutesResponse.optimized_intermediate_waypoint_index` will be
+   *  empty.
+   */
+  // const optimizeWaypointOrder = true
   /**
    *  Optional. Specifies what reference routes to calculate as part of the
    *  request in addition to the default route. A reference route is a route with
@@ -118,6 +141,27 @@ function main(origin, destination) {
    *  returned in the response.
    */
   // const extraComputations = 1234
+  /**
+   *  Optional. Specifies the assumptions to use when calculating time in
+   *  traffic. This setting affects the value returned in the duration field in
+   *  the Route google.maps.routing.v2.Route  and
+   *  RouteLeg google.maps.routing.v2.RouteLeg  which contains the predicted
+   *  time in traffic based on historical averages.
+   *  `TrafficModel` is only available for requests that have set
+   *  RoutingPreference google.maps.routing.v2.RoutingPreference  to
+   *  `TRAFFIC_AWARE_OPTIMAL` and
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  to `DRIVE`.
+   *  Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
+   *  specified.
+   */
+  // const trafficModel = {}
+  /**
+   *  Optional. Specifies preferences that influence the route returned for
+   *  `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`.
+   */
+  // const transitPreferences = {}
 
   // Imports the Routing library
   const {RoutesClient} = require('@googlemaps/routing').v2;
