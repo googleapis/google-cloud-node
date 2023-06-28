@@ -8,11 +8,11 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.EssentialContacts.V1",
                     "go_package": "cloud.google.com/go/essentialcontacts/apiv1/essentialcontactspb;essentialcontactspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "EnumsProto",
                     "java_package": "com.google.cloud.essentialcontacts.v1",
-                    "csharp_namespace": "Google.Cloud.EssentialContacts.V1",
                     "php_namespace": "Google\\Cloud\\EssentialContacts\\V1",
                     "ruby_package": "Google::Cloud::EssentialContacts::V1"
                   },
@@ -249,20 +249,32 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "email": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "notificationCategorySubscriptions": {
                           "rule": "repeated",
                           "type": "NotificationCategory",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "languageTag": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "validationState": {
                           "type": "ValidationState",
