@@ -49,7 +49,7 @@ function main(conversation) {
    */
   // const contextSize = 1234
   /**
-   *  Parameters for a human assist query.
+   *  Parameters for a human assist query. Only used for POC/demo purpose.
    */
   // const assistQueryParams = {}
 

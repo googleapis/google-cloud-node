@@ -31,8 +31,8 @@ function main(parent, environment, environmentId) {
   /**
    *  Required. The agent to create an environment for.
    *  Supported formats:
-   *  - `projects/<Project Number / ID>/agent`
-   *  - `projects/<Project Number / ID>/locations/<Location ID>/agent`
+   *  - `projects/<Project ID>/agent`
+   *  - `projects/<Project ID>/locations/<Location ID>/agent`
    */
   // const parent = 'abc123'
   /**

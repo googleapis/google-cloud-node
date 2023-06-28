@@ -849,8 +849,8 @@ export class DocumentsClient {
    *   Required. The knowledge base to import documents into.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {google.cloud.dialogflow.v2beta1.GcsSources} request.gcsSource
-   *   The Google Cloud Storage location for the documents.
+   * @param {google.cloud.dialogflow.v2beta1.GcsSources} [request.gcsSource]
+   *   Optional. The Google Cloud Storage location for the documents.
    *   The path can include a wildcard.
    *
    *   These URIs may have the forms
