@@ -195,6 +195,9 @@ export namespace google {
                     /** Endpoint instance */
                     instance?: (string|null);
 
+                    /** Endpoint forwardingRule */
+                    forwardingRule?: (string|null);
+
                     /** Endpoint gkeMasterCluster */
                     gkeMasterCluster?: (string|null);
 
@@ -228,6 +231,9 @@ export namespace google {
 
                     /** Endpoint instance. */
                     public instance: string;
+
+                    /** Endpoint forwardingRule. */
+                    public forwardingRule: string;
 
                     /** Endpoint gkeMasterCluster. */
                     public gkeMasterCluster: string;
@@ -4140,6 +4146,9 @@ export namespace google {
                     /** Endpoint instance */
                     instance?: (string|null);
 
+                    /** Endpoint forwardingRule */
+                    forwardingRule?: (string|null);
+
                     /** Endpoint gkeMasterCluster */
                     gkeMasterCluster?: (string|null);
 
@@ -4176,6 +4185,9 @@ export namespace google {
 
                     /** Endpoint instance. */
                     public instance: string;
+
+                    /** Endpoint forwardingRule. */
+                    public forwardingRule: string;
 
                     /** Endpoint gkeMasterCluster. */
                     public gkeMasterCluster: string;
