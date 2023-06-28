@@ -4625,6 +4625,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.RunAssetDiscoveryRequest()
@@ -4642,6 +4643,7 @@ describe('v1.SecurityCenterClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.runAssetDiscovery(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.runAssetDiscovery as SinonStub
@@ -4658,6 +4660,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.RunAssetDiscoveryRequest()
@@ -4696,6 +4699,7 @@ describe('v1.SecurityCenterClient', () => {
         protos.google.protobuf.IEmpty
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.runAssetDiscovery as SinonStub
@@ -4712,6 +4716,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.RunAssetDiscoveryRequest()
@@ -4728,6 +4733,7 @@ describe('v1.SecurityCenterClient', () => {
         expectedError
       );
       await assert.rejects(client.runAssetDiscovery(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.runAssetDiscovery as SinonStub
       ).getCall(0).args[0];
@@ -4743,6 +4749,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.RunAssetDiscoveryRequest()
@@ -4761,6 +4768,7 @@ describe('v1.SecurityCenterClient', () => {
       );
       const [operation] = await client.runAssetDiscovery(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.runAssetDiscovery as SinonStub
       ).getCall(0).args[0];
@@ -4776,6 +4784,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -4788,6 +4797,7 @@ describe('v1.SecurityCenterClient', () => {
       const decodedOperation = await client.checkRunAssetDiscoveryProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -4798,6 +4808,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -4809,6 +4820,7 @@ describe('v1.SecurityCenterClient', () => {
         client.checkRunAssetDiscoveryProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -4819,6 +4831,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -4842,6 +4855,7 @@ describe('v1.SecurityCenterClient', () => {
       ];
       client.innerApiCalls.groupAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.groupAssets(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.groupAssets as SinonStub
@@ -4858,6 +4872,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -4897,6 +4912,7 @@ describe('v1.SecurityCenterClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.groupAssets as SinonStub
@@ -4913,6 +4929,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -4929,6 +4946,7 @@ describe('v1.SecurityCenterClient', () => {
         expectedError
       );
       await assert.rejects(client.groupAssets(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.groupAssets as SinonStub
       ).getCall(0).args[0];
@@ -4944,6 +4962,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -4985,6 +5004,7 @@ describe('v1.SecurityCenterClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
@@ -5005,6 +5025,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -5038,6 +5059,7 @@ describe('v1.SecurityCenterClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
@@ -5057,6 +5079,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -5086,6 +5109,7 @@ describe('v1.SecurityCenterClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub).getCall(
@@ -5107,6 +5131,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.GroupAssetsRequest()
@@ -5130,6 +5155,7 @@ describe('v1.SecurityCenterClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub).getCall(
           0
@@ -5481,6 +5507,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5504,6 +5531,7 @@ describe('v1.SecurityCenterClient', () => {
       ];
       client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.listAssets(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listAssets as SinonStub
@@ -5520,6 +5548,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5561,6 +5590,7 @@ describe('v1.SecurityCenterClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listAssets as SinonStub
@@ -5577,6 +5607,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5593,6 +5624,7 @@ describe('v1.SecurityCenterClient', () => {
         expectedError
       );
       await assert.rejects(client.listAssets(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listAssets as SinonStub
       ).getCall(0).args[0];
@@ -5608,6 +5640,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5651,6 +5684,7 @@ describe('v1.SecurityCenterClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
@@ -5671,6 +5705,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5706,6 +5741,7 @@ describe('v1.SecurityCenterClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
@@ -5725,6 +5761,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5754,6 +5791,7 @@ describe('v1.SecurityCenterClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
@@ -5775,6 +5813,7 @@ describe('v1.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1.ListAssetsRequest()
@@ -5798,6 +5837,7 @@ describe('v1.SecurityCenterClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
           0

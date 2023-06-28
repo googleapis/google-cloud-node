@@ -2227,12 +2227,16 @@
                           "requestType": "GroupAssetsRequest",
                           "responseType": "GroupAssetsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:group",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/assets:group",
                             "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*}/assets:group",
@@ -2287,10 +2291,14 @@
                           "requestType": "ListAssetsRequest",
                           "responseType": "ListAssetsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=organizations/*}/assets",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/assets"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=organizations/*}/assets",
@@ -2495,6 +2503,7 @@
                           "requestType": "RunAssetDiscoveryRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:runDiscovery",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent",
@@ -2502,6 +2511,9 @@
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*}/assets:runDiscovery",
