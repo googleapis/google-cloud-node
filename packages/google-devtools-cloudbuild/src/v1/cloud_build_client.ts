@@ -209,6 +209,9 @@ export class CloudBuildClient {
       projectTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/triggers/{trigger}'
       ),
+      repositoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}'
+      ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{version}'
       ),
@@ -3348,6 +3351,77 @@ export class CloudBuildClient {
     return this.pathTemplates.projectTriggerPathTemplate.match(
       projectTriggerName
     ).trigger;
+  }
+
+  /**
+   * Return a fully-qualified repository resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connection
+   * @param {string} repository
+   * @returns {string} Resource name string.
+   */
+  repositoryPath(
+    project: string,
+    location: string,
+    connection: string,
+    repository: string
+  ) {
+    return this.pathTemplates.repositoryPathTemplate.render({
+      project: project,
+      location: location,
+      connection: connection,
+      repository: repository,
+    });
+  }
+
+  /**
+   * Parse the project from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .location;
+  }
+
+  /**
+   * Parse the connection from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the connection.
+   */
+  matchConnectionFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .connection;
+  }
+
+  /**
+   * Parse the repository from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .repository;
   }
 
   /**
