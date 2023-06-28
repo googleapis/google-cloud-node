@@ -6376,10 +6376,7 @@
                             },
                             "defaultUri": {
                               "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
+                              "id": 3
                             }
                           }
                         },
@@ -7341,6 +7338,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "adsWebConversionDataExportScope": {
+                          "type": "AdsWebConversionDataExportScope",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       },
                       "nested": {
@@ -7369,6 +7373,14 @@
                             "CROSS_CHANNEL_POSITION_BASED": 5,
                             "CROSS_CHANNEL_TIME_DECAY": 6,
                             "ADS_PREFERRED_LAST_CLICK": 7
+                          }
+                        },
+                        "AdsWebConversionDataExportScope": {
+                          "values": {
+                            "ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED": 0,
+                            "NOT_SELECTED_YET": 1,
+                            "CROSS_CHANNEL": 2,
+                            "ADS_PREFERRED": 3
                           }
                         }
                       }
