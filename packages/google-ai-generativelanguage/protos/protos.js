@@ -3705,7 +3705,6 @@
                                 case 1:
                                 case 2:
                                 case 3:
-                                case 4:
                                     break;
                                 }
                             return null;
@@ -3782,10 +3781,6 @@
                             case 3:
                                 message.threshold = 3;
                                 break;
-                            case "BLOCK_NONE":
-                            case 4:
-                                message.threshold = 4;
-                                break;
                             }
                             return message;
                         };
@@ -3848,7 +3843,6 @@
                          * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
                          * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
                          * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
-                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
                          */
                         SafetySetting.HarmBlockThreshold = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3856,7 +3850,6 @@
                             values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
                             values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
                             values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
-                            values[valuesById[4] = "BLOCK_NONE"] = 4;
                             return values;
                         })();
     

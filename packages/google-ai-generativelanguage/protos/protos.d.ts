@@ -1543,8 +1543,7 @@ export namespace google {
                         HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
                         BLOCK_LOW_AND_ABOVE = 1,
                         BLOCK_MEDIUM_AND_ABOVE = 2,
-                        BLOCK_ONLY_HIGH = 3,
-                        BLOCK_NONE = 4
+                        BLOCK_ONLY_HIGH = 3
                     }
                 }
 
