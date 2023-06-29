@@ -58,11 +58,21 @@ function main(origins, destinations) {
    */
   // const routingPreference = {}
   /**
-   *  Optional. The departure time. If you don't set this value, this defaults to
-   *  the time that you made the request. If you set this value to a time that
-   *  has already occurred, the request fails.
+   *  Optional. The departure time. If you don't set this value, then this value
+   *  defaults to the time that you made the request.
+   *  NOTE: You can only specify a `departure_time` in the past when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`.
    */
   // const departureTime = {}
+  /**
+   *  Optional. The arrival time.
+   *  NOTE: Can only be set when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`. You can specify either departure_time or arrival_time, but not
+   *  both.
+   */
+  // const arrivalTime = {}
   /**
    *  Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
    *  information, see
@@ -85,6 +95,25 @@ function main(origins, destinations) {
    *  returned in the response.
    */
   // const extraComputations = 1234
+  /**
+   *  Optional. Specifies the assumptions to use when calculating time in
+   *  traffic. This setting affects the value returned in the duration field in
+   *  the RouteMatrixElement google.maps.routing.v2.RouteMatrixElement  which
+   *  contains the predicted time in traffic based on historical averages.
+   *  RoutingPreference google.maps.routing.v2.RoutingPreference  to
+   *  `TRAFFIC_AWARE_OPTIMAL` and
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  to `DRIVE`.
+   *  Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
+   *  specified.
+   */
+  // const trafficModel = {}
+  /**
+   *  Optional. Specifies preferences that influence the route returned for
+   *  `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  `TRANSIT`.
+   */
+  // const transitPreferences = {}
 
   // Imports the Routing library
   const {RoutesClient} = require('@googlemaps/routing').v2;

@@ -172,6 +172,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -1091,18 +1103,6 @@
                   }
                 }
               }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
             }
           }
         },
@@ -1151,6 +1151,18 @@
                 },
                 "longitude": {
                   "type": "double",
+                  "id": 2
+                }
+              }
+            },
+            "LocalizedText": {
+              "fields": {
+                "text": {
+                  "type": "string",
+                  "id": 1
+                },
+                "languageCode": {
+                  "type": "string",
                   "id": 2
                 }
               }
@@ -1268,6 +1280,18 @@
                         }
                       }
                     },
+                    "LocalizedTime": {
+                      "fields": {
+                        "time": {
+                          "type": "google.type.LocalizedText",
+                          "id": 1
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Location": {
                       "fields": {
                         "latLng": {
@@ -1300,7 +1324,9 @@
                         "FERRY": 15,
                         "FERRY_TRAIN": 16,
                         "ROUNDABOUT_LEFT": 17,
-                        "ROUNDABOUT_RIGHT": 18
+                        "ROUNDABOUT_RIGHT": 18,
+                        "DEPART": 19,
+                        "NAME_CHANGE": 20
                       }
                     },
                     "NavigationInstruction": {
@@ -1394,9 +1420,40 @@
                           "type": "RouteTravelAdvisory",
                           "id": 9
                         },
+                        "optimizedIntermediateWaypointIndex": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 10
+                        },
+                        "localizedValues": {
+                          "type": "RouteLocalizedValues",
+                          "id": 11
+                        },
                         "routeToken": {
                           "type": "string",
                           "id": 12
+                        }
+                      },
+                      "nested": {
+                        "RouteLocalizedValues": {
+                          "fields": {
+                            "distance": {
+                              "type": "google.type.LocalizedText",
+                              "id": 1
+                            },
+                            "duration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 2
+                            },
+                            "staticDuration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            },
+                            "transitFare": {
+                              "type": "google.type.LocalizedText",
+                              "id": 4
+                            }
+                          }
                         }
                       }
                     },
@@ -1414,6 +1471,14 @@
                         "fuelConsumptionMicroliters": {
                           "type": "int64",
                           "id": 5
+                        },
+                        "routeRestrictionsPartiallyIgnored": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "transitFare": {
+                          "type": "google.type.Money",
+                          "id": 7
                         }
                       }
                     },
@@ -1473,6 +1538,81 @@
                         "travelAdvisory": {
                           "type": "RouteLegTravelAdvisory",
                           "id": 8
+                        },
+                        "localizedValues": {
+                          "type": "RouteLegLocalizedValues",
+                          "id": 9
+                        },
+                        "stepsOverview": {
+                          "type": "StepsOverview",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "RouteLegLocalizedValues": {
+                          "fields": {
+                            "distance": {
+                              "type": "google.type.LocalizedText",
+                              "id": 1
+                            },
+                            "duration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 2
+                            },
+                            "staticDuration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "StepsOverview": {
+                          "fields": {
+                            "multiModalSegments": {
+                              "rule": "repeated",
+                              "type": "MultiModalSegment",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "MultiModalSegment": {
+                              "oneofs": {
+                                "_stepStartIndex": {
+                                  "oneof": [
+                                    "stepStartIndex"
+                                  ]
+                                },
+                                "_stepEndIndex": {
+                                  "oneof": [
+                                    "stepEndIndex"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "stepStartIndex": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "stepEndIndex": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "navigationInstruction": {
+                                  "type": "NavigationInstruction",
+                                  "id": 3
+                                },
+                                "travelMode": {
+                                  "type": "RouteTravelMode",
+                                  "id": 4
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1505,6 +1645,98 @@
                         "travelAdvisory": {
                           "type": "RouteLegStepTravelAdvisory",
                           "id": 7
+                        },
+                        "localizedValues": {
+                          "type": "RouteLegStepLocalizedValues",
+                          "id": 8
+                        },
+                        "transitDetails": {
+                          "type": "RouteLegStepTransitDetails",
+                          "id": 9
+                        },
+                        "travelMode": {
+                          "type": "RouteTravelMode",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "RouteLegStepLocalizedValues": {
+                          "fields": {
+                            "distance": {
+                              "type": "google.type.LocalizedText",
+                              "id": 1
+                            },
+                            "staticDuration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RouteLegStepTransitDetails": {
+                      "fields": {
+                        "stopDetails": {
+                          "type": "TransitStopDetails",
+                          "id": 1
+                        },
+                        "localizedValues": {
+                          "type": "TransitDetailsLocalizedValues",
+                          "id": 2
+                        },
+                        "headsign": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "headway": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "transitLine": {
+                          "type": "TransitLine",
+                          "id": 5
+                        },
+                        "stopCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "tripShortText": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "TransitStopDetails": {
+                          "fields": {
+                            "arrivalStop": {
+                              "type": "TransitStop",
+                              "id": 1
+                            },
+                            "arrivalTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "departureStop": {
+                              "type": "TransitStop",
+                              "id": 3
+                            },
+                            "departureTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "TransitDetailsLocalizedValues": {
+                          "fields": {
+                            "arrivalTime": {
+                              "type": "LocalizedTime",
+                              "id": 1
+                            },
+                            "departureTime": {
+                              "type": "LocalizedTime",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -1514,6 +1746,16 @@
                         "DEFAULT_ROUTE": 1,
                         "DEFAULT_ROUTE_ALTERNATE": 2,
                         "FUEL_EFFICIENT": 3
+                      }
+                    },
+                    "RouteTravelMode": {
+                      "values": {
+                        "TRAVEL_MODE_UNSPECIFIED": 0,
+                        "DRIVE": 1,
+                        "BICYCLE": 2,
+                        "WALK": 3,
+                        "TWO_WHEELER": 4,
+                        "TRANSIT": 7
                       }
                     },
                     "SpeedReadingInterval": {
@@ -1574,6 +1816,116 @@
                         }
                       }
                     },
+                    "TransitAgency": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TransitLine": {
+                      "fields": {
+                        "agencies": {
+                          "rule": "repeated",
+                          "type": "TransitAgency",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "color": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "iconUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "nameShort": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "textColor": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "vehicle": {
+                          "type": "TransitVehicle",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "TransitStop": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "location": {
+                          "type": "Location",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TransitVehicle": {
+                      "fields": {
+                        "name": {
+                          "type": "google.type.LocalizedText",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "TransitVehicleType",
+                          "id": 2
+                        },
+                        "iconUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "localIconUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "TransitVehicleType": {
+                          "values": {
+                            "TRANSIT_VEHICLE_TYPE_UNSPECIFIED": 0,
+                            "BUS": 1,
+                            "CABLE_CAR": 2,
+                            "COMMUTER_TRAIN": 3,
+                            "FERRY": 4,
+                            "FUNICULAR": 5,
+                            "GONDOLA_LIFT": 6,
+                            "HEAVY_RAIL": 7,
+                            "HIGH_SPEED_TRAIN": 8,
+                            "INTERCITY_BUS": 9,
+                            "LONG_DISTANCE_TRAIN": 10,
+                            "METRO_RAIL": 11,
+                            "MONORAIL": 12,
+                            "OTHER": 13,
+                            "RAIL": 14,
+                            "SHARE_TAXI": 15,
+                            "SUBWAY": 16,
+                            "TRAM": 17,
+                            "TROLLEYBUS": 18
+                          }
+                        }
+                      }
+                    },
                     "RouteModifiers": {
                       "fields": {
                         "avoidTolls": {
@@ -1604,6 +1956,11 @@
                       }
                     },
                     "TollPass": {
+                      "valuesOptions": {
+                        "US_MI_IQ_PROX_CARD": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "TOLL_PASS_UNSPECIFIED": 0,
                         "AU_ETOLL_TAG": 82,
@@ -1664,6 +2021,7 @@
                         "US_MI_BCPASS": 94,
                         "US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG": 37,
                         "US_MI_IQ_PROX_CARD": 38,
+                        "US_MI_IQ_TAG": 95,
                         "US_MI_MACKINAC_BRIDGE_MAC_PASS": 39,
                         "US_MI_NEXPRESS_TOLL": 40,
                         "US_MN_EZPASSMN": 41,
@@ -1679,6 +2037,7 @@
                         "US_PA_EZPASSPA": 45,
                         "US_RI_EZPASSRI": 46,
                         "US_SC_PALPASS": 47,
+                        "US_TX_AVI_TAG": 97,
                         "US_TX_BANCPASS": 48,
                         "US_TX_DEL_RIO_PASS": 49,
                         "US_TX_EFAST_PASS": 50,
@@ -1686,6 +2045,7 @@
                         "US_TX_EPTOLL": 52,
                         "US_TX_EZ_CROSS": 53,
                         "US_TX_EZTAG": 54,
+                        "US_TX_FUEGO_TAG": 96,
                         "US_TX_LAREDO_TRADE_TAG": 55,
                         "US_TX_PLUSPASS": 56,
                         "US_TX_TOLLTAG": 57,
@@ -1715,15 +2075,6 @@
                         "ELECTRIC": 2,
                         "HYBRID": 3,
                         "DIESEL": 4
-                      }
-                    },
-                    "RouteTravelMode": {
-                      "values": {
-                        "TRAVEL_MODE_UNSPECIFIED": 0,
-                        "DRIVE": 1,
-                        "BICYCLE": 2,
-                        "WALK": 3,
-                        "TWO_WHEELER": 4
                       }
                     },
                     "Routes": {
@@ -1825,6 +2176,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "arrivalTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "computeAlternativeRoutes": {
                           "type": "bool",
                           "id": 8,
@@ -1860,6 +2218,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "optimizeWaypointOrder": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "requestedReferenceRoutes": {
                           "rule": "repeated",
                           "type": "ReferenceRoute",
@@ -1872,6 +2237,20 @@
                           "rule": "repeated",
                           "type": "ExtraComputation",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trafficModel": {
+                          "type": "TrafficModel",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transitPreferences": {
+                          "type": "TransitPreferences",
+                          "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1889,7 +2268,8 @@
                             "EXTRA_COMPUTATION_UNSPECIFIED": 0,
                             "TOLLS": 1,
                             "FUEL_CONSUMPTION": 2,
-                            "TRAFFIC_ON_POLYLINE": 3
+                            "TRAFFIC_ON_POLYLINE": 3,
+                            "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS": 4
                           }
                         }
                       }
@@ -1950,6 +2330,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "arrivalTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "languageCode": {
                           "type": "string",
                           "id": 6,
@@ -1968,6 +2355,20 @@
                           "rule": "repeated",
                           "type": "ExtraComputation",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trafficModel": {
+                          "type": "TrafficModel",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transitPreferences": {
+                          "type": "TransitPreferences",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2066,6 +2467,32 @@
                         "fallbackInfo": {
                           "type": "FallbackInfo",
                           "id": 8
+                        },
+                        "localizedValues": {
+                          "type": "LocalizedValues",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "LocalizedValues": {
+                          "fields": {
+                            "distance": {
+                              "type": "google.type.LocalizedText",
+                              "id": 1
+                            },
+                            "duration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 2
+                            },
+                            "staticDuration": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            },
+                            "transitFare": {
+                              "type": "google.type.LocalizedText",
+                              "id": 4
+                            }
+                          }
                         }
                       }
                     },
@@ -2082,6 +2509,46 @@
                         "TRAFFIC_UNAWARE": 1,
                         "TRAFFIC_AWARE": 2,
                         "TRAFFIC_AWARE_OPTIMAL": 3
+                      }
+                    },
+                    "TrafficModel": {
+                      "values": {
+                        "TRAFFIC_MODEL_UNSPECIFIED": 0,
+                        "BEST_GUESS": 1,
+                        "PESSIMISTIC": 2,
+                        "OPTIMISTIC": 3
+                      }
+                    },
+                    "TransitPreferences": {
+                      "fields": {
+                        "allowedTravelModes": {
+                          "rule": "repeated",
+                          "type": "TransitTravelMode",
+                          "id": 1
+                        },
+                        "routingPreference": {
+                          "type": "TransitRoutingPreference",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "TransitTravelMode": {
+                          "values": {
+                            "TRANSIT_TRAVEL_MODE_UNSPECIFIED": 0,
+                            "BUS": 1,
+                            "SUBWAY": 2,
+                            "TRAIN": 3,
+                            "LIGHT_RAIL": 4,
+                            "RAIL": 5
+                          }
+                        },
+                        "TransitRoutingPreference": {
+                          "values": {
+                            "TRANSIT_ROUTING_PREFERENCE_UNSPECIFIED": 0,
+                            "LESS_WALKING": 1,
+                            "FEWER_TRANSFERS": 2
+                          }
+                        }
                       }
                     },
                     "Units": {
