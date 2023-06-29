@@ -100,7 +100,7 @@ async function callListSources() {
   // Run request
   const iterable = await migrationcenterClient.listSourcesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
