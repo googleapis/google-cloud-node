@@ -2387,6 +2387,10 @@
                       "type": "SecurityPostureConfig",
                       "id": 124
                     },
+                    "desiredNetworkPerformanceConfig": {
+                      "type": "NetworkConfig.ClusterNetworkPerformanceConfig",
+                      "id": 125
+                    },
                     "desiredEnableFqdnNetworkPolicy": {
                       "type": "bool",
                       "id": 126,
@@ -4567,11 +4571,43 @@
                       "type": "GatewayAPIConfig",
                       "id": 16
                     },
+                    "networkPerformanceConfig": {
+                      "type": "ClusterNetworkPerformanceConfig",
+                      "id": 18
+                    },
                     "enableFqdnNetworkPolicy": {
                       "type": "bool",
                       "id": 19,
                       "options": {
                         "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "ClusterNetworkPerformanceConfig": {
+                      "oneofs": {
+                        "_totalEgressBandwidthTier": {
+                          "oneof": [
+                            "totalEgressBandwidthTier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalEgressBandwidthTier": {
+                          "type": "Tier",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Tier": {
+                          "values": {
+                            "TIER_UNSPECIFIED": 0,
+                            "TIER_1": 1
+                          }
+                        }
                       }
                     }
                   }
@@ -4826,7 +4862,8 @@
                       "values": {
                         "PROVIDER_UNSPECIFIED": 0,
                         "PLATFORM_DEFAULT": 1,
-                        "CLOUD_DNS": 2
+                        "CLOUD_DNS": 2,
+                        "KUBE_DNS": 3
                       }
                     },
                     "DNSScope": {
