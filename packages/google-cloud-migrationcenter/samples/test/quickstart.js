@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/migrationcenter').v1;
-const migrationcenterClient = new Client();
+const {MigrationCenterClient} = require('@google-cloud/migrationcenter').v1;
+const migrationcenterClient = new MigrationCenterClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
