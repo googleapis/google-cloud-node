@@ -606,6 +606,50 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async",
+            "title": "RepositoryManager fetchGitRefs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch the list of branches or tags for a given repository.",
+            "canonical": true,
+            "file": "repository_manager.fetch_git_refs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchGitRefs",
+                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "repository",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ref_type",
+                        "type": ".google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType"
+                    }
+                ],
+                "resultType": ".google.devtools.cloudbuild.v2.FetchGitRefsResponse",
+                "client": {
+                    "shortName": "RepositoryManagerClient",
+                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+                },
+                "method": {
+                    "shortName": "FetchGitRefs",
+                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
+                    "service": {
+                        "shortName": "RepositoryManager",
+                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+                    }
+                }
+            }
         }
     ]
 }

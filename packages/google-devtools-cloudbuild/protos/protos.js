@@ -23988,6 +23988,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devtools.cloudbuild.v2.RepositoryManager|fetchGitRefs}.
+                         * @memberof google.devtools.cloudbuild.v2.RepositoryManager
+                         * @typedef FetchGitRefsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.cloudbuild.v2.FetchGitRefsResponse} [response] FetchGitRefsResponse
+                         */
+    
+                        /**
+                         * Calls FetchGitRefs.
+                         * @function fetchGitRefs
+                         * @memberof google.devtools.cloudbuild.v2.RepositoryManager
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest} request FetchGitRefsRequest message or plain object
+                         * @param {google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefsCallback} callback Node-style callback called with the error, if any, and FetchGitRefsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RepositoryManager.prototype.fetchGitRefs = function fetchGitRefs(request, callback) {
+                            return this.rpcCall(fetchGitRefs, $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest, $root.google.devtools.cloudbuild.v2.FetchGitRefsResponse, request, callback);
+                        }, "name", { value: "FetchGitRefs" });
+    
+                        /**
+                         * Calls FetchGitRefs.
+                         * @function fetchGitRefs
+                         * @memberof google.devtools.cloudbuild.v2.RepositoryManager
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest} request FetchGitRefsRequest message or plain object
+                         * @returns {Promise<google.devtools.cloudbuild.v2.FetchGitRefsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return RepositoryManager;
                     })();
     
@@ -24002,6 +24035,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Connection updateTime
                          * @property {google.devtools.cloudbuild.v2.IGitHubConfig|null} [githubConfig] Connection githubConfig
                          * @property {google.devtools.cloudbuild.v2.IGitHubEnterpriseConfig|null} [githubEnterpriseConfig] Connection githubEnterpriseConfig
+                         * @property {google.devtools.cloudbuild.v2.IGitLabConfig|null} [gitlabConfig] Connection gitlabConfig
                          * @property {google.devtools.cloudbuild.v2.IInstallationState|null} [installationState] Connection installationState
                          * @property {boolean|null} [disabled] Connection disabled
                          * @property {boolean|null} [reconciling] Connection reconciling
@@ -24066,6 +24100,14 @@
                         Connection.prototype.githubEnterpriseConfig = null;
     
                         /**
+                         * Connection gitlabConfig.
+                         * @member {google.devtools.cloudbuild.v2.IGitLabConfig|null|undefined} gitlabConfig
+                         * @memberof google.devtools.cloudbuild.v2.Connection
+                         * @instance
+                         */
+                        Connection.prototype.gitlabConfig = null;
+    
+                        /**
                          * Connection installationState.
                          * @member {google.devtools.cloudbuild.v2.IInstallationState|null|undefined} installationState
                          * @memberof google.devtools.cloudbuild.v2.Connection
@@ -24110,12 +24152,12 @@
     
                         /**
                          * Connection connectionConfig.
-                         * @member {"githubConfig"|"githubEnterpriseConfig"|undefined} connectionConfig
+                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|undefined} connectionConfig
                          * @memberof google.devtools.cloudbuild.v2.Connection
                          * @instance
                          */
                         Object.defineProperty(Connection.prototype, "connectionConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -24153,6 +24195,8 @@
                                 $root.google.devtools.cloudbuild.v2.GitHubConfig.encode(message.githubConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.githubEnterpriseConfig != null && Object.hasOwnProperty.call(message, "githubEnterpriseConfig"))
                                 $root.google.devtools.cloudbuild.v2.GitHubEnterpriseConfig.encode(message.githubEnterpriseConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.gitlabConfig != null && Object.hasOwnProperty.call(message, "gitlabConfig"))
+                                $root.google.devtools.cloudbuild.v2.GitLabConfig.encode(message.gitlabConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.installationState != null && Object.hasOwnProperty.call(message, "installationState"))
                                 $root.google.devtools.cloudbuild.v2.InstallationState.encode(message.installationState, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
@@ -24216,6 +24260,10 @@
                                     }
                                 case 6: {
                                         message.githubEnterpriseConfig = $root.google.devtools.cloudbuild.v2.GitHubEnterpriseConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.gitlabConfig = $root.google.devtools.cloudbuild.v2.GitLabConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -24324,6 +24372,16 @@
                                         return "githubEnterpriseConfig." + error;
                                 }
                             }
+                            if (message.gitlabConfig != null && message.hasOwnProperty("gitlabConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v2.GitLabConfig.verify(message.gitlabConfig);
+                                    if (error)
+                                        return "gitlabConfig." + error;
+                                }
+                            }
                             if (message.installationState != null && message.hasOwnProperty("installationState")) {
                                 var error = $root.google.devtools.cloudbuild.v2.InstallationState.verify(message.installationState);
                                 if (error)
@@ -24382,6 +24440,11 @@
                                 if (typeof object.githubEnterpriseConfig !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v2.Connection.githubEnterpriseConfig: object expected");
                                 message.githubEnterpriseConfig = $root.google.devtools.cloudbuild.v2.GitHubEnterpriseConfig.fromObject(object.githubEnterpriseConfig);
+                            }
+                            if (object.gitlabConfig != null) {
+                                if (typeof object.gitlabConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v2.Connection.gitlabConfig: object expected");
+                                message.gitlabConfig = $root.google.devtools.cloudbuild.v2.GitLabConfig.fromObject(object.gitlabConfig);
                             }
                             if (object.installationState != null) {
                                 if (typeof object.installationState !== "object")
@@ -24443,6 +24506,11 @@
                                 object.githubEnterpriseConfig = $root.google.devtools.cloudbuild.v2.GitHubEnterpriseConfig.toObject(message.githubEnterpriseConfig, options);
                                 if (options.oneofs)
                                     object.connectionConfig = "githubEnterpriseConfig";
+                            }
+                            if (message.gitlabConfig != null && message.hasOwnProperty("gitlabConfig")) {
+                                object.gitlabConfig = $root.google.devtools.cloudbuild.v2.GitLabConfig.toObject(message.gitlabConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "gitlabConfig";
                             }
                             if (message.installationState != null && message.hasOwnProperty("installationState"))
                                 object.installationState = $root.google.devtools.cloudbuild.v2.InstallationState.toObject(message.installationState, options);
@@ -25982,6 +26050,363 @@
                         return GitHubEnterpriseConfig;
                     })();
     
+                    v2.GitLabConfig = (function() {
+    
+                        /**
+                         * Properties of a GitLabConfig.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @interface IGitLabConfig
+                         * @property {string|null} [hostUri] GitLabConfig hostUri
+                         * @property {string|null} [webhookSecretSecretVersion] GitLabConfig webhookSecretSecretVersion
+                         * @property {google.devtools.cloudbuild.v2.IUserCredential|null} [readAuthorizerCredential] GitLabConfig readAuthorizerCredential
+                         * @property {google.devtools.cloudbuild.v2.IUserCredential|null} [authorizerCredential] GitLabConfig authorizerCredential
+                         * @property {google.devtools.cloudbuild.v2.IServiceDirectoryConfig|null} [serviceDirectoryConfig] GitLabConfig serviceDirectoryConfig
+                         * @property {string|null} [sslCa] GitLabConfig sslCa
+                         * @property {string|null} [serverVersion] GitLabConfig serverVersion
+                         */
+    
+                        /**
+                         * Constructs a new GitLabConfig.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @classdesc Represents a GitLabConfig.
+                         * @implements IGitLabConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v2.IGitLabConfig=} [properties] Properties to set
+                         */
+                        function GitLabConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitLabConfig hostUri.
+                         * @member {string} hostUri
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.hostUri = "";
+    
+                        /**
+                         * GitLabConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * GitLabConfig readAuthorizerCredential.
+                         * @member {google.devtools.cloudbuild.v2.IUserCredential|null|undefined} readAuthorizerCredential
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.readAuthorizerCredential = null;
+    
+                        /**
+                         * GitLabConfig authorizerCredential.
+                         * @member {google.devtools.cloudbuild.v2.IUserCredential|null|undefined} authorizerCredential
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.authorizerCredential = null;
+    
+                        /**
+                         * GitLabConfig serviceDirectoryConfig.
+                         * @member {google.devtools.cloudbuild.v2.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.serviceDirectoryConfig = null;
+    
+                        /**
+                         * GitLabConfig sslCa.
+                         * @member {string} sslCa
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.sslCa = "";
+    
+                        /**
+                         * GitLabConfig serverVersion.
+                         * @member {string} serverVersion
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         */
+                        GitLabConfig.prototype.serverVersion = "";
+    
+                        /**
+                         * Creates a new GitLabConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IGitLabConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v2.GitLabConfig} GitLabConfig instance
+                         */
+                        GitLabConfig.create = function create(properties) {
+                            return new GitLabConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabConfig message. Does not implicitly {@link google.devtools.cloudbuild.v2.GitLabConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IGitLabConfig} message GitLabConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostUri != null && Object.hasOwnProperty.call(message, "hostUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostUri);
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.webhookSecretSecretVersion);
+                            if (message.readAuthorizerCredential != null && Object.hasOwnProperty.call(message, "readAuthorizerCredential"))
+                                $root.google.devtools.cloudbuild.v2.UserCredential.encode(message.readAuthorizerCredential, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.authorizerCredential != null && Object.hasOwnProperty.call(message, "authorizerCredential"))
+                                $root.google.devtools.cloudbuild.v2.UserCredential.encode(message.authorizerCredential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.sslCa != null && Object.hasOwnProperty.call(message, "sslCa"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sslCa);
+                            if (message.serverVersion != null && Object.hasOwnProperty.call(message, "serverVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.serverVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitLabConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.GitLabConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IGitLabConfig} message GitLabConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitLabConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitLabConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v2.GitLabConfig} GitLabConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GitLabConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.readAuthorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.authorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceDirectoryConfig = $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sslCa = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serverVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitLabConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v2.GitLabConfig} GitLabConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitLabConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitLabConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitLabConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                if (!$util.isString(message.hostUri))
+                                    return "hostUri: string expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential")) {
+                                var error = $root.google.devtools.cloudbuild.v2.UserCredential.verify(message.readAuthorizerCredential);
+                                if (error)
+                                    return "readAuthorizerCredential." + error;
+                            }
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
+                                var error = $root.google.devtools.cloudbuild.v2.UserCredential.verify(message.authorizerCredential);
+                                if (error)
+                                    return "authorizerCredential." + error;
+                            }
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
+                            if (message.sslCa != null && message.hasOwnProperty("sslCa"))
+                                if (!$util.isString(message.sslCa))
+                                    return "sslCa: string expected";
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                if (!$util.isString(message.serverVersion))
+                                    return "serverVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitLabConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v2.GitLabConfig} GitLabConfig
+                         */
+                        GitLabConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v2.GitLabConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v2.GitLabConfig();
+                            if (object.hostUri != null)
+                                message.hostUri = String(object.hostUri);
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.readAuthorizerCredential != null) {
+                                if (typeof object.readAuthorizerCredential !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v2.GitLabConfig.readAuthorizerCredential: object expected");
+                                message.readAuthorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.fromObject(object.readAuthorizerCredential);
+                            }
+                            if (object.authorizerCredential != null) {
+                                if (typeof object.authorizerCredential !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v2.GitLabConfig.authorizerCredential: object expected");
+                                message.authorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.fromObject(object.authorizerCredential);
+                            }
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v2.GitLabConfig.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
+                            if (object.sslCa != null)
+                                message.sslCa = String(object.sslCa);
+                            if (object.serverVersion != null)
+                                message.serverVersion = String(object.serverVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitLabConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.GitLabConfig} message GitLabConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitLabConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostUri = "";
+                                object.webhookSecretSecretVersion = "";
+                                object.readAuthorizerCredential = null;
+                                object.authorizerCredential = null;
+                                object.serviceDirectoryConfig = null;
+                                object.sslCa = "";
+                                object.serverVersion = "";
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                object.hostUri = message.hostUri;
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential"))
+                                object.readAuthorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.toObject(message.readAuthorizerCredential, options);
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential"))
+                                object.authorizerCredential = $root.google.devtools.cloudbuild.v2.UserCredential.toObject(message.authorizerCredential, options);
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            if (message.sslCa != null && message.hasOwnProperty("sslCa"))
+                                object.sslCa = message.sslCa;
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                object.serverVersion = message.serverVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitLabConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitLabConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitLabConfig
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v2.GitLabConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitLabConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v2.GitLabConfig";
+                        };
+    
+                        return GitLabConfig;
+                    })();
+    
                     v2.ServiceDirectoryConfig = (function() {
     
                         /**
@@ -26197,6 +26622,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Repository updateTime
                          * @property {Object.<string,string>|null} [annotations] Repository annotations
                          * @property {string|null} [etag] Repository etag
+                         * @property {string|null} [webhookId] Repository webhookId
                          */
     
                         /**
@@ -26264,6 +26690,14 @@
                         Repository.prototype.etag = "";
     
                         /**
+                         * Repository webhookId.
+                         * @member {string} webhookId
+                         * @memberof google.devtools.cloudbuild.v2.Repository
+                         * @instance
+                         */
+                        Repository.prototype.webhookId = "";
+    
+                        /**
                          * Creates a new Repository instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v2.Repository
@@ -26300,6 +26734,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
+                            if (message.webhookId != null && Object.hasOwnProperty.call(message, "webhookId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.webhookId);
                             return writer;
                         };
     
@@ -26377,6 +26813,10 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.webhookId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26439,6 +26879,9 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.webhookId != null && message.hasOwnProperty("webhookId"))
+                                if (!$util.isString(message.webhookId))
+                                    return "webhookId: string expected";
                             return null;
                         };
     
@@ -26477,6 +26920,8 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            if (object.webhookId != null)
+                                message.webhookId = String(object.webhookId);
                             return message;
                         };
     
@@ -26501,6 +26946,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.etag = "";
+                                object.webhookId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -26518,6 +26964,8 @@
                             }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.webhookId != null && message.hasOwnProperty("webhookId"))
+                                object.webhookId = message.webhookId;
                             return object;
                         };
     
@@ -26775,6 +27223,233 @@
                         };
     
                         return OAuthCredential;
+                    })();
+    
+                    v2.UserCredential = (function() {
+    
+                        /**
+                         * Properties of a UserCredential.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @interface IUserCredential
+                         * @property {string|null} [userTokenSecretVersion] UserCredential userTokenSecretVersion
+                         * @property {string|null} [username] UserCredential username
+                         */
+    
+                        /**
+                         * Constructs a new UserCredential.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @classdesc Represents a UserCredential.
+                         * @implements IUserCredential
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v2.IUserCredential=} [properties] Properties to set
+                         */
+                        function UserCredential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserCredential userTokenSecretVersion.
+                         * @member {string} userTokenSecretVersion
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @instance
+                         */
+                        UserCredential.prototype.userTokenSecretVersion = "";
+    
+                        /**
+                         * UserCredential username.
+                         * @member {string} username
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @instance
+                         */
+                        UserCredential.prototype.username = "";
+    
+                        /**
+                         * Creates a new UserCredential instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IUserCredential=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v2.UserCredential} UserCredential instance
+                         */
+                        UserCredential.create = function create(properties) {
+                            return new UserCredential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserCredential message. Does not implicitly {@link google.devtools.cloudbuild.v2.UserCredential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IUserCredential} message UserCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCredential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.userTokenSecretVersion != null && Object.hasOwnProperty.call(message, "userTokenSecretVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.userTokenSecretVersion);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.UserCredential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IUserCredential} message UserCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v2.UserCredential} UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCredential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.UserCredential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.userTokenSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v2.UserCredential} UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserCredential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserCredential message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserCredential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userTokenSecretVersion != null && message.hasOwnProperty("userTokenSecretVersion"))
+                                if (!$util.isString(message.userTokenSecretVersion))
+                                    return "userTokenSecretVersion: string expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v2.UserCredential} UserCredential
+                         */
+                        UserCredential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v2.UserCredential)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v2.UserCredential();
+                            if (object.userTokenSecretVersion != null)
+                                message.userTokenSecretVersion = String(object.userTokenSecretVersion);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.UserCredential} message UserCredential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserCredential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.userTokenSecretVersion = "";
+                                object.username = "";
+                            }
+                            if (message.userTokenSecretVersion != null && message.hasOwnProperty("userTokenSecretVersion"))
+                                object.userTokenSecretVersion = message.userTokenSecretVersion;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserCredential to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserCredential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserCredential
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v2.UserCredential
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserCredential.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v2.UserCredential";
+                        };
+    
+                        return UserCredential;
                     })();
     
                     v2.CreateConnectionRequest = (function() {
@@ -30835,6 +31510,747 @@
                         };
     
                         return FetchReadWriteTokenResponse;
+                    })();
+    
+                    v2.ProcessWebhookRequest = (function() {
+    
+                        /**
+                         * Properties of a ProcessWebhookRequest.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @interface IProcessWebhookRequest
+                         * @property {string|null} [parent] ProcessWebhookRequest parent
+                         * @property {google.api.IHttpBody|null} [body] ProcessWebhookRequest body
+                         * @property {string|null} [webhookKey] ProcessWebhookRequest webhookKey
+                         */
+    
+                        /**
+                         * Constructs a new ProcessWebhookRequest.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @classdesc Represents a ProcessWebhookRequest.
+                         * @implements IProcessWebhookRequest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v2.IProcessWebhookRequest=} [properties] Properties to set
+                         */
+                        function ProcessWebhookRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProcessWebhookRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @instance
+                         */
+                        ProcessWebhookRequest.prototype.parent = "";
+    
+                        /**
+                         * ProcessWebhookRequest body.
+                         * @member {google.api.IHttpBody|null|undefined} body
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @instance
+                         */
+                        ProcessWebhookRequest.prototype.body = null;
+    
+                        /**
+                         * ProcessWebhookRequest webhookKey.
+                         * @member {string} webhookKey
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @instance
+                         */
+                        ProcessWebhookRequest.prototype.webhookKey = "";
+    
+                        /**
+                         * Creates a new ProcessWebhookRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IProcessWebhookRequest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v2.ProcessWebhookRequest} ProcessWebhookRequest instance
+                         */
+                        ProcessWebhookRequest.create = function create(properties) {
+                            return new ProcessWebhookRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProcessWebhookRequest message. Does not implicitly {@link google.devtools.cloudbuild.v2.ProcessWebhookRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IProcessWebhookRequest} message ProcessWebhookRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProcessWebhookRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.api.HttpBody.encode(message.body, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.webhookKey != null && Object.hasOwnProperty.call(message, "webhookKey"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.webhookKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProcessWebhookRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.ProcessWebhookRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IProcessWebhookRequest} message ProcessWebhookRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProcessWebhookRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProcessWebhookRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v2.ProcessWebhookRequest} ProcessWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProcessWebhookRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ProcessWebhookRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.body = $root.google.api.HttpBody.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.webhookKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProcessWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v2.ProcessWebhookRequest} ProcessWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProcessWebhookRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProcessWebhookRequest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProcessWebhookRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.api.HttpBody.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            if (message.webhookKey != null && message.hasOwnProperty("webhookKey"))
+                                if (!$util.isString(message.webhookKey))
+                                    return "webhookKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProcessWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v2.ProcessWebhookRequest} ProcessWebhookRequest
+                         */
+                        ProcessWebhookRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v2.ProcessWebhookRequest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v2.ProcessWebhookRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v2.ProcessWebhookRequest.body: object expected");
+                                message.body = $root.google.api.HttpBody.fromObject(object.body);
+                            }
+                            if (object.webhookKey != null)
+                                message.webhookKey = String(object.webhookKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProcessWebhookRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.ProcessWebhookRequest} message ProcessWebhookRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProcessWebhookRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.body = null;
+                                object.webhookKey = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.api.HttpBody.toObject(message.body, options);
+                            if (message.webhookKey != null && message.hasOwnProperty("webhookKey"))
+                                object.webhookKey = message.webhookKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProcessWebhookRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProcessWebhookRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProcessWebhookRequest
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v2.ProcessWebhookRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProcessWebhookRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v2.ProcessWebhookRequest";
+                        };
+    
+                        return ProcessWebhookRequest;
+                    })();
+    
+                    v2.FetchGitRefsRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchGitRefsRequest.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @interface IFetchGitRefsRequest
+                         * @property {string|null} [repository] FetchGitRefsRequest repository
+                         * @property {google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType|null} [refType] FetchGitRefsRequest refType
+                         */
+    
+                        /**
+                         * Constructs a new FetchGitRefsRequest.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @classdesc Represents a FetchGitRefsRequest.
+                         * @implements IFetchGitRefsRequest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest=} [properties] Properties to set
+                         */
+                        function FetchGitRefsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchGitRefsRequest repository.
+                         * @member {string} repository
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @instance
+                         */
+                        FetchGitRefsRequest.prototype.repository = "";
+    
+                        /**
+                         * FetchGitRefsRequest refType.
+                         * @member {google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType} refType
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @instance
+                         */
+                        FetchGitRefsRequest.prototype.refType = 0;
+    
+                        /**
+                         * Creates a new FetchGitRefsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsRequest} FetchGitRefsRequest instance
+                         */
+                        FetchGitRefsRequest.create = function create(properties) {
+                            return new FetchGitRefsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchGitRefsRequest message. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest} message FetchGitRefsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchGitRefsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                            if (message.refType != null && Object.hasOwnProperty.call(message, "refType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.refType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchGitRefsRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsRequest} message FetchGitRefsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchGitRefsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchGitRefsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsRequest} FetchGitRefsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchGitRefsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.repository = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.refType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchGitRefsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsRequest} FetchGitRefsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchGitRefsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchGitRefsRequest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchGitRefsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                if (!$util.isString(message.repository))
+                                    return "repository: string expected";
+                            if (message.refType != null && message.hasOwnProperty("refType"))
+                                switch (message.refType) {
+                                default:
+                                    return "refType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchGitRefsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsRequest} FetchGitRefsRequest
+                         */
+                        FetchGitRefsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest();
+                            if (object.repository != null)
+                                message.repository = String(object.repository);
+                            switch (object.refType) {
+                            default:
+                                if (typeof object.refType === "number") {
+                                    message.refType = object.refType;
+                                    break;
+                                }
+                                break;
+                            case "REF_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.refType = 0;
+                                break;
+                            case "TAG":
+                            case 1:
+                                message.refType = 1;
+                                break;
+                            case "BRANCH":
+                            case 2:
+                                message.refType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchGitRefsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.FetchGitRefsRequest} message FetchGitRefsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchGitRefsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.repository = "";
+                                object.refType = options.enums === String ? "REF_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                object.repository = message.repository;
+                            if (message.refType != null && message.hasOwnProperty("refType"))
+                                object.refType = options.enums === String ? $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType[message.refType] === undefined ? message.refType : $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType[message.refType] : message.refType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchGitRefsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchGitRefsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchGitRefsRequest
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchGitRefsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v2.FetchGitRefsRequest";
+                        };
+    
+                        /**
+                         * RefType enum.
+                         * @name google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType
+                         * @enum {number}
+                         * @property {number} REF_TYPE_UNSPECIFIED=0 REF_TYPE_UNSPECIFIED value
+                         * @property {number} TAG=1 TAG value
+                         * @property {number} BRANCH=2 BRANCH value
+                         */
+                        FetchGitRefsRequest.RefType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REF_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TAG"] = 1;
+                            values[valuesById[2] = "BRANCH"] = 2;
+                            return values;
+                        })();
+    
+                        return FetchGitRefsRequest;
+                    })();
+    
+                    v2.FetchGitRefsResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchGitRefsResponse.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @interface IFetchGitRefsResponse
+                         * @property {Array.<string>|null} [refNames] FetchGitRefsResponse refNames
+                         */
+    
+                        /**
+                         * Constructs a new FetchGitRefsResponse.
+                         * @memberof google.devtools.cloudbuild.v2
+                         * @classdesc Represents a FetchGitRefsResponse.
+                         * @implements IFetchGitRefsResponse
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsResponse=} [properties] Properties to set
+                         */
+                        function FetchGitRefsResponse(properties) {
+                            this.refNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchGitRefsResponse refNames.
+                         * @member {Array.<string>} refNames
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @instance
+                         */
+                        FetchGitRefsResponse.prototype.refNames = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FetchGitRefsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsResponse=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsResponse} FetchGitRefsResponse instance
+                         */
+                        FetchGitRefsResponse.create = function create(properties) {
+                            return new FetchGitRefsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchGitRefsResponse message. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsResponse} message FetchGitRefsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchGitRefsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.refNames != null && message.refNames.length)
+                                for (var i = 0; i < message.refNames.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.refNames[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchGitRefsResponse message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.IFetchGitRefsResponse} message FetchGitRefsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchGitRefsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchGitRefsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsResponse} FetchGitRefsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchGitRefsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.refNames && message.refNames.length))
+                                            message.refNames = [];
+                                        message.refNames.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchGitRefsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsResponse} FetchGitRefsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchGitRefsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchGitRefsResponse message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchGitRefsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.refNames != null && message.hasOwnProperty("refNames")) {
+                                if (!Array.isArray(message.refNames))
+                                    return "refNames: array expected";
+                                for (var i = 0; i < message.refNames.length; ++i)
+                                    if (!$util.isString(message.refNames[i]))
+                                        return "refNames: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchGitRefsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v2.FetchGitRefsResponse} FetchGitRefsResponse
+                         */
+                        FetchGitRefsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v2.FetchGitRefsResponse)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsResponse();
+                            if (object.refNames) {
+                                if (!Array.isArray(object.refNames))
+                                    throw TypeError(".google.devtools.cloudbuild.v2.FetchGitRefsResponse.refNames: array expected");
+                                message.refNames = [];
+                                for (var i = 0; i < object.refNames.length; ++i)
+                                    message.refNames[i] = String(object.refNames[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchGitRefsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v2.FetchGitRefsResponse} message FetchGitRefsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchGitRefsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.refNames = [];
+                            if (message.refNames && message.refNames.length) {
+                                object.refNames = [];
+                                for (var j = 0; j < message.refNames.length; ++j)
+                                    object.refNames[j] = message.refNames[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchGitRefsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchGitRefsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchGitRefsResponse
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v2.FetchGitRefsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchGitRefsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v2.FetchGitRefsResponse";
+                        };
+    
+                        return FetchGitRefsResponse;
                     })();
     
                     return v2;

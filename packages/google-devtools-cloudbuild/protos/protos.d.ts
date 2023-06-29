@@ -9302,6 +9302,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public fetchLinkableRepositories(request: google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest): Promise<google.devtools.cloudbuild.v2.FetchLinkableRepositoriesResponse>;
+
+                    /**
+                     * Calls FetchGitRefs.
+                     * @param request FetchGitRefsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchGitRefsResponse
+                     */
+                    public fetchGitRefs(request: google.devtools.cloudbuild.v2.IFetchGitRefsRequest, callback: google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefsCallback): void;
+
+                    /**
+                     * Calls FetchGitRefs.
+                     * @param request FetchGitRefsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRefs(request: google.devtools.cloudbuild.v2.IFetchGitRefsRequest): Promise<google.devtools.cloudbuild.v2.FetchGitRefsResponse>;
                 }
 
                 namespace RepositoryManager {
@@ -9396,6 +9410,13 @@ export namespace google {
                      * @param [response] FetchLinkableRepositoriesResponse
                      */
                     type FetchLinkableRepositoriesCallback = (error: (Error|null), response?: google.devtools.cloudbuild.v2.FetchLinkableRepositoriesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.cloudbuild.v2.RepositoryManager|fetchGitRefs}.
+                     * @param error Error, if any
+                     * @param [response] FetchGitRefsResponse
+                     */
+                    type FetchGitRefsCallback = (error: (Error|null), response?: google.devtools.cloudbuild.v2.FetchGitRefsResponse) => void;
                 }
 
                 /** Properties of a Connection. */
@@ -9415,6 +9436,9 @@ export namespace google {
 
                     /** Connection githubEnterpriseConfig */
                     githubEnterpriseConfig?: (google.devtools.cloudbuild.v2.IGitHubEnterpriseConfig|null);
+
+                    /** Connection gitlabConfig */
+                    gitlabConfig?: (google.devtools.cloudbuild.v2.IGitLabConfig|null);
 
                     /** Connection installationState */
                     installationState?: (google.devtools.cloudbuild.v2.IInstallationState|null);
@@ -9456,6 +9480,9 @@ export namespace google {
                     /** Connection githubEnterpriseConfig. */
                     public githubEnterpriseConfig?: (google.devtools.cloudbuild.v2.IGitHubEnterpriseConfig|null);
 
+                    /** Connection gitlabConfig. */
+                    public gitlabConfig?: (google.devtools.cloudbuild.v2.IGitLabConfig|null);
+
                     /** Connection installationState. */
                     public installationState?: (google.devtools.cloudbuild.v2.IInstallationState|null);
 
@@ -9472,7 +9499,7 @@ export namespace google {
                     public etag: string;
 
                     /** Connection connectionConfig. */
-                    public connectionConfig?: ("githubConfig"|"githubEnterpriseConfig");
+                    public connectionConfig?: ("githubConfig"|"githubEnterpriseConfig"|"gitlabConfig");
 
                     /**
                      * Creates a new Connection instance using the specified properties.
@@ -10139,6 +10166,139 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GitLabConfig. */
+                interface IGitLabConfig {
+
+                    /** GitLabConfig hostUri */
+                    hostUri?: (string|null);
+
+                    /** GitLabConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** GitLabConfig readAuthorizerCredential */
+                    readAuthorizerCredential?: (google.devtools.cloudbuild.v2.IUserCredential|null);
+
+                    /** GitLabConfig authorizerCredential */
+                    authorizerCredential?: (google.devtools.cloudbuild.v2.IUserCredential|null);
+
+                    /** GitLabConfig serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.devtools.cloudbuild.v2.IServiceDirectoryConfig|null);
+
+                    /** GitLabConfig sslCa */
+                    sslCa?: (string|null);
+
+                    /** GitLabConfig serverVersion */
+                    serverVersion?: (string|null);
+                }
+
+                /** Represents a GitLabConfig. */
+                class GitLabConfig implements IGitLabConfig {
+
+                    /**
+                     * Constructs a new GitLabConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v2.IGitLabConfig);
+
+                    /** GitLabConfig hostUri. */
+                    public hostUri: string;
+
+                    /** GitLabConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** GitLabConfig readAuthorizerCredential. */
+                    public readAuthorizerCredential?: (google.devtools.cloudbuild.v2.IUserCredential|null);
+
+                    /** GitLabConfig authorizerCredential. */
+                    public authorizerCredential?: (google.devtools.cloudbuild.v2.IUserCredential|null);
+
+                    /** GitLabConfig serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.devtools.cloudbuild.v2.IServiceDirectoryConfig|null);
+
+                    /** GitLabConfig sslCa. */
+                    public sslCa: string;
+
+                    /** GitLabConfig serverVersion. */
+                    public serverVersion: string;
+
+                    /**
+                     * Creates a new GitLabConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitLabConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v2.IGitLabConfig): google.devtools.cloudbuild.v2.GitLabConfig;
+
+                    /**
+                     * Encodes the specified GitLabConfig message. Does not implicitly {@link google.devtools.cloudbuild.v2.GitLabConfig.verify|verify} messages.
+                     * @param message GitLabConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v2.IGitLabConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitLabConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.GitLabConfig.verify|verify} messages.
+                     * @param message GitLabConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v2.IGitLabConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitLabConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitLabConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v2.GitLabConfig;
+
+                    /**
+                     * Decodes a GitLabConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitLabConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v2.GitLabConfig;
+
+                    /**
+                     * Verifies a GitLabConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitLabConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitLabConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v2.GitLabConfig;
+
+                    /**
+                     * Creates a plain object from a GitLabConfig message. Also converts values to other types if specified.
+                     * @param message GitLabConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v2.GitLabConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitLabConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitLabConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ServiceDirectoryConfig. */
                 interface IServiceDirectoryConfig {
 
@@ -10256,6 +10416,9 @@ export namespace google {
 
                     /** Repository etag */
                     etag?: (string|null);
+
+                    /** Repository webhookId */
+                    webhookId?: (string|null);
                 }
 
                 /** Represents a Repository. */
@@ -10284,6 +10447,9 @@ export namespace google {
 
                     /** Repository etag. */
                     public etag: string;
+
+                    /** Repository webhookId. */
+                    public webhookId: string;
 
                     /**
                      * Creates a new Repository instance using the specified properties.
@@ -10460,6 +10626,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OAuthCredential
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserCredential. */
+                interface IUserCredential {
+
+                    /** UserCredential userTokenSecretVersion */
+                    userTokenSecretVersion?: (string|null);
+
+                    /** UserCredential username */
+                    username?: (string|null);
+                }
+
+                /** Represents a UserCredential. */
+                class UserCredential implements IUserCredential {
+
+                    /**
+                     * Constructs a new UserCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v2.IUserCredential);
+
+                    /** UserCredential userTokenSecretVersion. */
+                    public userTokenSecretVersion: string;
+
+                    /** UserCredential username. */
+                    public username: string;
+
+                    /**
+                     * Creates a new UserCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserCredential instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v2.IUserCredential): google.devtools.cloudbuild.v2.UserCredential;
+
+                    /**
+                     * Encodes the specified UserCredential message. Does not implicitly {@link google.devtools.cloudbuild.v2.UserCredential.verify|verify} messages.
+                     * @param message UserCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v2.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.UserCredential.verify|verify} messages.
+                     * @param message UserCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v2.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v2.UserCredential;
+
+                    /**
+                     * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v2.UserCredential;
+
+                    /**
+                     * Verifies a UserCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v2.UserCredential;
+
+                    /**
+                     * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                     * @param message UserCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v2.UserCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserCredential
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -12235,6 +12504,325 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchReadWriteTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProcessWebhookRequest. */
+                interface IProcessWebhookRequest {
+
+                    /** ProcessWebhookRequest parent */
+                    parent?: (string|null);
+
+                    /** ProcessWebhookRequest body */
+                    body?: (google.api.IHttpBody|null);
+
+                    /** ProcessWebhookRequest webhookKey */
+                    webhookKey?: (string|null);
+                }
+
+                /** Represents a ProcessWebhookRequest. */
+                class ProcessWebhookRequest implements IProcessWebhookRequest {
+
+                    /**
+                     * Constructs a new ProcessWebhookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v2.IProcessWebhookRequest);
+
+                    /** ProcessWebhookRequest parent. */
+                    public parent: string;
+
+                    /** ProcessWebhookRequest body. */
+                    public body?: (google.api.IHttpBody|null);
+
+                    /** ProcessWebhookRequest webhookKey. */
+                    public webhookKey: string;
+
+                    /**
+                     * Creates a new ProcessWebhookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessWebhookRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v2.IProcessWebhookRequest): google.devtools.cloudbuild.v2.ProcessWebhookRequest;
+
+                    /**
+                     * Encodes the specified ProcessWebhookRequest message. Does not implicitly {@link google.devtools.cloudbuild.v2.ProcessWebhookRequest.verify|verify} messages.
+                     * @param message ProcessWebhookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v2.IProcessWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessWebhookRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.ProcessWebhookRequest.verify|verify} messages.
+                     * @param message ProcessWebhookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v2.IProcessWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessWebhookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessWebhookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v2.ProcessWebhookRequest;
+
+                    /**
+                     * Decodes a ProcessWebhookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessWebhookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v2.ProcessWebhookRequest;
+
+                    /**
+                     * Verifies a ProcessWebhookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessWebhookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v2.ProcessWebhookRequest;
+
+                    /**
+                     * Creates a plain object from a ProcessWebhookRequest message. Also converts values to other types if specified.
+                     * @param message ProcessWebhookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v2.ProcessWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessWebhookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessWebhookRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRefsRequest. */
+                interface IFetchGitRefsRequest {
+
+                    /** FetchGitRefsRequest repository */
+                    repository?: (string|null);
+
+                    /** FetchGitRefsRequest refType */
+                    refType?: (google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType|keyof typeof google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType|null);
+                }
+
+                /** Represents a FetchGitRefsRequest. */
+                class FetchGitRefsRequest implements IFetchGitRefsRequest {
+
+                    /**
+                     * Constructs a new FetchGitRefsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v2.IFetchGitRefsRequest);
+
+                    /** FetchGitRefsRequest repository. */
+                    public repository: string;
+
+                    /** FetchGitRefsRequest refType. */
+                    public refType: (google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType|keyof typeof google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType);
+
+                    /**
+                     * Creates a new FetchGitRefsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRefsRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v2.IFetchGitRefsRequest): google.devtools.cloudbuild.v2.FetchGitRefsRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRefsRequest message. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsRequest.verify|verify} messages.
+                     * @param message FetchGitRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v2.IFetchGitRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRefsRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsRequest.verify|verify} messages.
+                     * @param message FetchGitRefsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v2.IFetchGitRefsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRefsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v2.FetchGitRefsRequest;
+
+                    /**
+                     * Decodes a FetchGitRefsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRefsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v2.FetchGitRefsRequest;
+
+                    /**
+                     * Verifies a FetchGitRefsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRefsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRefsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v2.FetchGitRefsRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRefsRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRefsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v2.FetchGitRefsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRefsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRefsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FetchGitRefsRequest {
+
+                    /** RefType enum. */
+                    enum RefType {
+                        REF_TYPE_UNSPECIFIED = 0,
+                        TAG = 1,
+                        BRANCH = 2
+                    }
+                }
+
+                /** Properties of a FetchGitRefsResponse. */
+                interface IFetchGitRefsResponse {
+
+                    /** FetchGitRefsResponse refNames */
+                    refNames?: (string[]|null);
+                }
+
+                /** Represents a FetchGitRefsResponse. */
+                class FetchGitRefsResponse implements IFetchGitRefsResponse {
+
+                    /**
+                     * Constructs a new FetchGitRefsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v2.IFetchGitRefsResponse);
+
+                    /** FetchGitRefsResponse refNames. */
+                    public refNames: string[];
+
+                    /**
+                     * Creates a new FetchGitRefsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRefsResponse instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v2.IFetchGitRefsResponse): google.devtools.cloudbuild.v2.FetchGitRefsResponse;
+
+                    /**
+                     * Encodes the specified FetchGitRefsResponse message. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsResponse.verify|verify} messages.
+                     * @param message FetchGitRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v2.IFetchGitRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRefsResponse message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v2.FetchGitRefsResponse.verify|verify} messages.
+                     * @param message FetchGitRefsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v2.IFetchGitRefsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRefsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v2.FetchGitRefsResponse;
+
+                    /**
+                     * Decodes a FetchGitRefsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRefsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v2.FetchGitRefsResponse;
+
+                    /**
+                     * Verifies a FetchGitRefsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRefsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRefsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v2.FetchGitRefsResponse;
+
+                    /**
+                     * Creates a plain object from a FetchGitRefsResponse message. Also converts values to other types if specified.
+                     * @param message FetchGitRefsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v2.FetchGitRefsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRefsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRefsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

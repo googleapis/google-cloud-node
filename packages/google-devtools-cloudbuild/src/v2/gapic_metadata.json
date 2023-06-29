@@ -30,6 +30,11 @@
                 "fetchReadToken"
               ]
             },
+            "FetchGitRefs": {
+              "methods": [
+                "fetchGitRefs"
+              ]
+            },
             "CreateConnection": {
               "methods": [
                 "createConnection"
@@ -104,6 +109,11 @@
             "FetchReadToken": {
               "methods": [
                 "fetchReadToken"
+              ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetchGitRefs"
               ]
             },
             "CreateConnection": {
