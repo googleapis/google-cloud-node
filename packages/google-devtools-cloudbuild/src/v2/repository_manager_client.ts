@@ -44,7 +44,7 @@ import * as gapicConfig from './repository_manager_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Manages connections to source code repostiories.
+ *  Manages connections to source code repositories.
  * @class
  * @memberof v2
  */
@@ -410,6 +410,7 @@ export class RepositoryManagerClient {
       'fetchReadWriteToken',
       'fetchReadToken',
       'fetchLinkableRepositories',
+      'fetchGitRefs',
     ];
     for (const methodName of repositoryManagerStubMethods) {
       const callPromise = this.repositoryManagerStub.then(
@@ -869,6 +870,100 @@ export class RepositoryManagerClient {
       });
     this.initialize();
     return this.innerApiCalls.fetchReadToken(request, options, callback);
+  }
+  /**
+   * Fetch the list of branches or tags for a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The resource name of the repository in the format
+   *   `projects/* /locations/* /connections/* /repositories/*`.
+   * @param {google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType} request.refType
+   *   Type of refs to fetch
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v2.FetchGitRefsResponse | FetchGitRefsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/repository_manager.fetch_git_refs.js</caption>
+   * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async
+   */
+  fetchGitRefs(
+    request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  fetchGitRefs(
+    request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchGitRefs(
+    request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+    callback: Callback<
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchGitRefs(
+    request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+      protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchGitRefs(request, options, callback);
   }
 
   /**

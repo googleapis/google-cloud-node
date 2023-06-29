@@ -2973,6 +2973,24 @@
                               }
                             }
                           ]
+                        },
+                        "FetchGitRefs": {
+                          "requestType": "FetchGitRefsRequest",
+                          "responseType": "FetchGitRefsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:fetchGitRefs",
+                            "(google.api.method_signature)": "repository"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:fetchGitRefs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "repository"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2988,7 +3006,8 @@
                         "connectionConfig": {
                           "oneof": [
                             "githubConfig",
-                            "githubEnterpriseConfig"
+                            "githubEnterpriseConfig",
+                            "gitlabConfig"
                           ]
                         }
                       },
@@ -3021,6 +3040,10 @@
                         "githubEnterpriseConfig": {
                           "type": "GitHubEnterpriseConfig",
                           "id": 6
+                        },
+                        "gitlabConfig": {
+                          "type": "GitLabConfig",
+                          "id": 7
                         },
                         "installationState": {
                           "type": "InstallationState",
@@ -3191,6 +3214,51 @@
                         }
                       }
                     },
+                    "GitLabConfig": {
+                      "fields": {
+                        "hostUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "webhookSecretSecretVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "readAuthorizerCredential": {
+                          "type": "UserCredential",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authorizerCredential": {
+                          "type": "UserCredential",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "serviceDirectoryConfig": {
+                          "type": "ServiceDirectoryConfig",
+                          "id": 5
+                        },
+                        "sslCa": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "serverVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ServiceDirectoryConfig": {
                       "fields": {
                         "service": {
@@ -3248,6 +3316,13 @@
                         "etag": {
                           "type": "string",
                           "id": 7
+                        },
+                        "webhookId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3257,6 +3332,25 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserCredential": {
+                      "fields": {
+                        "userTokenSecretVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                           }
                         },
@@ -3552,6 +3646,60 @@
                         "expirationTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ProcessWebhookRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "body": {
+                          "type": "google.api.HttpBody",
+                          "id": 2
+                        },
+                        "webhookKey": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FetchGitRefsRequest": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "refType": {
+                          "type": "RefType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RefType": {
+                          "values": {
+                            "REF_TYPE_UNSPECIFIED": 0,
+                            "TAG": 1,
+                            "BRANCH": 2
+                          }
+                        }
+                      }
+                    },
+                    "FetchGitRefsResponse": {
+                      "fields": {
+                        "refNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }
