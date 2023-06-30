@@ -324,6 +324,8 @@ export class KeyManagementServiceClient {
       'restoreCryptoKeyVersion',
       'encrypt',
       'decrypt',
+      'rawEncrypt',
+      'rawDecrypt',
       'asymmetricSign',
       'asymmetricDecrypt',
       'macSign',
@@ -2238,6 +2240,328 @@ export class KeyManagementServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.decrypt(request, options, callback);
+  }
+  /**
+   * Encrypts data using portable cryptographic primitives. Most users should
+   * choose {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt} and
+   * {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt} rather than
+   * their raw counterparts. The
+   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT|RAW_ENCRYPT_DECRYPT}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   encryption.
+   * @param {Buffer} request.plaintext
+   *   Required. The data to encrypt. Must be no larger than 64KiB.
+   *
+   *   The maximum size depends on the key version's
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the
+   *   plaintext must be no larger than 64KiB. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
+   * @param {Buffer} [request.additionalAuthenticatedData]
+   *   Optional. Optional data that, if specified, must also be provided during
+   *   decryption through
+   *   {@link google.cloud.kms.v1.RawDecryptRequest.additional_authenticated_data|RawDecryptRequest.additional_authenticated_data}.
+   *
+   *   This field may only be used in conjunction with an
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm} that accepts
+   *   additional authenticated data (for example, AES-GCM).
+   *
+   *   The maximum size depends on the key version's
+   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the
+   *   plaintext must be no larger than 64KiB. For
+   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
+   * @param {google.protobuf.Int64Value} [request.plaintextCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawEncryptRequest.plaintext|RawEncryptRequest.plaintext}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received plaintext using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that CRC32C(plaintext) is equal
+   *   to plaintext_crc32c, and if so, perform a limited number of retries. A
+   *   persistent mismatch may indicate an issue in your computation of the CRC32C
+   *   checksum. Note: This field is defined as int64 for reasons of compatibility
+   *   across different languages. However, it is a non-negative integer, which
+   *   will never exceed 2^32-1, and can be safely downconverted to uint32 in
+   *   languages that support this type.
+   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawEncryptRequest.additional_authenticated_data|RawEncryptRequest.additional_authenticated_data}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received additional_authenticated_data using
+   *   this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C(additional_authenticated_data) is equal to
+   *   additional_authenticated_data_crc32c, and if so, perform
+   *   a limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   * @param {Buffer} [request.initializationVector]
+   *   Optional. A customer-supplied initialization vector that will be used for
+   *   encryption. If it is not provided for AES-CBC and AES-CTR, one will be
+   *   generated. It will be returned in
+   *   {@link google.cloud.kms.v1.RawEncryptResponse.initialization_vector|RawEncryptResponse.initialization_vector}.
+   * @param {google.protobuf.Int64Value} [request.initializationVectorCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawEncryptRequest.initialization_vector|RawEncryptRequest.initialization_vector}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received initialization_vector using this
+   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C(initialization_vector) is equal to
+   *   initialization_vector_crc32c, and if so, perform
+   *   a limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.kms.v1.RawEncryptResponse | RawEncryptResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/key_management_service.raw_encrypt.js</caption>
+   * region_tag:cloudkms_v1_generated_KeyManagementService_RawEncrypt_async
+   */
+  rawEncrypt(
+    request?: protos.google.cloud.kms.v1.IRawEncryptRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IRawEncryptResponse,
+      protos.google.cloud.kms.v1.IRawEncryptRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  rawEncrypt(
+    request: protos.google.cloud.kms.v1.IRawEncryptRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IRawEncryptResponse,
+      protos.google.cloud.kms.v1.IRawEncryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rawEncrypt(
+    request: protos.google.cloud.kms.v1.IRawEncryptRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IRawEncryptResponse,
+      protos.google.cloud.kms.v1.IRawEncryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rawEncrypt(
+    request?: protos.google.cloud.kms.v1.IRawEncryptRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IRawEncryptResponse,
+          protos.google.cloud.kms.v1.IRawEncryptRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IRawEncryptResponse,
+      protos.google.cloud.kms.v1.IRawEncryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IRawEncryptResponse,
+      protos.google.cloud.kms.v1.IRawEncryptRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.rawEncrypt(request, options, callback);
+  }
+  /**
+   * Decrypts data that was originally encrypted using a raw cryptographic
+   * mechanism. The {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+   * must be
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT|RAW_ENCRYPT_DECRYPT}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+   *   decryption.
+   * @param {Buffer} request.ciphertext
+   *   Required. The encrypted data originally returned in
+   *   {@link google.cloud.kms.v1.RawEncryptResponse.ciphertext|RawEncryptResponse.ciphertext}.
+   * @param {Buffer} [request.additionalAuthenticatedData]
+   *   Optional. Optional data that must match the data originally supplied in
+   *   {@link google.cloud.kms.v1.RawEncryptRequest.additional_authenticated_data|RawEncryptRequest.additional_authenticated_data}.
+   * @param {Buffer} request.initializationVector
+   *   Required. The initialization vector (IV) used during encryption, which must
+   *   match the data originally provided in
+   *   {@link google.cloud.kms.v1.RawEncryptResponse.initialization_vector|RawEncryptResponse.initialization_vector}.
+   * @param {number} request.tagLength
+   *   The length of the authentication tag that is appended to the end of
+   *   the ciphertext. If unspecified (0), the default value for the key's
+   *   algorithm will be used (for AES-GCM, the default value is 16).
+   * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawDecryptRequest.ciphertext|RawDecryptRequest.ciphertext}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received ciphertext using this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that CRC32C(ciphertext) is equal
+   *   to ciphertext_crc32c, and if so, perform a limited number of retries. A
+   *   persistent mismatch may indicate an issue in your computation of the CRC32C
+   *   checksum. Note: This field is defined as int64 for reasons of compatibility
+   *   across different languages. However, it is a non-negative integer, which
+   *   will never exceed 2^32-1, and can be safely downconverted to uint32 in
+   *   languages that support this type.
+   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawDecryptRequest.additional_authenticated_data|RawDecryptRequest.additional_authenticated_data}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received additional_authenticated_data using
+   *   this checksum.
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C(additional_authenticated_data) is equal to
+   *   additional_authenticated_data_crc32c, and if so, perform
+   *   a limited number of retries. A persistent mismatch may indicate an issue in
+   *   your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   * @param {google.protobuf.Int64Value} [request.initializationVectorCrc32c]
+   *   Optional. An optional CRC32C checksum of the
+   *   {@link google.cloud.kms.v1.RawDecryptRequest.initialization_vector|RawDecryptRequest.initialization_vector}.
+   *   If specified,
+   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+   *   verify the integrity of the received initialization_vector using this
+   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+   *   will report an error if the checksum verification fails. If you receive a
+   *   checksum error, your client should verify that
+   *   CRC32C(initialization_vector) is equal to initialization_vector_crc32c, and
+   *   if so, perform a limited number of retries. A persistent mismatch may
+   *   indicate an issue in your computation of the CRC32C checksum.
+   *   Note: This field is defined as int64 for reasons of compatibility across
+   *   different languages. However, it is a non-negative integer, which will
+   *   never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *   that support this type.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.kms.v1.RawDecryptResponse | RawDecryptResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/key_management_service.raw_decrypt.js</caption>
+   * region_tag:cloudkms_v1_generated_KeyManagementService_RawDecrypt_async
+   */
+  rawDecrypt(
+    request?: protos.google.cloud.kms.v1.IRawDecryptRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IRawDecryptResponse,
+      protos.google.cloud.kms.v1.IRawDecryptRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  rawDecrypt(
+    request: protos.google.cloud.kms.v1.IRawDecryptRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IRawDecryptResponse,
+      protos.google.cloud.kms.v1.IRawDecryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rawDecrypt(
+    request: protos.google.cloud.kms.v1.IRawDecryptRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IRawDecryptResponse,
+      protos.google.cloud.kms.v1.IRawDecryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rawDecrypt(
+    request?: protos.google.cloud.kms.v1.IRawDecryptRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IRawDecryptResponse,
+          protos.google.cloud.kms.v1.IRawDecryptRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IRawDecryptResponse,
+      protos.google.cloud.kms.v1.IRawDecryptRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IRawDecryptResponse,
+      protos.google.cloud.kms.v1.IRawDecryptRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.rawDecrypt(request, options, callback);
   }
   /**
    * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
