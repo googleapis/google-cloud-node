@@ -50,6 +50,8 @@ function main() {
   const interconnectAttachmentsClient =
     new compute.InterconnectAttachmentsClient();
   const interconnectLocationsClient = new compute.InterconnectLocationsClient();
+  const interconnectRemoteLocationsClient =
+    new compute.InterconnectRemoteLocationsClient();
   const interconnectsClient = new compute.InterconnectsClient();
   const licenseCodesClient = new compute.LicenseCodesClient();
   const licensesClient = new compute.LicensesClient();
