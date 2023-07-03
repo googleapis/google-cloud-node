@@ -6310,6 +6310,13 @@
                   }
                 },
                 "NodeKubeletConfig": {
+                  "oneofs": {
+                    "_insecureKubeletReadonlyPortEnabled": {
+                      "oneof": [
+                        "insecureKubeletReadonlyPortEnabled"
+                      ]
+                    }
+                  },
                   "fields": {
                     "cpuManagerPolicy": {
                       "type": "string",
@@ -6326,6 +6333,13 @@
                     "podPidsLimit": {
                       "type": "int64",
                       "id": 4
+                    },
+                    "insecureKubeletReadonlyPortEnabled": {
+                      "type": "bool",
+                      "id": 7,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -6554,6 +6568,13 @@
                     "podCidrOverprovisionConfig": {
                       "type": "PodCIDROverprovisionConfig",
                       "id": 13
+                    },
+                    "podIpv4RangeUtilization": {
+                      "type": "double",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -7252,6 +7273,13 @@
                     "additionalPodRangesConfig": {
                       "type": "AdditionalPodRangesConfig",
                       "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "defaultPodIpv4RangeUtilization": {
+                      "type": "double",
+                      "id": 25,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -8126,6 +8154,32 @@
                       "rule": "repeated",
                       "type": "string",
                       "id": 1
+                    },
+                    "podRangeInfo": {
+                      "rule": "repeated",
+                      "type": "RangeInfo",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "RangeInfo": {
+                  "fields": {
+                    "rangeName": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "utilization": {
+                      "type": "double",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -9566,6 +9620,10 @@
                         "type": {
                           "type": "Type",
                           "id": 1
+                        },
+                        "tpuTopology": {
+                          "type": "string",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -9899,6 +9957,13 @@
                   }
                 },
                 "AutoprovisioningNodePoolDefaults": {
+                  "oneofs": {
+                    "_insecureKubeletReadonlyPortEnabled": {
+                      "oneof": [
+                        "insecureKubeletReadonlyPortEnabled"
+                      ]
+                    }
+                  },
                   "fields": {
                     "oauthScopes": {
                       "rule": "repeated",
@@ -9943,6 +10008,13 @@
                     "imageType": {
                       "type": "string",
                       "id": 10
+                    },
+                    "insecureKubeletReadonlyPortEnabled": {
+                      "type": "bool",
+                      "id": 13,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
