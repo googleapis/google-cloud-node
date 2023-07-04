@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.5.1...routing-v0.6.0) (2023-07-04)
+
+
+### Features
+
+* [routing] Add HTML Navigation Instructions feature to ComputeRoutes ([#4381](https://github.com/googleapis/google-cloud-node/issues/4381)) ([8414c84](https://github.com/googleapis/google-cloud-node/commit/8414c8458133ecc654d25eeb8b0b90c4dac9ff04))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/routing-v0.5.0...routing-v0.5.1) (2023-04-13)
 
 
