@@ -1966,6 +1966,10 @@
                               "options": {
                                 "deprecated": true
                               }
+                            },
+                            "driverVersion": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
