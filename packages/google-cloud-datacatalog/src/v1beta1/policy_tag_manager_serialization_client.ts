@@ -350,10 +350,10 @@ export class PolicyTagManagerSerializationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of project that the newly created taxonomies will
-   *   belong to.
+   *   Required. Resource name of project that the imported taxonomies will belong
+   *   to.
    * @param {google.cloud.datacatalog.v1beta1.InlineSource} request.inlineSource
-   *   Inline source used for taxonomies import
+   *   Inline source used for taxonomies to be imported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

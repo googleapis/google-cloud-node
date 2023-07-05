@@ -81,6 +81,7 @@
   * [Data_catalog.list_tags](#data_catalog.list_tags)
   * [Data_catalog.lookup_entry](#data_catalog.lookup_entry)
   * [Data_catalog.rename_tag_template_field](#data_catalog.rename_tag_template_field)
+  * [Data_catalog.rename_tag_template_field_enum_value](#data_catalog.rename_tag_template_field_enum_value)
   * [Data_catalog.search_catalog](#data_catalog.search_catalog)
   * [Data_catalog.set_iam_policy](#data_catalog.set_iam_policy)
   * [Data_catalog.test_iam_permissions](#data_catalog.test_iam_permissions)
@@ -1287,6 +1288,23 @@ __Usage:__
 
 
 `node packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field.js`
+
+
+-----
+
+
+
+
+### Data_catalog.rename_tag_template_field_enum_value
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field_enum_value.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field_enum_value.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field_enum_value.js`
 
 
 -----

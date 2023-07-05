@@ -42,6 +42,11 @@ function main(parent) {
    *  not set, defaults to an empty string.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Supported field for filter is 'service' and value is 'dataplex'.
+   *  Eg: service=dataplex.
+   */
+  // const filter = 'abc123'
 
   // Imports the Datacatalog library
   const {PolicyTagManagerClient} = require('@google-cloud/datacatalog').v1beta1;

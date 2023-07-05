@@ -33,8 +33,10 @@ function main(entryGroup) {
    */
   // const entryGroup = {}
   /**
-   *  The fields to update on the entry group. If absent or empty, all modifiable
-   *  fields are updated.
+   *  Names of fields whose values to overwrite on an entry group.
+   *  If this parameter is absent or empty, all modifiable fields
+   *  are overwritten. If such fields are non-required and omitted in the
+   *  request body, their values are emptied.
    */
   // const updateMask = {}
 
