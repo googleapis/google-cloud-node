@@ -21474,6 +21474,9 @@ export namespace google {
 
                 /** NodeKubeletConfig podPidsLimit */
                 podPidsLimit?: (number|Long|string|null);
+
+                /** NodeKubeletConfig insecureKubeletReadonlyPortEnabled */
+                insecureKubeletReadonlyPortEnabled?: (boolean|null);
             }
 
             /** Represents a NodeKubeletConfig. */
@@ -21496,6 +21499,12 @@ export namespace google {
 
                 /** NodeKubeletConfig podPidsLimit. */
                 public podPidsLimit: (number|Long|string);
+
+                /** NodeKubeletConfig insecureKubeletReadonlyPortEnabled. */
+                public insecureKubeletReadonlyPortEnabled?: (boolean|null);
+
+                /** NodeKubeletConfig _insecureKubeletReadonlyPortEnabled. */
+                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -21999,6 +22008,9 @@ export namespace google {
 
                 /** NodeNetworkConfig podCidrOverprovisionConfig */
                 podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
+
+                /** NodeNetworkConfig podIpv4RangeUtilization */
+                podIpv4RangeUtilization?: (number|null);
             }
 
             /** Represents a NodeNetworkConfig. */
@@ -22027,6 +22039,9 @@ export namespace google {
 
                 /** NodeNetworkConfig podCidrOverprovisionConfig. */
                 public podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
+
+                /** NodeNetworkConfig podIpv4RangeUtilization. */
+                public podIpv4RangeUtilization: number;
 
                 /** NodeNetworkConfig _enablePrivateNodes. */
                 public _enablePrivateNodes?: "enablePrivateNodes";
@@ -26190,6 +26205,9 @@ export namespace google {
 
                 /** IPAllocationPolicy additionalPodRangesConfig */
                 additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
+                /** IPAllocationPolicy defaultPodIpv4RangeUtilization */
+                defaultPodIpv4RangeUtilization?: (number|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -26260,6 +26278,9 @@ export namespace google {
 
                 /** IPAllocationPolicy additionalPodRangesConfig. */
                 public additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
+                /** IPAllocationPolicy defaultPodIpv4RangeUtilization. */
+                public defaultPodIpv4RangeUtilization: number;
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -28248,6 +28269,9 @@ export namespace google {
                 /** ClusterUpdate desiredSecurityPostureConfig */
                 desiredSecurityPostureConfig?: (google.container.v1beta1.ISecurityPostureConfig|null);
 
+                /** ClusterUpdate desiredNetworkPerformanceConfig */
+                desiredNetworkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
+
                 /** ClusterUpdate desiredEnableFqdnNetworkPolicy */
                 desiredEnableFqdnNetworkPolicy?: (boolean|null);
 
@@ -28423,6 +28447,9 @@ export namespace google {
                 /** ClusterUpdate desiredSecurityPostureConfig. */
                 public desiredSecurityPostureConfig?: (google.container.v1beta1.ISecurityPostureConfig|null);
 
+                /** ClusterUpdate desiredNetworkPerformanceConfig. */
+                public desiredNetworkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
+
                 /** ClusterUpdate desiredEnableFqdnNetworkPolicy. */
                 public desiredEnableFqdnNetworkPolicy?: (boolean|null);
 
@@ -28524,6 +28551,9 @@ export namespace google {
 
                 /** AdditionalPodRangesConfig podRangeNames */
                 podRangeNames?: (string[]|null);
+
+                /** AdditionalPodRangesConfig podRangeInfo */
+                podRangeInfo?: (google.container.v1beta1.IRangeInfo[]|null);
             }
 
             /** Represents an AdditionalPodRangesConfig. */
@@ -28537,6 +28567,9 @@ export namespace google {
 
                 /** AdditionalPodRangesConfig podRangeNames. */
                 public podRangeNames: string[];
+
+                /** AdditionalPodRangesConfig podRangeInfo. */
+                public podRangeInfo: google.container.v1beta1.IRangeInfo[];
 
                 /**
                  * Creates a new AdditionalPodRangesConfig instance using the specified properties.
@@ -28610,6 +28643,109 @@ export namespace google {
 
                 /**
                  * Gets the default type url for AdditionalPodRangesConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RangeInfo. */
+            interface IRangeInfo {
+
+                /** RangeInfo rangeName */
+                rangeName?: (string|null);
+
+                /** RangeInfo utilization */
+                utilization?: (number|null);
+            }
+
+            /** Represents a RangeInfo. */
+            class RangeInfo implements IRangeInfo {
+
+                /**
+                 * Constructs a new RangeInfo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IRangeInfo);
+
+                /** RangeInfo rangeName. */
+                public rangeName: string;
+
+                /** RangeInfo utilization. */
+                public utilization: number;
+
+                /**
+                 * Creates a new RangeInfo instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RangeInfo instance
+                 */
+                public static create(properties?: google.container.v1beta1.IRangeInfo): google.container.v1beta1.RangeInfo;
+
+                /**
+                 * Encodes the specified RangeInfo message. Does not implicitly {@link google.container.v1beta1.RangeInfo.verify|verify} messages.
+                 * @param message RangeInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IRangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RangeInfo message, length delimited. Does not implicitly {@link google.container.v1beta1.RangeInfo.verify|verify} messages.
+                 * @param message RangeInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IRangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RangeInfo message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RangeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.RangeInfo;
+
+                /**
+                 * Decodes a RangeInfo message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RangeInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.RangeInfo;
+
+                /**
+                 * Verifies a RangeInfo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RangeInfo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RangeInfo
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.RangeInfo;
+
+                /**
+                 * Creates a plain object from a RangeInfo message. Also converts values to other types if specified.
+                 * @param message RangeInfo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.RangeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RangeInfo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RangeInfo
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -33361,6 +33497,9 @@ export namespace google {
 
                     /** PlacementPolicy type */
                     type?: (google.container.v1beta1.NodePool.PlacementPolicy.Type|keyof typeof google.container.v1beta1.NodePool.PlacementPolicy.Type|null);
+
+                    /** PlacementPolicy tpuTopology */
+                    tpuTopology?: (string|null);
                 }
 
                 /** Represents a PlacementPolicy. */
@@ -33374,6 +33513,9 @@ export namespace google {
 
                     /** PlacementPolicy type. */
                     public type: (google.container.v1beta1.NodePool.PlacementPolicy.Type|keyof typeof google.container.v1beta1.NodePool.PlacementPolicy.Type);
+
+                    /** PlacementPolicy tpuTopology. */
+                    public tpuTopology: string;
 
                     /**
                      * Creates a new PlacementPolicy instance using the specified properties.
@@ -35053,6 +35195,9 @@ export namespace google {
 
                 /** AutoprovisioningNodePoolDefaults imageType */
                 imageType?: (string|null);
+
+                /** AutoprovisioningNodePoolDefaults insecureKubeletReadonlyPortEnabled */
+                insecureKubeletReadonlyPortEnabled?: (boolean|null);
             }
 
             /** Represents an AutoprovisioningNodePoolDefaults. */
@@ -35093,6 +35238,12 @@ export namespace google {
 
                 /** AutoprovisioningNodePoolDefaults imageType. */
                 public imageType: string;
+
+                /** AutoprovisioningNodePoolDefaults insecureKubeletReadonlyPortEnabled. */
+                public insecureKubeletReadonlyPortEnabled?: (boolean|null);
+
+                /** AutoprovisioningNodePoolDefaults _insecureKubeletReadonlyPortEnabled. */
+                public _insecureKubeletReadonlyPortEnabled?: "insecureKubeletReadonlyPortEnabled";
 
                 /**
                  * Creates a new AutoprovisioningNodePoolDefaults instance using the specified properties.
@@ -37202,6 +37353,9 @@ export namespace google {
                 /** NetworkConfig gatewayApiConfig */
                 gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
 
+                /** NetworkConfig networkPerformanceConfig */
+                networkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
+
                 /** NetworkConfig enableFqdnNetworkPolicy */
                 enableFqdnNetworkPolicy?: (boolean|null);
             }
@@ -37244,6 +37398,9 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig. */
                 public gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig networkPerformanceConfig. */
+                public networkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
 
                 /** NetworkConfig enableFqdnNetworkPolicy. */
                 public enableFqdnNetworkPolicy?: (boolean|null);
@@ -37327,6 +37484,118 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace NetworkConfig {
+
+                /** Properties of a ClusterNetworkPerformanceConfig. */
+                interface IClusterNetworkPerformanceConfig {
+
+                    /** ClusterNetworkPerformanceConfig totalEgressBandwidthTier */
+                    totalEgressBandwidthTier?: (google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|keyof typeof google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|null);
+                }
+
+                /** Represents a ClusterNetworkPerformanceConfig. */
+                class ClusterNetworkPerformanceConfig implements IClusterNetworkPerformanceConfig {
+
+                    /**
+                     * Constructs a new ClusterNetworkPerformanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig);
+
+                    /** ClusterNetworkPerformanceConfig totalEgressBandwidthTier. */
+                    public totalEgressBandwidthTier?: (google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|keyof typeof google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.Tier|null);
+
+                    /** ClusterNetworkPerformanceConfig _totalEgressBandwidthTier. */
+                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
+
+                    /**
+                     * Creates a new ClusterNetworkPerformanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClusterNetworkPerformanceConfig instance
+                     */
+                    public static create(properties?: google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig): google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig;
+
+                    /**
+                     * Encodes the specified ClusterNetworkPerformanceConfig message. Does not implicitly {@link google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.verify|verify} messages.
+                     * @param message ClusterNetworkPerformanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClusterNetworkPerformanceConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig.verify|verify} messages.
+                     * @param message ClusterNetworkPerformanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClusterNetworkPerformanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClusterNetworkPerformanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig;
+
+                    /**
+                     * Decodes a ClusterNetworkPerformanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClusterNetworkPerformanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig;
+
+                    /**
+                     * Verifies a ClusterNetworkPerformanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClusterNetworkPerformanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClusterNetworkPerformanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig;
+
+                    /**
+                     * Creates a plain object from a ClusterNetworkPerformanceConfig message. Also converts values to other types if specified.
+                     * @param message ClusterNetworkPerformanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.NetworkConfig.ClusterNetworkPerformanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClusterNetworkPerformanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClusterNetworkPerformanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClusterNetworkPerformanceConfig {
+
+                    /** Tier enum. */
+                    enum Tier {
+                        TIER_UNSPECIFIED = 0,
+                        TIER_1 = 1
+                    }
+                }
             }
 
             /** Properties of a GatewayAPIConfig. */
@@ -38497,7 +38766,8 @@ export namespace google {
                 enum Provider {
                     PROVIDER_UNSPECIFIED = 0,
                     PLATFORM_DEFAULT = 1,
-                    CLOUD_DNS = 2
+                    CLOUD_DNS = 2,
+                    KUBE_DNS = 3
                 }
 
                 /** DNSScope enum. */

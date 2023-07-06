@@ -8073,6 +8073,9 @@ export namespace google {
 
                         /** Accelerator installGpuDrivers */
                         installGpuDrivers?: (boolean|null);
+
+                        /** Accelerator driverVersion */
+                        driverVersion?: (string|null);
                     }
 
                     /** Represents an Accelerator. */
@@ -8092,6 +8095,9 @@ export namespace google {
 
                         /** Accelerator installGpuDrivers. */
                         public installGpuDrivers: boolean;
+
+                        /** Accelerator driverVersion. */
+                        public driverVersion: string;
 
                         /**
                          * Creates a new Accelerator instance using the specified properties.

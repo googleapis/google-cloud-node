@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.9.0...batch-v0.10.0) (2023-07-04)
+
+
+### Features
+
+* [batch] Add gpu driver version field ([#4391](https://github.com/googleapis/google-cloud-node/issues/4391)) ([ec08d08](https://github.com/googleapis/google-cloud-node/commit/ec08d08cd2d8c03b61d9e7a8e7879ecfcb83475f))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.8.0...batch-v0.9.0) (2023-06-14)
 
 
