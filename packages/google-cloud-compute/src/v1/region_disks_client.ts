@@ -236,6 +236,7 @@ export class RegionDisksClient {
     // and create an API call method for each.
     const regionDisksStubMethods = [
       'addResourcePolicies',
+      'bulkInsert',
       'createSnapshot',
       'delete',
       'get',
@@ -246,6 +247,9 @@ export class RegionDisksClient {
       'resize',
       'setIamPolicy',
       'setLabels',
+      'startAsyncReplication',
+      'stopAsyncReplication',
+      'stopGroupAsyncReplication',
       'testIamPermissions',
       'update',
     ];
@@ -440,6 +444,129 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls
       .addResourcePolicies(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Bulk create a set of disks.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.BulkInsertDiskResource} request.bulkInsertDiskResourceResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_disks.bulk_insert.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_BulkInsert_async
+   */
+  bulkInsert(
+    request?: protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  bulkInsert(
+    request: protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkInsert(
+    request: protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkInsert(
+    request?: protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .bulkInsert(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -1482,6 +1609,379 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls
       .setLabels(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Starts asynchronous replication. Must be invoked on the primary disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   The name of the persistent disk.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionDisksStartAsyncReplicationRequest} request.regionDisksStartAsyncReplicationRequestResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_disks.start_async_replication.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_StartAsyncReplication_async
+   */
+  startAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  startAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStartAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        disk: request.disk ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .startAsyncReplication(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Stops asynchronous replication. Can be invoked either on the primary or on the secondary disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   The name of the persistent disk.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_disks.stop_async_replication.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_StopAsyncReplication_async
+   */
+  stopAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  stopAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        disk: request.disk ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .stopAsyncReplication(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Stops asynchronous replication for a consistency group of disks. Can be invoked either in the primary or secondary scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.DisksStopGroupAsyncReplicationResource} request.disksStopGroupAsyncReplicationResourceResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request. This must be the region of the primary or secondary disks in the consistency group.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_disks.stop_group_async_replication.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_StopGroupAsyncReplication_async
+   */
+  stopGroupAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  stopGroupAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopGroupAsyncReplication(
+    request: protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopGroupAsyncReplication(
+    request?: protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IStopGroupAsyncReplicationRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .stopGroupAsyncReplication(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,

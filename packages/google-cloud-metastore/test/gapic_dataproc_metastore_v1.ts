@@ -2398,6 +2398,592 @@ describe('v1.DataprocMetastoreClient', () => {
     });
   });
 
+  describe('queryMetadata', () => {
+    it('invokes queryMetadata without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.QueryMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.QueryMetadataRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.queryMetadata =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.queryMetadata(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetadata without error using callback', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.QueryMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.QueryMetadataRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.queryMetadata =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryMetadata(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.metastore.v1.IQueryMetadataResponse,
+              protos.google.cloud.metastore.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.metastore.v1.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetadata with call error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.QueryMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.QueryMetadataRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryMetadata = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.queryMetadata(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetadata with LRO error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.QueryMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.QueryMetadataRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryMetadata = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.queryMetadata(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkQueryMetadataProgress without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkQueryMetadataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkQueryMetadataProgress with error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkQueryMetadataProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('moveTableToDatabase', () => {
+    it('invokes moveTableToDatabase without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.MoveTableToDatabaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.MoveTableToDatabaseRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.moveTableToDatabase =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.moveTableToDatabase(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes moveTableToDatabase without error using callback', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.MoveTableToDatabaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.MoveTableToDatabaseRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.moveTableToDatabase =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.moveTableToDatabase(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.metastore.v1.IMoveTableToDatabaseResponse,
+              protos.google.cloud.metastore.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.metastore.v1.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes moveTableToDatabase with call error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.MoveTableToDatabaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.MoveTableToDatabaseRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.moveTableToDatabase(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes moveTableToDatabase with LRO error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.MoveTableToDatabaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.MoveTableToDatabaseRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.moveTableToDatabase(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveTableToDatabase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkMoveTableToDatabaseProgress without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkMoveTableToDatabaseProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkMoveTableToDatabaseProgress with error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkMoveTableToDatabaseProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('alterMetadataResourceLocation', () => {
+    it('invokes alterMetadataResourceLocation without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.alterMetadataResourceLocation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.alterMetadataResourceLocation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes alterMetadataResourceLocation without error using callback', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.alterMetadataResourceLocation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.alterMetadataResourceLocation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse,
+              protos.google.cloud.metastore.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes alterMetadataResourceLocation with call error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.alterMetadataResourceLocation(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes alterMetadataResourceLocation with LRO error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest',
+        ['service']
+      );
+      request.service = defaultValue1;
+      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.alterMetadataResourceLocation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAlterMetadataResourceLocationProgress without error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkAlterMetadataResourceLocationProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAlterMetadataResourceLocationProgress with error', async () => {
+      const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAlterMetadataResourceLocationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listServices', () => {
     it('invokes listServices without error', async () => {
       const client = new dataprocmetastoreModule.v1.DataprocMetastoreClient({

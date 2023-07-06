@@ -8,5 +8,6 @@
   "../../protos/google/cloud/datacatalog/v1beta1/search.proto",
   "../../protos/google/cloud/datacatalog/v1beta1/table_spec.proto",
   "../../protos/google/cloud/datacatalog/v1beta1/tags.proto",
-  "../../protos/google/cloud/datacatalog/v1beta1/timestamps.proto"
+  "../../protos/google/cloud/datacatalog/v1beta1/timestamps.proto",
+  "../../protos/google/cloud/datacatalog/v1beta1/usage.proto"
 ]

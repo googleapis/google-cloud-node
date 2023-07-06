@@ -11947,6 +11947,12 @@ export namespace google {
                     /** RecognitionConfig explicitDecodingConfig */
                     explicitDecodingConfig?: (google.cloud.speech.v2.IExplicitDecodingConfig|null);
 
+                    /** RecognitionConfig model */
+                    model?: (string|null);
+
+                    /** RecognitionConfig languageCodes */
+                    languageCodes?: (string[]|null);
+
                     /** RecognitionConfig features */
                     features?: (google.cloud.speech.v2.IRecognitionFeatures|null);
 
@@ -11968,6 +11974,12 @@ export namespace google {
 
                     /** RecognitionConfig explicitDecodingConfig. */
                     public explicitDecodingConfig?: (google.cloud.speech.v2.IExplicitDecodingConfig|null);
+
+                    /** RecognitionConfig model. */
+                    public model: string;
+
+                    /** RecognitionConfig languageCodes. */
+                    public languageCodes: string[];
 
                     /** RecognitionConfig features. */
                     public features?: (google.cloud.speech.v2.IRecognitionFeatures|null);
