@@ -21095,6 +21095,7 @@
                              * @property {string|null} [type] Accelerator type
                              * @property {number|Long|null} [count] Accelerator count
                              * @property {boolean|null} [installGpuDrivers] Accelerator installGpuDrivers
+                             * @property {string|null} [driverVersion] Accelerator driverVersion
                              */
     
                             /**
@@ -21137,6 +21138,14 @@
                             Accelerator.prototype.installGpuDrivers = false;
     
                             /**
+                             * Accelerator driverVersion.
+                             * @member {string} driverVersion
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.Accelerator
+                             * @instance
+                             */
+                            Accelerator.prototype.driverVersion = "";
+    
+                            /**
                              * Creates a new Accelerator instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1alpha.AllocationPolicy.Accelerator
@@ -21166,6 +21175,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
                                 if (message.installGpuDrivers != null && Object.hasOwnProperty.call(message, "installGpuDrivers"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
+                                if (message.driverVersion != null && Object.hasOwnProperty.call(message, "driverVersion"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.driverVersion);
                                 return writer;
                             };
     
@@ -21212,6 +21223,10 @@
                                             message.installGpuDrivers = reader.bool();
                                             break;
                                         }
+                                    case 4: {
+                                            message.driverVersion = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -21256,6 +21271,9 @@
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     if (typeof message.installGpuDrivers !== "boolean")
                                         return "installGpuDrivers: boolean expected";
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    if (!$util.isString(message.driverVersion))
+                                        return "driverVersion: string expected";
                                 return null;
                             };
     
@@ -21284,6 +21302,8 @@
                                         message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
                                 if (object.installGpuDrivers != null)
                                     message.installGpuDrivers = Boolean(object.installGpuDrivers);
+                                if (object.driverVersion != null)
+                                    message.driverVersion = String(object.driverVersion);
                                 return message;
                             };
     
@@ -21308,6 +21328,7 @@
                                     } else
                                         object.count = options.longs === String ? "0" : 0;
                                     object.installGpuDrivers = false;
+                                    object.driverVersion = "";
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     object.type = message.type;
@@ -21318,6 +21339,8 @@
                                         object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     object.installGpuDrivers = message.installGpuDrivers;
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    object.driverVersion = message.driverVersion;
                                 return object;
                             };
     
