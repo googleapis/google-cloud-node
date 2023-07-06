@@ -41,6 +41,8 @@
   * [Key_management_service.list_key_rings](#key_management_service.list_key_rings)
   * [Key_management_service.mac_sign](#key_management_service.mac_sign)
   * [Key_management_service.mac_verify](#key_management_service.mac_verify)
+  * [Key_management_service.raw_decrypt](#key_management_service.raw_decrypt)
+  * [Key_management_service.raw_encrypt](#key_management_service.raw_encrypt)
   * [Key_management_service.restore_crypto_key_version](#key_management_service.restore_crypto_key_version)
   * [Key_management_service.update_crypto_key](#key_management_service.update_crypto_key)
   * [Key_management_service.update_crypto_key_primary_version](#key_management_service.update_crypto_key_primary_version)
@@ -548,6 +550,40 @@ __Usage:__
 
 
 `node packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_verify.js`
+
+
+-----
+
+
+
+
+### Key_management_service.raw_decrypt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_decrypt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_decrypt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_decrypt.js`
+
+
+-----
+
+
+
+
+### Key_management_service.raw_encrypt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_encrypt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_encrypt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.raw_encrypt.js`
 
 
 -----

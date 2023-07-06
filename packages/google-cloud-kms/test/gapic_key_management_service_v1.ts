@@ -2558,6 +2558,274 @@ describe('v1.KeyManagementServiceClient', () => {
     });
   });
 
+  describe('rawEncrypt', () => {
+    it('invokes rawEncrypt without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawEncryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptResponse()
+      );
+      client.innerApiCalls.rawEncrypt = stubSimpleCall(expectedResponse);
+      const [response] = await client.rawEncrypt(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawEncrypt without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawEncryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptResponse()
+      );
+      client.innerApiCalls.rawEncrypt =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rawEncrypt(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IRawEncryptResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawEncrypt with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawEncryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rawEncrypt = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.rawEncrypt(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawEncrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawEncrypt with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawEncryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawEncryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.rawEncrypt(request), expectedError);
+    });
+  });
+
+  describe('rawDecrypt', () => {
+    it('invokes rawDecrypt without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawDecryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptResponse()
+      );
+      client.innerApiCalls.rawDecrypt = stubSimpleCall(expectedResponse);
+      const [response] = await client.rawDecrypt(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawDecrypt without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawDecryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptResponse()
+      );
+      client.innerApiCalls.rawDecrypt =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rawDecrypt(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IRawDecryptResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawDecrypt with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawDecryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rawDecrypt = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.rawDecrypt(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rawDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rawDecrypt with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RawDecryptRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.RawDecryptRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.rawDecrypt(request), expectedError);
+    });
+  });
+
   describe('asymmetricSign', () => {
     it('invokes asymmetricSign without error', async () => {
       const client =
