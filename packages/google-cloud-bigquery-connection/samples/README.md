@@ -30,7 +30,6 @@
   * [Connection_service.update_connection](#connection_service.update_connection)
   * [Connection_service.update_connection_credential](#connection_service.update_connection_credential)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -346,23 +345,6 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-connection/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-connection/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-bigquery-connection/samples/test/quickstart.js`
 
 
 
