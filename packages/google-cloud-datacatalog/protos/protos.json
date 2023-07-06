@@ -3839,6 +3839,8 @@
                     "java_package": "com.google.cloud.datacatalog.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1beta1",
                     "ruby_package": "Google::Cloud::DataCatalog::V1beta1",
+                    "(google.api.resource_definition).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}",
                     "java_outer_classname": "PolicyTagManagerSerializationProto"
                   },
                   "nested": {
@@ -3847,6 +3849,13 @@
                         "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
                         "BIGQUERY": 1,
                         "CLOUD_PUBSUB": 2
+                      }
+                    },
+                    "ManagingSystem": {
+                      "values": {
+                        "MANAGING_SYSTEM_UNSPECIFIED": 0,
+                        "MANAGING_SYSTEM_DATAPLEX": 1,
+                        "MANAGING_SYSTEM_OTHER": 2
                       }
                     },
                     "DataCatalog": {
@@ -4228,6 +4237,26 @@
                             }
                           ]
                         },
+                        "RenameTagTemplateFieldEnumValue": {
+                          "requestType": "RenameTagTemplateFieldEnumValueRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*/enumValues/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_enum_value_display_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*/enumValues/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_enum_value_display_name"
+                            }
+                          ]
+                        },
                         "DeleteTagTemplateField": {
                           "requestType": "DeleteTagTemplateFieldRequest",
                           "responseType": "google.protobuf.Empty",
@@ -4446,7 +4475,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "pageSize": {
@@ -4481,6 +4510,14 @@
                             "includeGcpPublicDatasets": {
                               "type": "bool",
                               "id": 7
+                            },
+                            "restrictedLocations": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -4493,9 +4530,18 @@
                           "type": "SearchCatalogResult",
                           "id": 1
                         },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
                         "nextPageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -4727,6 +4773,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
@@ -4780,6 +4827,13 @@
                         "sourceSystemTimestamps": {
                           "type": "SystemTimestamps",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "usageSignal": {
+                          "type": "UsageSignal",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -4994,6 +5048,25 @@
                           }
                         },
                         "newTagTemplateFieldId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RenameTagTemplateFieldEnumValueRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue"
+                          }
+                        },
+                        "newEnumValueDisplayName": {
                           "type": "string",
                           "id": 2,
                           "options": {
@@ -5233,6 +5306,10 @@
                         "linkedResource": {
                           "type": "string",
                           "id": 4
+                        },
+                        "modifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
                         }
                       }
                     },
@@ -5275,7 +5352,8 @@
                       "values": {
                         "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
                         "BIGQUERY_VIEW": 2,
-                        "BIGQUERY_TABLE": 5
+                        "BIGQUERY_TABLE": 5,
+                        "BIGQUERY_MATERIALIZED_VIEW": 7
                       }
                     },
                     "ViewSpec": {
@@ -5483,6 +5561,10 @@
                           "type": "bool",
                           "id": 3
                         },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "order": {
                           "type": "int32",
                           "id": 5
@@ -5509,6 +5591,15 @@
                         }
                       },
                       "nested": {
+                        "PrimitiveType": {
+                          "values": {
+                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                            "DOUBLE": 1,
+                            "STRING": 2,
+                            "BOOL": 3,
+                            "TIMESTAMP": 4
+                          }
+                        },
                         "EnumType": {
                           "fields": {
                             "allowedValues": {
@@ -5530,15 +5621,39 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "UsageStats": {
+                      "fields": {
+                        "totalCompletions": {
+                          "type": "float",
+                          "id": 1
                         },
-                        "PrimitiveType": {
-                          "values": {
-                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
-                            "DOUBLE": 1,
-                            "STRING": 2,
-                            "BOOL": 3,
-                            "TIMESTAMP": 4
-                          }
+                        "totalFailures": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "totalCancellations": {
+                          "type": "float",
+                          "id": 3
+                        },
+                        "totalExecutionTimeForCompletionsMillis": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UsageSignal": {
+                      "fields": {
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "usageWithinTimeRange": {
+                          "keyType": "string",
+                          "type": "UsageStats",
+                          "id": 2
                         }
                       }
                     },
@@ -5831,12 +5946,33 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "policyTagCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taxonomyTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "activatedPolicyTypes": {
                           "rule": "repeated",
                           "type": "PolicyType",
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "service": {
+                          "type": "Service",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -5845,6 +5981,18 @@
                           "values": {
                             "POLICY_TYPE_UNSPECIFIED": 0,
                             "FINE_GRAINED_ACCESS_CONTROL": 1
+                          }
+                        },
+                        "Service": {
+                          "fields": {
+                            "name": {
+                              "type": "ManagingSystem",
+                              "id": 1
+                            },
+                            "identity": {
+                              "type": "string",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -5944,6 +6092,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -6112,11 +6264,20 @@
                           "rule": "repeated",
                           "type": "SerializedPolicyTag",
                           "id": 3
+                        },
+                        "activatedPolicyTypes": {
+                          "rule": "repeated",
+                          "type": "Taxonomy.PolicyType",
+                          "id": 4
                         }
                       }
                     },
                     "SerializedPolicyTag": {
                       "fields": {
+                        "policyTag": {
+                          "type": "string",
+                          "id": 1
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 2,

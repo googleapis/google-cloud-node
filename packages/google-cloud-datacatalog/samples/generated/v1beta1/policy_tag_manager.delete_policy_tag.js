@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the policy tag to be deleted. All of its descendant
-   *  policy tags will also be deleted.
+   *  Required. Resource name of the policy tag to be deleted. All of its
+   *  descendant policy tags will also be deleted.
    */
   // const name = 'abc123'
 

@@ -865,8 +865,8 @@ export class PolicyTagManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the policy tag to be deleted. All of its descendant
-   *   policy tags will also be deleted.
+   *   Required. Resource name of the policy tag to be deleted. All of its
+   *   descendant policy tags will also be deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1441,6 +1441,9 @@ export class PolicyTagManagerClient {
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any. If
    *   not set, defaults to an empty string.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1541,6 +1544,9 @@ export class PolicyTagManagerClient {
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any. If
    *   not set, defaults to an empty string.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1589,6 +1595,9 @@ export class PolicyTagManagerClient {
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any. If
    *   not set, defaults to an empty string.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
