@@ -2290,6 +2290,143 @@ describe('v1beta1.DataCatalogClient', () => {
     });
   });
 
+  describe('renameTagTemplateFieldEnumValue', () => {
+    it('invokes renameTagTemplateFieldEnumValue without error', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
+      );
+      client.innerApiCalls.renameTagTemplateFieldEnumValue =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.renameTagTemplateFieldEnumValue(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameTagTemplateFieldEnumValue without error using callback', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
+      );
+      client.innerApiCalls.renameTagTemplateFieldEnumValue =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.renameTagTemplateFieldEnumValue(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplateField | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameTagTemplateFieldEnumValue with error', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.renameTagTemplateFieldEnumValue = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.renameTagTemplateFieldEnumValue(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameTagTemplateFieldEnumValue with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.renameTagTemplateFieldEnumValue(request),
+        expectedError
+      );
+    });
+  });
+
   describe('deleteTagTemplateField', () => {
     it('invokes deleteTagTemplateField without error', async () => {
       const client = new datacatalogModule.v1beta1.DataCatalogClient({
@@ -4958,6 +5095,121 @@ describe('v1beta1.DataCatalogClient', () => {
         assert.strictEqual(result, 'fieldValue');
         assert(
           (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tagTemplateFieldEnumValue', () => {
+      const fakePath = '/rendered/path/tagTemplateFieldEnumValue';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tag_template: 'tagTemplateValue',
+        tag_template_field_id: 'tagTemplateFieldIdValue',
+        enum_value_display_name: 'enumValueDisplayNameValue',
+      };
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tagTemplateFieldEnumValuePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tagTemplateFieldEnumValuePath', () => {
+        const result = client.tagTemplateFieldEnumValuePath(
+          'projectValue',
+          'locationValue',
+          'tagTemplateValue',
+          'tagTemplateFieldIdValue',
+          'enumValueDisplayNameValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTagTemplateFieldEnumValueName', () => {
+        const result =
+          client.matchProjectFromTagTemplateFieldEnumValueName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTagTemplateFieldEnumValueName', () => {
+        const result =
+          client.matchLocationFromTagTemplateFieldEnumValueName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagTemplateFromTagTemplateFieldEnumValueName', () => {
+        const result =
+          client.matchTagTemplateFromTagTemplateFieldEnumValueName(fakePath);
+        assert.strictEqual(result, 'tagTemplateValue');
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagTemplateFieldIdFromTagTemplateFieldEnumValueName', () => {
+        const result =
+          client.matchTagTemplateFieldIdFromTagTemplateFieldEnumValueName(
+            fakePath
+          );
+        assert.strictEqual(result, 'tagTemplateFieldIdValue');
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnumValueDisplayNameFromTagTemplateFieldEnumValueName', () => {
+        const result =
+          client.matchEnumValueDisplayNameFromTagTemplateFieldEnumValueName(
+            fakePath
+          );
+        assert.strictEqual(result, 'enumValueDisplayNameValue');
+        assert(
+          (
+            client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

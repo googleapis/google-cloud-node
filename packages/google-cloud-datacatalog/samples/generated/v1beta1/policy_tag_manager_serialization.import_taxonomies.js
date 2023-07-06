@@ -29,12 +29,12 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of project that the newly created taxonomies will
-   *  belong to.
+   *  Required. Resource name of project that the imported taxonomies will belong
+   *  to.
    */
   // const parent = 'abc123'
   /**
-   *  Inline source used for taxonomies import
+   *  Inline source used for taxonomies to be imported.
    */
   // const inlineSource = {}
 
