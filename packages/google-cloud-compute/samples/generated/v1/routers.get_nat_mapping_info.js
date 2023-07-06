@@ -37,6 +37,10 @@ function main(project, region, router) {
    */
   // const maxResults = 1234
   /**
+   *  Name of the nat service to filter the Nat Mapping information. If it is omitted, all nats for this router will be returned. Name should conform to RFC1035.
+   */
+  // const natName = 'abc123'
+  /**
    *  Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
    */
   // const orderBy = 'abc123'

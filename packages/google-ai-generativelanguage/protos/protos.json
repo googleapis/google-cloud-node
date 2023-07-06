@@ -8,7 +8,7 @@
               "nested": {
                 "v1beta2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/ai/generativelanguage/v1beta2;generativelanguage",
+                    "go_package": "cloud.google.com/go/ai/generativelanguage/apiv1beta2/generativelanguagepb;generativelanguagepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TextServiceProto",
                     "java_package": "com.google.ai.generativelanguage.v1beta2"

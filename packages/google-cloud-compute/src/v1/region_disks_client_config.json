@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BulkInsert": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateSnapshot": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -61,6 +65,18 @@
           "retry_params_name": "default"
         },
         "SetLabels": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StartAsyncReplication": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopAsyncReplication": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopGroupAsyncReplication": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

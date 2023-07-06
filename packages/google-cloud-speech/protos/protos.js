@@ -29235,6 +29235,8 @@
                          * @interface IRecognitionConfig
                          * @property {google.cloud.speech.v2.IAutoDetectDecodingConfig|null} [autoDecodingConfig] RecognitionConfig autoDecodingConfig
                          * @property {google.cloud.speech.v2.IExplicitDecodingConfig|null} [explicitDecodingConfig] RecognitionConfig explicitDecodingConfig
+                         * @property {string|null} [model] RecognitionConfig model
+                         * @property {Array.<string>|null} [languageCodes] RecognitionConfig languageCodes
                          * @property {google.cloud.speech.v2.IRecognitionFeatures|null} [features] RecognitionConfig features
                          * @property {google.cloud.speech.v2.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
                          */
@@ -29248,6 +29250,7 @@
                          * @param {google.cloud.speech.v2.IRecognitionConfig=} [properties] Properties to set
                          */
                         function RecognitionConfig(properties) {
+                            this.languageCodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -29269,6 +29272,22 @@
                          * @instance
                          */
                         RecognitionConfig.prototype.explicitDecodingConfig = null;
+    
+                        /**
+                         * RecognitionConfig model.
+                         * @member {string} model
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.model = "";
+    
+                        /**
+                         * RecognitionConfig languageCodes.
+                         * @member {Array.<string>} languageCodes
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.languageCodes = $util.emptyArray;
     
                         /**
                          * RecognitionConfig features.
@@ -29332,6 +29351,11 @@
                                 $root.google.cloud.speech.v2.AutoDetectDecodingConfig.encode(message.autoDecodingConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.explicitDecodingConfig != null && Object.hasOwnProperty.call(message, "explicitDecodingConfig"))
                                 $root.google.cloud.speech.v2.ExplicitDecodingConfig.encode(message.explicitDecodingConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.model);
+                            if (message.languageCodes != null && message.languageCodes.length)
+                                for (var i = 0; i < message.languageCodes.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.languageCodes[i]);
                             return writer;
                         };
     
@@ -29372,6 +29396,16 @@
                                     }
                                 case 8: {
                                         message.explicitDecodingConfig = $root.google.cloud.speech.v2.ExplicitDecodingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.languageCodes && message.languageCodes.length))
+                                            message.languageCodes = [];
+                                        message.languageCodes.push(reader.string());
                                         break;
                                     }
                                 case 2: {
@@ -29436,6 +29470,16 @@
                                         return "explicitDecodingConfig." + error;
                                 }
                             }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.languageCodes != null && message.hasOwnProperty("languageCodes")) {
+                                if (!Array.isArray(message.languageCodes))
+                                    return "languageCodes: array expected";
+                                for (var i = 0; i < message.languageCodes.length; ++i)
+                                    if (!$util.isString(message.languageCodes[i]))
+                                        return "languageCodes: string[] expected";
+                            }
                             if (message.features != null && message.hasOwnProperty("features")) {
                                 var error = $root.google.cloud.speech.v2.RecognitionFeatures.verify(message.features);
                                 if (error)
@@ -29471,6 +29515,15 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.explicitDecodingConfig: object expected");
                                 message.explicitDecodingConfig = $root.google.cloud.speech.v2.ExplicitDecodingConfig.fromObject(object.explicitDecodingConfig);
                             }
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.languageCodes) {
+                                if (!Array.isArray(object.languageCodes))
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionConfig.languageCodes: array expected");
+                                message.languageCodes = [];
+                                for (var i = 0; i < object.languageCodes.length; ++i)
+                                    message.languageCodes[i] = String(object.languageCodes[i]);
+                            }
                             if (object.features != null) {
                                 if (typeof object.features !== "object")
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.features: object expected");
@@ -29497,9 +29550,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.languageCodes = [];
                             if (options.defaults) {
                                 object.features = null;
                                 object.adaptation = null;
+                                object.model = "";
                             }
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.speech.v2.RecognitionFeatures.toObject(message.features, options);
@@ -29514,6 +29570,13 @@
                                 object.explicitDecodingConfig = $root.google.cloud.speech.v2.ExplicitDecodingConfig.toObject(message.explicitDecodingConfig, options);
                                 if (options.oneofs)
                                     object.decodingConfig = "explicitDecodingConfig";
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.languageCodes && message.languageCodes.length) {
+                                object.languageCodes = [];
+                                for (var j = 0; j < message.languageCodes.length; ++j)
+                                    object.languageCodes[j] = message.languageCodes[j];
                             }
                             return object;
                         };
