@@ -42,6 +42,7 @@ export {InstancesClient} from './instances_client';
 export {InstanceTemplatesClient} from './instance_templates_client';
 export {InterconnectAttachmentsClient} from './interconnect_attachments_client';
 export {InterconnectLocationsClient} from './interconnect_locations_client';
+export {InterconnectRemoteLocationsClient} from './interconnect_remote_locations_client';
 export {InterconnectsClient} from './interconnects_client';
 export {LicenseCodesClient} from './license_codes_client';
 export {LicensesClient} from './licenses_client';

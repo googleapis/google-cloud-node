@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v0.2.0...generativelanguage-v0.2.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* [generativelanguage] Update safety protos ([#4382](https://github.com/googleapis/google-cloud-node/issues/4382)) ([d06c733](https://github.com/googleapis/google-cloud-node/commit/d06c733eac7699f2a10853b150cfdeae464a9962))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v0.1.1...generativelanguage-v0.2.0) (2023-05-06)
 
 
