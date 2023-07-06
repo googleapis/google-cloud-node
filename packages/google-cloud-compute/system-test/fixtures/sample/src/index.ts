@@ -43,6 +43,7 @@ import {
   InstanceTemplatesClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
+  InterconnectRemoteLocationsClient,
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,
@@ -200,6 +201,11 @@ function doStuffWithInterconnectAttachmentsClient(
 }
 function doStuffWithInterconnectLocationsClient(
   client: InterconnectLocationsClient
+) {
+  client.close();
+}
+function doStuffWithInterconnectRemoteLocationsClient(
+  client: InterconnectRemoteLocationsClient
 ) {
   client.close();
 }
@@ -517,6 +523,12 @@ function main() {
   // check that the client instance can be created
   const interconnectLocationsClient = new InterconnectLocationsClient();
   doStuffWithInterconnectLocationsClient(interconnectLocationsClient);
+  // check that the client instance can be created
+  const interconnectRemoteLocationsClient =
+    new InterconnectRemoteLocationsClient();
+  doStuffWithInterconnectRemoteLocationsClient(
+    interconnectRemoteLocationsClient
+  );
   // check that the client instance can be created
   const interconnectsClient = new InterconnectsClient();
   doStuffWithInterconnectsClient(interconnectsClient);

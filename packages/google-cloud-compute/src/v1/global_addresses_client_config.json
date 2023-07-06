@@ -36,6 +36,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "Move": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SetLabels": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

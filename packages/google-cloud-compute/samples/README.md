@@ -20,6 +20,7 @@
   * [Addresses.get](#addresses.get)
   * [Addresses.insert](#addresses.insert)
   * [Addresses.list](#addresses.list)
+  * [Addresses.move](#addresses.move)
   * [Addresses.set_labels](#addresses.set_labels)
   * [Autoscalers.aggregated_list](#autoscalers.aggregated_list)
   * [Autoscalers.delete](#autoscalers.delete)
@@ -56,6 +57,7 @@
   * [Disk_types.list](#disk_types.list)
   * [Disks.add_resource_policies](#disks.add_resource_policies)
   * [Disks.aggregated_list](#disks.aggregated_list)
+  * [Disks.bulk_insert](#disks.bulk_insert)
   * [Disks.create_snapshot](#disks.create_snapshot)
   * [Disks.delete](#disks.delete)
   * [Disks.get](#disks.get)
@@ -66,6 +68,9 @@
   * [Disks.resize](#disks.resize)
   * [Disks.set_iam_policy](#disks.set_iam_policy)
   * [Disks.set_labels](#disks.set_labels)
+  * [Disks.start_async_replication](#disks.start_async_replication)
+  * [Disks.stop_async_replication](#disks.stop_async_replication)
+  * [Disks.stop_group_async_replication](#disks.stop_group_async_replication)
   * [Disks.test_iam_permissions](#disks.test_iam_permissions)
   * [Disks.update](#disks.update)
   * [External_vpn_gateways.delete](#external_vpn_gateways.delete)
@@ -110,6 +115,7 @@
   * [Global_addresses.get](#global_addresses.get)
   * [Global_addresses.insert](#global_addresses.insert)
   * [Global_addresses.list](#global_addresses.list)
+  * [Global_addresses.move](#global_addresses.move)
   * [Global_addresses.set_labels](#global_addresses.set_labels)
   * [Global_forwarding_rules.delete](#global_forwarding_rules.delete)
   * [Global_forwarding_rules.get](#global_forwarding_rules.get)
@@ -249,6 +255,8 @@
   * [Interconnect_attachments.set_labels](#interconnect_attachments.set_labels)
   * [Interconnect_locations.get](#interconnect_locations.get)
   * [Interconnect_locations.list](#interconnect_locations.list)
+  * [Interconnect_remote_locations.get](#interconnect_remote_locations.get)
+  * [Interconnect_remote_locations.list](#interconnect_remote_locations.list)
   * [Interconnects.delete](#interconnects.delete)
   * [Interconnects.get](#interconnects.get)
   * [Interconnects.get_diagnostics](#interconnects.get_diagnostics)
@@ -403,6 +411,7 @@
   * [Region_disk_types.get](#region_disk_types.get)
   * [Region_disk_types.list](#region_disk_types.list)
   * [Region_disks.add_resource_policies](#region_disks.add_resource_policies)
+  * [Region_disks.bulk_insert](#region_disks.bulk_insert)
   * [Region_disks.create_snapshot](#region_disks.create_snapshot)
   * [Region_disks.delete](#region_disks.delete)
   * [Region_disks.get](#region_disks.get)
@@ -413,6 +422,9 @@
   * [Region_disks.resize](#region_disks.resize)
   * [Region_disks.set_iam_policy](#region_disks.set_iam_policy)
   * [Region_disks.set_labels](#region_disks.set_labels)
+  * [Region_disks.start_async_replication](#region_disks.start_async_replication)
+  * [Region_disks.stop_async_replication](#region_disks.stop_async_replication)
+  * [Region_disks.stop_group_async_replication](#region_disks.stop_group_async_replication)
   * [Region_disks.test_iam_permissions](#region_disks.test_iam_permissions)
   * [Region_disks.update](#region_disks.update)
   * [Region_health_check_services.delete](#region_health_check_services.delete)
@@ -705,7 +717,6 @@
   * [Region_operations.get](#region_operations.get)
   * [Region_operations.wait](#region_operations.wait)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -851,6 +862,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/addresses.list.js`
+
+
+-----
+
+
+
+
+### Addresses.move
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/addresses.move.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/addresses.move.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/addresses.move.js`
 
 
 -----
@@ -1470,6 +1498,23 @@ __Usage:__
 
 
 
+### Disks.bulk_insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.bulk_insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.bulk_insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.bulk_insert.js`
+
+
+-----
+
+
+
+
 ### Disks.create_snapshot
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.create_snapshot.js).
@@ -1633,6 +1678,57 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/disks.set_labels.js`
+
+
+-----
+
+
+
+
+### Disks.start_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.start_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.start_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.start_async_replication.js`
+
+
+-----
+
+
+
+
+### Disks.stop_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.stop_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.stop_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.stop_async_replication.js`
+
+
+-----
+
+
+
+
+### Disks.stop_group_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.stop_group_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.stop_group_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.stop_group_async_replication.js`
 
 
 -----
@@ -2381,6 +2477,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/global_addresses.list.js`
+
+
+-----
+
+
+
+
+### Global_addresses.move
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/global_addresses.move.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/global_addresses.move.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/global_addresses.move.js`
 
 
 -----
@@ -4744,6 +4857,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/interconnect_locations.list.js`
+
+
+-----
+
+
+
+
+### Interconnect_remote_locations.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.get.js`
+
+
+-----
+
+
+
+
+### Interconnect_remote_locations.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/interconnect_remote_locations.list.js`
 
 
 -----
@@ -7369,6 +7516,23 @@ __Usage:__
 
 
 
+### Region_disks.bulk_insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.bulk_insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_disks.bulk_insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_disks.bulk_insert.js`
+
+
+-----
+
+
+
+
 ### Region_disks.create_snapshot
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.create_snapshot.js).
@@ -7532,6 +7696,57 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_disks.set_labels.js`
+
+
+-----
+
+
+
+
+### Region_disks.start_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.start_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_disks.start_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_disks.start_async_replication.js`
+
+
+-----
+
+
+
+
+### Region_disks.stop_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.stop_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_disks.stop_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_disks.stop_async_replication.js`
+
+
+-----
+
+
+
+
+### Region_disks.stop_group_async_replication
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.stop_group_async_replication.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_disks.stop_group_async_replication.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_disks.stop_group_async_replication.js`
 
 
 -----
@@ -12496,23 +12711,6 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-compute/samples/test/quickstart.test.js`
 
 
 
