@@ -239,6 +239,7 @@ export class GlobalAddressesClient {
       'get',
       'insert',
       'list',
+      'move',
       'setLabels',
     ];
     for (const methodName of globalAddressesStubMethods) {
@@ -641,6 +642,129 @@ export class GlobalAddressesClient {
     this.initialize();
     return this.innerApiCalls
       .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Moves the specified address resource from one project to another project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.address
+   *   Name of the address resource to move.
+   * @param {google.cloud.compute.v1.GlobalAddressesMoveRequest} request.globalAddressesMoveRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Source project ID which the Address is moved from.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/global_addresses.move.js</caption>
+   * region_tag:compute_v1_generated_GlobalAddresses_Move_async
+   */
+  move(
+    request?: protos.google.cloud.compute.v1.IMoveGlobalAddressRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  move(
+    request: protos.google.cloud.compute.v1.IMoveGlobalAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveGlobalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  move(
+    request: protos.google.cloud.compute.v1.IMoveGlobalAddressRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveGlobalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  move(
+    request?: protos.google.cloud.compute.v1.IMoveGlobalAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IMoveGlobalAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveGlobalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        address: request.address ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .move(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,

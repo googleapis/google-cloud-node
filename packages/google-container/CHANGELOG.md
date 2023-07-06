@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.13.0...container-v4.14.0) (2023-07-04)
+
+
+### Features
+
+* [container] Add `KUBE_DNS` option to `DNSConfig.cluster_dns` ([#4383](https://github.com/googleapis/google-cloud-node/issues/4383)) ([833a1ae](https://github.com/googleapis/google-cloud-node/commit/833a1ae44bab92fbfef8a225947b6d1f482cf099))
+
 ## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.12.0...container-v4.13.0) (2023-06-14)
 
 
