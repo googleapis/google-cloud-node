@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.7.0...cloudbuild-v3.8.0) (2023-07-04)
+
+
+### Features
+
+* [cloudbuild] Add GitLabConfig and fetchGitRefs for Cloud Build Repositories ([#4380](https://github.com/googleapis/google-cloud-node/issues/4380)) ([a425fe2](https://github.com/googleapis/google-cloud-node/commit/a425fe255c2e1c002cb58e3c2c074366d7724de9))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.6.0...cloudbuild-v3.7.0) (2023-06-28)
 
 

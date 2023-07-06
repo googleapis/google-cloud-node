@@ -5,6 +5,108 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5951ac077a08fcc427e3cd67c022d21f0040f81c",
+          "message": "Add initial files for google.cloud.migrationcenter.v1",
+          "issues": [
+            "4386"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "b9b11345-f326-45a7-8b72-1422001af4b7",
+      "createTime": "2023-07-04T14:41:00.186Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d06c733eac7699f2a10853b150cfdeae464a9962",
+          "message": "[generativelanguage] Update safety protos",
+          "issues": [
+            "4382"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "d21a7d0d-15db-4ed5-a30d-1097066e8ff4",
+      "createTime": "2023-07-04T14:41:00.181Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8414c8458133ecc654d25eeb8b0b90c4dac9ff04",
+          "message": "[routing] Add HTML Navigation Instructions feature to ComputeRoutes",
+          "issues": [
+            "4381"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "1d60180f-ee0e-4ead-9e58-2d8d01f7f106",
+      "createTime": "2023-07-04T14:41:00.178Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a425fe255c2e1c002cb58e3c2c074366d7724de9",
+          "message": "[cloudbuild] Add GitLabConfig and fetchGitRefs for Cloud Build Repositories",
+          "issues": [
+            "4380"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "3b6ad957-9b29-47ac-b1e7-926761f19620",
+      "createTime": "2023-07-04T14:41:00.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "833a1ae44bab92fbfef8a225947b6d1f482cf099",
+          "message": "[container] Add `KUBE_DNS` option to `DNSConfig.cluster_dns`",
+          "issues": [
+            "4383"
+          ]
+        }
+      ],
+      "version": "4.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "f387127b-5fec-41ee-b335-c0b493bddff8",
+      "createTime": "2023-07-04T14:41:00.171Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ec08d08cd2d8c03b61d9e7a8e7879ecfcb83475f",
+          "message": "[batch] Add gpu driver version field",
+          "issues": [
+            "4391"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "9b71c336-47a0-4113-bcbb-b1c762a95555",
+      "createTime": "2023-07-04T14:41:00.167Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f6f3726caf528c591f55772c23b8836a2657c2c8",
           "message": "[storagetransfer] add event driven transfer configuration",
           "issues": [
@@ -10780,5 +10882,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-06-28T19:08:57.103Z"
+  "updateTime": "2023-07-04T14:41:00.186Z"
 }
