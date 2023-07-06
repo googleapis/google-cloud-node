@@ -10393,6 +10393,9 @@ export namespace google {
                     /** Service uri */
                     uri?: (string|null);
 
+                    /** Service customAudiences */
+                    customAudiences?: (string[]|null);
+
                     /** Service satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
@@ -10489,6 +10492,9 @@ export namespace google {
 
                     /** Service uri. */
                     public uri: string;
+
+                    /** Service customAudiences. */
+                    public customAudiences: string[];
 
                     /** Service satisfiesPzs. */
                     public satisfiesPzs: boolean;

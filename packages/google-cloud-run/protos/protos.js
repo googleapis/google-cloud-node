@@ -27515,6 +27515,7 @@
                          * @property {string|null} [latestCreatedRevision] Service latestCreatedRevision
                          * @property {Array.<google.cloud.run.v2.ITrafficTargetStatus>|null} [trafficStatuses] Service trafficStatuses
                          * @property {string|null} [uri] Service uri
+                         * @property {Array.<string>|null} [customAudiences] Service customAudiences
                          * @property {boolean|null} [satisfiesPzs] Service satisfiesPzs
                          * @property {boolean|null} [reconciling] Service reconciling
                          * @property {string|null} [etag] Service etag
@@ -27534,6 +27535,7 @@
                             this.traffic = [];
                             this.conditions = [];
                             this.trafficStatuses = [];
+                            this.customAudiences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -27749,6 +27751,14 @@
                         Service.prototype.uri = "";
     
                         /**
+                         * Service customAudiences.
+                         * @member {Array.<string>} customAudiences
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.customAudiences = $util.emptyArray;
+    
+                        /**
                          * Service satisfiesPzs.
                          * @member {boolean} satisfiesPzs
                          * @memberof google.cloud.run.v2.Service
@@ -27853,6 +27863,9 @@
                                     $root.google.cloud.run.v2.TrafficTargetStatus.encode(message.trafficStatuses[i], writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 36, wireType 2 =*/290).string(message.uri);
+                            if (message.customAudiences != null && message.customAudiences.length)
+                                for (var i = 0; i < message.customAudiences.length; ++i)
+                                    writer.uint32(/* id 37, wireType 2 =*/298).string(message.customAudiences[i]);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.satisfiesPzs);
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
@@ -28041,6 +28054,12 @@
                                         message.uri = reader.string();
                                         break;
                                     }
+                                case 37: {
+                                        if (!(message.customAudiences && message.customAudiences.length))
+                                            message.customAudiences = [];
+                                        message.customAudiences.push(reader.string());
+                                        break;
+                                    }
                                 case 38: {
                                         message.satisfiesPzs = reader.bool();
                                         break;
@@ -28226,6 +28245,13 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.customAudiences != null && message.hasOwnProperty("customAudiences")) {
+                                if (!Array.isArray(message.customAudiences))
+                                    return "customAudiences: array expected";
+                                for (var i = 0; i < message.customAudiences.length; ++i)
+                                    if (!$util.isString(message.customAudiences[i]))
+                                        return "customAudiences: string[] expected";
+                            }
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
@@ -28431,6 +28457,13 @@
                             }
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.customAudiences) {
+                                if (!Array.isArray(object.customAudiences))
+                                    throw TypeError(".google.cloud.run.v2.Service.customAudiences: array expected");
+                                message.customAudiences = [];
+                                for (var i = 0; i < object.customAudiences.length; ++i)
+                                    message.customAudiences[i] = String(object.customAudiences[i]);
+                            }
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.reconciling != null)
@@ -28457,6 +28490,7 @@
                                 object.traffic = [];
                                 object.conditions = [];
                                 object.trafficStatuses = [];
+                                object.customAudiences = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -28570,6 +28604,11 @@
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.customAudiences && message.customAudiences.length) {
+                                object.customAudiences = [];
+                                for (var j = 0; j < message.customAudiences.length; ++j)
+                                    object.customAudiences[j] = message.customAudiences[j];
+                            }
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
