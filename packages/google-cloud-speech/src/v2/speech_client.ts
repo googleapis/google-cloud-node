@@ -702,7 +702,8 @@ export class SpeechClient {
    * @param {string} request.recognizer
    *   Required. The name of the Recognizer to use during recognition. The
    *   expected format is
-   *   `projects/{project}/locations/{location}/recognizers/{recognizer}`.
+   *   `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+   *   {recognizer} segment may be set to `_` to use an empty implicit Recognizer.
    * @param {google.cloud.speech.v2.RecognitionConfig} request.config
    *   Features and audio metadata to use for the Automatic Speech Recognition.
    *   This field in combination with the
@@ -1781,7 +1782,10 @@ export class SpeechClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.recognizer
-   *   Required. Resource name of the recognizer to be used for ASR.
+   *   Required. The name of the Recognizer to use during recognition. The
+   *   expected format is
+   *   `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+   *   {recognizer} segment may be set to `_` to use an empty implicit Recognizer.
    * @param {google.cloud.speech.v2.RecognitionConfig} request.config
    *   Features and audio metadata to use for the Automatic Speech Recognition.
    *   This field in combination with the

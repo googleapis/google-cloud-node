@@ -70,6 +70,21 @@
                 "deleteBackup"
               ]
             },
+            "QueryMetadata": {
+              "methods": [
+                "queryMetadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "moveTableToDatabase"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alterMetadataResourceLocation"
+              ]
+            },
             "ListServices": {
               "methods": [
                 "listServices",
@@ -154,6 +169,21 @@
             "DeleteBackup": {
               "methods": [
                 "deleteBackup"
+              ]
+            },
+            "QueryMetadata": {
+              "methods": [
+                "queryMetadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "moveTableToDatabase"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alterMetadataResourceLocation"
               ]
             },
             "ListServices": {

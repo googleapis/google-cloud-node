@@ -74,6 +74,8 @@ const InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 type InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 const InterconnectLocationsClient = v1.InterconnectLocationsClient;
 type InterconnectLocationsClient = v1.InterconnectLocationsClient;
+const InterconnectRemoteLocationsClient = v1.InterconnectRemoteLocationsClient;
+type InterconnectRemoteLocationsClient = v1.InterconnectRemoteLocationsClient;
 const InterconnectsClient = v1.InterconnectsClient;
 type InterconnectsClient = v1.InterconnectsClient;
 const LicenseCodesClient = v1.LicenseCodesClient;
@@ -232,6 +234,7 @@ export {
   InstanceTemplatesClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
+  InterconnectRemoteLocationsClient,
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,
@@ -325,6 +328,7 @@ export default {
   InstanceTemplatesClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
+  InterconnectRemoteLocationsClient,
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,

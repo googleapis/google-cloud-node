@@ -29,7 +29,10 @@ function main(recognizer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the recognizer to be used for ASR.
+   *  Required. The name of the Recognizer to use during recognition. The
+   *  expected format is
+   *  `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+   *  {recognizer} segment may be set to `_` to use an empty implicit Recognizer.
    */
   // const recognizer = 'abc123'
   /**

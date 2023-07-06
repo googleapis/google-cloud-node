@@ -657,6 +657,149 @@ describe('v1.GlobalAddressesClient', () => {
     });
   });
 
+  describe('move', () => {
+    it('invokes move without error', async () => {
+      const client = new globaladdressesModule.v1.GlobalAddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['address']
+      );
+      request.address = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.move = stubSimpleCall(expectedResponse);
+      const [response] = await client.move(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.move as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.move as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes move without error using callback', async () => {
+      const client = new globaladdressesModule.v1.GlobalAddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['address']
+      );
+      request.address = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.move = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.move(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.move as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.move as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes move with error', async () => {
+      const client = new globaladdressesModule.v1.GlobalAddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['address']
+      );
+      request.address = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&address=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.move = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.move(request), expectedError);
+      const actualRequest = (client.innerApiCalls.move as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.move as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes move with closed client', async () => {
+      const client = new globaladdressesModule.v1.GlobalAddressesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveGlobalAddressRequest',
+        ['address']
+      );
+      request.address = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.move(request), expectedError);
+    });
+  });
+
   describe('setLabels', () => {
     it('invokes setLabels without error', async () => {
       const client = new globaladdressesModule.v1.GlobalAddressesClient({
