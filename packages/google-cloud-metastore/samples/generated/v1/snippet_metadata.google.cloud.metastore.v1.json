@@ -744,6 +744,150 @@
             }
         },
         {
+            "regionTag": "metastore_v1_generated_DataprocMetastore_QueryMetadata_async",
+            "title": "DataprocMetastore queryMetadata Sample",
+            "origin": "API_DEFINITION",
+            "description": " Query DPMS metadata.",
+            "canonical": true,
+            "file": "dataproc_metastore.query_metadata.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryMetadata",
+                "fullName": "google.cloud.metastore.v1.DataprocMetastore.QueryMetadata",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "service",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataprocMetastoreClient",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastoreClient"
+                },
+                "method": {
+                    "shortName": "QueryMetadata",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastore.QueryMetadata",
+                    "service": {
+                        "shortName": "DataprocMetastore",
+                        "fullName": "google.cloud.metastore.v1.DataprocMetastore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "metastore_v1_generated_DataprocMetastore_MoveTableToDatabase_async",
+            "title": "DataprocMetastore moveTableToDatabase Sample",
+            "origin": "API_DEFINITION",
+            "description": " Move a table to another database.",
+            "canonical": true,
+            "file": "dataproc_metastore.move_table_to_database.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "MoveTableToDatabase",
+                "fullName": "google.cloud.metastore.v1.DataprocMetastore.MoveTableToDatabase",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "service",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "table_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "db_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_db_name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataprocMetastoreClient",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastoreClient"
+                },
+                "method": {
+                    "shortName": "MoveTableToDatabase",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastore.MoveTableToDatabase",
+                    "service": {
+                        "shortName": "DataprocMetastore",
+                        "fullName": "google.cloud.metastore.v1.DataprocMetastore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "metastore_v1_generated_DataprocMetastore_AlterMetadataResourceLocation_async",
+            "title": "DataprocMetastore alterMetadataResourceLocation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Alter metadata resource location. The metadata resource can be a database, table, or partition. This functionality only updates the parent directory for the respective metadata resource and does not transfer any existing data to the new location.",
+            "canonical": true,
+            "file": "dataproc_metastore.alter_metadata_resource_location.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AlterMetadataResourceLocation",
+                "fullName": "google.cloud.metastore.v1.DataprocMetastore.AlterMetadataResourceLocation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "service",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_uri",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataprocMetastoreClient",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastoreClient"
+                },
+                "method": {
+                    "shortName": "AlterMetadataResourceLocation",
+                    "fullName": "google.cloud.metastore.v1.DataprocMetastore.AlterMetadataResourceLocation",
+                    "service": {
+                        "shortName": "DataprocMetastore",
+                        "fullName": "google.cloud.metastore.v1.DataprocMetastore"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "metastore_v1_generated_DataprocMetastoreFederation_ListFederations_async",
             "title": "DataprocMetastore listFederations Sample",
             "origin": "API_DEFINITION",
