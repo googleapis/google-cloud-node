@@ -1967,7 +1967,8 @@ export class TestCasesClient {
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.ITestCase>;
   }
   /**
-   * Fetches a list of results for a given test case.
+   * Fetches the list of run results for the given test case. A maximum of 100
+   * results are kept for each test case.
    *
    * @param {Object} request
    *   The request object that will be sent.
