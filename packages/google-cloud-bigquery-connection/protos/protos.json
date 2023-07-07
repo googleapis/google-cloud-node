@@ -306,7 +306,8 @@
                                 "azure",
                                 "cloudSpanner",
                                 "cloudResource",
-                                "spark"
+                                "spark",
+                                "salesforceDataCloud"
                               ]
                             }
                           },
@@ -346,6 +347,13 @@
                             "spark": {
                               "type": "SparkProperties",
                               "id": 23
+                            },
+                            "salesforceDataCloud": {
+                              "type": "SalesforceDataCloudProperties",
+                              "id": 24,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "creationTime": {
                               "type": "int64",
@@ -431,9 +439,17 @@
                               "type": "bool",
                               "id": 2
                             },
+                            "maxParallelism": {
+                              "type": "int32",
+                              "id": 5
+                            },
                             "useServerlessAnalytics": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "useDataBoost": {
+                              "type": "bool",
+                              "id": 6
                             },
                             "databaseRole": {
                               "type": "string",
@@ -602,6 +618,25 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            }
+                          }
+                        },
+                        "SalesforceDataCloudProperties": {
+                          "fields": {
+                            "instanceUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "identity": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "tenantId": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
