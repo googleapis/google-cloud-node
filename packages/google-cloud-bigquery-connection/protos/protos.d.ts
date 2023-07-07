@@ -875,6 +875,9 @@ export namespace google {
                         /** Connection spark */
                         spark?: (google.cloud.bigquery.connection.v1.ISparkProperties|null);
 
+                        /** Connection salesforceDataCloud */
+                        salesforceDataCloud?: (google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties|null);
+
                         /** Connection creationTime */
                         creationTime?: (number|Long|string|null);
 
@@ -921,6 +924,9 @@ export namespace google {
                         /** Connection spark. */
                         public spark?: (google.cloud.bigquery.connection.v1.ISparkProperties|null);
 
+                        /** Connection salesforceDataCloud. */
+                        public salesforceDataCloud?: (google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties|null);
+
                         /** Connection creationTime. */
                         public creationTime: (number|Long|string);
 
@@ -931,7 +937,7 @@ export namespace google {
                         public hasCredential: boolean;
 
                         /** Connection properties. */
-                        public properties?: ("cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark");
+                        public properties?: ("cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark"|"salesforceDataCloud");
 
                         /**
                          * Creates a new Connection instance using the specified properties.
@@ -1254,8 +1260,14 @@ export namespace google {
                         /** CloudSpannerProperties useParallelism */
                         useParallelism?: (boolean|null);
 
+                        /** CloudSpannerProperties maxParallelism */
+                        maxParallelism?: (number|null);
+
                         /** CloudSpannerProperties useServerlessAnalytics */
                         useServerlessAnalytics?: (boolean|null);
+
+                        /** CloudSpannerProperties useDataBoost */
+                        useDataBoost?: (boolean|null);
 
                         /** CloudSpannerProperties databaseRole */
                         databaseRole?: (string|null);
@@ -1276,8 +1288,14 @@ export namespace google {
                         /** CloudSpannerProperties useParallelism. */
                         public useParallelism: boolean;
 
+                        /** CloudSpannerProperties maxParallelism. */
+                        public maxParallelism: number;
+
                         /** CloudSpannerProperties useServerlessAnalytics. */
                         public useServerlessAnalytics: boolean;
+
+                        /** CloudSpannerProperties useDataBoost. */
+                        public useDataBoost: boolean;
 
                         /** CloudSpannerProperties databaseRole. */
                         public databaseRole: string;
@@ -2205,6 +2223,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SparkProperties
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SalesforceDataCloudProperties. */
+                    interface ISalesforceDataCloudProperties {
+
+                        /** SalesforceDataCloudProperties instanceUri */
+                        instanceUri?: (string|null);
+
+                        /** SalesforceDataCloudProperties identity */
+                        identity?: (string|null);
+
+                        /** SalesforceDataCloudProperties tenantId */
+                        tenantId?: (string|null);
+                    }
+
+                    /** Represents a SalesforceDataCloudProperties. */
+                    class SalesforceDataCloudProperties implements ISalesforceDataCloudProperties {
+
+                        /**
+                         * Constructs a new SalesforceDataCloudProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties);
+
+                        /** SalesforceDataCloudProperties instanceUri. */
+                        public instanceUri: string;
+
+                        /** SalesforceDataCloudProperties identity. */
+                        public identity: string;
+
+                        /** SalesforceDataCloudProperties tenantId. */
+                        public tenantId: string;
+
+                        /**
+                         * Creates a new SalesforceDataCloudProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SalesforceDataCloudProperties instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties): google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties;
+
+                        /**
+                         * Encodes the specified SalesforceDataCloudProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.verify|verify} messages.
+                         * @param message SalesforceDataCloudProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SalesforceDataCloudProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.verify|verify} messages.
+                         * @param message SalesforceDataCloudProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SalesforceDataCloudProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SalesforceDataCloudProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties;
+
+                        /**
+                         * Decodes a SalesforceDataCloudProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SalesforceDataCloudProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties;
+
+                        /**
+                         * Verifies a SalesforceDataCloudProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SalesforceDataCloudProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SalesforceDataCloudProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties;
+
+                        /**
+                         * Creates a plain object from a SalesforceDataCloudProperties message. Also converts values to other types if specified.
+                         * @param message SalesforceDataCloudProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SalesforceDataCloudProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SalesforceDataCloudProperties
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
