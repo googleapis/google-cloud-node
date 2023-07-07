@@ -14,6 +14,7 @@
 
 import {
   Encodings,
+  ISchema,
   Message,
   PubSub,
   Schema,
@@ -59,13 +60,29 @@ describe('schema', () => {
   }
 
   async function cleanAllSchemas() {
-    const schemas = [];
+    const schemas: ISchema[] = [];
     for await (const s of pubsub.listSchemas()) {
       schemas.push(s);
     }
-    await Promise.all(
-      resources.filterForCleanup(schemas).map(s => s.delete?.())
-    );
+    const proms = resources.filterForCleanup(schemas).map(async s => {
+      await pubsub.schema(s.name!).delete!();
+    });
+
+    /*
+    // In case we need another forceful clean-up pass in the future,
+    // when changing ID formats.
+    const now = Date.now();
+    for (const s of schemas) {
+      if (s.name!.includes('/schema-')) {
+        const ts = (s.revisionCreateTime!.seconds! as number) * 1000;
+        if (now - ts >= 2 * 1000 * 60 * 60) {
+          proms.push(pubsub.schema(s.name!).delete!());
+        }
+      }
+    }
+    */
+
+    await Promise.all(proms);
   }
 
   async function cleanAllTopics() {

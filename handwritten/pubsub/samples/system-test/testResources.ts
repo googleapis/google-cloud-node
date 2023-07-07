@@ -147,16 +147,19 @@ export class TestResources {
   filterForCleanup(allResources: Resource[]): Resource[] {
     const currentRunPrefix = this.getPrefix();
     return allResources.filter(n => {
-      const name = n.name || null;
-      if (name === null) {
+      let name = n.name || undefined;
+      if (name === undefined) {
         return false;
       }
 
-      if (name.includes(currentRunPrefix)) {
+      // We'll always get at least one thing.
+      name = name.split('/').pop()!;
+
+      if (name.startsWith(currentRunPrefix)) {
         return true;
       }
 
-      if (name.includes(this.testSuiteId)) {
+      if (name.startsWith(this.testSuiteId)) {
         const parts = name.split('-');
         const createdAt = Number(parts[1]);
         const timeDiff = (Date.now() - createdAt) / (1000 * 60 * 60);
