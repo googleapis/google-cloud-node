@@ -49,6 +49,10 @@ function main(name) {
    */
   // const agentContent = 'Buffer.from('string')'
   /**
+   *  Setting for restoring from a git branch
+   */
+  // const gitSource = {}
+  /**
    *  Agent restore mode. If not specified, `KEEP` is assumed.
    */
   // const restoreOption = {}
