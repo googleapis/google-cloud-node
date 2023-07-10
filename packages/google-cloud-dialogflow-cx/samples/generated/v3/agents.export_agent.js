@@ -57,6 +57,10 @@ function main(name) {
    */
   // const environment = 'abc123'
   /**
+   *  Optional. The Git branch to export the agent to.
+   */
+  // const gitDestination = {}
+  /**
    *  Optional. Whether to include BigQuery Export setting.
    */
   // const includeBigqueryExportSettings = true
