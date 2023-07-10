@@ -11076,6 +11076,12 @@ export namespace google {
 
                     /** IssueModel trainingStats */
                     trainingStats?: (google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null);
+
+                    /** IssueModel modelType */
+                    modelType?: (google.cloud.contactcenterinsights.v1.IssueModel.ModelType|keyof typeof google.cloud.contactcenterinsights.v1.IssueModel.ModelType|null);
+
+                    /** IssueModel languageCode */
+                    languageCode?: (string|null);
                 }
 
                 /** Represents an IssueModel. */
@@ -11110,6 +11116,12 @@ export namespace google {
 
                     /** IssueModel trainingStats. */
                     public trainingStats?: (google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null);
+
+                    /** IssueModel modelType. */
+                    public modelType: (google.cloud.contactcenterinsights.v1.IssueModel.ModelType|keyof typeof google.cloud.contactcenterinsights.v1.IssueModel.ModelType);
+
+                    /** IssueModel languageCode. */
+                    public languageCode: string;
 
                     /**
                      * Creates a new IssueModel instance using the specified properties.
@@ -11308,6 +11320,13 @@ export namespace google {
                         DEPLOYED = 3,
                         UNDEPLOYING = 4,
                         DELETING = 5
+                    }
+
+                    /** ModelType enum. */
+                    enum ModelType {
+                        MODEL_TYPE_UNSPECIFIED = 0,
+                        TYPE_V1 = 1,
+                        TYPE_V2 = 2
                     }
                 }
 
