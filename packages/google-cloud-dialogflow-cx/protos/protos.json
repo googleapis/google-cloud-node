@@ -333,9 +333,57 @@
                               "type": "AdvancedSettings",
                               "id": 22
                             },
+                            "gitIntegrationSettings": {
+                              "type": "GitIntegrationSettings",
+                              "id": 30
+                            },
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
+                            }
+                          },
+                          "nested": {
+                            "GitIntegrationSettings": {
+                              "oneofs": {
+                                "gitSettings": {
+                                  "oneof": [
+                                    "githubSettings"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "githubSettings": {
+                                  "type": "GithubSettings",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "GithubSettings": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "repositoryUri": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "trackingBranch": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "accessToken": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "branches": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -462,6 +510,13 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
                             },
+                            "gitDestination": {
+                              "type": "GitDestination",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "includeBigqueryExportSettings": {
                               "type": "bool",
                               "id": 7,
@@ -477,6 +532,18 @@
                                 "BLOB": 1,
                                 "JSON_PACKAGE": 4
                               }
+                            },
+                            "GitDestination": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "commitMessage": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -485,7 +552,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "commitSha"
                               ]
                             }
                           },
@@ -497,6 +565,10 @@
                             "agentContent": {
                               "type": "bytes",
                               "id": 2
+                            },
+                            "commitSha": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -505,7 +577,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "gitSource"
                               ]
                             }
                           },
@@ -526,12 +599,24 @@
                               "type": "bytes",
                               "id": 3
                             },
+                            "gitSource": {
+                              "type": "GitSource",
+                              "id": 6
+                            },
                             "restoreOption": {
                               "type": "RestoreOption",
                               "id": 5
                             }
                           },
                           "nested": {
+                            "GitSource": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "RestoreOption": {
                               "values": {
                                 "RESTORE_OPTION_UNSPECIFIED": 0,
