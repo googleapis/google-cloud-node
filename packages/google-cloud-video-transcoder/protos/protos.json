@@ -109,6 +109,17 @@
                             "mode": {
                               "type": "ProcessingMode",
                               "id": 20
+                            },
+                            "batchModePriority": {
+                              "type": "int32",
+                              "id": 21
+                            },
+                            "optimization": {
+                              "type": "OptimizationStrategy",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -126,6 +137,13 @@
                                 "PROCESSING_MODE_UNSPECIFIED": 0,
                                 "PROCESSING_MODE_INTERACTIVE": 1,
                                 "PROCESSING_MODE_BATCH": 2
+                              }
+                            },
+                            "OptimizationStrategy": {
+                              "values": {
+                                "OPTIMIZATION_STRATEGY_UNSPECIFIED": 0,
+                                "AUTODETECT": 1,
+                                "DISABLED": 2
                               }
                             }
                           }
@@ -200,6 +218,11 @@
                               "rule": "repeated",
                               "type": "Overlay",
                               "id": 10
+                            },
+                            "encryptions": {
+                              "rule": "repeated",
+                              "type": "Encryption",
+                              "id": 11
                             }
                           }
                         },
@@ -307,10 +330,21 @@
                             "segmentSettings": {
                               "type": "SegmentSettings",
                               "id": 5
+                            },
+                            "encryptionId": {
+                              "type": "string",
+                              "id": 7
                             }
                           }
                         },
                         "Manifest": {
+                          "oneofs": {
+                            "manifestConfig": {
+                              "oneof": [
+                                "dash"
+                              ]
+                            }
+                          },
                           "fields": {
                             "fileName": {
                               "type": "string",
@@ -330,6 +364,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "dash": {
+                              "type": "DashConfig",
+                              "id": 4
                             }
                           },
                           "nested": {
@@ -338,6 +376,23 @@
                                 "MANIFEST_TYPE_UNSPECIFIED": 0,
                                 "HLS": 1,
                                 "DASH": 2
+                              }
+                            },
+                            "DashConfig": {
+                              "fields": {
+                                "segmentReferenceScheme": {
+                                  "type": "SegmentReferenceScheme",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "SegmentReferenceScheme": {
+                                  "values": {
+                                    "SEGMENT_REFERENCE_SCHEME_UNSPECIFIED": 0,
+                                    "SEGMENT_LIST": 1,
+                                    "SEGMENT_TEMPLATE_NUMBER": 2
+                                  }
+                                }
                               }
                             }
                           }
@@ -1146,6 +1201,116 @@
                               "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Encryption": {
+                          "oneofs": {
+                            "encryptionMode": {
+                              "oneof": [
+                                "aes_128",
+                                "sampleAes",
+                                "mpegCenc"
+                              ]
+                            },
+                            "secretSource": {
+                              "oneof": [
+                                "secretManagerKeySource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "aes_128": {
+                              "type": "Aes128Encryption",
+                              "id": 3
+                            },
+                            "sampleAes": {
+                              "type": "SampleAesEncryption",
+                              "id": 4
+                            },
+                            "mpegCenc": {
+                              "type": "MpegCommonEncryption",
+                              "id": 5
+                            },
+                            "secretManagerKeySource": {
+                              "type": "SecretManagerSource",
+                              "id": 7
+                            },
+                            "drmSystems": {
+                              "type": "DrmSystems",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Aes128Encryption": {
+                              "fields": {}
+                            },
+                            "SampleAesEncryption": {
+                              "fields": {}
+                            },
+                            "MpegCommonEncryption": {
+                              "fields": {
+                                "scheme": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "SecretManagerSource": {
+                              "fields": {
+                                "secretVersion": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "Widevine": {
+                              "fields": {}
+                            },
+                            "Fairplay": {
+                              "fields": {}
+                            },
+                            "Playready": {
+                              "fields": {}
+                            },
+                            "Clearkey": {
+                              "fields": {}
+                            },
+                            "DrmSystems": {
+                              "fields": {
+                                "widevine": {
+                                  "type": "Widevine",
+                                  "id": 1
+                                },
+                                "fairplay": {
+                                  "type": "Fairplay",
+                                  "id": 2
+                                },
+                                "playready": {
+                                  "type": "Playready",
+                                  "id": 3
+                                },
+                                "clearkey": {
+                                  "type": "Clearkey",
+                                  "id": 4
+                                }
                               }
                             }
                           }

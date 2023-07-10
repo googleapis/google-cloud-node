@@ -70,6 +70,12 @@ export namespace google {
 
                         /** Job mode */
                         mode?: (google.cloud.video.transcoder.v1.Job.ProcessingMode|keyof typeof google.cloud.video.transcoder.v1.Job.ProcessingMode|null);
+
+                        /** Job batchModePriority */
+                        batchModePriority?: (number|null);
+
+                        /** Job optimization */
+                        optimization?: (google.cloud.video.transcoder.v1.Job.OptimizationStrategy|keyof typeof google.cloud.video.transcoder.v1.Job.OptimizationStrategy|null);
                     }
 
                     /** Represents a Job. */
@@ -119,6 +125,12 @@ export namespace google {
 
                         /** Job mode. */
                         public mode: (google.cloud.video.transcoder.v1.Job.ProcessingMode|keyof typeof google.cloud.video.transcoder.v1.Job.ProcessingMode);
+
+                        /** Job batchModePriority. */
+                        public batchModePriority: number;
+
+                        /** Job optimization. */
+                        public optimization: (google.cloud.video.transcoder.v1.Job.OptimizationStrategy|keyof typeof google.cloud.video.transcoder.v1.Job.OptimizationStrategy);
 
                         /** Job jobConfig. */
                         public jobConfig?: ("templateId"|"config");
@@ -217,6 +229,13 @@ export namespace google {
                             PROCESSING_MODE_UNSPECIFIED = 0,
                             PROCESSING_MODE_INTERACTIVE = 1,
                             PROCESSING_MODE_BATCH = 2
+                        }
+
+                        /** OptimizationStrategy enum. */
+                        enum OptimizationStrategy {
+                            OPTIMIZATION_STRATEGY_UNSPECIFIED = 0,
+                            AUTODETECT = 1,
+                            DISABLED = 2
                         }
                     }
 
@@ -361,6 +380,9 @@ export namespace google {
 
                         /** JobConfig overlays */
                         overlays?: (google.cloud.video.transcoder.v1.IOverlay[]|null);
+
+                        /** JobConfig encryptions */
+                        encryptions?: (google.cloud.video.transcoder.v1.IEncryption[]|null);
                     }
 
                     /** Represents a JobConfig. */
@@ -401,6 +423,9 @@ export namespace google {
 
                         /** JobConfig overlays. */
                         public overlays: google.cloud.video.transcoder.v1.IOverlay[];
+
+                        /** JobConfig encryptions. */
+                        public encryptions: google.cloud.video.transcoder.v1.IEncryption[];
 
                         /**
                          * Creates a new JobConfig instance using the specified properties.
@@ -1033,6 +1058,9 @@ export namespace google {
 
                         /** MuxStream segmentSettings */
                         segmentSettings?: (google.cloud.video.transcoder.v1.ISegmentSettings|null);
+
+                        /** MuxStream encryptionId */
+                        encryptionId?: (string|null);
                     }
 
                     /** Represents a MuxStream. */
@@ -1058,6 +1086,9 @@ export namespace google {
 
                         /** MuxStream segmentSettings. */
                         public segmentSettings?: (google.cloud.video.transcoder.v1.ISegmentSettings|null);
+
+                        /** MuxStream encryptionId. */
+                        public encryptionId: string;
 
                         /**
                          * Creates a new MuxStream instance using the specified properties.
@@ -1148,6 +1179,9 @@ export namespace google {
 
                         /** Manifest muxStreams */
                         muxStreams?: (string[]|null);
+
+                        /** Manifest dash */
+                        dash?: (google.cloud.video.transcoder.v1.Manifest.IDashConfig|null);
                     }
 
                     /** Represents a Manifest. */
@@ -1167,6 +1201,12 @@ export namespace google {
 
                         /** Manifest muxStreams. */
                         public muxStreams: string[];
+
+                        /** Manifest dash. */
+                        public dash?: (google.cloud.video.transcoder.v1.Manifest.IDashConfig|null);
+
+                        /** Manifest manifestConfig. */
+                        public manifestConfig?: "dash";
 
                         /**
                          * Creates a new Manifest instance using the specified properties.
@@ -1253,6 +1293,113 @@ export namespace google {
                             MANIFEST_TYPE_UNSPECIFIED = 0,
                             HLS = 1,
                             DASH = 2
+                        }
+
+                        /** Properties of a DashConfig. */
+                        interface IDashConfig {
+
+                            /** DashConfig segmentReferenceScheme */
+                            segmentReferenceScheme?: (google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme|keyof typeof google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme|null);
+                        }
+
+                        /** Represents a DashConfig. */
+                        class DashConfig implements IDashConfig {
+
+                            /**
+                             * Constructs a new DashConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Manifest.IDashConfig);
+
+                            /** DashConfig segmentReferenceScheme. */
+                            public segmentReferenceScheme: (google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme|keyof typeof google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme);
+
+                            /**
+                             * Creates a new DashConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DashConfig instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Manifest.IDashConfig): google.cloud.video.transcoder.v1.Manifest.DashConfig;
+
+                            /**
+                             * Encodes the specified DashConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.Manifest.DashConfig.verify|verify} messages.
+                             * @param message DashConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Manifest.IDashConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DashConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Manifest.DashConfig.verify|verify} messages.
+                             * @param message DashConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Manifest.IDashConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DashConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DashConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Manifest.DashConfig;
+
+                            /**
+                             * Decodes a DashConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DashConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Manifest.DashConfig;
+
+                            /**
+                             * Verifies a DashConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DashConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DashConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Manifest.DashConfig;
+
+                            /**
+                             * Creates a plain object from a DashConfig message. Also converts values to other types if specified.
+                             * @param message DashConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Manifest.DashConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DashConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DashConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DashConfig {
+
+                            /** SegmentReferenceScheme enum. */
+                            enum SegmentReferenceScheme {
+                                SEGMENT_REFERENCE_SCHEME_UNSPECIFIED = 0,
+                                SEGMENT_LIST = 1,
+                                SEGMENT_TEMPLATE_NUMBER = 2
+                            }
                         }
                     }
 
@@ -4676,6 +4823,997 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Encryption. */
+                    interface IEncryption {
+
+                        /** Encryption id */
+                        id?: (string|null);
+
+                        /** Encryption aes_128 */
+                        aes_128?: (google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null);
+
+                        /** Encryption sampleAes */
+                        sampleAes?: (google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null);
+
+                        /** Encryption mpegCenc */
+                        mpegCenc?: (google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null);
+
+                        /** Encryption secretManagerKeySource */
+                        secretManagerKeySource?: (google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource|null);
+
+                        /** Encryption drmSystems */
+                        drmSystems?: (google.cloud.video.transcoder.v1.Encryption.IDrmSystems|null);
+                    }
+
+                    /** Represents an Encryption. */
+                    class Encryption implements IEncryption {
+
+                        /**
+                         * Constructs a new Encryption.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.transcoder.v1.IEncryption);
+
+                        /** Encryption id. */
+                        public id: string;
+
+                        /** Encryption aes_128. */
+                        public aes_128?: (google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null);
+
+                        /** Encryption sampleAes. */
+                        public sampleAes?: (google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null);
+
+                        /** Encryption mpegCenc. */
+                        public mpegCenc?: (google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null);
+
+                        /** Encryption secretManagerKeySource. */
+                        public secretManagerKeySource?: (google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource|null);
+
+                        /** Encryption drmSystems. */
+                        public drmSystems?: (google.cloud.video.transcoder.v1.Encryption.IDrmSystems|null);
+
+                        /** Encryption encryptionMode. */
+                        public encryptionMode?: ("aes_128"|"sampleAes"|"mpegCenc");
+
+                        /** Encryption secretSource. */
+                        public secretSource?: "secretManagerKeySource";
+
+                        /**
+                         * Creates a new Encryption instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Encryption instance
+                         */
+                        public static create(properties?: google.cloud.video.transcoder.v1.IEncryption): google.cloud.video.transcoder.v1.Encryption;
+
+                        /**
+                         * Encodes the specified Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
+                         * @param message Encryption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.transcoder.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
+                         * @param message Encryption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Encryption message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Encryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption;
+
+                        /**
+                         * Decodes an Encryption message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Encryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption;
+
+                        /**
+                         * Verifies an Encryption message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Encryption
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption;
+
+                        /**
+                         * Creates a plain object from an Encryption message. Also converts values to other types if specified.
+                         * @param message Encryption
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.transcoder.v1.Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Encryption to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Encryption
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Encryption {
+
+                        /** Properties of an Aes128Encryption. */
+                        interface IAes128Encryption {
+                        }
+
+                        /** Represents an Aes128Encryption. */
+                        class Aes128Encryption implements IAes128Encryption {
+
+                            /**
+                             * Constructs a new Aes128Encryption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption);
+
+                            /**
+                             * Creates a new Aes128Encryption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Aes128Encryption instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
+
+                            /**
+                             * Encodes the specified Aes128Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
+                             * @param message Aes128Encryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Aes128Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
+                             * @param message Aes128Encryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Aes128Encryption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Aes128Encryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
+
+                            /**
+                             * Decodes an Aes128Encryption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Aes128Encryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
+
+                            /**
+                             * Verifies an Aes128Encryption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Aes128Encryption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Aes128Encryption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
+
+                            /**
+                             * Creates a plain object from an Aes128Encryption message. Also converts values to other types if specified.
+                             * @param message Aes128Encryption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Aes128Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Aes128Encryption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Aes128Encryption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SampleAesEncryption. */
+                        interface ISampleAesEncryption {
+                        }
+
+                        /** Represents a SampleAesEncryption. */
+                        class SampleAesEncryption implements ISampleAesEncryption {
+
+                            /**
+                             * Constructs a new SampleAesEncryption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption);
+
+                            /**
+                             * Creates a new SampleAesEncryption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SampleAesEncryption instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
+
+                            /**
+                             * Encodes the specified SampleAesEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
+                             * @param message SampleAesEncryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SampleAesEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
+                             * @param message SampleAesEncryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SampleAesEncryption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SampleAesEncryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
+
+                            /**
+                             * Decodes a SampleAesEncryption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SampleAesEncryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
+
+                            /**
+                             * Verifies a SampleAesEncryption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SampleAesEncryption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SampleAesEncryption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
+
+                            /**
+                             * Creates a plain object from a SampleAesEncryption message. Also converts values to other types if specified.
+                             * @param message SampleAesEncryption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SampleAesEncryption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SampleAesEncryption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a MpegCommonEncryption. */
+                        interface IMpegCommonEncryption {
+
+                            /** MpegCommonEncryption scheme */
+                            scheme?: (string|null);
+                        }
+
+                        /** Represents a MpegCommonEncryption. */
+                        class MpegCommonEncryption implements IMpegCommonEncryption {
+
+                            /**
+                             * Constructs a new MpegCommonEncryption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption);
+
+                            /** MpegCommonEncryption scheme. */
+                            public scheme: string;
+
+                            /**
+                             * Creates a new MpegCommonEncryption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MpegCommonEncryption instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
+
+                            /**
+                             * Encodes the specified MpegCommonEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
+                             * @param message MpegCommonEncryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MpegCommonEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
+                             * @param message MpegCommonEncryption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MpegCommonEncryption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MpegCommonEncryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
+
+                            /**
+                             * Decodes a MpegCommonEncryption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MpegCommonEncryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
+
+                            /**
+                             * Verifies a MpegCommonEncryption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MpegCommonEncryption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MpegCommonEncryption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
+
+                            /**
+                             * Creates a plain object from a MpegCommonEncryption message. Also converts values to other types if specified.
+                             * @param message MpegCommonEncryption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MpegCommonEncryption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MpegCommonEncryption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SecretManagerSource. */
+                        interface ISecretManagerSource {
+
+                            /** SecretManagerSource secretVersion */
+                            secretVersion?: (string|null);
+                        }
+
+                        /** Represents a SecretManagerSource. */
+                        class SecretManagerSource implements ISecretManagerSource {
+
+                            /**
+                             * Constructs a new SecretManagerSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource);
+
+                            /** SecretManagerSource secretVersion. */
+                            public secretVersion: string;
+
+                            /**
+                             * Creates a new SecretManagerSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SecretManagerSource instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource): google.cloud.video.transcoder.v1.Encryption.SecretManagerSource;
+
+                            /**
+                             * Encodes the specified SecretManagerSource message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.verify|verify} messages.
+                             * @param message SecretManagerSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SecretManagerSource message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.verify|verify} messages.
+                             * @param message SecretManagerSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SecretManagerSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SecretManagerSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.SecretManagerSource;
+
+                            /**
+                             * Decodes a SecretManagerSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SecretManagerSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.SecretManagerSource;
+
+                            /**
+                             * Verifies a SecretManagerSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SecretManagerSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SecretManagerSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.SecretManagerSource;
+
+                            /**
+                             * Creates a plain object from a SecretManagerSource message. Also converts values to other types if specified.
+                             * @param message SecretManagerSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.SecretManagerSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SecretManagerSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SecretManagerSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Widevine. */
+                        interface IWidevine {
+                        }
+
+                        /** Represents a Widevine. */
+                        class Widevine implements IWidevine {
+
+                            /**
+                             * Constructs a new Widevine.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IWidevine);
+
+                            /**
+                             * Creates a new Widevine instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Widevine instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IWidevine): google.cloud.video.transcoder.v1.Encryption.Widevine;
+
+                            /**
+                             * Encodes the specified Widevine message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Widevine.verify|verify} messages.
+                             * @param message Widevine message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IWidevine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Widevine message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Widevine.verify|verify} messages.
+                             * @param message Widevine message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IWidevine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Widevine message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Widevine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Widevine;
+
+                            /**
+                             * Decodes a Widevine message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Widevine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Widevine;
+
+                            /**
+                             * Verifies a Widevine message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Widevine message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Widevine
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Widevine;
+
+                            /**
+                             * Creates a plain object from a Widevine message. Also converts values to other types if specified.
+                             * @param message Widevine
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Widevine, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Widevine to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Widevine
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Fairplay. */
+                        interface IFairplay {
+                        }
+
+                        /** Represents a Fairplay. */
+                        class Fairplay implements IFairplay {
+
+                            /**
+                             * Constructs a new Fairplay.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IFairplay);
+
+                            /**
+                             * Creates a new Fairplay instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Fairplay instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IFairplay): google.cloud.video.transcoder.v1.Encryption.Fairplay;
+
+                            /**
+                             * Encodes the specified Fairplay message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Fairplay.verify|verify} messages.
+                             * @param message Fairplay message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IFairplay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Fairplay message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Fairplay.verify|verify} messages.
+                             * @param message Fairplay message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IFairplay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Fairplay message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Fairplay
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Fairplay;
+
+                            /**
+                             * Decodes a Fairplay message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Fairplay
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Fairplay;
+
+                            /**
+                             * Verifies a Fairplay message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Fairplay message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Fairplay
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Fairplay;
+
+                            /**
+                             * Creates a plain object from a Fairplay message. Also converts values to other types if specified.
+                             * @param message Fairplay
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Fairplay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Fairplay to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Fairplay
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Playready. */
+                        interface IPlayready {
+                        }
+
+                        /** Represents a Playready. */
+                        class Playready implements IPlayready {
+
+                            /**
+                             * Constructs a new Playready.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IPlayready);
+
+                            /**
+                             * Creates a new Playready instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Playready instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IPlayready): google.cloud.video.transcoder.v1.Encryption.Playready;
+
+                            /**
+                             * Encodes the specified Playready message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Playready.verify|verify} messages.
+                             * @param message Playready message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IPlayready, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Playready message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Playready.verify|verify} messages.
+                             * @param message Playready message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IPlayready, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Playready message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Playready
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Playready;
+
+                            /**
+                             * Decodes a Playready message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Playready
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Playready;
+
+                            /**
+                             * Verifies a Playready message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Playready message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Playready
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Playready;
+
+                            /**
+                             * Creates a plain object from a Playready message. Also converts values to other types if specified.
+                             * @param message Playready
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Playready, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Playready to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Playready
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Clearkey. */
+                        interface IClearkey {
+                        }
+
+                        /** Represents a Clearkey. */
+                        class Clearkey implements IClearkey {
+
+                            /**
+                             * Constructs a new Clearkey.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IClearkey);
+
+                            /**
+                             * Creates a new Clearkey instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Clearkey instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IClearkey): google.cloud.video.transcoder.v1.Encryption.Clearkey;
+
+                            /**
+                             * Encodes the specified Clearkey message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Clearkey.verify|verify} messages.
+                             * @param message Clearkey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IClearkey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Clearkey message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Clearkey.verify|verify} messages.
+                             * @param message Clearkey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IClearkey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Clearkey message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Clearkey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Clearkey;
+
+                            /**
+                             * Decodes a Clearkey message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Clearkey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Clearkey;
+
+                            /**
+                             * Verifies a Clearkey message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Clearkey message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Clearkey
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Clearkey;
+
+                            /**
+                             * Creates a plain object from a Clearkey message. Also converts values to other types if specified.
+                             * @param message Clearkey
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Clearkey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Clearkey to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Clearkey
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DrmSystems. */
+                        interface IDrmSystems {
+
+                            /** DrmSystems widevine */
+                            widevine?: (google.cloud.video.transcoder.v1.Encryption.IWidevine|null);
+
+                            /** DrmSystems fairplay */
+                            fairplay?: (google.cloud.video.transcoder.v1.Encryption.IFairplay|null);
+
+                            /** DrmSystems playready */
+                            playready?: (google.cloud.video.transcoder.v1.Encryption.IPlayready|null);
+
+                            /** DrmSystems clearkey */
+                            clearkey?: (google.cloud.video.transcoder.v1.Encryption.IClearkey|null);
+                        }
+
+                        /** Represents a DrmSystems. */
+                        class DrmSystems implements IDrmSystems {
+
+                            /**
+                             * Constructs a new DrmSystems.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IDrmSystems);
+
+                            /** DrmSystems widevine. */
+                            public widevine?: (google.cloud.video.transcoder.v1.Encryption.IWidevine|null);
+
+                            /** DrmSystems fairplay. */
+                            public fairplay?: (google.cloud.video.transcoder.v1.Encryption.IFairplay|null);
+
+                            /** DrmSystems playready. */
+                            public playready?: (google.cloud.video.transcoder.v1.Encryption.IPlayready|null);
+
+                            /** DrmSystems clearkey. */
+                            public clearkey?: (google.cloud.video.transcoder.v1.Encryption.IClearkey|null);
+
+                            /**
+                             * Creates a new DrmSystems instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DrmSystems instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IDrmSystems): google.cloud.video.transcoder.v1.Encryption.DrmSystems;
+
+                            /**
+                             * Encodes the specified DrmSystems message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.DrmSystems.verify|verify} messages.
+                             * @param message DrmSystems message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IDrmSystems, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DrmSystems message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.DrmSystems.verify|verify} messages.
+                             * @param message DrmSystems message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IDrmSystems, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DrmSystems message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DrmSystems
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.DrmSystems;
+
+                            /**
+                             * Decodes a DrmSystems message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DrmSystems
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.DrmSystems;
+
+                            /**
+                             * Verifies a DrmSystems message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DrmSystems message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DrmSystems
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.DrmSystems;
+
+                            /**
+                             * Creates a plain object from a DrmSystems message. Also converts values to other types if specified.
+                             * @param message DrmSystems
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.DrmSystems, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DrmSystems to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DrmSystems
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Represents a TranscoderService */
