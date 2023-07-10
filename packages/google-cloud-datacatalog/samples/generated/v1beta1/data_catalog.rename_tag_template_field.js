@@ -34,7 +34,8 @@ function main(name, newTagTemplateFieldId) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The new ID of this tag template field. For example, `my_new_field`.
+   *  Required. The new ID of this tag template field. For example,
+   *  `my_new_field`.
    */
   // const newTagTemplateFieldId = 'abc123'
 

@@ -3362,6 +3362,11 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "customAudiences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 37
+                        },
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 38,

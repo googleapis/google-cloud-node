@@ -18028,6 +18028,7 @@
                                 case 2:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
@@ -18190,6 +18191,10 @@
                             case "E2_HIGHCPU_32":
                             case 6:
                                 message.machineType = 6;
+                                break;
+                            case "E2_MEDIUM":
+                            case 7:
+                                message.machineType = 7;
                                 break;
                             }
                             if (object.diskSizeGb != null)
@@ -18654,6 +18659,7 @@
                          * @property {number} N1_HIGHCPU_32=2 N1_HIGHCPU_32 value
                          * @property {number} E2_HIGHCPU_8=5 E2_HIGHCPU_8 value
                          * @property {number} E2_HIGHCPU_32=6 E2_HIGHCPU_32 value
+                         * @property {number} E2_MEDIUM=7 E2_MEDIUM value
                          */
                         BuildOptions.MachineType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -18662,6 +18668,7 @@
                             values[valuesById[2] = "N1_HIGHCPU_32"] = 2;
                             values[valuesById[5] = "E2_HIGHCPU_8"] = 5;
                             values[valuesById[6] = "E2_HIGHCPU_32"] = 6;
+                            values[valuesById[7] = "E2_MEDIUM"] = 7;
                             return values;
                         })();
     
