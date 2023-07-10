@@ -28509,6 +28509,11 @@
                             "instanceGroup"
                           ]
                         },
+                        "_instanceLifecyclePolicy": {
+                          "oneof": [
+                            "instanceLifecyclePolicy"
+                          ]
+                        },
                         "_instanceTemplate": {
                           "oneof": [
                             "instanceTemplate"
@@ -28623,6 +28628,13 @@
                         "instanceGroup": {
                           "type": "string",
                           "id": 81095253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceLifecyclePolicy": {
+                          "type": "InstanceGroupManagerInstanceLifecyclePolicy",
+                          "id": 447961617,
                           "options": {
                             "proto3_optional": true
                           }
@@ -28994,6 +29006,33 @@
                           "id": 263207002,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerInstanceLifecyclePolicy": {
+                      "oneofs": {
+                        "_forceUpdateOnRepair": {
+                          "oneof": [
+                            "forceUpdateOnRepair"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "forceUpdateOnRepair": {
+                          "type": "string",
+                          "id": 356302027,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ForceUpdateOnRepair": {
+                          "values": {
+                            "UNDEFINED_FORCE_UPDATE_ON_REPAIR": 0,
+                            "NO": 2497,
+                            "YES": 87751
                           }
                         }
                       }
@@ -56252,6 +56291,11 @@
                             "nextHopGateway"
                           ]
                         },
+                        "_nextHopHub": {
+                          "oneof": [
+                            "nextHopHub"
+                          ]
+                        },
                         "_nextHopIlb": {
                           "oneof": [
                             "nextHopIlb"
@@ -56361,6 +56405,13 @@
                         "nextHopGateway": {
                           "type": "string",
                           "id": 377175298,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextHopHub": {
+                          "type": "string",
+                          "id": 198679219,
                           "options": {
                             "proto3_optional": true
                           }
@@ -57429,6 +57480,11 @@
                     },
                     "RouterNat": {
                       "oneofs": {
+                        "_autoNetworkTier": {
+                          "oneof": [
+                            "autoNetworkTier"
+                          ]
+                        },
                         "_enableDynamicPortAllocation": {
                           "oneof": [
                             "enableDynamicPortAllocation"
@@ -57496,6 +57552,13 @@
                         }
                       },
                       "fields": {
+                        "autoNetworkTier": {
+                          "type": "string",
+                          "id": 269770211,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "drainNatIps": {
                           "rule": "repeated",
                           "type": "string",
@@ -57614,6 +57677,15 @@
                         }
                       },
                       "nested": {
+                        "AutoNetworkTier": {
+                          "values": {
+                            "UNDEFINED_AUTO_NETWORK_TIER": 0,
+                            "FIXED_STANDARD": 310464328,
+                            "PREMIUM": 399530551,
+                            "STANDARD": 484642493,
+                            "STANDARD_OVERRIDES_FIXED_STANDARD": 465847234
+                          }
+                        },
                         "EndpointTypes": {
                           "values": {
                             "UNDEFINED_ENDPOINT_TYPES": 0,
@@ -67191,6 +67263,11 @@
                             "fingerprint"
                           ]
                         },
+                        "_httpKeepAliveTimeoutSec": {
+                          "oneof": [
+                            "httpKeepAliveTimeoutSec"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -67245,6 +67322,13 @@
                         "fingerprint": {
                           "type": "string",
                           "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "httpKeepAliveTimeoutSec": {
+                          "type": "int32",
+                          "id": 447326046,
                           "options": {
                             "proto3_optional": true
                           }
@@ -67540,6 +67624,11 @@
                             "fingerprint"
                           ]
                         },
+                        "_httpKeepAliveTimeoutSec": {
+                          "oneof": [
+                            "httpKeepAliveTimeoutSec"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -67623,6 +67712,13 @@
                         "fingerprint": {
                           "type": "string",
                           "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "httpKeepAliveTimeoutSec": {
+                          "type": "int32",
+                          "id": 447326046,
                           "options": {
                             "proto3_optional": true
                           }
