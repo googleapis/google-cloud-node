@@ -25805,6 +25805,8 @@
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.State|null} [state] IssueModel state
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig|null} [inputDataConfig] IssueModel inputDataConfig
                          * @property {google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null} [trainingStats] IssueModel trainingStats
+                         * @property {google.cloud.contactcenterinsights.v1.IssueModel.ModelType|null} [modelType] IssueModel modelType
+                         * @property {string|null} [languageCode] IssueModel languageCode
                          */
     
                         /**
@@ -25887,6 +25889,22 @@
                         IssueModel.prototype.trainingStats = null;
     
                         /**
+                         * IssueModel modelType.
+                         * @member {google.cloud.contactcenterinsights.v1.IssueModel.ModelType} modelType
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.modelType = 0;
+    
+                        /**
+                         * IssueModel languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.languageCode = "";
+    
+                        /**
                          * Creates a new IssueModel instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.IssueModel
@@ -25926,6 +25944,10 @@
                                 $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.encode(message.trainingStats, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.issueCount != null && Object.hasOwnProperty.call(message, "issueCount"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.issueCount);
+                            if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.modelType);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.languageCode);
                             return writer;
                         };
     
@@ -25990,6 +26012,14 @@
                                     }
                                 case 7: {
                                         message.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.modelType = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.languageCode = reader.string();
                                         break;
                                     }
                                 default:
@@ -26068,6 +26098,18 @@
                                 if (error)
                                     return "trainingStats." + error;
                             }
+                            if (message.modelType != null && message.hasOwnProperty("modelType"))
+                                switch (message.modelType) {
+                                default:
+                                    return "modelType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
                             return null;
                         };
     
@@ -26148,6 +26190,28 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IssueModel.trainingStats: object expected");
                                 message.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.fromObject(object.trainingStats);
                             }
+                            switch (object.modelType) {
+                            default:
+                                if (typeof object.modelType === "number") {
+                                    message.modelType = object.modelType;
+                                    break;
+                                }
+                                break;
+                            case "MODEL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.modelType = 0;
+                                break;
+                            case "TYPE_V1":
+                            case 1:
+                                message.modelType = 1;
+                                break;
+                            case "TYPE_V2":
+                            case 2:
+                                message.modelType = 2;
+                                break;
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
                             return message;
                         };
     
@@ -26177,6 +26241,8 @@
                                     object.issueCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.issueCount = options.longs === String ? "0" : 0;
+                                object.modelType = options.enums === String ? "MODEL_TYPE_UNSPECIFIED" : 0;
+                                object.languageCode = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -26197,6 +26263,10 @@
                                     object.issueCount = options.longs === String ? String(message.issueCount) : message.issueCount;
                                 else
                                     object.issueCount = options.longs === String ? $util.Long.prototype.toString.call(message.issueCount) : options.longs === Number ? new $util.LongBits(message.issueCount.low >>> 0, message.issueCount.high >>> 0).toNumber() : message.issueCount;
+                            if (message.modelType != null && message.hasOwnProperty("modelType"))
+                                object.modelType = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IssueModel.ModelType[message.modelType] === undefined ? message.modelType : $root.google.cloud.contactcenterinsights.v1.IssueModel.ModelType[message.modelType] : message.modelType;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
                             return object;
                         };
     
@@ -26533,6 +26603,22 @@
                             values[valuesById[3] = "DEPLOYED"] = 3;
                             values[valuesById[4] = "UNDEPLOYING"] = 4;
                             values[valuesById[5] = "DELETING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * ModelType enum.
+                         * @name google.cloud.contactcenterinsights.v1.IssueModel.ModelType
+                         * @enum {number}
+                         * @property {number} MODEL_TYPE_UNSPECIFIED=0 MODEL_TYPE_UNSPECIFIED value
+                         * @property {number} TYPE_V1=1 TYPE_V1 value
+                         * @property {number} TYPE_V2=2 TYPE_V2 value
+                         */
+                        IssueModel.ModelType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODEL_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TYPE_V1"] = 1;
+                            values[valuesById[2] = "TYPE_V2"] = 2;
                             return values;
                         })();
     

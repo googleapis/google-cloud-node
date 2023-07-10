@@ -2713,6 +2713,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "modelType": {
+                          "type": "ModelType",
+                          "id": 9
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2746,6 +2754,13 @@
                             "DEPLOYED": 3,
                             "UNDEPLOYING": 4,
                             "DELETING": 5
+                          }
+                        },
+                        "ModelType": {
+                          "values": {
+                            "MODEL_TYPE_UNSPECIFIED": 0,
+                            "TYPE_V1": 1,
+                            "TYPE_V2": 2
                           }
                         }
                       }
