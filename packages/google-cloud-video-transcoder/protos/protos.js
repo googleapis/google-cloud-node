@@ -94,6 +94,8 @@
                              * @property {Object.<string,string>|null} [labels] Job labels
                              * @property {google.rpc.IStatus|null} [error] Job error
                              * @property {google.cloud.video.transcoder.v1.Job.ProcessingMode|null} [mode] Job mode
+                             * @property {number|null} [batchModePriority] Job batchModePriority
+                             * @property {google.cloud.video.transcoder.v1.Job.OptimizationStrategy|null} [optimization] Job optimization
                              */
     
                             /**
@@ -216,6 +218,22 @@
                              */
                             Job.prototype.mode = 0;
     
+                            /**
+                             * Job batchModePriority.
+                             * @member {number} batchModePriority
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.batchModePriority = 0;
+    
+                            /**
+                             * Job optimization.
+                             * @member {google.cloud.video.transcoder.v1.Job.OptimizationStrategy} optimization
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.optimization = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -281,6 +299,10 @@
                                     $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                     writer.uint32(/* id 20, wireType 0 =*/160).int32(message.mode);
+                                if (message.batchModePriority != null && Object.hasOwnProperty.call(message, "batchModePriority"))
+                                    writer.uint32(/* id 21, wireType 0 =*/168).int32(message.batchModePriority);
+                                if (message.optimization != null && Object.hasOwnProperty.call(message, "optimization"))
+                                    writer.uint32(/* id 22, wireType 0 =*/176).int32(message.optimization);
                                 return writer;
                             };
     
@@ -384,6 +406,14 @@
                                         }
                                     case 20: {
                                             message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.batchModePriority = reader.int32();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.optimization = reader.int32();
                                             break;
                                         }
                                     default:
@@ -497,6 +527,18 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.batchModePriority != null && message.hasOwnProperty("batchModePriority"))
+                                    if (!$util.isInteger(message.batchModePriority))
+                                        return "batchModePriority: integer expected";
+                                if (message.optimization != null && message.hasOwnProperty("optimization"))
+                                    switch (message.optimization) {
+                                    default:
+                                        return "optimization: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -602,6 +644,28 @@
                                     message.mode = 2;
                                     break;
                                 }
+                                if (object.batchModePriority != null)
+                                    message.batchModePriority = object.batchModePriority | 0;
+                                switch (object.optimization) {
+                                default:
+                                    if (typeof object.optimization === "number") {
+                                        message.optimization = object.optimization;
+                                        break;
+                                    }
+                                    break;
+                                case "OPTIMIZATION_STRATEGY_UNSPECIFIED":
+                                case 0:
+                                    message.optimization = 0;
+                                    break;
+                                case "AUTODETECT":
+                                case 1:
+                                    message.optimization = 1;
+                                    break;
+                                case "DISABLED":
+                                case 2:
+                                    message.optimization = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -631,6 +695,8 @@
                                     object.ttlAfterCompletionDays = 0;
                                     object.error = null;
                                     object.mode = options.enums === String ? "PROCESSING_MODE_UNSPECIFIED" : 0;
+                                    object.batchModePriority = 0;
+                                    object.optimization = options.enums === String ? "OPTIMIZATION_STRATEGY_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -668,6 +734,10 @@
                                     object.error = $root.google.rpc.Status.toObject(message.error, options);
                                 if (message.mode != null && message.hasOwnProperty("mode"))
                                     object.mode = options.enums === String ? $root.google.cloud.video.transcoder.v1.Job.ProcessingMode[message.mode] === undefined ? message.mode : $root.google.cloud.video.transcoder.v1.Job.ProcessingMode[message.mode] : message.mode;
+                                if (message.batchModePriority != null && message.hasOwnProperty("batchModePriority"))
+                                    object.batchModePriority = message.batchModePriority;
+                                if (message.optimization != null && message.hasOwnProperty("optimization"))
+                                    object.optimization = options.enums === String ? $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] === undefined ? message.optimization : $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] : message.optimization;
                                 return object;
                             };
     
@@ -730,6 +800,22 @@
                                 values[valuesById[0] = "PROCESSING_MODE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "PROCESSING_MODE_INTERACTIVE"] = 1;
                                 values[valuesById[2] = "PROCESSING_MODE_BATCH"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * OptimizationStrategy enum.
+                             * @name google.cloud.video.transcoder.v1.Job.OptimizationStrategy
+                             * @enum {number}
+                             * @property {number} OPTIMIZATION_STRATEGY_UNSPECIFIED=0 OPTIMIZATION_STRATEGY_UNSPECIFIED value
+                             * @property {number} AUTODETECT=1 AUTODETECT value
+                             * @property {number} DISABLED=2 DISABLED value
+                             */
+                            Job.OptimizationStrategy = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OPTIMIZATION_STRATEGY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "AUTODETECT"] = 1;
+                                values[valuesById[2] = "DISABLED"] = 2;
                                 return values;
                             })();
     
@@ -1043,6 +1129,7 @@
                              * @property {google.cloud.video.transcoder.v1.IPubsubDestination|null} [pubsubDestination] JobConfig pubsubDestination
                              * @property {Array.<google.cloud.video.transcoder.v1.ISpriteSheet>|null} [spriteSheets] JobConfig spriteSheets
                              * @property {Array.<google.cloud.video.transcoder.v1.IOverlay>|null} [overlays] JobConfig overlays
+                             * @property {Array.<google.cloud.video.transcoder.v1.IEncryption>|null} [encryptions] JobConfig encryptions
                              */
     
                             /**
@@ -1062,6 +1149,7 @@
                                 this.adBreaks = [];
                                 this.spriteSheets = [];
                                 this.overlays = [];
+                                this.encryptions = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1149,6 +1237,14 @@
                             JobConfig.prototype.overlays = $util.emptyArray;
     
                             /**
+                             * JobConfig encryptions.
+                             * @member {Array.<google.cloud.video.transcoder.v1.IEncryption>} encryptions
+                             * @memberof google.cloud.video.transcoder.v1.JobConfig
+                             * @instance
+                             */
+                            JobConfig.prototype.encryptions = $util.emptyArray;
+    
+                            /**
                              * Creates a new JobConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.JobConfig
@@ -1200,6 +1296,9 @@
                                 if (message.overlays != null && message.overlays.length)
                                     for (var i = 0; i < message.overlays.length; ++i)
                                         $root.google.cloud.video.transcoder.v1.Overlay.encode(message.overlays[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.encryptions != null && message.encryptions.length)
+                                    for (var i = 0; i < message.encryptions.length; ++i)
+                                        $root.google.cloud.video.transcoder.v1.Encryption.encode(message.encryptions[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1288,6 +1387,12 @@
                                             if (!(message.overlays && message.overlays.length))
                                                 message.overlays = [];
                                             message.overlays.push($root.google.cloud.video.transcoder.v1.Overlay.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 11: {
+                                            if (!(message.encryptions && message.encryptions.length))
+                                                message.encryptions = [];
+                                            message.encryptions.push($root.google.cloud.video.transcoder.v1.Encryption.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -1407,6 +1512,15 @@
                                             return "overlays." + error;
                                     }
                                 }
+                                if (message.encryptions != null && message.hasOwnProperty("encryptions")) {
+                                    if (!Array.isArray(message.encryptions))
+                                        return "encryptions: array expected";
+                                    for (var i = 0; i < message.encryptions.length; ++i) {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.verify(message.encryptions[i]);
+                                        if (error)
+                                            return "encryptions." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -1512,6 +1626,16 @@
                                         message.overlays[i] = $root.google.cloud.video.transcoder.v1.Overlay.fromObject(object.overlays[i]);
                                     }
                                 }
+                                if (object.encryptions) {
+                                    if (!Array.isArray(object.encryptions))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.JobConfig.encryptions: array expected");
+                                    message.encryptions = [];
+                                    for (var i = 0; i < object.encryptions.length; ++i) {
+                                        if (typeof object.encryptions[i] !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.JobConfig.encryptions: object expected");
+                                        message.encryptions[i] = $root.google.cloud.video.transcoder.v1.Encryption.fromObject(object.encryptions[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -1537,6 +1661,7 @@
                                     object.adBreaks = [];
                                     object.spriteSheets = [];
                                     object.overlays = [];
+                                    object.encryptions = [];
                                 }
                                 if (options.defaults) {
                                     object.output = null;
@@ -1585,6 +1710,11 @@
                                     object.overlays = [];
                                     for (var j = 0; j < message.overlays.length; ++j)
                                         object.overlays[j] = $root.google.cloud.video.transcoder.v1.Overlay.toObject(message.overlays[j], options);
+                                }
+                                if (message.encryptions && message.encryptions.length) {
+                                    object.encryptions = [];
+                                    for (var j = 0; j < message.encryptions.length; ++j)
+                                        object.encryptions[j] = $root.google.cloud.video.transcoder.v1.Encryption.toObject(message.encryptions[j], options);
                                 }
                                 return object;
                             };
@@ -2916,6 +3046,7 @@
                              * @property {string|null} [container] MuxStream container
                              * @property {Array.<string>|null} [elementaryStreams] MuxStream elementaryStreams
                              * @property {google.cloud.video.transcoder.v1.ISegmentSettings|null} [segmentSettings] MuxStream segmentSettings
+                             * @property {string|null} [encryptionId] MuxStream encryptionId
                              */
     
                             /**
@@ -2975,6 +3106,14 @@
                             MuxStream.prototype.segmentSettings = null;
     
                             /**
+                             * MuxStream encryptionId.
+                             * @member {string} encryptionId
+                             * @memberof google.cloud.video.transcoder.v1.MuxStream
+                             * @instance
+                             */
+                            MuxStream.prototype.encryptionId = "";
+    
+                            /**
                              * Creates a new MuxStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.MuxStream
@@ -3009,6 +3148,8 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.elementaryStreams[i]);
                                 if (message.segmentSettings != null && Object.hasOwnProperty.call(message, "segmentSettings"))
                                     $root.google.cloud.video.transcoder.v1.SegmentSettings.encode(message.segmentSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.encryptionId != null && Object.hasOwnProperty.call(message, "encryptionId"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.encryptionId);
                                 return writer;
                             };
     
@@ -3063,6 +3204,10 @@
                                         }
                                     case 5: {
                                             message.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.encryptionId = reader.string();
                                             break;
                                         }
                                     default:
@@ -3121,6 +3266,9 @@
                                     if (error)
                                         return "segmentSettings." + error;
                                 }
+                                if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
+                                    if (!$util.isString(message.encryptionId))
+                                        return "encryptionId: string expected";
                                 return null;
                             };
     
@@ -3154,6 +3302,8 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.MuxStream.segmentSettings: object expected");
                                     message.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.fromObject(object.segmentSettings);
                                 }
+                                if (object.encryptionId != null)
+                                    message.encryptionId = String(object.encryptionId);
                                 return message;
                             };
     
@@ -3177,6 +3327,7 @@
                                     object.fileName = "";
                                     object.container = "";
                                     object.segmentSettings = null;
+                                    object.encryptionId = "";
                                 }
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     object.key = message.key;
@@ -3191,6 +3342,8 @@
                                 }
                                 if (message.segmentSettings != null && message.hasOwnProperty("segmentSettings"))
                                     object.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.toObject(message.segmentSettings, options);
+                                if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
+                                    object.encryptionId = message.encryptionId;
                                 return object;
                             };
     
@@ -3232,6 +3385,7 @@
                              * @property {string|null} [fileName] Manifest fileName
                              * @property {google.cloud.video.transcoder.v1.Manifest.ManifestType|null} [type] Manifest type
                              * @property {Array.<string>|null} [muxStreams] Manifest muxStreams
+                             * @property {google.cloud.video.transcoder.v1.Manifest.IDashConfig|null} [dash] Manifest dash
                              */
     
                             /**
@@ -3275,6 +3429,28 @@
                             Manifest.prototype.muxStreams = $util.emptyArray;
     
                             /**
+                             * Manifest dash.
+                             * @member {google.cloud.video.transcoder.v1.Manifest.IDashConfig|null|undefined} dash
+                             * @memberof google.cloud.video.transcoder.v1.Manifest
+                             * @instance
+                             */
+                            Manifest.prototype.dash = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Manifest manifestConfig.
+                             * @member {"dash"|undefined} manifestConfig
+                             * @memberof google.cloud.video.transcoder.v1.Manifest
+                             * @instance
+                             */
+                            Object.defineProperty(Manifest.prototype, "manifestConfig", {
+                                get: $util.oneOfGetter($oneOfFields = ["dash"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new Manifest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.Manifest
@@ -3305,6 +3481,8 @@
                                 if (message.muxStreams != null && message.muxStreams.length)
                                     for (var i = 0; i < message.muxStreams.length; ++i)
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.muxStreams[i]);
+                                if (message.dash != null && Object.hasOwnProperty.call(message, "dash"))
+                                    $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.encode(message.dash, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3353,6 +3531,10 @@
                                             message.muxStreams.push(reader.string());
                                             break;
                                         }
+                                    case 4: {
+                                            message.dash = $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3388,6 +3570,7 @@
                             Manifest.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.fileName != null && message.hasOwnProperty("fileName"))
                                     if (!$util.isString(message.fileName))
                                         return "fileName: string expected";
@@ -3406,6 +3589,14 @@
                                     for (var i = 0; i < message.muxStreams.length; ++i)
                                         if (!$util.isString(message.muxStreams[i]))
                                             return "muxStreams: string[] expected";
+                                }
+                                if (message.dash != null && message.hasOwnProperty("dash")) {
+                                    properties.manifestConfig = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.verify(message.dash);
+                                        if (error)
+                                            return "dash." + error;
+                                    }
                                 }
                                 return null;
                             };
@@ -3451,6 +3642,11 @@
                                     for (var i = 0; i < object.muxStreams.length; ++i)
                                         message.muxStreams[i] = String(object.muxStreams[i]);
                                 }
+                                if (object.dash != null) {
+                                    if (typeof object.dash !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Manifest.dash: object expected");
+                                    message.dash = $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.fromObject(object.dash);
+                                }
                                 return message;
                             };
     
@@ -3481,6 +3677,11 @@
                                     object.muxStreams = [];
                                     for (var j = 0; j < message.muxStreams.length; ++j)
                                         object.muxStreams[j] = message.muxStreams[j];
+                                }
+                                if (message.dash != null && message.hasOwnProperty("dash")) {
+                                    object.dash = $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.toObject(message.dash, options);
+                                    if (options.oneofs)
+                                        object.manifestConfig = "dash";
                                 }
                                 return object;
                             };
@@ -3525,6 +3726,249 @@
                                 values[valuesById[1] = "HLS"] = 1;
                                 values[valuesById[2] = "DASH"] = 2;
                                 return values;
+                            })();
+    
+                            Manifest.DashConfig = (function() {
+    
+                                /**
+                                 * Properties of a DashConfig.
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest
+                                 * @interface IDashConfig
+                                 * @property {google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme|null} [segmentReferenceScheme] DashConfig segmentReferenceScheme
+                                 */
+    
+                                /**
+                                 * Constructs a new DashConfig.
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest
+                                 * @classdesc Represents a DashConfig.
+                                 * @implements IDashConfig
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Manifest.IDashConfig=} [properties] Properties to set
+                                 */
+                                function DashConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DashConfig segmentReferenceScheme.
+                                 * @member {google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme} segmentReferenceScheme
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @instance
+                                 */
+                                DashConfig.prototype.segmentReferenceScheme = 0;
+    
+                                /**
+                                 * Creates a new DashConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Manifest.IDashConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Manifest.DashConfig} DashConfig instance
+                                 */
+                                DashConfig.create = function create(properties) {
+                                    return new DashConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DashConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.Manifest.DashConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Manifest.IDashConfig} message DashConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DashConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.segmentReferenceScheme != null && Object.hasOwnProperty.call(message, "segmentReferenceScheme"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.segmentReferenceScheme);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DashConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Manifest.DashConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Manifest.IDashConfig} message DashConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DashConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DashConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Manifest.DashConfig} DashConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DashConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Manifest.DashConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.segmentReferenceScheme = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DashConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Manifest.DashConfig} DashConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DashConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DashConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DashConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.segmentReferenceScheme != null && message.hasOwnProperty("segmentReferenceScheme"))
+                                        switch (message.segmentReferenceScheme) {
+                                        default:
+                                            return "segmentReferenceScheme: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DashConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Manifest.DashConfig} DashConfig
+                                 */
+                                DashConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Manifest.DashConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.Manifest.DashConfig();
+                                    switch (object.segmentReferenceScheme) {
+                                    default:
+                                        if (typeof object.segmentReferenceScheme === "number") {
+                                            message.segmentReferenceScheme = object.segmentReferenceScheme;
+                                            break;
+                                        }
+                                        break;
+                                    case "SEGMENT_REFERENCE_SCHEME_UNSPECIFIED":
+                                    case 0:
+                                        message.segmentReferenceScheme = 0;
+                                        break;
+                                    case "SEGMENT_LIST":
+                                    case 1:
+                                        message.segmentReferenceScheme = 1;
+                                        break;
+                                    case "SEGMENT_TEMPLATE_NUMBER":
+                                    case 2:
+                                        message.segmentReferenceScheme = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DashConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Manifest.DashConfig} message DashConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DashConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.segmentReferenceScheme = options.enums === String ? "SEGMENT_REFERENCE_SCHEME_UNSPECIFIED" : 0;
+                                    if (message.segmentReferenceScheme != null && message.hasOwnProperty("segmentReferenceScheme"))
+                                        object.segmentReferenceScheme = options.enums === String ? $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme[message.segmentReferenceScheme] === undefined ? message.segmentReferenceScheme : $root.google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme[message.segmentReferenceScheme] : message.segmentReferenceScheme;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DashConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DashConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DashConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Manifest.DashConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DashConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Manifest.DashConfig";
+                                };
+    
+                                /**
+                                 * SegmentReferenceScheme enum.
+                                 * @name google.cloud.video.transcoder.v1.Manifest.DashConfig.SegmentReferenceScheme
+                                 * @enum {number}
+                                 * @property {number} SEGMENT_REFERENCE_SCHEME_UNSPECIFIED=0 SEGMENT_REFERENCE_SCHEME_UNSPECIFIED value
+                                 * @property {number} SEGMENT_LIST=1 SEGMENT_LIST value
+                                 * @property {number} SEGMENT_TEMPLATE_NUMBER=2 SEGMENT_TEMPLATE_NUMBER value
+                                 */
+                                DashConfig.SegmentReferenceScheme = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SEGMENT_REFERENCE_SCHEME_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "SEGMENT_LIST"] = 1;
+                                    values[valuesById[2] = "SEGMENT_TEMPLATE_NUMBER"] = 2;
+                                    return values;
+                                })();
+    
+                                return DashConfig;
                             })();
     
                             return Manifest;
@@ -12233,6 +12677,2149 @@
                             };
     
                             return SegmentSettings;
+                        })();
+    
+                        v1.Encryption = (function() {
+    
+                            /**
+                             * Properties of an Encryption.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @interface IEncryption
+                             * @property {string|null} [id] Encryption id
+                             * @property {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null} [aes_128] Encryption aes_128
+                             * @property {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null} [sampleAes] Encryption sampleAes
+                             * @property {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null} [mpegCenc] Encryption mpegCenc
+                             * @property {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource|null} [secretManagerKeySource] Encryption secretManagerKeySource
+                             * @property {google.cloud.video.transcoder.v1.Encryption.IDrmSystems|null} [drmSystems] Encryption drmSystems
+                             */
+    
+                            /**
+                             * Constructs a new Encryption.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @classdesc Represents an Encryption.
+                             * @implements IEncryption
+                             * @constructor
+                             * @param {google.cloud.video.transcoder.v1.IEncryption=} [properties] Properties to set
+                             */
+                            function Encryption(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Encryption id.
+                             * @member {string} id
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.id = "";
+    
+                            /**
+                             * Encryption aes_128.
+                             * @member {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null|undefined} aes_128
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.aes_128 = null;
+    
+                            /**
+                             * Encryption sampleAes.
+                             * @member {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null|undefined} sampleAes
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.sampleAes = null;
+    
+                            /**
+                             * Encryption mpegCenc.
+                             * @member {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null|undefined} mpegCenc
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.mpegCenc = null;
+    
+                            /**
+                             * Encryption secretManagerKeySource.
+                             * @member {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource|null|undefined} secretManagerKeySource
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.secretManagerKeySource = null;
+    
+                            /**
+                             * Encryption drmSystems.
+                             * @member {google.cloud.video.transcoder.v1.Encryption.IDrmSystems|null|undefined} drmSystems
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Encryption.prototype.drmSystems = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Encryption encryptionMode.
+                             * @member {"aes_128"|"sampleAes"|"mpegCenc"|undefined} encryptionMode
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Object.defineProperty(Encryption.prototype, "encryptionMode", {
+                                get: $util.oneOfGetter($oneOfFields = ["aes_128", "sampleAes", "mpegCenc"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Encryption secretSource.
+                             * @member {"secretManagerKeySource"|undefined} secretSource
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             */
+                            Object.defineProperty(Encryption.prototype, "secretSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["secretManagerKeySource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Encryption instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IEncryption=} [properties] Properties to set
+                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption instance
+                             */
+                            Encryption.create = function create(properties) {
+                                return new Encryption(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IEncryption} message Encryption message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Encryption.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.aes_128 != null && Object.hasOwnProperty.call(message, "aes_128"))
+                                    $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.encode(message.aes_128, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.sampleAes != null && Object.hasOwnProperty.call(message, "sampleAes"))
+                                    $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.encode(message.sampleAes, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.mpegCenc != null && Object.hasOwnProperty.call(message, "mpegCenc"))
+                                    $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.encode(message.mpegCenc, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.id);
+                                if (message.secretManagerKeySource != null && Object.hasOwnProperty.call(message, "secretManagerKeySource"))
+                                    $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.encode(message.secretManagerKeySource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.drmSystems != null && Object.hasOwnProperty.call(message, "drmSystems"))
+                                    $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems.encode(message.drmSystems, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IEncryption} message Encryption message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Encryption.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Encryption message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Encryption.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 6: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.secretManagerKeySource = $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.drmSystems = $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Encryption message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Encryption.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Encryption message.
+                             * @function verify
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Encryption.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.aes_128 != null && message.hasOwnProperty("aes_128")) {
+                                    properties.encryptionMode = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify(message.aes_128);
+                                        if (error)
+                                            return "aes_128." + error;
+                                    }
+                                }
+                                if (message.sampleAes != null && message.hasOwnProperty("sampleAes")) {
+                                    if (properties.encryptionMode === 1)
+                                        return "encryptionMode: multiple values";
+                                    properties.encryptionMode = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify(message.sampleAes);
+                                        if (error)
+                                            return "sampleAes." + error;
+                                    }
+                                }
+                                if (message.mpegCenc != null && message.hasOwnProperty("mpegCenc")) {
+                                    if (properties.encryptionMode === 1)
+                                        return "encryptionMode: multiple values";
+                                    properties.encryptionMode = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify(message.mpegCenc);
+                                        if (error)
+                                            return "mpegCenc." + error;
+                                    }
+                                }
+                                if (message.secretManagerKeySource != null && message.hasOwnProperty("secretManagerKeySource")) {
+                                    properties.secretSource = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.verify(message.secretManagerKeySource);
+                                        if (error)
+                                            return "secretManagerKeySource." + error;
+                                    }
+                                }
+                                if (message.drmSystems != null && message.hasOwnProperty("drmSystems")) {
+                                    var error = $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems.verify(message.drmSystems);
+                                    if (error)
+                                        return "drmSystems." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
+                             */
+                            Encryption.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption)
+                                    return object;
+                                var message = new $root.google.cloud.video.transcoder.v1.Encryption();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.aes_128 != null) {
+                                    if (typeof object.aes_128 !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.aes_128: object expected");
+                                    message.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.fromObject(object.aes_128);
+                                }
+                                if (object.sampleAes != null) {
+                                    if (typeof object.sampleAes !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.sampleAes: object expected");
+                                    message.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.fromObject(object.sampleAes);
+                                }
+                                if (object.mpegCenc != null) {
+                                    if (typeof object.mpegCenc !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.mpegCenc: object expected");
+                                    message.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.fromObject(object.mpegCenc);
+                                }
+                                if (object.secretManagerKeySource != null) {
+                                    if (typeof object.secretManagerKeySource !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.secretManagerKeySource: object expected");
+                                    message.secretManagerKeySource = $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.fromObject(object.secretManagerKeySource);
+                                }
+                                if (object.drmSystems != null) {
+                                    if (typeof object.drmSystems !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.drmSystems: object expected");
+                                    message.drmSystems = $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems.fromObject(object.drmSystems);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Encryption message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.Encryption} message Encryption
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Encryption.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.drmSystems = null;
+                                }
+                                if (message.aes_128 != null && message.hasOwnProperty("aes_128")) {
+                                    object.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.toObject(message.aes_128, options);
+                                    if (options.oneofs)
+                                        object.encryptionMode = "aes_128";
+                                }
+                                if (message.sampleAes != null && message.hasOwnProperty("sampleAes")) {
+                                    object.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.toObject(message.sampleAes, options);
+                                    if (options.oneofs)
+                                        object.encryptionMode = "sampleAes";
+                                }
+                                if (message.mpegCenc != null && message.hasOwnProperty("mpegCenc")) {
+                                    object.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.toObject(message.mpegCenc, options);
+                                    if (options.oneofs)
+                                        object.encryptionMode = "mpegCenc";
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.secretManagerKeySource != null && message.hasOwnProperty("secretManagerKeySource")) {
+                                    object.secretManagerKeySource = $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.toObject(message.secretManagerKeySource, options);
+                                    if (options.oneofs)
+                                        object.secretSource = "secretManagerKeySource";
+                                }
+                                if (message.drmSystems != null && message.hasOwnProperty("drmSystems"))
+                                    object.drmSystems = $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems.toObject(message.drmSystems, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Encryption to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Encryption.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Encryption
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.transcoder.v1.Encryption
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Encryption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption";
+                            };
+    
+                            Encryption.Aes128Encryption = (function() {
+    
+                                /**
+                                 * Properties of an Aes128Encryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IAes128Encryption
+                                 */
+    
+                                /**
+                                 * Constructs a new Aes128Encryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents an Aes128Encryption.
+                                 * @implements IAes128Encryption
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption=} [properties] Properties to set
+                                 */
+                                function Aes128Encryption(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Aes128Encryption instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption instance
+                                 */
+                                Aes128Encryption.create = function create(properties) {
+                                    return new Aes128Encryption(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Aes128Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption} message Aes128Encryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Aes128Encryption.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Aes128Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption} message Aes128Encryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Aes128Encryption.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Aes128Encryption message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Aes128Encryption.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Aes128Encryption message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Aes128Encryption.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Aes128Encryption message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Aes128Encryption.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Aes128Encryption message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
+                                 */
+                                Aes128Encryption.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption();
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Aes128Encryption message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} message Aes128Encryption
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Aes128Encryption.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Aes128Encryption to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Aes128Encryption.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Aes128Encryption
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Aes128Encryption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.Aes128Encryption";
+                                };
+    
+                                return Aes128Encryption;
+                            })();
+    
+                            Encryption.SampleAesEncryption = (function() {
+    
+                                /**
+                                 * Properties of a SampleAesEncryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface ISampleAesEncryption
+                                 */
+    
+                                /**
+                                 * Constructs a new SampleAesEncryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a SampleAesEncryption.
+                                 * @implements ISampleAesEncryption
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption=} [properties] Properties to set
+                                 */
+                                function SampleAesEncryption(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new SampleAesEncryption instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption instance
+                                 */
+                                SampleAesEncryption.create = function create(properties) {
+                                    return new SampleAesEncryption(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SampleAesEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption} message SampleAesEncryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SampleAesEncryption.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SampleAesEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption} message SampleAesEncryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SampleAesEncryption.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SampleAesEncryption message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SampleAesEncryption.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SampleAesEncryption message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SampleAesEncryption.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SampleAesEncryption message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SampleAesEncryption.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SampleAesEncryption message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
+                                 */
+                                SampleAesEncryption.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SampleAesEncryption message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} message SampleAesEncryption
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SampleAesEncryption.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this SampleAesEncryption to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SampleAesEncryption.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SampleAesEncryption
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SampleAesEncryption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption";
+                                };
+    
+                                return SampleAesEncryption;
+                            })();
+    
+                            Encryption.MpegCommonEncryption = (function() {
+    
+                                /**
+                                 * Properties of a MpegCommonEncryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IMpegCommonEncryption
+                                 * @property {string|null} [scheme] MpegCommonEncryption scheme
+                                 */
+    
+                                /**
+                                 * Constructs a new MpegCommonEncryption.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a MpegCommonEncryption.
+                                 * @implements IMpegCommonEncryption
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption=} [properties] Properties to set
+                                 */
+                                function MpegCommonEncryption(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MpegCommonEncryption scheme.
+                                 * @member {string} scheme
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @instance
+                                 */
+                                MpegCommonEncryption.prototype.scheme = "";
+    
+                                /**
+                                 * Creates a new MpegCommonEncryption instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption instance
+                                 */
+                                MpegCommonEncryption.create = function create(properties) {
+                                    return new MpegCommonEncryption(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MpegCommonEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption} message MpegCommonEncryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MpegCommonEncryption.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.scheme != null && Object.hasOwnProperty.call(message, "scheme"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.scheme);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MpegCommonEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption} message MpegCommonEncryption message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MpegCommonEncryption.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MpegCommonEncryption message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MpegCommonEncryption.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 2: {
+                                                message.scheme = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MpegCommonEncryption message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MpegCommonEncryption.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MpegCommonEncryption message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MpegCommonEncryption.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.scheme != null && message.hasOwnProperty("scheme"))
+                                        if (!$util.isString(message.scheme))
+                                            return "scheme: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MpegCommonEncryption message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
+                                 */
+                                MpegCommonEncryption.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption();
+                                    if (object.scheme != null)
+                                        message.scheme = String(object.scheme);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MpegCommonEncryption message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} message MpegCommonEncryption
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MpegCommonEncryption.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.scheme = "";
+                                    if (message.scheme != null && message.hasOwnProperty("scheme"))
+                                        object.scheme = message.scheme;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MpegCommonEncryption to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MpegCommonEncryption.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MpegCommonEncryption
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MpegCommonEncryption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption";
+                                };
+    
+                                return MpegCommonEncryption;
+                            })();
+    
+                            Encryption.SecretManagerSource = (function() {
+    
+                                /**
+                                 * Properties of a SecretManagerSource.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface ISecretManagerSource
+                                 * @property {string|null} [secretVersion] SecretManagerSource secretVersion
+                                 */
+    
+                                /**
+                                 * Constructs a new SecretManagerSource.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a SecretManagerSource.
+                                 * @implements ISecretManagerSource
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource=} [properties] Properties to set
+                                 */
+                                function SecretManagerSource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SecretManagerSource secretVersion.
+                                 * @member {string} secretVersion
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @instance
+                                 */
+                                SecretManagerSource.prototype.secretVersion = "";
+    
+                                /**
+                                 * Creates a new SecretManagerSource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SecretManagerSource} SecretManagerSource instance
+                                 */
+                                SecretManagerSource.create = function create(properties) {
+                                    return new SecretManagerSource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SecretManagerSource message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource} message SecretManagerSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SecretManagerSource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.secretVersion != null && Object.hasOwnProperty.call(message, "secretVersion"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.secretVersion);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SecretManagerSource message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SecretManagerSource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISecretManagerSource} message SecretManagerSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SecretManagerSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SecretManagerSource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SecretManagerSource} SecretManagerSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SecretManagerSource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.secretVersion = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SecretManagerSource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SecretManagerSource} SecretManagerSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SecretManagerSource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SecretManagerSource message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SecretManagerSource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.secretVersion != null && message.hasOwnProperty("secretVersion"))
+                                        if (!$util.isString(message.secretVersion))
+                                            return "secretVersion: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SecretManagerSource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SecretManagerSource} SecretManagerSource
+                                 */
+                                SecretManagerSource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.SecretManagerSource();
+                                    if (object.secretVersion != null)
+                                        message.secretVersion = String(object.secretVersion);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SecretManagerSource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.SecretManagerSource} message SecretManagerSource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SecretManagerSource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.secretVersion = "";
+                                    if (message.secretVersion != null && message.hasOwnProperty("secretVersion"))
+                                        object.secretVersion = message.secretVersion;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SecretManagerSource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SecretManagerSource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SecretManagerSource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SecretManagerSource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SecretManagerSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.SecretManagerSource";
+                                };
+    
+                                return SecretManagerSource;
+                            })();
+    
+                            Encryption.Widevine = (function() {
+    
+                                /**
+                                 * Properties of a Widevine.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IWidevine
+                                 */
+    
+                                /**
+                                 * Constructs a new Widevine.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a Widevine.
+                                 * @implements IWidevine
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IWidevine=} [properties] Properties to set
+                                 */
+                                function Widevine(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Widevine instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IWidevine=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Widevine} Widevine instance
+                                 */
+                                Widevine.create = function create(properties) {
+                                    return new Widevine(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Widevine message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Widevine.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IWidevine} message Widevine message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Widevine.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Widevine message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Widevine.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IWidevine} message Widevine message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Widevine.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Widevine message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Widevine} Widevine
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Widevine.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Widevine();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Widevine message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Widevine} Widevine
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Widevine.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Widevine message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Widevine.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Widevine message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Widevine} Widevine
+                                 */
+                                Widevine.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Widevine)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.Widevine();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Widevine message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.Widevine} message Widevine
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Widevine.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Widevine to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Widevine.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Widevine
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Widevine
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Widevine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.Widevine";
+                                };
+    
+                                return Widevine;
+                            })();
+    
+                            Encryption.Fairplay = (function() {
+    
+                                /**
+                                 * Properties of a Fairplay.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IFairplay
+                                 */
+    
+                                /**
+                                 * Constructs a new Fairplay.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a Fairplay.
+                                 * @implements IFairplay
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IFairplay=} [properties] Properties to set
+                                 */
+                                function Fairplay(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Fairplay instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IFairplay=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Fairplay} Fairplay instance
+                                 */
+                                Fairplay.create = function create(properties) {
+                                    return new Fairplay(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Fairplay message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Fairplay.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IFairplay} message Fairplay message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fairplay.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Fairplay message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Fairplay.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IFairplay} message Fairplay message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fairplay.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Fairplay message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Fairplay} Fairplay
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fairplay.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Fairplay();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Fairplay message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Fairplay} Fairplay
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fairplay.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Fairplay message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Fairplay.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Fairplay message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Fairplay} Fairplay
+                                 */
+                                Fairplay.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Fairplay)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.Fairplay();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Fairplay message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.Fairplay} message Fairplay
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Fairplay.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Fairplay to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Fairplay.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Fairplay
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Fairplay
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Fairplay.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.Fairplay";
+                                };
+    
+                                return Fairplay;
+                            })();
+    
+                            Encryption.Playready = (function() {
+    
+                                /**
+                                 * Properties of a Playready.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IPlayready
+                                 */
+    
+                                /**
+                                 * Constructs a new Playready.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a Playready.
+                                 * @implements IPlayready
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IPlayready=} [properties] Properties to set
+                                 */
+                                function Playready(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Playready instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IPlayready=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Playready} Playready instance
+                                 */
+                                Playready.create = function create(properties) {
+                                    return new Playready(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Playready message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Playready.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IPlayready} message Playready message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Playready.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Playready message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Playready.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IPlayready} message Playready message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Playready.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Playready message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Playready} Playready
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Playready.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Playready();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Playready message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Playready} Playready
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Playready.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Playready message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Playready.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Playready message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Playready} Playready
+                                 */
+                                Playready.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Playready)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.Playready();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Playready message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.Playready} message Playready
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Playready.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Playready to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Playready.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Playready
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Playready
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Playready.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.Playready";
+                                };
+    
+                                return Playready;
+                            })();
+    
+                            Encryption.Clearkey = (function() {
+    
+                                /**
+                                 * Properties of a Clearkey.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IClearkey
+                                 */
+    
+                                /**
+                                 * Constructs a new Clearkey.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a Clearkey.
+                                 * @implements IClearkey
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IClearkey=} [properties] Properties to set
+                                 */
+                                function Clearkey(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Clearkey instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IClearkey=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Clearkey} Clearkey instance
+                                 */
+                                Clearkey.create = function create(properties) {
+                                    return new Clearkey(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Clearkey message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Clearkey.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IClearkey} message Clearkey message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Clearkey.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Clearkey message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Clearkey.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IClearkey} message Clearkey message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Clearkey.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Clearkey message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Clearkey} Clearkey
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Clearkey.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Clearkey();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Clearkey message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Clearkey} Clearkey
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Clearkey.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Clearkey message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Clearkey.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Clearkey message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Clearkey} Clearkey
+                                 */
+                                Clearkey.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Clearkey)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.Encryption.Clearkey();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Clearkey message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.Clearkey} message Clearkey
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Clearkey.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Clearkey to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Clearkey.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Clearkey
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Clearkey
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Clearkey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.Clearkey";
+                                };
+    
+                                return Clearkey;
+                            })();
+    
+                            Encryption.DrmSystems = (function() {
+    
+                                /**
+                                 * Properties of a DrmSystems.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @interface IDrmSystems
+                                 * @property {google.cloud.video.transcoder.v1.Encryption.IWidevine|null} [widevine] DrmSystems widevine
+                                 * @property {google.cloud.video.transcoder.v1.Encryption.IFairplay|null} [fairplay] DrmSystems fairplay
+                                 * @property {google.cloud.video.transcoder.v1.Encryption.IPlayready|null} [playready] DrmSystems playready
+                                 * @property {google.cloud.video.transcoder.v1.Encryption.IClearkey|null} [clearkey] DrmSystems clearkey
+                                 */
+    
+                                /**
+                                 * Constructs a new DrmSystems.
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption
+                                 * @classdesc Represents a DrmSystems.
+                                 * @implements IDrmSystems
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IDrmSystems=} [properties] Properties to set
+                                 */
+                                function DrmSystems(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DrmSystems widevine.
+                                 * @member {google.cloud.video.transcoder.v1.Encryption.IWidevine|null|undefined} widevine
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @instance
+                                 */
+                                DrmSystems.prototype.widevine = null;
+    
+                                /**
+                                 * DrmSystems fairplay.
+                                 * @member {google.cloud.video.transcoder.v1.Encryption.IFairplay|null|undefined} fairplay
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @instance
+                                 */
+                                DrmSystems.prototype.fairplay = null;
+    
+                                /**
+                                 * DrmSystems playready.
+                                 * @member {google.cloud.video.transcoder.v1.Encryption.IPlayready|null|undefined} playready
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @instance
+                                 */
+                                DrmSystems.prototype.playready = null;
+    
+                                /**
+                                 * DrmSystems clearkey.
+                                 * @member {google.cloud.video.transcoder.v1.Encryption.IClearkey|null|undefined} clearkey
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @instance
+                                 */
+                                DrmSystems.prototype.clearkey = null;
+    
+                                /**
+                                 * Creates a new DrmSystems instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IDrmSystems=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.DrmSystems} DrmSystems instance
+                                 */
+                                DrmSystems.create = function create(properties) {
+                                    return new DrmSystems(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DrmSystems message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.DrmSystems.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IDrmSystems} message DrmSystems message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DrmSystems.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.widevine != null && Object.hasOwnProperty.call(message, "widevine"))
+                                        $root.google.cloud.video.transcoder.v1.Encryption.Widevine.encode(message.widevine, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.fairplay != null && Object.hasOwnProperty.call(message, "fairplay"))
+                                        $root.google.cloud.video.transcoder.v1.Encryption.Fairplay.encode(message.fairplay, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.playready != null && Object.hasOwnProperty.call(message, "playready"))
+                                        $root.google.cloud.video.transcoder.v1.Encryption.Playready.encode(message.playready, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.clearkey != null && Object.hasOwnProperty.call(message, "clearkey"))
+                                        $root.google.cloud.video.transcoder.v1.Encryption.Clearkey.encode(message.clearkey, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DrmSystems message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.DrmSystems.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.IDrmSystems} message DrmSystems message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DrmSystems.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DrmSystems message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.DrmSystems} DrmSystems
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DrmSystems.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.widevine = $root.google.cloud.video.transcoder.v1.Encryption.Widevine.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.fairplay = $root.google.cloud.video.transcoder.v1.Encryption.Fairplay.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.playready = $root.google.cloud.video.transcoder.v1.Encryption.Playready.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.clearkey = $root.google.cloud.video.transcoder.v1.Encryption.Clearkey.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DrmSystems message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.DrmSystems} DrmSystems
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DrmSystems.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DrmSystems message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DrmSystems.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.widevine != null && message.hasOwnProperty("widevine")) {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Widevine.verify(message.widevine);
+                                        if (error)
+                                            return "widevine." + error;
+                                    }
+                                    if (message.fairplay != null && message.hasOwnProperty("fairplay")) {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Fairplay.verify(message.fairplay);
+                                        if (error)
+                                            return "fairplay." + error;
+                                    }
+                                    if (message.playready != null && message.hasOwnProperty("playready")) {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Playready.verify(message.playready);
+                                        if (error)
+                                            return "playready." + error;
+                                    }
+                                    if (message.clearkey != null && message.hasOwnProperty("clearkey")) {
+                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Clearkey.verify(message.clearkey);
+                                        if (error)
+                                            return "clearkey." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DrmSystems message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.Encryption.DrmSystems} DrmSystems
+                                 */
+                                DrmSystems.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.DrmSystems();
+                                    if (object.widevine != null) {
+                                        if (typeof object.widevine !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.Encryption.DrmSystems.widevine: object expected");
+                                        message.widevine = $root.google.cloud.video.transcoder.v1.Encryption.Widevine.fromObject(object.widevine);
+                                    }
+                                    if (object.fairplay != null) {
+                                        if (typeof object.fairplay !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.Encryption.DrmSystems.fairplay: object expected");
+                                        message.fairplay = $root.google.cloud.video.transcoder.v1.Encryption.Fairplay.fromObject(object.fairplay);
+                                    }
+                                    if (object.playready != null) {
+                                        if (typeof object.playready !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.Encryption.DrmSystems.playready: object expected");
+                                        message.playready = $root.google.cloud.video.transcoder.v1.Encryption.Playready.fromObject(object.playready);
+                                    }
+                                    if (object.clearkey != null) {
+                                        if (typeof object.clearkey !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.Encryption.DrmSystems.clearkey: object expected");
+                                        message.clearkey = $root.google.cloud.video.transcoder.v1.Encryption.Clearkey.fromObject(object.clearkey);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DrmSystems message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.Encryption.DrmSystems} message DrmSystems
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DrmSystems.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.widevine = null;
+                                        object.fairplay = null;
+                                        object.playready = null;
+                                        object.clearkey = null;
+                                    }
+                                    if (message.widevine != null && message.hasOwnProperty("widevine"))
+                                        object.widevine = $root.google.cloud.video.transcoder.v1.Encryption.Widevine.toObject(message.widevine, options);
+                                    if (message.fairplay != null && message.hasOwnProperty("fairplay"))
+                                        object.fairplay = $root.google.cloud.video.transcoder.v1.Encryption.Fairplay.toObject(message.fairplay, options);
+                                    if (message.playready != null && message.hasOwnProperty("playready"))
+                                        object.playready = $root.google.cloud.video.transcoder.v1.Encryption.Playready.toObject(message.playready, options);
+                                    if (message.clearkey != null && message.hasOwnProperty("clearkey"))
+                                        object.clearkey = $root.google.cloud.video.transcoder.v1.Encryption.Clearkey.toObject(message.clearkey, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DrmSystems to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DrmSystems.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DrmSystems
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.Encryption.DrmSystems
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DrmSystems.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.Encryption.DrmSystems";
+                                };
+    
+                                return DrmSystems;
+                            })();
+    
+                            return Encryption;
                         })();
     
                         v1.TranscoderService = (function() {
