@@ -12,6 +12,10 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Alpha_analytics_data.create_audience_list](#alpha_analytics_data.create_audience_list)
+  * [Alpha_analytics_data.get_audience_list](#alpha_analytics_data.get_audience_list)
+  * [Alpha_analytics_data.list_audience_lists](#alpha_analytics_data.list_audience_lists)
+  * [Alpha_analytics_data.query_audience_list](#alpha_analytics_data.query_audience_list)
   * [Alpha_analytics_data.run_funnel_report](#alpha_analytics_data.run_funnel_report)
   * [Beta_analytics_data.batch_run_pivot_reports](#beta_analytics_data.batch_run_pivot_reports)
   * [Beta_analytics_data.batch_run_reports](#beta_analytics_data.batch_run_reports)
@@ -21,7 +25,6 @@
   * [Beta_analytics_data.run_realtime_report](#beta_analytics_data.run_realtime_report)
   * [Beta_analytics_data.run_report](#beta_analytics_data.run_report)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -35,6 +38,74 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Alpha_analytics_data.create_audience_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.get_audience_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.list_audience_lists
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.query_audience_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js`
+
+
+-----
+
 
 
 
@@ -184,23 +255,6 @@ __Usage:__
 
 
 `node packages/google-analytics-data/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-analytics-data/samples/test/quickstart.test.js`
 
 
 

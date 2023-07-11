@@ -62,7 +62,7 @@ function main() {
    *  If specified, next action adds a dimension to the funnel visualization sub
    *  report response. This next action dimension expands each funnel step to the
    *  unique values of the next action. For example a next action of the
-   *  `eventName` dimension will create rows for several events (i.e.
+   *  `eventName` dimension will create rows for several events (for example
    *  `session_start` & `click`) and the total.
    *  Next action only supports `eventName` and most Page / Screen dimensions
    *  like `pageTitle` and `pagePath`.
@@ -85,7 +85,7 @@ function main() {
   // const segments = 1234
   /**
    *  The number of rows to return. If unspecified, 10,000 rows are returned. The
-   *  API returns a maximum of 100,000 rows per request, no matter how many you
+   *  API returns a maximum of 250,000 rows per request, no matter how many you
    *  ask for. `limit` must be positive.
    *  The API can also return fewer rows than the requested `limit`, if there
    *  aren't as many dimension values as the `limit`.
