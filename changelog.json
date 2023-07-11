@@ -5,6 +5,252 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "f3e866e2c16ba430d7fb3bf0abc723b04ea9e994",
+          "message": "[cloudbuild] added e2-medium machine type",
+          "issues": [
+            "4402"
+          ]
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "8ab83dda-dd80-49c4-a0d7-7ed241c15eed",
+      "createTime": "2023-07-11T01:38:57.211Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1c86e278233c71b93d2478003f45c6d09e7f3344",
+          "message": "[container] add a flag to toggle the Kubelet read only port",
+          "issues": [
+            "4387"
+          ]
+        }
+      ],
+      "version": "4.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a45acc9b-cbf9-4731-9da8-4a8c2c92d9f3",
+      "createTime": "2023-07-11T01:38:57.207Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "198cb4b8f28ae21b9dc0bc2333d8df5c19ef1421",
+          "message": "[video-transcoder] added support for segment template manifest generation with DASH",
+          "issues": [
+            "4407"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "9988346f-5e31-4db2-84ec-2a2f497a5634",
+      "createTime": "2023-07-11T01:38:57.203Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "99d532459a01833ee82a233d03cd0bf4bd647353",
+          "message": "Add `model` and `language_codes` fields in `RecognitionConfig` message + enable default `_` recognizer",
+          "issues": [
+            "4395"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "602450ac-dab4-43b3-b811-a91e9306d906",
+      "createTime": "2023-07-11T01:38:57.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "453410c2441d9f82d931ba78b9cedf428459dcf5",
+          "message": "[run] Adds support for custom audiences",
+          "issues": [
+            "4400"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "3bd4a899-1c47-4e58-aff1-7cd2a926b5a3",
+      "createTime": "2023-07-11T01:38:57.195Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ec44b3c810bda599cdb5f3e1d673871abff34009",
+          "message": "[metastore] added Admin Interface (v1)",
+          "issues": [
+            "4392"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "8efb9341-b398-4e04-8336-34ffd2f7aec7",
+      "createTime": "2023-07-11T01:38:57.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "685b1ad505b25a45763ade68d1d0b8917cb262c7",
+          "message": "[kms] add interoperable symmetric encryption system",
+          "issues": [
+            "4389"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "7a1a3026-2ae4-43d1-916b-d1f3c116ebab",
+      "createTime": "2023-07-11T01:38:57.188Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88e5a03ca13cd1a86d954f8f3ae66ea8a1c0abba",
+          "message": "[dialogflow-cx] added GitIntegrationSettings to the Agent",
+          "issues": [
+            "4404"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "f9a96281-28a3-4abf-827c-be905a63d8f4",
+      "createTime": "2023-07-11T01:38:57.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c2442fb3b2183d49bdd721ddc751f5b4cbcabca",
+          "message": "[deploy] added support routeUpdateWaitTime field for Deployment Strategies",
+          "issues": [
+            "4408"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "aadb2c5a-2acd-4fd7-8c43-48430ff7c914",
+      "createTime": "2023-07-11T01:38:57.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3f53b3ff4644fac5a20e36beb67d5601d573d29",
+          "message": "[datacatalog] added rpc RenameTagTemplateFieldEnumValue",
+          "issues": [
+            "4396"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "82b9bee2-3046-42a4-a15f-f7e8c1ca53a8",
+      "createTime": "2023-07-11T01:38:57.174Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8af03771ca5c239cf234ac4b9ee59f290eb5071c",
+          "message": "[contactcenterinsights] Support topic model type V2",
+          "issues": [
+            "4397"
+          ]
+        }
+      ],
+      "version": "2.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "59bd34db-5f5e-4852-9610-f599f63e6386",
+      "createTime": "2023-07-11T01:38:57.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "db3b83d191eeef3ab27d282bf9eb4be36280bb69",
+          "message": "[compute] Update Compute Engine API to revision 20230701 (#821)",
+          "issues": [
+            "4406"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "67a4cefab91a1dcf066097c141e764ee50f4c2e9",
+          "message": "[compute] Update Compute Engine API to revision 20230610 (#820)",
+          "issues": [
+            "4388"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "662dc799-14fc-42f3-8539-3f013c034f93",
+      "createTime": "2023-07-11T01:38:57.165Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fd7489a04a291555c8c31ad615236486709b645e",
+          "message": "[bigquery-connection] add support for Salesforce connections, which are usable only by allowlisted partners",
+          "issues": [
+            "4403"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "1ac6e8e9-c873-43c7-91af-9d02a392c5e5",
+      "createTime": "2023-07-11T01:38:57.155Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b81d695e7f0a70d0b2821a8c2de8dbf34f801b70",
+          "message": "[analytics-data] add `CreateAudienceList`, `QueryAudienceList`,`GetAudienceList`,`ListAudienceLists` methods to the Data API v1 alpha",
+          "issues": [
+            "4409"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "8bfbde9a-1918-49d2-9781-256b0ab8d2dd",
+      "createTime": "2023-07-11T01:38:57.152Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5951ac077a08fcc427e3cd67c022d21f0040f81c",
           "message": "Add initial files for google.cloud.migrationcenter.v1",
           "issues": [
@@ -10882,5 +11128,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-07-04T14:41:00.186Z"
+  "updateTime": "2023-07-11T01:38:57.211Z"
 }

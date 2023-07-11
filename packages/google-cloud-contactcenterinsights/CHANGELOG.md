@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.8.0...contact-center-insights-v2.9.0) (2023-07-11)
+
+
+### Features
+
+* [contactcenterinsights] Support topic model type V2 ([#4397](https://github.com/googleapis/google-cloud-node/issues/4397)) ([8af0377](https://github.com/googleapis/google-cloud-node/commit/8af03771ca5c239cf234ac4b9ee59f290eb5071c))
+
 ## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.7.0...contact-center-insights-v2.8.0) (2023-06-06)
 
 

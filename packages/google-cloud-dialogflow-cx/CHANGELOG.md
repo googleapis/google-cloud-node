@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.7.0...dialogflow-cx-v3.8.0) (2023-07-11)
+
+
+### Features
+
+* [dialogflow-cx] added GitIntegrationSettings to the Agent ([#4404](https://github.com/googleapis/google-cloud-node/issues/4404)) ([88e5a03](https://github.com/googleapis/google-cloud-node/commit/88e5a03ca13cd1a86d954f8f3ae66ea8a1c0abba))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.6.0...dialogflow-cx-v3.7.0) (2023-06-28)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/speech-v5.5.1...speech-v5.6.0) (2023-07-11)
+
+
+### Features
+
+* Add `model` and `language_codes` fields in `RecognitionConfig` message + enable default `_` recognizer ([#4395](https://github.com/googleapis/google-cloud-node/issues/4395)) ([99d5324](https://github.com/googleapis/google-cloud-node/commit/99d532459a01833ee82a233d03cd0bf4bd647353))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/speech-v5.5.0...speech-v5.5.1) (2023-06-28)
 
 
