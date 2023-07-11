@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.5.0...dataproc-metastore-v3.6.0) (2023-07-11)
+
+
+### Features
+
+* [metastore] added Admin Interface (v1) ([#4392](https://github.com/googleapis/google-cloud-node/issues/4392)) ([ec44b3c](https://github.com/googleapis/google-cloud-node/commit/ec44b3c810bda599cdb5f3e1d673871abff34009))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.4.2...dataproc-metastore-v3.5.0) (2023-04-24)
 
 

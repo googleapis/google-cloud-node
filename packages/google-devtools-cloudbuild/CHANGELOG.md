@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.8.0...cloudbuild-v3.9.0) (2023-07-11)
+
+
+### Features
+
+* [cloudbuild] added e2-medium machine type ([#4402](https://github.com/googleapis/google-cloud-node/issues/4402)) ([f3e866e](https://github.com/googleapis/google-cloud-node/commit/f3e866e2c16ba430d7fb3bf0abc723b04ea9e994))
+
 ## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.7.0...cloudbuild-v3.8.0) (2023-07-04)
 
 

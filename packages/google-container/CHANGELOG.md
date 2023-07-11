@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.14.0...container-v4.15.0) (2023-07-11)
+
+
+### Features
+
+* [container] add a flag to toggle the Kubelet read only port ([#4387](https://github.com/googleapis/google-cloud-node/issues/4387)) ([1c86e27](https://github.com/googleapis/google-cloud-node/commit/1c86e278233c71b93d2478003f45c6d09e7f3344))
+
 ## [4.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.13.0...container-v4.14.0) (2023-07-04)
 
 

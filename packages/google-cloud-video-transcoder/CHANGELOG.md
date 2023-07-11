@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.6.0...video-transcoder-v2.7.0) (2023-07-11)
+
+
+### Features
+
+* [video-transcoder] added support for segment template manifest generation with DASH ([#4407](https://github.com/googleapis/google-cloud-node/issues/4407)) ([198cb4b](https://github.com/googleapis/google-cloud-node/commit/198cb4b8f28ae21b9dc0bc2333d8df5c19ef1421))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.5.0...video-transcoder-v2.6.0) (2023-04-13)
 
 

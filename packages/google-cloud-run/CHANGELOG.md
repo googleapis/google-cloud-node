@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/run-v0.5.0...run-v0.6.0) (2023-07-11)
+
+
+### Features
+
+* [run] Adds support for custom audiences ([#4400](https://github.com/googleapis/google-cloud-node/issues/4400)) ([453410c](https://github.com/googleapis/google-cloud-node/commit/453410c2441d9f82d931ba78b9cedf428459dcf5))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/run-v0.4.2...run-v0.5.0) (2023-05-04)
 
 

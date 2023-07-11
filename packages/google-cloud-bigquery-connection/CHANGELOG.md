@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.2.1...bigquery-connection-v2.3.0) (2023-07-11)
+
+
+### Features
+
+* [bigquery-connection] add support for Salesforce connections, which are usable only by allowlisted partners ([#4403](https://github.com/googleapis/google-cloud-node/issues/4403)) ([fd7489a](https://github.com/googleapis/google-cloud-node/commit/fd7489a04a291555c8c31ad615236486709b645e))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.2.0...bigquery-connection-v2.2.1) (2023-04-13)
 
 

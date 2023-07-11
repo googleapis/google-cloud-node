@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.7.0...deploy-v2.8.0) (2023-07-11)
+
+
+### Features
+
+* [deploy] added support routeUpdateWaitTime field for Deployment Strategies ([#4408](https://github.com/googleapis/google-cloud-node/issues/4408)) ([4c2442f](https://github.com/googleapis/google-cloud-node/commit/4c2442fb3b2183d49bdd721ddc751f5b4cbcabca))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.6.0...deploy-v2.7.0) (2023-06-28)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.4.0...datacatalog-v3.5.0) (2023-07-11)
+
+
+### Features
+
+* [datacatalog] added rpc RenameTagTemplateFieldEnumValue ([#4396](https://github.com/googleapis/google-cloud-node/issues/4396)) ([f3f53b3](https://github.com/googleapis/google-cloud-node/commit/f3f53b3ff4644fac5a20e36beb67d5601d573d29))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.3.1...datacatalog-v3.4.0) (2023-06-06)
 
 
