@@ -1823,6 +1823,9 @@ export namespace google {
 
                         /** GatewayServiceMesh deployment */
                         deployment?: (string|null);
+
+                        /** GatewayServiceMesh routeUpdateWaitTime */
+                        routeUpdateWaitTime?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a GatewayServiceMesh. */
@@ -1842,6 +1845,9 @@ export namespace google {
 
                         /** GatewayServiceMesh deployment. */
                         public deployment: string;
+
+                        /** GatewayServiceMesh routeUpdateWaitTime. */
+                        public routeUpdateWaitTime?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new GatewayServiceMesh instance using the specified properties.
@@ -11534,6 +11540,8 @@ export namespace google {
                 enum Type {
                     TYPE_UNSPECIFIED = 0,
                     TYPE_PUBSUB_NOTIFICATION_FAILURE = 1,
+                    TYPE_RESOURCE_STATE_CHANGE = 3,
+                    TYPE_PROCESS_ABORTED = 4,
                     TYPE_RENDER_STATUES_CHANGE = 2
                 }
 

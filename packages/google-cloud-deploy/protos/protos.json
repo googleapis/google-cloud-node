@@ -869,6 +869,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "routeUpdateWaitTime": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1254,19 +1261,31 @@
                         },
                         "gke": {
                           "type": "GkeCluster",
-                          "id": 15
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "anthosCluster": {
                           "type": "AnthosCluster",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "run": {
                           "type": "CloudRunLocation",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "multiTarget": {
                           "type": "MultiTarget",
-                          "id": 19
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "etag": {
                           "type": "string",
@@ -3283,6 +3302,8 @@
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
                         "TYPE_PUBSUB_NOTIFICATION_FAILURE": 1,
+                        "TYPE_RESOURCE_STATE_CHANGE": 3,
+                        "TYPE_PROCESS_ABORTED": 4,
                         "TYPE_RENDER_STATUES_CHANGE": 2
                       }
                     },

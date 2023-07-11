@@ -4130,6 +4130,7 @@
                              * @property {string|null} [httpRoute] GatewayServiceMesh httpRoute
                              * @property {string|null} [service] GatewayServiceMesh service
                              * @property {string|null} [deployment] GatewayServiceMesh deployment
+                             * @property {google.protobuf.IDuration|null} [routeUpdateWaitTime] GatewayServiceMesh routeUpdateWaitTime
                              */
     
                             /**
@@ -4172,6 +4173,14 @@
                             GatewayServiceMesh.prototype.deployment = "";
     
                             /**
+                             * GatewayServiceMesh routeUpdateWaitTime.
+                             * @member {google.protobuf.IDuration|null|undefined} routeUpdateWaitTime
+                             * @memberof google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh
+                             * @instance
+                             */
+                            GatewayServiceMesh.prototype.routeUpdateWaitTime = null;
+    
+                            /**
                              * Creates a new GatewayServiceMesh instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh
@@ -4201,6 +4210,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.service);
                                 if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.deployment);
+                                if (message.routeUpdateWaitTime != null && Object.hasOwnProperty.call(message, "routeUpdateWaitTime"))
+                                    $root.google.protobuf.Duration.encode(message.routeUpdateWaitTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4247,6 +4258,10 @@
                                             message.deployment = reader.string();
                                             break;
                                         }
+                                    case 4: {
+                                            message.routeUpdateWaitTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4291,6 +4306,11 @@
                                 if (message.deployment != null && message.hasOwnProperty("deployment"))
                                     if (!$util.isString(message.deployment))
                                         return "deployment: string expected";
+                                if (message.routeUpdateWaitTime != null && message.hasOwnProperty("routeUpdateWaitTime")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.routeUpdateWaitTime);
+                                    if (error)
+                                        return "routeUpdateWaitTime." + error;
+                                }
                                 return null;
                             };
     
@@ -4312,6 +4332,11 @@
                                     message.service = String(object.service);
                                 if (object.deployment != null)
                                     message.deployment = String(object.deployment);
+                                if (object.routeUpdateWaitTime != null) {
+                                    if (typeof object.routeUpdateWaitTime !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.routeUpdateWaitTime: object expected");
+                                    message.routeUpdateWaitTime = $root.google.protobuf.Duration.fromObject(object.routeUpdateWaitTime);
+                                }
                                 return message;
                             };
     
@@ -4332,6 +4357,7 @@
                                     object.httpRoute = "";
                                     object.service = "";
                                     object.deployment = "";
+                                    object.routeUpdateWaitTime = null;
                                 }
                                 if (message.httpRoute != null && message.hasOwnProperty("httpRoute"))
                                     object.httpRoute = message.httpRoute;
@@ -4339,6 +4365,8 @@
                                     object.service = message.service;
                                 if (message.deployment != null && message.hasOwnProperty("deployment"))
                                     object.deployment = message.deployment;
+                                if (message.routeUpdateWaitTime != null && message.hasOwnProperty("routeUpdateWaitTime"))
+                                    object.routeUpdateWaitTime = $root.google.protobuf.Duration.toObject(message.routeUpdateWaitTime, options);
                                 return object;
                             };
     
@@ -28262,6 +28290,8 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -28298,6 +28328,14 @@
                             case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -28369,12 +28407,16 @@
                      * @enum {number}
                      * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
                      * @property {number} TYPE_PUBSUB_NOTIFICATION_FAILURE=1 TYPE_PUBSUB_NOTIFICATION_FAILURE value
+                     * @property {number} TYPE_RESOURCE_STATE_CHANGE=3 TYPE_RESOURCE_STATE_CHANGE value
+                     * @property {number} TYPE_PROCESS_ABORTED=4 TYPE_PROCESS_ABORTED value
                      * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
                      */
                     v1.Type = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "TYPE_PUBSUB_NOTIFICATION_FAILURE"] = 1;
+                        values[valuesById[3] = "TYPE_RESOURCE_STATE_CHANGE"] = 3;
+                        values[valuesById[4] = "TYPE_PROCESS_ABORTED"] = 4;
                         values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
                         return values;
                     })();
@@ -28624,6 +28666,8 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -28668,6 +28712,14 @@
                             case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -28918,6 +28970,8 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -28954,6 +29008,14 @@
                             case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -29470,6 +29532,8 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -29513,6 +29577,14 @@
                             case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -29762,6 +29834,8 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
+                                case 4:
                                 case 2:
                                     break;
                                 }
@@ -29798,6 +29872,14 @@
                             case "TYPE_PUBSUB_NOTIFICATION_FAILURE":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "TYPE_RESOURCE_STATE_CHANGE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "TYPE_PROCESS_ABORTED":
+                            case 4:
+                                message.type = 4;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
