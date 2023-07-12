@@ -35,8 +35,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. If this is provided, it must match the server's etag on the
-   *  workerpool for the request to be processed.
+   *  Optional. If provided, it must match the server's etag on the workerpool
+   *  for the request to be processed.
    */
   // const etag = 'abc123'
   /**
