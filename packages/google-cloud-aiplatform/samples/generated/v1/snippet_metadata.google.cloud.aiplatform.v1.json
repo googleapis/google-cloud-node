@@ -540,6 +540,46 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async",
+            "title": "DatasetService deleteSavedQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a SavedQuery.",
+            "canonical": true,
+            "file": "dataset_service.delete_saved_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSavedQuery",
+                "fullName": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSavedQuery",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_async",
             "title": "DatasetService getAnnotationSpec Sample",
             "origin": "API_DEFINITION",
@@ -7932,46 +7972,6 @@
             }
         },
         {
-            "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async",
-            "title": "DatasetService readTensorboardUsage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
-            "canonical": true,
-            "file": "tensorboard_service.read_tensorboard_usage.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReadTensorboardUsage",
-                "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "tensorboard",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.aiplatform.v1.ReadTensorboardUsageResponse",
-                "client": {
-                    "shortName": "TensorboardServiceClient",
-                    "fullName": "google.cloud.aiplatform.v1.TensorboardServiceClient"
-                },
-                "method": {
-                    "shortName": "ReadTensorboardUsage",
-                    "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-                    "service": {
-                        "shortName": "TensorboardService",
-                        "fullName": "google.cloud.aiplatform.v1.TensorboardService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboard_async",
             "title": "DatasetService updateTensorboard Sample",
             "origin": "API_DEFINITION",
@@ -8108,6 +8108,46 @@
                 "method": {
                     "shortName": "DeleteTensorboard",
                     "fullName": "google.cloud.aiplatform.v1.TensorboardService.DeleteTensorboard",
+                    "service": {
+                        "shortName": "TensorboardService",
+                        "fullName": "google.cloud.aiplatform.v1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async",
+            "title": "DatasetService readTensorboardUsage Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
+            "canonical": true,
+            "file": "tensorboard_service.read_tensorboard_usage.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadTensorboardUsage",
+                "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tensorboard",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ReadTensorboardUsageResponse",
+                "client": {
+                    "shortName": "TensorboardServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadTensorboardUsage",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1.TensorboardService"

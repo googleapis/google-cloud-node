@@ -45,6 +45,11 @@
                 "exportData"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -118,6 +123,11 @@
             "ExportData": {
               "methods": [
                 "exportData"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
               ]
             },
             "ListDatasets": {

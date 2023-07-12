@@ -605,6 +605,9 @@ export class FeaturestoreServiceClient {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -838,6 +841,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -1006,6 +1013,7 @@ export class FeaturestoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1162,6 +1170,7 @@ export class FeaturestoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1345,6 +1354,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -2167,7 +2179,7 @@ export class FeaturestoreServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to create Featurestores.
    *   Format:
-   *   `projects/{project}/locations/{location}'`
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.Featurestore} request.featurestore
    *   Required. The Featurestore to create.
    * @param {string} request.featurestoreId
@@ -5051,6 +5063,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -5220,6 +5233,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -5337,6 +5351,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
