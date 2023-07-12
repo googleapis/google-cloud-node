@@ -1781,7 +1781,7 @@
                     "BuildTrigger": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/BuildTrigger",
-                        "(google.api.resource).pattern": "projects/{project}/triggers/{trigger}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/triggers/{trigger}",
                         "(google.api.resource).plural": "triggers",
                         "(google.api.resource).singular": "trigger"
                       },
