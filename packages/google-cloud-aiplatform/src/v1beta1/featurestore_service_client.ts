@@ -269,6 +269,9 @@ export class FeaturestoreServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -2351,7 +2354,7 @@ export class FeaturestoreServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to create Featurestores.
    *   Format:
-   *   `projects/{project}/locations/{location}'`
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1beta1.Featurestore} request.featurestore
    *   Required. The Featurestore to create.
    * @param {string} request.featurestoreId
@@ -5235,6 +5238,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -5404,6 +5408,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -5521,6 +5526,7 @@ export class FeaturestoreServiceClient {
    *   * `featurestore_id`: Supports = comparisons.
    *
    *   Examples:
+   *
    *   * `description = "foo bar"` --> Any Feature with description exactly equal
    *   to `foo bar`
    *   * `value_type = DOUBLE` --> Features whose type is DOUBLE.
@@ -7635,6 +7641,67 @@ export class FeaturestoreServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**

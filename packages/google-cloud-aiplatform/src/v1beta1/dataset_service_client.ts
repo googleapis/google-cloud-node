@@ -44,8 +44,7 @@ import * as gapicConfig from './dataset_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The service that handles the CRUD of Vertex AI Dataset and its child
- *  resources.
+ *  The service that manages Vertex AI Dataset and its child resources.
  * @class
  * @memberof v1beta1
  */
@@ -269,6 +268,9 @@ export class DatasetServiceClient {
       ),
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
@@ -1560,6 +1562,12 @@ export class DatasetServiceClient {
     const exportDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.ExportDataOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteSavedQueryResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSavedQueryMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataset: new this._gaxModule.LongrunningDescriptor(
@@ -1581,6 +1589,11 @@ export class DatasetServiceClient {
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
+      ),
+      deleteSavedQuery: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSavedQueryResponse.decode.bind(deleteSavedQueryResponse),
+        deleteSavedQueryMetadata.decode.bind(deleteSavedQueryMetadata)
       ),
     };
 
@@ -1644,6 +1657,7 @@ export class DatasetServiceClient {
       'listDataItems',
       'searchDataItems',
       'listSavedQueries',
+      'deleteSavedQuery',
       'getAnnotationSpec',
       'listAnnotations',
     ];
@@ -2590,6 +2604,146 @@ export class DatasetServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ExportDataResponse,
       protos.google.cloud.aiplatform.v1beta1.ExportDataOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a SavedQuery.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the SavedQuery to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_saved_query.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteSavedQuery_async
+   */
+  deleteSavedQuery(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSavedQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteSavedQuery(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSavedQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSavedQuery(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSavedQueryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSavedQuery(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSavedQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSavedQuery(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSavedQuery()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_saved_query.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteSavedQuery_async
+   */
+  async checkDeleteSavedQueryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSavedQuery,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
   /**
@@ -5927,6 +6081,67 @@ export class DatasetServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**
