@@ -43,6 +43,7 @@ function main(projectId, triggerId) {
   // const triggerId = 'abc123'
   /**
    *  Source to build against this trigger.
+   *  Branch and tag names cannot consist of regular expressions.
    */
   // const source = {}
 
