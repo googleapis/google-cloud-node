@@ -916,6 +916,13 @@
                   }
                 },
                 "NodeKubeletConfig": {
+                  "oneofs": {
+                    "_insecureKubeletReadonlyPortEnabled": {
+                      "oneof": [
+                        "insecureKubeletReadonlyPortEnabled"
+                      ]
+                    }
+                  },
                   "fields": {
                     "cpuManagerPolicy": {
                       "type": "string",
@@ -932,6 +939,13 @@
                     "podPidsLimit": {
                       "type": "int64",
                       "id": 4
+                    },
+                    "insecureKubeletReadonlyPortEnabled": {
+                      "type": "bool",
+                      "id": 7,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -1156,6 +1170,13 @@
                     "podCidrOverprovisionConfig": {
                       "type": "PodCIDROverprovisionConfig",
                       "id": 13
+                    },
+                    "podIpv4RangeUtilization": {
+                      "type": "double",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -1435,6 +1456,10 @@
                     "gkeBackupAgentConfig": {
                       "type": "GkeBackupAgentConfig",
                       "id": 16
+                    },
+                    "gcsFuseCsiDriverConfig": {
+                      "type": "GcsFuseCsiDriverConfig",
+                      "id": 17
                     }
                   }
                 },
@@ -1572,6 +1597,14 @@
                   }
                 },
                 "GcpFilestoreCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "GcsFuseCsiDriverConfig": {
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -1780,6 +1813,13 @@
                     "additionalPodRangesConfig": {
                       "type": "AdditionalPodRangesConfig",
                       "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "defaultPodIpv4RangeUtilization": {
+                      "type": "double",
+                      "id": 25,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -2414,6 +2454,32 @@
                       "rule": "repeated",
                       "type": "string",
                       "id": 1
+                    },
+                    "podRangeInfo": {
+                      "rule": "repeated",
+                      "type": "RangeInfo",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "RangeInfo": {
+                  "fields": {
+                    "rangeName": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "utilization": {
+                      "type": "double",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -4055,6 +4121,13 @@
                   }
                 },
                 "AutoprovisioningNodePoolDefaults": {
+                  "oneofs": {
+                    "_insecureKubeletReadonlyPortEnabled": {
+                      "oneof": [
+                        "insecureKubeletReadonlyPortEnabled"
+                      ]
+                    }
+                  },
                   "fields": {
                     "oauthScopes": {
                       "rule": "repeated",
@@ -4099,6 +4172,13 @@
                     "imageType": {
                       "type": "string",
                       "id": 10
+                    },
+                    "insecureKubeletReadonlyPortEnabled": {
+                      "type": "bool",
+                      "id": 13,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -5319,6 +5399,32 @@
                     "managedPrometheusConfig": {
                       "type": "ManagedPrometheusConfig",
                       "id": 2
+                    },
+                    "advancedDatapathObservabilityConfig": {
+                      "type": "AdvancedDatapathObservabilityConfig",
+                      "id": 3
+                    }
+                  }
+                },
+                "AdvancedDatapathObservabilityConfig": {
+                  "fields": {
+                    "enableMetrics": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "relayMode": {
+                      "type": "RelayMode",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "RelayMode": {
+                      "values": {
+                        "RELAY_MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "INTERNAL_VPC_LB": 3,
+                        "EXTERNAL_LB": 4
+                      }
                     }
                   }
                 },
