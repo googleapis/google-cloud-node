@@ -11392,6 +11392,32 @@
                     "managedPrometheusConfig": {
                       "type": "ManagedPrometheusConfig",
                       "id": 2
+                    },
+                    "advancedDatapathObservabilityConfig": {
+                      "type": "AdvancedDatapathObservabilityConfig",
+                      "id": 3
+                    }
+                  }
+                },
+                "AdvancedDatapathObservabilityConfig": {
+                  "fields": {
+                    "enableMetrics": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "relayMode": {
+                      "type": "RelayMode",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "RelayMode": {
+                      "values": {
+                        "RELAY_MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "INTERNAL_VPC_LB": 3,
+                        "EXTERNAL_LB": 4
+                      }
                     }
                   }
                 },

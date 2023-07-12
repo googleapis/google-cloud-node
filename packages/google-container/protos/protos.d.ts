@@ -42644,6 +42644,9 @@ export namespace google {
 
                 /** MonitoringConfig managedPrometheusConfig */
                 managedPrometheusConfig?: (google.container.v1beta1.IManagedPrometheusConfig|null);
+
+                /** MonitoringConfig advancedDatapathObservabilityConfig */
+                advancedDatapathObservabilityConfig?: (google.container.v1beta1.IAdvancedDatapathObservabilityConfig|null);
             }
 
             /** Represents a MonitoringConfig. */
@@ -42660,6 +42663,9 @@ export namespace google {
 
                 /** MonitoringConfig managedPrometheusConfig. */
                 public managedPrometheusConfig?: (google.container.v1beta1.IManagedPrometheusConfig|null);
+
+                /** MonitoringConfig advancedDatapathObservabilityConfig. */
+                public advancedDatapathObservabilityConfig?: (google.container.v1beta1.IAdvancedDatapathObservabilityConfig|null);
 
                 /**
                  * Creates a new MonitoringConfig instance using the specified properties.
@@ -42737,6 +42743,120 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdvancedDatapathObservabilityConfig. */
+            interface IAdvancedDatapathObservabilityConfig {
+
+                /** AdvancedDatapathObservabilityConfig enableMetrics */
+                enableMetrics?: (boolean|null);
+
+                /** AdvancedDatapathObservabilityConfig relayMode */
+                relayMode?: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|null);
+            }
+
+            /** Represents an AdvancedDatapathObservabilityConfig. */
+            class AdvancedDatapathObservabilityConfig implements IAdvancedDatapathObservabilityConfig {
+
+                /**
+                 * Constructs a new AdvancedDatapathObservabilityConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAdvancedDatapathObservabilityConfig);
+
+                /** AdvancedDatapathObservabilityConfig enableMetrics. */
+                public enableMetrics: boolean;
+
+                /** AdvancedDatapathObservabilityConfig relayMode. */
+                public relayMode: (google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode|keyof typeof google.container.v1beta1.AdvancedDatapathObservabilityConfig.RelayMode);
+
+                /**
+                 * Creates a new AdvancedDatapathObservabilityConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdvancedDatapathObservabilityConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAdvancedDatapathObservabilityConfig): google.container.v1beta1.AdvancedDatapathObservabilityConfig;
+
+                /**
+                 * Encodes the specified AdvancedDatapathObservabilityConfig message. Does not implicitly {@link google.container.v1beta1.AdvancedDatapathObservabilityConfig.verify|verify} messages.
+                 * @param message AdvancedDatapathObservabilityConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAdvancedDatapathObservabilityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdvancedDatapathObservabilityConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AdvancedDatapathObservabilityConfig.verify|verify} messages.
+                 * @param message AdvancedDatapathObservabilityConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAdvancedDatapathObservabilityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdvancedDatapathObservabilityConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdvancedDatapathObservabilityConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AdvancedDatapathObservabilityConfig;
+
+                /**
+                 * Decodes an AdvancedDatapathObservabilityConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdvancedDatapathObservabilityConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AdvancedDatapathObservabilityConfig;
+
+                /**
+                 * Verifies an AdvancedDatapathObservabilityConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdvancedDatapathObservabilityConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdvancedDatapathObservabilityConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AdvancedDatapathObservabilityConfig;
+
+                /**
+                 * Creates a plain object from an AdvancedDatapathObservabilityConfig message. Also converts values to other types if specified.
+                 * @param message AdvancedDatapathObservabilityConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AdvancedDatapathObservabilityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdvancedDatapathObservabilityConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdvancedDatapathObservabilityConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AdvancedDatapathObservabilityConfig {
+
+                /** RelayMode enum. */
+                enum RelayMode {
+                    RELAY_MODE_UNSPECIFIED = 0,
+                    DISABLED = 1,
+                    INTERNAL_VPC_LB = 3,
+                    EXTERNAL_LB = 4
+                }
             }
 
             /** Properties of a NodePoolLoggingConfig. */
