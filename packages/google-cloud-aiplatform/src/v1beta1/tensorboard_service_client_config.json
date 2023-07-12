@@ -28,10 +28,6 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "ReadTensorboardUsage": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
         "UpdateTensorboard": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -41,6 +37,14 @@
           "retry_params_name": "default"
         },
         "DeleteTensorboard": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReadTensorboardUsage": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReadTensorboardSize": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
