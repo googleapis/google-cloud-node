@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.12.0](https://github.com/googleapis/nodejs-storage/compare/v6.11.0...v6.12.0) (2023-07-13)
+
+
+### Features
+
+* Add header for deno runtime for metrics tracking ([#2220](https://github.com/googleapis/nodejs-storage/issues/2220)) ([5083920](https://github.com/googleapis/nodejs-storage/commit/50839209063e75996b2a57bd7664760e0e5331ca))
+* MPU for transfer manager ([#2192](https://github.com/googleapis/nodejs-storage/issues/2192)) ([ae83421](https://github.com/googleapis/nodejs-storage/commit/ae83421e617a5761c75a7c8a15eaa1ea7c7fb1de))
+
 ## [6.11.0](https://github.com/googleapis/nodejs-storage/compare/v6.10.1...v6.11.0) (2023-06-02)
 
 
