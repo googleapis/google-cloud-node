@@ -9972,6 +9972,9 @@ export namespace google {
 
                     /** Cluster primaryConfig */
                     primaryConfig?: (google.cloud.alloydb.v1alpha.Cluster.IPrimaryConfig|null);
+
+                    /** Cluster satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents a Cluster. */
@@ -10060,6 +10063,9 @@ export namespace google {
 
                     /** Cluster primaryConfig. */
                     public primaryConfig?: (google.cloud.alloydb.v1alpha.Cluster.IPrimaryConfig|null);
+
+                    /** Cluster satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource");
@@ -10531,6 +10537,9 @@ export namespace google {
 
                     /** Instance updatePolicy */
                     updatePolicy?: (google.cloud.alloydb.v1alpha.Instance.IUpdatePolicy|null);
+
+                    /** Instance satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents an Instance. */
@@ -10607,6 +10616,9 @@ export namespace google {
 
                     /** Instance updatePolicy. */
                     public updatePolicy?: (google.cloud.alloydb.v1alpha.Instance.IUpdatePolicy|null);
+
+                    /** Instance satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -11431,6 +11443,12 @@ export namespace google {
 
                     /** Backup expiryTime */
                     expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup expiryQuantity */
+                    expiryQuantity?: (google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry|null);
+
+                    /** Backup satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents a Backup. */
@@ -11498,6 +11516,12 @@ export namespace google {
 
                     /** Backup expiryTime. */
                     public expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup expiryQuantity. */
+                    public expiryQuantity?: (google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry|null);
+
+                    /** Backup satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -11578,6 +11602,109 @@ export namespace google {
                 }
 
                 namespace Backup {
+
+                    /** Properties of a QuantityBasedExpiry. */
+                    interface IQuantityBasedExpiry {
+
+                        /** QuantityBasedExpiry retentionCount */
+                        retentionCount?: (number|null);
+
+                        /** QuantityBasedExpiry totalRetentionCount */
+                        totalRetentionCount?: (number|null);
+                    }
+
+                    /** Represents a QuantityBasedExpiry. */
+                    class QuantityBasedExpiry implements IQuantityBasedExpiry {
+
+                        /**
+                         * Constructs a new QuantityBasedExpiry.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry);
+
+                        /** QuantityBasedExpiry retentionCount. */
+                        public retentionCount: number;
+
+                        /** QuantityBasedExpiry totalRetentionCount. */
+                        public totalRetentionCount: number;
+
+                        /**
+                         * Creates a new QuantityBasedExpiry instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuantityBasedExpiry instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry): google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Encodes the specified QuantityBasedExpiry message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry.verify|verify} messages.
+                         * @param message QuantityBasedExpiry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuantityBasedExpiry message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry.verify|verify} messages.
+                         * @param message QuantityBasedExpiry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Backup.IQuantityBasedExpiry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuantityBasedExpiry message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuantityBasedExpiry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Decodes a QuantityBasedExpiry message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuantityBasedExpiry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Verifies a QuantityBasedExpiry message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuantityBasedExpiry message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuantityBasedExpiry
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Creates a plain object from a QuantityBasedExpiry message. Also converts values to other types if specified.
+                         * @param message QuantityBasedExpiry
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Backup.QuantityBasedExpiry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuantityBasedExpiry to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuantityBasedExpiry
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** State enum. */
                     enum State {
@@ -16420,6 +16547,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey */
                     publicKey?: (string|null);
+
+                    /** GenerateClientCertificateRequest useMetadataExchange */
+                    useMetadataExchange?: (boolean|null);
                 }
 
                 /** Represents a GenerateClientCertificateRequest. */
@@ -16445,6 +16575,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey. */
                     public publicKey: string;
+
+                    /** GenerateClientCertificateRequest useMetadataExchange. */
+                    public useMetadataExchange: boolean;
 
                     /**
                      * Creates a new GenerateClientCertificateRequest instance using the specified properties.
