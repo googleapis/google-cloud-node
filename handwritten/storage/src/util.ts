@@ -168,6 +168,30 @@ export function formatAsUTCISO(
   return resultString;
 }
 
+/**
+ * Examines the runtime environment and returns the appropriate tracking string.
+ * @returns {string} metrics tracking string based on the current runtime environment.
+ */
+export function getRuntimeTrackingString(): string {
+  if (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    globalThis.Deno &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    globalThis.Deno.version &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    globalThis.Deno.version.deno
+  ) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return `gl-deno/${globalThis.Deno.version.deno}`;
+  } else {
+    return `gl-node/${process.versions.node}`;
+  }
+}
+
 export class PassThroughShim extends PassThrough {
   private shouldEmitReading = true;
   private shouldEmitWriting = true;

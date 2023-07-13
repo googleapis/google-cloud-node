@@ -33,6 +33,7 @@ import {teenyRequest} from 'teeny-request';
 import {Interceptor} from './service-object';
 import * as uuid from 'uuid';
 import {DEFAULT_PROJECT_ID_TOKEN} from './service';
+import {getRuntimeTrackingString} from '../util';
 
 const packageJson = require('../../../package.json');
 
@@ -1011,7 +1012,7 @@ export class Util {
   _getDefaultHeaders() {
     return {
       'User-Agent': util.getUserAgentFromPackageJson(packageJson),
-      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${
+      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         packageJson.version
       } gccl-invocation-id/${uuid.v4()}`,
     };

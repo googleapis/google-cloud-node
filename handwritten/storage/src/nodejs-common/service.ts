@@ -26,6 +26,7 @@ import {
   PackageJson,
   util,
 } from './util';
+import {getRuntimeTrackingString} from '../util';
 
 export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
@@ -246,7 +247,7 @@ export class Service {
     }
     reqOpts.headers = extend({}, reqOpts.headers, {
       'User-Agent': userAgent,
-      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${
+      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
         pkg.version
       } gccl-invocation-id/${uuid.v4()}`,
     });

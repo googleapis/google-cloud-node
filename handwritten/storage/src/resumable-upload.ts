@@ -27,6 +27,7 @@ import {Readable, Writable, WritableOptions} from 'stream';
 import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
 import * as uuid from 'uuid';
+import {getRuntimeTrackingString} from './util';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
@@ -597,7 +598,9 @@ export class Upload extends Writable {
       ),
       data: metadata,
       headers: {
-        'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.uri}`,
+        'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
+          packageJson.version
+        } gccl-invocation-id/${this.currentInvocationId.uri}`,
         ...headers,
       },
     };
@@ -764,7 +767,9 @@ export class Upload extends Writable {
     });
 
     const headers: GaxiosOptions['headers'] = {
-      'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.chunk}`,
+      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
+        packageJson.version
+      } gccl-invocation-id/${this.currentInvocationId.chunk}`,
     };
 
     // If using multiple chunk upload, set appropriate header
@@ -905,7 +910,9 @@ export class Upload extends Writable {
       headers: {
         'Content-Length': 0,
         'Content-Range': 'bytes */*',
-        'x-goog-api-client': `gl-node/${process.versions.node} gccl/${packageJson.version} gccl-invocation-id/${this.currentInvocationId.offset}`,
+        'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
+          packageJson.version
+        } gccl-invocation-id/${this.currentInvocationId.offset}`,
       },
     };
     try {
