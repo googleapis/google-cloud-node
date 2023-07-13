@@ -63,6 +63,12 @@ function main(parent) {
    *  Optional. The public key from the client.
    */
   // const publicKey = 'abc123'
+  /**
+   *  Optional. An optional hint to the endpoint to generate a client
+   *  ceritificate that can be used by AlloyDB connectors to exchange additional
+   *  metadata with the server after TLS handshake.
+   */
+  // const useMetadataExchange = true
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
