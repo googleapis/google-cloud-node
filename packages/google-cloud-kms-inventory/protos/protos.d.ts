@@ -590,6 +590,9 @@ export namespace google {
 
                         /** SearchProtectedResourcesRequest pageToken */
                         pageToken?: (string|null);
+
+                        /** SearchProtectedResourcesRequest resourceTypes */
+                        resourceTypes?: (string[]|null);
                     }
 
                     /** Represents a SearchProtectedResourcesRequest. */
@@ -612,6 +615,9 @@ export namespace google {
 
                         /** SearchProtectedResourcesRequest pageToken. */
                         public pageToken: string;
+
+                        /** SearchProtectedResourcesRequest resourceTypes. */
+                        public resourceTypes: string[];
 
                         /**
                          * Creates a new SearchProtectedResourcesRequest instance using the specified properties.
