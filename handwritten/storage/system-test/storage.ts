@@ -59,6 +59,7 @@ const RUNNING_IN_VPCSC = !!process.env['GOOGLE_CLOUD_TESTS_IN_VPCSC'];
 
 const UNIFORM_ACCESS_TIMEOUT = 60 * 1000; // 60s see: https://cloud.google.com/storage/docs/consistency#eventually_consistent_operations
 const UNIFORM_ACCESS_WAIT_TIME = 5 * 1000; // 5s
+const BUCKET_METADATA_UPDATE_WAIT_TIME = 1000; // 1s buckets have a max rate of one metadata update per second.
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
@@ -2554,6 +2555,9 @@ describe('storage', () => {
         });
 
         beforeEach(async () => {
+          await new Promise(res =>
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+          );
           await bucket.setMetadata({
             encryption: {
               defaultKmsKeyName: kmsKeyName,
@@ -2562,6 +2566,9 @@ describe('storage', () => {
         });
 
         afterEach(async () => {
+          await new Promise(res =>
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+          );
           await bucket.setMetadata({
             encryption: null,
           });
@@ -2583,6 +2590,9 @@ describe('storage', () => {
           const newKmsKeyName = generateKmsKeyName(cryptoKeyId);
 
           await createCryptoKeyAsync(cryptoKeyId);
+          await new Promise(res =>
+            setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
+          );
           await bucket.setMetadata({
             encryption: {
               defaultKmsKeyName: newKmsKeyName,
