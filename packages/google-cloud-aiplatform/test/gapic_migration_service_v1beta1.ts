@@ -3567,6 +3567,83 @@ describe('v1beta1.MigrationServiceClient', () => {
       });
     });
 
+    describe('persistentResource', () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client = new migrationserviceModule.v1beta1.MigrationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', () => {
+        const result = client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', () => {
+        const result = client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', () => {
+        const result = client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', () => {
+        const result =
+          client.matchPersistentResourceFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('pipelineJob', () => {
       const fakePath = '/rendered/path/pipelineJob';
       const expectedParameters = {

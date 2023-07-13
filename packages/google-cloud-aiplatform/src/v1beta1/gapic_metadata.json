@@ -45,6 +45,11 @@
                 "exportData"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -118,6 +123,11 @@
             "ExportData": {
               "methods": [
                 "exportData"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
               ]
             },
             "ListDatasets": {
@@ -1850,6 +1860,64 @@
         }
       }
     },
+    "PersistentResourceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {
@@ -2187,6 +2255,11 @@
                 "readTensorboardUsage"
               ]
             },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
+              ]
+            },
             "CreateTensorboardExperiment": {
               "methods": [
                 "createTensorboardExperiment"
@@ -2345,6 +2418,11 @@
             "ReadTensorboardUsage": {
               "methods": [
                 "readTensorboardUsage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
               ]
             },
             "CreateTensorboardExperiment": {

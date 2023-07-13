@@ -31,7 +31,7 @@ function main(parent, featurestore, featurestoreId) {
   /**
    *  Required. The resource name of the Location to create Featurestores.
    *  Format:
-   *  `projects/{project}/locations/{location}'`
+   *  `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

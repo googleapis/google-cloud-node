@@ -563,6 +563,141 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
   });
 
+  describe('readTensorboardSize', () => {
+    it('invokes readTensorboardSize without error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.readTensorboardSize(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize without error using callback', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readTensorboardSize(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardSize = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with closed client', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+    });
+  });
+
   describe('createTensorboardExperiment', () => {
     it('invokes createTensorboardExperiment without error', async () => {
       const client =
@@ -8585,6 +8720,84 @@ describe('v1beta1.TensorboardServiceClient', () => {
         assert.strictEqual(result, 'nasTrialDetailValue');
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('persistentResource', () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', () => {
+        const result = client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', () => {
+        const result = client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', () => {
+        const result = client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', () => {
+        const result =
+          client.matchPersistentResourceFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

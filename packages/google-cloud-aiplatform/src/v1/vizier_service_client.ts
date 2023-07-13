@@ -596,6 +596,9 @@ export class VizierServiceClient {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -829,6 +832,10 @@ export class VizierServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -997,6 +1004,7 @@ export class VizierServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1153,6 +1161,7 @@ export class VizierServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1336,6 +1345,9 @@ export class VizierServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',

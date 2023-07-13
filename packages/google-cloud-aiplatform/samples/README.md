@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
   * [Dataset_service.export_data](#dataset_service.export_data)
   * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
   * [Dataset_service.get_dataset](#dataset_service.get_dataset)
@@ -225,6 +226,7 @@
   * [Vizier_service.suggest_trials](#vizier_service.suggest_trials)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
   * [Dataset_service.export_data](#dataset_service.export_data)
   * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
   * [Dataset_service.get_dataset](#dataset_service.get_dataset)
@@ -377,6 +379,10 @@
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
+  * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
+  * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
+  * [Persistent_resource_service.get_persistent_resource](#persistent_resource_service.get_persistent_resource)
+  * [Persistent_resource_service.list_persistent_resources](#persistent_resource_service.list_persistent_resources)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
   * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
   * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
@@ -423,6 +429,7 @@
   * [Tensorboard_service.list_tensorboard_time_series](#tensorboard_service.list_tensorboard_time_series)
   * [Tensorboard_service.list_tensorboards](#tensorboard_service.list_tensorboards)
   * [Tensorboard_service.read_tensorboard_blob_data](#tensorboard_service.read_tensorboard_blob_data)
+  * [Tensorboard_service.read_tensorboard_size](#tensorboard_service.read_tensorboard_size)
   * [Tensorboard_service.read_tensorboard_time_series_data](#tensorboard_service.read_tensorboard_time_series_data)
   * [Tensorboard_service.read_tensorboard_usage](#tensorboard_service.read_tensorboard_usage)
   * [Tensorboard_service.update_tensorboard](#tensorboard_service.update_tensorboard)
@@ -490,6 +497,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js`
+
+
+-----
+
+
+
+
+### Dataset_service.delete_saved_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_saved_query.js`
 
 
 -----
@@ -4084,6 +4108,23 @@ __Usage:__
 
 
 
+### Dataset_service.delete_saved_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.delete_saved_query.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.export_data
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.export_data.js).
@@ -6668,6 +6709,74 @@ __Usage:__
 
 
 
+### Persistent_resource_service.create_persistent_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js`
+
+
+-----
+
+
+
+
+### Persistent_resource_service.delete_persistent_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js`
+
+
+-----
+
+
+
+
+### Persistent_resource_service.get_persistent_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js`
+
+
+-----
+
+
+
+
+### Persistent_resource_service.list_persistent_resources
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js`
+
+
+-----
+
+
+
+
 ### Pipeline_service.cancel_pipeline_job
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js).
@@ -7443,6 +7552,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_blob_data.js`
+
+
+-----
+
+
+
+
+### Tensorboard_service.read_tensorboard_size
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js`
 
 
 -----

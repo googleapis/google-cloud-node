@@ -540,6 +540,46 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_DatasetService_DeleteSavedQuery_async",
+            "title": "DatasetService deleteSavedQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a SavedQuery.",
+            "canonical": true,
+            "file": "dataset_service.delete_saved_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSavedQuery",
+                "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.DeleteSavedQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSavedQuery",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.DeleteSavedQuery",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_DatasetService_GetAnnotationSpec_async",
             "title": "DatasetService getAnnotationSpec Sample",
             "origin": "API_DEFINITION",
@@ -7244,6 +7284,182 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_CreatePersistentResource_async",
+            "title": "DatasetService createPersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Uploads a Model artifact into Vertex AI.",
+            "canonical": true,
+            "file": "persistent_resource_service.create_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.CreatePersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "persistent_resource",
+                        "type": ".google.cloud.aiplatform.v1beta1.PersistentResource"
+                    },
+                    {
+                        "name": "persistent_resource_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "CreatePersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.CreatePersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_GetPersistentResource_async",
+            "title": "DatasetService getPersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.get_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.GetPersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.PersistentResource",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.GetPersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_ListPersistentResources_async",
+            "title": "DatasetService listPersistentResources Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists PersistentResources in a Location.",
+            "canonical": true,
+            "file": "persistent_resource_service.list_persistent_resources.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPersistentResources",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.ListPersistentResources",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListPersistentResourcesResponse",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "ListPersistentResources",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.ListPersistentResources",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_DeletePersistentResource_async",
+            "title": "DatasetService deletePersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.delete_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.DeletePersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "DeletePersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.DeletePersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async",
             "title": "DatasetService createTrainingPipeline Sample",
             "origin": "API_DEFINITION",
@@ -8456,46 +8672,6 @@
             }
         },
         {
-            "regionTag": "aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardUsage_async",
-            "title": "DatasetService readTensorboardUsage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
-            "canonical": true,
-            "file": "tensorboard_service.read_tensorboard_usage.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReadTensorboardUsage",
-                "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardUsage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "tensorboard",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.aiplatform.v1beta1.ReadTensorboardUsageResponse",
-                "client": {
-                    "shortName": "TensorboardServiceClient",
-                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardServiceClient"
-                },
-                "method": {
-                    "shortName": "ReadTensorboardUsage",
-                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardUsage",
-                    "service": {
-                        "shortName": "TensorboardService",
-                        "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async",
             "title": "DatasetService updateTensorboard Sample",
             "origin": "API_DEFINITION",
@@ -8632,6 +8808,86 @@
                 "method": {
                     "shortName": "DeleteTensorboard",
                     "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.DeleteTensorboard",
+                    "service": {
+                        "shortName": "TensorboardService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardUsage_async",
+            "title": "DatasetService readTensorboardUsage Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
+            "canonical": true,
+            "file": "tensorboard_service.read_tensorboard_usage.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadTensorboardUsage",
+                "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardUsage",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tensorboard",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ReadTensorboardUsageResponse",
+                "client": {
+                    "shortName": "TensorboardServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadTensorboardUsage",
+                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardUsage",
+                    "service": {
+                        "shortName": "TensorboardService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardSize_async",
+            "title": "DatasetService readTensorboardSize Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the storage size for a given TensorBoard instance.",
+            "canonical": true,
+            "file": "tensorboard_service.read_tensorboard_size.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadTensorboardSize",
+                "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardSize",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tensorboard",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse",
+                "client": {
+                    "shortName": "TensorboardServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadTensorboardSize",
+                    "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService.ReadTensorboardSize",
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
