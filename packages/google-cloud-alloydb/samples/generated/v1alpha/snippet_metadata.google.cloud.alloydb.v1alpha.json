@@ -1279,14 +1279,14 @@
             "regionTag": "alloydb_v1alpha_generated_AlloyDBAdmin_GenerateClientCertificate_async",
             "title": "AlloyDBAdmin generateClientCertificate Sample",
             "origin": "API_DEFINITION",
-            "description": " Generate a client certificate signed by a Cluster CA. The sole purpose of this endpoint is to support the Auth Proxy client and the endpoint's behavior is subject to change without notice, so do not rely on its behavior remaining constant. Future changes will not break the Auth Proxy client.",
+            "description": " Generate a client certificate signed by a Cluster CA. The sole purpose of this endpoint is to support AlloyDB connectors and the Auth Proxy client. The endpoint's behavior is subject to change without notice, so do not rely on its behavior remaining constant. Future changes will not break AlloyDB connectors or the Auth Proxy client.",
             "canonical": true,
             "file": "alloy_d_b_admin.generate_client_certificate.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -1314,6 +1314,10 @@
                     {
                         "name": "public_key",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "use_metadata_exchange",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.alloydb.v1alpha.GenerateClientCertificateResponse",

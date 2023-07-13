@@ -927,10 +927,10 @@ export class AlloyDBAdminClient {
   }
   /**
    * Generate a client certificate signed by a Cluster CA.
-   * The sole purpose of this endpoint is to support the Auth Proxy client and
-   * the endpoint's behavior is subject to change without notice, so do not rely
-   * on its behavior remaining constant. Future changes will not break the Auth
-   * Proxy client.
+   * The sole purpose of this endpoint is to support AlloyDB connectors and the
+   * Auth Proxy client. The endpoint's behavior is subject to change without
+   * notice, so do not rely on its behavior remaining constant. Future changes
+   * will not break AlloyDB connectors or the Auth Proxy client.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -961,6 +961,10 @@ export class AlloyDBAdminClient {
    *   default duration.
    * @param {string} [request.publicKey]
    *   Optional. The public key from the client.
+   * @param {boolean} [request.useMetadataExchange]
+   *   Optional. An optional hint to the endpoint to generate a client
+   *   ceritificate that can be used by AlloyDB connectors to exchange additional
+   *   metadata with the server after TLS handshake.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
