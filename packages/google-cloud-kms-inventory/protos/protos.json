@@ -200,6 +200,14 @@
                             "pageToken": {
                               "type": "string",
                               "id": 4
+                            },
+                            "resourceTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

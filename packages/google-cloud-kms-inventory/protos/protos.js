@@ -1423,6 +1423,7 @@
                              * @property {string|null} [cryptoKey] SearchProtectedResourcesRequest cryptoKey
                              * @property {number|null} [pageSize] SearchProtectedResourcesRequest pageSize
                              * @property {string|null} [pageToken] SearchProtectedResourcesRequest pageToken
+                             * @property {Array.<string>|null} [resourceTypes] SearchProtectedResourcesRequest resourceTypes
                              */
     
                             /**
@@ -1434,6 +1435,7 @@
                              * @param {google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest=} [properties] Properties to set
                              */
                             function SearchProtectedResourcesRequest(properties) {
+                                this.resourceTypes = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1473,6 +1475,14 @@
                             SearchProtectedResourcesRequest.prototype.pageToken = "";
     
                             /**
+                             * SearchProtectedResourcesRequest resourceTypes.
+                             * @member {Array.<string>} resourceTypes
+                             * @memberof google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest
+                             * @instance
+                             */
+                            SearchProtectedResourcesRequest.prototype.resourceTypes = $util.emptyArray;
+    
+                            /**
                              * Creates a new SearchProtectedResourcesRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest
@@ -1504,6 +1514,9 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                                 if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                                if (message.resourceTypes != null && message.resourceTypes.length)
+                                    for (var i = 0; i < message.resourceTypes.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.resourceTypes[i]);
                                 return writer;
                             };
     
@@ -1554,6 +1567,12 @@
                                             message.pageToken = reader.string();
                                             break;
                                         }
+                                    case 5: {
+                                            if (!(message.resourceTypes && message.resourceTypes.length))
+                                                message.resourceTypes = [];
+                                            message.resourceTypes.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1601,6 +1620,13 @@
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     if (!$util.isString(message.pageToken))
                                         return "pageToken: string expected";
+                                if (message.resourceTypes != null && message.hasOwnProperty("resourceTypes")) {
+                                    if (!Array.isArray(message.resourceTypes))
+                                        return "resourceTypes: array expected";
+                                    for (var i = 0; i < message.resourceTypes.length; ++i)
+                                        if (!$util.isString(message.resourceTypes[i]))
+                                            return "resourceTypes: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -1624,6 +1650,13 @@
                                     message.pageSize = object.pageSize | 0;
                                 if (object.pageToken != null)
                                     message.pageToken = String(object.pageToken);
+                                if (object.resourceTypes) {
+                                    if (!Array.isArray(object.resourceTypes))
+                                        throw TypeError(".google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest.resourceTypes: array expected");
+                                    message.resourceTypes = [];
+                                    for (var i = 0; i < object.resourceTypes.length; ++i)
+                                        message.resourceTypes[i] = String(object.resourceTypes[i]);
+                                }
                                 return message;
                             };
     
@@ -1640,6 +1673,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.resourceTypes = [];
                                 if (options.defaults) {
                                     object.cryptoKey = "";
                                     object.scope = "";
@@ -1654,6 +1689,11 @@
                                     object.pageSize = message.pageSize;
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     object.pageToken = message.pageToken;
+                                if (message.resourceTypes && message.resourceTypes.length) {
+                                    object.resourceTypes = [];
+                                    for (var j = 0; j < message.resourceTypes.length; ++j)
+                                        object.resourceTypes[j] = message.resourceTypes[j];
+                                }
                                 return object;
                             };
     
