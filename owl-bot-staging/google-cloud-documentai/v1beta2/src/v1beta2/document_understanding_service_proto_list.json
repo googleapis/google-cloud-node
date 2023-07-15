@@ -1,6 +1,0 @@
-[
-  "../../protos/google/cloud/documentai/v1beta2/barcode.proto",
-  "../../protos/google/cloud/documentai/v1beta2/document.proto",
-  "../../protos/google/cloud/documentai/v1beta2/document_understanding.proto",
-  "../../protos/google/cloud/documentai/v1beta2/geometry.proto"
-]

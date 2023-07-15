@@ -5741,6 +5741,233 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an OcrConfig. */
+                interface IOcrConfig {
+
+                    /** OcrConfig hints */
+                    hints?: (google.cloud.documentai.v1.OcrConfig.IHints|null);
+
+                    /** OcrConfig enableNativePdfParsing */
+                    enableNativePdfParsing?: (boolean|null);
+
+                    /** OcrConfig enableImageQualityScores */
+                    enableImageQualityScores?: (boolean|null);
+
+                    /** OcrConfig advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
+
+                    /** OcrConfig enableSymbol */
+                    enableSymbol?: (boolean|null);
+
+                    /** OcrConfig computeStyleInfo */
+                    computeStyleInfo?: (boolean|null);
+                }
+
+                /** Represents an OcrConfig. */
+                class OcrConfig implements IOcrConfig {
+
+                    /**
+                     * Constructs a new OcrConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IOcrConfig);
+
+                    /** OcrConfig hints. */
+                    public hints?: (google.cloud.documentai.v1.OcrConfig.IHints|null);
+
+                    /** OcrConfig enableNativePdfParsing. */
+                    public enableNativePdfParsing: boolean;
+
+                    /** OcrConfig enableImageQualityScores. */
+                    public enableImageQualityScores: boolean;
+
+                    /** OcrConfig advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
+
+                    /** OcrConfig enableSymbol. */
+                    public enableSymbol: boolean;
+
+                    /** OcrConfig computeStyleInfo. */
+                    public computeStyleInfo: boolean;
+
+                    /**
+                     * Creates a new OcrConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OcrConfig instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IOcrConfig): google.cloud.documentai.v1.OcrConfig;
+
+                    /**
+                     * Encodes the specified OcrConfig message. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OcrConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.OcrConfig;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.OcrConfig;
+
+                    /**
+                     * Verifies an OcrConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OcrConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OcrConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.OcrConfig;
+
+                    /**
+                     * Creates a plain object from an OcrConfig message. Also converts values to other types if specified.
+                     * @param message OcrConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.OcrConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OcrConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OcrConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OcrConfig {
+
+                    /** Properties of a Hints. */
+                    interface IHints {
+
+                        /** Hints languageHints */
+                        languageHints?: (string[]|null);
+                    }
+
+                    /** Represents a Hints. */
+                    class Hints implements IHints {
+
+                        /**
+                         * Constructs a new Hints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.OcrConfig.IHints);
+
+                        /** Hints languageHints. */
+                        public languageHints: string[];
+
+                        /**
+                         * Creates a new Hints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Hints instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.OcrConfig.IHints): google.cloud.documentai.v1.OcrConfig.Hints;
+
+                        /**
+                         * Encodes the specified Hints message. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Hints message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.OcrConfig.Hints;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.OcrConfig.Hints;
+
+                        /**
+                         * Verifies a Hints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Hints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Hints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.OcrConfig.Hints;
+
+                        /**
+                         * Creates a plain object from a Hints message. Also converts values to other types if specified.
+                         * @param message Hints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.OcrConfig.Hints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Hints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Hints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Represents a DocumentProcessorService */
                 class DocumentProcessorService extends $protobuf.rpc.Service {
 
@@ -6227,6 +6454,103 @@ export namespace google {
                     type ListEvaluationsCallback = (error: (Error|null), response?: google.cloud.documentai.v1.ListEvaluationsResponse) => void;
                 }
 
+                /** Properties of a ProcessOptions. */
+                interface IProcessOptions {
+
+                    /** ProcessOptions ocrConfig */
+                    ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+                }
+
+                /** Represents a ProcessOptions. */
+                class ProcessOptions implements IProcessOptions {
+
+                    /**
+                     * Constructs a new ProcessOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IProcessOptions);
+
+                    /** ProcessOptions ocrConfig. */
+                    public ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /**
+                     * Creates a new ProcessOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessOptions instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IProcessOptions): google.cloud.documentai.v1.ProcessOptions;
+
+                    /**
+                     * Encodes the specified ProcessOptions message. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.verify|verify} messages.
+                     * @param message ProcessOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IProcessOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessOptions message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.verify|verify} messages.
+                     * @param message ProcessOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IProcessOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessOptions;
+
+                    /**
+                     * Decodes a ProcessOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessOptions;
+
+                    /**
+                     * Verifies a ProcessOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessOptions;
+
+                    /**
+                     * Creates a plain object from a ProcessOptions message. Also converts values to other types if specified.
+                     * @param message ProcessOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.ProcessOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ProcessRequest. */
                 interface IProcessRequest {
 
@@ -6236,6 +6560,9 @@ export namespace google {
                     /** ProcessRequest rawDocument */
                     rawDocument?: (google.cloud.documentai.v1.IRawDocument|null);
 
+                    /** ProcessRequest gcsDocument */
+                    gcsDocument?: (google.cloud.documentai.v1.IGcsDocument|null);
+
                     /** ProcessRequest name */
                     name?: (string|null);
 
@@ -6244,6 +6571,9 @@ export namespace google {
 
                     /** ProcessRequest fieldMask */
                     fieldMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ProcessRequest processOptions */
+                    processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -6261,6 +6591,9 @@ export namespace google {
                     /** ProcessRequest rawDocument. */
                     public rawDocument?: (google.cloud.documentai.v1.IRawDocument|null);
 
+                    /** ProcessRequest gcsDocument. */
+                    public gcsDocument?: (google.cloud.documentai.v1.IGcsDocument|null);
+
                     /** ProcessRequest name. */
                     public name: string;
 
@@ -6270,8 +6603,11 @@ export namespace google {
                     /** ProcessRequest fieldMask. */
                     public fieldMask?: (google.protobuf.IFieldMask|null);
 
+                    /** ProcessRequest processOptions. */
+                    public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
                     /** ProcessRequest source. */
-                    public source?: ("inlineDocument"|"rawDocument");
+                    public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
 
                     /**
                      * Creates a new ProcessRequest instance using the specified properties.
@@ -6589,6 +6925,9 @@ export namespace google {
 
                     /** BatchProcessRequest skipHumanReview */
                     skipHumanReview?: (boolean|null);
+
+                    /** BatchProcessRequest processOptions */
+                    processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
                 }
 
                 /** Represents a BatchProcessRequest. */
@@ -6611,6 +6950,9 @@ export namespace google {
 
                     /** BatchProcessRequest skipHumanReview. */
                     public skipHumanReview: boolean;
+
+                    /** BatchProcessRequest processOptions. */
+                    public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
 
                     /**
                      * Creates a new BatchProcessRequest instance using the specified properties.
@@ -10077,6 +10419,9 @@ export namespace google {
                 /** Properties of a TrainProcessorVersionRequest. */
                 interface ITrainProcessorVersionRequest {
 
+                    /** TrainProcessorVersionRequest customDocumentExtractionOptions */
+                    customDocumentExtractionOptions?: (google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions|null);
+
                     /** TrainProcessorVersionRequest parent */
                     parent?: (string|null);
 
@@ -10102,6 +10447,9 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.documentai.v1.ITrainProcessorVersionRequest);
 
+                    /** TrainProcessorVersionRequest customDocumentExtractionOptions. */
+                    public customDocumentExtractionOptions?: (google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions|null);
+
                     /** TrainProcessorVersionRequest parent. */
                     public parent: string;
 
@@ -10116,6 +10464,9 @@ export namespace google {
 
                     /** TrainProcessorVersionRequest baseProcessorVersion. */
                     public baseProcessorVersion: string;
+
+                    /** TrainProcessorVersionRequest processorFlags. */
+                    public processorFlags?: "customDocumentExtractionOptions";
 
                     /**
                      * Creates a new TrainProcessorVersionRequest instance using the specified properties.
@@ -10298,6 +10649,113 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomDocumentExtractionOptions. */
+                    interface ICustomDocumentExtractionOptions {
+
+                        /** CustomDocumentExtractionOptions trainingMethod */
+                        trainingMethod?: (google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.TrainingMethod|keyof typeof google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.TrainingMethod|null);
+                    }
+
+                    /** Represents a CustomDocumentExtractionOptions. */
+                    class CustomDocumentExtractionOptions implements ICustomDocumentExtractionOptions {
+
+                        /**
+                         * Constructs a new CustomDocumentExtractionOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions);
+
+                        /** CustomDocumentExtractionOptions trainingMethod. */
+                        public trainingMethod: (google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.TrainingMethod|keyof typeof google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.TrainingMethod);
+
+                        /**
+                         * Creates a new CustomDocumentExtractionOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomDocumentExtractionOptions instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions): google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions;
+
+                        /**
+                         * Encodes the specified CustomDocumentExtractionOptions message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.verify|verify} messages.
+                         * @param message CustomDocumentExtractionOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomDocumentExtractionOptions message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions.verify|verify} messages.
+                         * @param message CustomDocumentExtractionOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomDocumentExtractionOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomDocumentExtractionOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions;
+
+                        /**
+                         * Decodes a CustomDocumentExtractionOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomDocumentExtractionOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions;
+
+                        /**
+                         * Verifies a CustomDocumentExtractionOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomDocumentExtractionOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomDocumentExtractionOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions;
+
+                        /**
+                         * Creates a plain object from a CustomDocumentExtractionOptions message. Also converts values to other types if specified.
+                         * @param message CustomDocumentExtractionOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomDocumentExtractionOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomDocumentExtractionOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CustomDocumentExtractionOptions {
+
+                        /** TrainingMethod enum. */
+                        enum TrainingMethod {
+                            TRAINING_METHOD_UNSPECIFIED = 0,
+                            MODEL_BASED = 1,
+                            TEMPLATE_BASED = 2
+                        }
                     }
                 }
 
@@ -18200,6 +18658,115 @@ export namespace google {
             /** Namespace v1beta2. */
             namespace v1beta2 {
 
+                /** Properties of a Barcode. */
+                interface IBarcode {
+
+                    /** Barcode format */
+                    format?: (string|null);
+
+                    /** Barcode valueFormat */
+                    valueFormat?: (string|null);
+
+                    /** Barcode rawValue */
+                    rawValue?: (string|null);
+                }
+
+                /** Represents a Barcode. */
+                class Barcode implements IBarcode {
+
+                    /**
+                     * Constructs a new Barcode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta2.IBarcode);
+
+                    /** Barcode format. */
+                    public format: string;
+
+                    /** Barcode valueFormat. */
+                    public valueFormat: string;
+
+                    /** Barcode rawValue. */
+                    public rawValue: string;
+
+                    /**
+                     * Creates a new Barcode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Barcode instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta2.IBarcode): google.cloud.documentai.v1beta2.Barcode;
+
+                    /**
+                     * Encodes the specified Barcode message. Does not implicitly {@link google.cloud.documentai.v1beta2.Barcode.verify|verify} messages.
+                     * @param message Barcode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta2.IBarcode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Barcode message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Barcode.verify|verify} messages.
+                     * @param message Barcode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta2.IBarcode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Barcode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Barcode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Barcode;
+
+                    /**
+                     * Decodes a Barcode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Barcode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Barcode;
+
+                    /**
+                     * Verifies a Barcode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Barcode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Barcode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Barcode;
+
+                    /**
+                     * Creates a plain object from a Barcode message. Also converts values to other types if specified.
+                     * @param message Barcode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta2.Barcode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Barcode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Barcode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Document. */
                 interface IDocument {
 
@@ -18227,6 +18794,9 @@ export namespace google {
                     /** Document entityRelations */
                     entityRelations?: (google.cloud.documentai.v1beta2.Document.IEntityRelation[]|null);
 
+                    /** Document textChanges */
+                    textChanges?: (google.cloud.documentai.v1beta2.Document.ITextChange[]|null);
+
                     /** Document shardInfo */
                     shardInfo?: (google.cloud.documentai.v1beta2.Document.IShardInfo|null);
 
@@ -18235,6 +18805,9 @@ export namespace google {
 
                     /** Document error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** Document revisions */
+                    revisions?: (google.cloud.documentai.v1beta2.Document.IRevision[]|null);
                 }
 
                 /** Represents a Document. */
@@ -18270,6 +18843,9 @@ export namespace google {
                     /** Document entityRelations. */
                     public entityRelations: google.cloud.documentai.v1beta2.Document.IEntityRelation[];
 
+                    /** Document textChanges. */
+                    public textChanges: google.cloud.documentai.v1beta2.Document.ITextChange[];
+
                     /** Document shardInfo. */
                     public shardInfo?: (google.cloud.documentai.v1beta2.Document.IShardInfo|null);
 
@@ -18278,6 +18854,9 @@ export namespace google {
 
                     /** Document error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** Document revisions. */
+                    public revisions: google.cloud.documentai.v1beta2.Document.IRevision[];
 
                     /** Document source. */
                     public source?: ("uri"|"content");
@@ -18606,6 +19185,9 @@ export namespace google {
 
                         /** Style fontSize */
                         fontSize?: (google.cloud.documentai.v1beta2.Document.Style.IFontSize|null);
+
+                        /** Style fontFamily */
+                        fontFamily?: (string|null);
                     }
 
                     /** Represents a Style. */
@@ -18637,6 +19219,9 @@ export namespace google {
 
                         /** Style fontSize. */
                         public fontSize?: (google.cloud.documentai.v1beta2.Document.Style.IFontSize|null);
+
+                        /** Style fontFamily. */
+                        public fontFamily: string;
 
                         /**
                          * Creates a new Style instance using the specified properties.
@@ -18828,6 +19413,12 @@ export namespace google {
                         /** Page pageNumber */
                         pageNumber?: (number|null);
 
+                        /** Page image */
+                        image?: (google.cloud.documentai.v1beta2.Document.Page.IImage|null);
+
+                        /** Page transforms */
+                        transforms?: (google.cloud.documentai.v1beta2.Document.Page.IMatrix[]|null);
+
                         /** Page dimension */
                         dimension?: (google.cloud.documentai.v1beta2.Document.Page.IDimension|null);
 
@@ -18857,6 +19448,18 @@ export namespace google {
 
                         /** Page formFields */
                         formFields?: (google.cloud.documentai.v1beta2.Document.Page.IFormField[]|null);
+
+                        /** Page symbols */
+                        symbols?: (google.cloud.documentai.v1beta2.Document.Page.ISymbol[]|null);
+
+                        /** Page detectedBarcodes */
+                        detectedBarcodes?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode[]|null);
+
+                        /** Page imageQualityScores */
+                        imageQualityScores?: (google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores|null);
+
+                        /** Page provenance */
+                        provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                     }
 
                     /** Represents a Page. */
@@ -18870,6 +19473,12 @@ export namespace google {
 
                         /** Page pageNumber. */
                         public pageNumber: number;
+
+                        /** Page image. */
+                        public image?: (google.cloud.documentai.v1beta2.Document.Page.IImage|null);
+
+                        /** Page transforms. */
+                        public transforms: google.cloud.documentai.v1beta2.Document.Page.IMatrix[];
 
                         /** Page dimension. */
                         public dimension?: (google.cloud.documentai.v1beta2.Document.Page.IDimension|null);
@@ -18900,6 +19509,18 @@ export namespace google {
 
                         /** Page formFields. */
                         public formFields: google.cloud.documentai.v1beta2.Document.Page.IFormField[];
+
+                        /** Page symbols. */
+                        public symbols: google.cloud.documentai.v1beta2.Document.Page.ISymbol[];
+
+                        /** Page detectedBarcodes. */
+                        public detectedBarcodes: google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode[];
+
+                        /** Page imageQualityScores. */
+                        public imageQualityScores?: (google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores|null);
+
+                        /** Page provenance. */
+                        public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                         /**
                          * Creates a new Page instance using the specified properties.
@@ -19090,6 +19711,236 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of an Image. */
+                        interface IImage {
+
+                            /** Image content */
+                            content?: (Uint8Array|string|null);
+
+                            /** Image mimeType */
+                            mimeType?: (string|null);
+
+                            /** Image width */
+                            width?: (number|null);
+
+                            /** Image height */
+                            height?: (number|null);
+                        }
+
+                        /** Represents an Image. */
+                        class Image implements IImage {
+
+                            /**
+                             * Constructs a new Image.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.IImage);
+
+                            /** Image content. */
+                            public content: (Uint8Array|string);
+
+                            /** Image mimeType. */
+                            public mimeType: string;
+
+                            /** Image width. */
+                            public width: number;
+
+                            /** Image height. */
+                            public height: number;
+
+                            /**
+                             * Creates a new Image instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Image instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.IImage): google.cloud.documentai.v1beta2.Document.Page.Image;
+
+                            /**
+                             * Encodes the specified Image message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Image.verify|verify} messages.
+                             * @param message Image message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Page.IImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Image message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Image.verify|verify} messages.
+                             * @param message Image message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.IImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Image message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Image
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.Image;
+
+                            /**
+                             * Decodes an Image message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Image
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.Image;
+
+                            /**
+                             * Verifies an Image message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Image message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Image
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.Image;
+
+                            /**
+                             * Creates a plain object from an Image message. Also converts values to other types if specified.
+                             * @param message Image
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.Image, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Image to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Image
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Matrix. */
+                        interface IMatrix {
+
+                            /** Matrix rows */
+                            rows?: (number|null);
+
+                            /** Matrix cols */
+                            cols?: (number|null);
+
+                            /** Matrix type */
+                            type?: (number|null);
+
+                            /** Matrix data */
+                            data?: (Uint8Array|string|null);
+                        }
+
+                        /** Represents a Matrix. */
+                        class Matrix implements IMatrix {
+
+                            /**
+                             * Constructs a new Matrix.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.IMatrix);
+
+                            /** Matrix rows. */
+                            public rows: number;
+
+                            /** Matrix cols. */
+                            public cols: number;
+
+                            /** Matrix type. */
+                            public type: number;
+
+                            /** Matrix data. */
+                            public data: (Uint8Array|string);
+
+                            /**
+                             * Creates a new Matrix instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Matrix instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.IMatrix): google.cloud.documentai.v1beta2.Document.Page.Matrix;
+
+                            /**
+                             * Encodes the specified Matrix message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Matrix.verify|verify} messages.
+                             * @param message Matrix message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Page.IMatrix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Matrix message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Matrix.verify|verify} messages.
+                             * @param message Matrix message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.IMatrix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Matrix message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Matrix
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.Matrix;
+
+                            /**
+                             * Decodes a Matrix message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Matrix
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.Matrix;
+
+                            /**
+                             * Verifies a Matrix message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Matrix message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Matrix
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.Matrix;
+
+                            /**
+                             * Creates a plain object from a Matrix message. Also converts values to other types if specified.
+                             * @param message Matrix
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.Matrix, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Matrix to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Matrix
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a Layout. */
                         interface ILayout {
 
@@ -19104,9 +19955,6 @@ export namespace google {
 
                             /** Layout orientation */
                             orientation?: (google.cloud.documentai.v1beta2.Document.Page.Layout.Orientation|keyof typeof google.cloud.documentai.v1beta2.Document.Page.Layout.Orientation|null);
-
-                            /** Layout id */
-                            id?: (string|null);
                         }
 
                         /** Represents a Layout. */
@@ -19129,9 +19977,6 @@ export namespace google {
 
                             /** Layout orientation. */
                             public orientation: (google.cloud.documentai.v1beta2.Document.Page.Layout.Orientation|keyof typeof google.cloud.documentai.v1beta2.Document.Page.Layout.Orientation);
-
-                            /** Layout id. */
-                            public id: string;
 
                             /**
                              * Creates a new Layout instance using the specified properties.
@@ -19231,6 +20076,9 @@ export namespace google {
 
                             /** Block detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Block provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                         }
 
                         /** Represents a Block. */
@@ -19247,6 +20095,9 @@ export namespace google {
 
                             /** Block detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /** Block provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                             /**
                              * Creates a new Block instance using the specified properties.
@@ -19334,6 +20185,9 @@ export namespace google {
 
                             /** Paragraph detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Paragraph provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                         }
 
                         /** Represents a Paragraph. */
@@ -19350,6 +20204,9 @@ export namespace google {
 
                             /** Paragraph detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /** Paragraph provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                             /**
                              * Creates a new Paragraph instance using the specified properties.
@@ -19437,6 +20294,9 @@ export namespace google {
 
                             /** Line detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Line provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                         }
 
                         /** Represents a Line. */
@@ -19453,6 +20313,9 @@ export namespace google {
 
                             /** Line detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /** Line provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                             /**
                              * Creates a new Line instance using the specified properties.
@@ -19543,6 +20406,12 @@ export namespace google {
 
                             /** Token detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Token provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
+
+                            /** Token styleInfo */
+                            styleInfo?: (google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo|null);
                         }
 
                         /** Represents a Token. */
@@ -19562,6 +20431,12 @@ export namespace google {
 
                             /** Token detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /** Token provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
+
+                            /** Token styleInfo. */
+                            public styleInfo?: (google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo|null);
 
                             /**
                              * Creates a new Token instance using the specified properties.
@@ -19750,6 +20625,290 @@ export namespace google {
                                     HYPHEN = 3
                                 }
                             }
+
+                            /** Properties of a StyleInfo. */
+                            interface IStyleInfo {
+
+                                /** StyleInfo fontSize */
+                                fontSize?: (number|null);
+
+                                /** StyleInfo pixelFontSize */
+                                pixelFontSize?: (number|null);
+
+                                /** StyleInfo letterSpacing */
+                                letterSpacing?: (number|null);
+
+                                /** StyleInfo fontType */
+                                fontType?: (string|null);
+
+                                /** StyleInfo bold */
+                                bold?: (boolean|null);
+
+                                /** StyleInfo italic */
+                                italic?: (boolean|null);
+
+                                /** StyleInfo underlined */
+                                underlined?: (boolean|null);
+
+                                /** StyleInfo strikeout */
+                                strikeout?: (boolean|null);
+
+                                /** StyleInfo subscript */
+                                subscript?: (boolean|null);
+
+                                /** StyleInfo superscript */
+                                superscript?: (boolean|null);
+
+                                /** StyleInfo smallcaps */
+                                smallcaps?: (boolean|null);
+
+                                /** StyleInfo fontWeight */
+                                fontWeight?: (number|null);
+
+                                /** StyleInfo handwritten */
+                                handwritten?: (boolean|null);
+
+                                /** StyleInfo textColor */
+                                textColor?: (google.type.IColor|null);
+
+                                /** StyleInfo backgroundColor */
+                                backgroundColor?: (google.type.IColor|null);
+                            }
+
+                            /** Represents a StyleInfo. */
+                            class StyleInfo implements IStyleInfo {
+
+                                /**
+                                 * Constructs a new StyleInfo.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo);
+
+                                /** StyleInfo fontSize. */
+                                public fontSize: number;
+
+                                /** StyleInfo pixelFontSize. */
+                                public pixelFontSize: number;
+
+                                /** StyleInfo letterSpacing. */
+                                public letterSpacing: number;
+
+                                /** StyleInfo fontType. */
+                                public fontType: string;
+
+                                /** StyleInfo bold. */
+                                public bold: boolean;
+
+                                /** StyleInfo italic. */
+                                public italic: boolean;
+
+                                /** StyleInfo underlined. */
+                                public underlined: boolean;
+
+                                /** StyleInfo strikeout. */
+                                public strikeout: boolean;
+
+                                /** StyleInfo subscript. */
+                                public subscript: boolean;
+
+                                /** StyleInfo superscript. */
+                                public superscript: boolean;
+
+                                /** StyleInfo smallcaps. */
+                                public smallcaps: boolean;
+
+                                /** StyleInfo fontWeight. */
+                                public fontWeight: number;
+
+                                /** StyleInfo handwritten. */
+                                public handwritten: boolean;
+
+                                /** StyleInfo textColor. */
+                                public textColor?: (google.type.IColor|null);
+
+                                /** StyleInfo backgroundColor. */
+                                public backgroundColor?: (google.type.IColor|null);
+
+                                /**
+                                 * Creates a new StyleInfo instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns StyleInfo instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo): google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Encodes the specified StyleInfo message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo.verify|verify} messages.
+                                 * @param message StyleInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified StyleInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo.verify|verify} messages.
+                                 * @param message StyleInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.Token.IStyleInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a StyleInfo message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns StyleInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Decodes a StyleInfo message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns StyleInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Verifies a StyleInfo message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a StyleInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns StyleInfo
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo;
+
+                                /**
+                                 * Creates a plain object from a StyleInfo message. Also converts values to other types if specified.
+                                 * @param message StyleInfo
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.Token.StyleInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this StyleInfo to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for StyleInfo
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a Symbol. */
+                        interface ISymbol {
+
+                            /** Symbol layout */
+                            layout?: (google.cloud.documentai.v1beta2.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages */
+                            detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+                        }
+
+                        /** Represents a Symbol. */
+                        class Symbol implements ISymbol {
+
+                            /**
+                             * Constructs a new Symbol.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.ISymbol);
+
+                            /** Symbol layout. */
+                            public layout?: (google.cloud.documentai.v1beta2.Document.Page.ILayout|null);
+
+                            /** Symbol detectedLanguages. */
+                            public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /**
+                             * Creates a new Symbol instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Symbol instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.ISymbol): google.cloud.documentai.v1beta2.Document.Page.Symbol;
+
+                            /**
+                             * Encodes the specified Symbol message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Symbol message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.Symbol.verify|verify} messages.
+                             * @param message Symbol message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.ISymbol, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.Symbol;
+
+                            /**
+                             * Decodes a Symbol message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Symbol
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.Symbol;
+
+                            /**
+                             * Verifies a Symbol message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Symbol message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Symbol
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.Symbol;
+
+                            /**
+                             * Creates a plain object from a Symbol message. Also converts values to other types if specified.
+                             * @param message Symbol
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.Symbol, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Symbol to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Symbol
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a VisualElement. */
@@ -19875,6 +21034,9 @@ export namespace google {
 
                             /** Table detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Table provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                         }
 
                         /** Represents a Table. */
@@ -19897,6 +21059,9 @@ export namespace google {
 
                             /** Table detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1beta2.Document.Page.IDetectedLanguage[];
+
+                            /** Table provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                             /**
                              * Creates a new Table instance using the specified properties.
@@ -20214,6 +21379,9 @@ export namespace google {
 
                             /** FormField correctedValueText */
                             correctedValueText?: (string|null);
+
+                            /** FormField provenance */
+                            provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
                         }
 
                         /** Represents a FormField. */
@@ -20245,6 +21413,9 @@ export namespace google {
 
                             /** FormField correctedValueText. */
                             public correctedValueText: string;
+
+                            /** FormField provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
 
                             /**
                              * Creates a new FormField instance using the specified properties.
@@ -20318,6 +21489,109 @@ export namespace google {
 
                             /**
                              * Gets the default type url for FormField
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DetectedBarcode. */
+                        interface IDetectedBarcode {
+
+                            /** DetectedBarcode layout */
+                            layout?: (google.cloud.documentai.v1beta2.Document.Page.ILayout|null);
+
+                            /** DetectedBarcode barcode */
+                            barcode?: (google.cloud.documentai.v1beta2.IBarcode|null);
+                        }
+
+                        /** Represents a DetectedBarcode. */
+                        class DetectedBarcode implements IDetectedBarcode {
+
+                            /**
+                             * Constructs a new DetectedBarcode.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode);
+
+                            /** DetectedBarcode layout. */
+                            public layout?: (google.cloud.documentai.v1beta2.Document.Page.ILayout|null);
+
+                            /** DetectedBarcode barcode. */
+                            public barcode?: (google.cloud.documentai.v1beta2.IBarcode|null);
+
+                            /**
+                             * Creates a new DetectedBarcode instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DetectedBarcode instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode): google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode;
+
+                            /**
+                             * Encodes the specified DetectedBarcode message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode.verify|verify} messages.
+                             * @param message DetectedBarcode message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DetectedBarcode message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode.verify|verify} messages.
+                             * @param message DetectedBarcode message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.IDetectedBarcode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DetectedBarcode message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DetectedBarcode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode;
+
+                            /**
+                             * Decodes a DetectedBarcode message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DetectedBarcode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode;
+
+                            /**
+                             * Verifies a DetectedBarcode message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DetectedBarcode message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DetectedBarcode
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode;
+
+                            /**
+                             * Creates a plain object from a DetectedBarcode message. Also converts values to other types if specified.
+                             * @param message DetectedBarcode
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.DetectedBarcode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DetectedBarcode to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DetectedBarcode
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -20426,6 +21700,215 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** Properties of an ImageQualityScores. */
+                        interface IImageQualityScores {
+
+                            /** ImageQualityScores qualityScore */
+                            qualityScore?: (number|null);
+
+                            /** ImageQualityScores detectedDefects */
+                            detectedDefects?: (google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect[]|null);
+                        }
+
+                        /** Represents an ImageQualityScores. */
+                        class ImageQualityScores implements IImageQualityScores {
+
+                            /**
+                             * Constructs a new ImageQualityScores.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores);
+
+                            /** ImageQualityScores qualityScore. */
+                            public qualityScore: number;
+
+                            /** ImageQualityScores detectedDefects. */
+                            public detectedDefects: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect[];
+
+                            /**
+                             * Creates a new ImageQualityScores instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ImageQualityScores instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Encodes the specified ImageQualityScores message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.verify|verify} messages.
+                             * @param message ImageQualityScores message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ImageQualityScores message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.verify|verify} messages.
+                             * @param message ImageQualityScores message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.IImageQualityScores, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ImageQualityScores message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ImageQualityScores
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Decodes an ImageQualityScores message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ImageQualityScores
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Verifies an ImageQualityScores message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ImageQualityScores message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ImageQualityScores
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Creates a plain object from an ImageQualityScores message. Also converts values to other types if specified.
+                             * @param message ImageQualityScores
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ImageQualityScores to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ImageQualityScores
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ImageQualityScores {
+
+                            /** Properties of a DetectedDefect. */
+                            interface IDetectedDefect {
+
+                                /** DetectedDefect type */
+                                type?: (string|null);
+
+                                /** DetectedDefect confidence */
+                                confidence?: (number|null);
+                            }
+
+                            /** Represents a DetectedDefect. */
+                            class DetectedDefect implements IDetectedDefect {
+
+                                /**
+                                 * Constructs a new DetectedDefect.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect);
+
+                                /** DetectedDefect type. */
+                                public type: string;
+
+                                /** DetectedDefect confidence. */
+                                public confidence: number;
+
+                                /**
+                                 * Creates a new DetectedDefect instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DetectedDefect instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Encodes the specified DetectedDefect message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                 * @param message DetectedDefect message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DetectedDefect message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                 * @param message DetectedDefect message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.IDetectedDefect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DetectedDefect message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DetectedDefect
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Decodes a DetectedDefect message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DetectedDefect
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Verifies a DetectedDefect message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DetectedDefect message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DetectedDefect
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Creates a plain object from a DetectedDefect message. Also converts values to other types if specified.
+                                 * @param message DetectedDefect
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta2.Document.Page.ImageQualityScores.DetectedDefect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DetectedDefect to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DetectedDefect
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of an Entity. */
@@ -20451,6 +21934,18 @@ export namespace google {
 
                         /** Entity id */
                         id?: (string|null);
+
+                        /** Entity normalizedValue */
+                        normalizedValue?: (google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue|null);
+
+                        /** Entity properties */
+                        properties?: (google.cloud.documentai.v1beta2.Document.IEntity[]|null);
+
+                        /** Entity provenance */
+                        provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
+
+                        /** Entity redacted */
+                        redacted?: (boolean|null);
                     }
 
                     /** Represents an Entity. */
@@ -20482,6 +21977,18 @@ export namespace google {
 
                         /** Entity id. */
                         public id: string;
+
+                        /** Entity normalizedValue. */
+                        public normalizedValue?: (google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue|null);
+
+                        /** Entity properties. */
+                        public properties: google.cloud.documentai.v1beta2.Document.IEntity[];
+
+                        /** Entity provenance. */
+                        public provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance|null);
+
+                        /** Entity redacted. */
+                        public redacted: boolean;
 
                         /**
                          * Creates a new Entity instance using the specified properties.
@@ -20559,6 +22066,151 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Entity {
+
+                        /** Properties of a NormalizedValue. */
+                        interface INormalizedValue {
+
+                            /** NormalizedValue moneyValue */
+                            moneyValue?: (google.type.IMoney|null);
+
+                            /** NormalizedValue dateValue */
+                            dateValue?: (google.type.IDate|null);
+
+                            /** NormalizedValue datetimeValue */
+                            datetimeValue?: (google.type.IDateTime|null);
+
+                            /** NormalizedValue addressValue */
+                            addressValue?: (google.type.IPostalAddress|null);
+
+                            /** NormalizedValue booleanValue */
+                            booleanValue?: (boolean|null);
+
+                            /** NormalizedValue integerValue */
+                            integerValue?: (number|null);
+
+                            /** NormalizedValue floatValue */
+                            floatValue?: (number|null);
+
+                            /** NormalizedValue text */
+                            text?: (string|null);
+                        }
+
+                        /** Represents a NormalizedValue. */
+                        class NormalizedValue implements INormalizedValue {
+
+                            /**
+                             * Constructs a new NormalizedValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue);
+
+                            /** NormalizedValue moneyValue. */
+                            public moneyValue?: (google.type.IMoney|null);
+
+                            /** NormalizedValue dateValue. */
+                            public dateValue?: (google.type.IDate|null);
+
+                            /** NormalizedValue datetimeValue. */
+                            public datetimeValue?: (google.type.IDateTime|null);
+
+                            /** NormalizedValue addressValue. */
+                            public addressValue?: (google.type.IPostalAddress|null);
+
+                            /** NormalizedValue booleanValue. */
+                            public booleanValue?: (boolean|null);
+
+                            /** NormalizedValue integerValue. */
+                            public integerValue?: (number|null);
+
+                            /** NormalizedValue floatValue. */
+                            public floatValue?: (number|null);
+
+                            /** NormalizedValue text. */
+                            public text: string;
+
+                            /** NormalizedValue structuredValue. */
+                            public structuredValue?: ("moneyValue"|"dateValue"|"datetimeValue"|"addressValue"|"booleanValue"|"integerValue"|"floatValue");
+
+                            /**
+                             * Creates a new NormalizedValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NormalizedValue instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue): google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue;
+
+                            /**
+                             * Encodes the specified NormalizedValue message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue.verify|verify} messages.
+                             * @param message NormalizedValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NormalizedValue message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue.verify|verify} messages.
+                             * @param message NormalizedValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Entity.INormalizedValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NormalizedValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NormalizedValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue;
+
+                            /**
+                             * Decodes a NormalizedValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NormalizedValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue;
+
+                            /**
+                             * Verifies a NormalizedValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NormalizedValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NormalizedValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue;
+
+                            /**
+                             * Creates a plain object from a NormalizedValue message. Also converts values to other types if specified.
+                             * @param message NormalizedValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Entity.NormalizedValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NormalizedValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NormalizedValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of an EntityRelation. */
@@ -20989,6 +22641,12 @@ export namespace google {
 
                             /** PageRef layoutId */
                             layoutId?: (string|null);
+
+                            /** PageRef boundingPoly */
+                            boundingPoly?: (google.cloud.documentai.v1beta2.IBoundingPoly|null);
+
+                            /** PageRef confidence */
+                            confidence?: (number|null);
                         }
 
                         /** Represents a PageRef. */
@@ -21008,6 +22666,12 @@ export namespace google {
 
                             /** PageRef layoutId. */
                             public layoutId: string;
+
+                            /** PageRef boundingPoly. */
+                            public boundingPoly?: (google.cloud.documentai.v1beta2.IBoundingPoly|null);
+
+                            /** PageRef confidence. */
+                            public confidence: number;
 
                             /**
                              * Creates a new PageRef instance using the specified properties.
@@ -21101,6 +22765,596 @@ export namespace google {
                                 FORM_FIELD = 7
                             }
                         }
+                    }
+
+                    /** Properties of a Provenance. */
+                    interface IProvenance {
+
+                        /** Provenance revision */
+                        revision?: (number|null);
+
+                        /** Provenance id */
+                        id?: (number|null);
+
+                        /** Provenance parents */
+                        parents?: (google.cloud.documentai.v1beta2.Document.Provenance.IParent[]|null);
+
+                        /** Provenance type */
+                        type?: (google.cloud.documentai.v1beta2.Document.Provenance.OperationType|keyof typeof google.cloud.documentai.v1beta2.Document.Provenance.OperationType|null);
+                    }
+
+                    /** Represents a Provenance. */
+                    class Provenance implements IProvenance {
+
+                        /**
+                         * Constructs a new Provenance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta2.Document.IProvenance);
+
+                        /** Provenance revision. */
+                        public revision: number;
+
+                        /** Provenance id. */
+                        public id: number;
+
+                        /** Provenance parents. */
+                        public parents: google.cloud.documentai.v1beta2.Document.Provenance.IParent[];
+
+                        /** Provenance type. */
+                        public type: (google.cloud.documentai.v1beta2.Document.Provenance.OperationType|keyof typeof google.cloud.documentai.v1beta2.Document.Provenance.OperationType);
+
+                        /**
+                         * Creates a new Provenance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Provenance instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta2.Document.IProvenance): google.cloud.documentai.v1beta2.Document.Provenance;
+
+                        /**
+                         * Encodes the specified Provenance message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Provenance.verify|verify} messages.
+                         * @param message Provenance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta2.Document.IProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Provenance message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Provenance.verify|verify} messages.
+                         * @param message Provenance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.IProvenance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Provenance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Provenance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Provenance;
+
+                        /**
+                         * Decodes a Provenance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Provenance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Provenance;
+
+                        /**
+                         * Verifies a Provenance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Provenance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Provenance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Provenance;
+
+                        /**
+                         * Creates a plain object from a Provenance message. Also converts values to other types if specified.
+                         * @param message Provenance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta2.Document.Provenance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Provenance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Provenance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Provenance {
+
+                        /** Properties of a Parent. */
+                        interface IParent {
+
+                            /** Parent revision */
+                            revision?: (number|null);
+
+                            /** Parent index */
+                            index?: (number|null);
+
+                            /** Parent id */
+                            id?: (number|null);
+                        }
+
+                        /** Represents a Parent. */
+                        class Parent implements IParent {
+
+                            /**
+                             * Constructs a new Parent.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Provenance.IParent);
+
+                            /** Parent revision. */
+                            public revision: number;
+
+                            /** Parent index. */
+                            public index: number;
+
+                            /** Parent id. */
+                            public id: number;
+
+                            /**
+                             * Creates a new Parent instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Parent instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Provenance.IParent): google.cloud.documentai.v1beta2.Document.Provenance.Parent;
+
+                            /**
+                             * Encodes the specified Parent message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Provenance.Parent.verify|verify} messages.
+                             * @param message Parent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Provenance.IParent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Parent message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Provenance.Parent.verify|verify} messages.
+                             * @param message Parent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Provenance.IParent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Parent message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Parent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Provenance.Parent;
+
+                            /**
+                             * Decodes a Parent message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Parent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Provenance.Parent;
+
+                            /**
+                             * Verifies a Parent message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Parent message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Parent
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Provenance.Parent;
+
+                            /**
+                             * Creates a plain object from a Parent message. Also converts values to other types if specified.
+                             * @param message Parent
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Provenance.Parent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Parent to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Parent
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** OperationType enum. */
+                        enum OperationType {
+                            OPERATION_TYPE_UNSPECIFIED = 0,
+                            ADD = 1,
+                            REMOVE = 2,
+                            UPDATE = 7,
+                            REPLACE = 3,
+                            EVAL_REQUESTED = 4,
+                            EVAL_APPROVED = 5,
+                            EVAL_SKIPPED = 6
+                        }
+                    }
+
+                    /** Properties of a Revision. */
+                    interface IRevision {
+
+                        /** Revision agent */
+                        agent?: (string|null);
+
+                        /** Revision processor */
+                        processor?: (string|null);
+
+                        /** Revision id */
+                        id?: (string|null);
+
+                        /** Revision parent */
+                        parent?: (number[]|null);
+
+                        /** Revision parentIds */
+                        parentIds?: (string[]|null);
+
+                        /** Revision createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Revision humanReview */
+                        humanReview?: (google.cloud.documentai.v1beta2.Document.Revision.IHumanReview|null);
+                    }
+
+                    /** Represents a Revision. */
+                    class Revision implements IRevision {
+
+                        /**
+                         * Constructs a new Revision.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta2.Document.IRevision);
+
+                        /** Revision agent. */
+                        public agent?: (string|null);
+
+                        /** Revision processor. */
+                        public processor?: (string|null);
+
+                        /** Revision id. */
+                        public id: string;
+
+                        /** Revision parent. */
+                        public parent: number[];
+
+                        /** Revision parentIds. */
+                        public parentIds: string[];
+
+                        /** Revision createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Revision humanReview. */
+                        public humanReview?: (google.cloud.documentai.v1beta2.Document.Revision.IHumanReview|null);
+
+                        /** Revision source. */
+                        public source?: ("agent"|"processor");
+
+                        /**
+                         * Creates a new Revision instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Revision instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta2.Document.IRevision): google.cloud.documentai.v1beta2.Document.Revision;
+
+                        /**
+                         * Encodes the specified Revision message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Revision.verify|verify} messages.
+                         * @param message Revision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta2.Document.IRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Revision message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Revision.verify|verify} messages.
+                         * @param message Revision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.IRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Revision message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Revision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Revision;
+
+                        /**
+                         * Decodes a Revision message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Revision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Revision;
+
+                        /**
+                         * Verifies a Revision message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Revision message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Revision
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Revision;
+
+                        /**
+                         * Creates a plain object from a Revision message. Also converts values to other types if specified.
+                         * @param message Revision
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta2.Document.Revision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Revision to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Revision
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Revision {
+
+                        /** Properties of a HumanReview. */
+                        interface IHumanReview {
+
+                            /** HumanReview state */
+                            state?: (string|null);
+
+                            /** HumanReview stateMessage */
+                            stateMessage?: (string|null);
+                        }
+
+                        /** Represents a HumanReview. */
+                        class HumanReview implements IHumanReview {
+
+                            /**
+                             * Constructs a new HumanReview.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta2.Document.Revision.IHumanReview);
+
+                            /** HumanReview state. */
+                            public state: string;
+
+                            /** HumanReview stateMessage. */
+                            public stateMessage: string;
+
+                            /**
+                             * Creates a new HumanReview instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns HumanReview instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta2.Document.Revision.IHumanReview): google.cloud.documentai.v1beta2.Document.Revision.HumanReview;
+
+                            /**
+                             * Encodes the specified HumanReview message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Revision.HumanReview.verify|verify} messages.
+                             * @param message HumanReview message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta2.Document.Revision.IHumanReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified HumanReview message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.Revision.HumanReview.verify|verify} messages.
+                             * @param message HumanReview message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.Revision.IHumanReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a HumanReview message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns HumanReview
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.Revision.HumanReview;
+
+                            /**
+                             * Decodes a HumanReview message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns HumanReview
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.Revision.HumanReview;
+
+                            /**
+                             * Verifies a HumanReview message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a HumanReview message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns HumanReview
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.Revision.HumanReview;
+
+                            /**
+                             * Creates a plain object from a HumanReview message. Also converts values to other types if specified.
+                             * @param message HumanReview
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta2.Document.Revision.HumanReview, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this HumanReview to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for HumanReview
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a TextChange. */
+                    interface ITextChange {
+
+                        /** TextChange textAnchor */
+                        textAnchor?: (google.cloud.documentai.v1beta2.Document.ITextAnchor|null);
+
+                        /** TextChange changedText */
+                        changedText?: (string|null);
+
+                        /** TextChange provenance */
+                        provenance?: (google.cloud.documentai.v1beta2.Document.IProvenance[]|null);
+                    }
+
+                    /** Represents a TextChange. */
+                    class TextChange implements ITextChange {
+
+                        /**
+                         * Constructs a new TextChange.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta2.Document.ITextChange);
+
+                        /** TextChange textAnchor. */
+                        public textAnchor?: (google.cloud.documentai.v1beta2.Document.ITextAnchor|null);
+
+                        /** TextChange changedText. */
+                        public changedText: string;
+
+                        /** TextChange provenance. */
+                        public provenance: google.cloud.documentai.v1beta2.Document.IProvenance[];
+
+                        /**
+                         * Creates a new TextChange instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextChange instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta2.Document.ITextChange): google.cloud.documentai.v1beta2.Document.TextChange;
+
+                        /**
+                         * Encodes the specified TextChange message. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.TextChange.verify|verify} messages.
+                         * @param message TextChange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta2.Document.ITextChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextChange message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta2.Document.TextChange.verify|verify} messages.
+                         * @param message TextChange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta2.Document.ITextChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextChange message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta2.Document.TextChange;
+
+                        /**
+                         * Decodes a TextChange message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta2.Document.TextChange;
+
+                        /**
+                         * Verifies a TextChange message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextChange message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextChange
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta2.Document.TextChange;
+
+                        /**
+                         * Creates a plain object from a TextChange message. Also converts values to other types if specified.
+                         * @param message TextChange
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta2.Document.TextChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextChange to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextChange
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -23834,6 +26088,321 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a DocumentId. */
+                interface IDocumentId {
+
+                    /** DocumentId gcsManagedDocId */
+                    gcsManagedDocId?: (google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId|null);
+
+                    /** DocumentId unmanagedDocId */
+                    unmanagedDocId?: (google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId|null);
+
+                    /** DocumentId revisionRef */
+                    revisionRef?: (google.cloud.documentai.v1beta3.IRevisionRef|null);
+                }
+
+                /** Represents a DocumentId. */
+                class DocumentId implements IDocumentId {
+
+                    /**
+                     * Constructs a new DocumentId.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentId);
+
+                    /** DocumentId gcsManagedDocId. */
+                    public gcsManagedDocId?: (google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId|null);
+
+                    /** DocumentId unmanagedDocId. */
+                    public unmanagedDocId?: (google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId|null);
+
+                    /** DocumentId revisionRef. */
+                    public revisionRef?: (google.cloud.documentai.v1beta3.IRevisionRef|null);
+
+                    /** DocumentId type. */
+                    public type?: ("gcsManagedDocId"|"unmanagedDocId");
+
+                    /**
+                     * Creates a new DocumentId instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentId instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentId): google.cloud.documentai.v1beta3.DocumentId;
+
+                    /**
+                     * Encodes the specified DocumentId message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.verify|verify} messages.
+                     * @param message DocumentId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentId message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.verify|verify} messages.
+                     * @param message DocumentId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentId message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentId;
+
+                    /**
+                     * Decodes a DocumentId message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentId;
+
+                    /**
+                     * Verifies a DocumentId message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentId message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentId
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentId;
+
+                    /**
+                     * Creates a plain object from a DocumentId message. Also converts values to other types if specified.
+                     * @param message DocumentId
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentId to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DocumentId
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DocumentId {
+
+                    /** Properties of a GCSManagedDocumentId. */
+                    interface IGCSManagedDocumentId {
+
+                        /** GCSManagedDocumentId gcsUri */
+                        gcsUri?: (string|null);
+
+                        /** GCSManagedDocumentId cwDocId */
+                        cwDocId?: (string|null);
+                    }
+
+                    /** Represents a GCSManagedDocumentId. */
+                    class GCSManagedDocumentId implements IGCSManagedDocumentId {
+
+                        /**
+                         * Constructs a new GCSManagedDocumentId.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId);
+
+                        /** GCSManagedDocumentId gcsUri. */
+                        public gcsUri: string;
+
+                        /** GCSManagedDocumentId cwDocId. */
+                        public cwDocId: string;
+
+                        /**
+                         * Creates a new GCSManagedDocumentId instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GCSManagedDocumentId instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId): google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId;
+
+                        /**
+                         * Encodes the specified GCSManagedDocumentId message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId.verify|verify} messages.
+                         * @param message GCSManagedDocumentId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GCSManagedDocumentId message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId.verify|verify} messages.
+                         * @param message GCSManagedDocumentId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentId.IGCSManagedDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GCSManagedDocumentId message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GCSManagedDocumentId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId;
+
+                        /**
+                         * Decodes a GCSManagedDocumentId message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GCSManagedDocumentId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId;
+
+                        /**
+                         * Verifies a GCSManagedDocumentId message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GCSManagedDocumentId message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GCSManagedDocumentId
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId;
+
+                        /**
+                         * Creates a plain object from a GCSManagedDocumentId message. Also converts values to other types if specified.
+                         * @param message GCSManagedDocumentId
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentId.GCSManagedDocumentId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GCSManagedDocumentId to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GCSManagedDocumentId
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UnmanagedDocumentId. */
+                    interface IUnmanagedDocumentId {
+
+                        /** UnmanagedDocumentId docId */
+                        docId?: (string|null);
+                    }
+
+                    /** Represents an UnmanagedDocumentId. */
+                    class UnmanagedDocumentId implements IUnmanagedDocumentId {
+
+                        /**
+                         * Constructs a new UnmanagedDocumentId.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId);
+
+                        /** UnmanagedDocumentId docId. */
+                        public docId: string;
+
+                        /**
+                         * Creates a new UnmanagedDocumentId instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UnmanagedDocumentId instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId): google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId;
+
+                        /**
+                         * Encodes the specified UnmanagedDocumentId message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId.verify|verify} messages.
+                         * @param message UnmanagedDocumentId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UnmanagedDocumentId message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId.verify|verify} messages.
+                         * @param message UnmanagedDocumentId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentId.IUnmanagedDocumentId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UnmanagedDocumentId message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UnmanagedDocumentId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId;
+
+                        /**
+                         * Decodes an UnmanagedDocumentId message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UnmanagedDocumentId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId;
+
+                        /**
+                         * Verifies an UnmanagedDocumentId message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UnmanagedDocumentId message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UnmanagedDocumentId
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId;
+
+                        /**
+                         * Creates a plain object from an UnmanagedDocumentId message. Also converts values to other types if specified.
+                         * @param message UnmanagedDocumentId
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentId.UnmanagedDocumentId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UnmanagedDocumentId to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UnmanagedDocumentId
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a DatasetSchema. */
                 interface IDatasetSchema {
 
@@ -23937,1834 +26506,205 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a RawDocument. */
-                interface IRawDocument {
+                /** Properties of a BatchDatasetDocuments. */
+                interface IBatchDatasetDocuments {
 
-                    /** RawDocument content */
-                    content?: (Uint8Array|string|null);
+                    /** BatchDatasetDocuments individualDocumentIds */
+                    individualDocumentIds?: (google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds|null);
 
-                    /** RawDocument mimeType */
-                    mimeType?: (string|null);
+                    /** BatchDatasetDocuments filter */
+                    filter?: (string|null);
                 }
 
-                /** Represents a RawDocument. */
-                class RawDocument implements IRawDocument {
+                /** Represents a BatchDatasetDocuments. */
+                class BatchDatasetDocuments implements IBatchDatasetDocuments {
 
                     /**
-                     * Constructs a new RawDocument.
+                     * Constructs a new BatchDatasetDocuments.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IRawDocument);
+                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDatasetDocuments);
 
-                    /** RawDocument content. */
-                    public content: (Uint8Array|string);
+                    /** BatchDatasetDocuments individualDocumentIds. */
+                    public individualDocumentIds?: (google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds|null);
 
-                    /** RawDocument mimeType. */
-                    public mimeType: string;
+                    /** BatchDatasetDocuments filter. */
+                    public filter?: (string|null);
+
+                    /** BatchDatasetDocuments criteria. */
+                    public criteria?: ("individualDocumentIds"|"filter");
 
                     /**
-                     * Creates a new RawDocument instance using the specified properties.
+                     * Creates a new BatchDatasetDocuments instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns RawDocument instance
+                     * @returns BatchDatasetDocuments instance
                      */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IRawDocument): google.cloud.documentai.v1beta3.RawDocument;
+                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDatasetDocuments): google.cloud.documentai.v1beta3.BatchDatasetDocuments;
 
                     /**
-                     * Encodes the specified RawDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
-                     * @param message RawDocument message or plain object to encode
+                     * Encodes the specified BatchDatasetDocuments message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDatasetDocuments.verify|verify} messages.
+                     * @param message BatchDatasetDocuments message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.documentai.v1beta3.IRawDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDatasetDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified RawDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
-                     * @param message RawDocument message or plain object to encode
+                     * Encodes the specified BatchDatasetDocuments message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDatasetDocuments.verify|verify} messages.
+                     * @param message BatchDatasetDocuments message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IRawDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDatasetDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a RawDocument message from the specified reader or buffer.
+                     * Decodes a BatchDatasetDocuments message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns RawDocument
+                     * @returns BatchDatasetDocuments
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.RawDocument;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDatasetDocuments;
 
                     /**
-                     * Decodes a RawDocument message from the specified reader or buffer, length delimited.
+                     * Decodes a BatchDatasetDocuments message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns RawDocument
+                     * @returns BatchDatasetDocuments
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.RawDocument;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDatasetDocuments;
 
                     /**
-                     * Verifies a RawDocument message.
+                     * Verifies a BatchDatasetDocuments message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a RawDocument message from a plain object. Also converts values to their respective internal types.
+                     * Creates a BatchDatasetDocuments message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns RawDocument
+                     * @returns BatchDatasetDocuments
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.RawDocument;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDatasetDocuments;
 
                     /**
-                     * Creates a plain object from a RawDocument message. Also converts values to other types if specified.
-                     * @param message RawDocument
+                     * Creates a plain object from a BatchDatasetDocuments message. Also converts values to other types if specified.
+                     * @param message BatchDatasetDocuments
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.documentai.v1beta3.RawDocument, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDatasetDocuments, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this RawDocument to JSON.
+                     * Converts this BatchDatasetDocuments to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for RawDocument
+                     * Gets the default type url for BatchDatasetDocuments
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a GcsDocument. */
-                interface IGcsDocument {
+                namespace BatchDatasetDocuments {
 
-                    /** GcsDocument gcsUri */
-                    gcsUri?: (string|null);
+                    /** Properties of an IndividualDocumentIds. */
+                    interface IIndividualDocumentIds {
 
-                    /** GcsDocument mimeType */
-                    mimeType?: (string|null);
-                }
-
-                /** Represents a GcsDocument. */
-                class GcsDocument implements IGcsDocument {
-
-                    /**
-                     * Constructs a new GcsDocument.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsDocument);
-
-                    /** GcsDocument gcsUri. */
-                    public gcsUri: string;
-
-                    /** GcsDocument mimeType. */
-                    public mimeType: string;
-
-                    /**
-                     * Creates a new GcsDocument instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsDocument instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsDocument): google.cloud.documentai.v1beta3.GcsDocument;
-
-                    /**
-                     * Encodes the specified GcsDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
-                     * @param message GcsDocument message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IGcsDocument, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
-                     * @param message GcsDocument message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsDocument, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsDocument message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsDocument
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsDocument;
-
-                    /**
-                     * Decodes a GcsDocument message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsDocument
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsDocument;
-
-                    /**
-                     * Verifies a GcsDocument message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsDocument message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsDocument
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsDocument;
-
-                    /**
-                     * Creates a plain object from a GcsDocument message. Also converts values to other types if specified.
-                     * @param message GcsDocument
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.GcsDocument, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsDocument to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GcsDocument
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GcsDocuments. */
-                interface IGcsDocuments {
-
-                    /** GcsDocuments documents */
-                    documents?: (google.cloud.documentai.v1beta3.IGcsDocument[]|null);
-                }
-
-                /** Represents a GcsDocuments. */
-                class GcsDocuments implements IGcsDocuments {
-
-                    /**
-                     * Constructs a new GcsDocuments.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsDocuments);
-
-                    /** GcsDocuments documents. */
-                    public documents: google.cloud.documentai.v1beta3.IGcsDocument[];
-
-                    /**
-                     * Creates a new GcsDocuments instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsDocuments instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsDocuments): google.cloud.documentai.v1beta3.GcsDocuments;
-
-                    /**
-                     * Encodes the specified GcsDocuments message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
-                     * @param message GcsDocuments message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IGcsDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsDocuments message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
-                     * @param message GcsDocuments message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsDocuments message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsDocuments
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsDocuments;
-
-                    /**
-                     * Decodes a GcsDocuments message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsDocuments
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsDocuments;
-
-                    /**
-                     * Verifies a GcsDocuments message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsDocuments message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsDocuments
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsDocuments;
-
-                    /**
-                     * Creates a plain object from a GcsDocuments message. Also converts values to other types if specified.
-                     * @param message GcsDocuments
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.GcsDocuments, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsDocuments to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GcsDocuments
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GcsPrefix. */
-                interface IGcsPrefix {
-
-                    /** GcsPrefix gcsUriPrefix */
-                    gcsUriPrefix?: (string|null);
-                }
-
-                /** Represents a GcsPrefix. */
-                class GcsPrefix implements IGcsPrefix {
-
-                    /**
-                     * Constructs a new GcsPrefix.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsPrefix);
-
-                    /** GcsPrefix gcsUriPrefix. */
-                    public gcsUriPrefix: string;
-
-                    /**
-                     * Creates a new GcsPrefix instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsPrefix instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsPrefix): google.cloud.documentai.v1beta3.GcsPrefix;
-
-                    /**
-                     * Encodes the specified GcsPrefix message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
-                     * @param message GcsPrefix message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IGcsPrefix, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsPrefix message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
-                     * @param message GcsPrefix message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsPrefix, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsPrefix message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsPrefix
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsPrefix;
-
-                    /**
-                     * Decodes a GcsPrefix message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsPrefix
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsPrefix;
-
-                    /**
-                     * Verifies a GcsPrefix message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsPrefix message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsPrefix
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsPrefix;
-
-                    /**
-                     * Creates a plain object from a GcsPrefix message. Also converts values to other types if specified.
-                     * @param message GcsPrefix
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.GcsPrefix, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsPrefix to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GcsPrefix
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a BatchDocumentsInputConfig. */
-                interface IBatchDocumentsInputConfig {
-
-                    /** BatchDocumentsInputConfig gcsPrefix */
-                    gcsPrefix?: (google.cloud.documentai.v1beta3.IGcsPrefix|null);
-
-                    /** BatchDocumentsInputConfig gcsDocuments */
-                    gcsDocuments?: (google.cloud.documentai.v1beta3.IGcsDocuments|null);
-                }
-
-                /** Represents a BatchDocumentsInputConfig. */
-                class BatchDocumentsInputConfig implements IBatchDocumentsInputConfig {
-
-                    /**
-                     * Constructs a new BatchDocumentsInputConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig);
-
-                    /** BatchDocumentsInputConfig gcsPrefix. */
-                    public gcsPrefix?: (google.cloud.documentai.v1beta3.IGcsPrefix|null);
-
-                    /** BatchDocumentsInputConfig gcsDocuments. */
-                    public gcsDocuments?: (google.cloud.documentai.v1beta3.IGcsDocuments|null);
-
-                    /** BatchDocumentsInputConfig source. */
-                    public source?: ("gcsPrefix"|"gcsDocuments");
-
-                    /**
-                     * Creates a new BatchDocumentsInputConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BatchDocumentsInputConfig instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
-
-                    /**
-                     * Encodes the specified BatchDocumentsInputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
-                     * @param message BatchDocumentsInputConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BatchDocumentsInputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
-                     * @param message BatchDocumentsInputConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BatchDocumentsInputConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
-
-                    /**
-                     * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BatchDocumentsInputConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
-
-                    /**
-                     * Verifies a BatchDocumentsInputConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BatchDocumentsInputConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BatchDocumentsInputConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
-
-                    /**
-                     * Creates a plain object from a BatchDocumentsInputConfig message. Also converts values to other types if specified.
-                     * @param message BatchDocumentsInputConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDocumentsInputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BatchDocumentsInputConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for BatchDocumentsInputConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DocumentOutputConfig. */
-                interface IDocumentOutputConfig {
-
-                    /** DocumentOutputConfig gcsOutputConfig */
-                    gcsOutputConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null);
-                }
-
-                /** Represents a DocumentOutputConfig. */
-                class DocumentOutputConfig implements IDocumentOutputConfig {
-
-                    /**
-                     * Constructs a new DocumentOutputConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentOutputConfig);
-
-                    /** DocumentOutputConfig gcsOutputConfig. */
-                    public gcsOutputConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null);
-
-                    /** DocumentOutputConfig destination. */
-                    public destination?: "gcsOutputConfig";
-
-                    /**
-                     * Creates a new DocumentOutputConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DocumentOutputConfig instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentOutputConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig;
-
-                    /**
-                     * Encodes the specified DocumentOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
-                     * @param message DocumentOutputConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
-                     * @param message DocumentOutputConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DocumentOutputConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DocumentOutputConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig;
-
-                    /**
-                     * Decodes a DocumentOutputConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DocumentOutputConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig;
-
-                    /**
-                     * Verifies a DocumentOutputConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DocumentOutputConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig;
-
-                    /**
-                     * Creates a plain object from a DocumentOutputConfig message. Also converts values to other types if specified.
-                     * @param message DocumentOutputConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DocumentOutputConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DocumentOutputConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace DocumentOutputConfig {
-
-                    /** Properties of a GcsOutputConfig. */
-                    interface IGcsOutputConfig {
-
-                        /** GcsOutputConfig gcsUri */
-                        gcsUri?: (string|null);
-
-                        /** GcsOutputConfig fieldMask */
-                        fieldMask?: (google.protobuf.IFieldMask|null);
-
-                        /** GcsOutputConfig shardingConfig */
-                        shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
+                        /** IndividualDocumentIds documentIds */
+                        documentIds?: (google.cloud.documentai.v1beta3.IDocumentId[]|null);
                     }
 
-                    /** Represents a GcsOutputConfig. */
-                    class GcsOutputConfig implements IGcsOutputConfig {
+                    /** Represents an IndividualDocumentIds. */
+                    class IndividualDocumentIds implements IIndividualDocumentIds {
 
                         /**
-                         * Constructs a new GcsOutputConfig.
+                         * Constructs a new IndividualDocumentIds.
                          * @param [properties] Properties to set
                          */
-                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig);
+                        constructor(properties?: google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds);
 
-                        /** GcsOutputConfig gcsUri. */
-                        public gcsUri: string;
-
-                        /** GcsOutputConfig fieldMask. */
-                        public fieldMask?: (google.protobuf.IFieldMask|null);
-
-                        /** GcsOutputConfig shardingConfig. */
-                        public shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
+                        /** IndividualDocumentIds documentIds. */
+                        public documentIds: google.cloud.documentai.v1beta3.IDocumentId[];
 
                         /**
-                         * Creates a new GcsOutputConfig instance using the specified properties.
+                         * Creates a new IndividualDocumentIds instance using the specified properties.
                          * @param [properties] Properties to set
-                         * @returns GcsOutputConfig instance
+                         * @returns IndividualDocumentIds instance
                          */
-                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+                        public static create(properties?: google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds): google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds;
 
                         /**
-                         * Encodes the specified GcsOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
-                         * @param message GcsOutputConfig message or plain object to encode
+                         * Encodes the specified IndividualDocumentIds message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds.verify|verify} messages.
+                         * @param message IndividualDocumentIds message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encode(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encode(message: google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Encodes the specified GcsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
-                         * @param message GcsOutputConfig message or plain object to encode
+                         * Encodes the specified IndividualDocumentIds message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds.verify|verify} messages.
+                         * @param message IndividualDocumentIds message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.BatchDatasetDocuments.IIndividualDocumentIds, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Decodes a GcsOutputConfig message from the specified reader or buffer.
+                         * Decodes an IndividualDocumentIds message from the specified reader or buffer.
                          * @param reader Reader or buffer to decode from
                          * @param [length] Message length if known beforehand
-                         * @returns GcsOutputConfig
+                         * @returns IndividualDocumentIds
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds;
 
                         /**
-                         * Decodes a GcsOutputConfig message from the specified reader or buffer, length delimited.
+                         * Decodes an IndividualDocumentIds message from the specified reader or buffer, length delimited.
                          * @param reader Reader or buffer to decode from
-                         * @returns GcsOutputConfig
+                         * @returns IndividualDocumentIds
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds;
 
                         /**
-                         * Verifies a GcsOutputConfig message.
+                         * Verifies an IndividualDocumentIds message.
                          * @param message Plain object to verify
                          * @returns `null` if valid, otherwise the reason why it is not
                          */
                         public static verify(message: { [k: string]: any }): (string|null);
 
                         /**
-                         * Creates a GcsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * Creates an IndividualDocumentIds message from a plain object. Also converts values to their respective internal types.
                          * @param object Plain object
-                         * @returns GcsOutputConfig
+                         * @returns IndividualDocumentIds
                          */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds;
 
                         /**
-                         * Creates a plain object from a GcsOutputConfig message. Also converts values to other types if specified.
-                         * @param message GcsOutputConfig
+                         * Creates a plain object from an IndividualDocumentIds message. Also converts values to other types if specified.
+                         * @param message IndividualDocumentIds
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.cloud.documentai.v1beta3.BatchDatasetDocuments.IndividualDocumentIds, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
-                         * Converts this GcsOutputConfig to JSON.
+                         * Converts this IndividualDocumentIds to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
 
                         /**
-                         * Gets the default type url for GcsOutputConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace GcsOutputConfig {
-
-                        /** Properties of a ShardingConfig. */
-                        interface IShardingConfig {
-
-                            /** ShardingConfig pagesPerShard */
-                            pagesPerShard?: (number|null);
-
-                            /** ShardingConfig pagesOverlap */
-                            pagesOverlap?: (number|null);
-                        }
-
-                        /** Represents a ShardingConfig. */
-                        class ShardingConfig implements IShardingConfig {
-
-                            /**
-                             * Constructs a new ShardingConfig.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig);
-
-                            /** ShardingConfig pagesPerShard. */
-                            public pagesPerShard: number;
-
-                            /** ShardingConfig pagesOverlap. */
-                            public pagesOverlap: number;
-
-                            /**
-                             * Creates a new ShardingConfig instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns ShardingConfig instance
-                             */
-                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
-
-                            /**
-                             * Encodes the specified ShardingConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
-                             * @param message ShardingConfig message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified ShardingConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
-                             * @param message ShardingConfig message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a ShardingConfig message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns ShardingConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
-
-                            /**
-                             * Decodes a ShardingConfig message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns ShardingConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
-
-                            /**
-                             * Verifies a ShardingConfig message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a ShardingConfig message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns ShardingConfig
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
-
-                            /**
-                             * Creates a plain object from a ShardingConfig message. Also converts values to other types if specified.
-                             * @param message ShardingConfig
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this ShardingConfig to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for ShardingConfig
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-                }
-
-                /** Properties of an OcrConfig. */
-                interface IOcrConfig {
-
-                    /** OcrConfig hints */
-                    hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
-
-                    /** OcrConfig enableNativePdfParsing */
-                    enableNativePdfParsing?: (boolean|null);
-
-                    /** OcrConfig enableImageQualityScores */
-                    enableImageQualityScores?: (boolean|null);
-
-                    /** OcrConfig advancedOcrOptions */
-                    advancedOcrOptions?: (string[]|null);
-
-                    /** OcrConfig enableSymbol */
-                    enableSymbol?: (boolean|null);
-
-                    /** OcrConfig computeStyleInfo */
-                    computeStyleInfo?: (boolean|null);
-                }
-
-                /** Represents an OcrConfig. */
-                class OcrConfig implements IOcrConfig {
-
-                    /**
-                     * Constructs a new OcrConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IOcrConfig);
-
-                    /** OcrConfig hints. */
-                    public hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
-
-                    /** OcrConfig enableNativePdfParsing. */
-                    public enableNativePdfParsing: boolean;
-
-                    /** OcrConfig enableImageQualityScores. */
-                    public enableImageQualityScores: boolean;
-
-                    /** OcrConfig advancedOcrOptions. */
-                    public advancedOcrOptions: string[];
-
-                    /** OcrConfig enableSymbol. */
-                    public enableSymbol: boolean;
-
-                    /** OcrConfig computeStyleInfo. */
-                    public computeStyleInfo: boolean;
-
-                    /**
-                     * Creates a new OcrConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OcrConfig instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IOcrConfig): google.cloud.documentai.v1beta3.OcrConfig;
-
-                    /**
-                     * Encodes the specified OcrConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
-                     * @param message OcrConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OcrConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
-                     * @param message OcrConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an OcrConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OcrConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig;
-
-                    /**
-                     * Decodes an OcrConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OcrConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig;
-
-                    /**
-                     * Verifies an OcrConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an OcrConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OcrConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig;
-
-                    /**
-                     * Creates a plain object from an OcrConfig message. Also converts values to other types if specified.
-                     * @param message OcrConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OcrConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OcrConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace OcrConfig {
-
-                    /** Properties of a Hints. */
-                    interface IHints {
-
-                        /** Hints languageHints */
-                        languageHints?: (string[]|null);
-                    }
-
-                    /** Represents a Hints. */
-                    class Hints implements IHints {
-
-                        /**
-                         * Constructs a new Hints.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints);
-
-                        /** Hints languageHints. */
-                        public languageHints: string[];
-
-                        /**
-                         * Creates a new Hints instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Hints instance
-                         */
-                        public static create(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints): google.cloud.documentai.v1beta3.OcrConfig.Hints;
-
-                        /**
-                         * Encodes the specified Hints message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
-                         * @param message Hints message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Hints message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
-                         * @param message Hints message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Hints message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Hints
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig.Hints;
-
-                        /**
-                         * Decodes a Hints message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Hints
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig.Hints;
-
-                        /**
-                         * Verifies a Hints message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Hints message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Hints
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig.Hints;
-
-                        /**
-                         * Creates a plain object from a Hints message. Also converts values to other types if specified.
-                         * @param message Hints
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig.Hints, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Hints to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Hints
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-                }
-
-                /** Properties of a PropertyMetadata. */
-                interface IPropertyMetadata {
-
-                    /** PropertyMetadata inactive */
-                    inactive?: (boolean|null);
-                }
-
-                /** Represents a PropertyMetadata. */
-                class PropertyMetadata implements IPropertyMetadata {
-
-                    /**
-                     * Constructs a new PropertyMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IPropertyMetadata);
-
-                    /** PropertyMetadata inactive. */
-                    public inactive: boolean;
-
-                    /**
-                     * Creates a new PropertyMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PropertyMetadata instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IPropertyMetadata): google.cloud.documentai.v1beta3.PropertyMetadata;
-
-                    /**
-                     * Encodes the specified PropertyMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.PropertyMetadata.verify|verify} messages.
-                     * @param message PropertyMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IPropertyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PropertyMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.PropertyMetadata.verify|verify} messages.
-                     * @param message PropertyMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IPropertyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PropertyMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PropertyMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.PropertyMetadata;
-
-                    /**
-                     * Decodes a PropertyMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PropertyMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.PropertyMetadata;
-
-                    /**
-                     * Verifies a PropertyMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PropertyMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PropertyMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.PropertyMetadata;
-
-                    /**
-                     * Creates a plain object from a PropertyMetadata message. Also converts values to other types if specified.
-                     * @param message PropertyMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.PropertyMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PropertyMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PropertyMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an EntityTypeMetadata. */
-                interface IEntityTypeMetadata {
-
-                    /** EntityTypeMetadata inactive */
-                    inactive?: (boolean|null);
-                }
-
-                /** Represents an EntityTypeMetadata. */
-                class EntityTypeMetadata implements IEntityTypeMetadata {
-
-                    /**
-                     * Constructs a new EntityTypeMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IEntityTypeMetadata);
-
-                    /** EntityTypeMetadata inactive. */
-                    public inactive: boolean;
-
-                    /**
-                     * Creates a new EntityTypeMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns EntityTypeMetadata instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IEntityTypeMetadata): google.cloud.documentai.v1beta3.EntityTypeMetadata;
-
-                    /**
-                     * Encodes the specified EntityTypeMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.EntityTypeMetadata.verify|verify} messages.
-                     * @param message EntityTypeMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IEntityTypeMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified EntityTypeMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.EntityTypeMetadata.verify|verify} messages.
-                     * @param message EntityTypeMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IEntityTypeMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an EntityTypeMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns EntityTypeMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.EntityTypeMetadata;
-
-                    /**
-                     * Decodes an EntityTypeMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns EntityTypeMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.EntityTypeMetadata;
-
-                    /**
-                     * Verifies an EntityTypeMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an EntityTypeMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns EntityTypeMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.EntityTypeMetadata;
-
-                    /**
-                     * Creates a plain object from an EntityTypeMetadata message. Also converts values to other types if specified.
-                     * @param message EntityTypeMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.EntityTypeMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this EntityTypeMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for EntityTypeMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DocumentSchema. */
-                interface IDocumentSchema {
-
-                    /** DocumentSchema displayName */
-                    displayName?: (string|null);
-
-                    /** DocumentSchema description */
-                    description?: (string|null);
-
-                    /** DocumentSchema entityTypes */
-                    entityTypes?: (google.cloud.documentai.v1beta3.DocumentSchema.IEntityType[]|null);
-
-                    /** DocumentSchema metadata */
-                    metadata?: (google.cloud.documentai.v1beta3.DocumentSchema.IMetadata|null);
-                }
-
-                /** Represents a DocumentSchema. */
-                class DocumentSchema implements IDocumentSchema {
-
-                    /**
-                     * Constructs a new DocumentSchema.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentSchema);
-
-                    /** DocumentSchema displayName. */
-                    public displayName: string;
-
-                    /** DocumentSchema description. */
-                    public description: string;
-
-                    /** DocumentSchema entityTypes. */
-                    public entityTypes: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType[];
-
-                    /** DocumentSchema metadata. */
-                    public metadata?: (google.cloud.documentai.v1beta3.DocumentSchema.IMetadata|null);
-
-                    /**
-                     * Creates a new DocumentSchema instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DocumentSchema instance
-                     */
-                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentSchema): google.cloud.documentai.v1beta3.DocumentSchema;
-
-                    /**
-                     * Encodes the specified DocumentSchema message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.verify|verify} messages.
-                     * @param message DocumentSchema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentSchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DocumentSchema message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.verify|verify} messages.
-                     * @param message DocumentSchema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentSchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DocumentSchema message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DocumentSchema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema;
-
-                    /**
-                     * Decodes a DocumentSchema message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DocumentSchema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema;
-
-                    /**
-                     * Verifies a DocumentSchema message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DocumentSchema message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DocumentSchema
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema;
-
-                    /**
-                     * Creates a plain object from a DocumentSchema message. Also converts values to other types if specified.
-                     * @param message DocumentSchema
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DocumentSchema to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DocumentSchema
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace DocumentSchema {
-
-                    /** Properties of an EntityType. */
-                    interface IEntityType {
-
-                        /** EntityType enumValues */
-                        enumValues?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues|null);
-
-                        /** EntityType displayName */
-                        displayName?: (string|null);
-
-                        /** EntityType name */
-                        name?: (string|null);
-
-                        /** EntityType baseTypes */
-                        baseTypes?: (string[]|null);
-
-                        /** EntityType properties */
-                        properties?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty[]|null);
-
-                        /** EntityType entityTypeMetadata */
-                        entityTypeMetadata?: (google.cloud.documentai.v1beta3.IEntityTypeMetadata|null);
-                    }
-
-                    /** Represents an EntityType. */
-                    class EntityType implements IEntityType {
-
-                        /**
-                         * Constructs a new EntityType.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType);
-
-                        /** EntityType enumValues. */
-                        public enumValues?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues|null);
-
-                        /** EntityType displayName. */
-                        public displayName: string;
-
-                        /** EntityType name. */
-                        public name: string;
-
-                        /** EntityType baseTypes. */
-                        public baseTypes: string[];
-
-                        /** EntityType properties. */
-                        public properties: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty[];
-
-                        /** EntityType entityTypeMetadata. */
-                        public entityTypeMetadata?: (google.cloud.documentai.v1beta3.IEntityTypeMetadata|null);
-
-                        /** EntityType valueSource. */
-                        public valueSource?: "enumValues";
-
-                        /**
-                         * Creates a new EntityType instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns EntityType instance
-                         */
-                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
-
-                        /**
-                         * Encodes the specified EntityType message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.verify|verify} messages.
-                         * @param message EntityType message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified EntityType message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.verify|verify} messages.
-                         * @param message EntityType message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an EntityType message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns EntityType
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
-
-                        /**
-                         * Decodes an EntityType message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns EntityType
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
-
-                        /**
-                         * Verifies an EntityType message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an EntityType message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns EntityType
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
-
-                        /**
-                         * Creates a plain object from an EntityType message. Also converts values to other types if specified.
-                         * @param message EntityType
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this EntityType to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for EntityType
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace EntityType {
-
-                        /** Properties of an EnumValues. */
-                        interface IEnumValues {
-
-                            /** EnumValues values */
-                            values?: (string[]|null);
-                        }
-
-                        /** Represents an EnumValues. */
-                        class EnumValues implements IEnumValues {
-
-                            /**
-                             * Constructs a new EnumValues.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues);
-
-                            /** EnumValues values. */
-                            public values: string[];
-
-                            /**
-                             * Creates a new EnumValues instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns EnumValues instance
-                             */
-                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
-
-                            /**
-                             * Encodes the specified EnumValues message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues.verify|verify} messages.
-                             * @param message EnumValues message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified EnumValues message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues.verify|verify} messages.
-                             * @param message EnumValues message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an EnumValues message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns EnumValues
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
-
-                            /**
-                             * Decodes an EnumValues message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns EnumValues
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
-
-                            /**
-                             * Verifies an EnumValues message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an EnumValues message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns EnumValues
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
-
-                            /**
-                             * Creates a plain object from an EnumValues message. Also converts values to other types if specified.
-                             * @param message EnumValues
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this EnumValues to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for EnumValues
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        /** Properties of a Property. */
-                        interface IProperty {
-
-                            /** Property name */
-                            name?: (string|null);
-
-                            /** Property valueType */
-                            valueType?: (string|null);
-
-                            /** Property occurrenceType */
-                            occurrenceType?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|keyof typeof google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|null);
-
-                            /** Property propertyMetadata */
-                            propertyMetadata?: (google.cloud.documentai.v1beta3.IPropertyMetadata|null);
-                        }
-
-                        /** Represents a Property. */
-                        class Property implements IProperty {
-
-                            /**
-                             * Constructs a new Property.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty);
-
-                            /** Property name. */
-                            public name: string;
-
-                            /** Property valueType. */
-                            public valueType: string;
-
-                            /** Property occurrenceType. */
-                            public occurrenceType: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|keyof typeof google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType);
-
-                            /** Property propertyMetadata. */
-                            public propertyMetadata?: (google.cloud.documentai.v1beta3.IPropertyMetadata|null);
-
-                            /**
-                             * Creates a new Property instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns Property instance
-                             */
-                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
-
-                            /**
-                             * Encodes the specified Property message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.verify|verify} messages.
-                             * @param message Property message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified Property message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.verify|verify} messages.
-                             * @param message Property message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a Property message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns Property
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
-
-                            /**
-                             * Decodes a Property message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns Property
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
-
-                            /**
-                             * Verifies a Property message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a Property message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns Property
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
-
-                            /**
-                             * Creates a plain object from a Property message. Also converts values to other types if specified.
-                             * @param message Property
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this Property to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for Property
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        namespace Property {
-
-                            /** OccurrenceType enum. */
-                            enum OccurrenceType {
-                                OCCURRENCE_TYPE_UNSPECIFIED = 0,
-                                OPTIONAL_ONCE = 1,
-                                OPTIONAL_MULTIPLE = 2,
-                                REQUIRED_ONCE = 3,
-                                REQUIRED_MULTIPLE = 4
-                            }
-                        }
-                    }
-
-                    /** Properties of a Metadata. */
-                    interface IMetadata {
-
-                        /** Metadata documentSplitter */
-                        documentSplitter?: (boolean|null);
-
-                        /** Metadata documentAllowMultipleLabels */
-                        documentAllowMultipleLabels?: (boolean|null);
-
-                        /** Metadata prefixedNamingOnProperties */
-                        prefixedNamingOnProperties?: (boolean|null);
-
-                        /** Metadata skipNamingValidation */
-                        skipNamingValidation?: (boolean|null);
-                    }
-
-                    /** Represents a Metadata. */
-                    class Metadata implements IMetadata {
-
-                        /**
-                         * Constructs a new Metadata.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata);
-
-                        /** Metadata documentSplitter. */
-                        public documentSplitter: boolean;
-
-                        /** Metadata documentAllowMultipleLabels. */
-                        public documentAllowMultipleLabels: boolean;
-
-                        /** Metadata prefixedNamingOnProperties. */
-                        public prefixedNamingOnProperties: boolean;
-
-                        /** Metadata skipNamingValidation. */
-                        public skipNamingValidation: boolean;
-
-                        /**
-                         * Creates a new Metadata instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Metadata instance
-                         */
-                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
-
-                        /**
-                         * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.Metadata.verify|verify} messages.
-                         * @param message Metadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.Metadata.verify|verify} messages.
-                         * @param message Metadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Metadata message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Metadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
-
-                        /**
-                         * Decodes a Metadata message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Metadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
-
-                        /**
-                         * Verifies a Metadata message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Metadata
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
-
-                        /**
-                         * Creates a plain object from a Metadata message. Also converts values to other types if specified.
-                         * @param message Metadata
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Metadata to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for Metadata
+                         * Gets the default type url for IndividualDocumentIds
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -30245,6 +31185,129 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RevisionRef. */
+                interface IRevisionRef {
+
+                    /** RevisionRef revisionCase */
+                    revisionCase?: (google.cloud.documentai.v1beta3.RevisionRef.RevisionCase|keyof typeof google.cloud.documentai.v1beta3.RevisionRef.RevisionCase|null);
+
+                    /** RevisionRef revisionId */
+                    revisionId?: (string|null);
+
+                    /** RevisionRef latestProcessorVersion */
+                    latestProcessorVersion?: (string|null);
+                }
+
+                /** Represents a RevisionRef. */
+                class RevisionRef implements IRevisionRef {
+
+                    /**
+                     * Constructs a new RevisionRef.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IRevisionRef);
+
+                    /** RevisionRef revisionCase. */
+                    public revisionCase?: (google.cloud.documentai.v1beta3.RevisionRef.RevisionCase|keyof typeof google.cloud.documentai.v1beta3.RevisionRef.RevisionCase|null);
+
+                    /** RevisionRef revisionId. */
+                    public revisionId?: (string|null);
+
+                    /** RevisionRef latestProcessorVersion. */
+                    public latestProcessorVersion?: (string|null);
+
+                    /** RevisionRef source. */
+                    public source?: ("revisionCase"|"revisionId"|"latestProcessorVersion");
+
+                    /**
+                     * Creates a new RevisionRef instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RevisionRef instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IRevisionRef): google.cloud.documentai.v1beta3.RevisionRef;
+
+                    /**
+                     * Encodes the specified RevisionRef message. Does not implicitly {@link google.cloud.documentai.v1beta3.RevisionRef.verify|verify} messages.
+                     * @param message RevisionRef message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IRevisionRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RevisionRef message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.RevisionRef.verify|verify} messages.
+                     * @param message RevisionRef message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IRevisionRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RevisionRef message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RevisionRef
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.RevisionRef;
+
+                    /**
+                     * Decodes a RevisionRef message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RevisionRef
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.RevisionRef;
+
+                    /**
+                     * Verifies a RevisionRef message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RevisionRef message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RevisionRef
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.RevisionRef;
+
+                    /**
+                     * Creates a plain object from a RevisionRef message. Also converts values to other types if specified.
+                     * @param message RevisionRef
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.RevisionRef, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RevisionRef to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RevisionRef
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RevisionRef {
+
+                    /** RevisionCase enum. */
+                    enum RevisionCase {
+                        REVISION_CASE_UNSPECIFIED = 0,
+                        LATEST_HUMAN_REVIEW = 1,
+                        LATEST_TIMESTAMP = 2,
+                        BASE_OCR_REVISION = 3
+                    }
+                }
+
                 /** Properties of a Vertex. */
                 interface IVertex {
 
@@ -30552,6 +31615,1841 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RawDocument. */
+                interface IRawDocument {
+
+                    /** RawDocument content */
+                    content?: (Uint8Array|string|null);
+
+                    /** RawDocument mimeType */
+                    mimeType?: (string|null);
+                }
+
+                /** Represents a RawDocument. */
+                class RawDocument implements IRawDocument {
+
+                    /**
+                     * Constructs a new RawDocument.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IRawDocument);
+
+                    /** RawDocument content. */
+                    public content: (Uint8Array|string);
+
+                    /** RawDocument mimeType. */
+                    public mimeType: string;
+
+                    /**
+                     * Creates a new RawDocument instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RawDocument instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IRawDocument): google.cloud.documentai.v1beta3.RawDocument;
+
+                    /**
+                     * Encodes the specified RawDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
+                     * @param message RawDocument message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IRawDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RawDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
+                     * @param message RawDocument message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IRawDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RawDocument message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RawDocument
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.RawDocument;
+
+                    /**
+                     * Decodes a RawDocument message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RawDocument
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.RawDocument;
+
+                    /**
+                     * Verifies a RawDocument message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RawDocument message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RawDocument
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.RawDocument;
+
+                    /**
+                     * Creates a plain object from a RawDocument message. Also converts values to other types if specified.
+                     * @param message RawDocument
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.RawDocument, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RawDocument to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RawDocument
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsDocument. */
+                interface IGcsDocument {
+
+                    /** GcsDocument gcsUri */
+                    gcsUri?: (string|null);
+
+                    /** GcsDocument mimeType */
+                    mimeType?: (string|null);
+                }
+
+                /** Represents a GcsDocument. */
+                class GcsDocument implements IGcsDocument {
+
+                    /**
+                     * Constructs a new GcsDocument.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsDocument);
+
+                    /** GcsDocument gcsUri. */
+                    public gcsUri: string;
+
+                    /** GcsDocument mimeType. */
+                    public mimeType: string;
+
+                    /**
+                     * Creates a new GcsDocument instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsDocument instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsDocument): google.cloud.documentai.v1beta3.GcsDocument;
+
+                    /**
+                     * Encodes the specified GcsDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
+                     * @param message GcsDocument message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGcsDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
+                     * @param message GcsDocument message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsDocument message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsDocument
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsDocument;
+
+                    /**
+                     * Decodes a GcsDocument message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsDocument
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsDocument;
+
+                    /**
+                     * Verifies a GcsDocument message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsDocument message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsDocument
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsDocument;
+
+                    /**
+                     * Creates a plain object from a GcsDocument message. Also converts values to other types if specified.
+                     * @param message GcsDocument
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GcsDocument, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsDocument to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsDocument
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsDocuments. */
+                interface IGcsDocuments {
+
+                    /** GcsDocuments documents */
+                    documents?: (google.cloud.documentai.v1beta3.IGcsDocument[]|null);
+                }
+
+                /** Represents a GcsDocuments. */
+                class GcsDocuments implements IGcsDocuments {
+
+                    /**
+                     * Constructs a new GcsDocuments.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsDocuments);
+
+                    /** GcsDocuments documents. */
+                    public documents: google.cloud.documentai.v1beta3.IGcsDocument[];
+
+                    /**
+                     * Creates a new GcsDocuments instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsDocuments instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsDocuments): google.cloud.documentai.v1beta3.GcsDocuments;
+
+                    /**
+                     * Encodes the specified GcsDocuments message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
+                     * @param message GcsDocuments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGcsDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsDocuments message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
+                     * @param message GcsDocuments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsDocuments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsDocuments message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsDocuments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsDocuments;
+
+                    /**
+                     * Decodes a GcsDocuments message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsDocuments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsDocuments;
+
+                    /**
+                     * Verifies a GcsDocuments message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsDocuments message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsDocuments
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsDocuments;
+
+                    /**
+                     * Creates a plain object from a GcsDocuments message. Also converts values to other types if specified.
+                     * @param message GcsDocuments
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GcsDocuments, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsDocuments to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsDocuments
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsPrefix. */
+                interface IGcsPrefix {
+
+                    /** GcsPrefix gcsUriPrefix */
+                    gcsUriPrefix?: (string|null);
+                }
+
+                /** Represents a GcsPrefix. */
+                class GcsPrefix implements IGcsPrefix {
+
+                    /**
+                     * Constructs a new GcsPrefix.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGcsPrefix);
+
+                    /** GcsPrefix gcsUriPrefix. */
+                    public gcsUriPrefix: string;
+
+                    /**
+                     * Creates a new GcsPrefix instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsPrefix instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGcsPrefix): google.cloud.documentai.v1beta3.GcsPrefix;
+
+                    /**
+                     * Encodes the specified GcsPrefix message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
+                     * @param message GcsPrefix message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGcsPrefix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsPrefix message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
+                     * @param message GcsPrefix message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGcsPrefix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsPrefix message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsPrefix
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GcsPrefix;
+
+                    /**
+                     * Decodes a GcsPrefix message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsPrefix
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GcsPrefix;
+
+                    /**
+                     * Verifies a GcsPrefix message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsPrefix message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsPrefix
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GcsPrefix;
+
+                    /**
+                     * Creates a plain object from a GcsPrefix message. Also converts values to other types if specified.
+                     * @param message GcsPrefix
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GcsPrefix, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsPrefix to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsPrefix
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDocumentsInputConfig. */
+                interface IBatchDocumentsInputConfig {
+
+                    /** BatchDocumentsInputConfig gcsPrefix */
+                    gcsPrefix?: (google.cloud.documentai.v1beta3.IGcsPrefix|null);
+
+                    /** BatchDocumentsInputConfig gcsDocuments */
+                    gcsDocuments?: (google.cloud.documentai.v1beta3.IGcsDocuments|null);
+                }
+
+                /** Represents a BatchDocumentsInputConfig. */
+                class BatchDocumentsInputConfig implements IBatchDocumentsInputConfig {
+
+                    /**
+                     * Constructs a new BatchDocumentsInputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig);
+
+                    /** BatchDocumentsInputConfig gcsPrefix. */
+                    public gcsPrefix?: (google.cloud.documentai.v1beta3.IGcsPrefix|null);
+
+                    /** BatchDocumentsInputConfig gcsDocuments. */
+                    public gcsDocuments?: (google.cloud.documentai.v1beta3.IGcsDocuments|null);
+
+                    /** BatchDocumentsInputConfig source. */
+                    public source?: ("gcsPrefix"|"gcsDocuments");
+
+                    /**
+                     * Creates a new BatchDocumentsInputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDocumentsInputConfig instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
+
+                    /**
+                     * Encodes the specified BatchDocumentsInputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
+                     * @param message BatchDocumentsInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDocumentsInputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
+                     * @param message BatchDocumentsInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDocumentsInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
+
+                    /**
+                     * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDocumentsInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
+
+                    /**
+                     * Verifies a BatchDocumentsInputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDocumentsInputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDocumentsInputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDocumentsInputConfig;
+
+                    /**
+                     * Creates a plain object from a BatchDocumentsInputConfig message. Also converts values to other types if specified.
+                     * @param message BatchDocumentsInputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDocumentsInputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDocumentsInputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDocumentsInputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DocumentOutputConfig. */
+                interface IDocumentOutputConfig {
+
+                    /** DocumentOutputConfig gcsOutputConfig */
+                    gcsOutputConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null);
+                }
+
+                /** Represents a DocumentOutputConfig. */
+                class DocumentOutputConfig implements IDocumentOutputConfig {
+
+                    /**
+                     * Constructs a new DocumentOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentOutputConfig);
+
+                    /** DocumentOutputConfig gcsOutputConfig. */
+                    public gcsOutputConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null);
+
+                    /** DocumentOutputConfig destination. */
+                    public destination?: "gcsOutputConfig";
+
+                    /**
+                     * Creates a new DocumentOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentOutputConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig;
+
+                    /**
+                     * Encodes the specified DocumentOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
+                     * @param message DocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
+                     * @param message DocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig;
+
+                    /**
+                     * Decodes a DocumentOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig;
+
+                    /**
+                     * Verifies a DocumentOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig;
+
+                    /**
+                     * Creates a plain object from a DocumentOutputConfig message. Also converts values to other types if specified.
+                     * @param message DocumentOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DocumentOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DocumentOutputConfig {
+
+                    /** Properties of a GcsOutputConfig. */
+                    interface IGcsOutputConfig {
+
+                        /** GcsOutputConfig gcsUri */
+                        gcsUri?: (string|null);
+
+                        /** GcsOutputConfig fieldMask */
+                        fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** GcsOutputConfig shardingConfig */
+                        shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
+                    }
+
+                    /** Represents a GcsOutputConfig. */
+                    class GcsOutputConfig implements IGcsOutputConfig {
+
+                        /**
+                         * Constructs a new GcsOutputConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig);
+
+                        /** GcsOutputConfig gcsUri. */
+                        public gcsUri: string;
+
+                        /** GcsOutputConfig fieldMask. */
+                        public fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** GcsOutputConfig shardingConfig. */
+                        public shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
+
+                        /**
+                         * Creates a new GcsOutputConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsOutputConfig instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+
+                        /**
+                         * Encodes the specified GcsOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
+                         * @param message GcsOutputConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
+                         * @param message GcsOutputConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsOutputConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+
+                        /**
+                         * Decodes a GcsOutputConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+
+                        /**
+                         * Verifies a GcsOutputConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsOutputConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig;
+
+                        /**
+                         * Creates a plain object from a GcsOutputConfig message. Also converts values to other types if specified.
+                         * @param message GcsOutputConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsOutputConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsOutputConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsOutputConfig {
+
+                        /** Properties of a ShardingConfig. */
+                        interface IShardingConfig {
+
+                            /** ShardingConfig pagesPerShard */
+                            pagesPerShard?: (number|null);
+
+                            /** ShardingConfig pagesOverlap */
+                            pagesOverlap?: (number|null);
+                        }
+
+                        /** Represents a ShardingConfig. */
+                        class ShardingConfig implements IShardingConfig {
+
+                            /**
+                             * Constructs a new ShardingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig);
+
+                            /** ShardingConfig pagesPerShard. */
+                            public pagesPerShard: number;
+
+                            /** ShardingConfig pagesOverlap. */
+                            public pagesOverlap: number;
+
+                            /**
+                             * Creates a new ShardingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShardingConfig instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Encodes the specified ShardingConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
+                             * @param message ShardingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShardingConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
+                             * @param message ShardingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShardingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShardingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Decodes a ShardingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShardingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Verifies a ShardingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShardingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShardingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Creates a plain object from a ShardingConfig message. Also converts values to other types if specified.
+                             * @param message ShardingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShardingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShardingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of an OcrConfig. */
+                interface IOcrConfig {
+
+                    /** OcrConfig hints */
+                    hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
+
+                    /** OcrConfig enableNativePdfParsing */
+                    enableNativePdfParsing?: (boolean|null);
+
+                    /** OcrConfig enableImageQualityScores */
+                    enableImageQualityScores?: (boolean|null);
+
+                    /** OcrConfig advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
+
+                    /** OcrConfig enableSymbol */
+                    enableSymbol?: (boolean|null);
+
+                    /** OcrConfig computeStyleInfo */
+                    computeStyleInfo?: (boolean|null);
+                }
+
+                /** Represents an OcrConfig. */
+                class OcrConfig implements IOcrConfig {
+
+                    /**
+                     * Constructs a new OcrConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IOcrConfig);
+
+                    /** OcrConfig hints. */
+                    public hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
+
+                    /** OcrConfig enableNativePdfParsing. */
+                    public enableNativePdfParsing: boolean;
+
+                    /** OcrConfig enableImageQualityScores. */
+                    public enableImageQualityScores: boolean;
+
+                    /** OcrConfig advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
+
+                    /** OcrConfig enableSymbol. */
+                    public enableSymbol: boolean;
+
+                    /** OcrConfig computeStyleInfo. */
+                    public computeStyleInfo: boolean;
+
+                    /**
+                     * Creates a new OcrConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OcrConfig instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IOcrConfig): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Encodes the specified OcrConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OcrConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Verifies an OcrConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OcrConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OcrConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Creates a plain object from an OcrConfig message. Also converts values to other types if specified.
+                     * @param message OcrConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OcrConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OcrConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OcrConfig {
+
+                    /** Properties of a Hints. */
+                    interface IHints {
+
+                        /** Hints languageHints */
+                        languageHints?: (string[]|null);
+                    }
+
+                    /** Represents a Hints. */
+                    class Hints implements IHints {
+
+                        /**
+                         * Constructs a new Hints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints);
+
+                        /** Hints languageHints. */
+                        public languageHints: string[];
+
+                        /**
+                         * Creates a new Hints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Hints instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Encodes the specified Hints message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Hints message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Verifies a Hints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Hints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Hints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Creates a plain object from a Hints message. Also converts values to other types if specified.
+                         * @param message Hints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig.Hints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Hints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Hints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a PropertyMetadata. */
+                interface IPropertyMetadata {
+
+                    /** PropertyMetadata inactive */
+                    inactive?: (boolean|null);
+                }
+
+                /** Represents a PropertyMetadata. */
+                class PropertyMetadata implements IPropertyMetadata {
+
+                    /**
+                     * Constructs a new PropertyMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IPropertyMetadata);
+
+                    /** PropertyMetadata inactive. */
+                    public inactive: boolean;
+
+                    /**
+                     * Creates a new PropertyMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IPropertyMetadata): google.cloud.documentai.v1beta3.PropertyMetadata;
+
+                    /**
+                     * Encodes the specified PropertyMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.PropertyMetadata.verify|verify} messages.
+                     * @param message PropertyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IPropertyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.PropertyMetadata.verify|verify} messages.
+                     * @param message PropertyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IPropertyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.PropertyMetadata;
+
+                    /**
+                     * Decodes a PropertyMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.PropertyMetadata;
+
+                    /**
+                     * Verifies a PropertyMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.PropertyMetadata;
+
+                    /**
+                     * Creates a plain object from a PropertyMetadata message. Also converts values to other types if specified.
+                     * @param message PropertyMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.PropertyMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PropertyMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EntityTypeMetadata. */
+                interface IEntityTypeMetadata {
+
+                    /** EntityTypeMetadata inactive */
+                    inactive?: (boolean|null);
+                }
+
+                /** Represents an EntityTypeMetadata. */
+                class EntityTypeMetadata implements IEntityTypeMetadata {
+
+                    /**
+                     * Constructs a new EntityTypeMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IEntityTypeMetadata);
+
+                    /** EntityTypeMetadata inactive. */
+                    public inactive: boolean;
+
+                    /**
+                     * Creates a new EntityTypeMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntityTypeMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IEntityTypeMetadata): google.cloud.documentai.v1beta3.EntityTypeMetadata;
+
+                    /**
+                     * Encodes the specified EntityTypeMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.EntityTypeMetadata.verify|verify} messages.
+                     * @param message EntityTypeMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IEntityTypeMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntityTypeMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.EntityTypeMetadata.verify|verify} messages.
+                     * @param message EntityTypeMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IEntityTypeMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntityTypeMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntityTypeMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.EntityTypeMetadata;
+
+                    /**
+                     * Decodes an EntityTypeMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntityTypeMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.EntityTypeMetadata;
+
+                    /**
+                     * Verifies an EntityTypeMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntityTypeMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntityTypeMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.EntityTypeMetadata;
+
+                    /**
+                     * Creates a plain object from an EntityTypeMetadata message. Also converts values to other types if specified.
+                     * @param message EntityTypeMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.EntityTypeMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntityTypeMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntityTypeMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DocumentSchema. */
+                interface IDocumentSchema {
+
+                    /** DocumentSchema displayName */
+                    displayName?: (string|null);
+
+                    /** DocumentSchema description */
+                    description?: (string|null);
+
+                    /** DocumentSchema entityTypes */
+                    entityTypes?: (google.cloud.documentai.v1beta3.DocumentSchema.IEntityType[]|null);
+
+                    /** DocumentSchema metadata */
+                    metadata?: (google.cloud.documentai.v1beta3.DocumentSchema.IMetadata|null);
+                }
+
+                /** Represents a DocumentSchema. */
+                class DocumentSchema implements IDocumentSchema {
+
+                    /**
+                     * Constructs a new DocumentSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentSchema);
+
+                    /** DocumentSchema displayName. */
+                    public displayName: string;
+
+                    /** DocumentSchema description. */
+                    public description: string;
+
+                    /** DocumentSchema entityTypes. */
+                    public entityTypes: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType[];
+
+                    /** DocumentSchema metadata. */
+                    public metadata?: (google.cloud.documentai.v1beta3.DocumentSchema.IMetadata|null);
+
+                    /**
+                     * Creates a new DocumentSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentSchema instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentSchema): google.cloud.documentai.v1beta3.DocumentSchema;
+
+                    /**
+                     * Encodes the specified DocumentSchema message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.verify|verify} messages.
+                     * @param message DocumentSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentSchema message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.verify|verify} messages.
+                     * @param message DocumentSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema;
+
+                    /**
+                     * Decodes a DocumentSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema;
+
+                    /**
+                     * Verifies a DocumentSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema;
+
+                    /**
+                     * Creates a plain object from a DocumentSchema message. Also converts values to other types if specified.
+                     * @param message DocumentSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DocumentSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DocumentSchema {
+
+                    /** Properties of an EntityType. */
+                    interface IEntityType {
+
+                        /** EntityType enumValues */
+                        enumValues?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues|null);
+
+                        /** EntityType displayName */
+                        displayName?: (string|null);
+
+                        /** EntityType name */
+                        name?: (string|null);
+
+                        /** EntityType baseTypes */
+                        baseTypes?: (string[]|null);
+
+                        /** EntityType properties */
+                        properties?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty[]|null);
+
+                        /** EntityType entityTypeMetadata */
+                        entityTypeMetadata?: (google.cloud.documentai.v1beta3.IEntityTypeMetadata|null);
+                    }
+
+                    /** Represents an EntityType. */
+                    class EntityType implements IEntityType {
+
+                        /**
+                         * Constructs a new EntityType.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType);
+
+                        /** EntityType enumValues. */
+                        public enumValues?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues|null);
+
+                        /** EntityType displayName. */
+                        public displayName: string;
+
+                        /** EntityType name. */
+                        public name: string;
+
+                        /** EntityType baseTypes. */
+                        public baseTypes: string[];
+
+                        /** EntityType properties. */
+                        public properties: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty[];
+
+                        /** EntityType entityTypeMetadata. */
+                        public entityTypeMetadata?: (google.cloud.documentai.v1beta3.IEntityTypeMetadata|null);
+
+                        /** EntityType valueSource. */
+                        public valueSource?: "enumValues";
+
+                        /**
+                         * Creates a new EntityType instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EntityType instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
+
+                        /**
+                         * Encodes the specified EntityType message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.verify|verify} messages.
+                         * @param message EntityType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EntityType message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.verify|verify} messages.
+                         * @param message EntityType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.IEntityType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EntityType message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EntityType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
+
+                        /**
+                         * Decodes an EntityType message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EntityType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
+
+                        /**
+                         * Verifies an EntityType message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EntityType message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EntityType
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType;
+
+                        /**
+                         * Creates a plain object from an EntityType message. Also converts values to other types if specified.
+                         * @param message EntityType
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EntityType to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EntityType
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EntityType {
+
+                        /** Properties of an EnumValues. */
+                        interface IEnumValues {
+
+                            /** EnumValues values */
+                            values?: (string[]|null);
+                        }
+
+                        /** Represents an EnumValues. */
+                        class EnumValues implements IEnumValues {
+
+                            /**
+                             * Constructs a new EnumValues.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues);
+
+                            /** EnumValues values. */
+                            public values: string[];
+
+                            /**
+                             * Creates a new EnumValues instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EnumValues instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
+
+                            /**
+                             * Encodes the specified EnumValues message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues.verify|verify} messages.
+                             * @param message EnumValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EnumValues message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues.verify|verify} messages.
+                             * @param message EnumValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IEnumValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EnumValues message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EnumValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
+
+                            /**
+                             * Decodes an EnumValues message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EnumValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
+
+                            /**
+                             * Verifies an EnumValues message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EnumValues message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EnumValues
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues;
+
+                            /**
+                             * Creates a plain object from an EnumValues message. Also converts values to other types if specified.
+                             * @param message EnumValues
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.EnumValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EnumValues to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EnumValues
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Property. */
+                        interface IProperty {
+
+                            /** Property name */
+                            name?: (string|null);
+
+                            /** Property valueType */
+                            valueType?: (string|null);
+
+                            /** Property occurrenceType */
+                            occurrenceType?: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|keyof typeof google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|null);
+
+                            /** Property propertyMetadata */
+                            propertyMetadata?: (google.cloud.documentai.v1beta3.IPropertyMetadata|null);
+                        }
+
+                        /** Represents a Property. */
+                        class Property implements IProperty {
+
+                            /**
+                             * Constructs a new Property.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty);
+
+                            /** Property name. */
+                            public name: string;
+
+                            /** Property valueType. */
+                            public valueType: string;
+
+                            /** Property occurrenceType. */
+                            public occurrenceType: (google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType|keyof typeof google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.OccurrenceType);
+
+                            /** Property propertyMetadata. */
+                            public propertyMetadata?: (google.cloud.documentai.v1beta3.IPropertyMetadata|null);
+
+                            /**
+                             * Creates a new Property instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Property instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
+
+                            /**
+                             * Encodes the specified Property message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.verify|verify} messages.
+                             * @param message Property message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Property message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property.verify|verify} messages.
+                             * @param message Property message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.IProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Property message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Property
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
+
+                            /**
+                             * Decodes a Property message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Property
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
+
+                            /**
+                             * Verifies a Property message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Property message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Property
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property;
+
+                            /**
+                             * Creates a plain object from a Property message. Also converts values to other types if specified.
+                             * @param message Property
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.EntityType.Property, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Property to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Property
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Property {
+
+                            /** OccurrenceType enum. */
+                            enum OccurrenceType {
+                                OCCURRENCE_TYPE_UNSPECIFIED = 0,
+                                OPTIONAL_ONCE = 1,
+                                OPTIONAL_MULTIPLE = 2,
+                                REQUIRED_ONCE = 3,
+                                REQUIRED_MULTIPLE = 4
+                            }
+                        }
+                    }
+
+                    /** Properties of a Metadata. */
+                    interface IMetadata {
+
+                        /** Metadata documentSplitter */
+                        documentSplitter?: (boolean|null);
+
+                        /** Metadata documentAllowMultipleLabels */
+                        documentAllowMultipleLabels?: (boolean|null);
+
+                        /** Metadata prefixedNamingOnProperties */
+                        prefixedNamingOnProperties?: (boolean|null);
+
+                        /** Metadata skipNamingValidation */
+                        skipNamingValidation?: (boolean|null);
+                    }
+
+                    /** Represents a Metadata. */
+                    class Metadata implements IMetadata {
+
+                        /**
+                         * Constructs a new Metadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata);
+
+                        /** Metadata documentSplitter. */
+                        public documentSplitter: boolean;
+
+                        /** Metadata documentAllowMultipleLabels. */
+                        public documentAllowMultipleLabels: boolean;
+
+                        /** Metadata prefixedNamingOnProperties. */
+                        public prefixedNamingOnProperties: boolean;
+
+                        /** Metadata skipNamingValidation. */
+                        public skipNamingValidation: boolean;
+
+                        /**
+                         * Creates a new Metadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Metadata instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
+
+                        /**
+                         * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.Metadata.verify|verify} messages.
+                         * @param message Metadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentSchema.Metadata.verify|verify} messages.
+                         * @param message Metadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentSchema.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Metadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Metadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
+
+                        /**
+                         * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Metadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
+
+                        /**
+                         * Verifies a Metadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Metadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentSchema.Metadata;
+
+                        /**
+                         * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                         * @param message Metadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.DocumentSchema.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Metadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Metadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents a DocumentProcessorService */
@@ -31167,6 +34065,9 @@ export namespace google {
                     /** ProcessRequest rawDocument */
                     rawDocument?: (google.cloud.documentai.v1beta3.IRawDocument|null);
 
+                    /** ProcessRequest gcsDocument */
+                    gcsDocument?: (google.cloud.documentai.v1beta3.IGcsDocument|null);
+
                     /** ProcessRequest name */
                     name?: (string|null);
 
@@ -31198,6 +34099,9 @@ export namespace google {
                     /** ProcessRequest rawDocument. */
                     public rawDocument?: (google.cloud.documentai.v1beta3.IRawDocument|null);
 
+                    /** ProcessRequest gcsDocument. */
+                    public gcsDocument?: (google.cloud.documentai.v1beta3.IGcsDocument|null);
+
                     /** ProcessRequest name. */
                     public name: string;
 
@@ -31214,7 +34118,7 @@ export namespace google {
                     public processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
 
                     /** ProcessRequest source. */
-                    public source?: ("inlineDocument"|"rawDocument");
+                    public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
 
                     /**
                      * Creates a new ProcessRequest instance using the specified properties.
@@ -38815,6 +41719,48 @@ export namespace google {
                     public updateDataset(request: google.cloud.documentai.v1beta3.IUpdateDatasetRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ImportDocuments.
+                     * @param request ImportDocumentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importDocuments(request: google.cloud.documentai.v1beta3.IImportDocumentsRequest, callback: google.cloud.documentai.v1beta3.DocumentService.ImportDocumentsCallback): void;
+
+                    /**
+                     * Calls ImportDocuments.
+                     * @param request ImportDocumentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importDocuments(request: google.cloud.documentai.v1beta3.IImportDocumentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDocument.
+                     * @param request GetDocumentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GetDocumentResponse
+                     */
+                    public getDocument(request: google.cloud.documentai.v1beta3.IGetDocumentRequest, callback: google.cloud.documentai.v1beta3.DocumentService.GetDocumentCallback): void;
+
+                    /**
+                     * Calls GetDocument.
+                     * @param request GetDocumentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDocument(request: google.cloud.documentai.v1beta3.IGetDocumentRequest): Promise<google.cloud.documentai.v1beta3.GetDocumentResponse>;
+
+                    /**
+                     * Calls BatchDeleteDocuments.
+                     * @param request BatchDeleteDocumentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchDeleteDocuments(request: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest, callback: google.cloud.documentai.v1beta3.DocumentService.BatchDeleteDocumentsCallback): void;
+
+                    /**
+                     * Calls BatchDeleteDocuments.
+                     * @param request BatchDeleteDocumentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeleteDocuments(request: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetDatasetSchema.
                      * @param request GetDatasetSchemaRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and DatasetSchema
@@ -38853,6 +41799,27 @@ export namespace google {
                     type UpdateDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentService|importDocuments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportDocumentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentService|getDocument}.
+                     * @param error Error, if any
+                     * @param [response] GetDocumentResponse
+                     */
+                    type GetDocumentCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.GetDocumentResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentService|batchDeleteDocuments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchDeleteDocumentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentService|getDatasetSchema}.
                      * @param error Error, if any
                      * @param [response] DatasetSchema
@@ -38865,6 +41832,14 @@ export namespace google {
                      * @param [response] DatasetSchema
                      */
                     type UpdateDatasetSchemaCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.DatasetSchema) => void;
+                }
+
+                /** DatasetSplitType enum. */
+                enum DatasetSplitType {
+                    DATASET_SPLIT_TYPE_UNSPECIFIED = 0,
+                    DATASET_SPLIT_TRAIN = 1,
+                    DATASET_SPLIT_TEST = 2,
+                    DATASET_SPLIT_UNASSIGNED = 3
                 }
 
                 /** Properties of an UpdateDatasetRequest. */
@@ -39067,6 +42042,1372 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImportDocumentsRequest. */
+                interface IImportDocumentsRequest {
+
+                    /** ImportDocumentsRequest dataset */
+                    dataset?: (string|null);
+
+                    /** ImportDocumentsRequest batchDocumentsImportConfigs */
+                    batchDocumentsImportConfigs?: (google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig[]|null);
+                }
+
+                /** Represents an ImportDocumentsRequest. */
+                class ImportDocumentsRequest implements IImportDocumentsRequest {
+
+                    /**
+                     * Constructs a new ImportDocumentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportDocumentsRequest);
+
+                    /** ImportDocumentsRequest dataset. */
+                    public dataset: string;
+
+                    /** ImportDocumentsRequest batchDocumentsImportConfigs. */
+                    public batchDocumentsImportConfigs: google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig[];
+
+                    /**
+                     * Creates a new ImportDocumentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDocumentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportDocumentsRequest): google.cloud.documentai.v1beta3.ImportDocumentsRequest;
+
+                    /**
+                     * Encodes the specified ImportDocumentsRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.verify|verify} messages.
+                     * @param message ImportDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDocumentsRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.verify|verify} messages.
+                     * @param message ImportDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDocumentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsRequest;
+
+                    /**
+                     * Decodes an ImportDocumentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsRequest;
+
+                    /**
+                     * Verifies an ImportDocumentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDocumentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDocumentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsRequest;
+
+                    /**
+                     * Creates a plain object from an ImportDocumentsRequest message. Also converts values to other types if specified.
+                     * @param message ImportDocumentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDocumentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDocumentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportDocumentsRequest {
+
+                    /** Properties of a BatchDocumentsImportConfig. */
+                    interface IBatchDocumentsImportConfig {
+
+                        /** BatchDocumentsImportConfig datasetSplit */
+                        datasetSplit?: (google.cloud.documentai.v1beta3.DatasetSplitType|keyof typeof google.cloud.documentai.v1beta3.DatasetSplitType|null);
+
+                        /** BatchDocumentsImportConfig autoSplitConfig */
+                        autoSplitConfig?: (google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig|null);
+
+                        /** BatchDocumentsImportConfig batchInputConfig */
+                        batchInputConfig?: (google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig|null);
+                    }
+
+                    /** Represents a BatchDocumentsImportConfig. */
+                    class BatchDocumentsImportConfig implements IBatchDocumentsImportConfig {
+
+                        /**
+                         * Constructs a new BatchDocumentsImportConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig);
+
+                        /** BatchDocumentsImportConfig datasetSplit. */
+                        public datasetSplit?: (google.cloud.documentai.v1beta3.DatasetSplitType|keyof typeof google.cloud.documentai.v1beta3.DatasetSplitType|null);
+
+                        /** BatchDocumentsImportConfig autoSplitConfig. */
+                        public autoSplitConfig?: (google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig|null);
+
+                        /** BatchDocumentsImportConfig batchInputConfig. */
+                        public batchInputConfig?: (google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig|null);
+
+                        /** BatchDocumentsImportConfig splitTypeConfig. */
+                        public splitTypeConfig?: ("datasetSplit"|"autoSplitConfig");
+
+                        /**
+                         * Creates a new BatchDocumentsImportConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BatchDocumentsImportConfig instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig;
+
+                        /**
+                         * Encodes the specified BatchDocumentsImportConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.verify|verify} messages.
+                         * @param message BatchDocumentsImportConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BatchDocumentsImportConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.verify|verify} messages.
+                         * @param message BatchDocumentsImportConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.IBatchDocumentsImportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BatchDocumentsImportConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BatchDocumentsImportConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig;
+
+                        /**
+                         * Decodes a BatchDocumentsImportConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BatchDocumentsImportConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig;
+
+                        /**
+                         * Verifies a BatchDocumentsImportConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BatchDocumentsImportConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BatchDocumentsImportConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig;
+
+                        /**
+                         * Creates a plain object from a BatchDocumentsImportConfig message. Also converts values to other types if specified.
+                         * @param message BatchDocumentsImportConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BatchDocumentsImportConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BatchDocumentsImportConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BatchDocumentsImportConfig {
+
+                        /** Properties of an AutoSplitConfig. */
+                        interface IAutoSplitConfig {
+
+                            /** AutoSplitConfig trainingSplitRatio */
+                            trainingSplitRatio?: (number|null);
+                        }
+
+                        /** Represents an AutoSplitConfig. */
+                        class AutoSplitConfig implements IAutoSplitConfig {
+
+                            /**
+                             * Constructs a new AutoSplitConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig);
+
+                            /** AutoSplitConfig trainingSplitRatio. */
+                            public trainingSplitRatio: number;
+
+                            /**
+                             * Creates a new AutoSplitConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AutoSplitConfig instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig;
+
+                            /**
+                             * Encodes the specified AutoSplitConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig.verify|verify} messages.
+                             * @param message AutoSplitConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AutoSplitConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig.verify|verify} messages.
+                             * @param message AutoSplitConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.IAutoSplitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AutoSplitConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AutoSplitConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig;
+
+                            /**
+                             * Decodes an AutoSplitConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AutoSplitConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig;
+
+                            /**
+                             * Verifies an AutoSplitConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AutoSplitConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AutoSplitConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig;
+
+                            /**
+                             * Creates a plain object from an AutoSplitConfig message. Also converts values to other types if specified.
+                             * @param message AutoSplitConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsRequest.BatchDocumentsImportConfig.AutoSplitConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AutoSplitConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AutoSplitConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of an ImportDocumentsResponse. */
+                interface IImportDocumentsResponse {
+                }
+
+                /** Represents an ImportDocumentsResponse. */
+                class ImportDocumentsResponse implements IImportDocumentsResponse {
+
+                    /**
+                     * Constructs a new ImportDocumentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportDocumentsResponse);
+
+                    /**
+                     * Creates a new ImportDocumentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDocumentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportDocumentsResponse): google.cloud.documentai.v1beta3.ImportDocumentsResponse;
+
+                    /**
+                     * Encodes the specified ImportDocumentsResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsResponse.verify|verify} messages.
+                     * @param message ImportDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDocumentsResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsResponse.verify|verify} messages.
+                     * @param message ImportDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDocumentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsResponse;
+
+                    /**
+                     * Decodes an ImportDocumentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsResponse;
+
+                    /**
+                     * Verifies an ImportDocumentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDocumentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDocumentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsResponse;
+
+                    /**
+                     * Creates a plain object from an ImportDocumentsResponse message. Also converts values to other types if specified.
+                     * @param message ImportDocumentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDocumentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDocumentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDocumentsMetadata. */
+                interface IImportDocumentsMetadata {
+
+                    /** ImportDocumentsMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /** ImportDocumentsMetadata individualImportStatuses */
+                    individualImportStatuses?: (google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus[]|null);
+
+                    /** ImportDocumentsMetadata importConfigValidationResults */
+                    importConfigValidationResults?: (google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult[]|null);
+
+                    /** ImportDocumentsMetadata totalDocumentCount */
+                    totalDocumentCount?: (number|null);
+                }
+
+                /** Represents an ImportDocumentsMetadata. */
+                class ImportDocumentsMetadata implements IImportDocumentsMetadata {
+
+                    /**
+                     * Constructs a new ImportDocumentsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportDocumentsMetadata);
+
+                    /** ImportDocumentsMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /** ImportDocumentsMetadata individualImportStatuses. */
+                    public individualImportStatuses: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus[];
+
+                    /** ImportDocumentsMetadata importConfigValidationResults. */
+                    public importConfigValidationResults: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult[];
+
+                    /** ImportDocumentsMetadata totalDocumentCount. */
+                    public totalDocumentCount: number;
+
+                    /**
+                     * Creates a new ImportDocumentsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDocumentsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportDocumentsMetadata): google.cloud.documentai.v1beta3.ImportDocumentsMetadata;
+
+                    /**
+                     * Encodes the specified ImportDocumentsMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.verify|verify} messages.
+                     * @param message ImportDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDocumentsMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.verify|verify} messages.
+                     * @param message ImportDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDocumentsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsMetadata;
+
+                    /**
+                     * Decodes an ImportDocumentsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsMetadata;
+
+                    /**
+                     * Verifies an ImportDocumentsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDocumentsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDocumentsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportDocumentsMetadata message. Also converts values to other types if specified.
+                     * @param message ImportDocumentsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDocumentsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDocumentsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportDocumentsMetadata {
+
+                    /** Properties of an IndividualImportStatus. */
+                    interface IIndividualImportStatus {
+
+                        /** IndividualImportStatus inputGcsSource */
+                        inputGcsSource?: (string|null);
+
+                        /** IndividualImportStatus status */
+                        status?: (google.rpc.IStatus|null);
+
+                        /** IndividualImportStatus outputDocumentId */
+                        outputDocumentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+                    }
+
+                    /** Represents an IndividualImportStatus. */
+                    class IndividualImportStatus implements IIndividualImportStatus {
+
+                        /**
+                         * Constructs a new IndividualImportStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus);
+
+                        /** IndividualImportStatus inputGcsSource. */
+                        public inputGcsSource: string;
+
+                        /** IndividualImportStatus status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /** IndividualImportStatus outputDocumentId. */
+                        public outputDocumentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+
+                        /**
+                         * Creates a new IndividualImportStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndividualImportStatus instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus;
+
+                        /**
+                         * Encodes the specified IndividualImportStatus message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus.verify|verify} messages.
+                         * @param message IndividualImportStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndividualImportStatus message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus.verify|verify} messages.
+                         * @param message IndividualImportStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IIndividualImportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndividualImportStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndividualImportStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus;
+
+                        /**
+                         * Decodes an IndividualImportStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndividualImportStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus;
+
+                        /**
+                         * Verifies an IndividualImportStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndividualImportStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndividualImportStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus;
+
+                        /**
+                         * Creates a plain object from an IndividualImportStatus message. Also converts values to other types if specified.
+                         * @param message IndividualImportStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IndividualImportStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndividualImportStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndividualImportStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ImportConfigValidationResult. */
+                    interface IImportConfigValidationResult {
+
+                        /** ImportConfigValidationResult inputGcsSource */
+                        inputGcsSource?: (string|null);
+
+                        /** ImportConfigValidationResult status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents an ImportConfigValidationResult. */
+                    class ImportConfigValidationResult implements IImportConfigValidationResult {
+
+                        /**
+                         * Constructs a new ImportConfigValidationResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult);
+
+                        /** ImportConfigValidationResult inputGcsSource. */
+                        public inputGcsSource: string;
+
+                        /** ImportConfigValidationResult status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new ImportConfigValidationResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportConfigValidationResult instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult;
+
+                        /**
+                         * Encodes the specified ImportConfigValidationResult message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult.verify|verify} messages.
+                         * @param message ImportConfigValidationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportConfigValidationResult message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult.verify|verify} messages.
+                         * @param message ImportConfigValidationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.IImportConfigValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportConfigValidationResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportConfigValidationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult;
+
+                        /**
+                         * Decodes an ImportConfigValidationResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportConfigValidationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult;
+
+                        /**
+                         * Verifies an ImportConfigValidationResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportConfigValidationResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportConfigValidationResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult;
+
+                        /**
+                         * Creates a plain object from an ImportConfigValidationResult message. Also converts values to other types if specified.
+                         * @param message ImportConfigValidationResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ImportDocumentsMetadata.ImportConfigValidationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportConfigValidationResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportConfigValidationResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GetDocumentRequest. */
+                interface IGetDocumentRequest {
+
+                    /** GetDocumentRequest dataset */
+                    dataset?: (string|null);
+
+                    /** GetDocumentRequest documentId */
+                    documentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+
+                    /** GetDocumentRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
+
+                    /** GetDocumentRequest pageRange */
+                    pageRange?: (google.cloud.documentai.v1beta3.IDocumentPageRange|null);
+                }
+
+                /** Represents a GetDocumentRequest. */
+                class GetDocumentRequest implements IGetDocumentRequest {
+
+                    /**
+                     * Constructs a new GetDocumentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGetDocumentRequest);
+
+                    /** GetDocumentRequest dataset. */
+                    public dataset: string;
+
+                    /** GetDocumentRequest documentId. */
+                    public documentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+
+                    /** GetDocumentRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
+
+                    /** GetDocumentRequest pageRange. */
+                    public pageRange?: (google.cloud.documentai.v1beta3.IDocumentPageRange|null);
+
+                    /**
+                     * Creates a new GetDocumentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDocumentRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGetDocumentRequest): google.cloud.documentai.v1beta3.GetDocumentRequest;
+
+                    /**
+                     * Encodes the specified GetDocumentRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.GetDocumentRequest.verify|verify} messages.
+                     * @param message GetDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GetDocumentRequest.verify|verify} messages.
+                     * @param message GetDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGetDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDocumentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GetDocumentRequest;
+
+                    /**
+                     * Decodes a GetDocumentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GetDocumentRequest;
+
+                    /**
+                     * Verifies a GetDocumentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDocumentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GetDocumentRequest;
+
+                    /**
+                     * Creates a plain object from a GetDocumentRequest message. Also converts values to other types if specified.
+                     * @param message GetDocumentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GetDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDocumentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDocumentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDocumentResponse. */
+                interface IGetDocumentResponse {
+
+                    /** GetDocumentResponse document */
+                    document?: (google.cloud.documentai.v1beta3.IDocument|null);
+                }
+
+                /** Represents a GetDocumentResponse. */
+                class GetDocumentResponse implements IGetDocumentResponse {
+
+                    /**
+                     * Constructs a new GetDocumentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGetDocumentResponse);
+
+                    /** GetDocumentResponse document. */
+                    public document?: (google.cloud.documentai.v1beta3.IDocument|null);
+
+                    /**
+                     * Creates a new GetDocumentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDocumentResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGetDocumentResponse): google.cloud.documentai.v1beta3.GetDocumentResponse;
+
+                    /**
+                     * Encodes the specified GetDocumentResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.GetDocumentResponse.verify|verify} messages.
+                     * @param message GetDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGetDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDocumentResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GetDocumentResponse.verify|verify} messages.
+                     * @param message GetDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGetDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDocumentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GetDocumentResponse;
+
+                    /**
+                     * Decodes a GetDocumentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GetDocumentResponse;
+
+                    /**
+                     * Verifies a GetDocumentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDocumentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDocumentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GetDocumentResponse;
+
+                    /**
+                     * Creates a plain object from a GetDocumentResponse message. Also converts values to other types if specified.
+                     * @param message GetDocumentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GetDocumentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDocumentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDocumentResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteDocumentsRequest. */
+                interface IBatchDeleteDocumentsRequest {
+
+                    /** BatchDeleteDocumentsRequest dataset */
+                    dataset?: (string|null);
+
+                    /** BatchDeleteDocumentsRequest datasetDocuments */
+                    datasetDocuments?: (google.cloud.documentai.v1beta3.IBatchDatasetDocuments|null);
+                }
+
+                /** Represents a BatchDeleteDocumentsRequest. */
+                class BatchDeleteDocumentsRequest implements IBatchDeleteDocumentsRequest {
+
+                    /**
+                     * Constructs a new BatchDeleteDocumentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest);
+
+                    /** BatchDeleteDocumentsRequest dataset. */
+                    public dataset: string;
+
+                    /** BatchDeleteDocumentsRequest datasetDocuments. */
+                    public datasetDocuments?: (google.cloud.documentai.v1beta3.IBatchDatasetDocuments|null);
+
+                    /**
+                     * Creates a new BatchDeleteDocumentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteDocumentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest): google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest;
+
+                    /**
+                     * Verifies a BatchDeleteDocumentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteDocumentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteDocumentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteDocumentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeleteDocumentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteDocumentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteDocumentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteDocumentsResponse. */
+                interface IBatchDeleteDocumentsResponse {
+                }
+
+                /** Represents a BatchDeleteDocumentsResponse. */
+                class BatchDeleteDocumentsResponse implements IBatchDeleteDocumentsResponse {
+
+                    /**
+                     * Constructs a new BatchDeleteDocumentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse);
+
+                    /**
+                     * Creates a new BatchDeleteDocumentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteDocumentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse): google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse;
+
+                    /**
+                     * Verifies a BatchDeleteDocumentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteDocumentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteDocumentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteDocumentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchDeleteDocumentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteDocumentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteDocumentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchDeleteDocumentsMetadata. */
+                interface IBatchDeleteDocumentsMetadata {
+
+                    /** BatchDeleteDocumentsMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /** BatchDeleteDocumentsMetadata individualBatchDeleteStatuses */
+                    individualBatchDeleteStatuses?: (google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus[]|null);
+
+                    /** BatchDeleteDocumentsMetadata totalDocumentCount */
+                    totalDocumentCount?: (number|null);
+
+                    /** BatchDeleteDocumentsMetadata errorDocumentCount */
+                    errorDocumentCount?: (number|null);
+                }
+
+                /** Represents a BatchDeleteDocumentsMetadata. */
+                class BatchDeleteDocumentsMetadata implements IBatchDeleteDocumentsMetadata {
+
+                    /**
+                     * Constructs a new BatchDeleteDocumentsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata);
+
+                    /** BatchDeleteDocumentsMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /** BatchDeleteDocumentsMetadata individualBatchDeleteStatuses. */
+                    public individualBatchDeleteStatuses: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus[];
+
+                    /** BatchDeleteDocumentsMetadata totalDocumentCount. */
+                    public totalDocumentCount: number;
+
+                    /** BatchDeleteDocumentsMetadata errorDocumentCount. */
+                    public errorDocumentCount: number;
+
+                    /**
+                     * Creates a new BatchDeleteDocumentsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteDocumentsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteDocumentsMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.verify|verify} messages.
+                     * @param message BatchDeleteDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata;
+
+                    /**
+                     * Decodes a BatchDeleteDocumentsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata;
+
+                    /**
+                     * Verifies a BatchDeleteDocumentsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteDocumentsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteDocumentsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteDocumentsMetadata message. Also converts values to other types if specified.
+                     * @param message BatchDeleteDocumentsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteDocumentsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchDeleteDocumentsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchDeleteDocumentsMetadata {
+
+                    /** Properties of an IndividualBatchDeleteStatus. */
+                    interface IIndividualBatchDeleteStatus {
+
+                        /** IndividualBatchDeleteStatus documentId */
+                        documentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+
+                        /** IndividualBatchDeleteStatus status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents an IndividualBatchDeleteStatus. */
+                    class IndividualBatchDeleteStatus implements IIndividualBatchDeleteStatus {
+
+                        /**
+                         * Constructs a new IndividualBatchDeleteStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus);
+
+                        /** IndividualBatchDeleteStatus documentId. */
+                        public documentId?: (google.cloud.documentai.v1beta3.IDocumentId|null);
+
+                        /** IndividualBatchDeleteStatus status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new IndividualBatchDeleteStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndividualBatchDeleteStatus instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus;
+
+                        /**
+                         * Encodes the specified IndividualBatchDeleteStatus message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus.verify|verify} messages.
+                         * @param message IndividualBatchDeleteStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndividualBatchDeleteStatus message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus.verify|verify} messages.
+                         * @param message IndividualBatchDeleteStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IIndividualBatchDeleteStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndividualBatchDeleteStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndividualBatchDeleteStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus;
+
+                        /**
+                         * Decodes an IndividualBatchDeleteStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndividualBatchDeleteStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus;
+
+                        /**
+                         * Verifies an IndividualBatchDeleteStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndividualBatchDeleteStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndividualBatchDeleteStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus;
+
+                        /**
+                         * Creates a plain object from an IndividualBatchDeleteStatus message. Also converts values to other types if specified.
+                         * @param message IndividualBatchDeleteStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata.IndividualBatchDeleteStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndividualBatchDeleteStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndividualBatchDeleteStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a GetDatasetSchemaRequest. */
                 interface IGetDatasetSchemaRequest {
 
@@ -39267,6 +43608,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateDatasetSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DocumentPageRange. */
+                interface IDocumentPageRange {
+
+                    /** DocumentPageRange start */
+                    start?: (number|null);
+
+                    /** DocumentPageRange end */
+                    end?: (number|null);
+                }
+
+                /** Represents a DocumentPageRange. */
+                class DocumentPageRange implements IDocumentPageRange {
+
+                    /**
+                     * Constructs a new DocumentPageRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDocumentPageRange);
+
+                    /** DocumentPageRange start. */
+                    public start: number;
+
+                    /** DocumentPageRange end. */
+                    public end: number;
+
+                    /**
+                     * Creates a new DocumentPageRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentPageRange instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDocumentPageRange): google.cloud.documentai.v1beta3.DocumentPageRange;
+
+                    /**
+                     * Encodes the specified DocumentPageRange message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentPageRange.verify|verify} messages.
+                     * @param message DocumentPageRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDocumentPageRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentPageRange message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentPageRange.verify|verify} messages.
+                     * @param message DocumentPageRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDocumentPageRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentPageRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentPageRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentPageRange;
+
+                    /**
+                     * Decodes a DocumentPageRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentPageRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentPageRange;
+
+                    /**
+                     * Verifies a DocumentPageRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentPageRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentPageRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentPageRange;
+
+                    /**
+                     * Creates a plain object from a DocumentPageRange message. Also converts values to other types if specified.
+                     * @param message DocumentPageRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DocumentPageRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentPageRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DocumentPageRange
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

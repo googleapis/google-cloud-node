@@ -633,6 +633,8 @@ export class DocumentProcessorServiceClient {
    *   An inline document proto.
    * @param {google.cloud.documentai.v1beta3.RawDocument} request.rawDocument
    *   A raw document content (bytes).
+   * @param {google.cloud.documentai.v1beta3.GcsDocument} request.gcsDocument
+   *   A raw document on Google Cloud Storage.
    * @param {string} request.name
    *   Required. The resource name of the
    *   {@link google.cloud.documentai.v1beta3.Processor|Processor} or

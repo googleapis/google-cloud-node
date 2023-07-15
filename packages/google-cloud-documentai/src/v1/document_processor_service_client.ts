@@ -612,6 +612,8 @@ export class DocumentProcessorServiceClient {
    *   An inline document proto.
    * @param {google.cloud.documentai.v1.RawDocument} request.rawDocument
    *   A raw document content (bytes).
+   * @param {google.cloud.documentai.v1.GcsDocument} request.gcsDocument
+   *   A raw document on Google Cloud Storage.
    * @param {string} request.name
    *   Required. The resource name of the
    *   {@link google.cloud.documentai.v1.Processor|Processor} or
@@ -631,6 +633,8 @@ export class DocumentProcessorServiceClient {
    *   {@link google.cloud.documentai.v1.ProcessResponse.document|ProcessResponse.document}
    *   output. Only supports top-level document and pages field, so it must be in
    *   the form of `{document_field_name}` or `pages.{page_field_name}`.
+   * @param {google.cloud.documentai.v1.ProcessOptions} request.processOptions
+   *   Inference-time options for the process API
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1286,6 +1290,8 @@ export class DocumentProcessorServiceClient {
    * @param {boolean} request.skipHumanReview
    *   Whether human review should be skipped for this request. Default to
    *   `false`.
+   * @param {google.cloud.documentai.v1.ProcessOptions} request.processOptions
+   *   Inference-time options for the process API
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1424,6 +1430,8 @@ export class DocumentProcessorServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions} request.customDocumentExtractionOptions
+   *   Options to control Custom Document Extraction (CDE) Processor.
    * @param {string} request.parent
    *   Required. The parent (project, location and processor) to create the new
    *   version for. Format:

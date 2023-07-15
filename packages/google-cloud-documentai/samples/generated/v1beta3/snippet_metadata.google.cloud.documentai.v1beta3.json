@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -38,6 +38,10 @@
                     {
                         "name": "raw_document",
                         "type": ".google.cloud.documentai.v1beta3.RawDocument"
+                    },
+                    {
+                        "name": "gcs_document",
+                        "type": ".google.cloud.documentai.v1beta3.GcsDocument"
                     },
                     {
                         "name": "name",
@@ -1104,6 +1108,146 @@
                 "method": {
                     "shortName": "UpdateDataset",
                     "fullName": "google.cloud.documentai.v1beta3.DocumentService.UpdateDataset",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_ImportDocuments_async",
+            "title": "DocumentProcessorService importDocuments Sample",
+            "origin": "API_DEFINITION",
+            "description": " Import documents into a dataset.",
+            "canonical": true,
+            "file": "document_service.import_documents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportDocuments",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.ImportDocuments",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "batch_documents_import_configs",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportDocuments",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.ImportDocuments",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_GetDocument_async",
+            "title": "DocumentProcessorService getDocument Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns relevant fields present in the requested document.",
+            "canonical": true,
+            "file": "document_service.get_document.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDocument",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.GetDocument",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "document_id",
+                        "type": ".google.cloud.documentai.v1beta3.DocumentId"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "page_range",
+                        "type": ".google.cloud.documentai.v1beta3.DocumentPageRange"
+                    }
+                ],
+                "resultType": ".google.cloud.documentai.v1beta3.GetDocumentResponse",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "GetDocument",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.GetDocument",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async",
+            "title": "DocumentProcessorService batchDeleteDocuments Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a set of documents.",
+            "canonical": true,
+            "file": "document_service.batch_delete_documents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchDeleteDocuments",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentService.BatchDeleteDocuments",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "dataset_documents",
+                        "type": ".google.cloud.documentai.v1beta3.BatchDatasetDocuments"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchDeleteDocuments",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentService.BatchDeleteDocuments",
                     "service": {
                         "shortName": "DocumentService",
                         "fullName": "google.cloud.documentai.v1beta3.DocumentService"

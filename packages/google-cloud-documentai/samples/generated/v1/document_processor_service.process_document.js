@@ -37,6 +37,10 @@ function main(name) {
    */
   // const rawDocument = {}
   /**
+   *  A raw document on Google Cloud Storage.
+   */
+  // const gcsDocument = {}
+  /**
    *  Required. The resource name of the
    *  Processor google.cloud.documentai.v1.Processor  or
    *  ProcessorVersion google.cloud.documentai.v1.ProcessorVersion 
@@ -61,6 +65,10 @@ function main(name) {
    *  the form of `{document_field_name}` or `pages.{page_field_name}`.
    */
   // const fieldMask = {}
+  /**
+   *  Inference-time options for the process API
+   */
+  // const processOptions = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1;
