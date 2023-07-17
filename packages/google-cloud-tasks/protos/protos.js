@@ -8077,6 +8077,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.tasks.v2beta2.CloudTasks|uploadQueueYaml}.
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @typedef UploadQueueYamlCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls UploadQueueYaml.
+                         * @function uploadQueueYaml
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest} request UploadQueueYamlRequest message or plain object
+                         * @param {google.cloud.tasks.v2beta2.CloudTasks.UploadQueueYamlCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudTasks.prototype.uploadQueueYaml = function uploadQueueYaml(request, callback) {
+                            return this.rpcCall(uploadQueueYaml, $root.google.cloud.tasks.v2beta2.UploadQueueYamlRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "UploadQueueYaml" });
+    
+                        /**
+                         * Calls UploadQueueYaml.
+                         * @function uploadQueueYaml
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest} request UploadQueueYamlRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.tasks.v2beta2.CloudTasks|getIamPolicy}.
                          * @memberof google.cloud.tasks.v2beta2.CloudTasks
                          * @typedef GetIamPolicyCallback
@@ -8469,6 +8502,39 @@
                          * @instance
                          * @param {google.cloud.tasks.v2beta2.IRunTaskRequest} request RunTaskRequest message or plain object
                          * @returns {Promise<google.cloud.tasks.v2beta2.Task>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tasks.v2beta2.CloudTasks|bufferTask}.
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @typedef BufferTaskCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.tasks.v2beta2.BufferTaskResponse} [response] BufferTaskResponse
+                         */
+    
+                        /**
+                         * Calls BufferTask.
+                         * @function bufferTask
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest} request BufferTaskRequest message or plain object
+                         * @param {google.cloud.tasks.v2beta2.CloudTasks.BufferTaskCallback} callback Node-style callback called with the error, if any, and BufferTaskResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudTasks.prototype.bufferTask = function bufferTask(request, callback) {
+                            return this.rpcCall(bufferTask, $root.google.cloud.tasks.v2beta2.BufferTaskRequest, $root.google.cloud.tasks.v2beta2.BufferTaskResponse, request, callback);
+                        }, "name", { value: "BufferTask" });
+    
+                        /**
+                         * Calls BufferTask.
+                         * @function bufferTask
+                         * @memberof google.cloud.tasks.v2beta2.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest} request BufferTaskRequest message or plain object
+                         * @returns {Promise<google.cloud.tasks.v2beta2.BufferTaskResponse>} Promise
                          * @variation 2
                          */
     
@@ -10535,6 +10601,257 @@
                         };
     
                         return ResumeQueueRequest;
+                    })();
+    
+                    v2beta2.UploadQueueYamlRequest = (function() {
+    
+                        /**
+                         * Properties of an UploadQueueYamlRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IUploadQueueYamlRequest
+                         * @property {string|null} [appId] UploadQueueYamlRequest appId
+                         * @property {google.api.IHttpBody|null} [httpBody] UploadQueueYamlRequest httpBody
+                         */
+    
+                        /**
+                         * Constructs a new UploadQueueYamlRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents an UploadQueueYamlRequest.
+                         * @implements IUploadQueueYamlRequest
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest=} [properties] Properties to set
+                         */
+                        function UploadQueueYamlRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadQueueYamlRequest appId.
+                         * @member {string} appId
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @instance
+                         */
+                        UploadQueueYamlRequest.prototype.appId = "";
+    
+                        /**
+                         * UploadQueueYamlRequest httpBody.
+                         * @member {google.api.IHttpBody|null|undefined} httpBody
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @instance
+                         */
+                        UploadQueueYamlRequest.prototype.httpBody = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UploadQueueYamlRequest _httpBody.
+                         * @member {"httpBody"|undefined} _httpBody
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @instance
+                         */
+                        Object.defineProperty(UploadQueueYamlRequest.prototype, "_httpBody", {
+                            get: $util.oneOfGetter($oneOfFields = ["httpBody"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UploadQueueYamlRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.UploadQueueYamlRequest} UploadQueueYamlRequest instance
+                         */
+                        UploadQueueYamlRequest.create = function create(properties) {
+                            return new UploadQueueYamlRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadQueueYamlRequest message. Does not implicitly {@link google.cloud.tasks.v2beta2.UploadQueueYamlRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest} message UploadQueueYamlRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadQueueYamlRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.appId != null && Object.hasOwnProperty.call(message, "appId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.appId);
+                            if (message.httpBody != null && Object.hasOwnProperty.call(message, "httpBody"))
+                                $root.google.api.HttpBody.encode(message.httpBody, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadQueueYamlRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.UploadQueueYamlRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUploadQueueYamlRequest} message UploadQueueYamlRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadQueueYamlRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadQueueYamlRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.UploadQueueYamlRequest} UploadQueueYamlRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadQueueYamlRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.UploadQueueYamlRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.appId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.httpBody = $root.google.api.HttpBody.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadQueueYamlRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.UploadQueueYamlRequest} UploadQueueYamlRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadQueueYamlRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadQueueYamlRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadQueueYamlRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                if (!$util.isString(message.appId))
+                                    return "appId: string expected";
+                            if (message.httpBody != null && message.hasOwnProperty("httpBody")) {
+                                properties._httpBody = 1;
+                                {
+                                    var error = $root.google.api.HttpBody.verify(message.httpBody);
+                                    if (error)
+                                        return "httpBody." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadQueueYamlRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.UploadQueueYamlRequest} UploadQueueYamlRequest
+                         */
+                        UploadQueueYamlRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.UploadQueueYamlRequest)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.UploadQueueYamlRequest();
+                            if (object.appId != null)
+                                message.appId = String(object.appId);
+                            if (object.httpBody != null) {
+                                if (typeof object.httpBody !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.UploadQueueYamlRequest.httpBody: object expected");
+                                message.httpBody = $root.google.api.HttpBody.fromObject(object.httpBody);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadQueueYamlRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.UploadQueueYamlRequest} message UploadQueueYamlRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadQueueYamlRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.appId = "";
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                object.appId = message.appId;
+                            if (message.httpBody != null && message.hasOwnProperty("httpBody")) {
+                                object.httpBody = $root.google.api.HttpBody.toObject(message.httpBody, options);
+                                if (options.oneofs)
+                                    object._httpBody = "httpBody";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadQueueYamlRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadQueueYamlRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadQueueYamlRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.UploadQueueYamlRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadQueueYamlRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.UploadQueueYamlRequest";
+                        };
+    
+                        return UploadQueueYamlRequest;
                     })();
     
                     v2beta2.ListTasksRequest = (function() {
@@ -13433,6 +13750,469 @@
                         return RunTaskRequest;
                     })();
     
+                    v2beta2.BufferTaskRequest = (function() {
+    
+                        /**
+                         * Properties of a BufferTaskRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IBufferTaskRequest
+                         * @property {string|null} [queue] BufferTaskRequest queue
+                         * @property {string|null} [taskId] BufferTaskRequest taskId
+                         * @property {google.api.IHttpBody|null} [body] BufferTaskRequest body
+                         */
+    
+                        /**
+                         * Constructs a new BufferTaskRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a BufferTaskRequest.
+                         * @implements IBufferTaskRequest
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest=} [properties] Properties to set
+                         */
+                        function BufferTaskRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BufferTaskRequest queue.
+                         * @member {string} queue
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.queue = "";
+    
+                        /**
+                         * BufferTaskRequest taskId.
+                         * @member {string} taskId
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.taskId = "";
+    
+                        /**
+                         * BufferTaskRequest body.
+                         * @member {google.api.IHttpBody|null|undefined} body
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.body = null;
+    
+                        /**
+                         * Creates a new BufferTaskRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskRequest} BufferTaskRequest instance
+                         */
+                        BufferTaskRequest.create = function create(properties) {
+                            return new BufferTaskRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskRequest message. Does not implicitly {@link google.cloud.tasks.v2beta2.BufferTaskRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest} message BufferTaskRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queue != null && Object.hasOwnProperty.call(message, "queue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queue);
+                            if (message.taskId != null && Object.hasOwnProperty.call(message, "taskId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.taskId);
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.api.HttpBody.encode(message.body, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.BufferTaskRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskRequest} message BufferTaskRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskRequest} BufferTaskRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.BufferTaskRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.queue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.taskId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.body = $root.google.api.HttpBody.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskRequest} BufferTaskRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BufferTaskRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BufferTaskRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queue != null && message.hasOwnProperty("queue"))
+                                if (!$util.isString(message.queue))
+                                    return "queue: string expected";
+                            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                                if (!$util.isString(message.taskId))
+                                    return "taskId: string expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.api.HttpBody.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BufferTaskRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskRequest} BufferTaskRequest
+                         */
+                        BufferTaskRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.BufferTaskRequest)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.BufferTaskRequest();
+                            if (object.queue != null)
+                                message.queue = String(object.queue);
+                            if (object.taskId != null)
+                                message.taskId = String(object.taskId);
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.BufferTaskRequest.body: object expected");
+                                message.body = $root.google.api.HttpBody.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BufferTaskRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.BufferTaskRequest} message BufferTaskRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BufferTaskRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.queue = "";
+                                object.taskId = "";
+                                object.body = null;
+                            }
+                            if (message.queue != null && message.hasOwnProperty("queue"))
+                                object.queue = message.queue;
+                            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                                object.taskId = message.taskId;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.api.HttpBody.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BufferTaskRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BufferTaskRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BufferTaskRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BufferTaskRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.BufferTaskRequest";
+                        };
+    
+                        return BufferTaskRequest;
+                    })();
+    
+                    v2beta2.BufferTaskResponse = (function() {
+    
+                        /**
+                         * Properties of a BufferTaskResponse.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IBufferTaskResponse
+                         * @property {google.cloud.tasks.v2beta2.ITask|null} [task] BufferTaskResponse task
+                         */
+    
+                        /**
+                         * Constructs a new BufferTaskResponse.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a BufferTaskResponse.
+                         * @implements IBufferTaskResponse
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskResponse=} [properties] Properties to set
+                         */
+                        function BufferTaskResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BufferTaskResponse task.
+                         * @member {google.cloud.tasks.v2beta2.ITask|null|undefined} task
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @instance
+                         */
+                        BufferTaskResponse.prototype.task = null;
+    
+                        /**
+                         * Creates a new BufferTaskResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskResponse=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskResponse} BufferTaskResponse instance
+                         */
+                        BufferTaskResponse.create = function create(properties) {
+                            return new BufferTaskResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskResponse message. Does not implicitly {@link google.cloud.tasks.v2beta2.BufferTaskResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskResponse} message BufferTaskResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.task != null && Object.hasOwnProperty.call(message, "task"))
+                                $root.google.cloud.tasks.v2beta2.Task.encode(message.task, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskResponse message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.BufferTaskResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IBufferTaskResponse} message BufferTaskResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskResponse} BufferTaskResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.BufferTaskResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.task = $root.google.cloud.tasks.v2beta2.Task.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskResponse} BufferTaskResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BufferTaskResponse message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BufferTaskResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.task != null && message.hasOwnProperty("task")) {
+                                var error = $root.google.cloud.tasks.v2beta2.Task.verify(message.task);
+                                if (error)
+                                    return "task." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BufferTaskResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.BufferTaskResponse} BufferTaskResponse
+                         */
+                        BufferTaskResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.BufferTaskResponse)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.BufferTaskResponse();
+                            if (object.task != null) {
+                                if (typeof object.task !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.BufferTaskResponse.task: object expected");
+                                message.task = $root.google.cloud.tasks.v2beta2.Task.fromObject(object.task);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BufferTaskResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.BufferTaskResponse} message BufferTaskResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BufferTaskResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.task = null;
+                            if (message.task != null && message.hasOwnProperty("task"))
+                                object.task = $root.google.cloud.tasks.v2beta2.Task.toObject(message.task, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BufferTaskResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BufferTaskResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BufferTaskResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.BufferTaskResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BufferTaskResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.BufferTaskResponse";
+                        };
+    
+                        return BufferTaskResponse;
+                    })();
+    
                     v2beta2.Queue = (function() {
     
                         /**
@@ -13442,6 +14222,7 @@
                          * @property {string|null} [name] Queue name
                          * @property {google.cloud.tasks.v2beta2.IAppEngineHttpTarget|null} [appEngineHttpTarget] Queue appEngineHttpTarget
                          * @property {google.cloud.tasks.v2beta2.IPullTarget|null} [pullTarget] Queue pullTarget
+                         * @property {google.cloud.tasks.v2beta2.IHttpTarget|null} [httpTarget] Queue httpTarget
                          * @property {google.cloud.tasks.v2beta2.IRateLimits|null} [rateLimits] Queue rateLimits
                          * @property {google.cloud.tasks.v2beta2.IRetryConfig|null} [retryConfig] Queue retryConfig
                          * @property {google.cloud.tasks.v2beta2.Queue.State|null} [state] Queue state
@@ -13489,6 +14270,14 @@
                          * @instance
                          */
                         Queue.prototype.pullTarget = null;
+    
+                        /**
+                         * Queue httpTarget.
+                         * @member {google.cloud.tasks.v2beta2.IHttpTarget|null|undefined} httpTarget
+                         * @memberof google.cloud.tasks.v2beta2.Queue
+                         * @instance
+                         */
+                        Queue.prototype.httpTarget = null;
     
                         /**
                          * Queue rateLimits.
@@ -13551,12 +14340,12 @@
     
                         /**
                          * Queue targetType.
-                         * @member {"appEngineHttpTarget"|"pullTarget"|undefined} targetType
+                         * @member {"appEngineHttpTarget"|"pullTarget"|"httpTarget"|undefined} targetType
                          * @memberof google.cloud.tasks.v2beta2.Queue
                          * @instance
                          */
                         Object.defineProperty(Queue.prototype, "targetType", {
-                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpTarget", "pullTarget"]),
+                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpTarget", "pullTarget", "httpTarget"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13604,6 +14393,8 @@
                                 $root.google.protobuf.Duration.encode(message.tombstoneTtl, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
                                 $root.google.cloud.tasks.v2beta2.QueueStats.encode(message.stats, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.httpTarget != null && Object.hasOwnProperty.call(message, "httpTarget"))
+                                $root.google.cloud.tasks.v2beta2.HttpTarget.encode(message.httpTarget, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -13648,6 +14439,10 @@
                                     }
                                 case 4: {
                                         message.pullTarget = $root.google.cloud.tasks.v2beta2.PullTarget.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.httpTarget = $root.google.cloud.tasks.v2beta2.HttpTarget.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -13735,6 +14530,16 @@
                                         return "pullTarget." + error;
                                 }
                             }
+                            if (message.httpTarget != null && message.hasOwnProperty("httpTarget")) {
+                                if (properties.targetType === 1)
+                                    return "targetType: multiple values";
+                                properties.targetType = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.HttpTarget.verify(message.httpTarget);
+                                    if (error)
+                                        return "httpTarget." + error;
+                                }
+                            }
                             if (message.rateLimits != null && message.hasOwnProperty("rateLimits")) {
                                 var error = $root.google.cloud.tasks.v2beta2.RateLimits.verify(message.rateLimits);
                                 if (error)
@@ -13801,6 +14606,11 @@
                                 if (typeof object.pullTarget !== "object")
                                     throw TypeError(".google.cloud.tasks.v2beta2.Queue.pullTarget: object expected");
                                 message.pullTarget = $root.google.cloud.tasks.v2beta2.PullTarget.fromObject(object.pullTarget);
+                            }
+                            if (object.httpTarget != null) {
+                                if (typeof object.httpTarget !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.Queue.httpTarget: object expected");
+                                message.httpTarget = $root.google.cloud.tasks.v2beta2.HttpTarget.fromObject(object.httpTarget);
                             }
                             if (object.rateLimits != null) {
                                 if (typeof object.rateLimits !== "object")
@@ -13908,6 +14718,11 @@
                                 object.tombstoneTtl = $root.google.protobuf.Duration.toObject(message.tombstoneTtl, options);
                             if (message.stats != null && message.hasOwnProperty("stats"))
                                 object.stats = $root.google.cloud.tasks.v2beta2.QueueStats.toObject(message.stats, options);
+                            if (message.httpTarget != null && message.hasOwnProperty("httpTarget")) {
+                                object.httpTarget = $root.google.cloud.tasks.v2beta2.HttpTarget.toObject(message.httpTarget, options);
+                                if (options.oneofs)
+                                    object.targetType = "httpTarget";
+                            }
                             return object;
                         };
     
@@ -15751,6 +16566,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.appEngineRouting != null && message.hasOwnProperty("appEngineRouting")) {
@@ -15817,6 +16634,14 @@
                             case "DELETE":
                             case 5:
                                 message.httpMethod = 5;
+                                break;
+                            case "PATCH":
+                            case 6:
+                                message.httpMethod = 6;
+                                break;
+                            case "OPTIONS":
+                            case 7:
+                                message.httpMethod = 7;
                                 break;
                             }
                             if (object.appEngineRouting != null) {
@@ -16187,6 +17012,2628 @@
                         return AppEngineRouting;
                     })();
     
+                    v2beta2.HttpRequest = (function() {
+    
+                        /**
+                         * Properties of a HttpRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IHttpRequest
+                         * @property {string|null} [url] HttpRequest url
+                         * @property {google.cloud.tasks.v2beta2.HttpMethod|null} [httpMethod] HttpRequest httpMethod
+                         * @property {Object.<string,string>|null} [headers] HttpRequest headers
+                         * @property {Uint8Array|null} [body] HttpRequest body
+                         * @property {google.cloud.tasks.v2beta2.IOAuthToken|null} [oauthToken] HttpRequest oauthToken
+                         * @property {google.cloud.tasks.v2beta2.IOidcToken|null} [oidcToken] HttpRequest oidcToken
+                         */
+    
+                        /**
+                         * Constructs a new HttpRequest.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a HttpRequest.
+                         * @implements IHttpRequest
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IHttpRequest=} [properties] Properties to set
+                         */
+                        function HttpRequest(properties) {
+                            this.headers = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpRequest url.
+                         * @member {string} url
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.url = "";
+    
+                        /**
+                         * HttpRequest httpMethod.
+                         * @member {google.cloud.tasks.v2beta2.HttpMethod} httpMethod
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.httpMethod = 0;
+    
+                        /**
+                         * HttpRequest headers.
+                         * @member {Object.<string,string>} headers
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.headers = $util.emptyObject;
+    
+                        /**
+                         * HttpRequest body.
+                         * @member {Uint8Array} body
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.body = $util.newBuffer([]);
+    
+                        /**
+                         * HttpRequest oauthToken.
+                         * @member {google.cloud.tasks.v2beta2.IOAuthToken|null|undefined} oauthToken
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.oauthToken = null;
+    
+                        /**
+                         * HttpRequest oidcToken.
+                         * @member {google.cloud.tasks.v2beta2.IOidcToken|null|undefined} oidcToken
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.oidcToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * HttpRequest authorizationHeader.
+                         * @member {"oauthToken"|"oidcToken"|undefined} authorizationHeader
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         */
+                        Object.defineProperty(HttpRequest.prototype, "authorizationHeader", {
+                            get: $util.oneOfGetter($oneOfFields = ["oauthToken", "oidcToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new HttpRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.HttpRequest} HttpRequest instance
+                         */
+                        HttpRequest.create = function create(properties) {
+                            return new HttpRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpRequest message. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpRequest} message HttpRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.httpMethod != null && Object.hasOwnProperty.call(message, "httpMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.httpMethod);
+                            if (message.headers != null && Object.hasOwnProperty.call(message, "headers"))
+                                for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.body);
+                            if (message.oauthToken != null && Object.hasOwnProperty.call(message, "oauthToken"))
+                                $root.google.cloud.tasks.v2beta2.OAuthToken.encode(message.oauthToken, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.oidcToken != null && Object.hasOwnProperty.call(message, "oidcToken"))
+                                $root.google.cloud.tasks.v2beta2.OidcToken.encode(message.oidcToken, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpRequest} message HttpRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.HttpRequest} HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.HttpRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.httpMethod = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.headers === $util.emptyObject)
+                                            message.headers = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.headers[key] = value;
+                                        break;
+                                    }
+                                case 4: {
+                                        message.body = reader.bytes();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.HttpRequest} HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                switch (message.httpMethod) {
+                                default:
+                                    return "httpMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!$util.isObject(message.headers))
+                                    return "headers: object expected";
+                                var key = Object.keys(message.headers);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.headers[key[i]]))
+                                        return "headers: string{k:string} expected";
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                if (!(message.body && typeof message.body.length === "number" || $util.isString(message.body)))
+                                    return "body: buffer expected";
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.OAuthToken.verify(message.oauthToken);
+                                    if (error)
+                                        return "oauthToken." + error;
+                                }
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                if (properties.authorizationHeader === 1)
+                                    return "authorizationHeader: multiple values";
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.OidcToken.verify(message.oidcToken);
+                                    if (error)
+                                        return "oidcToken." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.HttpRequest} HttpRequest
+                         */
+                        HttpRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.HttpRequest)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.HttpRequest();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            switch (object.httpMethod) {
+                            default:
+                                if (typeof object.httpMethod === "number") {
+                                    message.httpMethod = object.httpMethod;
+                                    break;
+                                }
+                                break;
+                            case "HTTP_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.httpMethod = 0;
+                                break;
+                            case "POST":
+                            case 1:
+                                message.httpMethod = 1;
+                                break;
+                            case "GET":
+                            case 2:
+                                message.httpMethod = 2;
+                                break;
+                            case "HEAD":
+                            case 3:
+                                message.httpMethod = 3;
+                                break;
+                            case "PUT":
+                            case 4:
+                                message.httpMethod = 4;
+                                break;
+                            case "DELETE":
+                            case 5:
+                                message.httpMethod = 5;
+                                break;
+                            case "PATCH":
+                            case 6:
+                                message.httpMethod = 6;
+                                break;
+                            case "OPTIONS":
+                            case 7:
+                                message.httpMethod = 7;
+                                break;
+                            }
+                            if (object.headers) {
+                                if (typeof object.headers !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpRequest.headers: object expected");
+                                message.headers = {};
+                                for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                    message.headers[keys[i]] = String(object.headers[keys[i]]);
+                            }
+                            if (object.body != null)
+                                if (typeof object.body === "string")
+                                    $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
+                                else if (object.body.length >= 0)
+                                    message.body = object.body;
+                            if (object.oauthToken != null) {
+                                if (typeof object.oauthToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpRequest.oauthToken: object expected");
+                                message.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.fromObject(object.oauthToken);
+                            }
+                            if (object.oidcToken != null) {
+                                if (typeof object.oidcToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpRequest.oidcToken: object expected");
+                                message.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.fromObject(object.oidcToken);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.HttpRequest} message HttpRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.headers = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.httpMethod = options.enums === String ? "HTTP_METHOD_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.body = "";
+                                else {
+                                    object.body = [];
+                                    if (options.bytes !== Array)
+                                        object.body = $util.newBuffer(object.body);
+                                }
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                object.httpMethod = options.enums === String ? $root.google.cloud.tasks.v2beta2.HttpMethod[message.httpMethod] === undefined ? message.httpMethod : $root.google.cloud.tasks.v2beta2.HttpMethod[message.httpMethod] : message.httpMethod;
+                            var keys2;
+                            if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                object.headers = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.headers[keys2[j]] = message.headers[keys2[j]];
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = options.bytes === String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === Array ? Array.prototype.slice.call(message.body) : message.body;
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                object.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.toObject(message.oauthToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oauthToken";
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                object.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.toObject(message.oidcToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oidcToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HttpRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.HttpRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HttpRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.HttpRequest";
+                        };
+    
+                        return HttpRequest;
+                    })();
+    
+                    v2beta2.PathOverride = (function() {
+    
+                        /**
+                         * Properties of a PathOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IPathOverride
+                         * @property {string|null} [path] PathOverride path
+                         */
+    
+                        /**
+                         * Constructs a new PathOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a PathOverride.
+                         * @implements IPathOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IPathOverride=} [properties] Properties to set
+                         */
+                        function PathOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PathOverride path.
+                         * @member {string} path
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @instance
+                         */
+                        PathOverride.prototype.path = "";
+    
+                        /**
+                         * Creates a new PathOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IPathOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.PathOverride} PathOverride instance
+                         */
+                        PathOverride.create = function create(properties) {
+                            return new PathOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PathOverride message. Does not implicitly {@link google.cloud.tasks.v2beta2.PathOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IPathOverride} message PathOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PathOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.PathOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IPathOverride} message PathOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PathOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.PathOverride} PathOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.PathOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PathOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.PathOverride} PathOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PathOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PathOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PathOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.PathOverride} PathOverride
+                         */
+                        PathOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.PathOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.PathOverride();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PathOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.PathOverride} message PathOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PathOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.path = "";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PathOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PathOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PathOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.PathOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PathOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.PathOverride";
+                        };
+    
+                        return PathOverride;
+                    })();
+    
+                    v2beta2.QueryOverride = (function() {
+    
+                        /**
+                         * Properties of a QueryOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IQueryOverride
+                         * @property {string|null} [queryParams] QueryOverride queryParams
+                         */
+    
+                        /**
+                         * Constructs a new QueryOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a QueryOverride.
+                         * @implements IQueryOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IQueryOverride=} [properties] Properties to set
+                         */
+                        function QueryOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOverride queryParams.
+                         * @member {string} queryParams
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @instance
+                         */
+                        QueryOverride.prototype.queryParams = "";
+    
+                        /**
+                         * Creates a new QueryOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IQueryOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.QueryOverride} QueryOverride instance
+                         */
+                        QueryOverride.create = function create(properties) {
+                            return new QueryOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOverride message. Does not implicitly {@link google.cloud.tasks.v2beta2.QueryOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IQueryOverride} message QueryOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queryParams != null && Object.hasOwnProperty.call(message, "queryParams"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryParams);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.QueryOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IQueryOverride} message QueryOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.QueryOverride} QueryOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.QueryOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.queryParams = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.QueryOverride} QueryOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queryParams != null && message.hasOwnProperty("queryParams"))
+                                if (!$util.isString(message.queryParams))
+                                    return "queryParams: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.QueryOverride} QueryOverride
+                         */
+                        QueryOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.QueryOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.QueryOverride();
+                            if (object.queryParams != null)
+                                message.queryParams = String(object.queryParams);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.QueryOverride} message QueryOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.queryParams = "";
+                            if (message.queryParams != null && message.hasOwnProperty("queryParams"))
+                                object.queryParams = message.queryParams;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.QueryOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.QueryOverride";
+                        };
+    
+                        return QueryOverride;
+                    })();
+    
+                    v2beta2.UriOverride = (function() {
+    
+                        /**
+                         * Properties of an UriOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IUriOverride
+                         * @property {google.cloud.tasks.v2beta2.UriOverride.Scheme|null} [scheme] UriOverride scheme
+                         * @property {string|null} [host] UriOverride host
+                         * @property {number|Long|null} [port] UriOverride port
+                         * @property {google.cloud.tasks.v2beta2.IPathOverride|null} [pathOverride] UriOverride pathOverride
+                         * @property {google.cloud.tasks.v2beta2.IQueryOverride|null} [queryOverride] UriOverride queryOverride
+                         * @property {google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode|null} [uriOverrideEnforceMode] UriOverride uriOverrideEnforceMode
+                         */
+    
+                        /**
+                         * Constructs a new UriOverride.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents an UriOverride.
+                         * @implements IUriOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IUriOverride=} [properties] Properties to set
+                         */
+                        function UriOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UriOverride scheme.
+                         * @member {google.cloud.tasks.v2beta2.UriOverride.Scheme|null|undefined} scheme
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.scheme = null;
+    
+                        /**
+                         * UriOverride host.
+                         * @member {string|null|undefined} host
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.host = null;
+    
+                        /**
+                         * UriOverride port.
+                         * @member {number|Long|null|undefined} port
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.port = null;
+    
+                        /**
+                         * UriOverride pathOverride.
+                         * @member {google.cloud.tasks.v2beta2.IPathOverride|null|undefined} pathOverride
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.pathOverride = null;
+    
+                        /**
+                         * UriOverride queryOverride.
+                         * @member {google.cloud.tasks.v2beta2.IQueryOverride|null|undefined} queryOverride
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.queryOverride = null;
+    
+                        /**
+                         * UriOverride uriOverrideEnforceMode.
+                         * @member {google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode} uriOverrideEnforceMode
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.uriOverrideEnforceMode = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UriOverride _scheme.
+                         * @member {"scheme"|undefined} _scheme
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_scheme", {
+                            get: $util.oneOfGetter($oneOfFields = ["scheme"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UriOverride _host.
+                         * @member {"host"|undefined} _host
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_host", {
+                            get: $util.oneOfGetter($oneOfFields = ["host"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UriOverride _port.
+                         * @member {"port"|undefined} _port
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_port", {
+                            get: $util.oneOfGetter($oneOfFields = ["port"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UriOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUriOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.UriOverride} UriOverride instance
+                         */
+                        UriOverride.create = function create(properties) {
+                            return new UriOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UriOverride message. Does not implicitly {@link google.cloud.tasks.v2beta2.UriOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUriOverride} message UriOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UriOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scheme != null && Object.hasOwnProperty.call(message, "scheme"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scheme);
+                            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.port);
+                            if (message.pathOverride != null && Object.hasOwnProperty.call(message, "pathOverride"))
+                                $root.google.cloud.tasks.v2beta2.PathOverride.encode(message.pathOverride, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.queryOverride != null && Object.hasOwnProperty.call(message, "queryOverride"))
+                                $root.google.cloud.tasks.v2beta2.QueryOverride.encode(message.queryOverride, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.uriOverrideEnforceMode != null && Object.hasOwnProperty.call(message, "uriOverrideEnforceMode"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uriOverrideEnforceMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UriOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.UriOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IUriOverride} message UriOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UriOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UriOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.UriOverride} UriOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UriOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.UriOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.scheme = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.host = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.port = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pathOverride = $root.google.cloud.tasks.v2beta2.PathOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.queryOverride = $root.google.cloud.tasks.v2beta2.QueryOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.uriOverrideEnforceMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UriOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.UriOverride} UriOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UriOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UriOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UriOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.scheme != null && message.hasOwnProperty("scheme")) {
+                                properties._scheme = 1;
+                                switch (message.scheme) {
+                                default:
+                                    return "scheme: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.host != null && message.hasOwnProperty("host")) {
+                                properties._host = 1;
+                                if (!$util.isString(message.host))
+                                    return "host: string expected";
+                            }
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                properties._port = 1;
+                                if (!$util.isInteger(message.port) && !(message.port && $util.isInteger(message.port.low) && $util.isInteger(message.port.high)))
+                                    return "port: integer|Long expected";
+                            }
+                            if (message.pathOverride != null && message.hasOwnProperty("pathOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta2.PathOverride.verify(message.pathOverride);
+                                if (error)
+                                    return "pathOverride." + error;
+                            }
+                            if (message.queryOverride != null && message.hasOwnProperty("queryOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta2.QueryOverride.verify(message.queryOverride);
+                                if (error)
+                                    return "queryOverride." + error;
+                            }
+                            if (message.uriOverrideEnforceMode != null && message.hasOwnProperty("uriOverrideEnforceMode"))
+                                switch (message.uriOverrideEnforceMode) {
+                                default:
+                                    return "uriOverrideEnforceMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UriOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.UriOverride} UriOverride
+                         */
+                        UriOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.UriOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.UriOverride();
+                            switch (object.scheme) {
+                            default:
+                                if (typeof object.scheme === "number") {
+                                    message.scheme = object.scheme;
+                                    break;
+                                }
+                                break;
+                            case "SCHEME_UNSPECIFIED":
+                            case 0:
+                                message.scheme = 0;
+                                break;
+                            case "HTTP":
+                            case 1:
+                                message.scheme = 1;
+                                break;
+                            case "HTTPS":
+                            case 2:
+                                message.scheme = 2;
+                                break;
+                            }
+                            if (object.host != null)
+                                message.host = String(object.host);
+                            if (object.port != null)
+                                if ($util.Long)
+                                    (message.port = $util.Long.fromValue(object.port)).unsigned = false;
+                                else if (typeof object.port === "string")
+                                    message.port = parseInt(object.port, 10);
+                                else if (typeof object.port === "number")
+                                    message.port = object.port;
+                                else if (typeof object.port === "object")
+                                    message.port = new $util.LongBits(object.port.low >>> 0, object.port.high >>> 0).toNumber();
+                            if (object.pathOverride != null) {
+                                if (typeof object.pathOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.UriOverride.pathOverride: object expected");
+                                message.pathOverride = $root.google.cloud.tasks.v2beta2.PathOverride.fromObject(object.pathOverride);
+                            }
+                            if (object.queryOverride != null) {
+                                if (typeof object.queryOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.UriOverride.queryOverride: object expected");
+                                message.queryOverride = $root.google.cloud.tasks.v2beta2.QueryOverride.fromObject(object.queryOverride);
+                            }
+                            switch (object.uriOverrideEnforceMode) {
+                            default:
+                                if (typeof object.uriOverrideEnforceMode === "number") {
+                                    message.uriOverrideEnforceMode = object.uriOverrideEnforceMode;
+                                    break;
+                                }
+                                break;
+                            case "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED":
+                            case 0:
+                                message.uriOverrideEnforceMode = 0;
+                                break;
+                            case "IF_NOT_EXISTS":
+                            case 1:
+                                message.uriOverrideEnforceMode = 1;
+                                break;
+                            case "ALWAYS":
+                            case 2:
+                                message.uriOverrideEnforceMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UriOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.UriOverride} message UriOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UriOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pathOverride = null;
+                                object.queryOverride = null;
+                                object.uriOverrideEnforceMode = options.enums === String ? "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.scheme != null && message.hasOwnProperty("scheme")) {
+                                object.scheme = options.enums === String ? $root.google.cloud.tasks.v2beta2.UriOverride.Scheme[message.scheme] === undefined ? message.scheme : $root.google.cloud.tasks.v2beta2.UriOverride.Scheme[message.scheme] : message.scheme;
+                                if (options.oneofs)
+                                    object._scheme = "scheme";
+                            }
+                            if (message.host != null && message.hasOwnProperty("host")) {
+                                object.host = message.host;
+                                if (options.oneofs)
+                                    object._host = "host";
+                            }
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                if (typeof message.port === "number")
+                                    object.port = options.longs === String ? String(message.port) : message.port;
+                                else
+                                    object.port = options.longs === String ? $util.Long.prototype.toString.call(message.port) : options.longs === Number ? new $util.LongBits(message.port.low >>> 0, message.port.high >>> 0).toNumber() : message.port;
+                                if (options.oneofs)
+                                    object._port = "port";
+                            }
+                            if (message.pathOverride != null && message.hasOwnProperty("pathOverride"))
+                                object.pathOverride = $root.google.cloud.tasks.v2beta2.PathOverride.toObject(message.pathOverride, options);
+                            if (message.queryOverride != null && message.hasOwnProperty("queryOverride"))
+                                object.queryOverride = $root.google.cloud.tasks.v2beta2.QueryOverride.toObject(message.queryOverride, options);
+                            if (message.uriOverrideEnforceMode != null && message.hasOwnProperty("uriOverrideEnforceMode"))
+                                object.uriOverrideEnforceMode = options.enums === String ? $root.google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode[message.uriOverrideEnforceMode] === undefined ? message.uriOverrideEnforceMode : $root.google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode[message.uriOverrideEnforceMode] : message.uriOverrideEnforceMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UriOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UriOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UriOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.UriOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UriOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.UriOverride";
+                        };
+    
+                        /**
+                         * Scheme enum.
+                         * @name google.cloud.tasks.v2beta2.UriOverride.Scheme
+                         * @enum {number}
+                         * @property {number} SCHEME_UNSPECIFIED=0 SCHEME_UNSPECIFIED value
+                         * @property {number} HTTP=1 HTTP value
+                         * @property {number} HTTPS=2 HTTPS value
+                         */
+                        UriOverride.Scheme = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEME_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HTTP"] = 1;
+                            values[valuesById[2] = "HTTPS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * UriOverrideEnforceMode enum.
+                         * @name google.cloud.tasks.v2beta2.UriOverride.UriOverrideEnforceMode
+                         * @enum {number}
+                         * @property {number} URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED=0 URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED value
+                         * @property {number} IF_NOT_EXISTS=1 IF_NOT_EXISTS value
+                         * @property {number} ALWAYS=2 ALWAYS value
+                         */
+                        UriOverride.UriOverrideEnforceMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IF_NOT_EXISTS"] = 1;
+                            values[valuesById[2] = "ALWAYS"] = 2;
+                            return values;
+                        })();
+    
+                        return UriOverride;
+                    })();
+    
+                    v2beta2.HttpTarget = (function() {
+    
+                        /**
+                         * Properties of a HttpTarget.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IHttpTarget
+                         * @property {google.cloud.tasks.v2beta2.IUriOverride|null} [uriOverride] HttpTarget uriOverride
+                         * @property {google.cloud.tasks.v2beta2.HttpMethod|null} [httpMethod] HttpTarget httpMethod
+                         * @property {Array.<google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride>|null} [headerOverrides] HttpTarget headerOverrides
+                         * @property {google.cloud.tasks.v2beta2.IOAuthToken|null} [oauthToken] HttpTarget oauthToken
+                         * @property {google.cloud.tasks.v2beta2.IOidcToken|null} [oidcToken] HttpTarget oidcToken
+                         */
+    
+                        /**
+                         * Constructs a new HttpTarget.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a HttpTarget.
+                         * @implements IHttpTarget
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IHttpTarget=} [properties] Properties to set
+                         */
+                        function HttpTarget(properties) {
+                            this.headerOverrides = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpTarget uriOverride.
+                         * @member {google.cloud.tasks.v2beta2.IUriOverride|null|undefined} uriOverride
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.uriOverride = null;
+    
+                        /**
+                         * HttpTarget httpMethod.
+                         * @member {google.cloud.tasks.v2beta2.HttpMethod} httpMethod
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.httpMethod = 0;
+    
+                        /**
+                         * HttpTarget headerOverrides.
+                         * @member {Array.<google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride>} headerOverrides
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.headerOverrides = $util.emptyArray;
+    
+                        /**
+                         * HttpTarget oauthToken.
+                         * @member {google.cloud.tasks.v2beta2.IOAuthToken|null|undefined} oauthToken
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.oauthToken = null;
+    
+                        /**
+                         * HttpTarget oidcToken.
+                         * @member {google.cloud.tasks.v2beta2.IOidcToken|null|undefined} oidcToken
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.oidcToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * HttpTarget authorizationHeader.
+                         * @member {"oauthToken"|"oidcToken"|undefined} authorizationHeader
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         */
+                        Object.defineProperty(HttpTarget.prototype, "authorizationHeader", {
+                            get: $util.oneOfGetter($oneOfFields = ["oauthToken", "oidcToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new HttpTarget instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpTarget=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.HttpTarget} HttpTarget instance
+                         */
+                        HttpTarget.create = function create(properties) {
+                            return new HttpTarget(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpTarget message. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpTarget} message HttpTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpTarget.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uriOverride != null && Object.hasOwnProperty.call(message, "uriOverride"))
+                                $root.google.cloud.tasks.v2beta2.UriOverride.encode(message.uriOverride, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.httpMethod != null && Object.hasOwnProperty.call(message, "httpMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.httpMethod);
+                            if (message.headerOverrides != null && message.headerOverrides.length)
+                                for (var i = 0; i < message.headerOverrides.length; ++i)
+                                    $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.encode(message.headerOverrides[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.oauthToken != null && Object.hasOwnProperty.call(message, "oauthToken"))
+                                $root.google.cloud.tasks.v2beta2.OAuthToken.encode(message.oauthToken, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.oidcToken != null && Object.hasOwnProperty.call(message, "oidcToken"))
+                                $root.google.cloud.tasks.v2beta2.OidcToken.encode(message.oidcToken, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpTarget message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IHttpTarget} message HttpTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpTarget message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.HttpTarget} HttpTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpTarget.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.HttpTarget();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uriOverride = $root.google.cloud.tasks.v2beta2.UriOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.httpMethod = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.headerOverrides && message.headerOverrides.length))
+                                            message.headerOverrides = [];
+                                        message.headerOverrides.push($root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpTarget message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.HttpTarget} HttpTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpTarget.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpTarget message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpTarget.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.uriOverride != null && message.hasOwnProperty("uriOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta2.UriOverride.verify(message.uriOverride);
+                                if (error)
+                                    return "uriOverride." + error;
+                            }
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                switch (message.httpMethod) {
+                                default:
+                                    return "httpMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.headerOverrides != null && message.hasOwnProperty("headerOverrides")) {
+                                if (!Array.isArray(message.headerOverrides))
+                                    return "headerOverrides: array expected";
+                                for (var i = 0; i < message.headerOverrides.length; ++i) {
+                                    var error = $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.verify(message.headerOverrides[i]);
+                                    if (error)
+                                        return "headerOverrides." + error;
+                                }
+                            }
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.OAuthToken.verify(message.oauthToken);
+                                    if (error)
+                                        return "oauthToken." + error;
+                                }
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                if (properties.authorizationHeader === 1)
+                                    return "authorizationHeader: multiple values";
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.OidcToken.verify(message.oidcToken);
+                                    if (error)
+                                        return "oidcToken." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpTarget message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.HttpTarget} HttpTarget
+                         */
+                        HttpTarget.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.HttpTarget)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.HttpTarget();
+                            if (object.uriOverride != null) {
+                                if (typeof object.uriOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.uriOverride: object expected");
+                                message.uriOverride = $root.google.cloud.tasks.v2beta2.UriOverride.fromObject(object.uriOverride);
+                            }
+                            switch (object.httpMethod) {
+                            default:
+                                if (typeof object.httpMethod === "number") {
+                                    message.httpMethod = object.httpMethod;
+                                    break;
+                                }
+                                break;
+                            case "HTTP_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.httpMethod = 0;
+                                break;
+                            case "POST":
+                            case 1:
+                                message.httpMethod = 1;
+                                break;
+                            case "GET":
+                            case 2:
+                                message.httpMethod = 2;
+                                break;
+                            case "HEAD":
+                            case 3:
+                                message.httpMethod = 3;
+                                break;
+                            case "PUT":
+                            case 4:
+                                message.httpMethod = 4;
+                                break;
+                            case "DELETE":
+                            case 5:
+                                message.httpMethod = 5;
+                                break;
+                            case "PATCH":
+                            case 6:
+                                message.httpMethod = 6;
+                                break;
+                            case "OPTIONS":
+                            case 7:
+                                message.httpMethod = 7;
+                                break;
+                            }
+                            if (object.headerOverrides) {
+                                if (!Array.isArray(object.headerOverrides))
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.headerOverrides: array expected");
+                                message.headerOverrides = [];
+                                for (var i = 0; i < object.headerOverrides.length; ++i) {
+                                    if (typeof object.headerOverrides[i] !== "object")
+                                        throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.headerOverrides: object expected");
+                                    message.headerOverrides[i] = $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.fromObject(object.headerOverrides[i]);
+                                }
+                            }
+                            if (object.oauthToken != null) {
+                                if (typeof object.oauthToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.oauthToken: object expected");
+                                message.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.fromObject(object.oauthToken);
+                            }
+                            if (object.oidcToken != null) {
+                                if (typeof object.oidcToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.oidcToken: object expected");
+                                message.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.fromObject(object.oidcToken);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpTarget message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.HttpTarget} message HttpTarget
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpTarget.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.headerOverrides = [];
+                            if (options.defaults) {
+                                object.uriOverride = null;
+                                object.httpMethod = options.enums === String ? "HTTP_METHOD_UNSPECIFIED" : 0;
+                            }
+                            if (message.uriOverride != null && message.hasOwnProperty("uriOverride"))
+                                object.uriOverride = $root.google.cloud.tasks.v2beta2.UriOverride.toObject(message.uriOverride, options);
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                object.httpMethod = options.enums === String ? $root.google.cloud.tasks.v2beta2.HttpMethod[message.httpMethod] === undefined ? message.httpMethod : $root.google.cloud.tasks.v2beta2.HttpMethod[message.httpMethod] : message.httpMethod;
+                            if (message.headerOverrides && message.headerOverrides.length) {
+                                object.headerOverrides = [];
+                                for (var j = 0; j < message.headerOverrides.length; ++j)
+                                    object.headerOverrides[j] = $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.toObject(message.headerOverrides[j], options);
+                            }
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                object.oauthToken = $root.google.cloud.tasks.v2beta2.OAuthToken.toObject(message.oauthToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oauthToken";
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                object.oidcToken = $root.google.cloud.tasks.v2beta2.OidcToken.toObject(message.oidcToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oidcToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpTarget to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpTarget.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HttpTarget
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HttpTarget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.HttpTarget";
+                        };
+    
+                        HttpTarget.Header = (function() {
+    
+                            /**
+                             * Properties of a Header.
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                             * @interface IHeader
+                             * @property {string|null} [key] Header key
+                             * @property {string|null} [value] Header value
+                             */
+    
+                            /**
+                             * Constructs a new Header.
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                             * @classdesc Represents a Header.
+                             * @implements IHeader
+                             * @constructor
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeader=} [properties] Properties to set
+                             */
+                            function Header(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Header key.
+                             * @member {string} key
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @instance
+                             */
+                            Header.prototype.key = "";
+    
+                            /**
+                             * Header value.
+                             * @member {string} value
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @instance
+                             */
+                            Header.prototype.value = "";
+    
+                            /**
+                             * Creates a new Header instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeader=} [properties] Properties to set
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.Header} Header instance
+                             */
+                            Header.create = function create(properties) {
+                                return new Header(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Header message. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.Header.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeader} message Header message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Header.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Header message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.Header.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeader} message Header message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Header.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Header message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.Header} Header
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Header.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.HttpTarget.Header();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Header message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.Header} Header
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Header.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Header message.
+                             * @function verify
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Header.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Header message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.Header} Header
+                             */
+                            Header.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tasks.v2beta2.HttpTarget.Header)
+                                    return object;
+                                var message = new $root.google.cloud.tasks.v2beta2.HttpTarget.Header();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Header message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.Header} message Header
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Header.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.value = "";
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Header to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Header.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Header
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.Header
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Header.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tasks.v2beta2.HttpTarget.Header";
+                            };
+    
+                            return Header;
+                        })();
+    
+                        HttpTarget.HeaderOverride = (function() {
+    
+                            /**
+                             * Properties of a HeaderOverride.
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                             * @interface IHeaderOverride
+                             * @property {google.cloud.tasks.v2beta2.HttpTarget.IHeader|null} [header] HeaderOverride header
+                             */
+    
+                            /**
+                             * Constructs a new HeaderOverride.
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget
+                             * @classdesc Represents a HeaderOverride.
+                             * @implements IHeaderOverride
+                             * @constructor
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride=} [properties] Properties to set
+                             */
+                            function HeaderOverride(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HeaderOverride header.
+                             * @member {google.cloud.tasks.v2beta2.HttpTarget.IHeader|null|undefined} header
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @instance
+                             */
+                            HeaderOverride.prototype.header = null;
+    
+                            /**
+                             * Creates a new HeaderOverride instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride=} [properties] Properties to set
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride} HeaderOverride instance
+                             */
+                            HeaderOverride.create = function create(properties) {
+                                return new HeaderOverride(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HeaderOverride message. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride} message HeaderOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeaderOverride.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.header != null && Object.hasOwnProperty.call(message, "header"))
+                                    $root.google.cloud.tasks.v2beta2.HttpTarget.Header.encode(message.header, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HeaderOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.IHeaderOverride} message HeaderOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeaderOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HeaderOverride message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride} HeaderOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeaderOverride.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.header = $root.google.cloud.tasks.v2beta2.HttpTarget.Header.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HeaderOverride message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride} HeaderOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeaderOverride.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HeaderOverride message.
+                             * @function verify
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HeaderOverride.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.header != null && message.hasOwnProperty("header")) {
+                                    var error = $root.google.cloud.tasks.v2beta2.HttpTarget.Header.verify(message.header);
+                                    if (error)
+                                        return "header." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HeaderOverride message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride} HeaderOverride
+                             */
+                            HeaderOverride.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride)
+                                    return object;
+                                var message = new $root.google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride();
+                                if (object.header != null) {
+                                    if (typeof object.header !== "object")
+                                        throw TypeError(".google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride.header: object expected");
+                                    message.header = $root.google.cloud.tasks.v2beta2.HttpTarget.Header.fromObject(object.header);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HeaderOverride message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride} message HeaderOverride
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HeaderOverride.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.header = null;
+                                if (message.header != null && message.hasOwnProperty("header"))
+                                    object.header = $root.google.cloud.tasks.v2beta2.HttpTarget.Header.toObject(message.header, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HeaderOverride to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HeaderOverride.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HeaderOverride
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HeaderOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tasks.v2beta2.HttpTarget.HeaderOverride";
+                            };
+    
+                            return HeaderOverride;
+                        })();
+    
+                        return HttpTarget;
+                    })();
+    
+                    v2beta2.OAuthToken = (function() {
+    
+                        /**
+                         * Properties of a OAuthToken.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IOAuthToken
+                         * @property {string|null} [serviceAccountEmail] OAuthToken serviceAccountEmail
+                         * @property {string|null} [scope] OAuthToken scope
+                         */
+    
+                        /**
+                         * Constructs a new OAuthToken.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents a OAuthToken.
+                         * @implements IOAuthToken
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IOAuthToken=} [properties] Properties to set
+                         */
+                        function OAuthToken(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OAuthToken serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @instance
+                         */
+                        OAuthToken.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * OAuthToken scope.
+                         * @member {string} scope
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @instance
+                         */
+                        OAuthToken.prototype.scope = "";
+    
+                        /**
+                         * Creates a new OAuthToken instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOAuthToken=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.OAuthToken} OAuthToken instance
+                         */
+                        OAuthToken.create = function create(properties) {
+                            return new OAuthToken(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OAuthToken message. Does not implicitly {@link google.cloud.tasks.v2beta2.OAuthToken.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOAuthToken} message OAuthToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuthToken.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.scope);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OAuthToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.OAuthToken.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOAuthToken} message OAuthToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuthToken.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OAuthToken message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.OAuthToken} OAuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuthToken.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.OAuthToken();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceAccountEmail = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scope = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OAuthToken message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.OAuthToken} OAuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuthToken.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OAuthToken message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OAuthToken.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                if (!$util.isString(message.scope))
+                                    return "scope: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OAuthToken message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.OAuthToken} OAuthToken
+                         */
+                        OAuthToken.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.OAuthToken)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.OAuthToken();
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.scope != null)
+                                message.scope = String(object.scope);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OAuthToken message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.OAuthToken} message OAuthToken
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OAuthToken.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceAccountEmail = "";
+                                object.scope = "";
+                            }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = message.scope;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OAuthToken to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OAuthToken.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OAuthToken
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.OAuthToken
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OAuthToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.OAuthToken";
+                        };
+    
+                        return OAuthToken;
+                    })();
+    
+                    v2beta2.OidcToken = (function() {
+    
+                        /**
+                         * Properties of an OidcToken.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @interface IOidcToken
+                         * @property {string|null} [serviceAccountEmail] OidcToken serviceAccountEmail
+                         * @property {string|null} [audience] OidcToken audience
+                         */
+    
+                        /**
+                         * Constructs a new OidcToken.
+                         * @memberof google.cloud.tasks.v2beta2
+                         * @classdesc Represents an OidcToken.
+                         * @implements IOidcToken
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta2.IOidcToken=} [properties] Properties to set
+                         */
+                        function OidcToken(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OidcToken serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @instance
+                         */
+                        OidcToken.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * OidcToken audience.
+                         * @member {string} audience
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @instance
+                         */
+                        OidcToken.prototype.audience = "";
+    
+                        /**
+                         * Creates a new OidcToken instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOidcToken=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta2.OidcToken} OidcToken instance
+                         */
+                        OidcToken.create = function create(properties) {
+                            return new OidcToken(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.tasks.v2beta2.OidcToken.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOidcToken} message OidcToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OidcToken.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.OidcToken.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.IOidcToken} message OidcToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OidcToken.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OidcToken message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta2.OidcToken} OidcToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OidcToken.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta2.OidcToken();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceAccountEmail = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta2.OidcToken} OidcToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OidcToken.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OidcToken message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OidcToken.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta2.OidcToken} OidcToken
+                         */
+                        OidcToken.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta2.OidcToken)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta2.OidcToken();
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2beta2.OidcToken} message OidcToken
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OidcToken.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceAccountEmail = "";
+                                object.audience = "";
+                            }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OidcToken to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OidcToken.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OidcToken
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta2.OidcToken
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OidcToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta2.OidcToken";
+                        };
+    
+                        return OidcToken;
+                    })();
+    
                     /**
                      * HttpMethod enum.
                      * @name google.cloud.tasks.v2beta2.HttpMethod
@@ -16197,6 +19644,8 @@
                      * @property {number} HEAD=3 HEAD value
                      * @property {number} PUT=4 PUT value
                      * @property {number} DELETE=5 DELETE value
+                     * @property {number} PATCH=6 PATCH value
+                     * @property {number} OPTIONS=7 OPTIONS value
                      */
                     v2beta2.HttpMethod = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -16206,6 +19655,8 @@
                         values[valuesById[3] = "HEAD"] = 3;
                         values[valuesById[4] = "PUT"] = 4;
                         values[valuesById[5] = "DELETE"] = 5;
+                        values[valuesById[6] = "PATCH"] = 6;
+                        values[valuesById[7] = "OPTIONS"] = 7;
                         return values;
                     })();
     
@@ -16218,6 +19669,7 @@
                          * @property {string|null} [name] Task name
                          * @property {google.cloud.tasks.v2beta2.IAppEngineHttpRequest|null} [appEngineHttpRequest] Task appEngineHttpRequest
                          * @property {google.cloud.tasks.v2beta2.IPullMessage|null} [pullMessage] Task pullMessage
+                         * @property {google.cloud.tasks.v2beta2.IHttpRequest|null} [httpRequest] Task httpRequest
                          * @property {google.protobuf.ITimestamp|null} [scheduleTime] Task scheduleTime
                          * @property {google.protobuf.ITimestamp|null} [createTime] Task createTime
                          * @property {google.cloud.tasks.v2beta2.ITaskStatus|null} [status] Task status
@@ -16264,6 +19716,14 @@
                         Task.prototype.pullMessage = null;
     
                         /**
+                         * Task httpRequest.
+                         * @member {google.cloud.tasks.v2beta2.IHttpRequest|null|undefined} httpRequest
+                         * @memberof google.cloud.tasks.v2beta2.Task
+                         * @instance
+                         */
+                        Task.prototype.httpRequest = null;
+    
+                        /**
                          * Task scheduleTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} scheduleTime
                          * @memberof google.cloud.tasks.v2beta2.Task
@@ -16300,12 +19760,12 @@
     
                         /**
                          * Task payloadType.
-                         * @member {"appEngineHttpRequest"|"pullMessage"|undefined} payloadType
+                         * @member {"appEngineHttpRequest"|"pullMessage"|"httpRequest"|undefined} payloadType
                          * @memberof google.cloud.tasks.v2beta2.Task
                          * @instance
                          */
                         Object.defineProperty(Task.prototype, "payloadType", {
-                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpRequest", "pullMessage"]),
+                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpRequest", "pullMessage", "httpRequest"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -16347,6 +19807,8 @@
                                 $root.google.cloud.tasks.v2beta2.TaskStatus.encode(message.status, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.view != null && Object.hasOwnProperty.call(message, "view"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.view);
+                            if (message.httpRequest != null && Object.hasOwnProperty.call(message, "httpRequest"))
+                                $root.google.cloud.tasks.v2beta2.HttpRequest.encode(message.httpRequest, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -16391,6 +19853,10 @@
                                     }
                                 case 4: {
                                         message.pullMessage = $root.google.cloud.tasks.v2beta2.PullMessage.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.httpRequest = $root.google.cloud.tasks.v2beta2.HttpRequest.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -16466,6 +19932,16 @@
                                         return "pullMessage." + error;
                                 }
                             }
+                            if (message.httpRequest != null && message.hasOwnProperty("httpRequest")) {
+                                if (properties.payloadType === 1)
+                                    return "payloadType: multiple values";
+                                properties.payloadType = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta2.HttpRequest.verify(message.httpRequest);
+                                    if (error)
+                                        return "httpRequest." + error;
+                                }
+                            }
                             if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
                                 if (error)
@@ -16516,6 +19992,11 @@
                                 if (typeof object.pullMessage !== "object")
                                     throw TypeError(".google.cloud.tasks.v2beta2.Task.pullMessage: object expected");
                                 message.pullMessage = $root.google.cloud.tasks.v2beta2.PullMessage.fromObject(object.pullMessage);
+                            }
+                            if (object.httpRequest != null) {
+                                if (typeof object.httpRequest !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta2.Task.httpRequest: object expected");
+                                message.httpRequest = $root.google.cloud.tasks.v2beta2.HttpRequest.fromObject(object.httpRequest);
                             }
                             if (object.scheduleTime != null) {
                                 if (typeof object.scheduleTime !== "object")
@@ -16595,6 +20076,11 @@
                                 object.status = $root.google.cloud.tasks.v2beta2.TaskStatus.toObject(message.status, options);
                             if (message.view != null && message.hasOwnProperty("view"))
                                 object.view = options.enums === String ? $root.google.cloud.tasks.v2beta2.Task.View[message.view] === undefined ? message.view : $root.google.cloud.tasks.v2beta2.Task.View[message.view] : message.view;
+                            if (message.httpRequest != null && message.hasOwnProperty("httpRequest")) {
+                                object.httpRequest = $root.google.cloud.tasks.v2beta2.HttpRequest.toObject(message.httpRequest, options);
+                                if (options.oneofs)
+                                    object.payloadType = "httpRequest";
+                            }
                             return object;
                         };
     
@@ -17788,6 +21274,39 @@
                          * @instance
                          * @param {google.cloud.tasks.v2beta3.IRunTaskRequest} request RunTaskRequest message or plain object
                          * @returns {Promise<google.cloud.tasks.v2beta3.Task>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|bufferTask}.
+                         * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                         * @typedef BufferTaskCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.tasks.v2beta3.BufferTaskResponse} [response] BufferTaskResponse
+                         */
+    
+                        /**
+                         * Calls BufferTask.
+                         * @function bufferTask
+                         * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest} request BufferTaskRequest message or plain object
+                         * @param {google.cloud.tasks.v2beta3.CloudTasks.BufferTaskCallback} callback Node-style callback called with the error, if any, and BufferTaskResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudTasks.prototype.bufferTask = function bufferTask(request, callback) {
+                            return this.rpcCall(bufferTask, $root.google.cloud.tasks.v2beta3.BufferTaskRequest, $root.google.cloud.tasks.v2beta3.BufferTaskResponse, request, callback);
+                        }, "name", { value: "BufferTask" });
+    
+                        /**
+                         * Calls BufferTask.
+                         * @function bufferTask
+                         * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                         * @instance
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest} request BufferTaskRequest message or plain object
+                         * @returns {Promise<google.cloud.tasks.v2beta3.BufferTaskResponse>} Promise
                          * @variation 2
                          */
     
@@ -21385,6 +24904,469 @@
                         return RunTaskRequest;
                     })();
     
+                    v2beta3.BufferTaskRequest = (function() {
+    
+                        /**
+                         * Properties of a BufferTaskRequest.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IBufferTaskRequest
+                         * @property {string|null} [queue] BufferTaskRequest queue
+                         * @property {string|null} [taskId] BufferTaskRequest taskId
+                         * @property {google.api.IHttpBody|null} [body] BufferTaskRequest body
+                         */
+    
+                        /**
+                         * Constructs a new BufferTaskRequest.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents a BufferTaskRequest.
+                         * @implements IBufferTaskRequest
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest=} [properties] Properties to set
+                         */
+                        function BufferTaskRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BufferTaskRequest queue.
+                         * @member {string} queue
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.queue = "";
+    
+                        /**
+                         * BufferTaskRequest taskId.
+                         * @member {string} taskId
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.taskId = "";
+    
+                        /**
+                         * BufferTaskRequest body.
+                         * @member {google.api.IHttpBody|null|undefined} body
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @instance
+                         */
+                        BufferTaskRequest.prototype.body = null;
+    
+                        /**
+                         * Creates a new BufferTaskRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskRequest} BufferTaskRequest instance
+                         */
+                        BufferTaskRequest.create = function create(properties) {
+                            return new BufferTaskRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskRequest message. Does not implicitly {@link google.cloud.tasks.v2beta3.BufferTaskRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest} message BufferTaskRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queue != null && Object.hasOwnProperty.call(message, "queue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queue);
+                            if (message.taskId != null && Object.hasOwnProperty.call(message, "taskId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.taskId);
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.api.HttpBody.encode(message.body, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BufferTaskRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskRequest} message BufferTaskRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskRequest} BufferTaskRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BufferTaskRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.queue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.taskId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.body = $root.google.api.HttpBody.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskRequest} BufferTaskRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BufferTaskRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BufferTaskRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queue != null && message.hasOwnProperty("queue"))
+                                if (!$util.isString(message.queue))
+                                    return "queue: string expected";
+                            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                                if (!$util.isString(message.taskId))
+                                    return "taskId: string expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.api.HttpBody.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BufferTaskRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskRequest} BufferTaskRequest
+                         */
+                        BufferTaskRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.BufferTaskRequest)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.BufferTaskRequest();
+                            if (object.queue != null)
+                                message.queue = String(object.queue);
+                            if (object.taskId != null)
+                                message.taskId = String(object.taskId);
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BufferTaskRequest.body: object expected");
+                                message.body = $root.google.api.HttpBody.fromObject(object.body);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BufferTaskRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.BufferTaskRequest} message BufferTaskRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BufferTaskRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.queue = "";
+                                object.taskId = "";
+                                object.body = null;
+                            }
+                            if (message.queue != null && message.hasOwnProperty("queue"))
+                                object.queue = message.queue;
+                            if (message.taskId != null && message.hasOwnProperty("taskId"))
+                                object.taskId = message.taskId;
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.api.HttpBody.toObject(message.body, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BufferTaskRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BufferTaskRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BufferTaskRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BufferTaskRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BufferTaskRequest";
+                        };
+    
+                        return BufferTaskRequest;
+                    })();
+    
+                    v2beta3.BufferTaskResponse = (function() {
+    
+                        /**
+                         * Properties of a BufferTaskResponse.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IBufferTaskResponse
+                         * @property {google.cloud.tasks.v2beta3.ITask|null} [task] BufferTaskResponse task
+                         */
+    
+                        /**
+                         * Constructs a new BufferTaskResponse.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents a BufferTaskResponse.
+                         * @implements IBufferTaskResponse
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskResponse=} [properties] Properties to set
+                         */
+                        function BufferTaskResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BufferTaskResponse task.
+                         * @member {google.cloud.tasks.v2beta3.ITask|null|undefined} task
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @instance
+                         */
+                        BufferTaskResponse.prototype.task = null;
+    
+                        /**
+                         * Creates a new BufferTaskResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskResponse=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskResponse} BufferTaskResponse instance
+                         */
+                        BufferTaskResponse.create = function create(properties) {
+                            return new BufferTaskResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskResponse message. Does not implicitly {@link google.cloud.tasks.v2beta3.BufferTaskResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskResponse} message BufferTaskResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.task != null && Object.hasOwnProperty.call(message, "task"))
+                                $root.google.cloud.tasks.v2beta3.Task.encode(message.task, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BufferTaskResponse message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BufferTaskResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IBufferTaskResponse} message BufferTaskResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BufferTaskResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskResponse} BufferTaskResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BufferTaskResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.task = $root.google.cloud.tasks.v2beta3.Task.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BufferTaskResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskResponse} BufferTaskResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BufferTaskResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BufferTaskResponse message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BufferTaskResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.task != null && message.hasOwnProperty("task")) {
+                                var error = $root.google.cloud.tasks.v2beta3.Task.verify(message.task);
+                                if (error)
+                                    return "task." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BufferTaskResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.BufferTaskResponse} BufferTaskResponse
+                         */
+                        BufferTaskResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.BufferTaskResponse)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.BufferTaskResponse();
+                            if (object.task != null) {
+                                if (typeof object.task !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BufferTaskResponse.task: object expected");
+                                message.task = $root.google.cloud.tasks.v2beta3.Task.fromObject(object.task);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BufferTaskResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.BufferTaskResponse} message BufferTaskResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BufferTaskResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.task = null;
+                            if (message.task != null && message.hasOwnProperty("task"))
+                                object.task = $root.google.cloud.tasks.v2beta3.Task.toObject(message.task, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BufferTaskResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BufferTaskResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BufferTaskResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.BufferTaskResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BufferTaskResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BufferTaskResponse";
+                        };
+    
+                        return BufferTaskResponse;
+                    })();
+    
                     v2beta3.Queue = (function() {
     
                         /**
@@ -21393,6 +25375,7 @@
                          * @interface IQueue
                          * @property {string|null} [name] Queue name
                          * @property {google.cloud.tasks.v2beta3.IAppEngineHttpQueue|null} [appEngineHttpQueue] Queue appEngineHttpQueue
+                         * @property {google.cloud.tasks.v2beta3.IHttpTarget|null} [httpTarget] Queue httpTarget
                          * @property {google.cloud.tasks.v2beta3.IRateLimits|null} [rateLimits] Queue rateLimits
                          * @property {google.cloud.tasks.v2beta3.IRetryConfig|null} [retryConfig] Queue retryConfig
                          * @property {google.cloud.tasks.v2beta3.Queue.State|null} [state] Queue state
@@ -21434,6 +25417,14 @@
                          * @instance
                          */
                         Queue.prototype.appEngineHttpQueue = null;
+    
+                        /**
+                         * Queue httpTarget.
+                         * @member {google.cloud.tasks.v2beta3.IHttpTarget|null|undefined} httpTarget
+                         * @memberof google.cloud.tasks.v2beta3.Queue
+                         * @instance
+                         */
+                        Queue.prototype.httpTarget = null;
     
                         /**
                          * Queue rateLimits.
@@ -21567,6 +25558,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.type);
                             if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
                                 $root.google.cloud.tasks.v2beta3.QueueStats.encode(message.stats, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.httpTarget != null && Object.hasOwnProperty.call(message, "httpTarget"))
+                                $root.google.cloud.tasks.v2beta3.HttpTarget.encode(message.httpTarget, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -21607,6 +25600,10 @@
                                     }
                                 case 3: {
                                         message.appEngineHttpQueue = $root.google.cloud.tasks.v2beta3.AppEngineHttpQueue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.httpTarget = $root.google.cloud.tasks.v2beta3.HttpTarget.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -21692,6 +25689,11 @@
                                         return "appEngineHttpQueue." + error;
                                 }
                             }
+                            if (message.httpTarget != null && message.hasOwnProperty("httpTarget")) {
+                                var error = $root.google.cloud.tasks.v2beta3.HttpTarget.verify(message.httpTarget);
+                                if (error)
+                                    return "httpTarget." + error;
+                            }
                             if (message.rateLimits != null && message.hasOwnProperty("rateLimits")) {
                                 var error = $root.google.cloud.tasks.v2beta3.RateLimits.verify(message.rateLimits);
                                 if (error)
@@ -21767,6 +25769,11 @@
                                 if (typeof object.appEngineHttpQueue !== "object")
                                     throw TypeError(".google.cloud.tasks.v2beta3.Queue.appEngineHttpQueue: object expected");
                                 message.appEngineHttpQueue = $root.google.cloud.tasks.v2beta3.AppEngineHttpQueue.fromObject(object.appEngineHttpQueue);
+                            }
+                            if (object.httpTarget != null) {
+                                if (typeof object.httpTarget !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.Queue.httpTarget: object expected");
+                                message.httpTarget = $root.google.cloud.tasks.v2beta3.HttpTarget.fromObject(object.httpTarget);
                             }
                             if (object.rateLimits != null) {
                                 if (typeof object.rateLimits !== "object")
@@ -21874,6 +25881,7 @@
                                 object.stackdriverLoggingConfig = null;
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 object.stats = null;
+                                object.httpTarget = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -21900,6 +25908,8 @@
                                 object.type = options.enums === String ? $root.google.cloud.tasks.v2beta3.Queue.Type[message.type] === undefined ? message.type : $root.google.cloud.tasks.v2beta3.Queue.Type[message.type] : message.type;
                             if (message.stats != null && message.hasOwnProperty("stats"))
                                 object.stats = $root.google.cloud.tasks.v2beta3.QueueStats.toObject(message.stats, options);
+                            if (message.httpTarget != null && message.hasOwnProperty("httpTarget"))
+                                object.httpTarget = $root.google.cloud.tasks.v2beta3.HttpTarget.toObject(message.httpTarget, options);
                             return object;
                         };
     
@@ -23307,6 +27317,1724 @@
                         };
     
                         return PullMessage;
+                    })();
+    
+                    v2beta3.PathOverride = (function() {
+    
+                        /**
+                         * Properties of a PathOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IPathOverride
+                         * @property {string|null} [path] PathOverride path
+                         */
+    
+                        /**
+                         * Constructs a new PathOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents a PathOverride.
+                         * @implements IPathOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IPathOverride=} [properties] Properties to set
+                         */
+                        function PathOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PathOverride path.
+                         * @member {string} path
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @instance
+                         */
+                        PathOverride.prototype.path = "";
+    
+                        /**
+                         * Creates a new PathOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IPathOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.PathOverride} PathOverride instance
+                         */
+                        PathOverride.create = function create(properties) {
+                            return new PathOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PathOverride message. Does not implicitly {@link google.cloud.tasks.v2beta3.PathOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IPathOverride} message PathOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PathOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.PathOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IPathOverride} message PathOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PathOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.PathOverride} PathOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.PathOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PathOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.PathOverride} PathOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PathOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PathOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PathOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.PathOverride} PathOverride
+                         */
+                        PathOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.PathOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.PathOverride();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PathOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.PathOverride} message PathOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PathOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.path = "";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PathOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PathOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PathOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.PathOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PathOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.PathOverride";
+                        };
+    
+                        return PathOverride;
+                    })();
+    
+                    v2beta3.QueryOverride = (function() {
+    
+                        /**
+                         * Properties of a QueryOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IQueryOverride
+                         * @property {string|null} [queryParams] QueryOverride queryParams
+                         */
+    
+                        /**
+                         * Constructs a new QueryOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents a QueryOverride.
+                         * @implements IQueryOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IQueryOverride=} [properties] Properties to set
+                         */
+                        function QueryOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOverride queryParams.
+                         * @member {string} queryParams
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @instance
+                         */
+                        QueryOverride.prototype.queryParams = "";
+    
+                        /**
+                         * Creates a new QueryOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IQueryOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.QueryOverride} QueryOverride instance
+                         */
+                        QueryOverride.create = function create(properties) {
+                            return new QueryOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOverride message. Does not implicitly {@link google.cloud.tasks.v2beta3.QueryOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IQueryOverride} message QueryOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queryParams != null && Object.hasOwnProperty.call(message, "queryParams"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryParams);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.QueryOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IQueryOverride} message QueryOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.QueryOverride} QueryOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.QueryOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.queryParams = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.QueryOverride} QueryOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queryParams != null && message.hasOwnProperty("queryParams"))
+                                if (!$util.isString(message.queryParams))
+                                    return "queryParams: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.QueryOverride} QueryOverride
+                         */
+                        QueryOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.QueryOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.QueryOverride();
+                            if (object.queryParams != null)
+                                message.queryParams = String(object.queryParams);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.QueryOverride} message QueryOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.queryParams = "";
+                            if (message.queryParams != null && message.hasOwnProperty("queryParams"))
+                                object.queryParams = message.queryParams;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.QueryOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.QueryOverride";
+                        };
+    
+                        return QueryOverride;
+                    })();
+    
+                    v2beta3.UriOverride = (function() {
+    
+                        /**
+                         * Properties of an UriOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IUriOverride
+                         * @property {google.cloud.tasks.v2beta3.UriOverride.Scheme|null} [scheme] UriOverride scheme
+                         * @property {string|null} [host] UriOverride host
+                         * @property {number|Long|null} [port] UriOverride port
+                         * @property {google.cloud.tasks.v2beta3.IPathOverride|null} [pathOverride] UriOverride pathOverride
+                         * @property {google.cloud.tasks.v2beta3.IQueryOverride|null} [queryOverride] UriOverride queryOverride
+                         * @property {google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode|null} [uriOverrideEnforceMode] UriOverride uriOverrideEnforceMode
+                         */
+    
+                        /**
+                         * Constructs a new UriOverride.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents an UriOverride.
+                         * @implements IUriOverride
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IUriOverride=} [properties] Properties to set
+                         */
+                        function UriOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UriOverride scheme.
+                         * @member {google.cloud.tasks.v2beta3.UriOverride.Scheme|null|undefined} scheme
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.scheme = null;
+    
+                        /**
+                         * UriOverride host.
+                         * @member {string|null|undefined} host
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.host = null;
+    
+                        /**
+                         * UriOverride port.
+                         * @member {number|Long|null|undefined} port
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.port = null;
+    
+                        /**
+                         * UriOverride pathOverride.
+                         * @member {google.cloud.tasks.v2beta3.IPathOverride|null|undefined} pathOverride
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.pathOverride = null;
+    
+                        /**
+                         * UriOverride queryOverride.
+                         * @member {google.cloud.tasks.v2beta3.IQueryOverride|null|undefined} queryOverride
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.queryOverride = null;
+    
+                        /**
+                         * UriOverride uriOverrideEnforceMode.
+                         * @member {google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode} uriOverrideEnforceMode
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        UriOverride.prototype.uriOverrideEnforceMode = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UriOverride _scheme.
+                         * @member {"scheme"|undefined} _scheme
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_scheme", {
+                            get: $util.oneOfGetter($oneOfFields = ["scheme"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UriOverride _host.
+                         * @member {"host"|undefined} _host
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_host", {
+                            get: $util.oneOfGetter($oneOfFields = ["host"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UriOverride _port.
+                         * @member {"port"|undefined} _port
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         */
+                        Object.defineProperty(UriOverride.prototype, "_port", {
+                            get: $util.oneOfGetter($oneOfFields = ["port"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UriOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IUriOverride=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.UriOverride} UriOverride instance
+                         */
+                        UriOverride.create = function create(properties) {
+                            return new UriOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UriOverride message. Does not implicitly {@link google.cloud.tasks.v2beta3.UriOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IUriOverride} message UriOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UriOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scheme != null && Object.hasOwnProperty.call(message, "scheme"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scheme);
+                            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.port);
+                            if (message.pathOverride != null && Object.hasOwnProperty.call(message, "pathOverride"))
+                                $root.google.cloud.tasks.v2beta3.PathOverride.encode(message.pathOverride, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.queryOverride != null && Object.hasOwnProperty.call(message, "queryOverride"))
+                                $root.google.cloud.tasks.v2beta3.QueryOverride.encode(message.queryOverride, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.uriOverrideEnforceMode != null && Object.hasOwnProperty.call(message, "uriOverrideEnforceMode"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uriOverrideEnforceMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UriOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.UriOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IUriOverride} message UriOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UriOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UriOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.UriOverride} UriOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UriOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.UriOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.scheme = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.host = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.port = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pathOverride = $root.google.cloud.tasks.v2beta3.PathOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.queryOverride = $root.google.cloud.tasks.v2beta3.QueryOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.uriOverrideEnforceMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UriOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.UriOverride} UriOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UriOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UriOverride message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UriOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.scheme != null && message.hasOwnProperty("scheme")) {
+                                properties._scheme = 1;
+                                switch (message.scheme) {
+                                default:
+                                    return "scheme: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.host != null && message.hasOwnProperty("host")) {
+                                properties._host = 1;
+                                if (!$util.isString(message.host))
+                                    return "host: string expected";
+                            }
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                properties._port = 1;
+                                if (!$util.isInteger(message.port) && !(message.port && $util.isInteger(message.port.low) && $util.isInteger(message.port.high)))
+                                    return "port: integer|Long expected";
+                            }
+                            if (message.pathOverride != null && message.hasOwnProperty("pathOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta3.PathOverride.verify(message.pathOverride);
+                                if (error)
+                                    return "pathOverride." + error;
+                            }
+                            if (message.queryOverride != null && message.hasOwnProperty("queryOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta3.QueryOverride.verify(message.queryOverride);
+                                if (error)
+                                    return "queryOverride." + error;
+                            }
+                            if (message.uriOverrideEnforceMode != null && message.hasOwnProperty("uriOverrideEnforceMode"))
+                                switch (message.uriOverrideEnforceMode) {
+                                default:
+                                    return "uriOverrideEnforceMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UriOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.UriOverride} UriOverride
+                         */
+                        UriOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.UriOverride)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.UriOverride();
+                            switch (object.scheme) {
+                            default:
+                                if (typeof object.scheme === "number") {
+                                    message.scheme = object.scheme;
+                                    break;
+                                }
+                                break;
+                            case "SCHEME_UNSPECIFIED":
+                            case 0:
+                                message.scheme = 0;
+                                break;
+                            case "HTTP":
+                            case 1:
+                                message.scheme = 1;
+                                break;
+                            case "HTTPS":
+                            case 2:
+                                message.scheme = 2;
+                                break;
+                            }
+                            if (object.host != null)
+                                message.host = String(object.host);
+                            if (object.port != null)
+                                if ($util.Long)
+                                    (message.port = $util.Long.fromValue(object.port)).unsigned = false;
+                                else if (typeof object.port === "string")
+                                    message.port = parseInt(object.port, 10);
+                                else if (typeof object.port === "number")
+                                    message.port = object.port;
+                                else if (typeof object.port === "object")
+                                    message.port = new $util.LongBits(object.port.low >>> 0, object.port.high >>> 0).toNumber();
+                            if (object.pathOverride != null) {
+                                if (typeof object.pathOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.UriOverride.pathOverride: object expected");
+                                message.pathOverride = $root.google.cloud.tasks.v2beta3.PathOverride.fromObject(object.pathOverride);
+                            }
+                            if (object.queryOverride != null) {
+                                if (typeof object.queryOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.UriOverride.queryOverride: object expected");
+                                message.queryOverride = $root.google.cloud.tasks.v2beta3.QueryOverride.fromObject(object.queryOverride);
+                            }
+                            switch (object.uriOverrideEnforceMode) {
+                            default:
+                                if (typeof object.uriOverrideEnforceMode === "number") {
+                                    message.uriOverrideEnforceMode = object.uriOverrideEnforceMode;
+                                    break;
+                                }
+                                break;
+                            case "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED":
+                            case 0:
+                                message.uriOverrideEnforceMode = 0;
+                                break;
+                            case "IF_NOT_EXISTS":
+                            case 1:
+                                message.uriOverrideEnforceMode = 1;
+                                break;
+                            case "ALWAYS":
+                            case 2:
+                                message.uriOverrideEnforceMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UriOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.UriOverride} message UriOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UriOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pathOverride = null;
+                                object.queryOverride = null;
+                                object.uriOverrideEnforceMode = options.enums === String ? "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.scheme != null && message.hasOwnProperty("scheme")) {
+                                object.scheme = options.enums === String ? $root.google.cloud.tasks.v2beta3.UriOverride.Scheme[message.scheme] === undefined ? message.scheme : $root.google.cloud.tasks.v2beta3.UriOverride.Scheme[message.scheme] : message.scheme;
+                                if (options.oneofs)
+                                    object._scheme = "scheme";
+                            }
+                            if (message.host != null && message.hasOwnProperty("host")) {
+                                object.host = message.host;
+                                if (options.oneofs)
+                                    object._host = "host";
+                            }
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                if (typeof message.port === "number")
+                                    object.port = options.longs === String ? String(message.port) : message.port;
+                                else
+                                    object.port = options.longs === String ? $util.Long.prototype.toString.call(message.port) : options.longs === Number ? new $util.LongBits(message.port.low >>> 0, message.port.high >>> 0).toNumber() : message.port;
+                                if (options.oneofs)
+                                    object._port = "port";
+                            }
+                            if (message.pathOverride != null && message.hasOwnProperty("pathOverride"))
+                                object.pathOverride = $root.google.cloud.tasks.v2beta3.PathOverride.toObject(message.pathOverride, options);
+                            if (message.queryOverride != null && message.hasOwnProperty("queryOverride"))
+                                object.queryOverride = $root.google.cloud.tasks.v2beta3.QueryOverride.toObject(message.queryOverride, options);
+                            if (message.uriOverrideEnforceMode != null && message.hasOwnProperty("uriOverrideEnforceMode"))
+                                object.uriOverrideEnforceMode = options.enums === String ? $root.google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode[message.uriOverrideEnforceMode] === undefined ? message.uriOverrideEnforceMode : $root.google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode[message.uriOverrideEnforceMode] : message.uriOverrideEnforceMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UriOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UriOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UriOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.UriOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UriOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.UriOverride";
+                        };
+    
+                        /**
+                         * Scheme enum.
+                         * @name google.cloud.tasks.v2beta3.UriOverride.Scheme
+                         * @enum {number}
+                         * @property {number} SCHEME_UNSPECIFIED=0 SCHEME_UNSPECIFIED value
+                         * @property {number} HTTP=1 HTTP value
+                         * @property {number} HTTPS=2 HTTPS value
+                         */
+                        UriOverride.Scheme = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEME_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HTTP"] = 1;
+                            values[valuesById[2] = "HTTPS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * UriOverrideEnforceMode enum.
+                         * @name google.cloud.tasks.v2beta3.UriOverride.UriOverrideEnforceMode
+                         * @enum {number}
+                         * @property {number} URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED=0 URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED value
+                         * @property {number} IF_NOT_EXISTS=1 IF_NOT_EXISTS value
+                         * @property {number} ALWAYS=2 ALWAYS value
+                         */
+                        UriOverride.UriOverrideEnforceMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IF_NOT_EXISTS"] = 1;
+                            values[valuesById[2] = "ALWAYS"] = 2;
+                            return values;
+                        })();
+    
+                        return UriOverride;
+                    })();
+    
+                    v2beta3.HttpTarget = (function() {
+    
+                        /**
+                         * Properties of a HttpTarget.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @interface IHttpTarget
+                         * @property {google.cloud.tasks.v2beta3.IUriOverride|null} [uriOverride] HttpTarget uriOverride
+                         * @property {google.cloud.tasks.v2beta3.HttpMethod|null} [httpMethod] HttpTarget httpMethod
+                         * @property {Array.<google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride>|null} [headerOverrides] HttpTarget headerOverrides
+                         * @property {google.cloud.tasks.v2beta3.IOAuthToken|null} [oauthToken] HttpTarget oauthToken
+                         * @property {google.cloud.tasks.v2beta3.IOidcToken|null} [oidcToken] HttpTarget oidcToken
+                         */
+    
+                        /**
+                         * Constructs a new HttpTarget.
+                         * @memberof google.cloud.tasks.v2beta3
+                         * @classdesc Represents a HttpTarget.
+                         * @implements IHttpTarget
+                         * @constructor
+                         * @param {google.cloud.tasks.v2beta3.IHttpTarget=} [properties] Properties to set
+                         */
+                        function HttpTarget(properties) {
+                            this.headerOverrides = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpTarget uriOverride.
+                         * @member {google.cloud.tasks.v2beta3.IUriOverride|null|undefined} uriOverride
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.uriOverride = null;
+    
+                        /**
+                         * HttpTarget httpMethod.
+                         * @member {google.cloud.tasks.v2beta3.HttpMethod} httpMethod
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.httpMethod = 0;
+    
+                        /**
+                         * HttpTarget headerOverrides.
+                         * @member {Array.<google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride>} headerOverrides
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.headerOverrides = $util.emptyArray;
+    
+                        /**
+                         * HttpTarget oauthToken.
+                         * @member {google.cloud.tasks.v2beta3.IOAuthToken|null|undefined} oauthToken
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.oauthToken = null;
+    
+                        /**
+                         * HttpTarget oidcToken.
+                         * @member {google.cloud.tasks.v2beta3.IOidcToken|null|undefined} oidcToken
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        HttpTarget.prototype.oidcToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * HttpTarget authorizationHeader.
+                         * @member {"oauthToken"|"oidcToken"|undefined} authorizationHeader
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         */
+                        Object.defineProperty(HttpTarget.prototype, "authorizationHeader", {
+                            get: $util.oneOfGetter($oneOfFields = ["oauthToken", "oidcToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new HttpTarget instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IHttpTarget=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2beta3.HttpTarget} HttpTarget instance
+                         */
+                        HttpTarget.create = function create(properties) {
+                            return new HttpTarget(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpTarget message. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IHttpTarget} message HttpTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpTarget.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uriOverride != null && Object.hasOwnProperty.call(message, "uriOverride"))
+                                $root.google.cloud.tasks.v2beta3.UriOverride.encode(message.uriOverride, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.httpMethod != null && Object.hasOwnProperty.call(message, "httpMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.httpMethod);
+                            if (message.headerOverrides != null && message.headerOverrides.length)
+                                for (var i = 0; i < message.headerOverrides.length; ++i)
+                                    $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.encode(message.headerOverrides[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.oauthToken != null && Object.hasOwnProperty.call(message, "oauthToken"))
+                                $root.google.cloud.tasks.v2beta3.OAuthToken.encode(message.oauthToken, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.oidcToken != null && Object.hasOwnProperty.call(message, "oidcToken"))
+                                $root.google.cloud.tasks.v2beta3.OidcToken.encode(message.oidcToken, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpTarget message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.IHttpTarget} message HttpTarget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpTarget message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2beta3.HttpTarget} HttpTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpTarget.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.HttpTarget();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uriOverride = $root.google.cloud.tasks.v2beta3.UriOverride.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.httpMethod = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.headerOverrides && message.headerOverrides.length))
+                                            message.headerOverrides = [];
+                                        message.headerOverrides.push($root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.oauthToken = $root.google.cloud.tasks.v2beta3.OAuthToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.oidcToken = $root.google.cloud.tasks.v2beta3.OidcToken.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpTarget message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2beta3.HttpTarget} HttpTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpTarget.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpTarget message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpTarget.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.uriOverride != null && message.hasOwnProperty("uriOverride")) {
+                                var error = $root.google.cloud.tasks.v2beta3.UriOverride.verify(message.uriOverride);
+                                if (error)
+                                    return "uriOverride." + error;
+                            }
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                switch (message.httpMethod) {
+                                default:
+                                    return "httpMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.headerOverrides != null && message.hasOwnProperty("headerOverrides")) {
+                                if (!Array.isArray(message.headerOverrides))
+                                    return "headerOverrides: array expected";
+                                for (var i = 0; i < message.headerOverrides.length; ++i) {
+                                    var error = $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.verify(message.headerOverrides[i]);
+                                    if (error)
+                                        return "headerOverrides." + error;
+                                }
+                            }
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta3.OAuthToken.verify(message.oauthToken);
+                                    if (error)
+                                        return "oauthToken." + error;
+                                }
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                if (properties.authorizationHeader === 1)
+                                    return "authorizationHeader: multiple values";
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2beta3.OidcToken.verify(message.oidcToken);
+                                    if (error)
+                                        return "oidcToken." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpTarget message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2beta3.HttpTarget} HttpTarget
+                         */
+                        HttpTarget.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2beta3.HttpTarget)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2beta3.HttpTarget();
+                            if (object.uriOverride != null) {
+                                if (typeof object.uriOverride !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.uriOverride: object expected");
+                                message.uriOverride = $root.google.cloud.tasks.v2beta3.UriOverride.fromObject(object.uriOverride);
+                            }
+                            switch (object.httpMethod) {
+                            default:
+                                if (typeof object.httpMethod === "number") {
+                                    message.httpMethod = object.httpMethod;
+                                    break;
+                                }
+                                break;
+                            case "HTTP_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.httpMethod = 0;
+                                break;
+                            case "POST":
+                            case 1:
+                                message.httpMethod = 1;
+                                break;
+                            case "GET":
+                            case 2:
+                                message.httpMethod = 2;
+                                break;
+                            case "HEAD":
+                            case 3:
+                                message.httpMethod = 3;
+                                break;
+                            case "PUT":
+                            case 4:
+                                message.httpMethod = 4;
+                                break;
+                            case "DELETE":
+                            case 5:
+                                message.httpMethod = 5;
+                                break;
+                            case "PATCH":
+                            case 6:
+                                message.httpMethod = 6;
+                                break;
+                            case "OPTIONS":
+                            case 7:
+                                message.httpMethod = 7;
+                                break;
+                            }
+                            if (object.headerOverrides) {
+                                if (!Array.isArray(object.headerOverrides))
+                                    throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.headerOverrides: array expected");
+                                message.headerOverrides = [];
+                                for (var i = 0; i < object.headerOverrides.length; ++i) {
+                                    if (typeof object.headerOverrides[i] !== "object")
+                                        throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.headerOverrides: object expected");
+                                    message.headerOverrides[i] = $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.fromObject(object.headerOverrides[i]);
+                                }
+                            }
+                            if (object.oauthToken != null) {
+                                if (typeof object.oauthToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.oauthToken: object expected");
+                                message.oauthToken = $root.google.cloud.tasks.v2beta3.OAuthToken.fromObject(object.oauthToken);
+                            }
+                            if (object.oidcToken != null) {
+                                if (typeof object.oidcToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.oidcToken: object expected");
+                                message.oidcToken = $root.google.cloud.tasks.v2beta3.OidcToken.fromObject(object.oidcToken);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpTarget message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {google.cloud.tasks.v2beta3.HttpTarget} message HttpTarget
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpTarget.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.headerOverrides = [];
+                            if (options.defaults) {
+                                object.uriOverride = null;
+                                object.httpMethod = options.enums === String ? "HTTP_METHOD_UNSPECIFIED" : 0;
+                            }
+                            if (message.uriOverride != null && message.hasOwnProperty("uriOverride"))
+                                object.uriOverride = $root.google.cloud.tasks.v2beta3.UriOverride.toObject(message.uriOverride, options);
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                object.httpMethod = options.enums === String ? $root.google.cloud.tasks.v2beta3.HttpMethod[message.httpMethod] === undefined ? message.httpMethod : $root.google.cloud.tasks.v2beta3.HttpMethod[message.httpMethod] : message.httpMethod;
+                            if (message.headerOverrides && message.headerOverrides.length) {
+                                object.headerOverrides = [];
+                                for (var j = 0; j < message.headerOverrides.length; ++j)
+                                    object.headerOverrides[j] = $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.toObject(message.headerOverrides[j], options);
+                            }
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                object.oauthToken = $root.google.cloud.tasks.v2beta3.OAuthToken.toObject(message.oauthToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oauthToken";
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                object.oidcToken = $root.google.cloud.tasks.v2beta3.OidcToken.toObject(message.oidcToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oidcToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpTarget to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpTarget.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HttpTarget
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HttpTarget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tasks.v2beta3.HttpTarget";
+                        };
+    
+                        HttpTarget.Header = (function() {
+    
+                            /**
+                             * Properties of a Header.
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                             * @interface IHeader
+                             * @property {string|null} [key] Header key
+                             * @property {string|null} [value] Header value
+                             */
+    
+                            /**
+                             * Constructs a new Header.
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                             * @classdesc Represents a Header.
+                             * @implements IHeader
+                             * @constructor
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeader=} [properties] Properties to set
+                             */
+                            function Header(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Header key.
+                             * @member {string} key
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @instance
+                             */
+                            Header.prototype.key = "";
+    
+                            /**
+                             * Header value.
+                             * @member {string} value
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @instance
+                             */
+                            Header.prototype.value = "";
+    
+                            /**
+                             * Creates a new Header instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeader=} [properties] Properties to set
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.Header} Header instance
+                             */
+                            Header.create = function create(properties) {
+                                return new Header(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Header message. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.Header.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeader} message Header message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Header.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Header message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.Header.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeader} message Header message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Header.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Header message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.Header} Header
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Header.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.HttpTarget.Header();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Header message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.Header} Header
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Header.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Header message.
+                             * @function verify
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Header.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Header message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.Header} Header
+                             */
+                            Header.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tasks.v2beta3.HttpTarget.Header)
+                                    return object;
+                                var message = new $root.google.cloud.tasks.v2beta3.HttpTarget.Header();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Header message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.Header} message Header
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Header.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.value = "";
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Header to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Header.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Header
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.Header
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Header.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tasks.v2beta3.HttpTarget.Header";
+                            };
+    
+                            return Header;
+                        })();
+    
+                        HttpTarget.HeaderOverride = (function() {
+    
+                            /**
+                             * Properties of a HeaderOverride.
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                             * @interface IHeaderOverride
+                             * @property {google.cloud.tasks.v2beta3.HttpTarget.IHeader|null} [header] HeaderOverride header
+                             */
+    
+                            /**
+                             * Constructs a new HeaderOverride.
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget
+                             * @classdesc Represents a HeaderOverride.
+                             * @implements IHeaderOverride
+                             * @constructor
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride=} [properties] Properties to set
+                             */
+                            function HeaderOverride(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HeaderOverride header.
+                             * @member {google.cloud.tasks.v2beta3.HttpTarget.IHeader|null|undefined} header
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @instance
+                             */
+                            HeaderOverride.prototype.header = null;
+    
+                            /**
+                             * Creates a new HeaderOverride instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride=} [properties] Properties to set
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride} HeaderOverride instance
+                             */
+                            HeaderOverride.create = function create(properties) {
+                                return new HeaderOverride(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HeaderOverride message. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride} message HeaderOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeaderOverride.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.header != null && Object.hasOwnProperty.call(message, "header"))
+                                    $root.google.cloud.tasks.v2beta3.HttpTarget.Header.encode(message.header, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HeaderOverride message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.IHeaderOverride} message HeaderOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HeaderOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HeaderOverride message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride} HeaderOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeaderOverride.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.header = $root.google.cloud.tasks.v2beta3.HttpTarget.Header.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HeaderOverride message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride} HeaderOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HeaderOverride.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HeaderOverride message.
+                             * @function verify
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HeaderOverride.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.header != null && message.hasOwnProperty("header")) {
+                                    var error = $root.google.cloud.tasks.v2beta3.HttpTarget.Header.verify(message.header);
+                                    if (error)
+                                        return "header." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HeaderOverride message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride} HeaderOverride
+                             */
+                            HeaderOverride.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride)
+                                    return object;
+                                var message = new $root.google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride();
+                                if (object.header != null) {
+                                    if (typeof object.header !== "object")
+                                        throw TypeError(".google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride.header: object expected");
+                                    message.header = $root.google.cloud.tasks.v2beta3.HttpTarget.Header.fromObject(object.header);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HeaderOverride message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride} message HeaderOverride
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HeaderOverride.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.header = null;
+                                if (message.header != null && message.hasOwnProperty("header"))
+                                    object.header = $root.google.cloud.tasks.v2beta3.HttpTarget.Header.toObject(message.header, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HeaderOverride to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HeaderOverride.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HeaderOverride
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HeaderOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tasks.v2beta3.HttpTarget.HeaderOverride";
+                            };
+    
+                            return HeaderOverride;
+                        })();
+    
+                        return HttpTarget;
                     })();
     
                     v2beta3.HttpRequest = (function() {
@@ -27668,6 +33396,287 @@
                 };
     
                 return ResourceReference;
+            })();
+    
+            api.HttpBody = (function() {
+    
+                /**
+                 * Properties of a HttpBody.
+                 * @memberof google.api
+                 * @interface IHttpBody
+                 * @property {string|null} [contentType] HttpBody contentType
+                 * @property {Uint8Array|null} [data] HttpBody data
+                 * @property {Array.<google.protobuf.IAny>|null} [extensions] HttpBody extensions
+                 */
+    
+                /**
+                 * Constructs a new HttpBody.
+                 * @memberof google.api
+                 * @classdesc Represents a HttpBody.
+                 * @implements IHttpBody
+                 * @constructor
+                 * @param {google.api.IHttpBody=} [properties] Properties to set
+                 */
+                function HttpBody(properties) {
+                    this.extensions = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * HttpBody contentType.
+                 * @member {string} contentType
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.contentType = "";
+    
+                /**
+                 * HttpBody data.
+                 * @member {Uint8Array} data
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.data = $util.newBuffer([]);
+    
+                /**
+                 * HttpBody extensions.
+                 * @member {Array.<google.protobuf.IAny>} extensions
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.extensions = $util.emptyArray;
+    
+                /**
+                 * Creates a new HttpBody instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody=} [properties] Properties to set
+                 * @returns {google.api.HttpBody} HttpBody instance
+                 */
+                HttpBody.create = function create(properties) {
+                    return new HttpBody(properties);
+                };
+    
+                /**
+                 * Encodes the specified HttpBody message. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody} message HttpBody message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                HttpBody.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.contentType != null && Object.hasOwnProperty.call(message, "contentType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.contentType);
+                    if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                    if (message.extensions != null && message.extensions.length)
+                        for (var i = 0; i < message.extensions.length; ++i)
+                            $root.google.protobuf.Any.encode(message.extensions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified HttpBody message, length delimited. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody} message HttpBody message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                HttpBody.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a HttpBody message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.HttpBody} HttpBody
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                HttpBody.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpBody();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.contentType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.data = reader.bytes();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.extensions && message.extensions.length))
+                                    message.extensions = [];
+                                message.extensions.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a HttpBody message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.HttpBody} HttpBody
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                HttpBody.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a HttpBody message.
+                 * @function verify
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                HttpBody.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        if (!$util.isString(message.contentType))
+                            return "contentType: string expected";
+                    if (message.data != null && message.hasOwnProperty("data"))
+                        if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                            return "data: buffer expected";
+                    if (message.extensions != null && message.hasOwnProperty("extensions")) {
+                        if (!Array.isArray(message.extensions))
+                            return "extensions: array expected";
+                        for (var i = 0; i < message.extensions.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.extensions[i]);
+                            if (error)
+                                return "extensions." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a HttpBody message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.HttpBody} HttpBody
+                 */
+                HttpBody.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.HttpBody)
+                        return object;
+                    var message = new $root.google.api.HttpBody();
+                    if (object.contentType != null)
+                        message.contentType = String(object.contentType);
+                    if (object.data != null)
+                        if (typeof object.data === "string")
+                            $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                        else if (object.data.length >= 0)
+                            message.data = object.data;
+                    if (object.extensions) {
+                        if (!Array.isArray(object.extensions))
+                            throw TypeError(".google.api.HttpBody.extensions: array expected");
+                        message.extensions = [];
+                        for (var i = 0; i < object.extensions.length; ++i) {
+                            if (typeof object.extensions[i] !== "object")
+                                throw TypeError(".google.api.HttpBody.extensions: object expected");
+                            message.extensions[i] = $root.google.protobuf.Any.fromObject(object.extensions[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a HttpBody message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.HttpBody} message HttpBody
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                HttpBody.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.extensions = [];
+                    if (options.defaults) {
+                        object.contentType = "";
+                        if (options.bytes === String)
+                            object.data = "";
+                        else {
+                            object.data = [];
+                            if (options.bytes !== Array)
+                                object.data = $util.newBuffer(object.data);
+                        }
+                    }
+                    if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        object.contentType = message.contentType;
+                    if (message.data != null && message.hasOwnProperty("data"))
+                        object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                    if (message.extensions && message.extensions.length) {
+                        object.extensions = [];
+                        for (var j = 0; j < message.extensions.length; ++j)
+                            object.extensions[j] = $root.google.protobuf.Any.toObject(message.extensions[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this HttpBody to JSON.
+                 * @function toJSON
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                HttpBody.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for HttpBody
+                 * @function getTypeUrl
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                HttpBody.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.HttpBody";
+                };
+    
+                return HttpBody;
             })();
     
             return api;

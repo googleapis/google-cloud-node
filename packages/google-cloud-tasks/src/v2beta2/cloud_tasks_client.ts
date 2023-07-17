@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -60,6 +62,7 @@ export class CloudTasksClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   cloudTasksStub?: Promise<{[name: string]: Function}>;
 
@@ -156,6 +159,10 @@ export class CloudTasksClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -267,6 +274,7 @@ export class CloudTasksClient {
       'purgeQueue',
       'pauseQueue',
       'resumeQueue',
+      'uploadQueueYaml',
       'getIamPolicy',
       'setIamPolicy',
       'testIamPermissions',
@@ -279,6 +287,7 @@ export class CloudTasksClient {
       'renewLease',
       'cancelLease',
       'runTask',
+      'bufferTask',
     ];
     for (const methodName of cloudTasksStubMethods) {
       const callPromise = this.cloudTasksStub.then(
@@ -1051,6 +1060,101 @@ export class CloudTasksClient {
     return this.innerApiCalls.resumeQueue(request, options, callback);
   }
   /**
+   * Update queue list by uploading a queue.yaml file.
+   *
+   * The queue.yaml file is supplied in the request body as a YAML encoded
+   * string. This method was added to support gcloud clients versions before
+   * 322.0.0. New clients should use CreateQueue instead of this method.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.appId
+   *   Required. The App ID is supplied as an HTTP parameter. Unlike internal
+   *   usage of App ID, it does not include a region prefix. Rather, the App ID
+   *   represents the Project ID against which to make the request.
+   * @param {google.api.HttpBody} request.httpBody
+   *   The http body contains the queue.yaml file which used to update queue lists
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js</caption>
+   * region_tag:cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_async
+   */
+  uploadQueueYaml(
+    request?: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  uploadQueueYaml(
+    request: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadQueueYaml(
+    request: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadQueueYaml(
+    request?: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.uploadQueueYaml(request, options, callback);
+  }
+  /**
    * Gets the access control policy for a
    * {@link google.cloud.tasks.v2beta2.Queue|Queue}. Returns an empty policy if the
    * resource exists and does not have a policy set.
@@ -1482,10 +1586,10 @@ export class CloudTasksClient {
    *   that was deleted or completed recently then the call will fail
    *   with {@link google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS}.
    *   If the task's queue was created using Cloud Tasks, then another task with
-   *   the same name can't be created for ~1hour after the original task was
+   *   the same name can't be created for ~1 hour after the original task was
    *   deleted or completed. If the task's queue was created using queue.yaml or
    *   queue.xml, then another task with the same name can't be created
-   *   for ~9days after the original task was deleted or completed.
+   *   for ~9 days after the original task was deleted or completed.
    *
    *   Because there is an extra lookup cost to identify duplicate task
    *   names, these {@link google.cloud.tasks.v2beta2.CloudTasks.CreateTask|CreateTask}
@@ -2333,6 +2437,113 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.runTask(request, options, callback);
   }
+  /**
+   * Creates and buffers a new task without the need to explicitly define a Task
+   * message. The queue must have [HTTP
+   * target][google.cloud.tasks.v2beta2.HttpTarget]. To create the task with a
+   * custom ID, use the following format and set TASK_ID to your desired ID:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer
+   * To create the task with an automatically generated ID, use the following
+   * format:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.
+   * Note: This feature is in its experimental stage. You must request access to
+   * the API through the [Cloud Tasks BufferTask Experiment Signup
+   * form](https://forms.gle/X8Zr5hiXH5tTGFqh8).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.queue
+   *   Required. The parent queue name. For example:
+   *   projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *
+   *   The queue must already exist.
+   * @param {string} [request.taskId]
+   *   Optional. Task ID for the task being created. If not provided, a random
+   *   task ID is assigned to the task.
+   * @param {google.api.HttpBody} [request.body]
+   *   Optional. Body of the HTTP request.
+   *
+   *   The body can take any generic value. The value is written to the
+   *   {@link payload|HttpRequest} of the [Task].
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.BufferTaskResponse | BufferTaskResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta2/cloud_tasks.buffer_task.js</caption>
+   * region_tag:cloudtasks_v2beta2_generated_CloudTasks_BufferTask_async
+   */
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+          | protos.google.cloud.tasks.v2beta2.IBufferTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        queue: request.queue ?? '',
+        task_id: request.taskId ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bufferTask(request, options, callback);
+  }
 
   /**
    * Lists queues.
@@ -2896,6 +3107,86 @@ export class CloudTasksClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.tasks.v2beta2.ITask>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3081,6 +3372,7 @@ export class CloudTasksClient {
       return this.cloudTasksStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();
