@@ -29,6 +29,7 @@
   * [Cloud_tasks.test_iam_permissions](#cloud_tasks.test_iam_permissions)
   * [Cloud_tasks.update_queue](#cloud_tasks.update_queue)
   * [Cloud_tasks.acknowledge_task](#cloud_tasks.acknowledge_task)
+  * [Cloud_tasks.buffer_task](#cloud_tasks.buffer_task)
   * [Cloud_tasks.cancel_lease](#cloud_tasks.cancel_lease)
   * [Cloud_tasks.create_queue](#cloud_tasks.create_queue)
   * [Cloud_tasks.create_task](#cloud_tasks.create_task)
@@ -48,6 +49,8 @@
   * [Cloud_tasks.set_iam_policy](#cloud_tasks.set_iam_policy)
   * [Cloud_tasks.test_iam_permissions](#cloud_tasks.test_iam_permissions)
   * [Cloud_tasks.update_queue](#cloud_tasks.update_queue)
+  * [Cloud_tasks.upload_queue_yaml](#cloud_tasks.upload_queue_yaml)
+  * [Cloud_tasks.buffer_task](#cloud_tasks.buffer_task)
   * [Cloud_tasks.create_queue](#cloud_tasks.create_queue)
   * [Cloud_tasks.create_task](#cloud_tasks.create_task)
   * [Cloud_tasks.delete_queue](#cloud_tasks.delete_queue)
@@ -65,7 +68,6 @@
   * [Cloud_tasks.test_iam_permissions](#cloud_tasks.test_iam_permissions)
   * [Cloud_tasks.update_queue](#cloud_tasks.update_queue)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -364,6 +366,23 @@ __Usage:__
 
 
 `node packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.acknowledge_task.js`
+
+
+-----
+
+
+
+
+### Cloud_tasks.buffer_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.buffer_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.buffer_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.buffer_task.js`
 
 
 -----
@@ -694,6 +713,40 @@ __Usage:__
 
 
 
+### Cloud_tasks.upload_queue_yaml
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js`
+
+
+-----
+
+
+
+
+### Cloud_tasks.buffer_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.buffer_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.buffer_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.buffer_task.js`
+
+
+-----
+
+
+
+
 ### Cloud_tasks.create_queue
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_queue.js).
@@ -976,23 +1029,6 @@ __Usage:__
 
 
 `node packages/google-cloud-tasks/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-tasks/samples/test/quickstart.test.js`
 
 
 

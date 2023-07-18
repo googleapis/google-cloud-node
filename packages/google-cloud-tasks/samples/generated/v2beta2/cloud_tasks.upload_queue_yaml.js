@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START cloudtasks_v2beta3_generated_CloudTasks_GetTask_async]
+function main(appId) {
+  // [START cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,35 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The task name. For example:
-   *  `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+   *  Required. The App ID is supplied as an HTTP parameter. Unlike internal
+   *  usage of App ID, it does not include a region prefix. Rather, the App ID
+   *  represents the Project ID against which to make the request.
    */
-  // const name = 'abc123'
+  // const appId = 'abc123'
   /**
-   *  The response_view specifies which subset of the
-   *  Task google.cloud.tasks.v2beta3.Task  will be returned.
-   *  By default response_view is
-   *  BASIC google.cloud.tasks.v2beta3.Task.View.BASIC; not all information is
-   *  retrieved by default because some data, such as payloads, might be
-   *  desirable to return only when needed because of its large size or because
-   *  of the sensitivity of data that it contains.
-   *  Authorization for FULL google.cloud.tasks.v2beta3.Task.View.FULL 
-   *  requires `cloudtasks.tasks.fullView` Google
-   *  IAM (https://cloud.google.com/iam/) permission on the
-   *  Task google.cloud.tasks.v2beta3.Task  resource.
+   *  The http body contains the queue.yaml file which used to update queue lists
    */
-  // const responseView = {}
+  // const httpBody = {}
 
   // Imports the Tasks library
-  const {CloudTasksClient} = require('@google-cloud/tasks').v2beta3;
+  const {CloudTasksClient} = require('@google-cloud/tasks').v2beta2;
 
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function callGetTask() {
+  async function callUploadQueueYaml() {
     // Construct request
     const request = {
-      name,
+      appId,
     };
 
     // Run request
-    const response = await tasksClient.getTask(request);
+    const response = await tasksClient.uploadQueueYaml(request);
     console.log(response);
   }
 
-  callGetTask();
-  // [END cloudtasks_v2beta3_generated_CloudTasks_GetTask_async]
+  callUploadQueueYaml();
+  // [END cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_async]
 }
 
 process.on('unhandledRejection', err => {
