@@ -1524,6 +1524,12 @@ export namespace google {
                 /** NodeNetworkConfig podCidrOverprovisionConfig */
                 podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
 
+                /** NodeNetworkConfig additionalNodeNetworkConfigs */
+                additionalNodeNetworkConfigs?: (google.container.v1.IAdditionalNodeNetworkConfig[]|null);
+
+                /** NodeNetworkConfig additionalPodNetworkConfigs */
+                additionalPodNetworkConfigs?: (google.container.v1.IAdditionalPodNetworkConfig[]|null);
+
                 /** NodeNetworkConfig podIpv4RangeUtilization */
                 podIpv4RangeUtilization?: (number|null);
             }
@@ -1554,6 +1560,12 @@ export namespace google {
 
                 /** NodeNetworkConfig podCidrOverprovisionConfig. */
                 public podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
+
+                /** NodeNetworkConfig additionalNodeNetworkConfigs. */
+                public additionalNodeNetworkConfigs: google.container.v1.IAdditionalNodeNetworkConfig[];
+
+                /** NodeNetworkConfig additionalPodNetworkConfigs. */
+                public additionalPodNetworkConfigs: google.container.v1.IAdditionalPodNetworkConfig[];
 
                 /** NodeNetworkConfig podIpv4RangeUtilization. */
                 public podIpv4RangeUtilization: number;
@@ -1752,6 +1764,221 @@ export namespace google {
                         TIER_1 = 1
                     }
                 }
+            }
+
+            /** Properties of an AdditionalNodeNetworkConfig. */
+            interface IAdditionalNodeNetworkConfig {
+
+                /** AdditionalNodeNetworkConfig network */
+                network?: (string|null);
+
+                /** AdditionalNodeNetworkConfig subnetwork */
+                subnetwork?: (string|null);
+            }
+
+            /** Represents an AdditionalNodeNetworkConfig. */
+            class AdditionalNodeNetworkConfig implements IAdditionalNodeNetworkConfig {
+
+                /**
+                 * Constructs a new AdditionalNodeNetworkConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IAdditionalNodeNetworkConfig);
+
+                /** AdditionalNodeNetworkConfig network. */
+                public network: string;
+
+                /** AdditionalNodeNetworkConfig subnetwork. */
+                public subnetwork: string;
+
+                /**
+                 * Creates a new AdditionalNodeNetworkConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalNodeNetworkConfig instance
+                 */
+                public static create(properties?: google.container.v1.IAdditionalNodeNetworkConfig): google.container.v1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Encodes the specified AdditionalNodeNetworkConfig message. Does not implicitly {@link google.container.v1.AdditionalNodeNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalNodeNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IAdditionalNodeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalNodeNetworkConfig message, length delimited. Does not implicitly {@link google.container.v1.AdditionalNodeNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalNodeNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IAdditionalNodeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalNodeNetworkConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalNodeNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Decodes an AdditionalNodeNetworkConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalNodeNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Verifies an AdditionalNodeNetworkConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalNodeNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalNodeNetworkConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalNodeNetworkConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalNodeNetworkConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.AdditionalNodeNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalNodeNetworkConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalNodeNetworkConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdditionalPodNetworkConfig. */
+            interface IAdditionalPodNetworkConfig {
+
+                /** AdditionalPodNetworkConfig subnetwork */
+                subnetwork?: (string|null);
+
+                /** AdditionalPodNetworkConfig secondaryPodRange */
+                secondaryPodRange?: (string|null);
+
+                /** AdditionalPodNetworkConfig maxPodsPerNode */
+                maxPodsPerNode?: (google.container.v1.IMaxPodsConstraint|null);
+            }
+
+            /** Represents an AdditionalPodNetworkConfig. */
+            class AdditionalPodNetworkConfig implements IAdditionalPodNetworkConfig {
+
+                /**
+                 * Constructs a new AdditionalPodNetworkConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IAdditionalPodNetworkConfig);
+
+                /** AdditionalPodNetworkConfig subnetwork. */
+                public subnetwork: string;
+
+                /** AdditionalPodNetworkConfig secondaryPodRange. */
+                public secondaryPodRange: string;
+
+                /** AdditionalPodNetworkConfig maxPodsPerNode. */
+                public maxPodsPerNode?: (google.container.v1.IMaxPodsConstraint|null);
+
+                /** AdditionalPodNetworkConfig _maxPodsPerNode. */
+                public _maxPodsPerNode?: "maxPodsPerNode";
+
+                /**
+                 * Creates a new AdditionalPodNetworkConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalPodNetworkConfig instance
+                 */
+                public static create(properties?: google.container.v1.IAdditionalPodNetworkConfig): google.container.v1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Encodes the specified AdditionalPodNetworkConfig message. Does not implicitly {@link google.container.v1.AdditionalPodNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalPodNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IAdditionalPodNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalPodNetworkConfig message, length delimited. Does not implicitly {@link google.container.v1.AdditionalPodNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalPodNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IAdditionalPodNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalPodNetworkConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalPodNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Decodes an AdditionalPodNetworkConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalPodNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Verifies an AdditionalPodNetworkConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalPodNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalPodNetworkConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalPodNetworkConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalPodNetworkConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.AdditionalPodNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalPodNetworkConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalPodNetworkConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ShieldedInstanceConfig. */
@@ -11494,6 +11721,9 @@ export namespace google {
 
                     /** PlacementPolicy type */
                     type?: (google.container.v1.NodePool.PlacementPolicy.Type|keyof typeof google.container.v1.NodePool.PlacementPolicy.Type|null);
+
+                    /** PlacementPolicy policyName */
+                    policyName?: (string|null);
                 }
 
                 /** Represents a PlacementPolicy. */
@@ -11507,6 +11737,9 @@ export namespace google {
 
                     /** PlacementPolicy type. */
                     public type: (google.container.v1.NodePool.PlacementPolicy.Type|keyof typeof google.container.v1.NodePool.PlacementPolicy.Type);
+
+                    /** PlacementPolicy policyName. */
+                    public policyName: string;
 
                     /**
                      * Creates a new PlacementPolicy instance using the specified properties.
@@ -15011,6 +15244,9 @@ export namespace google {
                 /** NetworkConfig gatewayApiConfig */
                 gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
+                /** NetworkConfig enableMultiNetworking */
+                enableMultiNetworking?: (boolean|null);
+
                 /** NetworkConfig networkPerformanceConfig */
                 networkPerformanceConfig?: (google.container.v1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
 
@@ -15056,6 +15292,9 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig. */
                 public gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableMultiNetworking. */
+                public enableMultiNetworking: boolean;
 
                 /** NetworkConfig networkPerformanceConfig. */
                 public networkPerformanceConfig?: (google.container.v1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
