@@ -3403,6 +3403,9 @@ export namespace google {
                         /** Event returnToProgram */
                         returnToProgram?: (google.cloud.video.livestream.v1.Event.IReturnToProgramTask|null);
 
+                        /** Event slate */
+                        slate?: (google.cloud.video.livestream.v1.Event.ISlateTask|null);
+
                         /** Event mute */
                         mute?: (google.cloud.video.livestream.v1.Event.IMuteTask|null);
 
@@ -3452,6 +3455,9 @@ export namespace google {
                         /** Event returnToProgram. */
                         public returnToProgram?: (google.cloud.video.livestream.v1.Event.IReturnToProgramTask|null);
 
+                        /** Event slate. */
+                        public slate?: (google.cloud.video.livestream.v1.Event.ISlateTask|null);
+
                         /** Event mute. */
                         public mute?: (google.cloud.video.livestream.v1.Event.IMuteTask|null);
 
@@ -3471,7 +3477,7 @@ export namespace google {
                         public error?: (google.rpc.IStatus|null);
 
                         /** Event task. */
-                        public task?: ("inputSwitch"|"adBreak"|"returnToProgram"|"mute"|"unmute");
+                        public task?: ("inputSwitch"|"adBreak"|"returnToProgram"|"slate"|"mute"|"unmute");
 
                         /**
                          * Creates a new Event instance using the specified properties.
@@ -3741,6 +3747,109 @@ export namespace google {
 
                             /**
                              * Gets the default type url for AdBreakTask
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SlateTask. */
+                        interface ISlateTask {
+
+                            /** SlateTask duration */
+                            duration?: (google.protobuf.IDuration|null);
+
+                            /** SlateTask asset */
+                            asset?: (string|null);
+                        }
+
+                        /** Represents a SlateTask. */
+                        class SlateTask implements ISlateTask {
+
+                            /**
+                             * Constructs a new SlateTask.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.Event.ISlateTask);
+
+                            /** SlateTask duration. */
+                            public duration?: (google.protobuf.IDuration|null);
+
+                            /** SlateTask asset. */
+                            public asset: string;
+
+                            /**
+                             * Creates a new SlateTask instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SlateTask instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.Event.ISlateTask): google.cloud.video.livestream.v1.Event.SlateTask;
+
+                            /**
+                             * Encodes the specified SlateTask message. Does not implicitly {@link google.cloud.video.livestream.v1.Event.SlateTask.verify|verify} messages.
+                             * @param message SlateTask message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.Event.ISlateTask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SlateTask message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Event.SlateTask.verify|verify} messages.
+                             * @param message SlateTask message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.Event.ISlateTask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SlateTask message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SlateTask
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Event.SlateTask;
+
+                            /**
+                             * Decodes a SlateTask message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SlateTask
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Event.SlateTask;
+
+                            /**
+                             * Verifies a SlateTask message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SlateTask message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SlateTask
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Event.SlateTask;
+
+                            /**
+                             * Creates a plain object from a SlateTask message. Also converts values to other types if specified.
+                             * @param message SlateTask
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.Event.SlateTask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SlateTask to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SlateTask
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -4035,6 +4144,360 @@ export namespace google {
                             FAILED = 4,
                             PENDING = 5,
                             STOPPED = 6
+                        }
+                    }
+
+                    /** Properties of an Asset. */
+                    interface IAsset {
+
+                        /** Asset name */
+                        name?: (string|null);
+
+                        /** Asset createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Asset updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Asset labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** Asset video */
+                        video?: (google.cloud.video.livestream.v1.Asset.IVideoAsset|null);
+
+                        /** Asset image */
+                        image?: (google.cloud.video.livestream.v1.Asset.IImageAsset|null);
+
+                        /** Asset crc32c */
+                        crc32c?: (string|null);
+
+                        /** Asset state */
+                        state?: (google.cloud.video.livestream.v1.Asset.State|keyof typeof google.cloud.video.livestream.v1.Asset.State|null);
+
+                        /** Asset error */
+                        error?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents an Asset. */
+                    class Asset implements IAsset {
+
+                        /**
+                         * Constructs a new Asset.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IAsset);
+
+                        /** Asset name. */
+                        public name: string;
+
+                        /** Asset createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Asset updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Asset labels. */
+                        public labels: { [k: string]: string };
+
+                        /** Asset video. */
+                        public video?: (google.cloud.video.livestream.v1.Asset.IVideoAsset|null);
+
+                        /** Asset image. */
+                        public image?: (google.cloud.video.livestream.v1.Asset.IImageAsset|null);
+
+                        /** Asset crc32c. */
+                        public crc32c: string;
+
+                        /** Asset state. */
+                        public state: (google.cloud.video.livestream.v1.Asset.State|keyof typeof google.cloud.video.livestream.v1.Asset.State);
+
+                        /** Asset error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /** Asset resource. */
+                        public resource?: ("video"|"image");
+
+                        /**
+                         * Creates a new Asset instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Asset instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IAsset): google.cloud.video.livestream.v1.Asset;
+
+                        /**
+                         * Encodes the specified Asset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.verify|verify} messages.
+                         * @param message Asset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.verify|verify} messages.
+                         * @param message Asset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Asset message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Asset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Asset;
+
+                        /**
+                         * Decodes an Asset message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Asset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Asset;
+
+                        /**
+                         * Verifies an Asset message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Asset message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Asset
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Asset;
+
+                        /**
+                         * Creates a plain object from an Asset message. Also converts values to other types if specified.
+                         * @param message Asset
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.Asset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Asset to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Asset
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Asset {
+
+                        /** Properties of a VideoAsset. */
+                        interface IVideoAsset {
+
+                            /** VideoAsset uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a VideoAsset. */
+                        class VideoAsset implements IVideoAsset {
+
+                            /**
+                             * Constructs a new VideoAsset.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.Asset.IVideoAsset);
+
+                            /** VideoAsset uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new VideoAsset instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns VideoAsset instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.Asset.IVideoAsset): google.cloud.video.livestream.v1.Asset.VideoAsset;
+
+                            /**
+                             * Encodes the specified VideoAsset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.VideoAsset.verify|verify} messages.
+                             * @param message VideoAsset message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.Asset.IVideoAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified VideoAsset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.VideoAsset.verify|verify} messages.
+                             * @param message VideoAsset message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.Asset.IVideoAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a VideoAsset message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns VideoAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Asset.VideoAsset;
+
+                            /**
+                             * Decodes a VideoAsset message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns VideoAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Asset.VideoAsset;
+
+                            /**
+                             * Verifies a VideoAsset message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a VideoAsset message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns VideoAsset
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Asset.VideoAsset;
+
+                            /**
+                             * Creates a plain object from a VideoAsset message. Also converts values to other types if specified.
+                             * @param message VideoAsset
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.Asset.VideoAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this VideoAsset to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for VideoAsset
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an ImageAsset. */
+                        interface IImageAsset {
+
+                            /** ImageAsset uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents an ImageAsset. */
+                        class ImageAsset implements IImageAsset {
+
+                            /**
+                             * Constructs a new ImageAsset.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.Asset.IImageAsset);
+
+                            /** ImageAsset uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new ImageAsset instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ImageAsset instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.Asset.IImageAsset): google.cloud.video.livestream.v1.Asset.ImageAsset;
+
+                            /**
+                             * Encodes the specified ImageAsset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.ImageAsset.verify|verify} messages.
+                             * @param message ImageAsset message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.Asset.IImageAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ImageAsset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.ImageAsset.verify|verify} messages.
+                             * @param message ImageAsset message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.Asset.IImageAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ImageAsset message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ImageAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Asset.ImageAsset;
+
+                            /**
+                             * Decodes an ImageAsset message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ImageAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Asset.ImageAsset;
+
+                            /**
+                             * Verifies an ImageAsset message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ImageAsset message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ImageAsset
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Asset.ImageAsset;
+
+                            /**
+                             * Creates a plain object from an ImageAsset message. Also converts values to other types if specified.
+                             * @param message ImageAsset
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.Asset.ImageAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ImageAsset to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ImageAsset
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            ACTIVE = 2,
+                            DELETING = 3,
+                            ERROR = 4
                         }
                     }
 
@@ -5029,6 +5492,227 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a Pool. */
+                    interface IPool {
+
+                        /** Pool name */
+                        name?: (string|null);
+
+                        /** Pool createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Pool updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Pool labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** Pool networkConfig */
+                        networkConfig?: (google.cloud.video.livestream.v1.Pool.INetworkConfig|null);
+                    }
+
+                    /** Represents a Pool. */
+                    class Pool implements IPool {
+
+                        /**
+                         * Constructs a new Pool.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IPool);
+
+                        /** Pool name. */
+                        public name: string;
+
+                        /** Pool createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Pool updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Pool labels. */
+                        public labels: { [k: string]: string };
+
+                        /** Pool networkConfig. */
+                        public networkConfig?: (google.cloud.video.livestream.v1.Pool.INetworkConfig|null);
+
+                        /**
+                         * Creates a new Pool instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Pool instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IPool): google.cloud.video.livestream.v1.Pool;
+
+                        /**
+                         * Encodes the specified Pool message. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.verify|verify} messages.
+                         * @param message Pool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Pool message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.verify|verify} messages.
+                         * @param message Pool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Pool message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Pool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Pool;
+
+                        /**
+                         * Decodes a Pool message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Pool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Pool;
+
+                        /**
+                         * Verifies a Pool message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Pool message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Pool
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Pool;
+
+                        /**
+                         * Creates a plain object from a Pool message. Also converts values to other types if specified.
+                         * @param message Pool
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.Pool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Pool to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Pool
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Pool {
+
+                        /** Properties of a NetworkConfig. */
+                        interface INetworkConfig {
+
+                            /** NetworkConfig peeredNetwork */
+                            peeredNetwork?: (string|null);
+                        }
+
+                        /** Represents a NetworkConfig. */
+                        class NetworkConfig implements INetworkConfig {
+
+                            /**
+                             * Constructs a new NetworkConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.Pool.INetworkConfig);
+
+                            /** NetworkConfig peeredNetwork. */
+                            public peeredNetwork: string;
+
+                            /**
+                             * Creates a new NetworkConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NetworkConfig instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.Pool.INetworkConfig): google.cloud.video.livestream.v1.Pool.NetworkConfig;
+
+                            /**
+                             * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.NetworkConfig.verify|verify} messages.
+                             * @param message NetworkConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.Pool.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.NetworkConfig.verify|verify} messages.
+                             * @param message NetworkConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.Pool.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NetworkConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NetworkConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.Pool.NetworkConfig;
+
+                            /**
+                             * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NetworkConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.Pool.NetworkConfig;
+
+                            /**
+                             * Verifies a NetworkConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NetworkConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.Pool.NetworkConfig;
+
+                            /**
+                             * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                             * @param message NetworkConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.Pool.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NetworkConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NetworkConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
                     /** Represents a LivestreamService */
                     class LivestreamService extends $protobuf.rpc.Service {
 
@@ -5272,6 +5956,90 @@ export namespace google {
                          * @returns Promise
                          */
                         public deleteEvent(request: google.cloud.video.livestream.v1.IDeleteEventRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls CreateAsset.
+                         * @param request CreateAssetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createAsset(request: google.cloud.video.livestream.v1.ICreateAssetRequest, callback: google.cloud.video.livestream.v1.LivestreamService.CreateAssetCallback): void;
+
+                        /**
+                         * Calls CreateAsset.
+                         * @param request CreateAssetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createAsset(request: google.cloud.video.livestream.v1.ICreateAssetRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteAsset.
+                         * @param request DeleteAssetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteAsset(request: google.cloud.video.livestream.v1.IDeleteAssetRequest, callback: google.cloud.video.livestream.v1.LivestreamService.DeleteAssetCallback): void;
+
+                        /**
+                         * Calls DeleteAsset.
+                         * @param request DeleteAssetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteAsset(request: google.cloud.video.livestream.v1.IDeleteAssetRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetAsset.
+                         * @param request GetAssetRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Asset
+                         */
+                        public getAsset(request: google.cloud.video.livestream.v1.IGetAssetRequest, callback: google.cloud.video.livestream.v1.LivestreamService.GetAssetCallback): void;
+
+                        /**
+                         * Calls GetAsset.
+                         * @param request GetAssetRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAsset(request: google.cloud.video.livestream.v1.IGetAssetRequest): Promise<google.cloud.video.livestream.v1.Asset>;
+
+                        /**
+                         * Calls ListAssets.
+                         * @param request ListAssetsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAssetsResponse
+                         */
+                        public listAssets(request: google.cloud.video.livestream.v1.IListAssetsRequest, callback: google.cloud.video.livestream.v1.LivestreamService.ListAssetsCallback): void;
+
+                        /**
+                         * Calls ListAssets.
+                         * @param request ListAssetsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAssets(request: google.cloud.video.livestream.v1.IListAssetsRequest): Promise<google.cloud.video.livestream.v1.ListAssetsResponse>;
+
+                        /**
+                         * Calls GetPool.
+                         * @param request GetPoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Pool
+                         */
+                        public getPool(request: google.cloud.video.livestream.v1.IGetPoolRequest, callback: google.cloud.video.livestream.v1.LivestreamService.GetPoolCallback): void;
+
+                        /**
+                         * Calls GetPool.
+                         * @param request GetPoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getPool(request: google.cloud.video.livestream.v1.IGetPoolRequest): Promise<google.cloud.video.livestream.v1.Pool>;
+
+                        /**
+                         * Calls UpdatePool.
+                         * @param request UpdatePoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updatePool(request: google.cloud.video.livestream.v1.IUpdatePoolRequest, callback: google.cloud.video.livestream.v1.LivestreamService.UpdatePoolCallback): void;
+
+                        /**
+                         * Calls UpdatePool.
+                         * @param request UpdatePoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updatePool(request: google.cloud.video.livestream.v1.IUpdatePoolRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace LivestreamService {
@@ -5387,6 +6155,593 @@ export namespace google {
                          * @param [response] Empty
                          */
                         type DeleteEventCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|createAsset}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateAssetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|deleteAsset}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteAssetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|getAsset}.
+                         * @param error Error, if any
+                         * @param [response] Asset
+                         */
+                        type GetAssetCallback = (error: (Error|null), response?: google.cloud.video.livestream.v1.Asset) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|listAssets}.
+                         * @param error Error, if any
+                         * @param [response] ListAssetsResponse
+                         */
+                        type ListAssetsCallback = (error: (Error|null), response?: google.cloud.video.livestream.v1.ListAssetsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|getPool}.
+                         * @param error Error, if any
+                         * @param [response] Pool
+                         */
+                        type GetPoolCallback = (error: (Error|null), response?: google.cloud.video.livestream.v1.Pool) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|updatePool}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdatePoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                    }
+
+                    /** Properties of a CreateAssetRequest. */
+                    interface ICreateAssetRequest {
+
+                        /** CreateAssetRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateAssetRequest asset */
+                        asset?: (google.cloud.video.livestream.v1.IAsset|null);
+
+                        /** CreateAssetRequest assetId */
+                        assetId?: (string|null);
+
+                        /** CreateAssetRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateAssetRequest. */
+                    class CreateAssetRequest implements ICreateAssetRequest {
+
+                        /**
+                         * Constructs a new CreateAssetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.ICreateAssetRequest);
+
+                        /** CreateAssetRequest parent. */
+                        public parent: string;
+
+                        /** CreateAssetRequest asset. */
+                        public asset?: (google.cloud.video.livestream.v1.IAsset|null);
+
+                        /** CreateAssetRequest assetId. */
+                        public assetId: string;
+
+                        /** CreateAssetRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateAssetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateAssetRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.ICreateAssetRequest): google.cloud.video.livestream.v1.CreateAssetRequest;
+
+                        /**
+                         * Encodes the specified CreateAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.CreateAssetRequest.verify|verify} messages.
+                         * @param message CreateAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.ICreateAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.CreateAssetRequest.verify|verify} messages.
+                         * @param message CreateAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.ICreateAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateAssetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.CreateAssetRequest;
+
+                        /**
+                         * Decodes a CreateAssetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.CreateAssetRequest;
+
+                        /**
+                         * Verifies a CreateAssetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateAssetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateAssetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.CreateAssetRequest;
+
+                        /**
+                         * Creates a plain object from a CreateAssetRequest message. Also converts values to other types if specified.
+                         * @param message CreateAssetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.CreateAssetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateAssetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateAssetRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteAssetRequest. */
+                    interface IDeleteAssetRequest {
+
+                        /** DeleteAssetRequest name */
+                        name?: (string|null);
+
+                        /** DeleteAssetRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteAssetRequest. */
+                    class DeleteAssetRequest implements IDeleteAssetRequest {
+
+                        /**
+                         * Constructs a new DeleteAssetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IDeleteAssetRequest);
+
+                        /** DeleteAssetRequest name. */
+                        public name: string;
+
+                        /** DeleteAssetRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteAssetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteAssetRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IDeleteAssetRequest): google.cloud.video.livestream.v1.DeleteAssetRequest;
+
+                        /**
+                         * Encodes the specified DeleteAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteAssetRequest.verify|verify} messages.
+                         * @param message DeleteAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IDeleteAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteAssetRequest.verify|verify} messages.
+                         * @param message DeleteAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IDeleteAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteAssetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.DeleteAssetRequest;
+
+                        /**
+                         * Decodes a DeleteAssetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.DeleteAssetRequest;
+
+                        /**
+                         * Verifies a DeleteAssetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteAssetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteAssetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.DeleteAssetRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteAssetRequest message. Also converts values to other types if specified.
+                         * @param message DeleteAssetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.DeleteAssetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteAssetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteAssetRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAssetsRequest. */
+                    interface IListAssetsRequest {
+
+                        /** ListAssetsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAssetsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAssetsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListAssetsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListAssetsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListAssetsRequest. */
+                    class ListAssetsRequest implements IListAssetsRequest {
+
+                        /**
+                         * Constructs a new ListAssetsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IListAssetsRequest);
+
+                        /** ListAssetsRequest parent. */
+                        public parent: string;
+
+                        /** ListAssetsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAssetsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListAssetsRequest filter. */
+                        public filter: string;
+
+                        /** ListAssetsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListAssetsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAssetsRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IListAssetsRequest): google.cloud.video.livestream.v1.ListAssetsRequest;
+
+                        /**
+                         * Encodes the specified ListAssetsRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsRequest.verify|verify} messages.
+                         * @param message ListAssetsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsRequest.verify|verify} messages.
+                         * @param message ListAssetsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAssetsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAssetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.ListAssetsRequest;
+
+                        /**
+                         * Decodes a ListAssetsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAssetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.ListAssetsRequest;
+
+                        /**
+                         * Verifies a ListAssetsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAssetsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.ListAssetsRequest;
+
+                        /**
+                         * Creates a plain object from a ListAssetsRequest message. Also converts values to other types if specified.
+                         * @param message ListAssetsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.ListAssetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAssetsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAssetsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAssetsResponse. */
+                    interface IListAssetsResponse {
+
+                        /** ListAssetsResponse assets */
+                        assets?: (google.cloud.video.livestream.v1.IAsset[]|null);
+
+                        /** ListAssetsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAssetsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAssetsResponse. */
+                    class ListAssetsResponse implements IListAssetsResponse {
+
+                        /**
+                         * Constructs a new ListAssetsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IListAssetsResponse);
+
+                        /** ListAssetsResponse assets. */
+                        public assets: google.cloud.video.livestream.v1.IAsset[];
+
+                        /** ListAssetsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAssetsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAssetsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAssetsResponse instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IListAssetsResponse): google.cloud.video.livestream.v1.ListAssetsResponse;
+
+                        /**
+                         * Encodes the specified ListAssetsResponse message. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsResponse.verify|verify} messages.
+                         * @param message ListAssetsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsResponse.verify|verify} messages.
+                         * @param message ListAssetsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAssetsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAssetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.ListAssetsResponse;
+
+                        /**
+                         * Decodes a ListAssetsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAssetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.ListAssetsResponse;
+
+                        /**
+                         * Verifies a ListAssetsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAssetsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.ListAssetsResponse;
+
+                        /**
+                         * Creates a plain object from a ListAssetsResponse message. Also converts values to other types if specified.
+                         * @param message ListAssetsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.ListAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAssetsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAssetsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAssetRequest. */
+                    interface IGetAssetRequest {
+
+                        /** GetAssetRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAssetRequest. */
+                    class GetAssetRequest implements IGetAssetRequest {
+
+                        /**
+                         * Constructs a new GetAssetRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IGetAssetRequest);
+
+                        /** GetAssetRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAssetRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAssetRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IGetAssetRequest): google.cloud.video.livestream.v1.GetAssetRequest;
+
+                        /**
+                         * Encodes the specified GetAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.GetAssetRequest.verify|verify} messages.
+                         * @param message GetAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IGetAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.GetAssetRequest.verify|verify} messages.
+                         * @param message GetAssetRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IGetAssetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAssetRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.GetAssetRequest;
+
+                        /**
+                         * Decodes a GetAssetRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAssetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.GetAssetRequest;
+
+                        /**
+                         * Verifies a GetAssetRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAssetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAssetRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.GetAssetRequest;
+
+                        /**
+                         * Creates a plain object from a GetAssetRequest message. Also converts values to other types if specified.
+                         * @param message GetAssetRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.GetAssetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAssetRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAssetRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CreateChannelRequest. */
@@ -7666,6 +9021,212 @@ export namespace google {
 
                         /**
                          * Gets the default type url for OperationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetPoolRequest. */
+                    interface IGetPoolRequest {
+
+                        /** GetPoolRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetPoolRequest. */
+                    class GetPoolRequest implements IGetPoolRequest {
+
+                        /**
+                         * Constructs a new GetPoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IGetPoolRequest);
+
+                        /** GetPoolRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetPoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetPoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IGetPoolRequest): google.cloud.video.livestream.v1.GetPoolRequest;
+
+                        /**
+                         * Encodes the specified GetPoolRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.GetPoolRequest.verify|verify} messages.
+                         * @param message GetPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IGetPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetPoolRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.GetPoolRequest.verify|verify} messages.
+                         * @param message GetPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IGetPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetPoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.GetPoolRequest;
+
+                        /**
+                         * Decodes a GetPoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.GetPoolRequest;
+
+                        /**
+                         * Verifies a GetPoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetPoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetPoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.GetPoolRequest;
+
+                        /**
+                         * Creates a plain object from a GetPoolRequest message. Also converts values to other types if specified.
+                         * @param message GetPoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.GetPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetPoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetPoolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdatePoolRequest. */
+                    interface IUpdatePoolRequest {
+
+                        /** UpdatePoolRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdatePoolRequest pool */
+                        pool?: (google.cloud.video.livestream.v1.IPool|null);
+
+                        /** UpdatePoolRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdatePoolRequest. */
+                    class UpdatePoolRequest implements IUpdatePoolRequest {
+
+                        /**
+                         * Constructs a new UpdatePoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IUpdatePoolRequest);
+
+                        /** UpdatePoolRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdatePoolRequest pool. */
+                        public pool?: (google.cloud.video.livestream.v1.IPool|null);
+
+                        /** UpdatePoolRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdatePoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdatePoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IUpdatePoolRequest): google.cloud.video.livestream.v1.UpdatePoolRequest;
+
+                        /**
+                         * Encodes the specified UpdatePoolRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.UpdatePoolRequest.verify|verify} messages.
+                         * @param message UpdatePoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IUpdatePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdatePoolRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.UpdatePoolRequest.verify|verify} messages.
+                         * @param message UpdatePoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IUpdatePoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdatePoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdatePoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.UpdatePoolRequest;
+
+                        /**
+                         * Decodes an UpdatePoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdatePoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.UpdatePoolRequest;
+
+                        /**
+                         * Verifies an UpdatePoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdatePoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdatePoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.UpdatePoolRequest;
+
+                        /**
+                         * Creates a plain object from an UpdatePoolRequest message. Also converts values to other types if specified.
+                         * @param message UpdatePoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.UpdatePoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdatePoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdatePoolRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

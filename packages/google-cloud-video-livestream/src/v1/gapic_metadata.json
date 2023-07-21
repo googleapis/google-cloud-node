@@ -35,6 +35,16 @@
                 "deleteEvent"
               ]
             },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "getPool"
+              ]
+            },
             "CreateChannel": {
               "methods": [
                 "createChannel"
@@ -75,6 +85,21 @@
                 "updateInput"
               ]
             },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "updatePool"
+              ]
+            },
             "ListChannels": {
               "methods": [
                 "listChannels",
@@ -94,6 +119,13 @@
                 "listEvents",
                 "listEventsStream",
                 "listEventsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
               ]
             }
           }
@@ -126,6 +158,16 @@
                 "deleteEvent"
               ]
             },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "getPool"
+              ]
+            },
             "CreateChannel": {
               "methods": [
                 "createChannel"
@@ -166,6 +208,21 @@
                 "updateInput"
               ]
             },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "updatePool"
+              ]
+            },
             "ListChannels": {
               "methods": [
                 "listChannels",
@@ -185,6 +242,13 @@
                 "listEvents",
                 "listEventsStream",
                 "listEventsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
               ]
             }
           }
