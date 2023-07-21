@@ -1,0 +1,259 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.video.livestream.v1",
+  "libraryPackage": "@google-cloud/livestream",
+  "services": {
+    "LivestreamService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LivestreamServiceClient",
+          "rpcs": {
+            "GetChannel": {
+              "methods": [
+                "getChannel"
+              ]
+            },
+            "GetInput": {
+              "methods": [
+                "getInput"
+              ]
+            },
+            "CreateEvent": {
+              "methods": [
+                "createEvent"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "DeleteEvent": {
+              "methods": [
+                "deleteEvent"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "getPool"
+              ]
+            },
+            "CreateChannel": {
+              "methods": [
+                "createChannel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "deleteChannel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "updateChannel"
+              ]
+            },
+            "StartChannel": {
+              "methods": [
+                "startChannel"
+              ]
+            },
+            "StopChannel": {
+              "methods": [
+                "stopChannel"
+              ]
+            },
+            "CreateInput": {
+              "methods": [
+                "createInput"
+              ]
+            },
+            "DeleteInput": {
+              "methods": [
+                "deleteInput"
+              ]
+            },
+            "UpdateInput": {
+              "methods": [
+                "updateInput"
+              ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "updatePool"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "listChannels",
+                "listChannelsStream",
+                "listChannelsAsync"
+              ]
+            },
+            "ListInputs": {
+              "methods": [
+                "listInputs",
+                "listInputsStream",
+                "listInputsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LivestreamServiceClient",
+          "rpcs": {
+            "GetChannel": {
+              "methods": [
+                "getChannel"
+              ]
+            },
+            "GetInput": {
+              "methods": [
+                "getInput"
+              ]
+            },
+            "CreateEvent": {
+              "methods": [
+                "createEvent"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "DeleteEvent": {
+              "methods": [
+                "deleteEvent"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "getPool"
+              ]
+            },
+            "CreateChannel": {
+              "methods": [
+                "createChannel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "deleteChannel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "updateChannel"
+              ]
+            },
+            "StartChannel": {
+              "methods": [
+                "startChannel"
+              ]
+            },
+            "StopChannel": {
+              "methods": [
+                "stopChannel"
+              ]
+            },
+            "CreateInput": {
+              "methods": [
+                "createInput"
+              ]
+            },
+            "DeleteInput": {
+              "methods": [
+                "deleteInput"
+              ]
+            },
+            "UpdateInput": {
+              "methods": [
+                "updateInput"
+              ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "updatePool"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "listChannels",
+                "listChannelsStream",
+                "listChannelsAsync"
+              ]
+            },
+            "ListInputs": {
+              "methods": [
+                "listInputs",
+                "listInputsStream",
+                "listInputsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
