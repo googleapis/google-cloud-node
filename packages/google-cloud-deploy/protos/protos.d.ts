@@ -11542,6 +11542,8 @@ export namespace google {
                     TYPE_PUBSUB_NOTIFICATION_FAILURE = 1,
                     TYPE_RESOURCE_STATE_CHANGE = 3,
                     TYPE_PROCESS_ABORTED = 4,
+                    TYPE_RESTRICTION_VIOLATED = 5,
+                    TYPE_RESOURCE_DELETED = 6,
                     TYPE_RENDER_STATUES_CHANGE = 2
                 }
 
