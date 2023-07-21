@@ -52,7 +52,7 @@
     "@types/pretty-ms": "^4.0.0",
     "@types/sinon": "^10.0.0",
     "@types/tmp": "0.2.3",
-    "c8": "^7.0.0",
+    "c8": "^8.0.0",
     "codecov": "^3.0.0",
     "gts": "^3.1.0",
     "js-green-licenses": "^4.0.0",
