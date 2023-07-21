@@ -28292,6 +28292,8 @@
                                 case 1:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                 case 2:
                                     break;
                                 }
@@ -28336,6 +28338,14 @@
                             case "TYPE_PROCESS_ABORTED":
                             case 4:
                                 message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -28409,6 +28419,8 @@
                      * @property {number} TYPE_PUBSUB_NOTIFICATION_FAILURE=1 TYPE_PUBSUB_NOTIFICATION_FAILURE value
                      * @property {number} TYPE_RESOURCE_STATE_CHANGE=3 TYPE_RESOURCE_STATE_CHANGE value
                      * @property {number} TYPE_PROCESS_ABORTED=4 TYPE_PROCESS_ABORTED value
+                     * @property {number} TYPE_RESTRICTION_VIOLATED=5 TYPE_RESTRICTION_VIOLATED value
+                     * @property {number} TYPE_RESOURCE_DELETED=6 TYPE_RESOURCE_DELETED value
                      * @property {number} TYPE_RENDER_STATUES_CHANGE=2 TYPE_RENDER_STATUES_CHANGE value
                      */
                     v1.Type = (function() {
@@ -28417,6 +28429,8 @@
                         values[valuesById[1] = "TYPE_PUBSUB_NOTIFICATION_FAILURE"] = 1;
                         values[valuesById[3] = "TYPE_RESOURCE_STATE_CHANGE"] = 3;
                         values[valuesById[4] = "TYPE_PROCESS_ABORTED"] = 4;
+                        values[valuesById[5] = "TYPE_RESTRICTION_VIOLATED"] = 5;
+                        values[valuesById[6] = "TYPE_RESOURCE_DELETED"] = 6;
                         values[valuesById[2] = "TYPE_RENDER_STATUES_CHANGE"] = 2;
                         return values;
                     })();
@@ -28668,6 +28682,8 @@
                                 case 1:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                 case 2:
                                     break;
                                 }
@@ -28720,6 +28736,14 @@
                             case "TYPE_PROCESS_ABORTED":
                             case 4:
                                 message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -28972,6 +28996,8 @@
                                 case 1:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                 case 2:
                                     break;
                                 }
@@ -29016,6 +29042,14 @@
                             case "TYPE_PROCESS_ABORTED":
                             case 4:
                                 message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -29534,6 +29568,8 @@
                                 case 1:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                 case 2:
                                     break;
                                 }
@@ -29585,6 +29621,14 @@
                             case "TYPE_PROCESS_ABORTED":
                             case 4:
                                 message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:
@@ -29836,6 +29880,8 @@
                                 case 1:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                 case 2:
                                     break;
                                 }
@@ -29880,6 +29926,14 @@
                             case "TYPE_PROCESS_ABORTED":
                             case 4:
                                 message.type = 4;
+                                break;
+                            case "TYPE_RESTRICTION_VIOLATED":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_RESOURCE_DELETED":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "TYPE_RENDER_STATUES_CHANGE":
                             case 2:

@@ -1171,6 +1171,16 @@
                       "type": "PodCIDROverprovisionConfig",
                       "id": 13
                     },
+                    "additionalNodeNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalNodeNetworkConfig",
+                      "id": 14
+                    },
+                    "additionalPodNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalPodNetworkConfig",
+                      "id": 15
+                    },
                     "podIpv4RangeUtilization": {
                       "type": "double",
                       "id": 16,
@@ -1204,6 +1214,44 @@
                             "TIER_1": 1
                           }
                         }
+                      }
+                    }
+                  }
+                },
+                "AdditionalNodeNetworkConfig": {
+                  "fields": {
+                    "network": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "AdditionalPodNetworkConfig": {
+                  "oneofs": {
+                    "_maxPodsPerNode": {
+                      "oneof": [
+                        "maxPodsPerNode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "secondaryPodRange": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "maxPodsPerNode": {
+                      "type": "MaxPodsConstraint",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   }
@@ -3788,6 +3836,10 @@
                         "type": {
                           "type": "Type",
                           "id": 1
+                        },
+                        "policyName": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -4650,6 +4702,10 @@
                     "gatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 16
+                    },
+                    "enableMultiNetworking": {
+                      "type": "bool",
+                      "id": 17
                     },
                     "networkPerformanceConfig": {
                       "type": "ClusterNetworkPerformanceConfig",
