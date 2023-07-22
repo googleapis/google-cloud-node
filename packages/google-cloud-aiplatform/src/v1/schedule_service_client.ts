@@ -37,18 +37,19 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/index_endpoint_service_client_config.json`.
+ * `src/v1/schedule_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './index_endpoint_service_client_config.json';
+import * as gapicConfig from './schedule_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for managing Vertex AI's IndexEndpoints.
+ *  A service for creating and managing Vertex AI's Schedule resources to
+ *  periodically launch shceudled runs to make API calls.
  * @class
  * @memberof v1
  */
-export class IndexEndpointServiceClient {
+export class ScheduleServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -69,10 +70,10 @@ export class IndexEndpointServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  indexEndpointServiceStub?: Promise<{[name: string]: Function}>;
+  scheduleServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of IndexEndpointServiceClient.
+   * Construct an instance of ScheduleServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -108,7 +109,7 @@ export class IndexEndpointServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new IndexEndpointServiceClient({fallback: 'rest'}, gax);
+   *     const client = new ScheduleServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -116,7 +117,7 @@ export class IndexEndpointServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof IndexEndpointServiceClient;
+    const staticMembers = this.constructor as typeof ScheduleServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -315,10 +316,10 @@ export class IndexEndpointServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listIndexEndpoints: new this._gaxModule.PageDescriptor(
+      listSchedules: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'indexEndpoints'
+        'schedules'
       ),
     };
 
@@ -1365,68 +1366,24 @@ export class IndexEndpointServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createIndexEndpointResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.IndexEndpoint'
-    ) as gax.protobuf.Type;
-    const createIndexEndpointMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.CreateIndexEndpointOperationMetadata'
-    ) as gax.protobuf.Type;
-    const deleteIndexEndpointResponse = protoFilesRoot.lookup(
+    const deleteScheduleResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteIndexEndpointMetadata = protoFilesRoot.lookup(
+    const deleteScheduleMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
-    const deployIndexResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeployIndexResponse'
-    ) as gax.protobuf.Type;
-    const deployIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeployIndexOperationMetadata'
-    ) as gax.protobuf.Type;
-    const undeployIndexResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.UndeployIndexResponse'
-    ) as gax.protobuf.Type;
-    const undeployIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.UndeployIndexOperationMetadata'
-    ) as gax.protobuf.Type;
-    const mutateDeployedIndexResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.MutateDeployedIndexResponse'
-    ) as gax.protobuf.Type;
-    const mutateDeployedIndexMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.MutateDeployedIndexOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createIndexEndpoint: new this._gaxModule.LongrunningDescriptor(
+      deleteSchedule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createIndexEndpointResponse.decode.bind(createIndexEndpointResponse),
-        createIndexEndpointMetadata.decode.bind(createIndexEndpointMetadata)
-      ),
-      deleteIndexEndpoint: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteIndexEndpointResponse.decode.bind(deleteIndexEndpointResponse),
-        deleteIndexEndpointMetadata.decode.bind(deleteIndexEndpointMetadata)
-      ),
-      deployIndex: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deployIndexResponse.decode.bind(deployIndexResponse),
-        deployIndexMetadata.decode.bind(deployIndexMetadata)
-      ),
-      undeployIndex: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        undeployIndexResponse.decode.bind(undeployIndexResponse),
-        undeployIndexMetadata.decode.bind(undeployIndexMetadata)
-      ),
-      mutateDeployedIndex: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        mutateDeployedIndexResponse.decode.bind(mutateDeployedIndexResponse),
-        mutateDeployedIndexMetadata.decode.bind(mutateDeployedIndexMetadata)
+        deleteScheduleResponse.decode.bind(deleteScheduleResponse),
+        deleteScheduleMetadata.decode.bind(deleteScheduleMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1.IndexEndpointService',
+      'google.cloud.aiplatform.v1.ScheduleService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -1454,37 +1411,36 @@ export class IndexEndpointServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.indexEndpointServiceStub) {
-      return this.indexEndpointServiceStub;
+    if (this.scheduleServiceStub) {
+      return this.scheduleServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.aiplatform.v1.IndexEndpointService.
-    this.indexEndpointServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.aiplatform.v1.ScheduleService.
+    this.scheduleServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1.IndexEndpointService'
+            'google.cloud.aiplatform.v1.ScheduleService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1.IndexEndpointService,
+          (this._protos as any).google.cloud.aiplatform.v1.ScheduleService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const indexEndpointServiceStubMethods = [
-      'createIndexEndpoint',
-      'getIndexEndpoint',
-      'listIndexEndpoints',
-      'updateIndexEndpoint',
-      'deleteIndexEndpoint',
-      'deployIndex',
-      'undeployIndex',
-      'mutateDeployedIndex',
+    const scheduleServiceStubMethods = [
+      'createSchedule',
+      'deleteSchedule',
+      'getSchedule',
+      'listSchedules',
+      'pauseSchedule',
+      'resumeSchedule',
+      'updateSchedule',
     ];
-    for (const methodName of indexEndpointServiceStubMethods) {
-      const callPromise = this.indexEndpointServiceStub.then(
+    for (const methodName of scheduleServiceStubMethods) {
+      const callPromise = this.scheduleServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -1512,7 +1468,7 @@ export class IndexEndpointServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.indexEndpointServiceStub;
+    return this.scheduleServiceStub;
   }
 
   /**
@@ -1569,278 +1525,78 @@ export class IndexEndpointServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets an IndexEndpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the IndexEndpoint resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.get_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_GetIndexEndpoint_async
-   */
-  getIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-          | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getIndexEndpoint(request, options, callback);
-  }
-  /**
-   * Updates an IndexEndpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1.IndexEndpoint} request.indexEndpoint
-   *   Required. The IndexEndpoint which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. See
-   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.update_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_UpdateIndexEndpoint_async
-   */
-  updateIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-          | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-      protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'index_endpoint.name': request.indexEndpoint!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateIndexEndpoint(request, options, callback);
-  }
-
-  /**
-   * Creates an IndexEndpoint.
+   * Creates a Schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to create the IndexEndpoint in.
+   *   Required. The resource name of the Location to create the Schedule in.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1.IndexEndpoint} request.indexEndpoint
-   *   Required. The IndexEndpoint to create.
+   * @param {google.cloud.aiplatform.v1.Schedule} request.schedule
+   *   Required. The Schedule to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Schedule | Schedule}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.create_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async
+   * @example <caption>include:samples/generated/v1/schedule_service.create_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_CreateSchedule_async
    */
-  createIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.ICreateIndexEndpointRequest,
+  createSchedule(
+    request?: protos.google.cloud.aiplatform.v1.ICreateScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.ICreateScheduleRequest | undefined,
       {} | undefined
     ]
   >;
-  createIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.ICreateIndexEndpointRequest,
+  createSchedule(
+    request: protos.google.cloud.aiplatform.v1.ICreateScheduleRequest,
     options: CallOptions,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.ICreateScheduleRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  createIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.ICreateIndexEndpointRequest,
+  createSchedule(
+    request: protos.google.cloud.aiplatform.v1.ICreateScheduleRequest,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.ICreateScheduleRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  createIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.ICreateIndexEndpointRequest,
+  createSchedule(
+    request?: protos.google.cloud.aiplatform.v1.ICreateScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-            protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.ICreateScheduleRequest
+          | null
+          | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.ICreateScheduleRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
-        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.ICreateScheduleRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1860,52 +1616,410 @@ export class IndexEndpointServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createIndexEndpoint(request, options, callback);
+    return this.innerApiCalls.createSchedule(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `createIndexEndpoint()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.create_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async
-   */
-  async checkCreateIndexEndpointProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1.IndexEndpoint,
-      protos.google.cloud.aiplatform.v1.CreateIndexEndpointOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createIndexEndpoint,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1.IndexEndpoint,
-      protos.google.cloud.aiplatform.v1.CreateIndexEndpointOperationMetadata
-    >;
-  }
-  /**
-   * Deletes an IndexEndpoint.
+   * Gets a Schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the IndexEndpoint resource to be deleted.
+   *   Required. The name of the Schedule resource.
    *   Format:
-   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Schedule | Schedule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schedule_service.get_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_GetSchedule_async
+   */
+  getSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IGetScheduleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IGetScheduleRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getSchedule(
+    request: protos.google.cloud.aiplatform.v1.IGetScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IGetScheduleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSchedule(
+    request: protos.google.cloud.aiplatform.v1.IGetScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IGetScheduleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IGetScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.IGetScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IGetScheduleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IGetScheduleRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSchedule(request, options, callback);
+  }
+  /**
+   * Pauses a Schedule. Will mark
+   * {@link google.cloud.aiplatform.v1.Schedule.state|Schedule.state} to 'PAUSED'. If
+   * the schedule is paused, no new runs will be created. Already created runs
+   * will NOT be paused or canceled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Schedule resource to be paused.
+   *   Format:
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schedule_service.pause_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_PauseSchedule_async
+   */
+  pauseSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IPauseScheduleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.IPauseScheduleRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  pauseSchedule(
+    request: protos.google.cloud.aiplatform.v1.IPauseScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseSchedule(
+    request: protos.google.cloud.aiplatform.v1.IPauseScheduleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IPauseScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IPauseScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.IPauseScheduleRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pauseSchedule(request, options, callback);
+  }
+  /**
+   * Resumes a paused Schedule to start scheduling new runs. Will mark
+   * {@link google.cloud.aiplatform.v1.Schedule.state|Schedule.state} to 'ACTIVE'.
+   * Only paused Schedule can be resumed.
+   *
+   * When the Schedule is resumed, new runs will be scheduled starting from the
+   * next execution time after the current time based on the time_specification
+   * in the Schedule. If {@link |Schedule.catchUp} is set up true, all
+   * missed runs will be scheduled for backfill first.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Schedule resource to be resumed.
+   *   Format:
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
+   * @param {boolean} [request.catchUp]
+   *   Optional. Whether to backfill missed runs when the schedule is resumed from
+   *   PAUSED state. If set to true, all missed runs will be scheduled. New runs
+   *   will be scheduled after the backfill is complete. This will also update
+   *   {@link google.cloud.aiplatform.v1.Schedule.catch_up|Schedule.catch_up} field.
+   *   Default to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schedule_service.resume_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_ResumeSchedule_async
+   */
+  resumeSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IResumeScheduleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.IResumeScheduleRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  resumeSchedule(
+    request: protos.google.cloud.aiplatform.v1.IResumeScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeSchedule(
+    request: protos.google.cloud.aiplatform.v1.IResumeScheduleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IResumeScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IResumeScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.IResumeScheduleRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resumeSchedule(request, options, callback);
+  }
+  /**
+   * Updates an active or paused Schedule.
+   *
+   * When the Schedule is updated, new runs will be scheduled starting from the
+   * updated next execution time after the update time based on the
+   * time_specification in the updated Schedule. All unstarted runs before the
+   * update time will be skipped while already created runs will NOT be paused
+   * or canceled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.Schedule} request.schedule
+   *   Required. The Schedule which replaces the resource on the server.
+   *   The following restrictions will be applied:
+   *     * The scheduled request type cannot be changed.
+   *     * The output_only fields will be ignored if specified.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. See
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Schedule | Schedule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/schedule_service.update_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_UpdateSchedule_async
+   */
+  updateSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSchedule(
+    request: protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchedule(
+    request: protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      | protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISchedule,
+      protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'schedule.name': request.schedule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSchedule(request, options, callback);
+  }
+
+  /**
+   * Deletes a Schedule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Schedule resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1915,11 +2029,11 @@ export class IndexEndpointServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.delete_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async
+   * @example <caption>include:samples/generated/v1/schedule_service.delete_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_DeleteSchedule_async
    */
-  deleteIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IDeleteIndexEndpointRequest,
+  deleteSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1931,8 +2045,8 @@ export class IndexEndpointServiceClient {
       {} | undefined
     ]
   >;
-  deleteIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IDeleteIndexEndpointRequest,
+  deleteSchedule(
+    request: protos.google.cloud.aiplatform.v1.IDeleteScheduleRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
@@ -1943,8 +2057,8 @@ export class IndexEndpointServiceClient {
       {} | null | undefined
     >
   ): void;
-  deleteIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IDeleteIndexEndpointRequest,
+  deleteSchedule(
+    request: protos.google.cloud.aiplatform.v1.IDeleteScheduleRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1954,8 +2068,8 @@ export class IndexEndpointServiceClient {
       {} | null | undefined
     >
   ): void;
-  deleteIndexEndpoint(
-    request?: protos.google.cloud.aiplatform.v1.IDeleteIndexEndpointRequest,
+  deleteSchedule(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2000,10 +2114,10 @@ export class IndexEndpointServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteIndexEndpoint(request, options, callback);
+    return this.innerApiCalls.deleteSchedule(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `deleteIndexEndpoint()`.
+   * Check the status of the long running operation returned by `deleteSchedule()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
@@ -2011,10 +2125,10 @@ export class IndexEndpointServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.delete_index_endpoint.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async
+   * @example <caption>include:samples/generated/v1/schedule_service.delete_schedule.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_DeleteSchedule_async
    */
-  async checkDeleteIndexEndpointProgress(
+  async checkDeleteScheduleProgress(
     name: string
   ): Promise<
     LROperation<
@@ -2029,7 +2143,7 @@ export class IndexEndpointServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteIndexEndpoint,
+      this.descriptors.longrunning.deleteSchedule,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -2038,542 +2152,138 @@ export class IndexEndpointServiceClient {
     >;
   }
   /**
-   * Deploys an Index into this IndexEndpoint, creating a DeployedIndex within
-   * it.
-   * Only non-empty Indexes can be deployed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource into which to deploy an
-   *   Index. Format:
-   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
-   * @param {google.cloud.aiplatform.v1.DeployedIndex} request.deployedIndex
-   *   Required. The DeployedIndex to be created within the IndexEndpoint.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.deploy_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_DeployIndex_async
-   */
-  deployIndex(
-    request?: protos.google.cloud.aiplatform.v1.IDeployIndexRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  deployIndex(
-    request: protos.google.cloud.aiplatform.v1.IDeployIndexRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deployIndex(
-    request: protos.google.cloud.aiplatform.v1.IDeployIndexRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deployIndex(
-    request?: protos.google.cloud.aiplatform.v1.IDeployIndexRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-            protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deployIndex(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `deployIndex()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.deploy_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_DeployIndex_async
-   */
-  async checkDeployIndexProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1.DeployIndexResponse,
-      protos.google.cloud.aiplatform.v1.DeployIndexOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deployIndex,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1.DeployIndexResponse,
-      protos.google.cloud.aiplatform.v1.DeployIndexOperationMetadata
-    >;
-  }
-  /**
-   * Undeploys an Index from an IndexEndpoint, removing a DeployedIndex from it,
-   * and freeing all resources it's using.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource from which to undeploy an
-   *   Index. Format:
-   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
-   * @param {string} request.deployedIndexId
-   *   Required. The ID of the DeployedIndex to be undeployed from the
-   *   IndexEndpoint.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.undeploy_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async
-   */
-  undeployIndex(
-    request?: protos.google.cloud.aiplatform.v1.IUndeployIndexRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  undeployIndex(
-    request: protos.google.cloud.aiplatform.v1.IUndeployIndexRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  undeployIndex(
-    request: protos.google.cloud.aiplatform.v1.IUndeployIndexRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  undeployIndex(
-    request?: protos.google.cloud.aiplatform.v1.IUndeployIndexRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-            protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
-        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.undeployIndex(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `undeployIndex()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.undeploy_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async
-   */
-  async checkUndeployIndexProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1.UndeployIndexResponse,
-      protos.google.cloud.aiplatform.v1.UndeployIndexOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.undeployIndex,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1.UndeployIndexResponse,
-      protos.google.cloud.aiplatform.v1.UndeployIndexOperationMetadata
-    >;
-  }
-  /**
-   * Update an existing DeployedIndex under an IndexEndpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource into which to deploy an
-   *   Index. Format:
-   *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
-   * @param {google.cloud.aiplatform.v1.DeployedIndex} request.deployedIndex
-   *   Required. The DeployedIndex to be updated within the IndexEndpoint.
-   *   Currently, the updatable fields are {@link automatic_resources|DeployedIndex}
-   *   and {@link dedicated_resources|DeployedIndex}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.mutate_deployed_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_MutateDeployedIndex_async
-   */
-  mutateDeployedIndex(
-    request?: protos.google.cloud.aiplatform.v1.IMutateDeployedIndexRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  mutateDeployedIndex(
-    request: protos.google.cloud.aiplatform.v1.IMutateDeployedIndexRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  mutateDeployedIndex(
-    request: protos.google.cloud.aiplatform.v1.IMutateDeployedIndexRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  mutateDeployedIndex(
-    request?: protos.google.cloud.aiplatform.v1.IMutateDeployedIndexRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
-        protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.mutateDeployedIndex(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `mutateDeployedIndex()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.mutate_deployed_index.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_MutateDeployedIndex_async
-   */
-  async checkMutateDeployedIndexProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1.MutateDeployedIndexResponse,
-      protos.google.cloud.aiplatform.v1.MutateDeployedIndexOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.mutateDeployedIndex,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1.MutateDeployedIndexResponse,
-      protos.google.cloud.aiplatform.v1.MutateDeployedIndexOperationMetadata
-    >;
-  }
-  /**
-   * Lists IndexEndpoints in a Location.
+   * Lists Schedules in a Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the
-   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field
-   *   names both snake_case and camelCase are supported.
+   *   Required. The resource name of the Location to list the Schedules from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
-   *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
    *
-   *   Some examples:
-   *     * `index_endpoint="1"`
-   *     * `display_name="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link google.cloud.aiplatform.v1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link google.cloud.aiplatform.v1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Schedule | Schedule}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listIndexEndpointsAsync()`
+   *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listIndexEndpoints(
-    request?: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedules(
+    request?: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.ISchedule[],
+      protos.google.cloud.aiplatform.v1.IListSchedulesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListSchedulesResponse
     ]
   >;
-  listIndexEndpoints(
-    request: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedules(
+    request: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint
+      protos.google.cloud.aiplatform.v1.ISchedule
     >
   ): void;
-  listIndexEndpoints(
-    request: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedules(
+    request: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint
+      protos.google.cloud.aiplatform.v1.ISchedule
     >
   ): void;
-  listIndexEndpoints(
-    request?: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedules(
+    request?: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
-          | protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+          protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
+          | protos.google.cloud.aiplatform.v1.IListSchedulesResponse
           | null
           | undefined,
-          protos.google.cloud.aiplatform.v1.IIndexEndpoint
+          protos.google.cloud.aiplatform.v1.ISchedule
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint
+      protos.google.cloud.aiplatform.v1.ISchedule
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.ISchedule[],
+      protos.google.cloud.aiplatform.v1.IListSchedulesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListSchedulesResponse
     ]
   > | void {
     request = request || {};
@@ -2592,7 +2302,7 @@ export class IndexEndpointServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listIndexEndpoints(request, options, callback);
+    return this.innerApiCalls.listSchedules(request, options, callback);
   }
 
   /**
@@ -2600,52 +2310,80 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the
-   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field
-   *   names both snake_case and camelCase are supported.
+   *   Required. The resource name of the Location to list the Schedules from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
-   *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
    *
-   *   Some examples:
-   *     * `index_endpoint="1"`
-   *     * `display_name="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link google.cloud.aiplatform.v1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link google.cloud.aiplatform.v1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Schedule | Schedule} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listIndexEndpointsAsync()`
+   *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listIndexEndpointsStream(
-    request?: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedulesStream(
+    request?: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2656,72 +2394,100 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listIndexEndpoints'];
+    const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listIndexEndpoints.createStream(
-      this.innerApiCalls.listIndexEndpoints as GaxCall,
+    return this.descriptors.page.listSchedules.createStream(
+      this.innerApiCalls.listSchedules as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listIndexEndpoints`, but returns an iterable object.
+   * Equivalent to `listSchedules`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the
-   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field
-   *   names both snake_case and camelCase are supported.
+   *   Required. The resource name of the Location to list the Schedules from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
-   *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
    *
-   *   Some examples:
-   *     * `index_endpoint="1"`
-   *     * `display_name="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link google.cloud.aiplatform.v1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link google.cloud.aiplatform.v1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.Schedule | Schedule}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/index_endpoint_service.list_index_endpoints.js</caption>
-   * region_tag:aiplatform_v1_generated_IndexEndpointService_ListIndexEndpoints_async
+   * @example <caption>include:samples/generated/v1/schedule_service.list_schedules.js</caption>
+   * region_tag:aiplatform_v1_generated_ScheduleService_ListSchedules_async
    */
-  listIndexEndpointsAsync(
-    request?: protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+  listSchedulesAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IIndexEndpoint> {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.ISchedule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2730,14 +2496,14 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listIndexEndpoints'];
+    const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listIndexEndpoints.asyncIterate(
-      this.innerApiCalls['listIndexEndpoints'] as GaxCall,
+    return this.descriptors.page.listSchedules.asyncIterate(
+      this.innerApiCalls['listSchedules'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IIndexEndpoint>;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ISchedule>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -5671,8 +5437,8 @@ export class IndexEndpointServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.indexEndpointServiceStub && !this._terminated) {
-      return this.indexEndpointServiceStub.then(stub => {
+    if (this.scheduleServiceStub && !this._terminated) {
+      return this.scheduleServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();

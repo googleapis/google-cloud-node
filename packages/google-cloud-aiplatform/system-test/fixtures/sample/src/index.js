@@ -36,6 +36,7 @@ function main() {
   const modelServiceClient = new aiplatform.ModelServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
+  const scheduleServiceClient = new aiplatform.ScheduleServiceClient();
   const specialistPoolServiceClient =
     new aiplatform.SpecialistPoolServiceClient();
   const tensorboardServiceClient = new aiplatform.TensorboardServiceClient();

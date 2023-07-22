@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as pipelineserviceModule from '../src';
+import * as scheduleserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -165,66 +165,66 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.PipelineServiceClient', () => {
+describe('v1.ScheduleServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        pipelineserviceModule.v1.PipelineServiceClient.servicePath;
+        scheduleserviceModule.v1.ScheduleServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        pipelineserviceModule.v1.PipelineServiceClient.apiEndpoint;
+        scheduleserviceModule.v1.ScheduleServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = pipelineserviceModule.v1.PipelineServiceClient.port;
+      const port = scheduleserviceModule.v1.ScheduleServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient();
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.pipelineServiceStub, undefined);
+      assert.strictEqual(client.scheduleServiceStub, undefined);
       await client.initialize();
-      assert(client.pipelineServiceStub);
+      assert(client.scheduleServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.pipelineServiceStub);
+      assert(client.scheduleServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.pipelineServiceStub, undefined);
+      assert.strictEqual(client.scheduleServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -232,7 +232,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -244,7 +244,7 @@ describe('v1.PipelineServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -265,65 +265,64 @@ describe('v1.PipelineServiceClient', () => {
     });
   });
 
-  describe('createTrainingPipeline', () => {
-    it('invokes createTrainingPipeline without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('createSchedule', () => {
+    it('invokes createSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.CreateScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.CreateScheduleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.TrainingPipeline()
+        new protos.google.cloud.aiplatform.v1.Schedule()
       );
-      client.innerApiCalls.createTrainingPipeline =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createTrainingPipeline(request);
+      client.innerApiCalls.createSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.createSchedule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createTrainingPipeline without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes createSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.CreateScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.CreateScheduleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.TrainingPipeline()
+        new protos.google.cloud.aiplatform.v1.Schedule()
       );
-      client.innerApiCalls.createTrainingPipeline =
+      client.innerApiCalls.createSchedule =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createTrainingPipeline(
+        client.createSchedule(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrainingPipeline | null
+            result?: protos.google.cloud.aiplatform.v1.ISchedule | null
           ) => {
             if (err) {
               reject(err);
@@ -336,131 +335,124 @@ describe('v1.PipelineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createTrainingPipeline with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes createSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.CreateScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.CreateScheduleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createTrainingPipeline = stubSimpleCall(
+      client.innerApiCalls.createSchedule = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.createTrainingPipeline(request),
-        expectedError
-      );
+      await assert.rejects(client.createSchedule(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createTrainingPipeline as SinonStub
+        client.innerApiCalls.createSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createTrainingPipeline with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes createSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.CreateScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.CreateScheduleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(
-        client.createTrainingPipeline(request),
-        expectedError
-      );
+      await assert.rejects(client.createSchedule(request), expectedError);
     });
   });
 
-  describe('getTrainingPipeline', () => {
-    it('invokes getTrainingPipeline without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('getSchedule', () => {
+    it('invokes getSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.GetScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.GetScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.TrainingPipeline()
+        new protos.google.cloud.aiplatform.v1.Schedule()
       );
-      client.innerApiCalls.getTrainingPipeline =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getTrainingPipeline(request);
+      client.innerApiCalls.getSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSchedule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTrainingPipeline without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes getSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.GetScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.GetScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.TrainingPipeline()
+        new protos.google.cloud.aiplatform.v1.Schedule()
       );
-      client.innerApiCalls.getTrainingPipeline =
+      client.innerApiCalls.getSchedule =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getTrainingPipeline(
+        client.getSchedule(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrainingPipeline | null
+            result?: protos.google.cloud.aiplatform.v1.ISchedule | null
           ) => {
             if (err) {
               reject(err);
@@ -473,78 +465,78 @@ describe('v1.PipelineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTrainingPipeline with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes getSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.GetScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.GetScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getTrainingPipeline = stubSimpleCall(
+      client.innerApiCalls.getSchedule = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getTrainingPipeline(request), expectedError);
+      await assert.rejects(client.getSchedule(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTrainingPipeline as SinonStub
+        client.innerApiCalls.getSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTrainingPipeline with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes getSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.GetScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.GetScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getTrainingPipeline(request), expectedError);
+      await assert.rejects(client.getSchedule(request), expectedError);
     });
   });
 
-  describe('cancelTrainingPipeline', () => {
-    it('invokes cancelTrainingPipeline without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('pauseSchedule', () => {
+    it('invokes pauseSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.PauseScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.PauseScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -552,31 +544,30 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelTrainingPipeline =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelTrainingPipeline(request);
+      client.innerApiCalls.pauseSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.pauseSchedule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelTrainingPipeline without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes pauseSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.PauseScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.PauseScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -584,10 +575,10 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelTrainingPipeline =
+      client.innerApiCalls.pauseSchedule =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.cancelTrainingPipeline(
+        client.pauseSchedule(
           request,
           (
             err?: Error | null,
@@ -604,344 +595,78 @@ describe('v1.PipelineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelTrainingPipeline with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes pauseSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.PauseScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.PauseScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.cancelTrainingPipeline = stubSimpleCall(
+      client.innerApiCalls.pauseSchedule = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.cancelTrainingPipeline(request),
-        expectedError
-      );
+      await assert.rejects(client.pauseSchedule(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+        client.innerApiCalls.pauseSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelTrainingPipeline with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes pauseSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.PauseScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.PauseScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(
-        client.cancelTrainingPipeline(request),
-        expectedError
-      );
+      await assert.rejects(client.pauseSchedule(request), expectedError);
     });
   });
 
-  describe('createPipelineJob', () => {
-    it('invokes createPipelineJob without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('resumeSchedule', () => {
+    it('invokes resumeSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
+        new protos.google.cloud.aiplatform.v1.ResumeScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreatePipelineJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.PipelineJob()
-      );
-      client.innerApiCalls.createPipelineJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.createPipelineJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPipelineJob without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreatePipelineJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.PipelineJob()
-      );
-      client.innerApiCalls.createPipelineJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPipelineJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IPipelineJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPipelineJob with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreatePipelineJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPipelineJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createPipelineJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPipelineJob with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CreatePipelineJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createPipelineJob(request), expectedError);
-    });
-  });
-
-  describe('getPipelineJob', () => {
-    it('invokes getPipelineJob without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetPipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.PipelineJob()
-      );
-      client.innerApiCalls.getPipelineJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPipelineJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPipelineJob without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetPipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.PipelineJob()
-      );
-      client.innerApiCalls.getPipelineJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPipelineJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IPipelineJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPipelineJob with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetPipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPipelineJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPipelineJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPipelineJob with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.GetPipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getPipelineJob(request), expectedError);
-    });
-  });
-
-  describe('cancelPipelineJob', () => {
-    it('invokes cancelPipelineJob without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelPipelineJobRequest',
+        '.google.cloud.aiplatform.v1.ResumeScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -949,30 +674,30 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelPipelineJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelPipelineJob(request);
+      client.innerApiCalls.resumeSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.resumeSchedule(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelPipelineJob without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes resumeSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+        new protos.google.cloud.aiplatform.v1.ResumeScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelPipelineJobRequest',
+        '.google.cloud.aiplatform.v1.ResumeScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -980,10 +705,10 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelPipelineJob =
+      client.innerApiCalls.resumeSchedule =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.cancelPipelineJob(
+        client.resumeSchedule(
           request,
           (
             err?: Error | null,
@@ -1000,78 +725,212 @@ describe('v1.PipelineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelPipelineJob with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes resumeSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+        new protos.google.cloud.aiplatform.v1.ResumeScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelPipelineJobRequest',
+        '.google.cloud.aiplatform.v1.ResumeScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.cancelPipelineJob = stubSimpleCall(
+      client.innerApiCalls.resumeSchedule = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.cancelPipelineJob(request), expectedError);
+      await assert.rejects(client.resumeSchedule(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPipelineJob as SinonStub
+        client.innerApiCalls.resumeSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes cancelPipelineJob with closed client', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes resumeSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+        new protos.google.cloud.aiplatform.v1.ResumeScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.CancelPipelineJobRequest',
+        '.google.cloud.aiplatform.v1.ResumeScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.cancelPipelineJob(request), expectedError);
+      await assert.rejects(client.resumeSchedule(request), expectedError);
     });
   });
 
-  describe('deleteTrainingPipeline', () => {
-    it('invokes deleteTrainingPipeline without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('updateSchedule', () => {
+    it('invokes updateSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.Schedule()
+      );
+      client.innerApiCalls.updateSchedule = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSchedule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.Schedule()
+      );
+      client.innerApiCalls.updateSchedule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSchedule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ISchedule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedHeaderRequestParams = `schedule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSchedule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSchedule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchedule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchedule with closed client', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateScheduleRequest()
+      );
+      request.schedule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateScheduleRequest',
+        ['schedule', 'name']
+      );
+      request.schedule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSchedule(request), expectedError);
+    });
+  });
+
+  describe('deleteSchedule', () => {
+    it('invokes deleteSchedule without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.DeleteScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1079,32 +938,32 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTrainingPipeline =
+      client.innerApiCalls.deleteSchedule =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteTrainingPipeline(request);
+      const [operation] = await client.deleteSchedule(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTrainingPipeline without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes deleteSchedule without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.DeleteScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1112,10 +971,10 @@ describe('v1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTrainingPipeline =
+      client.innerApiCalls.deleteSchedule =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteTrainingPipeline(
+        client.deleteSchedule(
           request,
           (
             err?: Error | null,
@@ -1139,84 +998,81 @@ describe('v1.PipelineServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTrainingPipeline with call error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes deleteSchedule with call error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.DeleteScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCall(
+      client.innerApiCalls.deleteSchedule = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.deleteTrainingPipeline(request),
-        expectedError
-      );
+      await assert.rejects(client.deleteSchedule(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTrainingPipeline with LRO error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes deleteSchedule with LRO error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteScheduleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1.DeleteScheduleRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCall(
+      client.innerApiCalls.deleteSchedule = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteTrainingPipeline(request);
+      const [operation] = await client.deleteSchedule(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+        client.innerApiCalls.deleteSchedule as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkDeleteTrainingPipelineProgress without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes checkDeleteScheduleProgress without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1229,7 +1085,7 @@ describe('v1.PipelineServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTrainingPipelineProgress(
+      const decodedOperation = await client.checkDeleteScheduleProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -1237,8 +1093,8 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteTrainingPipelineProgress with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes checkDeleteScheduleProgress with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1250,284 +1106,75 @@ describe('v1.PipelineServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkDeleteTrainingPipelineProgress(''),
+        client.checkDeleteScheduleProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('deletePipelineJob', () => {
-    it('invokes deletePipelineJob without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+  describe('listSchedules', () => {
+    it('invokes listSchedules without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeletePipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePipelineJob =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deletePipelineJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePipelineJob without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeletePipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePipelineJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePipelineJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePipelineJob with call error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeletePipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePipelineJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePipelineJob with LRO error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.DeletePipelineJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deletePipelineJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePipelineJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeletePipelineJobProgress without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeletePipelineJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeletePipelineJobProgress with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeletePipelineJobProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listTrainingPipelines', () => {
-    it('invokes listTrainingPipelines without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
       ];
-      client.innerApiCalls.listTrainingPipelines =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listTrainingPipelines(request);
+      client.innerApiCalls.listSchedules = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSchedules(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrainingPipelines without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes listSchedules without error using callback', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
       ];
-      client.innerApiCalls.listTrainingPipelines =
+      client.innerApiCalls.listSchedules =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listTrainingPipelines(
+        client.listSchedules(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.cloud.aiplatform.v1.ITrainingPipeline[]
-              | null
+            result?: protos.google.cloud.aiplatform.v1.ISchedule[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1540,84 +1187,74 @@ describe('v1.PipelineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrainingPipelines with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes listSchedules with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listTrainingPipelines = stubSimpleCall(
+      client.innerApiCalls.listSchedules = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.listTrainingPipelines(request),
-        expectedError
-      );
+      await assert.rejects(client.listSchedules(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listTrainingPipelines as SinonStub
+        client.innerApiCalls.listSchedules as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listTrainingPipelinesStream without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes listSchedulesStream without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
       ];
-      client.descriptors.page.listTrainingPipelines.createStream =
+      client.descriptors.page.listSchedules.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listTrainingPipelinesStream(request);
+      const stream = client.listSchedulesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.TrainingPipeline[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1.Schedule[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.TrainingPipeline) => {
+          (response: protos.google.cloud.aiplatform.v1.Schedule) => {
             responses.push(response);
           }
         );
@@ -1631,18 +1268,12 @@ describe('v1.PipelineServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrainingPipelines, request)
+          .calledWith(client.innerApiCalls.listSchedules, request)
       );
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1650,31 +1281,30 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
 
-    it('invokes listTrainingPipelinesStream with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('invokes listSchedulesStream with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrainingPipelines.createStream =
+      client.descriptors.page.listSchedules.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listTrainingPipelinesStream(request);
+      const stream = client.listSchedulesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.TrainingPipeline[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1.Schedule[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.TrainingPipeline) => {
+          (response: protos.google.cloud.aiplatform.v1.Schedule) => {
             responses.push(response);
           }
         );
@@ -1687,18 +1317,12 @@ describe('v1.PipelineServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrainingPipelines, request)
+          .calledWith(client.innerApiCalls.listSchedules, request)
       );
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSchedules.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1706,53 +1330,42 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listTrainingPipelines without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('uses async iteration with listSchedules without error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.TrainingPipeline()
-        ),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
+        generateSampleMessage(new protos.google.cloud.aiplatform.v1.Schedule()),
       ];
-      client.descriptors.page.listTrainingPipelines.asyncIterate =
+      client.descriptors.page.listSchedules.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1.ITrainingPipeline[] =
-        [];
-      const iterable = client.listTrainingPipelinesAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1.ISchedule[] = [];
+      const iterable = client.listSchedulesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listTrainingPipelines
-            .asyncIterate as SinonStub
+          client.descriptors.page.listSchedules.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .asyncIterate as SinonStub
-        )
+        (client.descriptors.page.listSchedules.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1760,369 +1373,39 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listTrainingPipelines with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+    it('uses async iteration with listSchedules with error', async () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
+        new protos.google.cloud.aiplatform.v1.ListSchedulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1.ListSchedulesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrainingPipelines.asyncIterate =
+      client.descriptors.page.listSchedules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listTrainingPipelinesAsync(request);
+      const iterable = client.listSchedulesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.ITrainingPipeline[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1.ISchedule[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listTrainingPipelines
-            .asyncIterate as SinonStub
+          client.descriptors.page.listSchedules.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (
-          client.descriptors.page.listTrainingPipelines
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listPipelineJobs', () => {
-    it('invokes listPipelineJobs without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-      ];
-      client.innerApiCalls.listPipelineJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPipelineJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPipelineJobs without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-      ];
-      client.innerApiCalls.listPipelineJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPipelineJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IPipelineJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPipelineJobs with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPipelineJobs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPipelineJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPipelineJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPipelineJobsStream without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-      ];
-      client.descriptors.page.listPipelineJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPipelineJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.PipelineJob[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.aiplatform.v1.PipelineJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPipelineJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listPipelineJobsStream with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPipelineJobs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPipelineJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.PipelineJob[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.aiplatform.v1.PipelineJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPipelineJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listPipelineJobs without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.PipelineJob()
-        ),
-      ];
-      client.descriptors.page.listPipelineJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1.IPipelineJob[] = [];
-      const iterable = client.listPipelineJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listPipelineJobs with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1.ListPipelineJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPipelineJobs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPipelineJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IPipelineJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
+        (client.descriptors.page.listSchedules.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2132,7 +1415,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2162,7 +1445,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2206,7 +1489,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2238,7 +1521,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2268,7 +1551,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2312,7 +1595,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2344,7 +1627,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2377,7 +1660,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2421,7 +1704,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2456,7 +1739,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2486,7 +1769,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2530,7 +1813,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2565,7 +1848,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2613,7 +1896,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2654,7 +1937,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2675,7 +1958,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2709,7 +1992,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2733,7 +2016,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2755,7 +2038,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2789,7 +2072,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2813,7 +2096,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2835,7 +2118,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2869,7 +2152,7 @@ describe('v1.PipelineServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2893,7 +2176,7 @@ describe('v1.PipelineServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2929,7 +2212,7 @@ describe('v1.PipelineServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2968,7 +2251,7 @@ describe('v1.PipelineServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3055,7 +2338,7 @@ describe('v1.PipelineServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3132,7 +2415,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3207,7 +2490,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3285,7 +2568,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3360,7 +2643,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3425,7 +2708,7 @@ describe('v1.PipelineServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3500,7 +2783,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3565,7 +2848,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3630,7 +2913,7 @@ describe('v1.PipelineServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3706,7 +2989,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3783,7 +3066,7 @@ describe('v1.PipelineServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3869,7 +3152,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3933,7 +3216,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4014,7 +3297,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4078,7 +3361,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4141,7 +3424,7 @@ describe('v1.PipelineServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4192,7 +3475,7 @@ describe('v1.PipelineServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4269,7 +3552,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4333,7 +3616,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4397,7 +3680,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4477,7 +3760,7 @@ describe('v1.PipelineServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4554,7 +3837,7 @@ describe('v1.PipelineServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4661,7 +3944,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         nas_job: 'nasJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4726,7 +4009,7 @@ describe('v1.PipelineServiceClient', () => {
         nas_job: 'nasJobValue',
         nas_trial_detail: 'nasTrialDetailValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4802,7 +4085,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4866,7 +4149,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4946,7 +4229,7 @@ describe('v1.PipelineServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5037,7 +4320,7 @@ describe('v1.PipelineServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5091,7 +4374,7 @@ describe('v1.PipelineServiceClient', () => {
         dataset: 'datasetValue',
         saved_query: 'savedQueryValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5166,7 +4449,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         schedule: 'scheduleValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5230,7 +4513,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5295,7 +4578,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5359,7 +4642,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5424,7 +4707,7 @@ describe('v1.PipelineServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5520,7 +4803,7 @@ describe('v1.PipelineServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5609,7 +4892,7 @@ describe('v1.PipelineServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5732,7 +5015,7 @@ describe('v1.PipelineServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5801,7 +5084,7 @@ describe('v1.PipelineServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
