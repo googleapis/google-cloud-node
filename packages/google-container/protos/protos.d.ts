@@ -22292,6 +22292,9 @@ export namespace google {
 
                 /** NodeConfig soleTenantConfig */
                 soleTenantConfig?: (google.container.v1beta1.ISoleTenantConfig|null);
+
+                /** NodeConfig hostMaintenancePolicy */
+                hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
             }
 
             /** Represents a NodeConfig. */
@@ -22407,6 +22410,9 @@ export namespace google {
 
                 /** NodeConfig soleTenantConfig. */
                 public soleTenantConfig?: (google.container.v1beta1.ISoleTenantConfig|null);
+
+                /** NodeConfig hostMaintenancePolicy. */
+                public hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -22610,6 +22616,12 @@ export namespace google {
                 /** NodeNetworkConfig podCidrOverprovisionConfig */
                 podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
 
+                /** NodeNetworkConfig additionalNodeNetworkConfigs */
+                additionalNodeNetworkConfigs?: (google.container.v1beta1.IAdditionalNodeNetworkConfig[]|null);
+
+                /** NodeNetworkConfig additionalPodNetworkConfigs */
+                additionalPodNetworkConfigs?: (google.container.v1beta1.IAdditionalPodNetworkConfig[]|null);
+
                 /** NodeNetworkConfig podIpv4RangeUtilization */
                 podIpv4RangeUtilization?: (number|null);
             }
@@ -22640,6 +22652,12 @@ export namespace google {
 
                 /** NodeNetworkConfig podCidrOverprovisionConfig. */
                 public podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
+
+                /** NodeNetworkConfig additionalNodeNetworkConfigs. */
+                public additionalNodeNetworkConfigs: google.container.v1beta1.IAdditionalNodeNetworkConfig[];
+
+                /** NodeNetworkConfig additionalPodNetworkConfigs. */
+                public additionalPodNetworkConfigs: google.container.v1beta1.IAdditionalPodNetworkConfig[];
 
                 /** NodeNetworkConfig podIpv4RangeUtilization. */
                 public podIpv4RangeUtilization: number;
@@ -22847,6 +22865,221 @@ export namespace google {
                         TIER_1 = 1
                     }
                 }
+            }
+
+            /** Properties of an AdditionalNodeNetworkConfig. */
+            interface IAdditionalNodeNetworkConfig {
+
+                /** AdditionalNodeNetworkConfig network */
+                network?: (string|null);
+
+                /** AdditionalNodeNetworkConfig subnetwork */
+                subnetwork?: (string|null);
+            }
+
+            /** Represents an AdditionalNodeNetworkConfig. */
+            class AdditionalNodeNetworkConfig implements IAdditionalNodeNetworkConfig {
+
+                /**
+                 * Constructs a new AdditionalNodeNetworkConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAdditionalNodeNetworkConfig);
+
+                /** AdditionalNodeNetworkConfig network. */
+                public network: string;
+
+                /** AdditionalNodeNetworkConfig subnetwork. */
+                public subnetwork: string;
+
+                /**
+                 * Creates a new AdditionalNodeNetworkConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalNodeNetworkConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAdditionalNodeNetworkConfig): google.container.v1beta1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Encodes the specified AdditionalNodeNetworkConfig message. Does not implicitly {@link google.container.v1beta1.AdditionalNodeNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalNodeNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAdditionalNodeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalNodeNetworkConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AdditionalNodeNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalNodeNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAdditionalNodeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalNodeNetworkConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalNodeNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Decodes an AdditionalNodeNetworkConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalNodeNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Verifies an AdditionalNodeNetworkConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalNodeNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalNodeNetworkConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AdditionalNodeNetworkConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalNodeNetworkConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalNodeNetworkConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AdditionalNodeNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalNodeNetworkConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalNodeNetworkConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdditionalPodNetworkConfig. */
+            interface IAdditionalPodNetworkConfig {
+
+                /** AdditionalPodNetworkConfig subnetwork */
+                subnetwork?: (string|null);
+
+                /** AdditionalPodNetworkConfig secondaryPodRange */
+                secondaryPodRange?: (string|null);
+
+                /** AdditionalPodNetworkConfig maxPodsPerNode */
+                maxPodsPerNode?: (google.container.v1beta1.IMaxPodsConstraint|null);
+            }
+
+            /** Represents an AdditionalPodNetworkConfig. */
+            class AdditionalPodNetworkConfig implements IAdditionalPodNetworkConfig {
+
+                /**
+                 * Constructs a new AdditionalPodNetworkConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAdditionalPodNetworkConfig);
+
+                /** AdditionalPodNetworkConfig subnetwork. */
+                public subnetwork: string;
+
+                /** AdditionalPodNetworkConfig secondaryPodRange. */
+                public secondaryPodRange: string;
+
+                /** AdditionalPodNetworkConfig maxPodsPerNode. */
+                public maxPodsPerNode?: (google.container.v1beta1.IMaxPodsConstraint|null);
+
+                /** AdditionalPodNetworkConfig _maxPodsPerNode. */
+                public _maxPodsPerNode?: "maxPodsPerNode";
+
+                /**
+                 * Creates a new AdditionalPodNetworkConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalPodNetworkConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAdditionalPodNetworkConfig): google.container.v1beta1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Encodes the specified AdditionalPodNetworkConfig message. Does not implicitly {@link google.container.v1beta1.AdditionalPodNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalPodNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAdditionalPodNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalPodNetworkConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AdditionalPodNetworkConfig.verify|verify} messages.
+                 * @param message AdditionalPodNetworkConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAdditionalPodNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalPodNetworkConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalPodNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Decodes an AdditionalPodNetworkConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalPodNetworkConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Verifies an AdditionalPodNetworkConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalPodNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalPodNetworkConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AdditionalPodNetworkConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalPodNetworkConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalPodNetworkConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AdditionalPodNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalPodNetworkConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalPodNetworkConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ShieldedInstanceConfig. */
@@ -23788,6 +24021,116 @@ export namespace google {
                         IN = 1,
                         NOT_IN = 2
                     }
+                }
+            }
+
+            /** Properties of a HostMaintenancePolicy. */
+            interface IHostMaintenancePolicy {
+
+                /** HostMaintenancePolicy maintenanceInterval */
+                maintenanceInterval?: (google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|keyof typeof google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|null);
+            }
+
+            /** Represents a HostMaintenancePolicy. */
+            class HostMaintenancePolicy implements IHostMaintenancePolicy {
+
+                /**
+                 * Constructs a new HostMaintenancePolicy.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IHostMaintenancePolicy);
+
+                /** HostMaintenancePolicy maintenanceInterval. */
+                public maintenanceInterval?: (google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|keyof typeof google.container.v1beta1.HostMaintenancePolicy.MaintenanceInterval|null);
+
+                /** HostMaintenancePolicy _maintenanceInterval. */
+                public _maintenanceInterval?: "maintenanceInterval";
+
+                /**
+                 * Creates a new HostMaintenancePolicy instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns HostMaintenancePolicy instance
+                 */
+                public static create(properties?: google.container.v1beta1.IHostMaintenancePolicy): google.container.v1beta1.HostMaintenancePolicy;
+
+                /**
+                 * Encodes the specified HostMaintenancePolicy message. Does not implicitly {@link google.container.v1beta1.HostMaintenancePolicy.verify|verify} messages.
+                 * @param message HostMaintenancePolicy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IHostMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified HostMaintenancePolicy message, length delimited. Does not implicitly {@link google.container.v1beta1.HostMaintenancePolicy.verify|verify} messages.
+                 * @param message HostMaintenancePolicy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IHostMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a HostMaintenancePolicy message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns HostMaintenancePolicy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.HostMaintenancePolicy;
+
+                /**
+                 * Decodes a HostMaintenancePolicy message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns HostMaintenancePolicy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.HostMaintenancePolicy;
+
+                /**
+                 * Verifies a HostMaintenancePolicy message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a HostMaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns HostMaintenancePolicy
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.HostMaintenancePolicy;
+
+                /**
+                 * Creates a plain object from a HostMaintenancePolicy message. Also converts values to other types if specified.
+                 * @param message HostMaintenancePolicy
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.HostMaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this HostMaintenancePolicy to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for HostMaintenancePolicy
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace HostMaintenancePolicy {
+
+                /** MaintenanceInterval enum. */
+                enum MaintenanceInterval {
+                    MAINTENANCE_INTERVAL_UNSPECIFIED = 0,
+                    AS_NEEDED = 1,
+                    PERIODIC = 2
                 }
             }
 
@@ -28519,6 +28862,9 @@ export namespace google {
 
                 /** NodeConfigDefaults loggingConfig */
                 loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** NodeConfigDefaults hostMaintenancePolicy */
+                hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
             }
 
             /** Represents a NodeConfigDefaults. */
@@ -28535,6 +28881,9 @@ export namespace google {
 
                 /** NodeConfigDefaults loggingConfig. */
                 public loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** NodeConfigDefaults hostMaintenancePolicy. */
+                public hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
 
                 /**
                  * Creates a new NodeConfigDefaults instance using the specified properties.
@@ -28881,6 +29230,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredK8sBetaApis */
                 desiredK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredHostMaintenancePolicy */
+                desiredHostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -29059,6 +29411,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredK8sBetaApis. */
                 public desiredK8sBetaApis?: (google.container.v1beta1.IK8sBetaAPIConfig|null);
+
+                /** ClusterUpdate desiredHostMaintenancePolicy. */
+                public desiredHostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
 
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
@@ -34101,6 +34456,9 @@ export namespace google {
 
                     /** PlacementPolicy tpuTopology */
                     tpuTopology?: (string|null);
+
+                    /** PlacementPolicy policyName */
+                    policyName?: (string|null);
                 }
 
                 /** Represents a PlacementPolicy. */
@@ -34117,6 +34475,9 @@ export namespace google {
 
                     /** PlacementPolicy tpuTopology. */
                     public tpuTopology: string;
+
+                    /** PlacementPolicy policyName. */
+                    public policyName: string;
 
                     /**
                      * Creates a new PlacementPolicy instance using the specified properties.
@@ -37954,6 +38315,9 @@ export namespace google {
                 /** NetworkConfig gatewayApiConfig */
                 gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
 
+                /** NetworkConfig enableMultiNetworking */
+                enableMultiNetworking?: (boolean|null);
+
                 /** NetworkConfig networkPerformanceConfig */
                 networkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
 
@@ -37999,6 +38363,9 @@ export namespace google {
 
                 /** NetworkConfig gatewayApiConfig. */
                 public gatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** NetworkConfig enableMultiNetworking. */
+                public enableMultiNetworking: boolean;
 
                 /** NetworkConfig networkPerformanceConfig. */
                 public networkPerformanceConfig?: (google.container.v1beta1.NetworkConfig.IClusterNetworkPerformanceConfig|null);
