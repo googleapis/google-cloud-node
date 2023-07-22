@@ -19,8 +19,6 @@ set -e
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
-tests_without_node12="typeless-sample-bot gapic-node-templating node-bootstrap-container"
-
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
     exit 1
@@ -41,15 +39,9 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${TEST_TYPE} != "lint" ]]; then
-    echo "not running tests for Node 12"
-elif [[ ${NODE_VERSION} == "12.22.12" ]]; then
-    echo "npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm"
-    npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm
-else
-    echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-    pnpm install --ignore-scripts --engine-strict --prod; pnpm install
-fi
+echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
+pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+
 
 retval=0
 
