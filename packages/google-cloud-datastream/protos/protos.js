@@ -17571,6 +17571,8 @@
                          * @property {boolean|null} [primaryKey] MysqlColumn primaryKey
                          * @property {boolean|null} [nullable] MysqlColumn nullable
                          * @property {number|null} [ordinalPosition] MysqlColumn ordinalPosition
+                         * @property {number|null} [precision] MysqlColumn precision
+                         * @property {number|null} [scale] MysqlColumn scale
                          */
     
                         /**
@@ -17645,6 +17647,22 @@
                         MysqlColumn.prototype.ordinalPosition = 0;
     
                         /**
+                         * MysqlColumn precision.
+                         * @member {number} precision
+                         * @memberof google.cloud.datastream.v1.MysqlColumn
+                         * @instance
+                         */
+                        MysqlColumn.prototype.precision = 0;
+    
+                        /**
+                         * MysqlColumn scale.
+                         * @member {number} scale
+                         * @memberof google.cloud.datastream.v1.MysqlColumn
+                         * @instance
+                         */
+                        MysqlColumn.prototype.scale = 0;
+    
+                        /**
                          * Creates a new MysqlColumn instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.MysqlColumn
@@ -17682,6 +17700,10 @@
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.nullable);
                             if (message.ordinalPosition != null && Object.hasOwnProperty.call(message, "ordinalPosition"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.ordinalPosition);
+                            if (message.precision != null && Object.hasOwnProperty.call(message, "precision"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.precision);
+                            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.scale);
                             return writer;
                         };
     
@@ -17744,6 +17766,14 @@
                                         message.ordinalPosition = reader.int32();
                                         break;
                                     }
+                                case 8: {
+                                        message.precision = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.scale = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17800,6 +17830,12 @@
                             if (message.ordinalPosition != null && message.hasOwnProperty("ordinalPosition"))
                                 if (!$util.isInteger(message.ordinalPosition))
                                     return "ordinalPosition: integer expected";
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                if (!$util.isInteger(message.precision))
+                                    return "precision: integer expected";
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                if (!$util.isInteger(message.scale))
+                                    return "scale: integer expected";
                             return null;
                         };
     
@@ -17829,6 +17865,10 @@
                                 message.nullable = Boolean(object.nullable);
                             if (object.ordinalPosition != null)
                                 message.ordinalPosition = object.ordinalPosition | 0;
+                            if (object.precision != null)
+                                message.precision = object.precision | 0;
+                            if (object.scale != null)
+                                message.scale = object.scale | 0;
                             return message;
                         };
     
@@ -17853,6 +17893,8 @@
                                 object.primaryKey = false;
                                 object.nullable = false;
                                 object.ordinalPosition = 0;
+                                object.precision = 0;
+                                object.scale = 0;
                             }
                             if (message.column != null && message.hasOwnProperty("column"))
                                 object.column = message.column;
@@ -17868,6 +17910,10 @@
                                 object.nullable = message.nullable;
                             if (message.ordinalPosition != null && message.hasOwnProperty("ordinalPosition"))
                                 object.ordinalPosition = message.ordinalPosition;
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                object.precision = message.precision;
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                object.scale = message.scale;
                             return object;
                         };
     
