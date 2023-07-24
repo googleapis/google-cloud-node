@@ -908,6 +908,260 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('getAsset', () => {
+    it('invokes getAsset without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Asset()
+      );
+      client.innerApiCalls.getAsset = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAsset(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAsset without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Asset()
+      );
+      client.innerApiCalls.getAsset =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAsset(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IAsset | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAsset with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getAsset(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAsset with closed client', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAsset(request), expectedError);
+    });
+  });
+
+  describe('getPool', () => {
+    it('invokes getPool without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetPoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetPoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Pool()
+      );
+      client.innerApiCalls.getPool = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPool(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getPool as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPool without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetPoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetPoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Pool()
+      );
+      client.innerApiCalls.getPool =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPool(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IPool | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getPool as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPool with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetPoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetPoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPool = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getPool(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getPool as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPool with closed client', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetPoolRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetPoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPool(request), expectedError);
+    });
+  });
+
   describe('createChannel', () => {
     it('invokes createChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -2448,6 +2702,580 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('createAsset', () => {
+    it('invokes createAsset without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateAssetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAsset = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAsset(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAsset without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateAssetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAsset =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAsset(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.video.livestream.v1.IAsset,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.video.livestream.v1.IAsset,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAsset with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateAssetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAsset = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAsset(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAsset with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateAssetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAsset = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createAsset(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAssetProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAssetProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAssetProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateAssetProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAsset', () => {
+    it('invokes deleteAsset without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteAsset = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAsset(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAsset without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteAsset =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAsset(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAsset with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAsset = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAsset(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAsset with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteAssetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAsset = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteAsset(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAsset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAssetProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAssetProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAssetProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteAssetProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updatePool', () => {
+    it('invokes updatePool without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
+      );
+      request.pool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdatePoolRequest',
+        ['pool', 'name']
+      );
+      request.pool.name = defaultValue1;
+      const expectedHeaderRequestParams = `pool.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePool = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updatePool(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePool without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
+      );
+      request.pool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdatePoolRequest',
+        ['pool', 'name']
+      );
+      request.pool.name = defaultValue1;
+      const expectedHeaderRequestParams = `pool.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePool =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePool(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.video.livestream.v1.IPool,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.video.livestream.v1.IPool,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePool with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
+      );
+      request.pool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdatePoolRequest',
+        ['pool', 'name']
+      );
+      request.pool.name = defaultValue1;
+      const expectedHeaderRequestParams = `pool.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePool = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updatePool(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePool with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
+      );
+      request.pool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdatePoolRequest',
+        ['pool', 'name']
+      );
+      request.pool.name = defaultValue1;
+      const expectedHeaderRequestParams = `pool.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePool = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updatePool(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdatePoolProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdatePoolProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdatePoolProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkUpdatePoolProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listChannels', () => {
     it('invokes listChannels without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -3433,6 +4261,335 @@ describe('v1.LivestreamServiceClient', () => {
       );
     });
   });
+
+  describe('listAssets', () => {
+    it('invokes listAssets without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+      ];
+      client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAssets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssets without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+      ];
+      client.innerApiCalls.listAssets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAssets(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IAsset[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssets with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAssets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAssets(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAssetsStream without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+      ];
+      client.descriptors.page.listAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.Asset[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.Asset) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssets, request)
+      );
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAssetsStream with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.Asset[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.Asset) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssets, request)
+      );
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAssets without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Asset()
+        ),
+      ];
+      client.descriptors.page.listAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.video.livestream.v1.IAsset[] = [];
+      const iterable = client.listAssetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAssets with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListAssetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listAssetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.video.livestream.v1.IAsset[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -3938,6 +5095,70 @@ describe('v1.LivestreamServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('asset', () => {
+      const fakePath = '/rendered/path/asset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        asset: 'assetValue',
+      };
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.assetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assetPath', () => {
+        const result = client.assetPath(
+          'projectValue',
+          'locationValue',
+          'assetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAssetName', () => {
+        const result = client.matchProjectFromAssetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAssetName', () => {
+        const result = client.matchLocationFromAssetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssetFromAssetName', () => {
+        const result = client.matchAssetFromAssetName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('channel', () => {
       const fakePath = '/rendered/path/channel';
       const expectedParameters = {
@@ -4185,6 +5406,70 @@ describe('v1.LivestreamServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pool', () => {
+      const fakePath = '/rendered/path/pool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pool: 'poolValue',
+      };
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.poolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.poolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('poolPath', () => {
+        const result = client.poolPath(
+          'projectValue',
+          'locationValue',
+          'poolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.poolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPoolName', () => {
+        const result = client.matchProjectFromPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.poolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPoolName', () => {
+        const result = client.matchLocationFromPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.poolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPoolFromPoolName', () => {
+        const result = client.matchPoolFromPoolName(fakePath);
+        assert.strictEqual(result, 'poolValue');
+        assert(
+          (client.pathTemplates.poolPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

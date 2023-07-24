@@ -15,7 +15,9 @@
                     "java_outer_classname": "RegistrationServiceProto",
                     "java_package": "com.google.cloud.servicedirectory.v1",
                     "php_namespace": "Google\\Cloud\\ServiceDirectory\\V1",
-                    "ruby_package": "Google::Cloud::ServiceDirectory::V1"
+                    "ruby_package": "Google::Cloud::ServiceDirectory::V1",
+                    "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Network",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/global/networks/{network}"
                   },
                   "nested": {
                     "Endpoint": {
@@ -51,6 +53,21 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Network"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -141,6 +158,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -163,6 +187,13 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -958,6 +989,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1061,6 +1099,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1095,6 +1140,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1395,7 +1447,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:getIamPolicy",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:getIamPolicy",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:getIamPolicy",
                             "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
@@ -1403,10 +1455,16 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:getIamPolicy",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:getIamPolicy",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:getIamPolicy",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:getIamPolicy",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -1417,7 +1475,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:setIamPolicy",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:setIamPolicy",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:setIamPolicy",
                             "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
@@ -1425,10 +1483,16 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:setIamPolicy",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:setIamPolicy",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:setIamPolicy",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:setIamPolicy",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -1439,7 +1503,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:testIamPermissions",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:testIamPermissions",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:testIamPermissions",
                             "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
@@ -1447,10 +1511,16 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*}:testIamPermissions",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:testIamPermissions",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/services/*}:testIamPermissions",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/namespaces/*/workloads/*}:testIamPermissions",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]

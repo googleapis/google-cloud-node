@@ -8800,6 +8800,7 @@
                              * @property {google.cloud.video.livestream.v1.Event.IInputSwitchTask|null} [inputSwitch] Event inputSwitch
                              * @property {google.cloud.video.livestream.v1.Event.IAdBreakTask|null} [adBreak] Event adBreak
                              * @property {google.cloud.video.livestream.v1.Event.IReturnToProgramTask|null} [returnToProgram] Event returnToProgram
+                             * @property {google.cloud.video.livestream.v1.Event.ISlateTask|null} [slate] Event slate
                              * @property {google.cloud.video.livestream.v1.Event.IMuteTask|null} [mute] Event mute
                              * @property {google.cloud.video.livestream.v1.Event.IUnmuteTask|null} [unmute] Event unmute
                              * @property {boolean|null} [executeNow] Event executeNow
@@ -8881,6 +8882,14 @@
                             Event.prototype.returnToProgram = null;
     
                             /**
+                             * Event slate.
+                             * @member {google.cloud.video.livestream.v1.Event.ISlateTask|null|undefined} slate
+                             * @memberof google.cloud.video.livestream.v1.Event
+                             * @instance
+                             */
+                            Event.prototype.slate = null;
+    
+                            /**
                              * Event mute.
                              * @member {google.cloud.video.livestream.v1.Event.IMuteTask|null|undefined} mute
                              * @memberof google.cloud.video.livestream.v1.Event
@@ -8933,12 +8942,12 @@
     
                             /**
                              * Event task.
-                             * @member {"inputSwitch"|"adBreak"|"returnToProgram"|"mute"|"unmute"|undefined} task
+                             * @member {"inputSwitch"|"adBreak"|"returnToProgram"|"slate"|"mute"|"unmute"|undefined} task
                              * @memberof google.cloud.video.livestream.v1.Event
                              * @instance
                              */
                             Object.defineProperty(Event.prototype, "task", {
-                                get: $util.oneOfGetter($oneOfFields = ["inputSwitch", "adBreak", "returnToProgram", "mute", "unmute"]),
+                                get: $util.oneOfGetter($oneOfFields = ["inputSwitch", "adBreak", "returnToProgram", "slate", "mute", "unmute"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -8989,6 +8998,8 @@
                                     $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 if (message.returnToProgram != null && Object.hasOwnProperty.call(message, "returnToProgram"))
                                     $root.google.cloud.video.livestream.v1.Event.ReturnToProgramTask.encode(message.returnToProgram, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.slate != null && Object.hasOwnProperty.call(message, "slate"))
+                                    $root.google.cloud.video.livestream.v1.Event.SlateTask.encode(message.slate, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 if (message.mute != null && Object.hasOwnProperty.call(message, "mute"))
                                     $root.google.cloud.video.livestream.v1.Event.MuteTask.encode(message.mute, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 if (message.unmute != null && Object.hasOwnProperty.call(message, "unmute"))
@@ -9072,6 +9083,10 @@
                                         }
                                     case 13: {
                                             message.returnToProgram = $root.google.cloud.video.livestream.v1.Event.ReturnToProgramTask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.slate = $root.google.cloud.video.livestream.v1.Event.SlateTask.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 15: {
@@ -9183,6 +9198,16 @@
                                             return "returnToProgram." + error;
                                     }
                                 }
+                                if (message.slate != null && message.hasOwnProperty("slate")) {
+                                    if (properties.task === 1)
+                                        return "task: multiple values";
+                                    properties.task = 1;
+                                    {
+                                        var error = $root.google.cloud.video.livestream.v1.Event.SlateTask.verify(message.slate);
+                                        if (error)
+                                            return "slate." + error;
+                                    }
+                                }
                                 if (message.mute != null && message.hasOwnProperty("mute")) {
                                     if (properties.task === 1)
                                         return "task: multiple values";
@@ -9277,6 +9302,11 @@
                                     if (typeof object.returnToProgram !== "object")
                                         throw TypeError(".google.cloud.video.livestream.v1.Event.returnToProgram: object expected");
                                     message.returnToProgram = $root.google.cloud.video.livestream.v1.Event.ReturnToProgramTask.fromObject(object.returnToProgram);
+                                }
+                                if (object.slate != null) {
+                                    if (typeof object.slate !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Event.slate: object expected");
+                                    message.slate = $root.google.cloud.video.livestream.v1.Event.SlateTask.fromObject(object.slate);
                                 }
                                 if (object.mute != null) {
                                     if (typeof object.mute !== "object")
@@ -9397,6 +9427,11 @@
                                     object.returnToProgram = $root.google.cloud.video.livestream.v1.Event.ReturnToProgramTask.toObject(message.returnToProgram, options);
                                     if (options.oneofs)
                                         object.task = "returnToProgram";
+                                }
+                                if (message.slate != null && message.hasOwnProperty("slate")) {
+                                    object.slate = $root.google.cloud.video.livestream.v1.Event.SlateTask.toObject(message.slate, options);
+                                    if (options.oneofs)
+                                        object.task = "slate";
                                 }
                                 if (message.mute != null && message.hasOwnProperty("mute")) {
                                     object.mute = $root.google.cloud.video.livestream.v1.Event.MuteTask.toObject(message.mute, options);
@@ -9846,6 +9881,238 @@
                                 };
     
                                 return AdBreakTask;
+                            })();
+    
+                            Event.SlateTask = (function() {
+    
+                                /**
+                                 * Properties of a SlateTask.
+                                 * @memberof google.cloud.video.livestream.v1.Event
+                                 * @interface ISlateTask
+                                 * @property {google.protobuf.IDuration|null} [duration] SlateTask duration
+                                 * @property {string|null} [asset] SlateTask asset
+                                 */
+    
+                                /**
+                                 * Constructs a new SlateTask.
+                                 * @memberof google.cloud.video.livestream.v1.Event
+                                 * @classdesc Represents a SlateTask.
+                                 * @implements ISlateTask
+                                 * @constructor
+                                 * @param {google.cloud.video.livestream.v1.Event.ISlateTask=} [properties] Properties to set
+                                 */
+                                function SlateTask(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SlateTask duration.
+                                 * @member {google.protobuf.IDuration|null|undefined} duration
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @instance
+                                 */
+                                SlateTask.prototype.duration = null;
+    
+                                /**
+                                 * SlateTask asset.
+                                 * @member {string} asset
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @instance
+                                 */
+                                SlateTask.prototype.asset = "";
+    
+                                /**
+                                 * Creates a new SlateTask instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Event.ISlateTask=} [properties] Properties to set
+                                 * @returns {google.cloud.video.livestream.v1.Event.SlateTask} SlateTask instance
+                                 */
+                                SlateTask.create = function create(properties) {
+                                    return new SlateTask(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SlateTask message. Does not implicitly {@link google.cloud.video.livestream.v1.Event.SlateTask.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Event.ISlateTask} message SlateTask message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SlateTask.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                        $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.asset != null && Object.hasOwnProperty.call(message, "asset"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.asset);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SlateTask message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Event.SlateTask.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Event.ISlateTask} message SlateTask message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SlateTask.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SlateTask message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.livestream.v1.Event.SlateTask} SlateTask
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SlateTask.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Event.SlateTask();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.asset = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SlateTask message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.livestream.v1.Event.SlateTask} SlateTask
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SlateTask.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SlateTask message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SlateTask.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.duration != null && message.hasOwnProperty("duration")) {
+                                        var error = $root.google.protobuf.Duration.verify(message.duration);
+                                        if (error)
+                                            return "duration." + error;
+                                    }
+                                    if (message.asset != null && message.hasOwnProperty("asset"))
+                                        if (!$util.isString(message.asset))
+                                            return "asset: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SlateTask message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.livestream.v1.Event.SlateTask} SlateTask
+                                 */
+                                SlateTask.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.livestream.v1.Event.SlateTask)
+                                        return object;
+                                    var message = new $root.google.cloud.video.livestream.v1.Event.SlateTask();
+                                    if (object.duration != null) {
+                                        if (typeof object.duration !== "object")
+                                            throw TypeError(".google.cloud.video.livestream.v1.Event.SlateTask.duration: object expected");
+                                        message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                    }
+                                    if (object.asset != null)
+                                        message.asset = String(object.asset);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SlateTask message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Event.SlateTask} message SlateTask
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SlateTask.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.duration = null;
+                                        object.asset = "";
+                                    }
+                                    if (message.duration != null && message.hasOwnProperty("duration"))
+                                        object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                                    if (message.asset != null && message.hasOwnProperty("asset"))
+                                        object.asset = message.asset;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SlateTask to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SlateTask.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SlateTask
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.livestream.v1.Event.SlateTask
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SlateTask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.livestream.v1.Event.SlateTask";
+                                };
+    
+                                return SlateTask;
                             })();
     
                             Event.ReturnToProgramTask = (function() {
@@ -10431,6 +10698,942 @@
                             })();
     
                             return Event;
+                        })();
+    
+                        v1.Asset = (function() {
+    
+                            /**
+                             * Properties of an Asset.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IAsset
+                             * @property {string|null} [name] Asset name
+                             * @property {google.protobuf.ITimestamp|null} [createTime] Asset createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] Asset updateTime
+                             * @property {Object.<string,string>|null} [labels] Asset labels
+                             * @property {google.cloud.video.livestream.v1.Asset.IVideoAsset|null} [video] Asset video
+                             * @property {google.cloud.video.livestream.v1.Asset.IImageAsset|null} [image] Asset image
+                             * @property {string|null} [crc32c] Asset crc32c
+                             * @property {google.cloud.video.livestream.v1.Asset.State|null} [state] Asset state
+                             * @property {google.rpc.IStatus|null} [error] Asset error
+                             */
+    
+                            /**
+                             * Constructs a new Asset.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents an Asset.
+                             * @implements IAsset
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IAsset=} [properties] Properties to set
+                             */
+                            function Asset(properties) {
+                                this.labels = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Asset name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.name = "";
+    
+                            /**
+                             * Asset createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.createTime = null;
+    
+                            /**
+                             * Asset updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.updateTime = null;
+    
+                            /**
+                             * Asset labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * Asset video.
+                             * @member {google.cloud.video.livestream.v1.Asset.IVideoAsset|null|undefined} video
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.video = null;
+    
+                            /**
+                             * Asset image.
+                             * @member {google.cloud.video.livestream.v1.Asset.IImageAsset|null|undefined} image
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.image = null;
+    
+                            /**
+                             * Asset crc32c.
+                             * @member {string} crc32c
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.crc32c = "";
+    
+                            /**
+                             * Asset state.
+                             * @member {google.cloud.video.livestream.v1.Asset.State} state
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.state = 0;
+    
+                            /**
+                             * Asset error.
+                             * @member {google.rpc.IStatus|null|undefined} error
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Asset.prototype.error = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Asset resource.
+                             * @member {"video"|"image"|undefined} resource
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             */
+                            Object.defineProperty(Asset.prototype, "resource", {
+                                get: $util.oneOfGetter($oneOfFields = ["video", "image"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Asset instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IAsset=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.Asset} Asset instance
+                             */
+                            Asset.create = function create(properties) {
+                                return new Asset(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Asset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IAsset} message Asset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Asset.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.video != null && Object.hasOwnProperty.call(message, "video"))
+                                    $root.google.cloud.video.livestream.v1.Asset.VideoAsset.encode(message.video, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                                    $root.google.cloud.video.livestream.v1.Asset.ImageAsset.encode(message.image, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.crc32c != null && Object.hasOwnProperty.call(message, "crc32c"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.crc32c);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
+                                if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                    $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Asset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IAsset} message Asset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Asset.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Asset message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.Asset} Asset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Asset.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Asset(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.video = $root.google.cloud.video.livestream.v1.Asset.VideoAsset.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.image = $root.google.cloud.video.livestream.v1.Asset.ImageAsset.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.crc32c = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Asset message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.Asset} Asset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Asset.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Asset message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Asset.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.video != null && message.hasOwnProperty("video")) {
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.cloud.video.livestream.v1.Asset.VideoAsset.verify(message.video);
+                                        if (error)
+                                            return "video." + error;
+                                    }
+                                }
+                                if (message.image != null && message.hasOwnProperty("image")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.cloud.video.livestream.v1.Asset.ImageAsset.verify(message.image);
+                                        if (error)
+                                            return "image." + error;
+                                    }
+                                }
+                                if (message.crc32c != null && message.hasOwnProperty("crc32c"))
+                                    if (!$util.isString(message.crc32c))
+                                        return "crc32c: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.error != null && message.hasOwnProperty("error")) {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Asset message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.Asset} Asset
+                             */
+                            Asset.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.Asset)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.Asset();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.video != null) {
+                                    if (typeof object.video !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.video: object expected");
+                                    message.video = $root.google.cloud.video.livestream.v1.Asset.VideoAsset.fromObject(object.video);
+                                }
+                                if (object.image != null) {
+                                    if (typeof object.image !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.image: object expected");
+                                    message.image = $root.google.cloud.video.livestream.v1.Asset.ImageAsset.fromObject(object.image);
+                                }
+                                if (object.crc32c != null)
+                                    message.crc32c = String(object.crc32c);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "CREATING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "ACTIVE":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ERROR":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.error != null) {
+                                    if (typeof object.error !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Asset.error: object expected");
+                                    message.error = $root.google.rpc.Status.fromObject(object.error);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Asset message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.Asset} message Asset
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Asset.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.crc32c = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.error = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.video != null && message.hasOwnProperty("video")) {
+                                    object.video = $root.google.cloud.video.livestream.v1.Asset.VideoAsset.toObject(message.video, options);
+                                    if (options.oneofs)
+                                        object.resource = "video";
+                                }
+                                if (message.image != null && message.hasOwnProperty("image")) {
+                                    object.image = $root.google.cloud.video.livestream.v1.Asset.ImageAsset.toObject(message.image, options);
+                                    if (options.oneofs)
+                                        object.resource = "image";
+                                }
+                                if (message.crc32c != null && message.hasOwnProperty("crc32c"))
+                                    object.crc32c = message.crc32c;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.video.livestream.v1.Asset.State[message.state] === undefined ? message.state : $root.google.cloud.video.livestream.v1.Asset.State[message.state] : message.state;
+                                if (message.error != null && message.hasOwnProperty("error"))
+                                    object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Asset to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Asset.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Asset
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.Asset
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Asset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.Asset";
+                            };
+    
+                            Asset.VideoAsset = (function() {
+    
+                                /**
+                                 * Properties of a VideoAsset.
+                                 * @memberof google.cloud.video.livestream.v1.Asset
+                                 * @interface IVideoAsset
+                                 * @property {string|null} [uri] VideoAsset uri
+                                 */
+    
+                                /**
+                                 * Constructs a new VideoAsset.
+                                 * @memberof google.cloud.video.livestream.v1.Asset
+                                 * @classdesc Represents a VideoAsset.
+                                 * @implements IVideoAsset
+                                 * @constructor
+                                 * @param {google.cloud.video.livestream.v1.Asset.IVideoAsset=} [properties] Properties to set
+                                 */
+                                function VideoAsset(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * VideoAsset uri.
+                                 * @member {string} uri
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @instance
+                                 */
+                                VideoAsset.prototype.uri = "";
+    
+                                /**
+                                 * Creates a new VideoAsset instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IVideoAsset=} [properties] Properties to set
+                                 * @returns {google.cloud.video.livestream.v1.Asset.VideoAsset} VideoAsset instance
+                                 */
+                                VideoAsset.create = function create(properties) {
+                                    return new VideoAsset(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified VideoAsset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.VideoAsset.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IVideoAsset} message VideoAsset message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                VideoAsset.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified VideoAsset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.VideoAsset.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IVideoAsset} message VideoAsset message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                VideoAsset.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a VideoAsset message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.livestream.v1.Asset.VideoAsset} VideoAsset
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                VideoAsset.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Asset.VideoAsset();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.uri = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a VideoAsset message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.livestream.v1.Asset.VideoAsset} VideoAsset
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                VideoAsset.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a VideoAsset message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                VideoAsset.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        if (!$util.isString(message.uri))
+                                            return "uri: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a VideoAsset message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.livestream.v1.Asset.VideoAsset} VideoAsset
+                                 */
+                                VideoAsset.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.livestream.v1.Asset.VideoAsset)
+                                        return object;
+                                    var message = new $root.google.cloud.video.livestream.v1.Asset.VideoAsset();
+                                    if (object.uri != null)
+                                        message.uri = String(object.uri);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a VideoAsset message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.VideoAsset} message VideoAsset
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                VideoAsset.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.uri = "";
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        object.uri = message.uri;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this VideoAsset to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                VideoAsset.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for VideoAsset
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.livestream.v1.Asset.VideoAsset
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                VideoAsset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.livestream.v1.Asset.VideoAsset";
+                                };
+    
+                                return VideoAsset;
+                            })();
+    
+                            Asset.ImageAsset = (function() {
+    
+                                /**
+                                 * Properties of an ImageAsset.
+                                 * @memberof google.cloud.video.livestream.v1.Asset
+                                 * @interface IImageAsset
+                                 * @property {string|null} [uri] ImageAsset uri
+                                 */
+    
+                                /**
+                                 * Constructs a new ImageAsset.
+                                 * @memberof google.cloud.video.livestream.v1.Asset
+                                 * @classdesc Represents an ImageAsset.
+                                 * @implements IImageAsset
+                                 * @constructor
+                                 * @param {google.cloud.video.livestream.v1.Asset.IImageAsset=} [properties] Properties to set
+                                 */
+                                function ImageAsset(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ImageAsset uri.
+                                 * @member {string} uri
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @instance
+                                 */
+                                ImageAsset.prototype.uri = "";
+    
+                                /**
+                                 * Creates a new ImageAsset instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IImageAsset=} [properties] Properties to set
+                                 * @returns {google.cloud.video.livestream.v1.Asset.ImageAsset} ImageAsset instance
+                                 */
+                                ImageAsset.create = function create(properties) {
+                                    return new ImageAsset(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageAsset message. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.ImageAsset.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IImageAsset} message ImageAsset message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageAsset.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageAsset message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Asset.ImageAsset.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.IImageAsset} message ImageAsset message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageAsset.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ImageAsset message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.livestream.v1.Asset.ImageAsset} ImageAsset
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageAsset.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Asset.ImageAsset();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.uri = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ImageAsset message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.livestream.v1.Asset.ImageAsset} ImageAsset
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageAsset.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ImageAsset message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ImageAsset.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        if (!$util.isString(message.uri))
+                                            return "uri: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ImageAsset message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.livestream.v1.Asset.ImageAsset} ImageAsset
+                                 */
+                                ImageAsset.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.livestream.v1.Asset.ImageAsset)
+                                        return object;
+                                    var message = new $root.google.cloud.video.livestream.v1.Asset.ImageAsset();
+                                    if (object.uri != null)
+                                        message.uri = String(object.uri);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ImageAsset message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Asset.ImageAsset} message ImageAsset
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ImageAsset.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.uri = "";
+                                    if (message.uri != null && message.hasOwnProperty("uri"))
+                                        object.uri = message.uri;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ImageAsset to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ImageAsset.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ImageAsset
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.livestream.v1.Asset.ImageAsset
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ImageAsset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.livestream.v1.Asset.ImageAsset";
+                                };
+    
+                                return ImageAsset;
+                            })();
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.video.livestream.v1.Asset.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} CREATING=1 CREATING value
+                             * @property {number} ACTIVE=2 ACTIVE value
+                             * @property {number} DELETING=3 DELETING value
+                             * @property {number} ERROR=4 ERROR value
+                             */
+                            Asset.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CREATING"] = 1;
+                                values[valuesById[2] = "ACTIVE"] = 2;
+                                values[valuesById[3] = "DELETING"] = 3;
+                                values[valuesById[4] = "ERROR"] = 4;
+                                return values;
+                            })();
+    
+                            return Asset;
                         })();
     
                         v1.Encryption = (function() {
@@ -12576,6 +13779,556 @@
                             return Encryption;
                         })();
     
+                        v1.Pool = (function() {
+    
+                            /**
+                             * Properties of a Pool.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IPool
+                             * @property {string|null} [name] Pool name
+                             * @property {google.protobuf.ITimestamp|null} [createTime] Pool createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] Pool updateTime
+                             * @property {Object.<string,string>|null} [labels] Pool labels
+                             * @property {google.cloud.video.livestream.v1.Pool.INetworkConfig|null} [networkConfig] Pool networkConfig
+                             */
+    
+                            /**
+                             * Constructs a new Pool.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a Pool.
+                             * @implements IPool
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IPool=} [properties] Properties to set
+                             */
+                            function Pool(properties) {
+                                this.labels = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Pool name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             */
+                            Pool.prototype.name = "";
+    
+                            /**
+                             * Pool createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             */
+                            Pool.prototype.createTime = null;
+    
+                            /**
+                             * Pool updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             */
+                            Pool.prototype.updateTime = null;
+    
+                            /**
+                             * Pool labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             */
+                            Pool.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * Pool networkConfig.
+                             * @member {google.cloud.video.livestream.v1.Pool.INetworkConfig|null|undefined} networkConfig
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             */
+                            Pool.prototype.networkConfig = null;
+    
+                            /**
+                             * Creates a new Pool instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IPool=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.Pool} Pool instance
+                             */
+                            Pool.create = function create(properties) {
+                                return new Pool(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Pool message. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IPool} message Pool message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pool.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                    $root.google.cloud.video.livestream.v1.Pool.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Pool message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IPool} message Pool message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pool.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Pool message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.Pool} Pool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pool.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Pool(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.networkConfig = $root.google.cloud.video.livestream.v1.Pool.NetworkConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Pool message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.Pool} Pool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pool.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Pool message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Pool.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                    var error = $root.google.cloud.video.livestream.v1.Pool.NetworkConfig.verify(message.networkConfig);
+                                    if (error)
+                                        return "networkConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Pool message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.Pool} Pool
+                             */
+                            Pool.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.Pool)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.Pool();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Pool.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Pool.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Pool.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.networkConfig != null) {
+                                    if (typeof object.networkConfig !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.Pool.networkConfig: object expected");
+                                    message.networkConfig = $root.google.cloud.video.livestream.v1.Pool.NetworkConfig.fromObject(object.networkConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Pool message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.Pool} message Pool
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Pool.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.networkConfig = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                    object.networkConfig = $root.google.cloud.video.livestream.v1.Pool.NetworkConfig.toObject(message.networkConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Pool to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Pool.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Pool
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.Pool
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Pool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.Pool";
+                            };
+    
+                            Pool.NetworkConfig = (function() {
+    
+                                /**
+                                 * Properties of a NetworkConfig.
+                                 * @memberof google.cloud.video.livestream.v1.Pool
+                                 * @interface INetworkConfig
+                                 * @property {string|null} [peeredNetwork] NetworkConfig peeredNetwork
+                                 */
+    
+                                /**
+                                 * Constructs a new NetworkConfig.
+                                 * @memberof google.cloud.video.livestream.v1.Pool
+                                 * @classdesc Represents a NetworkConfig.
+                                 * @implements INetworkConfig
+                                 * @constructor
+                                 * @param {google.cloud.video.livestream.v1.Pool.INetworkConfig=} [properties] Properties to set
+                                 */
+                                function NetworkConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NetworkConfig peeredNetwork.
+                                 * @member {string} peeredNetwork
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @instance
+                                 */
+                                NetworkConfig.prototype.peeredNetwork = "";
+    
+                                /**
+                                 * Creates a new NetworkConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Pool.INetworkConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.video.livestream.v1.Pool.NetworkConfig} NetworkConfig instance
+                                 */
+                                NetworkConfig.create = function create(properties) {
+                                    return new NetworkConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.NetworkConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Pool.INetworkConfig} message NetworkConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.peeredNetwork != null && Object.hasOwnProperty.call(message, "peeredNetwork"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.peeredNetwork);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.Pool.NetworkConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Pool.INetworkConfig} message NetworkConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NetworkConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.livestream.v1.Pool.NetworkConfig} NetworkConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.Pool.NetworkConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.peeredNetwork = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.livestream.v1.Pool.NetworkConfig} NetworkConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NetworkConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NetworkConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.peeredNetwork != null && message.hasOwnProperty("peeredNetwork"))
+                                        if (!$util.isString(message.peeredNetwork))
+                                            return "peeredNetwork: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.livestream.v1.Pool.NetworkConfig} NetworkConfig
+                                 */
+                                NetworkConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.livestream.v1.Pool.NetworkConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.video.livestream.v1.Pool.NetworkConfig();
+                                    if (object.peeredNetwork != null)
+                                        message.peeredNetwork = String(object.peeredNetwork);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {google.cloud.video.livestream.v1.Pool.NetworkConfig} message NetworkConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NetworkConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.peeredNetwork = "";
+                                    if (message.peeredNetwork != null && message.hasOwnProperty("peeredNetwork"))
+                                        object.peeredNetwork = message.peeredNetwork;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NetworkConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NetworkConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NetworkConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.livestream.v1.Pool.NetworkConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.livestream.v1.Pool.NetworkConfig";
+                                };
+    
+                                return NetworkConfig;
+                            })();
+    
+                            return Pool;
+                        })();
+    
                         v1.LivestreamService = (function() {
     
                             /**
@@ -13136,7 +14889,1497 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|createAsset}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef CreateAssetCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls CreateAsset.
+                             * @function createAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest} request CreateAssetRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.CreateAssetCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.createAsset = function createAsset(request, callback) {
+                                return this.rpcCall(createAsset, $root.google.cloud.video.livestream.v1.CreateAssetRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "CreateAsset" });
+    
+                            /**
+                             * Calls CreateAsset.
+                             * @function createAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest} request CreateAssetRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|deleteAsset}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef DeleteAssetCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls DeleteAsset.
+                             * @function deleteAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest} request DeleteAssetRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.DeleteAssetCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.deleteAsset = function deleteAsset(request, callback) {
+                                return this.rpcCall(deleteAsset, $root.google.cloud.video.livestream.v1.DeleteAssetRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "DeleteAsset" });
+    
+                            /**
+                             * Calls DeleteAsset.
+                             * @function deleteAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest} request DeleteAssetRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|getAsset}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef GetAssetCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.livestream.v1.Asset} [response] Asset
+                             */
+    
+                            /**
+                             * Calls GetAsset.
+                             * @function getAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest} request GetAssetRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.GetAssetCallback} callback Node-style callback called with the error, if any, and Asset
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.getAsset = function getAsset(request, callback) {
+                                return this.rpcCall(getAsset, $root.google.cloud.video.livestream.v1.GetAssetRequest, $root.google.cloud.video.livestream.v1.Asset, request, callback);
+                            }, "name", { value: "GetAsset" });
+    
+                            /**
+                             * Calls GetAsset.
+                             * @function getAsset
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest} request GetAssetRequest message or plain object
+                             * @returns {Promise<google.cloud.video.livestream.v1.Asset>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|listAssets}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef ListAssetsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.livestream.v1.ListAssetsResponse} [response] ListAssetsResponse
+                             */
+    
+                            /**
+                             * Calls ListAssets.
+                             * @function listAssets
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest} request ListAssetsRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.ListAssetsCallback} callback Node-style callback called with the error, if any, and ListAssetsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.listAssets = function listAssets(request, callback) {
+                                return this.rpcCall(listAssets, $root.google.cloud.video.livestream.v1.ListAssetsRequest, $root.google.cloud.video.livestream.v1.ListAssetsResponse, request, callback);
+                            }, "name", { value: "ListAssets" });
+    
+                            /**
+                             * Calls ListAssets.
+                             * @function listAssets
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest} request ListAssetsRequest message or plain object
+                             * @returns {Promise<google.cloud.video.livestream.v1.ListAssetsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|getPool}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef GetPoolCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.livestream.v1.Pool} [response] Pool
+                             */
+    
+                            /**
+                             * Calls GetPool.
+                             * @function getPool
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest} request GetPoolRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.GetPoolCallback} callback Node-style callback called with the error, if any, and Pool
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.getPool = function getPool(request, callback) {
+                                return this.rpcCall(getPool, $root.google.cloud.video.livestream.v1.GetPoolRequest, $root.google.cloud.video.livestream.v1.Pool, request, callback);
+                            }, "name", { value: "GetPool" });
+    
+                            /**
+                             * Calls GetPool.
+                             * @function getPool
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest} request GetPoolRequest message or plain object
+                             * @returns {Promise<google.cloud.video.livestream.v1.Pool>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|updatePool}.
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @typedef UpdatePoolCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls UpdatePool.
+                             * @function updatePool
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest} request UpdatePoolRequest message or plain object
+                             * @param {google.cloud.video.livestream.v1.LivestreamService.UpdatePoolCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LivestreamService.prototype.updatePool = function updatePool(request, callback) {
+                                return this.rpcCall(updatePool, $root.google.cloud.video.livestream.v1.UpdatePoolRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "UpdatePool" });
+    
+                            /**
+                             * Calls UpdatePool.
+                             * @function updatePool
+                             * @memberof google.cloud.video.livestream.v1.LivestreamService
+                             * @instance
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest} request UpdatePoolRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
                             return LivestreamService;
+                        })();
+    
+                        v1.CreateAssetRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface ICreateAssetRequest
+                             * @property {string|null} [parent] CreateAssetRequest parent
+                             * @property {google.cloud.video.livestream.v1.IAsset|null} [asset] CreateAssetRequest asset
+                             * @property {string|null} [assetId] CreateAssetRequest assetId
+                             * @property {string|null} [requestId] CreateAssetRequest requestId
+                             */
+    
+                            /**
+                             * Constructs a new CreateAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a CreateAssetRequest.
+                             * @implements ICreateAssetRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest=} [properties] Properties to set
+                             */
+                            function CreateAssetRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateAssetRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @instance
+                             */
+                            CreateAssetRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateAssetRequest asset.
+                             * @member {google.cloud.video.livestream.v1.IAsset|null|undefined} asset
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @instance
+                             */
+                            CreateAssetRequest.prototype.asset = null;
+    
+                            /**
+                             * CreateAssetRequest assetId.
+                             * @member {string} assetId
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @instance
+                             */
+                            CreateAssetRequest.prototype.assetId = "";
+    
+                            /**
+                             * CreateAssetRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @instance
+                             */
+                            CreateAssetRequest.prototype.requestId = "";
+    
+                            /**
+                             * Creates a new CreateAssetRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.CreateAssetRequest} CreateAssetRequest instance
+                             */
+                            CreateAssetRequest.create = function create(properties) {
+                                return new CreateAssetRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.CreateAssetRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest} message CreateAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateAssetRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.asset != null && Object.hasOwnProperty.call(message, "asset"))
+                                    $root.google.cloud.video.livestream.v1.Asset.encode(message.asset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.assetId != null && Object.hasOwnProperty.call(message, "assetId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.assetId);
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.CreateAssetRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.ICreateAssetRequest} message CreateAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateAssetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateAssetRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.CreateAssetRequest} CreateAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateAssetRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.CreateAssetRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.asset = $root.google.cloud.video.livestream.v1.Asset.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.assetId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.requestId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateAssetRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.CreateAssetRequest} CreateAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateAssetRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateAssetRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateAssetRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.asset != null && message.hasOwnProperty("asset")) {
+                                    var error = $root.google.cloud.video.livestream.v1.Asset.verify(message.asset);
+                                    if (error)
+                                        return "asset." + error;
+                                }
+                                if (message.assetId != null && message.hasOwnProperty("assetId"))
+                                    if (!$util.isString(message.assetId))
+                                        return "assetId: string expected";
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateAssetRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.CreateAssetRequest} CreateAssetRequest
+                             */
+                            CreateAssetRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.CreateAssetRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.CreateAssetRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.asset != null) {
+                                    if (typeof object.asset !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.CreateAssetRequest.asset: object expected");
+                                    message.asset = $root.google.cloud.video.livestream.v1.Asset.fromObject(object.asset);
+                                }
+                                if (object.assetId != null)
+                                    message.assetId = String(object.assetId);
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateAssetRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.CreateAssetRequest} message CreateAssetRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateAssetRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.asset = null;
+                                    object.assetId = "";
+                                    object.requestId = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.asset != null && message.hasOwnProperty("asset"))
+                                    object.asset = $root.google.cloud.video.livestream.v1.Asset.toObject(message.asset, options);
+                                if (message.assetId != null && message.hasOwnProperty("assetId"))
+                                    object.assetId = message.assetId;
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateAssetRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateAssetRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateAssetRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.CreateAssetRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateAssetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.CreateAssetRequest";
+                            };
+    
+                            return CreateAssetRequest;
+                        })();
+    
+                        v1.DeleteAssetRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IDeleteAssetRequest
+                             * @property {string|null} [name] DeleteAssetRequest name
+                             * @property {string|null} [requestId] DeleteAssetRequest requestId
+                             */
+    
+                            /**
+                             * Constructs a new DeleteAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a DeleteAssetRequest.
+                             * @implements IDeleteAssetRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest=} [properties] Properties to set
+                             */
+                            function DeleteAssetRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteAssetRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @instance
+                             */
+                            DeleteAssetRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteAssetRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @instance
+                             */
+                            DeleteAssetRequest.prototype.requestId = "";
+    
+                            /**
+                             * Creates a new DeleteAssetRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.DeleteAssetRequest} DeleteAssetRequest instance
+                             */
+                            DeleteAssetRequest.create = function create(properties) {
+                                return new DeleteAssetRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteAssetRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest} message DeleteAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteAssetRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteAssetRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IDeleteAssetRequest} message DeleteAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteAssetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteAssetRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.DeleteAssetRequest} DeleteAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteAssetRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.DeleteAssetRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.requestId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteAssetRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.DeleteAssetRequest} DeleteAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteAssetRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteAssetRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteAssetRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteAssetRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.DeleteAssetRequest} DeleteAssetRequest
+                             */
+                            DeleteAssetRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.DeleteAssetRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.DeleteAssetRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteAssetRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.DeleteAssetRequest} message DeleteAssetRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteAssetRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.requestId = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteAssetRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteAssetRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteAssetRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.DeleteAssetRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteAssetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.DeleteAssetRequest";
+                            };
+    
+                            return DeleteAssetRequest;
+                        })();
+    
+                        v1.ListAssetsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListAssetsRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IListAssetsRequest
+                             * @property {string|null} [parent] ListAssetsRequest parent
+                             * @property {number|null} [pageSize] ListAssetsRequest pageSize
+                             * @property {string|null} [pageToken] ListAssetsRequest pageToken
+                             * @property {string|null} [filter] ListAssetsRequest filter
+                             * @property {string|null} [orderBy] ListAssetsRequest orderBy
+                             */
+    
+                            /**
+                             * Constructs a new ListAssetsRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a ListAssetsRequest.
+                             * @implements IListAssetsRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest=} [properties] Properties to set
+                             */
+                            function ListAssetsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAssetsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             */
+                            ListAssetsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListAssetsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             */
+                            ListAssetsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListAssetsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             */
+                            ListAssetsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListAssetsRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             */
+                            ListAssetsRequest.prototype.filter = "";
+    
+                            /**
+                             * ListAssetsRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             */
+                            ListAssetsRequest.prototype.orderBy = "";
+    
+                            /**
+                             * Creates a new ListAssetsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsRequest} ListAssetsRequest instance
+                             */
+                            ListAssetsRequest.create = function create(properties) {
+                                return new ListAssetsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAssetsRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest} message ListAssetsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAssetsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsRequest} message ListAssetsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAssetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAssetsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsRequest} ListAssetsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAssetsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.ListAssetsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.orderBy = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAssetsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsRequest} ListAssetsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAssetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAssetsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAssetsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsRequest} ListAssetsRequest
+                             */
+                            ListAssetsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.ListAssetsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.ListAssetsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAssetsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.ListAssetsRequest} message ListAssetsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAssetsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                    object.orderBy = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAssetsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAssetsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAssetsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAssetsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.ListAssetsRequest";
+                            };
+    
+                            return ListAssetsRequest;
+                        })();
+    
+                        v1.ListAssetsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListAssetsResponse.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IListAssetsResponse
+                             * @property {Array.<google.cloud.video.livestream.v1.IAsset>|null} [assets] ListAssetsResponse assets
+                             * @property {string|null} [nextPageToken] ListAssetsResponse nextPageToken
+                             * @property {Array.<string>|null} [unreachable] ListAssetsResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new ListAssetsResponse.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a ListAssetsResponse.
+                             * @implements IListAssetsResponse
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IListAssetsResponse=} [properties] Properties to set
+                             */
+                            function ListAssetsResponse(properties) {
+                                this.assets = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAssetsResponse assets.
+                             * @member {Array.<google.cloud.video.livestream.v1.IAsset>} assets
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @instance
+                             */
+                            ListAssetsResponse.prototype.assets = $util.emptyArray;
+    
+                            /**
+                             * ListAssetsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @instance
+                             */
+                            ListAssetsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * ListAssetsResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @instance
+                             */
+                            ListAssetsResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ListAssetsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsResponse} ListAssetsResponse instance
+                             */
+                            ListAssetsResponse.create = function create(properties) {
+                                return new ListAssetsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAssetsResponse message. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsResponse} message ListAssetsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAssetsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.assets != null && message.assets.length)
+                                    for (var i = 0; i < message.assets.length; ++i)
+                                        $root.google.cloud.video.livestream.v1.Asset.encode(message.assets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListAssetsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IListAssetsResponse} message ListAssetsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAssetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAssetsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsResponse} ListAssetsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAssetsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.ListAssetsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.assets && message.assets.length))
+                                                message.assets = [];
+                                            message.assets.push($root.google.cloud.video.livestream.v1.Asset.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAssetsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsResponse} ListAssetsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAssetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAssetsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAssetsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.assets != null && message.hasOwnProperty("assets")) {
+                                    if (!Array.isArray(message.assets))
+                                        return "assets: array expected";
+                                    for (var i = 0; i < message.assets.length; ++i) {
+                                        var error = $root.google.cloud.video.livestream.v1.Asset.verify(message.assets[i]);
+                                        if (error)
+                                            return "assets." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.ListAssetsResponse} ListAssetsResponse
+                             */
+                            ListAssetsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.ListAssetsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.ListAssetsResponse();
+                                if (object.assets) {
+                                    if (!Array.isArray(object.assets))
+                                        throw TypeError(".google.cloud.video.livestream.v1.ListAssetsResponse.assets: array expected");
+                                    message.assets = [];
+                                    for (var i = 0; i < object.assets.length; ++i) {
+                                        if (typeof object.assets[i] !== "object")
+                                            throw TypeError(".google.cloud.video.livestream.v1.ListAssetsResponse.assets: object expected");
+                                        message.assets[i] = $root.google.cloud.video.livestream.v1.Asset.fromObject(object.assets[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.video.livestream.v1.ListAssetsResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAssetsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.ListAssetsResponse} message ListAssetsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAssetsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.assets = [];
+                                    object.unreachable = [];
+                                }
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.assets && message.assets.length) {
+                                    object.assets = [];
+                                    for (var j = 0; j < message.assets.length; ++j)
+                                        object.assets[j] = $root.google.cloud.video.livestream.v1.Asset.toObject(message.assets[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAssetsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAssetsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAssetsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.ListAssetsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAssetsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.ListAssetsResponse";
+                            };
+    
+                            return ListAssetsResponse;
+                        })();
+    
+                        v1.GetAssetRequest = (function() {
+    
+                            /**
+                             * Properties of a GetAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IGetAssetRequest
+                             * @property {string|null} [name] GetAssetRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetAssetRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a GetAssetRequest.
+                             * @implements IGetAssetRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest=} [properties] Properties to set
+                             */
+                            function GetAssetRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetAssetRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @instance
+                             */
+                            GetAssetRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetAssetRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.GetAssetRequest} GetAssetRequest instance
+                             */
+                            GetAssetRequest.create = function create(properties) {
+                                return new GetAssetRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetAssetRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.GetAssetRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest} message GetAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAssetRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetAssetRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.GetAssetRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetAssetRequest} message GetAssetRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAssetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetAssetRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.GetAssetRequest} GetAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAssetRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.GetAssetRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetAssetRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.GetAssetRequest} GetAssetRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAssetRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetAssetRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetAssetRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetAssetRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.GetAssetRequest} GetAssetRequest
+                             */
+                            GetAssetRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.GetAssetRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.GetAssetRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetAssetRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.GetAssetRequest} message GetAssetRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetAssetRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetAssetRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetAssetRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetAssetRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.GetAssetRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetAssetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.GetAssetRequest";
+                            };
+    
+                            return GetAssetRequest;
                         })();
     
                         v1.CreateChannelRequest = (function() {
@@ -18514,6 +21757,469 @@
                             };
     
                             return OperationMetadata;
+                        })();
+    
+                        v1.GetPoolRequest = (function() {
+    
+                            /**
+                             * Properties of a GetPoolRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IGetPoolRequest
+                             * @property {string|null} [name] GetPoolRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetPoolRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents a GetPoolRequest.
+                             * @implements IGetPoolRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest=} [properties] Properties to set
+                             */
+                            function GetPoolRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetPoolRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @instance
+                             */
+                            GetPoolRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetPoolRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.GetPoolRequest} GetPoolRequest instance
+                             */
+                            GetPoolRequest.create = function create(properties) {
+                                return new GetPoolRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetPoolRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.GetPoolRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest} message GetPoolRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetPoolRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetPoolRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.GetPoolRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IGetPoolRequest} message GetPoolRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetPoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetPoolRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.GetPoolRequest} GetPoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetPoolRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.GetPoolRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetPoolRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.GetPoolRequest} GetPoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetPoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetPoolRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetPoolRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetPoolRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.GetPoolRequest} GetPoolRequest
+                             */
+                            GetPoolRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.GetPoolRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.GetPoolRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetPoolRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.GetPoolRequest} message GetPoolRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetPoolRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetPoolRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetPoolRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetPoolRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.GetPoolRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetPoolRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.GetPoolRequest";
+                            };
+    
+                            return GetPoolRequest;
+                        })();
+    
+                        v1.UpdatePoolRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdatePoolRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @interface IUpdatePoolRequest
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePoolRequest updateMask
+                             * @property {google.cloud.video.livestream.v1.IPool|null} [pool] UpdatePoolRequest pool
+                             * @property {string|null} [requestId] UpdatePoolRequest requestId
+                             */
+    
+                            /**
+                             * Constructs a new UpdatePoolRequest.
+                             * @memberof google.cloud.video.livestream.v1
+                             * @classdesc Represents an UpdatePoolRequest.
+                             * @implements IUpdatePoolRequest
+                             * @constructor
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest=} [properties] Properties to set
+                             */
+                            function UpdatePoolRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdatePoolRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @instance
+                             */
+                            UpdatePoolRequest.prototype.updateMask = null;
+    
+                            /**
+                             * UpdatePoolRequest pool.
+                             * @member {google.cloud.video.livestream.v1.IPool|null|undefined} pool
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @instance
+                             */
+                            UpdatePoolRequest.prototype.pool = null;
+    
+                            /**
+                             * UpdatePoolRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @instance
+                             */
+                            UpdatePoolRequest.prototype.requestId = "";
+    
+                            /**
+                             * Creates a new UpdatePoolRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.livestream.v1.UpdatePoolRequest} UpdatePoolRequest instance
+                             */
+                            UpdatePoolRequest.create = function create(properties) {
+                                return new UpdatePoolRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdatePoolRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.UpdatePoolRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest} message UpdatePoolRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdatePoolRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.pool != null && Object.hasOwnProperty.call(message, "pool"))
+                                    $root.google.cloud.video.livestream.v1.Pool.encode(message.pool, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdatePoolRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.UpdatePoolRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.IUpdatePoolRequest} message UpdatePoolRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdatePoolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdatePoolRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.livestream.v1.UpdatePoolRequest} UpdatePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdatePoolRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.livestream.v1.UpdatePoolRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pool = $root.google.cloud.video.livestream.v1.Pool.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.requestId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdatePoolRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.livestream.v1.UpdatePoolRequest} UpdatePoolRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdatePoolRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdatePoolRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdatePoolRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                if (message.pool != null && message.hasOwnProperty("pool")) {
+                                    var error = $root.google.cloud.video.livestream.v1.Pool.verify(message.pool);
+                                    if (error)
+                                        return "pool." + error;
+                                }
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdatePoolRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.livestream.v1.UpdatePoolRequest} UpdatePoolRequest
+                             */
+                            UpdatePoolRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.livestream.v1.UpdatePoolRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.livestream.v1.UpdatePoolRequest();
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.UpdatePoolRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                if (object.pool != null) {
+                                    if (typeof object.pool !== "object")
+                                        throw TypeError(".google.cloud.video.livestream.v1.UpdatePoolRequest.pool: object expected");
+                                    message.pool = $root.google.cloud.video.livestream.v1.Pool.fromObject(object.pool);
+                                }
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdatePoolRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {google.cloud.video.livestream.v1.UpdatePoolRequest} message UpdatePoolRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdatePoolRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.updateMask = null;
+                                    object.pool = null;
+                                    object.requestId = "";
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.pool != null && message.hasOwnProperty("pool"))
+                                    object.pool = $root.google.cloud.video.livestream.v1.Pool.toObject(message.pool, options);
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdatePoolRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdatePoolRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdatePoolRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.livestream.v1.UpdatePoolRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdatePoolRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.livestream.v1.UpdatePoolRequest";
+                            };
+    
+                            return UpdatePoolRequest;
                         })();
     
                         return v1;

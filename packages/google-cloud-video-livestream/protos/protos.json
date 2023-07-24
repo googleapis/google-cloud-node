@@ -17,8 +17,8 @@
                         "java_package": "com.google.cloud.video.livestream.v1",
                         "php_namespace": "Google\\Cloud\\Video\\LiveStream\\V1",
                         "ruby_package": "Google::Cloud::Video::LiveStream::V1",
-                        "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
-                        "(google.api.resource_definition).pattern": "projects/{project}/secrets/{secret}/versions/{version}"
+                        "(google.api.resource_definition).type": "compute.googleapis.com/Network",
+                        "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                       },
                       "nested": {
                         "ElementaryStream": {
@@ -819,6 +819,7 @@
                                 "inputSwitch",
                                 "adBreak",
                                 "returnToProgram",
+                                "slate",
                                 "mute",
                                 "unmute"
                               ]
@@ -850,38 +851,27 @@
                             },
                             "inputSwitch": {
                               "type": "InputSwitchTask",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 5
                             },
                             "adBreak": {
                               "type": "AdBreakTask",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
                             },
                             "returnToProgram": {
                               "type": "ReturnToProgramTask",
-                              "id": 13,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 13
+                            },
+                            "slate": {
+                              "type": "SlateTask",
+                              "id": 14
                             },
                             "mute": {
                               "type": "MuteTask",
-                              "id": 15,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 15
                             },
                             "unmute": {
                               "type": "UnmuteTask",
-                              "id": 16,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 16
                             },
                             "executeNow": {
                               "type": "bool",
@@ -923,6 +913,21 @@
                                 }
                               }
                             },
+                            "SlateTask": {
+                              "fields": {
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1
+                                },
+                                "asset": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "livestream.googleapis.com/Asset"
+                                  }
+                                }
+                              }
+                            },
                             "ReturnToProgramTask": {
                               "fields": {}
                             },
@@ -946,6 +951,98 @@
                                 "FAILED": 4,
                                 "PENDING": 5,
                                 "STOPPED": 6
+                              }
+                            }
+                          }
+                        },
+                        "Asset": {
+                          "options": {
+                            "(google.api.resource).type": "livestream.googleapis.com/Asset",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/assets/{asset}"
+                          },
+                          "oneofs": {
+                            "resource": {
+                              "oneof": [
+                                "video",
+                                "image"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "video": {
+                              "type": "VideoAsset",
+                              "id": 5
+                            },
+                            "image": {
+                              "type": "ImageAsset",
+                              "id": 6
+                            },
+                            "crc32c": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VideoAsset": {
+                              "fields": {
+                                "uri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "ImageAsset": {
+                              "fields": {
+                                "uri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CREATING": 1,
+                                "ACTIVE": 2,
+                                "DELETING": 3,
+                                "ERROR": 4
                               }
                             }
                           }
@@ -1055,6 +1152,54 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Pool": {
+                          "options": {
+                            "(google.api.resource).type": "livestream.googleapis.com/Pool",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/pools/{pool}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "networkConfig": {
+                              "type": "NetworkConfig",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "NetworkConfig": {
+                              "fields": {
+                                "peeredNetwork": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                                   }
                                 }
                               }
@@ -1432,6 +1577,246 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "CreateAsset": {
+                              "requestType": "CreateAssetRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/assets",
+                                "(google.api.http).body": "asset",
+                                "(google.api.method_signature)": "parent,asset,asset_id",
+                                "(google.longrunning.operation_info).response_type": "Asset",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/assets",
+                                    "body": "asset"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,asset,asset_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "Asset",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteAsset": {
+                              "requestType": "DeleteAssetRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/assets/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/assets/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "GetAsset": {
+                              "requestType": "GetAssetRequest",
+                              "responseType": "Asset",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/assets/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/assets/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAssets": {
+                              "requestType": "ListAssetsRequest",
+                              "responseType": "ListAssetsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/assets",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/assets"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetPool": {
+                              "requestType": "GetPoolRequest",
+                              "responseType": "Pool",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/pools/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/pools/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "UpdatePool": {
+                              "requestType": "UpdatePoolRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{pool.name=projects/*/locations/*/pools/*}",
+                                "(google.api.http).body": "pool",
+                                "(google.api.method_signature)": "pool,update_mask",
+                                "(google.longrunning.operation_info).response_type": "Pool",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{pool.name=projects/*/locations/*/pools/*}",
+                                    "body": "pool"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "pool,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "Pool",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateAssetRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "livestream.googleapis.com/Asset"
+                              }
+                            },
+                            "asset": {
+                              "type": "Asset",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "assetId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "DeleteAssetRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Asset"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ListAssetsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "livestream.googleapis.com/Asset"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "ListAssetsResponse": {
+                          "fields": {
+                            "assets": {
+                              "rule": "repeated",
+                              "type": "Asset",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "GetAssetRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Asset"
+                              }
                             }
                           }
                         },
@@ -1867,6 +2252,37 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            }
+                          }
+                        },
+                        "GetPoolRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Pool"
+                              }
+                            }
+                          }
+                        },
+                        "UpdatePoolRequest": {
+                          "fields": {
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 1
+                            },
+                            "pool": {
+                              "type": "Pool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
