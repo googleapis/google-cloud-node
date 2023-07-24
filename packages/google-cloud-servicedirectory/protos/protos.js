@@ -76,6 +76,8 @@
                          * @property {string|null} [address] Endpoint address
                          * @property {number|null} [port] Endpoint port
                          * @property {Object.<string,string>|null} [annotations] Endpoint annotations
+                         * @property {string|null} [network] Endpoint network
+                         * @property {string|null} [uid] Endpoint uid
                          */
     
                         /**
@@ -127,6 +129,22 @@
                         Endpoint.prototype.annotations = $util.emptyObject;
     
                         /**
+                         * Endpoint network.
+                         * @member {string} network
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.network = "";
+    
+                        /**
+                         * Endpoint uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.uid = "";
+    
+                        /**
                          * Creates a new Endpoint instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1.Endpoint
@@ -159,6 +177,10 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.network);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.uid);
                             return writer;
                         };
     
@@ -228,6 +250,14 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 8: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -280,6 +310,12 @@
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
                             }
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -308,6 +344,10 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -330,6 +370,8 @@
                                 object.name = "";
                                 object.address = "";
                                 object.port = 0;
+                                object.network = "";
+                                object.uid = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -343,6 +385,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     
@@ -910,6 +956,7 @@
                          * @property {string|null} [name] Service name
                          * @property {Object.<string,string>|null} [annotations] Service annotations
                          * @property {Array.<google.cloud.servicedirectory.v1.IEndpoint>|null} [endpoints] Service endpoints
+                         * @property {string|null} [uid] Service uid
                          */
     
                         /**
@@ -954,6 +1001,14 @@
                         Service.prototype.endpoints = $util.emptyArray;
     
                         /**
+                         * Service uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1.Service
+                         * @instance
+                         */
+                        Service.prototype.uid = "";
+    
+                        /**
                          * Creates a new Service instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1.Service
@@ -985,6 +1040,8 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.uid);
                             return writer;
                         };
     
@@ -1052,6 +1109,10 @@
                                         message.endpoints.push($root.google.cloud.servicedirectory.v1.Endpoint.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 7: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1107,6 +1168,9 @@
                                         return "endpoints." + error;
                                 }
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -1141,6 +1205,8 @@
                                     message.endpoints[i] = $root.google.cloud.servicedirectory.v1.Endpoint.fromObject(object.endpoints[i]);
                                 }
                             }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -1161,8 +1227,10 @@
                                 object.endpoints = [];
                             if (options.objects || options.defaults)
                                 object.annotations = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.uid = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.endpoints && message.endpoints.length) {
@@ -1176,6 +1244,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     
@@ -1216,6 +1286,7 @@
                          * @interface INamespace
                          * @property {string|null} [name] Namespace name
                          * @property {Object.<string,string>|null} [labels] Namespace labels
+                         * @property {string|null} [uid] Namespace uid
                          */
     
                         /**
@@ -1251,6 +1322,14 @@
                         Namespace.prototype.labels = $util.emptyObject;
     
                         /**
+                         * Namespace uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1.Namespace
+                         * @instance
+                         */
+                        Namespace.prototype.uid = "";
+    
+                        /**
                          * Creates a new Namespace instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1.Namespace
@@ -1279,6 +1358,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
                             return writer;
                         };
     
@@ -1340,6 +1421,10 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 5: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1386,6 +1471,9 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -1410,6 +1498,8 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -1428,8 +1518,10 @@
                             var object = {};
                             if (options.objects || options.defaults)
                                 object.labels = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.uid = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             var keys2;
@@ -1438,6 +1530,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     
@@ -6450,6 +6544,7 @@
                          * @property {string|null} [network] Endpoint network
                          * @property {google.protobuf.ITimestamp|null} [createTime] Endpoint createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Endpoint updateTime
+                         * @property {string|null} [uid] Endpoint uid
                          */
     
                         /**
@@ -6525,6 +6620,14 @@
                         Endpoint.prototype.updateTime = null;
     
                         /**
+                         * Endpoint uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.uid = "";
+    
+                        /**
                          * Creates a new Endpoint instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1beta1.Endpoint
@@ -6563,6 +6666,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.uid);
                             return writer;
                         };
     
@@ -6644,6 +6749,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6709,6 +6818,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -6749,6 +6861,8 @@
                                     throw TypeError(".google.cloud.servicedirectory.v1beta1.Endpoint.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -6774,6 +6888,7 @@
                                 object.network = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.uid = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6793,6 +6908,8 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     
@@ -7362,6 +7479,7 @@
                          * @property {Array.<google.cloud.servicedirectory.v1beta1.IEndpoint>|null} [endpoints] Service endpoints
                          * @property {google.protobuf.ITimestamp|null} [createTime] Service createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Service updateTime
+                         * @property {string|null} [uid] Service uid
                          */
     
                         /**
@@ -7422,6 +7540,14 @@
                         Service.prototype.updateTime = null;
     
                         /**
+                         * Service uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1beta1.Service
+                         * @instance
+                         */
+                        Service.prototype.uid = "";
+    
+                        /**
                          * Creates a new Service instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1beta1.Service
@@ -7457,6 +7583,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.uid);
                             return writer;
                         };
     
@@ -7532,6 +7660,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7597,6 +7729,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -7641,6 +7776,8 @@
                                     throw TypeError(".google.cloud.servicedirectory.v1beta1.Service.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -7665,6 +7802,7 @@
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.uid = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7683,6 +7821,8 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     
@@ -7725,6 +7865,7 @@
                          * @property {Object.<string,string>|null} [labels] Namespace labels
                          * @property {google.protobuf.ITimestamp|null} [createTime] Namespace createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Namespace updateTime
+                         * @property {string|null} [uid] Namespace uid
                          */
     
                         /**
@@ -7776,6 +7917,14 @@
                         Namespace.prototype.updateTime = null;
     
                         /**
+                         * Namespace uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.servicedirectory.v1beta1.Namespace
+                         * @instance
+                         */
+                        Namespace.prototype.uid = "";
+    
+                        /**
                          * Creates a new Namespace instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.servicedirectory.v1beta1.Namespace
@@ -7808,6 +7957,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.uid);
                             return writer;
                         };
     
@@ -7877,6 +8028,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7933,6 +8088,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
                             return null;
                         };
     
@@ -7967,6 +8125,8 @@
                                     throw TypeError(".google.cloud.servicedirectory.v1beta1.Namespace.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
                             return message;
                         };
     
@@ -7989,6 +8149,7 @@
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.uid = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8002,6 +8163,8 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
                             return object;
                         };
     

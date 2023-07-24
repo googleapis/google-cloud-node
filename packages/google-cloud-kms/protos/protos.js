@@ -4723,6 +4723,10 @@
                                 case 1:
                                 case 41:
                                 case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -4817,6 +4821,22 @@
                             case "AES_256_GCM":
                             case 19:
                                 message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -5980,6 +6000,10 @@
                                 case 1:
                                 case 41:
                                 case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -6178,6 +6202,22 @@
                             case "AES_256_GCM":
                             case 19:
                                 message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -6436,6 +6476,10 @@
                          * @property {number} GOOGLE_SYMMETRIC_ENCRYPTION=1 GOOGLE_SYMMETRIC_ENCRYPTION value
                          * @property {number} AES_128_GCM=41 AES_128_GCM value
                          * @property {number} AES_256_GCM=19 AES_256_GCM value
+                         * @property {number} AES_128_CBC=42 AES_128_CBC value
+                         * @property {number} AES_256_CBC=43 AES_256_CBC value
+                         * @property {number} AES_128_CTR=44 AES_128_CTR value
+                         * @property {number} AES_256_CTR=45 AES_256_CTR value
                          * @property {number} RSA_SIGN_PSS_2048_SHA256=2 RSA_SIGN_PSS_2048_SHA256 value
                          * @property {number} RSA_SIGN_PSS_3072_SHA256=3 RSA_SIGN_PSS_3072_SHA256 value
                          * @property {number} RSA_SIGN_PSS_4096_SHA256=4 RSA_SIGN_PSS_4096_SHA256 value
@@ -6470,6 +6514,10 @@
                             values[valuesById[1] = "GOOGLE_SYMMETRIC_ENCRYPTION"] = 1;
                             values[valuesById[41] = "AES_128_GCM"] = 41;
                             values[valuesById[19] = "AES_256_GCM"] = 19;
+                            values[valuesById[42] = "AES_128_CBC"] = 42;
+                            values[valuesById[43] = "AES_256_CBC"] = 43;
+                            values[valuesById[44] = "AES_128_CTR"] = 44;
+                            values[valuesById[45] = "AES_256_CTR"] = 45;
                             values[valuesById[2] = "RSA_SIGN_PSS_2048_SHA256"] = 2;
                             values[valuesById[3] = "RSA_SIGN_PSS_3072_SHA256"] = 3;
                             values[valuesById[4] = "RSA_SIGN_PSS_4096_SHA256"] = 4;
@@ -6751,6 +6799,10 @@
                                 case 1:
                                 case 41:
                                 case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -6838,6 +6890,22 @@
                             case "AES_256_GCM":
                             case 19:
                                 message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -13418,6 +13486,10 @@
                                 case 1:
                                 case 41:
                                 case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -13499,6 +13571,22 @@
                             case "AES_256_GCM":
                             case 19:
                                 message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
