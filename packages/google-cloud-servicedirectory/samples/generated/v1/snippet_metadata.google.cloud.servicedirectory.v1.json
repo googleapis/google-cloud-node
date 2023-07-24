@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-servicedirectory",
-        "version": "4.0.5",
+        "version": "4.0.7",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -63,7 +63,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_CreateNamespace_async",
             "title": "ServiceDirectory createNamespace Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a namespace, and returns the new Namespace.",
+            "description": " Creates a namespace, and returns the new namespace.",
             "canonical": true,
             "file": "registration_service.create_namespace.js",
             "language": "JAVASCRIPT",
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 100,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -291,7 +291,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_CreateService_async",
             "title": "ServiceDirectory createService Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a service, and returns the new Service.",
+            "description": " Creates a service, and returns the new service.",
             "canonical": true,
             "file": "registration_service.create_service.js",
             "language": "JAVASCRIPT",
@@ -346,7 +346,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -519,7 +519,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_CreateEndpoint_async",
             "title": "ServiceDirectory createEndpoint Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a endpoint, and returns the new Endpoint.",
+            "description": " Creates an endpoint, and returns the new endpoint.",
             "canonical": true,
             "file": "registration_service.create_endpoint.js",
             "language": "JAVASCRIPT",
@@ -574,7 +574,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 106,
                     "type": "FULL"
                 }
             ],
@@ -623,7 +623,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_GetEndpoint_async",
             "title": "ServiceDirectory getEndpoint Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a endpoint.",
+            "description": " Gets an endpoint.",
             "canonical": true,
             "file": "registration_service.get_endpoint.js",
             "language": "JAVASCRIPT",
@@ -663,7 +663,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_UpdateEndpoint_async",
             "title": "ServiceDirectory updateEndpoint Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a endpoint.",
+            "description": " Updates an endpoint.",
             "canonical": true,
             "file": "registration_service.update_endpoint.js",
             "language": "JAVASCRIPT",
@@ -707,7 +707,7 @@
             "regionTag": "servicedirectory_v1_generated_RegistrationService_DeleteEndpoint_async",
             "title": "ServiceDirectory deleteEndpoint Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a endpoint.",
+            "description": " Deletes an endpoint.",
             "canonical": true,
             "file": "registration_service.delete_endpoint.js",
             "language": "JAVASCRIPT",
