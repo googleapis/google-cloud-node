@@ -863,9 +863,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -960,9 +960,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1011,9 +1011,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1066,8 +1066,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1167,8 +1166,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1222,8 +1220,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
