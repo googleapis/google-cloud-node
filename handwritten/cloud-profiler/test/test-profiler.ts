@@ -26,7 +26,7 @@ import * as sinon from 'sinon';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from 'pprof/proto/profile';
+import {perftools} from '../protos/profile';
 import {ProfilerConfig} from '../src/config';
 import {
   parseBackoffDuration,
