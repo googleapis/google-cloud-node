@@ -1778,6 +1778,105 @@
                         }
                       }
                     },
+                    "GitRepoSource": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "repository"
+                          ]
+                        },
+                        "enterpriseConfig": {
+                          "oneof": [
+                            "githubEnterpriseConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "repository": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "ref": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "repoType": {
+                          "type": "GitFileSource.RepoType",
+                          "id": 3
+                        },
+                        "githubEnterpriseConfig": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/GithubEnterpriseConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GitFileSource": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "repository"
+                          ]
+                        },
+                        "enterpriseConfig": {
+                          "oneof": [
+                            "githubEnterpriseConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "repository": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "repoType": {
+                          "type": "RepoType",
+                          "id": 3
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "githubEnterpriseConfig": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/GithubEnterpriseConfig"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RepoType": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "CLOUD_SOURCE_REPOSITORIES": 1,
+                            "GITHUB": 2,
+                            "BITBUCKET_SERVER": 3,
+                            "GITLAB": 4
+                          }
+                        }
+                      }
+                    },
                     "BuildTrigger": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/BuildTrigger",
@@ -1790,7 +1889,8 @@
                           "oneof": [
                             "autodetect",
                             "build",
-                            "filename"
+                            "filename",
+                            "gitFileSource"
                           ]
                         }
                       },
@@ -1847,6 +1947,10 @@
                           "type": "string",
                           "id": 8
                         },
+                        "gitFileSource": {
+                          "type": "GitFileSource",
+                          "id": 24
+                        },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5,
@@ -1879,6 +1983,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "sourceToBuild": {
+                          "type": "GitRepoSource",
+                          "id": 26
                         },
                         "serviceAccount": {
                           "type": "string",
@@ -2402,6 +2510,98 @@
                     },
                     "ReceiveTriggerWebhookResponse": {
                       "fields": {}
+                    },
+                    "GitHubEnterpriseConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbuild.googleapis.com/GithubEnterpriseConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/githubEnterpriseConfigs/{config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hostUrl": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "appId": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "webhookKey": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "peeredNetwork": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "secrets": {
+                          "type": "GitHubEnterpriseSecrets",
+                          "id": 10
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "sslCa": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GitHubEnterpriseSecrets": {
+                      "fields": {
+                        "privateKeyVersionName": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "webhookSecretVersionName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "oauthSecretVersionName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "oauthClientIdVersionName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        }
+                      }
                     },
                     "WorkerPool": {
                       "options": {

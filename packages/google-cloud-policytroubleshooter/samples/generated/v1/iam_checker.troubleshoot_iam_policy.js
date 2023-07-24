@@ -29,8 +29,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The information to use for checking whether a member has a permission for a
-   *  resource.
+   *  The information to use for checking whether a principal has a permission
+   *  for a resource.
    */
   // const accessTuple = {}
 

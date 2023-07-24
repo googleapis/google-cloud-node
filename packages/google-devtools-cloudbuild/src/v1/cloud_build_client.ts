@@ -194,14 +194,23 @@ export class CloudBuildClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
       projectBuildPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/builds/{build}'
       ),
+      projectConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/githubEnterpriseConfigs/{config}'
+      ),
       projectLocationBuildPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/builds/{build}'
+      ),
+      projectLocationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/githubEnterpriseConfigs/{config}'
       ),
       projectLocationTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/triggers/{trigger}'
@@ -3399,6 +3408,42 @@ export class CloudBuildClient {
   }
 
   /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -3460,6 +3505,44 @@ export class CloudBuildClient {
   }
 
   /**
+   * Return a fully-qualified projectConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} config
+   * @returns {string} Resource name string.
+   */
+  projectConfigPath(project: string, config: string) {
+    return this.pathTemplates.projectConfigPathTemplate.render({
+      project: project,
+      config: config,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConfig resource.
+   *
+   * @param {string} projectConfigName
+   *   A fully-qualified path representing project_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConfigName(projectConfigName: string) {
+    return this.pathTemplates.projectConfigPathTemplate.match(projectConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the config from ProjectConfig resource.
+   *
+   * @param {string} projectConfigName
+   *   A fully-qualified path representing project_config resource.
+   * @returns {string} A string representing the config.
+   */
+  matchConfigFromProjectConfigName(projectConfigName: string) {
+    return this.pathTemplates.projectConfigPathTemplate.match(projectConfigName)
+      .config;
+  }
+
+  /**
    * Return a fully-qualified projectLocationBuild resource name string.
    *
    * @param {string} project
@@ -3512,6 +3595,63 @@ export class CloudBuildClient {
     return this.pathTemplates.projectLocationBuildPathTemplate.match(
       projectLocationBuildName
     ).build;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} config
+   * @returns {string} Resource name string.
+   */
+  projectLocationConfigPath(project: string, location: string, config: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.render({
+      project: project,
+      location: location,
+      config: config,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConfigName(projectLocationConfigName: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConfigName(
+    projectLocationConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the config from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the config.
+   */
+  matchConfigFromProjectLocationConfigName(projectLocationConfigName: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).config;
   }
 
   /**
