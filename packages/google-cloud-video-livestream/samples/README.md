@@ -33,7 +33,10 @@
   * [Livestream_service.stop_channel](#livestream_service.stop_channel)
   * [Livestream_service.update_channel](#livestream_service.update_channel)
   * [Livestream_service.update_input](#livestream_service.update_input)
+<<<<<<< HEAD
   * [Livestream_service.update_pool](#livestream_service.update_pool)
+=======
+>>>>>>> 27860facba (🦉 Updates from OwlBot post-processor)
   * [Quickstart](#quickstart)
 
 ## Before you begin
