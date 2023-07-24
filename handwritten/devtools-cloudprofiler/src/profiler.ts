@@ -20,12 +20,12 @@ import {
   DecorateRequestOptions,
 } from '@google-cloud/common';
 import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
+import {perftools} from 'pprof/proto/profile';
 import * as msToStr from 'pretty-ms';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 import * as r from 'teeny-request';
 
-import {perftools} from '../protos/profile';
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 
